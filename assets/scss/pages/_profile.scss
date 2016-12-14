@@ -1,0 +1,44 @@
+.profile-page {
+  .user-card {
+    .avatar {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+    .card-info {
+      .name,
+      .email,
+      .birthday {
+        display: block;
+        margin-bottom: 5px;
+        width: 100%;
+      }
+
+      .email,
+      .birthday {
+        font-size: $font-size-small;
+      }
+    }
+  }
+
+  .user-form {
+    .panel {
+      margin-bottom: $padding-large-vertical * 2;
+
+      .panel-heading {
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+
+    .profile-picture-panel {
+      img {
+        max-width: 128px;
+      }
+    }
+  }
+
+  .dropzone-container {
+    padding: 15px 0;
+  }
+}

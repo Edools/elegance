@@ -1,0 +1,14 @@
+.alert-notice {
+  @include translate(-50%, 0);
+
+  position: fixed;
+  top: $padding-large-vertical;
+  left: 50%;
+  z-index: 1000;
+
+  .alert {
+    display: inline-block;
+    width: auto;
+    font-weight: normal;
+  }
+}

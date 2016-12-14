@@ -1,0 +1,57 @@
+<div class="forums-page page">
+  <div class="forum-questions-page page">
+    <div class="container">
+      <h3 class="title">{{ 'forums.forum' | t: title: topic.title }}</h3>
+      <div class="forum-questions-heading">
+        <a href="{{ forum | forum_path }}" class="btn btn-default">
+          <i class="icon-arrow-left"></i>
+          <span>{{ 'general.back' | t }}</span>
+        </a>
+        {% permitted forum_question, create %}
+        <a href="{{ topic | new_question_path }}" class="btn btn-primary pull-right">
+          <i class="icon-plus"></i>
+          <span>{{ 'forums.new_question' | t }}</span>
+        </a>
+        {% endpermitted %}
+      </div>
+
+      <div class="topic-question-list">
+        {% paginate questions by 10 %}
+
+        {% for question in questions %}
+          {% include 'forums/question-item', hide_editor: true %}
+        {% endfor %}
+
+        <div class="topic-question text-center">
+          <ul class="pagination">
+            {% if paginate.previous.is_link %}
+              <li>
+                <a href="{{ paginate.previous.url }}" data-turbolinks-scroll="false"><i
+                    class="icon-arrow-left"></i></a>
+              </li>
+            {% endif %}
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                <li>
+                  <a href="{{ part.url }}" data-turbolinks-scroll="false">{{ part.title }}</a>
+                </li>
+              {% else %}
+                <li class="disabled">
+                  <span>{{ part.title }}</span>
+                </li>
+              {% endif %}
+            {% endfor %}
+            {% if paginate.next.is_link %}
+              <li>
+                <a href="{{ paginate.next.url }}" data-turbolinks-scroll="false"><i
+                    class="icon-arrow-right"></i></a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+
+        {% endpaginate %}
+      </div>
+    </div>
+  </div>
+</div>

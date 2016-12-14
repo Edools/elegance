@@ -1,0 +1,57 @@
+<div class="profile-page page">
+  <div class="container page-container">
+    <div class="row">
+      <div class="sidebar col-md-4">
+        {% include 'public_user/sidebar', products_link: 'active' %}
+      </div>
+
+      <div class="profile-body col-md-8">
+        <div class="row">
+          <div class="col-md-12 tab-content">
+            <h2 class="title">
+              {{ 'pages.profile.products.title' | t }}
+            </h2>
+
+            <div class="product-list">
+              <div class="row">
+                {% for product in products %}
+                  <div class="col-sm-12 col-md-6">
+                    <div id="product-card-{{ product.id }}" class="thumbnail product">
+                      <div class="logo">
+                        <a href="/{{ product.slug }}">
+                          {% if product.logo %}
+                            {% image, src: product.logo, alt: product.title %}
+                          {% else %}
+                            {% assign placeholder = 'missing-product-logo.png' | asset_url %}
+                            {% image, src: placeholder, alt: product.title %}
+                          {% endif %}
+                        </a>
+                      </div>
+
+                      <div class="caption">
+                        <a class="title"
+                           title="{{ product.title }}"
+                           data-toggle="{% if product.title.size > 60 %}tooltip{% endif %}"
+                           id="product-{{ product.id }}" href="/{{ product.slug }}">
+                          {{ product.title | truncate: 60 }}
+                        </a>
+
+                        <p class="subtitle">{{ product.subtitle | truncate: 92 }}</p>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+
+                {% if products.size == 0 %}
+                  <div class="alert alert-info">
+                    {{ 'pages.profile.products.empty' | t }}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

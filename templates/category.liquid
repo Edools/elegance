@@ -1,0 +1,18 @@
+<div class="category-page page">
+  <div class="product-list">
+    <div class="container page-container">
+      <h2 class="title">{{ category.title }}</h2>
+
+      {% form 'category-search-product', category: category.slug %}
+        <div class="form-group">
+          <input id="filter-title-input" name="title" class="form-control"
+            type="text" value="{{ params.title }}" placeholder="{{ 'category.filter_by_product' | t }}" >
+        </div>
+      {% endform %}
+
+      <div class="row">
+        {% include 'product/list', products: products, gateway: gateway %}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,117 @@
+.course-content {
+  .hidden {
+    display: block;
+  }
+
+  .modules {
+    margin: 0;
+    padding: 0;
+    list-style-position: inside;
+    text-align: left;
+
+    .list-group-item {
+      @include user-select(none);
+
+      &.module {
+        font-weight: 600;
+        cursor: pointer;
+
+        .icon {
+          @include transition(.2s ease);
+
+          margin-right: 8px;
+          width: auto;
+          font-size: 14px;
+        }
+
+        &:hover {
+          .icon {
+            color: $brand-primary;
+          }
+        }
+
+        &.expanded {
+          .icon {
+            @include rotate(90deg);
+          }
+        }
+      }
+
+      @for $i from 1 through 9 {
+        &.sub-#{$i} {
+          padding-left: $padding-base-horizontal * ($i);
+        }
+      }
+
+      .content-lesson {
+        .class-info {
+          @include clearfix();
+
+          position: relative;
+          display: block;
+          width: 100%;
+
+          .left,
+          .right,
+          .center {
+            display: inline-block;
+            vertical-align: middle;
+          }
+
+          .left {
+            width: 30px;
+            text-align: left;
+          }
+
+          .right {
+            float: right;
+            width: auto;
+            text-align: right;
+          }
+
+          .lesson-title {
+            display: inline-block;
+            width: 100%;
+            height: 25px;
+          }
+
+          i {
+            width: 25px;
+          }
+
+          .lesson-views {
+            @include user-select(none);
+
+            vertical-align: middle;
+            line-height: 1;
+            cursor: pointer;
+          }
+
+          .release-date {
+            @include user-select(none);
+
+            cursor: default;
+          }
+        }
+      }
+
+      &.active {
+        a,
+        span,
+        i {
+          color: $component-active-color;
+        }
+      }
+    }
+  }
+
+  .paginate-link-top {
+    display: block;
+    margin-bottom: $padding-large-vertical * 2;
+  }
+
+  .paginate-link-bottom {
+    display: block;
+    margin-top: $padding-large-vertical * 2;
+  }
+}

@@ -1,0 +1,47 @@
+<div class="profile-page page">
+  <div class="container page-container">
+    <div class="row">
+      <div class="sidebar col-md-4">
+        {% include 'public_user/sidebar' %}
+      </div>
+
+      <div class="profile-body col-md-8">
+        <div class="row">
+          <div class="col-md-12 tab-content">
+            <div id="follow-list" class="tab-pane active">
+              <h2>{{ 'pages.profile.' | append: follow_page | append: '.title' | t }}</h2>
+
+              {% paginate follows by 9 %}
+              <div id="js-follow-list" class="followed-list row">
+                {% for follow in follows %}
+                  <div class="follow col-sm-6 col-lg-4">
+                    {% include 'public_user/mini_profile', user: follow, hide_actions: true %}
+                  </div>
+                {% endfor %}
+              </div>
+
+              {% if paginate.next.is_link %}
+                <div id="follow-more" class="col-xs-12 text-center" data-turbolinks-temporary>
+                  <a id="js-follow-more-link" href="{{ paginate.next.url }}">
+                    <span class="bold">{{ 'general.load_more' | t }}</span>
+                  </a>
+
+                  <div class="js-paginate-spinner" style="display: none;">
+                    <i class='fa fa-spinner fa-spin fa-2x'></i>
+                  </div>
+                </div>
+              {% endif %}
+              {% endpaginate %}
+
+              {% if follows.size == 0 %}
+                <div class="alert alert-info">
+                  {{ 'pages.profile.' | append: follow_page | append: '.empty' | t }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

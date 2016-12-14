@@ -1,0 +1,25 @@
+.course-page {
+  .course-page-header {
+    .course-content {
+      margin-top: $padding-large-vertical * 6;
+    }
+
+    .card-progress {
+      margin-top: $padding-large-vertical * 4;
+    }
+
+    .last-lesson-link {
+      margin-bottom: $padding-large-vertical * 2;
+    }
+  }
+
+  .course-page-content {
+    margin-top: $padding-large-vertical * 4;
+
+    .tab-content {
+      margin-top: $padding-large-vertical * 2;
+    }
+  }
+}
+
+@import 'course/lesson';

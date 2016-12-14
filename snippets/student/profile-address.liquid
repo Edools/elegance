@@ -1,0 +1,69 @@
+{% form 'profile' %}
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab">
+    <h4 class="panel-title">
+      <a role="button"
+         data-toggle="collapse"
+         data-parent="#accordion"
+         href="#collapseProfileAddress"
+         aria-expanded="false"
+         aria-controls="collapseProfileAddress">{{ 'profile.address' | t }}</a>
+    </h4>
+  </div>
+
+  <div id="collapseProfileAddress"
+       class="panel-collapse collapse"
+       role="tabpanel"
+       aria-labelledby="headingThree">
+    <div class="panel-body">
+      <div class="address-form">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group required">
+              <label class="control-label">{{ 'profile.street' | t }}</label>
+              <input type="text" value="{{ user.address.street }}" name="user[address_attributes][street]"
+                     class="form-control" required>
+            </div>
+            <div class="form-group required">
+              <label class="control-label">{{ 'profile.number' | t }}</label>
+              <input type="text" value="{{ user.address.number }}" name="user[address_attributes][number]"
+                     class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="control-label">{{ 'profile.complement' | t }}</label>
+              <input type="text" value="{{ user.address.complement }}" name="user[address_attributes][complement]"
+                     class="form-control">
+            </div>
+            <div class="form-group required">
+              <label class="control-label">{{ 'profile.district' | t }}</label>
+              <input type="text" value="{{ user.address.district }}" name="user[address_attributes][district]"
+                     class="form-control" required>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group required">
+              <label class="control-label">{{ 'profile.city' | t }}</label>
+              <input type="text" value="{{ user.address.city }}" name="user[address_attributes][city]"
+                     class="form-control"
+                     required>
+            </div>
+            <div class="form-group required">
+              <label class="control-label">{{ 'profile.state' | t }}</label>
+              {% include "select-address", selected_state: user.address.state %}
+            </div>
+            <div class="form-group required">
+              <label class="control-label">{{ 'profile.cep' | t }}</label>
+              <input type="text" value="{{ user.address.zip_code }}" ui-mask="99999-999"
+                     name="user[address_attributes][zip_code]" class="form-control" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-right">
+          <input type="submit" class="btn btn-primary" value="{{ 'profile.save' | t }}">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endform %}

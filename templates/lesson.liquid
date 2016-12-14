@@ -1,0 +1,72 @@
+<div class="lesson-page page">
+  <div class="container page-container">
+    <div class="row">
+      <div id="js-lesson-sidebar" class="col-md-4 js-lesson-sidebar">
+        <div class="lesson-page-sidebar">
+          <div class="control-back">
+            <a class="btn btn-default" href="{{ enrollment | course_path:course.id }}">
+              <i class="icon-arrow-left"></i>
+              <span>{{ 'general.back' | t }}</span>
+            </a>
+          </div>
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="title">{{ course.name }}</h4>
+            </div>
+
+            <div class="panel-body">
+              <div class="course-progress js-progress">
+                {% assign progress = enrollment | course_progress_card: course %}
+                <p> {{ progress.total }} {{ 'lesson.total' | t }}</p>
+                <div class="progress-header">
+                <span class="label label-success">
+                  <span class="js-completed-counter">{{ progress.completed }}</span> {{ 'lesson.completed' | t }}
+                </span>
+                  <span class="label label-info">
+                  <span class="js-in-progress-counter">{{ progress.in_progress }}</span> {{ 'lesson.started' | t }}
+                </span>
+                </div>
+                {% include 'progress-bar', total: progress.total, success: progress.completed, warning:
+                progress.in_progress %}
+              </div>
+              <div class="other-lessons">
+                {% include 'product/content-course', course: course, lesson_actions: true,
+                enrollment: enrollment, current_lesson_id: lesson.id, download_action: true %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div id="js-lesson-content-player" class="lesson-content-player">
+          <div class="lesson-content-player-heading">
+            <div class="js-fix-on-scroll">
+              {% include 'lesson/navigation' %}
+            </div>
+
+            <h2 class="lesson-title">{{ lesson.title }}</h2>
+          </div>
+
+          <div id="js-media-player" class="media-player" data-lesson-id="{{ lesson.id }}">
+            {% if lesson.media %}
+              {% media_player lesson: lesson, trackeable: track_lesson,
+              enrollment: enrollment, lesson_progress: lesson_progress,
+              course_content: course_content, course: course %}
+            {% else if lesson.activity %}
+              {% activity lesson: lesson, enrollment: enrollment,
+              lesson_progress: lesson_progress, answer: answer,
+              attempts_remaining: attempts_remaining,
+              course_content: course_content, course: course %}
+            {% endif %}
+          </div>
+
+          <div class="footer-navigation">
+            {% include 'lesson/navigation' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

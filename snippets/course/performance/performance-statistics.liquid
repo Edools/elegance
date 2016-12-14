@@ -1,0 +1,37 @@
+{% assign statistics = enrollment | get_statistics_data: course %}
+
+{% for content in course.contents %}
+  {% if content.resource.activity.type == 'Quiz' %}
+    {% capture _ %}{% increment total_quiz %}{% endcapture %}
+  {% endif %}
+{% endfor %}
+
+<ol id="js-course-tree" class="list-group">
+  <li class="list-group-item" style="font-weight: 600;">
+    {{'course.performance.statistics' | t }}
+  </li>
+  <li class="list-group-item">
+    <div style="display: inline-block;">
+      {{'course.performance.performed_activities' | t }}
+    </div>
+    <div style="display: inline-block; float: right;">
+      {{statistics.completed}}
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div style="display: inline-block;">
+      {{'course.performance.missing_activities' | t }}
+    </div>
+    <div style="display: inline-block; float: right;">
+      {{ total_quiz | minus: statistics.completed }}
+    </div>
+  </li>
+  <li class="list-group-item">
+    <div style="display: inline-block;">
+      {{'course.performance.scoring_average' | t }}
+    </div>
+    <div style="display: inline-block; float: right;">
+      {{statistics.grade | round}}
+    </div>
+  </li>
+</ol>

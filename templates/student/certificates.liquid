@@ -1,0 +1,49 @@
+<div class="certificates-page page">
+  <div class="container page-container">
+    <h2>{{ 'enrollment.my_certificates' | t }}</h2>
+
+    {% if certificates.size > 0 %}
+      <div class="certificates-list">
+        <div class="row">
+          {% for certificate in certificates %}
+            {% assign product = certificate.school_product %}
+
+            <article class="col-md-4 col-sm-6 col-xs-12">
+              <div class="course thumbnail">
+                <div class="course-image">
+                  {% if product.logo %}
+                    {% assign product_src = product.logo %}
+                  {% else %}
+                    {% assign product_src = 'missing-product-logo.png' | asset_url %}
+                  {% endif %}
+
+                  {% image, src: product_src, alt: product.title %}
+                </div>
+
+                <div class="course-header">
+              <span class="title"
+                    title="{{ product.title }}"
+                    data-toggle="{% if product.title.size > 70 %}tooltip{% endif %}">
+              {{ product.title | truncate: 70 }}
+              </span>
+                </div>
+
+                <div class="course-action">
+                  <a class="btn btn-default btn-edit" href="{{ certificate.s3_file_url }}" target="_blank">
+                    <i class="fa fa-download"></i>
+                    {{ 'enrollment.download_certificate' | t }}
+                  </a>
+                </div>
+
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <div class="note note-warning">
+        {{ 'enrollment.no_certificate' | t }}
+      </div>
+    {% endif %}
+  </div>
+</div>

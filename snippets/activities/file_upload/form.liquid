@@ -1,0 +1,23 @@
+<div class="document form-group">
+  {% dropzone 'file_upload', accepted_files: 'image/*,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,.docx,.doc,.xls,.xlsx,.ppt,.jpg,.png,.gif,.jpeg' %}
+    <div class="dz-default dz-message">
+      <i class="icon icon-cloud-upload"></i>
+      {% assign default = 'upload.drag_files' | t %}
+      {{ title | default: default }}<br>
+      <span class="dz-text-small">ou clique para selecionar</span>
+    </div>
+  {% enddropzone %}
+</div>
+
+{% form 'exam_answer', id: exam_answer_form, remote: true %}
+<input id="js-file" type="hidden" name="exam_answer[s3_files][]" required>
+<input type="hidden" name="exam_answer[activity_id]" value="{{ activity.id }}">
+<input type="hidden" name="exam_answer[lesson_progress_id]" value="{{ lesson_progress.id }}">
+
+<div class="form-group">
+  <button class="btn btn-primary pull-right" type="submit"
+          data-disable-with='{{ 'general.sending_dots' | t }}' disabled>
+    {{ 'upload.save' | t }}
+  </button>
+</div>
+{% endform %}

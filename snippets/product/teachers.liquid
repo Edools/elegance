@@ -1,0 +1,37 @@
+{% if product.class_teachers.size > 0 %}
+  <section class="product-teachers panel panel-default">
+
+    <div class="panel-heading">
+      <span class="title">{{ 'product.teachers.about' | t }}</span>
+    </div>
+
+    <div class="panel-body">
+      <div class="teachers-list">
+        {% for teacher in product.class_teachers %}
+          <div class="teacher-item">
+            <div class="row">
+              <div class="col-xs-2">
+                <div class="avatar">
+                  {% if teacher.photo_url %}
+                    {% image, src: teacher.photo_url, alt: teacher.full_name %}
+                  {% else %}
+                    {% assign placeholder = 'default-placeholder.png' | asset_url %}
+                    {% image, src: placeholder, alt: product.title %}
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class="col-xs-10">
+                <h4 class="title">{{ teacher.full_name }}</h4>
+              </div>
+
+              <div class="col-xs-12">
+                <div class="description" role="readmore" data-collapsed-height="100">{{ teacher.about }}</div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}

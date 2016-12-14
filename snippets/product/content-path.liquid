@@ -1,0 +1,86 @@
+{% if path %}
+  {% paginate path.courses by 10 %}
+
+  <div class="path-content">
+    {% if current_search.name %}
+      <p
+        class="subtitle">{{ 'product.path.courses_filtered' | t: count: paginate.items, name: current_search.name }}</p>
+    {% else %}
+      <p class="subtitle">{{ 'product.path.courses' | t: count: paginate.items }}</p>
+    {% endif %}
+
+    <div class="landing-modules">
+      {% if paginate.pages > 1 or current_search.name %}
+        <form id="course-filter" accept-charset="UTF-8" method="get" action="/{{ product.slug }}"
+              data-turbolinks-scroll="false">
+          <div class="form-group input-group input-group-lg">
+            <span class="input-group-addon no-background"><i class="icon-magnifier"></i></span>
+            <input type="text" name="name" class="form-control"
+                   placeholder="{{ 'product.path.courses.search_name_course' | t }}"
+                   value="{{ current_search.name }}">
+            <span class="input-group-btn">
+                  <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+                </span>
+          </div>
+        </form>
+      {% endif %}
+
+      <div class="path-courses">
+        <div class="row">
+          {% for course in path.courses %}
+            <div class="col-sm-6">
+              <div class="course-item">
+                <a href="{{ course | course_preview_path: product }}" class="course-link">
+                  <div class="course-image">
+                    {% if course.image_url %}
+                      {% image, src: course.image_url, alt: course.name %}
+                    {% else %}
+                      {% assign placeholder = 'missing-course-logo.png' | asset_url %}
+                      {% image, src: placeholder, alt: course.name %}
+                    {% endif %}
+                  </div>
+
+                  <div class="course-info">
+                    <h4 class="title"
+                        title="{{ course.name }}"
+                        data-toggle="{% if course.name.size > 60 %}tooltip{% endif %}">
+                      {{ course.name | truncate: 60 }}
+                    </h4>
+                    <span class="subtitle">{{ course.description }}</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="text-center">
+        <ul class="pagination">
+          {% if paginate.previous.is_link %}
+            <li>
+              <a href="{{ paginate.previous.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-left"></i></a>
+            </li>
+          {% endif %}
+          {% for part in paginate.parts %}
+            {% if part.is_link %}
+              <li>
+                <a href="{{ part.url }}" data-turbolinks-scroll="false">{{ part.title }}</a>
+              </li>
+            {% else %}
+              <li class="disabled">
+                <span>{{ part.title }}</span>
+              </li>
+            {% endif %}
+          {% endfor %}
+          {% if paginate.next.is_link %}
+            <li>
+              <a href="{{ paginate.next.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-right"></i></a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% endpaginate %}
+{% endif %}

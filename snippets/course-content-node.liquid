@@ -1,0 +1,115 @@
+<!-- Assing variables used by course_content and lesson -->
+{% if lesson_actions %}
+  {% assign lessons_info = enrollment.lessons_info %}
+  {% assign progress = nil %}
+
+  {% assign lesson_released = lesson | check_availability_for: enrollment %}
+  {% if lesson.release_at %}
+    {% assign release_type = 'release_at' %}
+    {% assign release_date = lesson.release_at %}
+  {% else %}
+    {% assign release_type = 'release_after' %}
+    {% assign release_date = enrollment.activated_at | add_days: lesson.release_after %}
+  {% endif %}
+
+  {% for lesson_progress in enrollment.lessons_progresses %}
+    {% if lesson_progress.lesson_id == lesson.id %}
+      {% assign progress = lesson_progress %}
+    {% endif %}
+  {% endfor %}
+
+  {% if current_lesson_id and current_lesson_id == lesson.id %}
+    {% assign active = 'active js' %}
+  {% else %}
+    {% assign active = nil %}
+  {% endif %}
+{% endif %}
+
+<li id="content-{{ content.id }}"
+    class="js-content list-group-item lesson module-item sub sub-{{ content.depth }} {{ active }} hidden"
+    collapsed="false">
+  <div id="lesson-{{ lesson.id }}" class="js-lesson content-lesson class {{ active }}" data-lesson-id="{{ lesson.id }}">
+    <div class="class-info">
+      <div class="left">
+        {% if lesson.type == 'ExamLesson' %}
+          {% case lesson.activity.type %}
+            {% when 'Quiz' %}
+            {% assign lesson_icon = 'icon-puzzle' %}
+            {% when 'FileUpload' %}
+            {% assign lesson_icon = 'icon-cloud-upload' %}
+            {% when 'CollaborativeDiscussion' %}
+            {% assign lesson_icon = 'icon-people' %}
+            {% else %}
+            {% assign lesson_icon = 'icon-puzzle' %}
+          {% endcase %}
+          <i class="{{ lesson_icon }}"></i>
+        {% else %}
+          {% include 'media-icon', media: lesson.media %}
+        {% endif %}
+      </div>
+
+      {% if lessons_info.completed contains lesson.id %}
+        {% assign hide_in_progress_icon = 'hide' %}
+        {% assign hide_completed_icon = nil %}
+      {% else %}
+        {% if lessons_info.in_progress contains lesson.id %}
+          {% assign hide_in_progress_icon = nil %}
+          {% assign hide_completed_icon = 'hide' %}
+        {% else %}
+          {% assign hide_in_progress_icon = 'hide' %}
+          {% assign hide_completed_icon = 'hide' %}
+        {% endif %}
+      {% endif %}
+
+      <div class="center">
+        {% if lesson_actions and lesson_released and current_user.type == 'Student' %}
+          <a class="lesson-title"
+            {% if no_turbolinks %} data-no-turbolink {% else %} data-turbolinks-scroll="#activity" {% endif %}
+             href="{{ content | content_path: enrollment: enrollment, course: course }}">
+            <span>{{ lesson.title }}</span>
+          </a>
+        {% else %}
+          <span class="lesson-title">
+            <span>{{ lesson.title }}</span>
+          </span>
+        {% endif %}
+      </div>
+
+      <div class="right">
+        <span class="progress-icon js-progress-icons">
+          <i class="icon-check js-completed-icon {{ hide_completed_icon }}"></i>
+          <i class="icon-clock js-in-progress-icon {{ hide_in_progress_icon }}"></i>
+        </span>
+
+        {% if lesson_actions %}
+          {% if progress and progress.views <= enrollment.max_attendance_length and enrollment.max_attendance_type ==
+          'attempts' %}
+            <span class="lesson-views attempt js-attendance"
+                  title="{{ 'product.course_content.views' | t }}"
+                  data-tooltip-placement="left"
+                  data-toggle="tooltip">
+            <span>{{ progress.views }}/{{ enrollment.max_attendance_length }}</span>
+          </span>
+          {% endif %}
+
+          {% unless lesson_released %}
+          <span class="release-date badge">
+              {{ 'lesson.' | append: release_type | t }}
+
+            <span class="js-to-client-timezone" data-timezone="{{ release_date | to_json }}" data-format="DD/MM/YYYY">
+                {{ release_date | date:"%d/%m/%Y" }} UTC
+              </span>
+            </span>
+          {% endunless %}
+
+          {% if download_action and course_content.downloadable %}
+            <a class="download-link" href="{{ course_content | content_download_path: course, enrollment }}"
+               data-no-turbolink>
+              <i class="icon-cloud-download"></i>
+            </a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</li>

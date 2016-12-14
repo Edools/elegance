@@ -1,0 +1,74 @@
+{% form 'profile' %}
+<div class="panel panel-default personal-data-panel">
+  <div class="panel-heading" role="tab">
+    <h4 class="panel-title">
+      <a role="button"
+         data-toggle="collapse"
+         data-parent="#accordion"
+         href="#collapseProfilePersonalData"
+         aria-expanded="false"
+         aria-controls="collapseProfilePersonalData">{{ 'profile.personal_data' | t }}</a>
+    </h4>
+  </div>
+  <div id="collapseProfilePersonalData"
+       class="panel-collapse collapse"
+       role="tabpanel"
+       aria-labelledby="headingTwo">
+    <div class="panel-body">
+      <div class="personal-data-form">
+        <div class="row tab-form-content">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">{{ 'profile.first_name' | t }}</label>
+              <input type="text" value="{{ user.first_name }}" name="user[first_name]" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="control-label">{{ 'profile.phone' | t }}</label>
+              <input id="user-phone" type="text" value="{{ user.phone }}" name="user[phone]" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="control-label">{{ 'profile.rg' | t }}</label>
+              <input id="user-rg" type="text" value="{{ user.rg }}" name="user[rg]" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">{{ 'profile.last_name' | t }}</label>
+              <input type="text" value="{{ user.last_name }}" name="user[last_name]" class="form-control">
+            </div>
+            <div class="form-group">
+              <label class="control-label">{{ 'profile.email' | t }}</label>
+              <input type="email" value="{{ user.email }}" name="user[email]" class="form-control">
+            </div>
+
+            {% capture label %}{{ 'profile.born_at' | t }}{% endcapture %}
+            {% capture name %}{{ 'user[born_at]' }}{% endcapture %}
+            {% capture value %}{{ user.born_at }}{% endcapture %}
+            {% include 'datepicker' %}
+
+          </div>
+        </div>
+        <div class="row tab-form-content">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">{{ 'profile.cpf' | t }}</label>
+              <input id="user-cpf" type="text" value="{{ user.cpf }}" ui-mask="999.999.999-99" name="user[cpf]"
+                     class="form-control">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="control-label">{{ 'profile.skype' | t }}</label>
+              <input type="text" value="{{ user.skype }}" name="user[skype]" class="form-control">
+            </div>
+          </div>
+
+          <div class="col-xs-12 text-right">
+            <input type="submit" class="btn btn-primary" value="{{ 'profile.save' | t }}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endform %}

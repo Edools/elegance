@@ -1,0 +1,10 @@
+<div class="extra-content course-content">
+  {% if extra_contents.size == 0 %}
+    <div class="well">
+      <strong>{{ 'course.extra_contents.empty' | t }}</strong>
+    </div>
+  {% else %}
+    {% include 'course/extra_content/list', extra_contents: course.extra_contents,
+      course: course, enrollment: enrollment %}
+  {% endif %}
+</div>

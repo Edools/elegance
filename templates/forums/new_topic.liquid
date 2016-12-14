@@ -1,0 +1,37 @@
+<div class="forums-page page">
+  <div class="forum-panel">
+    <div class="container whitebg course-dashboard-content">
+      <div class="container">
+        <div class="forum-questions-heading">
+          <a href="{{ forum | forum_path }}" type="button" class="btn btn-default">
+            <i class="icon-arrow-left"></i>
+            <span>{{ 'general.back' | t }}</span>
+          </a>
+          <h2>{{ 'forums.new_topic' | t }}</h2>
+        </div>
+      </div>
+
+      {% form 'forum/topic', section: section, forum: forum %}
+      <input type="hidden" name="forum_id" value="{{section.forum_id}}" />
+      <input type="hidden" name="forum_section[parent_forum_section_id]" value="{{section.id}}">
+      <div class="forums-page page">
+        <div class="forum-panel">
+          <div class="container whitebg course-dashboard-content">
+            <div class="forums-body">
+              <div class="form-group">
+                <label for="name_topic">Nome</label>
+                <input type="text" class="form-control" name="forum_section[title]" id="name_topic" required />
+              </div>
+              <div class="form-group">
+                <label for="description_topic">Descrição</label>
+                <input type="text" class="form-control" name="forum_section[description]" id="description_topic" required />
+              </div>
+              <button type="submit" class="btn btn-info">Salvar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endform %}
+    </div>
+  </div>
+</div>

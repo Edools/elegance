@@ -1,0 +1,6 @@
+<div class="progress">
+  <div class="progress-bar progress-bar-success progress-bar-striped js-completed-bar"
+       style="width: {{ success | times: 100 | divided_by: total }}%" data-percent="0"></div>
+  <div class="progress-bar progress-bar-info progress-bar-striped js-in-progress-bar"
+       style="width: {{ warning | times: 100 | divided_by: total }}%" data-percent="0"></div>
+</div>

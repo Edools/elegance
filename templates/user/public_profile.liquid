@@ -1,0 +1,62 @@
+<div class="profile-page page">
+  <div class="container page-container">
+    <div class="row">
+      <div class="sidebar col-md-4">
+        {% include 'public_user/sidebar', posts_link: 'active' %}
+      </div>
+
+      <div class="profile-body col-md-8">
+        <div class="row">
+          <div class="col-md-12 tab-content">
+            <h2>{{ 'pages.profile.posts.title' | t }}</h2>
+
+            {% if current_user and current_user.id == user.id %}
+              <div id="new-post-form" class="panel panel-default">
+                <div class="panel-body">
+                  {% form 'public_profile/post', id: new_post_form, remote: true %}
+                  <div class="form-group required">
+                      <textarea id="new-post" name="post[body]" class="form-control js-ckeditor"
+                                placeholder="{{ 'pages.profile.posts.share' | t }}"
+                                rows="5" cols="80" required></textarea>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary pull-right"
+                          data-disable-with="<i class='fa fa-spinner fa-spin'></i>{{ 'general.sending' | t }}...">
+                    {{ 'general.send' | t }}
+                  </button>
+                  {% endform %}
+                </div>
+              </div>
+            {% endif %}
+
+            {% paginate posts by 12 sort { created_at: :desc } %}
+            <div id="js-post-list" class="post-list">
+              {% for post in posts %}
+                {% include 'public_user/post_template' %}
+              {% endfor %}
+            </div>
+
+            {% if paginate.next.is_link %}
+              <div id="post-more" class="col-xs-12 text-center" data-turbolinks-temporary>
+                <a id="js-post-more-link" href="{{ paginate.next.url }}">
+                  <span class="bold">{{ 'general.load_more' | t }}</span>
+                </a>
+
+                <div class="js-paginate-spinner" style="display: none;">
+                  <i class='fa fa-spinner fa-spin fa-2x'></i>
+                </div>
+              </div>
+            {% endif %}
+            {% endpaginate %}
+
+            {% if posts.size == 0 %}
+              <div class="alert alert-info">
+                {{ 'pages.profile.posts.empty' | t }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

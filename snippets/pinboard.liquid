@@ -1,0 +1,26 @@
+<div class="pinboard">
+  {% if messages.size == 0 %}
+    <div class="well">
+      <strong>{{ 'course.pinboard.empty' | t }}</strong>
+    </div>
+  {% else %}
+    <div class="list-group" id="accordion">
+      {% for message in messages %}
+        <div class="list-group-item item">
+          <div id="message-{{ message.id }}">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#message-{{ message.id }}-body">
+              {{ message.subject }}
+            </a>
+
+            <span class="pull-right date">{{ message.updated_at | time_ago_in_words }}</span>
+          </div>
+          <div id="message-{{ message.id }}-body" class="panel-collapse collapse" role="tabpanel">
+            <div class="panel-body">
+              {{ message.text }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

@@ -1,0 +1,49 @@
+<div class="checkout-success-page page">
+  <div class="container">
+    <div class="text-center">
+      <i class="icon-check"></i>
+
+      <h2 class="text-success">
+        {{ 'checkout.success.order_created_successfully' | t }}
+      </h2>
+
+      {% if order.kind == 'subscription' %}
+        {% assign payment_option = order.payment_options.last %}
+        {% assign price = payment_option.price | money %}
+
+        <p>{{ 'checkout.success.subscription_created_successfully' | t: code: order.gateway_reference }}</p>
+        <p>{{ 'checkout.success.subscription_info.' | append: payment_option.period | t: price: price }}</p>
+
+        <div class="note note-warning">
+          {{ 'checkout.success.order_processing_warning' | t }}
+        </div>
+      {% else %}
+        {% capture status %}{{ 'payment.status.' | append: payment.status | t }}{% endcapture %}
+        {% unless payment.kind == 'free' %}
+        <p>{{ 'checkout.success.transaction_made_by' | t: gateway: gateway_credential.fullname }}</p>
+        {% endunless %}
+        <p>{{ 'checkout.success.transaction_status_is' | t: status: status, uuid: payment.uuid }}</p>
+        {% unless payment.kind == 'free' %}
+        <p>{{ 'checkout.success.transaction_questions' | t: gateway: gateway_credential.name }}</p>
+        {% endunless %}
+
+        {% if payment.status == 'under_analysis' or payment.status == 'waiting_boleto' %}
+          <br>
+          <div class="note note-warning">
+            {{ 'checkout.success.order_processing_warning' | t }}
+          </div>
+        {% endif %}
+      {% endif %}
+
+      {% if payment.kind == 'boleto' %}
+        <div class="note note-warning">
+          {{ 'checkout.success.boleto_warning' | t }} <a href="{{ payment.link }}"
+          class="js-open-on-load"
+          target="_blank">{{ 'checkout.success.boleto_warning_click_here' | t }}</a>
+        </div>
+      {% endif %}
+
+      <a href="/enrollments" class='btn btn-primary btn-lg'>{{ 'checkout.success.go_to_enrollments' | t }}</a>
+    </div>
+  </div>
+</div>

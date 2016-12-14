@@ -1,0 +1,85 @@
+<footer class="page-footer">
+  <div class="container">
+    <div class="info">
+      <div class="row">
+        <div class="col-sm-6 col-md-6">
+          <div class="info">
+
+            {% if settings.view.general.footer.logo %}
+              <div class="logo">
+                {% image, src: settings.view.general.footer.logo, class: 'img-responsive' %}
+              </div>
+            {% endif %}
+
+            {{ settings.view.general.footer.text }}
+          </div>
+
+          {% if settings.view.general.footer.address and current_school.address %}
+            <address>{{ current_school.address }}</address>
+          {% endif %}
+        </div>
+
+        <div class="col-md-5 col-md-offset-1">
+          <div class="contact-us">
+            <h2 class="title underlined">
+              {{ 'footer.contact_us' | t }}
+            </h2>
+
+            {% if settings.view.general.footer.phone and current_school.phone %}
+              <p>
+                <a href="tel:{{ school.phone }}">
+                  <i class="icon-phone"></i>
+                  <span>{{ current_school.phone }}</span>
+                </a>
+              </p>
+            {% endif %}
+
+            {% if settings.view.general.footer.email and current_school.email %}
+              <p>
+                <a href="mailto:{{ current_school.email }}">
+                  <i class="icon-envelope"></i>
+                  <span>{{ current_school.email }}</span>
+                </a>
+              </p>
+            {% endif %}
+
+            {% if settings.view.general.footer.site and current_school.site %}
+              <p>
+                <a href="{{ current_school.site }}">
+                  <i class="icon-globe"></i>
+                  <span>{{ current_school.site }}</span>
+                </a>
+              </p>
+            {% endif %}
+
+            <div class="company-info">
+              {% if settings.view.general.footer.razao_social and current_school.company_name %}
+                <p>
+                  <span>{{ current_school.company_name }}</span>
+                </p>
+              {% endif %}
+
+              {% if settings.view.general.footer.cnpj and current_school.cnpj %}
+                <p>
+                  <b>CNPJ: </b>
+                  <span>{{ current_school.cnpj }}</span>
+                </p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <div class="container">
+        {{ 'footer.plataform_by' | t }}
+        <a ng-click="fireAnalytics()" href="http://www.edools.com" class="brand scroller" target="blank"
+           title="Edools">
+          {% assign logo_edools_img = 'logo-edools.png' | asset_url %}
+          {% image, src: logo_edools_img, alt: 'Edools', width: 90 %}
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,68 @@
+{
+  "name": "edools-elegance-theme",
+  "description": "A base theme for Edools Core",
+  "main": "index.js",
+  "authors": [
+    "Mayke Freitas"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "edools",
+    "theme"
+  ],
+  "homepage": "https://github.com/Edools/core",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-datepicker": "^1.6.0",
+    "jquery": "^2.2.2",
+    "bootstrap": "^3.3.6",
+    "jquery-timeago": "^1.5.2",
+    "jquery-mask-plugin": "^1.14.0",
+    "moment": "^2.12.0",
+    "moment-timezone": "0.5.4",
+    "card": "^1.2.2",
+    "fastclick": "^1.0.6",
+    "readmore-js": "^2.2.0",
+    "compass-sass-mixins": "*",
+    "lodash": "^4.16.4",
+    "bLazy": "blazy#^1.8.2"
+  },
+  "overrides": {
+    "jquery": {
+      "main": []
+    },
+    "bootstrap-datepicker": {
+      "main": [
+        "dist/css/bootstrap-datepicker3.css",
+        "dist/js/bootstrap-datepicker.min.js",
+        "dist/locales/bootstrap-datepicker.pt-BR.min.js"
+      ]
+    },
+    "jquery-timeago": {
+      "main": [
+        "jquery.timeago.js",
+        "locales/jquery.timeago.pt-br.js"
+      ]
+    },
+    "moment": {
+      "main": [
+        "moment.js",
+        "locale/pt-br.js"
+      ]
+    },
+    "card": {
+      "main": [
+        "lib/js/card.js",
+        "lib/js/jquery.card.js"
+      ]
+    }
+  }
+}

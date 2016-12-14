@@ -1,0 +1,59 @@
+<div class="col-xs-12 col-md-4 text-center">
+    <div class="social-networks">
+        {% if settings.view.home.footer.social_facebook_link and current_school.facebook %}
+            <a class="social-network social-network-facebook" target="_blank"
+               href="https://www.facebook.com/{{ current_school.facebook }}">
+                <i class="icon-social-facebook"></i>
+                {{ 'home.social.follow_fb' | t }}
+            </a>
+        {% endif %}
+
+        {% if settings.view.home.footer.social_twitter_link and current_school.twitter %}
+            <a class="social-network social-network-twitter" target="_blank"
+               href="https://twitter.com/{{ current_school.twitter }}">
+                <i class="icon-social-twitter"></i>
+                {{ 'home.social.follow_tw' | t }}
+            </a>
+        {% endif %}
+
+        {% if settings.view.home.footer.social_instagram_link and current_school.instagram %}
+            <a class="social-network social-network-instagram" target="_blank"
+               href="https://www.instagram.com/{{ current_school.instagram }}">
+                <i class="icon-social-instagram"></i>
+                {{ 'home.social.follow_insta' | t }}
+            </a>
+        {% endif %}
+
+        {% if settings.view.home.footer.social_google_plus_link and current_school.google_plus %}
+            <a class="social-network social-network-google-plus" target="_blank"
+               href="https://plus.google.com/{{ current_school.google_plus }}">
+                <i class="icon-social-gplus"></i>
+                {{ 'home.social.follow_google' | t }}
+            </a>
+        {% endif %}
+
+        {% if settings.view.home.footer.social_youtube_link and current_school.youtube %}
+            <a class="social-network social-network-youtube" target="_blank"
+               href="https://www.youtube.com/channel/{{ current_school.youtube }}">
+                <i class="icon-social-youtube"></i>
+                {{ 'home.social.follow_youtube' | t }}
+            </a>
+        {% endif %}
+
+        {% if settings.view.home.footer.social_pinterest_link and current_school.pinterest %}
+            <a class="social-network social-network-pinterest" target="_blank"
+               href="https://www.pinterest.com/{{ current_school.pinterest }}">
+                <i class="icon-social-pinterest"></i>
+                {{ 'home.social.follow_pinterest' | t }}
+            </a>
+        {% endif %}
+
+        {% if settings.view.home.footer.social_linkedin_link and current_school.linkedin %}
+            <a class="social-network social-network-linkedin" target="_blank"
+               href="https://www.linkedin.com/company/{{ current_school.linkedin }}">
+                <i class="icon-social-linkedin"></i>
+                {{ 'home.social.follow_linkedin' | t }}
+            </a>
+        {% endif %}
+    </div>
+</div>

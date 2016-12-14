@@ -1,0 +1,57 @@
+<ol class="list-group modules">
+  {% for content in extra_contents %}
+    {% if content.available %}
+      {% assign content_released = content | check_availability_for: enrollment %}
+      {% if content.release_at %}
+        {% assign release_type = 'release_at' %}
+        {% assign release_date = content.release_at %}
+      {% else %}
+        {% assign release_type = 'release_after' %}
+        {% assign release_date = enrollment.activated_at | add_days: content.release_after %}
+      {% endif %}
+
+      <li id="extra-content-{{ content.id }}"
+          class="list-group-item lesson module-item {% if content.id == extra_content.id %}active{% endif %}">
+        <div class="content-lesson">
+          <div class="class-info {% if content.id == extra_content.id %} active {% endif %}">
+            <div class="left">
+              {% include 'media-icon', media: content.media %}
+            </div>
+
+            <div class="center">
+              {% if current_user.type == 'Student' and content_released  %}
+                <a class="title"
+                   href="/enrollments/{{ enrollment.id }}/courses/{{ course.id }}/extra_contents/{{ content.id }}">
+                  {{ content.title }}
+                </a>
+              {% else %}
+                <span class="title">{{ content.title }}</span>
+              {% endif %}
+            </div>
+
+            <div class="right">
+              {% if content_released %}
+                {% if content.downloadable and current_user.type == 'Student' %}
+                  <a class="download-link" href="{{ content | extra_content_download_path: course, enrollment }}"
+                     data-no-turbolink>
+                    <i class="icon-cloud-download"></i>
+                  </a>
+                {% endif %}
+              {% else %}
+                <span class="release-date badge">
+                  {{ 'lesson.' | append: release_type | t }}
+
+                  <span class="js-to-client-timezone"
+                        data-timezone="{{ release_date | to_json }}"
+                        data-format="DD/MM/YYYY">
+                          {{ release_date | date:"%d/%m/%Y" }} UTC
+                  </span>
+                </span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ol>

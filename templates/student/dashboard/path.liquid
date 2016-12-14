@@ -1,0 +1,74 @@
+<div class="course-page path-page page">
+  <div class="course-page-header page-header">
+    <div class="container">
+      <div class="control-back">
+        <a id="return-home" class="btn btn-default" href="/enrollments/{{ enrollment_id }}">
+          <i class="icon-arrow-left"></i>
+          <span>{{ 'general.back_to_enrollments' | t }}</span>
+        </a>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="course-header-info">
+
+            <h2 class="title">{{ path.name }}</h2>
+
+            <div class="description">
+              <p>{{ enrollment | total_max_attendance_message }}</p>
+              <p>{{ enrollment | use_max_attendance_message }}</p>
+            </div>
+
+            {% if enrollment.available_until %}
+              <span class="course-instructor">
+              <span class="available-title">
+                {{ 'general.available_until' | t }}: {{ enrollment.available_until | l: format: 'short' }}
+              </span>
+            </span>
+            {% endif %}
+
+            {% include 'progress-card', progress: enrollment.progress_card %}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="course-image">
+            {% if path.image_url %}
+              {% image, src: path.image_url, alt: path.name %}
+            {% else %}
+              {% assign placeholder = 'missing-course-logo.png' | asset_url %}
+              {% image, src: placeholder, alt: path.name %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="course-page-content">
+      <div hide-on-load="course" class="row course-container">
+        <div class="col-md-12">
+          <ul class="nav nav-tabs">
+            <li class="title">
+              <a href="#path-messages" data-toggle="tab">
+                {{ "path.pinboard" | t }}
+              </a>
+            </li>
+            <li class="title active">
+              <a href="#path-courses" data-toggle="tab">
+                {{ "path.courses" | t }}
+              </a>
+            </li>
+          </ul>
+          <div class="dashboards-body tab-content">
+            <div role="tabpanel" class="tab-pane" id="path-messages">
+              {% include 'pinboard', messages: messages %}
+            </div>
+            <div role="tabpanel" class="tab-pane active" id="path-courses">
+              {% include 'path-courses', enrollment: enrollment, path: path, courses: courses %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

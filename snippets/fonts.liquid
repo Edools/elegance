@@ -1,0 +1,41 @@
+{% assign font_families = '' %}
+
+<!-- Base Family -->
+{% unless font_families contains settings.style.type_base_family %}
+  {% assign font_families = font_families | append: settings.style.type_base_family | append: ',' %}
+{% endunless %}
+
+<!-- Navbar Family -->
+{% unless font_families contains settings.style.type_navbar_family %}
+  {% assign font_families = font_families | append: settings.style.type_navbar_family | append: ',' %}
+{% endunless %}
+
+<!-- Title Family -->
+{% unless font_families contains settings.style.type_title_family %}
+  {% assign font_families = font_families | append: settings.style.type_title_family | append: ',' %}
+{% endunless %}
+
+<!-- Subtitle Family -->
+{% unless font_families contains settings.style.type_subtitle_family %}
+  {% assign font_families = font_families | append: settings.style.type_subtitle_family | append: ',' %}
+{% endunless %}
+
+<!-- Paragraph Family -->
+{% unless font_families contains settings.style.type_paragraph_family %}
+  {% assign font_families = font_families | append: settings.style.type_paragraph_family | append: ',' %}
+{% endunless %}
+
+<!-- Button Family -->
+{% unless font_families contains settings.style.type_button_family %}
+  {% assign font_families = font_families | append: settings.style.type_button_family %}
+{% endunless %}
+
+{% assign font_families = font_families | split: ',' %}
+
+{% for font in font_families %}
+  {% unless settings.style.default_fonts contains font %}
+  <link
+    href='https://fonts.googleapis.com/css?family={{ font | replace: ' ', '+' }}:400,600,700,900'
+    rel='stylesheet' type='text/css'>
+  {% endunless %}
+{% endfor %}

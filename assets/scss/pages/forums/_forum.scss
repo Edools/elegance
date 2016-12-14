@@ -1,0 +1,56 @@
+.forum-page {
+  .forum-sections {
+    .list-group-item {
+      padding: 0;
+    }
+
+    .list-group-item-text {
+      padding: 0 15px;
+      padding-bottom: 10px;
+    }
+
+    .section {
+      .toggle {
+        display: block;
+        padding: 0 15px;
+        padding-top: 10px;
+        font-weight: normal;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      .section-topics {
+        display: block;
+        padding: 0 15px;
+        padding-top: $padding-large-vertical * 4;
+        padding-bottom: 10px;
+
+        .section-topic {
+          .title {
+            display: block;
+            margin-bottom: $padding-large-vertical * 2;
+            font-size: 18px;
+          }
+        }
+      }
+
+      .section-check:checked {
+        & ~ .toggle {
+          i {
+            @include rotate(-180deg);
+          }
+        }
+
+        & ~ .section-topics {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .actions {
+    margin-left: 15px;
+    padding: 20px;
+    height: 100%;
+  }
+}

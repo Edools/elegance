@@ -1,0 +1,118 @@
+{
+  "current": "Elegance",
+  "presets": {
+    "Elegance": {
+      "style": {
+        "default_fonts": [
+          "Proxima Nova",
+          "Helvetica",
+          "Verdana",
+          "Arial",
+          "Courier New"
+        ],
+        "color_primary": "#49b17b",
+        "color_body_bg": "#f4f2f0",
+        "color_body_text": "#585858",
+        "color_content_bg": "#f4f2f0",
+        "color_border": "#dedede",
+        "color_navbar_bg": "#ffffff",
+        "color_navbar_links": "#222",
+        "color_button_primary_text": "#ffffff",
+        "color_button_primary_bg": "#49b17b",
+        "color_button_secondary_text": "#585858",
+        "color_button_secondary_bg": "#ffffff",
+        "color_titles": "#585858",
+        "color_subtitles": "#585858",
+        "color_paragraphs": "#585858",
+        "color_links": "#49b17b",
+        "color_footer_bg": "#2e3234",
+        "color_footer_text": "#747474",
+        "color_footer_links": "#b8b8b8",
+        "type_base_family": "Proxima Nova",
+        "type_base_size": "16px",
+        "type_navbar_family": "Proxima Nova",
+        "type_navbar_size": "16px",
+        "type_title_family": "Proxima Nova",
+        "type_title_size": "32px",
+        "type_subtitle_family": "Proxima Nova",
+        "type_subtitle_size": "20px",
+        "type_paragraph_family": "Proxima Nova",
+        "type_paragraph_size": "16px",
+        "type_button_family": "Proxima Nova",
+        "type_button_size": "16px",
+        "home": {
+          "header_bg": "#41a875",
+          "header_text_color": "#ffffff",
+          "header_background_image": "",
+          "benefits": {
+            "color_icon": "#585858",
+            "color_title": "#585858",
+            "color_text": "#585858"
+          }
+        },
+        "product": {
+          "header_bg": "#41a875",
+          "header_text_color": "#ffffff",
+          "header_background_image": "",
+          "footer_text": "Assista ao curso e aumente a performance da sua organização!"
+        }
+      },
+      "view": {
+        "general": {
+          "favicon": "",
+          "navbar": {
+            "title": "Elegance Theme",
+            "logo": ""
+          },
+          "footer": {
+            "logo": "",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lectus, pretium quis lobortis sollicitu",
+            "site": false,
+            "email": false,
+            "phone": true,
+            "address": true,
+            "cnpj": true,
+            "razao_social": true
+          }
+        },
+        "home": {
+          "header": {
+            "title": "Seja Bem-Vindo",
+            "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lectus, pretium quis lobortis sollicitudin, viverra eget lacus. Curabitur vitae hendrerit ex, id iaculis tellus",
+            "cover_enable": true,
+            "cover_src": ""
+          },
+          "topics": [
+            {
+              "title": "Assista onde preferir",
+              "subtitle": "no seu computador, tablet ou celular",
+              "icon": "icon-screen-smartphone"
+            },
+            {
+              "title": "Certificados",
+              "subtitle": "Você irá receber nosso certificado na conclusão",
+              "icon": "icon-graduation"
+            },
+            {
+              "title": "Materiais Extras",
+              "subtitle": "Para complementar seu estudo além das video-aulas.",
+              "icon": "icon-docs"
+            }
+          ],
+          "product_list_title": "<strong>Participe de nossos cursos</strong>, basta escolher e assistir",
+          "footer": {
+            "title": "Donec sollicitudin molestie malesuada. Donec sollicitudin molestie malesuada.",
+            "text": "Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus.",
+            "social_twitter_link": true,
+            "social_facebook_link": true,
+            "social_pinterest_link": false,
+            "social_google_plus_link": false,
+            "social_instagram_link": false,
+            "social_youtube_link": false,
+            "social_linkedin_link": false
+          }
+        }
+      }
+    }
+  }
+}

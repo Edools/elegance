@@ -1,0 +1,13 @@
+{% if channel.permission_key %}
+  {% if channel.permission_key == 'content_management' %}
+    {% assign label_class = 'label-danger' %}
+    {% elsif channel.permission_key == 'school_management' %}
+    {% assign label_class = 'label-info' %}
+    {% elsif channel.permission_key == 'finance' %}
+    {% assign label_class = 'label-warning' %}
+  {% endif %}
+
+  <span class="label {{ label_class }}">
+    {{ 'messages.' | append: channel.permission_key | t }}
+  </span>
+{% endif %}

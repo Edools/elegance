@@ -1,0 +1,62 @@
+.checkout-cart-page {
+  .cart-product {
+    position: relative;
+
+    .pointer {
+      @include transition(.2s ease);
+
+      position: absolute;
+      right: -1px;
+      bottom: -1px;
+      display: block;
+      width: 36px;
+      height: 36px;
+      border: 1px solid $list-group-border;
+      border-top-left-radius: $border-radius-base;
+      border-bottom-right-radius: $border-radius-base;
+      background-color: $gray-lighter;
+      color: $text-muted;
+      text-align: center;
+      text-decoration: none;
+      line-height: 35px;
+
+      &:hover {
+        color: $brand-danger;
+      }
+    }
+
+    .cart-image {
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .cart-price {
+      @include breakpoint(md) {
+        text-align: right;
+      }
+
+      text-align: left;
+    }
+  }
+
+  .coupon-widget {
+    margin-top: $padding-large-vertical * 4;
+  }
+
+  .terms-of-use {
+    display: block;
+    margin: 15px 0;
+    text-align: center;
+  }
+
+  .payment-methods {
+    padding: $padding-base-vertical * 4 $padding-large-horizontal;
+
+    .title {
+      font-size: 20px;
+    }
+  }
+}

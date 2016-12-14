@@ -1,0 +1,69 @@
+<div class="forums-page page">
+  <div class="forum-panel">
+    <div class="container whitebg course-dashboard-content">
+      <h2>{{ 'forums.forums' | t }}</h2>
+      <div class="forums-body">
+        <form accept-charset="UTF-8" method="get" action="/forums" data-turbolinks-scroll="false">
+          <div class="input-group input-group-lg">
+            <span class="input-group-addon no-background"><i class="icon-magnifier"></i></span>
+            <input type="text" name="title" class="form-control" placeholder="{{ 'forums.filter_by_title' | t }}"
+                   value="{{ current_search.title }}">
+              <span class="input-group-btn">
+                <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+              </span>
+          </div>
+        </form>
+      </div>
+      <br>
+      <div collapse="collapsed" class="forum-sections list-group">
+        {% paginate forums by 10 %}
+        {% if forums.total_count == 0 %}
+          <div class="alert alert-info text-center">
+            {{ 'forums.empty' | t }}
+          </div>
+        {% else %}
+          {% for forum in forums %}
+            <article class="section list-group-item clearfix">
+              <div class="section-content clearfix">
+                <a class="list-group-item-heading title" href="{{ forum | forum_path }}">{{ forum.title }}</a>
+                <p class="list-group-item-text" clamp="3">{{ forum.description }}</p>
+              </div>
+              <div class="section-meta pull-right">
+                <b>
+                  {{ 'forums.child_forum_sections_count' | t: count: forum.child_forum_sections_count }}
+                </b>
+              </div>
+            </article>
+          {% endfor %}
+        {% endif %}
+        <div class="text-center">
+          <ul class="pagination">
+            {% if paginate.previous.is_link %}
+              <li>
+                <a href="{{ paginate.previous.url }}" data-turbolinks-scroll="false"><i
+                    class="icon-arrow-left"></i></a>
+              </li>
+            {% endif %}
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                <li>
+                  <a href="{{ part.url }}" data-turbolinks-scroll="false">{{ part.title }}</a>
+                </li>
+              {% else %}
+                <li class="disabled">
+                  <span>{{ part.title }}</span>
+                </li>
+              {% endif %}
+            {% endfor %}
+            {% if paginate.next.is_link %}
+              <li>
+                <a href="{{ paginate.next.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-right"></i></a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+        {% endpaginate %}
+      </div>
+    </div>
+  </div>
+</div>

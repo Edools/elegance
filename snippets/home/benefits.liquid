@@ -1,0 +1,21 @@
+{% if settings.view.home.topics.size > 0 %}
+  <div class="home-benefits">
+    <div class="row">
+      <div class="container">
+        <div class="col-xs-12 {% if settings.view.feed_rss.enable %} col-md-7 {% endif %}">
+          {% for topic in settings.view.home.topics %}
+            <div class="col-xs-12 col-md-4">
+              <div class="media">
+                <i class="benefits-icon {{ topic.icon }}"></i>
+                <div class="media-body">
+                  <h2 class="media-heading title">{{ topic.title }}</h2>
+                  <p>{{ topic.subtitle }}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}

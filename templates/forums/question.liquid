@@ -1,0 +1,87 @@
+<div class="forums-page page">
+  <div class="forum-question-page page">
+    <div class="container">
+      <div class="forum-questions-heading">
+        <a href="{{ topic | topic_path }}" type="button" class="btn btn-default">
+          <i class="icon-arrow-left"></i>
+          <span>{{ 'general.back' | t }}</span>
+        </a>
+      </div>
+
+      {% include 'forums/question-item' %}
+    </div>
+
+    <div class="question-answers">
+      <div class="container">
+        {% paginate question.forum_answers by 10 %}
+        {% if question.forum_answers.total_count == 0 %}
+          <h4 class="note-title">{{ 'general.attention' | t }}</h4>
+          {{ 'forums.answers_empty' | t }}
+        {% else %}
+          <section class="answers">
+            <h4 class="title">
+              <i class="icon-bubbles"></i>
+              <span>{{ 'forums.answers' | t }}</span>
+            </h4>
+            <div class="answers-list">
+              {% for answer in question.forum_answers %}
+                <div class="answer row">
+                  <div class="col-xs-3 col-sm-1 clearfix">
+                    <div class="avatar">
+                      {% assign avatar_alt = answer.user | fullname %}
+                      {% image, src: answer.user.cover_image_url, alt: avatar_alt %}
+                    </div>
+                  </div>
+                  <div class="col-xs-9 col-sm-11">
+                    <div class="comment-bubble">
+                      <div class="author">
+                  <span class="name">
+                    {% if answer.user.type == 'Collaborator' %}
+                      <i class="icon-group" tooltip="{{ 'forums.teacher' | t }}"></i>
+                    {% else %}
+                      <i class="icon-graduation" tooltip="{{ 'forums.student' | t }}"></i>
+                    {% endif %}
+                    {{ answer.user | fullname }}</span>
+                        <span class="date">{{ answer.created_at | time_ago_in_words }}</span>
+                      </div>
+                      <div class="content">
+                        {{ answer.text }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </section>
+        {% endif %}
+        <div class="text-center">
+          <ul class="pagination">
+            {% if paginate.previous.is_link %}
+              <li>
+                <a href="{{ paginate.previous.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-left"></i></a>
+              </li>
+            {% endif %}
+            {% for part in paginate.parts %}
+              {% if part.is_link %}
+                <li>
+                  <a href="{{ part.url }}" data-turbolinks-scroll="false">{{ part.title }}</a>
+                </li>
+              {% else %}
+                <li class="disabled">
+                  <span>{{ part.title }}</span>
+                </li>
+              {% endif %}
+            {% endfor %}
+            {% if paginate.next.is_link %}
+              <li>
+                <a href="{{ paginate.next.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-right"></i></a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+        {% endpaginate %}
+      </div>
+    </div>
+  </div>
+
+</div>

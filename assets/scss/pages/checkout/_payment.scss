@@ -1,0 +1,34 @@
+.checkout-payment-page {
+  .btn-finalize {
+    margin: $padding-large-vertical * 4 0;
+  }
+
+  .credit-card {
+    .card-wrapper {
+      margin-bottom: $padding-large-vertical * 8;
+
+      .jp-card-container {
+        @include breakpoint(sm) {
+          display: block;
+        }
+
+        display: none;
+      }
+    }
+  }
+
+  .bank-transfer {
+    .form-group {
+      margin-top: $padding-large-vertical * 4;
+      text-align: center;
+
+      .radio-inline {
+        @include breakpoint(sm) {
+          margin-bottom: 0;
+        }
+
+        margin-bottom: $padding-large-vertical * 3;
+      }
+    }
+  }
+}

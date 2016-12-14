@@ -1,0 +1,306 @@
+$profile-text-color: rgba($light, .9);
+
+.profile-page {
+  h2 {
+    line-height: 1;
+  }
+
+  .profile {
+    @extend .panel;
+    @extend .panel-default;
+
+    position: relative;
+    overflow: hidden;
+    margin-top: $padding-large-vertical * 2;
+    min-height: 420px;
+    background-color: #222;
+
+    .bg-picture {
+      @include filter(blur(20px));
+
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      bottom: -20px;
+      left: -20px;
+      z-index: 0;
+      opacity: .6;
+    }
+
+    .profile-body {
+      @extend .panel-body;
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      padding-top: $padding-large-vertical * 2;
+      padding-bottom: $padding-large-vertical * 2;
+    }
+
+    .profile-picture {
+      @include box-shadow(0 3px 6px -2px rgba(0, 0, 0, .45));
+
+      position: relative;
+      display: block;
+      overflow: hidden;
+      margin: 0 auto;
+      width: 210px;
+      height: 210px;
+      border: 5px solid $panel-bg;
+      border-radius: 100%;
+
+      img {
+        @include translate(-50%, -50%);
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: auto;
+        height: 100%;
+      }
+    }
+
+    .info-profile {
+      width: 100%;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .btn {
+      border-width: 0 !important;
+
+      i {
+        margin-right: 3px;
+      }
+    }
+
+    .info {
+      color: $profile-text-color;
+
+      .name {
+        margin-top: $padding-large-vertical * 2;
+        margin-bottom: $padding-large-vertical;
+        color: $profile-text-color;
+        font-weight: 600;
+        font-size: 24px;
+      }
+    }
+
+    .follow-info {
+      margin: $padding-large-vertical * 2 0;
+      padding: 10px 0 0 0;
+      color: $profile-text-color;
+
+      li {
+        display: inline;
+        padding: 0 5px;
+        text-align: center;
+        font-size: $font-size-base;
+
+        a {
+          color: $profile-text-color;
+          text-decoration: none;
+
+          .followers-count,
+          .followed-count {
+            font-weight: 600;
+          }
+        }
+      }
+
+      li:not(:last-child) {
+        margin-right: 1px;
+        border-right: 1px solid $profile-text-color;
+      }
+    }
+
+    .follow-actions {
+      display: inline-block;
+
+      .btn-following {
+        $color: #50fba4;
+
+        background-color: rgba(#000, .1) !important;
+        color: $color;
+
+        i {
+          color: lighten($color, 5%);
+        }
+      }
+    }
+
+    &.own-profile {
+      .name {
+        margin-bottom: 0;
+      }
+
+      .follow-info {
+        margin-top: 0;
+        padding-top: 0;
+      }
+    }
+  }
+
+  .nav-tabs {
+    border-bottom: none;
+
+    i {
+      margin-right: 5px;
+    }
+
+    a {
+      margin: 0;
+    }
+
+    .active {
+      a {
+        &,
+        &:hover {
+          @include box-shadow(-2px 0 0 0 $brand-primary);
+
+          padding-left: $padding-large-horizontal;
+          border: none;
+        }
+      }
+    }
+  }
+
+  .followed-list {
+    .profile {
+      min-height: 0;
+      height: 300px;
+
+      .bg-picture {
+        display: none;
+      }
+
+      .profile-body {
+        background-color: $panel-bg;
+
+        a,
+        .name {
+          color: $text-color !important;
+        }
+
+        .name {
+          margin-bottom: 0;
+          font-size: 22px;
+        }
+
+        .follow-info {
+          margin-top: 0;
+          padding: 0;
+        }
+      }
+
+      .profile-picture {
+        width: 164px;
+        height: 164px;
+      }
+    }
+  }
+
+  .post-list {
+    .post {
+      .panel-footer {
+        .post-date {
+          font-size: 12px;
+        }
+
+        .post-edit,
+        .post-delete {
+          margin-right: $padding-large-horizontal;
+          color: $text-color;
+          text-decoration: none;
+          font-size: $font-size-small;
+        }
+
+        .post-edit {
+          &:hover {
+            color: $brand-primary;
+          }
+        }
+
+        .post-delete {
+          &:hover {
+            color: $brand-danger;
+          }
+        }
+      }
+    }
+  }
+
+  .product-list {
+    .product {
+      @include breakpoint(md) {
+        height: 400px;
+      }
+    }
+  }
+
+  .media-list {
+    @include column-gap(15px);
+    @include breakpoint(sm) {
+      @include column-count(2);
+    }
+
+    .media {
+      @extend .panel;
+      @extend .panel-default;
+
+      position: relative;
+      display: inline-block;
+      margin: 0 0 7.5px;
+      padding: 0;
+
+      .logo {
+        img {
+          width: 100%;
+          height: auto;
+        }
+
+        i {
+          margin: $padding-large-horizontal;
+          color: $border-color-base;
+          font-size: 78px;
+        }
+      }
+
+      .caption {
+        padding: $padding-large-vertical $padding-large-horizontal;
+
+        .title {
+          display: block;
+          margin: 0;
+          color: $text-color;
+          text-decoration: none;
+          font-size: 18px;
+
+          &:hover {
+            color: $brand-primary;
+          }
+        }
+
+        .subtitle {
+          margin: 0;
+          color: $text-muted;
+        }
+      }
+
+      .remove-action {
+        position: absolute;
+        top: -1px;
+        right: -1px;
+
+        .btn {
+          border-radius: 0 $border-radius-base 0 $border-radius-base;
+        }
+      }
+    }
+  }
+}

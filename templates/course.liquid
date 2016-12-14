@@ -1,0 +1,111 @@
+<div class="course-page page">
+  <div class="course-page-header page-header">
+    <div class="container">
+      <div class="control-back">
+        <a id="return-home" class="btn btn-default" href="{{ enrollment.id | enrollments_or_path_path: path_id }}">
+          <i class="icon-arrow-left"></i>
+          <span>{{ 'general.back' | t }}</span>
+        </a>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="course-header-info">
+
+            <h2 class="title">{{ course.name }}</h2>
+
+            <div class="description">
+              <p>{{ enrollment | total_max_attendance_message }}</p>
+              <p>{{ enrollment | use_max_attendance_message }}</p>
+            </div>
+
+            {% if enrollment.available_until %}
+              <span class="course-instructor">
+              <span class="available-title">
+                {{ 'general.available_until' | t }}:
+              </span>
+              <span class="js-to-client-timezone" data-timezone="{{ enrollment.available_until | to_json }}"
+                    data-format="DD [de] MMMM, HH:mm">
+                {{ enrollment.available_until | l: format: 'short' }} UTC
+              </span>
+            </span>
+            {% endif %}
+
+            {% assign progress = enrollment | course_progress_card: course %}
+            {% include 'progress-card', progress: progress %}
+
+            {% if last_visited_content %}
+              <a class="last-lesson-link btn btn-default"
+                 data-no-turbolink
+                 data-toggle="tolltip"
+                 title="{{ last_lesson.title }}"
+                 href="{{ last_visited_content | content_path: enrollment: enrollment, course: course }}">
+                <span>{{ 'product.resource.continue' | t }}</span>
+                <i class="icon-arrow-right"></i>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="course-image">
+            {% if course.image_url %}
+              {% image, src: course.image_url, alt: course.name %}
+            {% else %}
+              {% assign placeholder = 'missing-course-logo.png' | asset_url %}
+              {% image, src: placeholder, alt: course.name %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container page-container">
+    <div class="course-page-content">
+      <div hide-on-load="course" class="row course-container">
+        <div class="col-md-12">
+          <ul class="nav nav-tabs">
+            <li class="title">
+              <a href="#course-messages" data-toggle="tab">
+                {{ 'course.billboard' | t }}
+              </a>
+            </li>
+
+            <li class="title active">
+              <a href="#course-content" data-toggle="tab">
+                {{ 'course.course_content' | t }}
+              </a>
+            </li>
+
+            <li class="title">
+              <a href="#course-extra-content" data-toggle="tab">
+                {{ 'course.complementary_material' | t }}
+              </a>
+            </li>
+          </ul>
+
+          <div class="dashboards-body tab-content">
+            <div role="tabpanel" class="tab-pane active" id="course-content">
+              {% include 'product/content-course', lesson_actions: true,
+              enrollment: enrollment, download_action: true %}
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="course-extra-content">
+              {% include 'course/extra-content', enrollment: enrollment,
+              course: course, extra_contents: course.extra_contents %}
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="course-messages">
+              {% include 'pinboard', messages: messages %}
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="course-performance">
+              {% include 'course/performance/performance-index' content: enrollment %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+.certificates-page {
+  .certificates-list {
+    .course {
+      @include breakpoint(sm) {
+        height: 440px;
+      }
+
+      padding: 0;
+      border: 2px solid darken($gray-lighter, 5%);
+
+      .course-image {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 230px;
+
+        img {
+          @include translate(-50%, -50%);
+
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: auto;
+          height: 100%;
+        }
+      }
+
+      .course-header {
+        padding: $padding-large-horizontal + 5;
+
+        .title {
+          @include breakpoint(sm) {
+            height: 68px;
+          }
+
+          display: block;
+          margin-top: 0;
+          margin-bottom: $padding-large-vertical;
+          color: $text-color;
+          font-size: 20px;
+          line-height: 1.2;
+        }
+      }
+
+      .course-action {
+        padding: $padding-large-horizontal + 5;
+        text-align: center;
+      }
+    }
+  }
+}

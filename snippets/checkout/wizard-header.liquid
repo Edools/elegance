@@ -1,0 +1,38 @@
+<div class="wizard-wrapper">
+  <ul class="wizard-steps">
+    <li class="wizard-step {% if step == 1 %}active{% endif %}{% if step > 1 %}active completed{% endif %}">
+      <span class="wizard-step-number">1</span>
+      <span class="wizard-step-caption">
+        <span>{{ 'checkout.wizard.connect' | t }}</span>
+      </span>
+    </li>
+
+    <li class="wizard-step {% if step == 2 %}active{% endif %}{% if step > 2 %}active completed{% endif %}">
+      {% if infos_completed %}
+        <a href="/checkout/complete" class="wizard-link wizard-step-number">2</a>
+        <a href="/checkout/complete" class="wizard-link wizard-step-caption">
+          <span>{{ 'checkout.wizard.verify' | t }}</span>
+        </a>
+      {% else %}
+        <span class="wizard-step-number">2</span>
+        <span class="wizard-step-caption">
+          <span>{{ 'checkout.wizard.complete' | t }}</span>
+        </span>
+      {% endif %}
+    </li>
+
+    <li class="wizard-step {% if step == 3 %}active{% endif %}{% if step > 3 %}active completed{% endif %}">
+      {% if infos_completed %}
+        <a href="/checkout/payment" class="wizard-link wizard-step-number">3</a>
+        <a href="/checkout/payment" class="wizard-link wizard-step-caption">
+          <span>{{ 'checkout.wizard.pay' | t }}</span>
+        </a>
+      {% else %}
+        <span class="wizard-step-number">3</span>
+        <span class="wizard-step-caption">
+          <span>{{ 'checkout.wizard.pay' | t }}</span>
+        </span>
+      {% endif %}
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,34 @@
+.orders-page {
+  padding-bottom: $padding-large-vertical * 12;
+
+  .order-items {
+    .item {
+      float: left;
+      margin-right: 5px;
+    }
+  }
+
+  .subscription-details {
+    padding: $padding-large-horizontal;
+    background-color: $table-border-color;
+  }
+
+  .subscription-actions {
+    @include flexbox((
+      display: flex,
+      flex-direction: column
+    ));
+
+    padding: $padding-large-horizontal;
+    width: 100%;
+    height: 100%;
+
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+            align-items: center;
+
+    .btn {
+      margin: 10px 0;
+    }
+  }
+}

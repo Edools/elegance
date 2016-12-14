@@ -1,0 +1,31 @@
+<div class="login-page page">
+  <div class="container page-container">
+    <h1 class="form-header title">{{ 'login.enter_your_account' | t }}</h1>
+    {% form 'login' %}
+    {% if form.errors %}
+      <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+    {% endif %}
+
+    <div class="form-group">
+      <input type="email" autofocus="true" name="user[email]" class="form-control input-lg"
+             placeholder="{{ 'login.email' | t }}" required>
+    </div>
+
+    <div class="form-group signin-password">
+      <input type="password" name="user[password]" class="form-control input-lg error"
+             placeholder="{{ 'login.password' | t }}" required>
+      {{ 'login.forgot' | t | reset_password_link : 'forgot' }}
+    </div>
+
+    <input type="submit" value="{{ 'login.enter' | t }}" class="btn btn-primary include 'public_user btn-block btn-lg">
+
+    {% endform %}
+
+    <br/><br/>
+
+    <p class="register">
+      {{ 'login.not_have_account' | t }}
+      {{ 'login.create_account' | t | register_link }}
+    </p>
+  </div>
+</div>

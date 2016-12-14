@@ -1,0 +1,19 @@
+.show-message-page {
+  .channel-info {
+    margin-bottom: $padding-large-vertical * 4;
+
+    .title {
+      margin-bottom: 0;
+    }
+  }
+
+  .channel-members {
+    margin-bottom: $padding-large-vertical * 4;
+  }
+
+  .reply-input {
+    .btn {
+      margin-top: $padding-large-vertical * 2;
+    }
+  }
+}

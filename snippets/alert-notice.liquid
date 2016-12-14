@@ -1,0 +1,26 @@
+{% if notice or alert %}
+  <div class="alert-notice">
+    {% if notice %}
+      <div class="alert alert-success">
+        <button data-dismiss="alert" class="close" type="button">×</button>
+        <i class="icon-check"></i>
+        {{ notice | t }}
+      </div>
+    {% endif %}
+    {% if alert %}
+      <div class="alert alert-danger">
+        <button data-dismiss="alert" class="close" type="button">×</button>
+        <i class="icon-close"></i>
+        {{ alert | default_errors }}
+      </div>
+    {% endif %}
+  </div>
+
+  <script>
+    setTimeout(function () {
+      $('.alert-notice').fadeOut(1000, function () {
+        $(this).remove();
+      });
+    }, 3000);
+  </script>
+{% endif %}

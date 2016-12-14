@@ -1,0 +1,74 @@
+.courses-list {
+  margin-top: $padding-large-vertical * 4;
+
+  .course {
+    @extend .thumbnail;
+    @include breakpoint(sm) {
+      height: 518px;
+    }
+
+    padding: 0;
+    border: 2px solid darken($gray-lighter, 5%);
+    border-radius: $border-radius-base;
+    background-color: $light;
+
+    .course-image {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 230px;
+
+      img {
+        @include translate(-50%, -50%);
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: auto;
+        height: 100%;
+      }
+    }
+
+    .course-info {
+      .title {
+        display: block;
+        text-decoration: none;
+
+        .caption {
+          @include breakpoint(sm) {
+            height: 68px;
+          }
+
+          display: block;
+          margin-top: 0;
+          margin-bottom: $padding-large-vertical;
+          padding-right: $padding-base-horizontal + 5;
+          padding-left: $padding-base-horizontal + 5;
+          color: $text-color;
+          font-size: 20px;
+          line-height: 1.2;
+        }
+      }
+
+      .course-avaliability {
+        padding: 0 $padding-large-horizontal + 5;
+
+        .status {
+          margin: $padding-large-vertical 0;
+          margin-top: $padding-large-vertical * 2;
+          text-align: center;
+          cursor: default;
+        }
+      }
+
+      .course-progress {
+        padding: 0 $padding-large-horizontal + 5;
+      }
+    }
+
+    .course-action {
+      padding: $padding-large-vertical * 2 $padding-large-horizontal + 5;
+      text-align: center;
+    }
+  }
+}

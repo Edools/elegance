@@ -1,0 +1,90 @@
+<div class="show-message-page page">
+  <div class="container page-container">
+    <div class="control-back">
+      {% capture inbox_link_html %}
+      <i class="icon-arrow-left"></i>
+      <span>{{ 'general.back' | t }}</span>
+      {% endcapture %}
+
+      {{ inbox_link_html | inbox_link : 'btn btn-default' }}
+    </div>
+
+    <div class="channel">
+      <div class="channel-header">
+        <div class="channel-info">
+          <h2 class="title">{{ channel.subject }}</h2>
+          {% include 'channel-team' %}
+        </div>
+
+        <div class="channel-members">
+          {% if channel.permission_key != 'profile_message' %}
+            <div class="channel-owner">
+              <strong class="member-label">{{ 'messages.show.from' | t }}</strong>
+              <i>{{ channel.owner | fullname }}</i>
+            </div>
+          {% endif %}
+
+          <div class="channel-members-list">
+            <strong class="member-label">{{ 'messages.show.to' | t }}</strong>
+
+            {% assign members = channel.members | map: 'user' %}
+            {% if channel.permission_key == 'profile_message' %}
+              {{ members | reject_by: 'id', current_user.id | map: 'full_name' }}
+            {% else %}
+              {{ members | map: 'full_name' | to_sentence }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="question-answers">
+        <div class="answers-list">
+          {% for message in channel.messages %}
+            <div class="answer row">
+              <div class="col-xs-3 col-sm-1 clearfix">
+                <div class="avatar">
+                  {% assign avatar_alt = message.sender | fullname %}
+                  {% image, src: message.sender.cover_image_url, alt: avatar_alt %}
+                </div>
+              </div>
+              <div class="col-xs-9 col-sm-11">
+                <div class="comment-bubble">
+                  <div class="author">
+                    <span>{{ message.sender | fullname }}</span>
+                    <span class="date">{{ message.created_at | time_ago_in_words }}</span>
+                  </div>
+                  <div class="content">
+                    {{ message.text }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="reply-input">
+        {% form 'reply' %}
+        {% if form.errors %}
+          <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+        {% endif %}
+
+        <textarea id="js-message-text"
+                  class="js-ckeditor form-control"
+                  rows="10"
+                  cols="80"
+                  name="channel[messages_attributes][text]"></textarea>
+
+        <div class="text-right">
+          <button class="btn btn-primary">
+            {{ 'messages.show.reply' | t }}
+          </button>
+        </div>
+
+        {% endform %}
+      </div>
+    </div>
+
+  </div>
+</div>
+

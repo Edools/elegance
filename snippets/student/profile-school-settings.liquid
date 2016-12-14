@@ -1,0 +1,52 @@
+{% if current_school.meta_available_locales %}
+  {% form 'profile' %}
+  <div class="panel panel-default profile-school-setings-panel">
+    <div class="panel-heading" role="tab">
+      <h4 class="panel-title">
+        <a role="button"
+           data-toggle="collapse"
+           data-parent="#accordion"
+           href="#collapseSchoolSettings"
+           aria-expanded="false"
+           aria-controls="collapseProfilePicture">
+          {{ 'profile.school.settings.title' | t }}
+        </a>
+      </h4>
+    </div>
+
+      <div id="collapseSchoolSettings"
+           class="panel-collapse collapse"
+           role="tabpanel"
+           aria-labelledby="headingOne">
+        <div class="panel-body">
+          <div class="locales-form">
+            <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group required">
+                    <label class="control-label">{{ 'profile.school.settings.locale' | t }}</label>
+
+                    {% assign selected_locale = current_user.locale %}
+                    <select value="{{ selected_locale }}" name="user[locale]" class="form-control">
+                      <option value="" {% if not selected_locale %}selected{% endif %}></option>
+
+                      {% for locale in current_school.meta_available_locales %}
+                        {%if locale[1]['active'] %}
+                        <option value="{{ locale[0] }}" {% if locale[0] == selected_locale %}selected{% endif %}>
+                          {{ 'profile.school.settings.locales.' | append: locale[0] | t }}
+                        </option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                  <div class="col-xs-12 text-right">
+                    <input type="submit" class="btn btn-primary" value="{{ 'profile.save' | t }}">
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endform %}
+{% endif %}

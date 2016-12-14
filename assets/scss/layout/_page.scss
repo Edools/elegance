@@ -1,0 +1,37 @@
+.page {
+  min-height: 640px;
+  background-color: $body-bg;
+
+  .page-container {
+    padding-bottom: $padding-large-vertical * 8;
+  }
+
+  .page-header {
+    margin: 0;
+    margin-bottom: $padding-large-vertical * 4;
+    padding-top: $padding-large-vertical * 2;
+    padding-bottom: $padding-large-vertical * 4;
+    border-bottom: 1px solid $border-color-base;
+    background-color: $light;
+
+    .title {
+      margin-top: 0;
+      margin-bottom: $padding-large-vertical * 4;
+      line-height: 1;
+    }
+
+    .course-image {
+      width: 100%;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .control-back {
+      margin-bottom: $padding-large-vertical * 2;
+      padding-top: 0;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+<div class="profile-page page">
+  <div class="container page-container">
+
+    <div class="control-back">
+      <a id="return-home" class="btn btn-default" href="/">
+        <i class="icon-arrow-left"></i>
+        <span>{{ 'general.back' | t }}</span>
+      </a>
+    </div>
+
+    <h2 class="title">{{ 'profile.my_profile' | t }}</h2>
+
+    <div class="row">
+      <div class="col-md-8">
+        <div class="user-form panel-group" role="tablist">
+          {% include 'student/profile-picture' %}
+
+          {% include 'student/profile-personal-data' %}
+
+          {% include 'student/profile-address' %}
+
+          {% include 'student/profile-account' %}
+
+          {% include 'student/profile-school-settings' %}
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="user-card">
+              <div class="col-xs-4">
+                {% if user.cover_image_url != null %}
+                  <div class="avatar">
+                    {% image, src: user.cover_image_url %}
+                  </div>
+                {% endif %}
+              </div>
+              <div class="card-info col-xs-8">
+                <p class="name">{{ user | fullname }}</p>
+                <p class="email">{{ user.email }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="list-group">
+            {% if current_user.type == 'Student' %}
+              <div class="list-group-item">
+                <a href="/orders">
+                  {{ 'profile.orders' | t }}
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

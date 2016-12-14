@@ -1,0 +1,124 @@
+.wizard {
+  display: block;
+
+  .wizard-wrapper {
+    margin-bottom: $padding-large-vertical * 4;
+    text-align: center;
+
+    .wizard-steps {
+      @include make-row();
+      @include list-unstyled();
+
+      .wizard-step {
+        $base-bg: darken($gray-lighter, 15%);
+        @include make-xs-column(4);
+
+        display: inline-block;
+        overflow: hidden;
+        padding: $padding-large-vertical * 2 0;
+        text-align: center;
+
+        .wizard-link {
+          color: inherit;
+          text-decoration: inherit;
+        }
+
+        &.active {
+          .wizard-step-number {
+            @include box-shadow(0 0 0 12px rgba(74, 160, 209, .2));
+
+            border-color: $brand-info;
+            background-color: lighten($brand-info, 33%);
+            color: $brand-info;
+
+            &:before,
+            &:after {
+              background-color: $brand-info;
+            }
+          }
+
+          .wizard-step-caption {
+            color: darken($brand-info, 5%);
+          }
+        }
+
+        &.completed {
+          position: relative;
+
+          &:after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            display: block;
+            margin-top: -12px;
+            margin-left: 6px;
+            width: 24px;
+            height: 24px;
+            border-radius: 100%;
+            background: $brand-primary url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6REVBMTRENzlCNjU0MTFFNkI5NkJCNjYxQUI0NkRGMjgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6REVBMTREN0FCNjU0MTFFNkI5NkJCNjYxQUI0NkRGMjgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpERUExNEQ3N0I2NTQxMUU2Qjk2QkI2NjFBQjQ2REYyOCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpERUExNEQ3OEI2NTQxMUU2Qjk2QkI2NjFBQjQ2REYyOCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PtPVgRIAAAJBSURBVHja7JpbSwJBFMcz7LUvIhThQ0iSFNkdiyIqrayILpJhSRczLUmK+hR9g5567AY+1HOPfYwudN+OsA8ic3Tdndmddc/A/8HhzJnz++9lZhZdiqI0OLm5yAAygAwgA8gAMoAMIAPIADKADCADyAAywHmtsQ6ZvKBHUAHkcdod4APdg5rU30+gFqcY0AG6A7lL+l5AzU54BPzqlXeX9Z844RHoBN0yLmYelKl3AwKgGwb8MShb78tgF+i6yFDWnwMdac5SNMCG6lbY7bDWXHaE70HgM3ry2Q0+iMAf6M1pJ/heBD5tJK9d4PsQ+H2jue0AP4DA7/HIL/syOAi6YvTvgs65zCDxlR9Grvw2z3lkhQ8h8Enec2kJagU9gAogjwnwIwj8loj5qgV4Qc8lRbyB2gTCjyLwm6Lm1LL8vJYV864aw7uYMQQ+IfKO0xKUYxT1AWrnWMg4Ar8h+pHTGnjGKO4T5ONQxAQCHzfjhVtL8CmjyG+Q30ABkwj8ulkrTq0D8oxif0EBHZNPIfAxM5dcPYNY74Q/9YyuNcc0Ar9m9p5D78AsAhDUMDaMjF2xYtNlZHAaAemvMGYGGbNs1a7TaIIUAjTEiJ1DYpes3HbzSLKDgIVKYqJIzKLV5w5eiZIIoE99JFhtQYaDF89kCWTH+MXon5fl5Mk7YVyp3qIyHb1FJI1VgJ+V7duDqMSrDPiIjB9fRH4TDIMuQD+gCOiS/iJDBpABZAAZQAaQAWQAGUAGkAFkABlABsjR/gUYABriC6MnTbiYAAAAAElFTkSuQmCC') no-repeat center center;
+            background-size: 16px auto;
+            content: '';
+          }
+
+          .wizard-step-number {
+            @include box-shadow(none);
+
+            border-color: $brand-success;
+            background-color: lighten($brand-success, 33%);
+            color: $brand-success;
+
+            &:before,
+            &:after {
+              background-color: $brand-success;
+            }
+          }
+          .wizard-step-caption {
+            color: darken($brand-success, 5%);
+          }
+        }
+
+        .wizard-step-number {
+          $size: 56px;
+
+          position: relative;
+          display: block;
+          margin: 0 auto $padding-large-vertical * 2;
+          width: $size;
+          height: $size;
+          border: 2px solid $base-bg;
+          border-radius: $size / 2;
+          background-color: transparent;
+          color: darken($base-bg, 15%);
+          text-align: center;
+          font-weight: 600;
+          font-size: 20px;
+          line-height: $size;
+
+          &:after,
+          &:before {
+            position: absolute;
+            top: 50%;
+            margin-top: -1.5px;
+            width: 100px;
+            height: 2px;
+            background-color: $base-bg;
+            content: '';
+          }
+          &:after {
+            left: 100%;
+          }
+
+          &:before {
+            right: 100%;
+          }
+        }
+
+        .wizard-step-caption {
+          display: block;
+          color: darken($base-bg, 15%);
+          font-size: $font-size-small;
+        }
+      }
+    }
+  }
+}

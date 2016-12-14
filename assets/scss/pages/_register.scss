@@ -1,0 +1,25 @@
+.register-page {
+  margin-bottom: $padding-large-vertical * 12;
+
+  .container {
+    max-width: 640px;
+  }
+
+  .form-group,
+  .btn {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 380px;
+  }
+
+  .title {
+    margin-top: $padding-large-vertical * 8;
+    text-align: center;
+  }
+
+  .forgot {
+    display: block;
+    margin: $padding-large-vertical * 2 0;
+    text-align: right;
+  }
+}

@@ -1,0 +1,115 @@
+<div class="messages-page page">
+  <div class="container page-container">
+    <h2 class="title">{{ 'messages.title' | t }}</h2>
+
+    <div id="channels">
+      <div class="messages-search">
+        <form id="channels-filter-form"
+              accept-charset="UTF-8"
+              method="get"
+              action="/channels"
+              data-turbolinks-scroll="false">
+          <div class="row">
+            <div class="col-xs-4">
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="icon-magnifier"></i>
+                </span>
+                <input id="filter-subject" type="text" name="subject" class="form-control"
+                       placeholder="{{ 'messages.inbox.filter_by_subject' | t }}" value="{{ current_search.subject }}">
+              </div>
+            </div>
+            <div class="col-xs-3">
+              {% assign permissions = "content_management|school_management|finance" | split: "|" %}
+              <select id="permission-key-filter-select"
+                      class="form-control"
+                      name="permission_key">
+                <option value="">{{ 'messages.inbox.team' | t }}</option>
+                {% for permission in permissions %}
+                  {% if permission == current_search.permission_key %}
+                  <option value="{{ permission }}" selected="selected">
+                  {% else %}
+                    <option value="{{ permission }}">
+                  {% endif %}
+
+                  {{ 'messages.' | append: permission | t }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="col-xs-2">
+              <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+            </div>
+
+            <div class="col-xs-3">
+              {% capture new_message_link_html %}
+              <i class="icon-pencil btn-label"></i>
+              <span>{{ 'messages.new_message' | t }}</span>
+              {% endcapture %}
+
+              {{ new_message_link_html | new_message_link : 'btn btn-primary btn-new-message pull-right' }}
+            </div>
+          </div>
+        </form>
+      </div>
+
+      {% paginate channels by 10 %}
+      <table class="table table-bordered table-striped message-list inbox">
+        <tbody>
+        {% for channel in channels %}
+          <tr class="message-item">
+            <td class="from">
+              {% if channel.permission_key == 'profile_message' %}
+                {% assign members = channel.members | map: 'user' %}
+                {{ members | reject_by: 'id', current_user.id | map: 'full_name' }}
+              {% else %}
+                {{ channel.owner | fullname }}
+              {% endif %}
+            </td>
+
+            <td><a href="{{ channel | channel_path }}">{{ channel.subject }}</a></td>
+
+            <td>
+              {% if channel.permission_key != 'profile_message' %}
+                {% include 'channel-team' %}
+              {% endif %}
+            </td>
+
+            <td>{{ channel.updated_at | time_ago_in_words }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="text-center">
+        <ul class="pagination">
+          {% if paginate.previous.is_link %}
+            <li>
+              <a href="{{ paginate.previous.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-left"></i></a>
+            </li>
+          {% endif %}
+
+          {% for part in paginate.parts %}
+            {% if part.is_link %}
+              <li>
+                <a href="{{ part.url }}" data-turbolinks-scroll="false">{{ part.title }}</a>
+              </li>
+            {% else %}
+              <li class="disabled">
+                <span>{{ part.title }}</span>
+              </li>
+            {% endif %}
+          {% endfor %}
+
+          {% if paginate.next.is_link %}
+            <li>
+              <a href="{{ paginate.next.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-right"></i></a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+      {% endpaginate %}
+    </div>
+  </div>
+</div>

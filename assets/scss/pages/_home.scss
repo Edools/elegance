@@ -1,0 +1,182 @@
+.home-page {
+  padding: 0;
+
+  .navbar {
+    border-bottom: none;
+  }
+
+  .home-header {
+    padding: $padding-large-vertical * 4 0;
+    background-color: $light;
+
+    .info {
+      color: $text-color;
+
+      .title {
+        color: $text-color;
+        font-weight: 600;
+        font-size: 34px;
+      }
+
+      .subtitle {
+        font-size: 18px;
+      }
+    }
+
+    .image {
+      @include breakpoint(md) {
+        text-align: right;
+      }
+
+      img {
+        @include img-responsive();
+        @include breakpoint(md) {
+          margin-top: 0;
+        }
+
+        display: inline-block;
+        margin-top: $padding-large-vertical * 3;
+      }
+    }
+  }
+
+  .home-benefits {
+    padding: $padding-large-vertical * 6 0;
+    background-color: $light;
+
+    .title {
+      font-size: 24px;
+    }
+
+    .media {
+      @include breakpoint(md) {
+        margin-bottom: 0;
+      }
+
+      margin-bottom: $padding-large-vertical * 6;
+      padding-top: $padding-large-vertical * 4;
+      padding-bottom: $padding-large-vertical * 4;
+      text-align: center;
+
+      .benefits-icon {
+        display: inline-block;
+        font-size: 52px;
+      }
+
+      .media-body {
+        display: block;
+        padding-top: $padding-large-vertical * 2;
+        padding-left: $padding-large-vertical * 2;
+        width: 100%;
+
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .home-call-to-action {
+    margin-bottom: 0;
+    background-color: transparent;
+  }
+
+  .home-about-us {
+    padding: $padding-large-vertical * 5 0;
+    border-top: 1px solid $border-color-base;
+    background-color: $light;
+
+    .social-networks {
+      @include breakpoint(md) {
+        text-align: right;
+      }
+
+      padding: $padding-large-vertical * 4 0;
+
+      .social-network {
+        $facebook-color: #4460a0;
+        $twitter-color: #5aa8df;
+        $instagram-color: #125688;
+        $google-plus-color: #d73d32;
+        $youtube-color: #e62117;
+        $pinterest-color: #bc1623;
+        $linkedin-color: #1984bc;
+        @include transition(.2s ease);
+
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 12px 15px;
+        max-width: 220px;
+        width: 100%;
+        border: 2px solid $border-color-base;
+        border-radius: 24.5px;
+        color: $text-color;
+        text-align: left;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 1;
+
+        i {
+          margin-right: 5px;
+        }
+
+        &-facebook {
+          &:hover {
+            border-color: $facebook-color;
+            background-color: $facebook-color;
+            color: $light;
+          }
+        }
+
+        &-twitter {
+          &:hover {
+            border-color: $twitter-color;
+            background-color: $twitter-color;
+            color: $light;
+          }
+        }
+
+        &-instagram {
+          &:hover {
+            border-color: $instagram-color;
+            background-color: $instagram-color;
+            color: $light;
+          }
+        }
+
+        &-google-plus {
+          &:hover {
+            border-color: $google-plus-color;
+            background-color: $google-plus-color;
+            color: $light;
+          }
+        }
+
+        &-youtube {
+          &:hover {
+            border-color: $youtube-color;
+            background-color: $youtube-color;
+            color: $light;
+          }
+        }
+
+        &-pinterest {
+          &:hover {
+            border-color: $pinterest-color;
+            background-color: $pinterest-color;
+            color: $light;
+          }
+        }
+
+        &-linkedin {
+          &:hover {
+            border-color: $linkedin-color;
+            background-color: $linkedin-color;
+            color: $light;
+          }
+        }
+      }
+    }
+  }
+}

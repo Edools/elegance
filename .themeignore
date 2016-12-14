@@ -1,0 +1,13 @@
+assets/scss/*
+assets/js/*
+assets/*.map
+dist/*
+bower_components/*
+node_modules/*
+bower.json
+package.json
+gulpfile.js
+.gitignore
+.themeignore
+.themeignoreupdate
+theme.json

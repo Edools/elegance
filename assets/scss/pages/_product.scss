@@ -1,0 +1,102 @@
+.product-page {
+  .navbar {
+    border-bottom: none;
+  }
+
+  .product-header {
+    margin-bottom: $padding-large-vertical * 4;
+    padding: $padding-large-vertical * 4 0;
+    padding-bottom: $padding-large-vertical * 8;
+
+    .title {
+      margin-bottom: $padding-large-vertical;
+    }
+
+    .subtitle {
+      margin-bottom: $padding-large-vertical * 4;
+    }
+
+    .image {
+      margin-bottom: $padding-large-vertical * 2;
+      text-align: right;
+
+      img {
+        display: inline-block;
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .product-info {
+      padding-bottom: $padding-large-horizontal * 2;
+      text-align: left;
+
+      .checklist {
+        margin-top: $padding-large-vertical * 4;
+        padding: 0;
+
+        .check {
+          margin: 0;
+          padding: $padding-large-vertical 0;
+          list-style: none;
+          text-align: left;
+          font-size: 18px;
+
+          i {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  .enroll {
+    .price {
+      margin-bottom: $padding-large-vertical;
+      font-weight: 600;
+      font-size: 36px;
+    }
+  }
+
+  .product-teachers {
+    .teachers-list {
+      .teacher-item {
+        margin-bottom: $padding-large-vertical * 4;
+        padding: 0 $padding-large-horizontal;
+
+        .avatar {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+
+        .title {
+          margin-top: 5px;
+          margin-bottom: 5px;
+        }
+
+        .description {
+          margin-top: $padding-large-vertical * 2;
+        }
+      }
+    }
+  }
+
+  .product-content {
+    margin-top: $padding-large-vertical * 8;
+    margin-bottom: $padding-large-vertical * 8;
+
+    .title {
+      margin-top: 0;
+      margin-bottom: $padding-large-vertical * 4;
+      line-height: 1;
+    }
+  }
+
+  .jumbotron {
+    background-color: $light;
+  }
+}
+
+@import 'product/list';
+@import 'product/path-content';
+@import 'product/course-content';

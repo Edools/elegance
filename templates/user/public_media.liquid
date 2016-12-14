@@ -1,0 +1,114 @@
+<div class="profile-page page">
+  <div class="container page-container">
+    <div class="row">
+      <div class="sidebar col-md-4">
+        {% include 'public_user/sidebar', files_link: 'active' %}
+      </div>
+
+      <div class="profile-body col-md-8">
+        <div class="row">
+          <div class="col-md-12 tab-content">
+            <h2>{{ 'pages.profile.media.title' | t }}</h2>
+
+            {% if current_user and current_user.id == user.id %}
+              <article id="new-media-form" class="panel panel-default">
+                <div class="panel-body">
+                  {% form 'public_profile/media', id: new_media_form %}
+                  <input type="hidden" id="js-media-url" name="media[s3_file_url]" required>
+                  <input type="hidden" id="js-media-type" name="media[type]" required>
+
+                  <div class="form-group">
+                    <label class="control-label">{{ 'pages.profile.media.media_title' | t }}</label>
+                    <input type="text" name="media[title]" class="form-control" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label">{{ 'pages.profile.media.media_description' | t }}</label>
+                    <textarea name="media[description]" class="form-control" rows="3" required></textarea>
+                  </div>
+
+                  <div class="dropzone-container">
+                    {% dropzone 'public_profile/media', accepted_files: 'image/*,application/pdf' %}
+                    <div class="dz-default dz-message">
+                      <span>{{ 'pages.profile.media.dropzone' | t }}</span>
+                    </div>
+                    {% enddropzone %}
+                  </div>
+
+                  <button type="submit" class="btn btn-primary pull-right"
+                          data-disable-with="<i class='fa fa-spinner fa-spin'></i>{{ 'general.sending' | t }}..."
+                          disabled>
+                    {{ 'general.send' | t }}
+                  </button>
+                  {% endform %}
+                </div>
+              </article>
+            {% endif %}
+
+            {% paginate media by 12 sort { created_at: :desc } %}
+
+            <div id="js-media-list" class="media-list">
+              {% for m in media %}
+                <div class="thumbnail media" id="media-{{ m.id }}">
+                  {% if current_user and current_user.id == user.id %}
+                    <div class="js-remove remove-action">
+                      <a href="{{ m | profile_media_path: user }}"
+                         data-remote="true"
+                         data-method="delete"
+                         data-disable-with="<i class='fa fa-spinner fa-spin'></i>"
+                         data-toggle="tooltip"
+                         title="{{ 'general.clean' | t }}"
+                         class="btn btn-danger">
+                        <i class="icon-trash"></i>
+                      </a>
+                    </div>
+                  {% endif %}
+
+                  <div class="logo text-center">
+                    <a href="{{ m.s3_file_url }}">
+                      {% if m.type == 'Image' %}
+                        {% image, src: m.s3_file_url, alt: m.title %}
+                      {% else %}
+                        <i class="icon-doc"></i>
+                      {% endif %}
+                    </a>
+                  </div>
+
+                  <div class="caption">
+                    <a class="title"
+                       title="{{ m.title }}"
+                       data-toggle="{% if m.title.size > 25 %}tooltip{% endif %}"
+                       id="media-{{ m.id }}" href="{{ m.s3_file_url }}">
+                      {{ m.title | truncate: 25 }}
+                    </a>
+
+                    <p class="subtitle">{{ m.description | truncate: 112 }}</p>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+
+            {% if paginate.next.is_link %}
+              <div id="post-more" class="col-xs-12 text-center" data-turbolinks-temporary>
+                <a id="js-post-more-link" href="{{ paginate.next.url }}">
+                  <span class="bold">{{ 'general.load_more' | t }}</span>
+                </a>
+
+                <div class="js-paginate-spinner" style="display: none;">
+                  <i class='fa fa-spinner fa-spin fa-2x'></i>
+                </div>
+              </div>
+            {% endif %}
+            {% endpaginate %}
+
+            {% if media.size == 0 %}
+              <div class="alert alert-info">
+                {{ 'pages.profile.media.empty' | t }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="product-topics">
+  {% for topic in product.topics %}
+    <div class="topic panel panel-default">
+      <div class="panel-heading">
+        <div class="title">{{ topic.title }}</div>
+      </div>
+      <div class="panel-body">
+        <p class="description">{{ topic.description }}</p>
+      </div>
+    </div>
+  {% endfor %}
+</div>

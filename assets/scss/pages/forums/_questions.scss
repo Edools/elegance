@@ -1,0 +1,33 @@
+.forum-questions-page {
+  .topic-question-list {
+    .topic-question {
+      .question-user {
+        .author-name {
+          display: block;
+          margin-top: 16px;
+          margin-left: 5px;
+        }
+
+        .date {
+          display: block;
+          margin-left: 5px;
+          font-size: 14px;
+        }
+      }
+
+      .question-content {
+        .title {
+          display: block;
+          margin-top: $padding-large-vertical;
+          margin-bottom: $padding-large-vertical;
+          text-decoration: none;
+          font-size: $font-size-h4;
+        }
+      }
+
+      .attached {
+        float: right;
+      }
+    }
+  }
+}

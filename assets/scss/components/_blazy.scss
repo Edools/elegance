@@ -1,0 +1,10 @@
+.b-lazy.animated {
+  @include transition(.5s ease-in-out);
+
+  max-width: 100%;
+  opacity: 0;
+}
+
+.b-lazy.b-loaded.animated {
+  opacity: 1;
+}

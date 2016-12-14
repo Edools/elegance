@@ -1,0 +1,789 @@
+{
+  "sms": {
+    "new_order": "sms to {{ student.first_name }} for new_order event!",
+    "updated_order": "sms to {{ student.first_name }} for updated_order event!",
+    "confirmed_order": "sms to {{ student.first_name }} for confirmed_order event!",
+    "canceled_order": "sms to {{ student.first_name }} for canceled_order event!",
+    "free_order": "sms to {{ student.first_name }} for free_order event!",
+    "new_student": "sms to {{ student.first_name }} for new_student event!",
+    "progress_in_25": "sms to {{ student.first_name }} for progress_in_25 event!",
+    "progress_in_50": "sms to {{ student.first_name }} for progress_in_50 event!",
+    "progress_in_75": "sms to {{ student.first_name }} for progress_in_75 event!",
+    "progress_in_100": "sms to {{ student.first_name }} for progress_in_100 event!",
+    "completed_activity": "sms to {{ student.first_name }} for completed_activity event!",
+    "approved_activity": "sms to {{ student.first_name }} for approved_activity event!",
+    "new_forum_question": "sms to {{ student.first_name }} for new_forum_question event!",
+    "new_message": "sms to {{ student.first_name }} for new_message event!"
+  },
+  "by_pass": "{{ message }}",
+  "time": {
+    "formats": {
+      "short": "%d de %B, %H:%M"
+    }
+  },
+  "general": {
+    "load_more": "Carregar mais",
+    "attention": "Atenção!",
+    "search": "Buscar",
+    "by": "por <strong>{{ name }}</strong>",
+    "read_more": "Leia Mais",
+    "progress": "Progresso",
+    "back": "Voltar",
+    "edit": "Editar",
+    "clean": "Apagar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "send": "Enviar",
+    "sending": "Enviando",
+    "back_to_enrollments": "Voltar para sua biblioteca de cursos",
+    "available_until": "Disponível até",
+    "drop_files_to_upload": "Solte o arquivo aqui para fazer o upload",
+    "dropzone_upload_error": "Não foi possível fazer upload do arquivo!",
+    "unauthorized": "Você não tem permissão para realizar essa ação",
+    "sending_dots": "Enviando...",
+    "send_answers": "Enviar respostas",
+    "close": "Fechar",
+    "enabled": "Habilitado",
+    "disabled": "Desabilitado"
+  },
+  "errors": {
+    "course": {
+      "requirements": {
+        "uncompleted": "Você não pode acessar esta aula porque ainda não completou seu pré-requisito"
+      }
+    },
+    "gateway_transaction": {
+      "invalid_email": "O endereço de e-mail enviado não é válido para este Gateway"
+    },
+    "checkout": {
+      "no_order": "Pedido não encontrado.",
+      "no_payment": "Pagamento não encontrado.",
+      "unprocessable": "Ocorreu um erro no processamento do pedido."
+    },
+    "credit_card": {
+      "number_invalid": "Número do cartão inválido",
+      "first_name_invalid": "Primeiro nome impresso no cartão inválido",
+      "last_name_invalid": "Último nome impresso no cartão inválido",
+      "month_invalid": "Mês de vencimento do cartão inválido",
+      "year_invalid": "Ano de vencimento do cartão inválido",
+      "verification_value_invalid": "CVV inválido"
+    },
+    "title": {
+      "blank": "Titulo não pode ficar em branco"
+    },
+    "description": {
+      "blank": "Descrição não pode ficar em branco"
+    },
+    "first_name": {
+      "blank": "Nome não pode ficar em branco"
+    },
+    "last_name": {
+      "blank": "Sobrenome não pode ficar em branco"
+    },
+    "phone": {
+      "blank": "Telefone não pode ficar em branco"
+    },
+    "rg": {
+      "blank": "RG não pode ficar em branco"
+    },
+    "address" : {
+      "address_presences" : "Todos os campos relacionados a endereço exceto complemento são obrigatórios."
+    },
+    "address_street": {
+      "blank": "Logradouro não pode ficar em branco"
+    },
+    "address_number": {
+      "blank": "Número do endereço não pode ficar em branco"
+    },
+    "address_district": {
+      "blank": "Bairro não pode ficar em branco"
+    },
+    "address_city": {
+      "blank": "Cidade não pode ficar em branco"
+    },
+    "address_state": {
+      "blank": "Não pode ficar em branco"
+    },
+    "address_zip_code": {
+      "blank": "CEP não pode ficar em branco"
+    },
+    "born_at": {
+      "invalid": "A data de nascimento deve ser anterior ao dia de hoje.",
+      "blank": "Data de nascimento não pode ficar em branco"
+    },
+    "cpf": {
+      "blank": "O CPF não pode ficar em branco",
+      "invalid": "O CPF não é válido"
+    },
+    "login": {
+      "invalid": "Email e/ou senha inválidos"
+    },
+    "subject": {
+      "blank": "Assunto não pode ficar em branco"
+    },
+    "messages": {
+      "invalid": "Texto da mensagem não pode ficar em branco"
+    },
+    "email": {
+      "taken": "O email {{ value }} já está em uso",
+      "invalid": "O email não é válido"
+    },
+    "password": {
+      "too_short": "A senha é muito curta (mínimo: {{ count }} caracteres)"
+    },
+    "password_confirmation": {
+      "confirmation": "A confirmação de senha não bateu com a senha criada"
+    },
+    "organization_id": {
+      "not_found_user_email": "Não foi encontrado nenhum aluno com o email informado"
+    },
+    "reset_password_token": {
+      "invalid": "Token para criar nova senha inválido"
+    },
+    "cart": {
+      "add": "Não foi possível adicionar o item no carrinho",
+      "remove": "Não foi possível remover o item do carrinho",
+      "can_not_apply_coupon": "Não foi possível aplicar o cupom. Certifique-se de que digitou os caracteres corretamente. Caso o erro persista, entre em contato com nossa equipe para averiguar se o cupom ainda é válido.",
+      "limit_subscriptions": "Não foi possível adicionar o item no carrinho. Você só pode assinar um item por compra.",
+      "kind_invalid": "Não foi possível adicionar o item no carrinho. Este item não pode ser processado junto com os que se encontram no carrinho, termine a compra e tente novamente.",
+      "invalid_user_coupon" : "Você não tem permissão para utilizar este cupom"
+    }
+  },
+  "navbar": {
+    "cart": "Carrinho",
+    "forum": "Fóruns",
+    "sign_in": "Entrar",
+    "my_courses": "Meus cursos",
+    "public_profile": "Perfil público",
+    "my_profile": "Meu Perfil",
+    "my_orders": "Meus Pedidos",
+    "my_certificates": "Meus certificados",
+    "messages": "Mensagens",
+    "sign_out": "Sair",
+    "admin": "Administração",
+    "open_navigation": "<span class=\"sr-only\">Abrir navegação</span>"
+  },
+  "progress": {
+    "completed": "Aula <span class='number completed'>{{ completed }}</span>",
+    "total": "de <span class='number total'>{{ total }}</span>"
+  },
+  "sessions": {
+    "signed_in": "Entrou com sucesso",
+    "signed_out": "Saiu com sucesso",
+    "already_logged_in": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida. Faça login novamente ou mantenha o acesso na outra sessão."
+  },
+  "registrations": {
+    "signed_up": "Bem-vindo! Você se registrou com sucesso."
+  },
+  "login": {
+    "enter_your_account": "Entre com a sua conta",
+    "email": "Email",
+    "password": "Senha",
+    "forgot": "Esqueceu?",
+    "enter": "Entrar",
+    "not_have_account": "Não possui conta?",
+    "create_account": "<b>CRIAR CONTA</b>"
+  },
+  "register": {
+    "first_name": "Seu Nome",
+    "email": "Seu Email",
+    "password": "Crie uma Senha",
+    "password_confirmation": "Repita sua Senha",
+    "create_account": "Criar conta"
+  },
+  "password_request": {
+    "email": "Email",
+    "password_reset": "Redefinição de senha",
+    "reset": "Redefinir",
+    "successfully_sent": "Pronto. Agora você vai receber um email com as instruções para a recuperação da senha."
+  },
+  "password_reset": {
+    "password_reset": "Redefinição de senha",
+    "reset": "Redefinir",
+    "password": "Nova senha",
+    "password_confirmation": "Confirmação da nova senha"
+  },
+  "accept_invitation": {
+    "choose_password": "Defina sua senha",
+    "password": "Senha",
+    "password_confirmation": "Confirmação de senha",
+    "accept": "Aceitar Convite"
+  },
+  "invitations": {
+    "updated": "Sua senha foi criada com sucesso. Bem-vindo!"
+  },
+  "forums": {
+    "forum": "Fórum: {{ title }}",
+    "forums": "Fóruns",
+    "new_topic": "Novo Tópico",
+    "new_section": "Nova Seção",
+    "filter_by_title": "Buscar por nome...",
+    "empty": "Ainda não há fóruns aqui.",
+    "new_question": "Fazer pergunta",
+    "click_to_answer": "Clique para responder",
+    "answer": "Responder",
+    "create_answer_success": "Resposta criada com sucesso",
+    "create_answer_failed": "Aconteceu um erro ao criar a resposta",
+    "student": "Aluno",
+    "teacher": "Professor",
+    "answers_empty": "Ainda não há respostas para esta pergunta.",
+    "answers": "Respostas",
+    "question_title": "Título da sua pergunta",
+    "ask": "Perguntar",
+    "child_forum_sections_count": {
+      "zero": "Não há nenhuma seção",
+      "one": "1 seção",
+      "other": "{{ count }} seções"
+    },
+    "forum_answers_count": {
+      "zero": "Não há nenhuma resposta",
+      "one": "1 resposta",
+      "other": "{{ count }} respostas"
+    }
+  },
+  "messages": {
+    "title": "Mensagens",
+    "content_management": "Acadêmico",
+    "school_management": "Administrativo",
+    "finance": "Financeiro",
+    "new_message": "Nova mensagem",
+    "profile_message": "",
+    "show": {
+      "from": "De:",
+      "to": "Para:",
+      "reply": "Responder"
+    },
+    "new": {
+      "to_team": "Para a equipe:",
+      "to": "Para:",
+      "subject": "Assunto:",
+      "message": "Mensagem",
+      "send": "Enviar"
+    },
+    "inbox": {
+      "filter_by_subject": "Buscar por assunto...",
+      "add_filter": "Adicionar Filtro",
+      "filter_by_team": "Filtrar por equipe",
+      "team": "Sem filtro"
+    }
+  },
+  "profile": {
+    "public_profile": "Perfil Público",
+    "my_profile": "<span class='lighter'>Meu</span>&nbsp;<strong>Perfil</strong>",
+    "picture": "Foto do Perfil",
+    "edit_picture": "Editar foto do perfil",
+    "personal_data": "Dados Pessoais",
+    "reset_password": "Redefinir Senha",
+    "first_name": "Nome",
+    "last_name": "Sobrenome",
+    "email": "E-mail",
+    "phone": "Telefone",
+    "rg": "RG",
+    "born_at": "Data de nascimento",
+    "cpf": "CPF",
+    "company": "Empresa",
+    "skype": "Skype",
+    "company_position": "Cargo",
+    "save": "Salvar",
+    "address": "Endereço",
+    "street": "Logradouro",
+    "number": "Nº",
+    "complement": "Complemento",
+    "district": "Bairro",
+    "city": "Cidade",
+    "state": "Estado",
+    "cep": "CEP",
+    "data": "Meus Dados",
+    "orders": "Minhas Compras",
+    "states": {
+      "AC": "Acre",
+      "AL": "Alagoas",
+      "AM": "Amazonas",
+      "AP": "Amapá",
+      "BA": "Bahia",
+      "CE": "Ceará",
+      "DF": "Distrito Federal",
+      "ES": "Espirito Santo",
+      "GO": "Goiás",
+      "MA": "Maranhão",
+      "MG": "Minas Gerais",
+      "MS": "Mato Grosso do Sul",
+      "MT": "Mato Grosso",
+      "PA": "Pará",
+      "PB": "Paraíba",
+      "PE": "Pernambuco",
+      "PI": "Piauí",
+      "PR": "Paraná",
+      "RJ": "Rio de Janeiro",
+      "RN": "Rio Grande do Norte",
+      "RO": "Rondônia",
+      "RR": "Roraima",
+      "RS": "Rio Grande do Sul",
+      "SC": "Santa Catarina",
+      "SE": "Sergipe",
+      "SP": "São Paulo",
+      "TO": "Tocantins"
+    },
+    "school": {
+      "settings": {
+        "title": "Configurações da escola",
+        "locale": "Linguagem",
+        "locales": {
+          "en": "Inglês",
+          "pt-BR": "Português",
+          "es": "Espanhol"
+        }
+      }
+    },
+    "posts": "Postagens",
+    "enrollments": "Matrículas",
+    "portfolio": "Portfólio",
+    "follow": "Seguir",
+    "following": "Seguindo",
+    "followers": "Seguidores",
+    "unfollow": "Deixar de seguir",
+    "message": "Mensagem"
+  },
+  "enrollment": {
+    "my_courses": "<span class='lighter'>Meus</span>&nbsp;<strong>Cursos</strong>",
+    "no_certificate": "Você ainda não tem certificados",
+    "download_certificate": "<span>Download certificado</span>",
+    "my_certificates": "<span class='lighter'>Meus</span>&nbsp;<strong>Certificados</strong>",
+    "not_enrolled_any_course": "Você ainda não está matriculado em nenhum curso.",
+    "go_course": "Ir para o Curso",
+    "go_path": "Acessar Pacote",
+    "pending": "<span class='lighter'>Matrículas</span>&nbsp;<strong>pendentes</strong>",
+    "available_time_message": {
+      "unlimited": "Este curso estará disponível por tempo ilimitado",
+      "available_until": "Este curso estará disponível até {{ date }}"
+    },
+    "total_max_attendance_message": {
+      "attendance_type_time": "Neste período você poderá consumir {{ time }} de conteúdo",
+      "attendance_type_attempts": "Neste período você poderá assistir {{ attempts }} vez(es) cada aula"
+    },
+    "use_max_attendance_message": {
+      "attendance_type_time": "Você já consumiu {{ time }} de conteúdo",
+      "attendance_type_attempts": "Você já assistiu {{ attempts }} vez(es) todas as aulas"
+    },
+    "status_message": {
+      "active": "Seu acesso está disponível",
+      "pending": "Seu acesso está indisponível",
+      "expired": "Seu acesso está indisponível",
+      "deactivated": "Seu acesso está indisponível",
+      "canceled": "Seu acesso está indisponível"
+    }
+  },
+  "product": {
+    "enroll": "Matricule-se",
+    "buy": "Matricule-se agora",
+    "load_more": "Carregar mais produtos",
+    "course_content": {
+      "load_previous": "Carregar aulas anteriores",
+      "load_more": "Carregar mais aulas",
+      "views": "Você possui {{ progress.views }} de {{ enrollment.max_attendance_length }} visualizações. (Visualizações no mesmo dia são contabilizadas apenas uma vez)"
+    },
+    "resource": {
+      "course": "Conteúdo do curso",
+      "continue": "Continuar de onde parei"
+    },
+    "teachers": {
+      "about": "Sobre os Instrutores"
+    },
+    "path": {
+      "courses": {
+        "zero": "Não há nenhum curso neste pacote",
+        "one": "1 curso neste pacote",
+        "other": "{{ count }} cursos neste pacote",
+        "search_name_course": "Buscar pelo nome do curso..."
+      },
+      "courses_filtered": {
+        "zero": "Não há nenhum curso neste pacote contendo o termo <i>{{ name }}</i>",
+        "one": "1 curso neste pacote contendo o termo <i>{{ name }}</i>",
+        "other": "{{ count }} cursos neste pacote contendo o termo <i>{{ name }}</i>"
+      }
+    },
+    "pricing": {
+      "common": {
+        "unitary": {
+          "one": "{{ price }}",
+          "other": "{{ count }}x de {{ price }}"
+        }
+      },
+      "subscription": {
+        "monthly": "{{ price }} por Mês",
+        "quarterly": "{{ price }} por Trimestre",
+        "semesterly": "{{ price }} por Semestre",
+        "yearly": "{{ price }} por Ano"
+      },
+      "free": {
+        "unitary": "Grátis"
+      },
+      "credit": {
+        "unitary": "{{ price }} Créditos"
+      }
+    }
+  },
+  "checkout": {
+    "wizard": {
+      "connect": "Conecte-se",
+      "complete": "Complete seu cadastro",
+      "verify": "Verifique seu cadastro",
+      "pay": "Realize o pagamento"
+    },
+    "cart": {
+      "title": "<strong>Carrinho</strong> <span class=\"lighter\">de compras</span>",
+      "empty": "Ainda não há items no seu carrinho.",
+      "coupon_applied": "Cupom aplicado com sucesso!"
+    },
+    "payment_methods": {
+      "title": "Formas de Pagamento",
+      "description": "Métodos de Pagamento: Visa, MasterCard, Hipercard, American Express, Bradesco, Itaú, Banco do Brasil e Boleto Bancário",
+      "credit_card": "Cartão de crédito",
+      "bank_transfer": "Débito online",
+      "boleto": "Boleto Bancário"
+    },
+    "safety": {
+      "title": "Este site é <strong>seguro</strong>",
+      "processed_by": "Pagamento processado por",
+      "description": "Possuímos segurança SSL, a mesma utilizada em bancos online, garantindo a criptografia de suas informações."
+    },
+    "connect": {
+      "create_account": "Crie sua conta",
+      "signin_account": "Já possui uma conta?",
+      "signin_again": "Você está entrando em uma área segura. Por favor, faça login novamente"
+    },
+    "finish": "Finalizar Compra",
+    "coupon": "Cupom:",
+    "coupon_code": "Cupom de desconto",
+    "total_amount_to_pay": "Total da Compra",
+    "total_amount_to_pay_in_installments": "ou em até {{ installments }}x no cartão",
+    "complete": {
+      "personal_information": "Dados Pessoais",
+      "first_name": "Nome",
+      "last_name": "Sobrenome",
+      "phone": "Telefone",
+      "cpf": "CPF",
+      "rg": "Identidade",
+      "born_at": "Data de nascimento",
+      "company_name": "Empresa",
+      "company_position": "Cargo",
+      "address": "Endereço",
+      "address_street": "Logradouro",
+      "address_number": "Nº",
+      "address_complement": "Complemento",
+      "address_district": "Bairro",
+      "address_city": "Cidade",
+      "address_state": "Estado",
+      "address_zip_code": "CEP",
+      "go_to_payment": "Prosseguir para pagamento"
+    },
+    "payment": {
+      "accept_term_of_use": "Eu aceito os <a href=\"/terms-of-use\" target=\"_blank\">Termos de Uso</a>",
+      "credit_card": "Cartão de Crédito",
+      "boleto": "Boleto Bancário",
+      "bank_transfer": "Transferência Bancária",
+      "credit_card_number": "Nº do Cartão de Crédito",
+      "credit_card_name": "Nome Impresso",
+      "credit_card_expiry": "Validade (mês/ano)",
+      "credit_card_cvv": "Cód. de Segurança",
+      "credit_card_installments": "Parcelas",
+      "credit_card_pay": "Efetuar Pagamento",
+      "disable_popups_warning": "Desabilite o bloqueio de pop-ups do seu navegador",
+      "boleto_warning": "O prazo para compensação de um boleto bancário é de até 3 dias úteis, após a realização do pagamento. O curso só irá ser liberado após a compensação do mesmo.",
+      "boleto_pay": "Gerar Boleto",
+      "bank_transfer_warning": "Você será redirecionado para a página do Banco para inserir as informações necessárias para o débito online. Sendo a transação realizada com sucesso, o curso será liberado.",
+      "bank_transfer_pay": "Ir para o Banco",
+      "installment_amount": {
+        "one": "{{ amount }} à vista",
+        "other": "{{ count }}x de {{ amount }}"
+      },
+      "installment_amount_with_taxes": {
+        "one": "{{ amount }} à vista s/ juros",
+        "other": "{{ count }}x de {{ amount }} c/ juros {{ amount_with_taxes }}"
+      }
+    },
+    "success": {
+      "order_created_successfully": "Seu pedido foi realizado com sucesso!",
+      "subscription_created_successfully": "Sua assinatura foi criada com o código {{ code }}.",
+      "subscription_info": {
+        "monthly": "Essa assinatura custa {{ price }} por mês.",
+        "quarterly": "Essa assinatura custa {{ price }} por trimestre.",
+        "semesterly": "Essa assinatura custa {{ price }} por semestre.",
+        "yearly": "Essa assinatura custa {{ price }} por ano."
+      },
+      "transaction_made_by": "Sua transação foi processada pelo {{ gateway }}.",
+      "transaction_status_is": "A transação está <b>{{ status }}</b> e seu identificador é <b id=\"payment-uuid\">{{ uuid }}</b>.",
+      "transaction_questions": "Caso tenha alguma dúvida referente ao pagamento, entre em contato com o {{ gateway }}.",
+      "order_processing_warning": "Após a confirmação do pagamento, sua matrícula será liberada.",
+      "boleto_warning": "Caso o seu boleto não tenha sido aberto, desative o bloqueio de pop-ups no seu navegador e clique",
+      "boleto_warning_click_here": "aqui",
+      "go_to_enrollments": "Ir para Meus Cursos"
+    },
+    "go_to_payment": "Prosseguir para pagamento"
+  },
+  "payment": {
+    "status": {
+      "unsent": "Não Executado",
+      "failed": "Falhado",
+      "initiated": "Iniciado",
+      "under_analysis": "Em Análise",
+      "waiting_boleto": "Aguardando Boleto",
+      "canceled": "Cancelado",
+      "authorized": "Autorizado",
+      "confirmed": "Confirmado",
+      "reversed": "Estornado",
+      "refunded": "Reembolsado",
+      "processing": "Processando"
+    }
+  },
+  "path": {
+    "no_courses": "Sem cursos neste pacote.",
+    "pinboard": "Quadro de <strong>Avisos</strong>",
+    "courses": "<strong>Cursos</strong> do pacote",
+    "certificate": "Solicitar Certificado",
+    "presents": "apresenta :",
+    "filter_by_name": "Buscar por nome do curso"
+  },
+  "course": {
+    "billboard": "Quadro de <strong>Avisos</strong>",
+    "course_content": "<strong>Conteúdo</strong> do curso",
+    "complementary_material": "<strong>Material</strong> complementar",
+    "extra_contents": {
+      "empty": "Sem Material Complementar neste curso."
+    },
+    "pinboard": {
+      "empty": "Sem avisos."
+    },
+    "performance": {
+      "performed_activities": "Atividades Realizadas",
+      "statistics": "Estatísticas",
+      "missing_activities": "Atividades faltantes",
+      "scoring_average": "Média de pontuação"
+    }
+  },
+  "home": {
+    "social": {
+      "follow_fb": "<span>Siga-nos no Facebook</span>",
+      "follow_tw": "<span>Siga-nos no Twitter</span>",
+      "follow_insta": "<span>Siga-nos no Instagram</span>",
+      "follow_google": "<span>Siga-nos no Google+</span>",
+      "follow_youtube": "<span>Siga-nos no Youtube</span>",
+      "follow_pinterest": "<span>Siga-nos no Pinterest</span>",
+      "follow_linkedin": "<span>Siga-nos no LinkedIn</span>"
+    }
+  },
+  "products": {
+    "products": "Produtos"
+  },
+  "lesson": {
+    "release_at": "Agendado para",
+    "release_after": "Agendado para",
+    "completed": "aula(s) completa(s)",
+    "started": "aula(s) iniciada(s)",
+    "total": "aula(s) no total",
+    "preview": "Anterior",
+    "next": "Próximo",
+    "course_content": "Conteúdo do curso"
+  },
+  "extra_content": {
+    "label": "Material complementar"
+  },
+  "quiz": {
+    "messages": {
+      "foo": "foo",
+      "approved": "Você obteve {{score}} pontos, portanto, você foi APROVADO nessa avaliação.",
+      "disapproved": "Você obteve {{score}} pontos. Para ser aprovado você precisa de {{min_grade}} pontos.",
+      "try": "Você ainda pode responder {{ attempts_remaining }} vezes, deseja tentar novamente?",
+      "click_here": "Clique aqui",
+      "waiting_correction": "Suas respostas estão aguardando correção.",
+      "waiting_correction_attempts_message": "Após a correção você ainda pode refazer o teste {{ attempts_remaining }} vezes."
+    },
+    "clean_associations": "Limpar associações",
+    "true": "Verdadeiro",
+    "false": "Falso",
+    "teacher_comment": "Comentário do professor",
+    "right_answer": "Resposta correta"
+  },
+  "colaborative_discussion": {
+    "write_your_comment": "Escreva seu comentário",
+    "comments": "Comentários"
+  },
+  "upload": {
+    "save": "Salvar arquivos",
+    "files_sent": "Arquivos enviados",
+    "any_uploaded_file": "Nenhum arquivo enviado",
+    "drag_files": "Solte os arquivos aqui"
+  },
+  "pages": {
+    "orders": {
+      "my_orders": "Meus Pedidos",
+      "number": "Nº",
+      "status": "Status",
+      "ordered_date": "Data do pedido",
+      "total": "Total",
+      "empty": "Você ainda não fez nenhum pedido. Confira <a href='/'>nossos cursos</a>.",
+      "custom_template": "<h1> Este é um template customizado</h1>",
+      "show_order_itens": "<span>ver itens do pedido</span>",
+      "cancel_signature": "Cancelar assinatura",
+      "recurring": {
+        "subscriptions": "Assinaturas",
+        "subscription": "Assinatura",
+        "product": "Produto",
+        "started_at": "Início",
+        "cancel": "Cancelar assinatura",
+        "canceled": "Assinatura cancelada com sucesso!",
+        "failed": "Ocorreu um erro no cancelamento da assinatura.",
+        "updated": "Assinatura atualizada com sucesso!",
+        "update_failed": "Assinatura atualizada sem sucesso!",
+        "plan": "Plano",
+        "period_start": "Início do Período Atual",
+        "period_end": "Fim do Período Atual",
+        "payment_option": "Forma de Pagamento",
+        "credit_card_used": "Cartão usado",
+        "change_credit_card": "Alterar cartão de crédito",
+        "pay_with_credit_card": "Pagar com cartão de crédito",
+        "pay_with_boleto": "Pagar com boleto",
+        "pricing": {
+          "monthly": "{{ price }} por Mês",
+          "quarterly": "{{ price }} por Trimestre",
+          "semesterly": "{{ price }} por Semestre",
+          "yearly": "{{ price }} por Ano"
+        }
+      }
+    },
+    "profile": {
+      "followers": {
+        "title": "Seguidores",
+        "empty": "Este usuário ainda não é seguido por outros usuários"
+      },
+      "following": {
+        "title": "Seguindo",
+        "empty": "Este usuário ainda não segue outros usuários"
+      },
+      "posts": {
+        "title": "Postagens",
+        "share": "Compartilhe algo...",
+        "empty": "Ainda não existem postagens"
+      },
+      "products": {
+        "title": "Matrículas",
+        "empty": "Este usuário ainda não possui matrículas"
+      },
+      "media": {
+        "title": "Portfólio",
+        "dropzone": "Clique ou solte o arquivo aqui",
+        "empty": "Ainda não existem arquivos",
+        "media_title": "Título",
+        "media_description": "Descrição"
+      }
+    }
+  },
+  "channels": {
+    "message": {
+      "success": "Mensagem enviada com sucesso."
+    }
+  },
+  "mailer": {
+    "hello": "Olá, {{first_name}}.",
+    "if_link_does_not_work": "Caso o link acima não funcione, copie e cole este endereço no seu navegador: {{url}}",
+    "report": {
+      "message": "O seu relatório foi gerado com sucesso. Para fazer o download, basta clicar no botão.",
+      "download": "Baixar relatório",
+      "generated_report": "Seu relatório está pronto.",
+      "payment_report_completed": {
+        "subject": "Seu relatório financeiro foi gerado!"
+      },
+      "course_report_completed": {
+        "subject": "Seu relatório do curso {{course_name}} foi gerado!"
+      }
+    },
+    "course_duplicate": {
+      "subject": "Seu curso foi duplicado",
+      "message": "O curso {{course_name}} foi duplicado com sucesso. Bastar clicar no botão para acessá-lo.",
+      "course_link": "Acessar cópia do curso",
+      "duplicate_success": "Curso duplicado com sucesso."
+    },
+    "invitation_instructions": {
+      "collaborator": {
+        "subject": "{{school}} - Você foi convidado para fazer parte de nossa equipe!",
+        "someone_invited_you": "Você foi convidado para fazer parte da equipe administrativa da escola \"{{school}}\".",
+        "accept_instructions": "Para aceitar o convite basta clicar no link abaixo.",
+        "accept": "Aceitar convite",
+        "ignore": "Se você não quiser aceitar o convite, por favor, ignore este e-mail."
+      },
+      "student": {
+        "subject": "{{school}} - Você foi convidado para se matricular!",
+        "someone_invited_you": "Você foi convidado para se matricular na escola \"{{school}}\".",
+        "accept_instructions": "Você deve confirmar sua inscrição e definir sua senha, clicando no botão abaixo.",
+        "accept": "Confirmar inscrição",
+        "ignore": "Se você não quiser aceitar o convite, por favor, ignore este e-mail.",
+        "invite_register_school": "Você foi convidado para se cadastrar na escola."
+      }
+    },
+    "enrollment_notification": {
+      "subject": "Você tem nova(s) matrícula(s)",
+      "you_have_been_enrolled": "Você foi matriculado nos seguintes produtos da escola:",
+      "access_message": "Entre na escola para acessar o conteúdo.",
+      "go_to_school": "Ir para escola",
+      "ignore": "Caso não tenha interesse pode ignorar essa mensagem.",
+      "enrolled_success": "Você foi matriculado em um curso."
+    },
+    "reset_password": {
+      "subject": "Instruções para troca de senha",
+      "hello": "Olá, {{first_name}}. Esqueceu sua senha?",
+      "someone_requested_a_link": "Sem problemas! Clique no botão abaixo.",
+      "change_my_password": "Redefinir senha",
+      "your_password_will_not_change": "Sua senha não irá mudar até você acessar o link acima e criar uma nova.",
+      "if_you_did_not_requested": "Se você não requisitou a troca de senha, ignore este email.",
+      "instructions": "Instruções para troca de senha."
+    },
+    "payment": {
+      "price": "Preço",
+      "total": "Total",
+      "item": "Item",
+      "resume": "Resumo do pedido",
+      "payment_success": "Seu pagamento foi confirmado!",
+      "under_analysis": {
+        "subject": "Seu pedido está em análise",
+        "first_paragraph": "Seu pedido na escola <strong>{{school_name}}</strong> está com o pagamento em análise.",
+        "second_paragraph": "Fique tranquilo pois a confirmação do seu pagamento é realizada de forma automática pelo nosso mediador de pagamento. Assim que o pagamento for confirmado você receberá um novo e-mail com a liberação.",
+        "analysis_payment": "Seu pagamento está em análise."
+      },
+      "boleto_created": {
+        "subject": "Seu boleto foi gerado!",
+        "first_paragraph": "O seu pedido na escola <strong>{{school_name}}</strong> foi confirmado e o boleto gerado no momento da compra.",
+        "second_paragraph": "Importante: a compensação do boleto pode levar até três dias após o pagamento. A confirmação e liberação do conteúdo será automática, porém pode levar algum tempo até que ela se conclua.",
+        "third_paragraph": "<a href=\"{{boleto_url}}\"><b>Clique aqui</b></a> para imprimir o boleto novamente, se necessário."
+      },
+      "confirmed": {
+        "subject": "Seu pedido foi aprovado!",
+        "first_paragraph": "O seu pedido na escola <strong>{{school_name}}</strong> foi aprovado! ✅",
+        "second_paragraph": "Agora é só acessar e assistir os cursos.",
+        "courses_link": "Acessar meus cursos"
+      },
+      "failed": {
+        "subject": "Seu pedido não pôde ser concluído",
+        "first_paragraph": "Infelizmente, o seu pedido na escola <strong>{{school_name}}</strong> não pôde ser concluído. ❌",
+        "second_paragraph": "Isso pode ocorrer por alguns motivos, como uma falha de segurança encontrada ou saldo insuficiente no cartão de crédito. Sugerimos que você tente novamente com outra forma de pagamento.",
+        "resume": "Resumo do pedido cancelado"
+      }
+    }
+  },
+  "category": {
+    "filter_by_product": "Filtrar por produto"
+  },
+  "footer": {
+    "contact_us": "<span class=\"underlined\">Entre em Contato</span>",
+    "plataform_by": "Plataforma de ensino por &nbsp;"
+  },
+  "terms_of_use": {
+    "title": "Termos de uso"
+  },
+  "devise": {
+    "invitations": {
+      "user": {
+        "invitation_token_invalid": "O token fornecido não é válido!"
+      }
+    }
+  }
+}

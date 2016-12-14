@@ -1,0 +1,50 @@
+.path-content {
+  .course-link {
+    text-decoration: none;
+  }
+
+  .path-courses {
+    .course-item {
+      @extend .thumbnail;
+
+      padding: 0;
+      border-width: 2px;
+
+      .course-image {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 230px;
+
+        img {
+          @include translate(-50%, -50%);
+
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: auto;
+          height: 100%;
+        }
+      }
+
+      .course-info {
+        padding: $padding-large-horizontal;
+
+        .title {
+          @include breakpoint(sm) {
+            height: 68px;
+          }
+
+          margin-bottom: $padding-large-vertical;
+          padding: $padding-large-vertical 0;
+          font-size: 20px;
+          line-height: 1.2;
+        }
+
+        .subtitle {
+          color: $text-muted;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{% form 'profile' %}
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab">
+    <h4 class="panel-title">
+      <a role="button"
+         data-toggle="collapse"
+         data-parent="#accordion"
+         href="#collapseProfileAccount"
+         aria-expanded="false"
+         aria-controls="collapseProfileAccount">{{ 'profile.reset_password' | t }}</a>
+    </h4>
+  </div>
+
+  <div id="collapseProfileAccount"
+       class="panel-collapse collapse"
+       role="tabpanel"
+       aria-labelledby="headingThree">
+    <div class="panel-body">
+      <div class="account-form">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group signin-password">
+              <label class="control-label">{{ 'password_reset.password' | t }}</label>
+              <input type="password" name="user[password]" class="form-control"
+                     required>
+            </div>
+
+            <div class="form-group signin-password">
+              <label class="control-label">{{ 'password_reset.password_confirmation' | t }}</label>
+              <input type="password" name="user[password_confirmation]" class="form-control"
+                     required>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-right">
+          <input type="submit" class="btn btn-primary" value="{{ 'profile.save' | t }}">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endform %}

@@ -1,0 +1,107 @@
+header.navbar {
+  @include box-shadow(0 1px 4px rgba(0, 0, 0, .06));
+
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .15);
+  background-color: $light;
+
+  .navbar-brand {
+    display: block;
+    text-transform: uppercase !important;
+
+    &.navbar-brand-img {
+      padding: 15px 0;
+
+      img {
+        width: auto;
+        height: 100%;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .navbar-nav {
+    a {
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+
+  .dropdown {
+    a {
+      font-weight: normal;
+    }
+
+    .dropdown-toggle {
+      @include breakpoint($grid-float-breakpoint) {
+        padding: 0 !important;
+      }
+
+      padding: $padding-large-vertical * 2 !important;
+      padding-right: 15px !important;
+      padding-left: 35px !important;
+      line-height: 80px;
+
+      .logged-user {
+        @include ellipsis();
+
+        display: inline-block;
+        max-width: 110px;
+        height: auto;
+        vertical-align: middle;
+        font-size: 14px;
+      }
+    }
+
+    .dropdown-menu {
+      @include translate(0, 0);
+      @include transition(.2s ease);
+      @include breakpoint($grid-float-breakpoint-max) {
+        display: block;
+        visibility: hidden;
+        border-radius: $border-radius-base + 2;
+        opacity: 0;
+        pointer-events: none;
+
+        &:before {
+          $size: 18px;
+
+          top: - ($size / 2);
+          right: 45px;
+          width: $size;
+          height: $size;
+        }
+      }
+
+      top: 150%;
+      right: -15px;
+
+      li {
+        a {
+          padding-top: 10px !important;
+          padding-bottom: 10px !important;
+          font-weight: 600;
+        }
+      }
+    }
+
+    &:hover,
+    &.open {
+      .avatar {
+        @include box-shadow(0 0 0 3px $brand-primary);
+      }
+    }
+
+    &.open {
+      @include breakpoint($grid-float-breakpoint-max) {
+        .dropdown-menu {
+          top: 90%;
+          visibility: visible;
+          opacity: 1;
+          pointer-events: all;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+//
+// Thumbnails
+// --------------------------------------------------
+
+
+// Mixin and adjust the regular image class
+.thumbnail {
+  @include transition(border .2s ease-in-out);
+
+  display: block;
+  margin-bottom: $line-height-computed;
+  padding: $thumbnail-padding;
+  border: 1px solid $thumbnail-border;
+  border-radius: $thumbnail-border-radius;
+  background-color: $thumbnail-bg;
+  line-height: $line-height-base;
+
+  > img,
+  a > img {
+    @include img-responsive;
+
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  // [converter] extracted a&:hover, a&:focus, a&.active to a.thumbnail:hover, a.thumbnail:focus, a.thumbnail.active
+
+  // Image captions
+  .caption {
+    padding: $thumbnail-caption-padding;
+    color: $thumbnail-caption-color;
+  }
+}
+
+// Add a hover state for linked versions only
+a.thumbnail:hover,
+a.thumbnail:focus,
+a.thumbnail.active {
+  border-color: $link-color;
+}

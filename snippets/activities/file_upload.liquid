@@ -1,0 +1,11 @@
+<div id="upload-file-container">
+  <div class="content-form">
+    <h4>{{ activity.description }}</h4>
+
+    {% if answer %}
+      {% include 'activities/file_upload/answers' %}
+    {% else %}
+      {% include 'activities/file_upload/form' %}
+    {% endif %}
+  </div>
+</div>

@@ -1,0 +1,9 @@
+{% if answer %}
+  <div id="answers-container">
+    {% include 'activities/quiz/answers' %}
+  </div>
+{% endif %}
+
+<div id="form-container" {% if answer %}class="hide"{% endif %}>
+  {% include 'activities/quiz/form' %}
+</div>

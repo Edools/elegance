@@ -1,0 +1,136 @@
+.lesson-page {
+  background-color: $light;
+
+  .lesson-page-sidebar {
+    .title {
+      margin: 0;
+    }
+
+    .course-progress {
+      .progress-header {
+        margin-bottom: $padding-large-vertical;
+
+        .label {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .other-lessons {
+      margin-top: $padding-large-vertical * 6;
+    }
+
+    .course-content {
+      .lesson {
+        .content-lesson {
+          .class-info {
+            .left {
+              float: left;
+              width: 15%;
+            }
+
+            .center {
+              float: left;
+              width: 85%;
+            }
+
+            .right {
+              float: left;
+              padding-left: 15%;
+              width: 100%;
+              text-align: left;
+            }
+
+            .lesson-title {
+              @include text-overflow;
+
+              vertical-align: middle;
+
+              &:hover {
+                span {
+                  position: absolute;
+                  top: -1px;
+                  z-index: 1000;
+                  padding: 2px 10px 2px 0;
+                  background-color: rgba($light, .9);
+                }
+              }
+            }
+          }
+        }
+
+        &.active {
+          .content-lesson {
+            .badge {
+              background-color: lighten($badge-bg, 7%);
+            }
+
+            .class-info {
+              .lesson-title {
+                &:hover {
+                  span {
+                    z-index: 10000;
+                    background-color: rgba($component-active-bg, .9);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .lesson-content-player {
+    .lesson-content-player-heading {
+      margin-bottom: $padding-large-vertical * 4;
+
+      .media-controls {
+        @include transition(.2s ease);
+
+        padding-top: $padding-large-vertical * 2;
+        text-align: right;
+      }
+
+      .lesson-title {
+        margin-bottom: $padding-large-vertical;
+        line-height: 1;
+      }
+
+      .scroll {
+        .media-controls {
+          margin-right: -10px;
+          opacity: .7;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .media-player {
+      .player {
+        text-align: left;
+
+        .text-player {
+          float: none;
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .footer-navigation {
+    @include breakpoint(sm) {
+      display: none;
+    }
+
+    margin-top: $padding-large-vertical * 4;
+    text-align: right;
+  }
+}
+
+@import 'lesson/quiz';
+@import 'lesson/collaborative_dicussion';

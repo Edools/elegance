@@ -1,0 +1,36 @@
+<!-- Assing variables used by course_content and lesson -->
+  {% assign lesson = content.resource %}
+  {% assign lessons_info = enrollment.lessons_info %}
+  {% comment %}{% assign progress = enrollment.lessons_progresses.last.grade %}{% endcomment %}
+  {% assign progress = enrollment | quiz_lesson_grade: lesson.id %}
+
+  {% if lessons_info.completed contains lesson.id %}
+  <li id="content-{{ content.id }}" class="js-content list-group-item lesson module-item sub" collapsed="false">
+    <div id="lesson-{{ lesson.id }}" class="js-lesson content-lesson class" data-lesson-id="{{ lesson.id }}">
+      <div class="class-info">
+        <div class="left">
+            {% assign lesson_icon = 'icon-puzzle' %}
+            <i class="fa {{ lesson_icon }}"></i>
+        </div>
+
+        <div class="center">
+            <a class="lesson-title"
+              {% if no_turbolinks %} data-no-turbolink {% else %} data-turbolinks-scroll="#activity" {% endif %}
+               href="{{ content | content_path: enrollment: enrollment, course: course }}">
+              <span>{{ lesson.title }}</span>
+            </a>
+        </div>
+
+        <div class="right">
+          <div class="card-progress" style="width: 200px;">
+            <div class="progress-bar-component" style="margin-bottom: 0px;">
+              <div class="progress-bar progress-bar-success progress-striped" style="width: {{ progress }}%" data-percent="15"></div>
+              <span class="percent" style="line-height: 43px;">{{ progress }}%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </li>
+{% endif %}

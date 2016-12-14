@@ -1,0 +1,20 @@
+.security-widget {
+  margin-bottom: $padding-large-vertical * 2;
+  padding: $padding-large-vertical * 2 $padding-large-horizontal;
+  border: 1px solid #ffe092;
+  border-radius: 4px;
+  background: #fffdf8;
+
+  .ssl-lock {
+    margin-bottom: $padding-large-vertical * 2;
+
+    .icon-lock {
+      color: #fbd68e;
+      font-size: 38px;
+    }
+  }
+
+  .security-seals {
+    margin-top: $padding-large-vertical * 2;
+  }
+}

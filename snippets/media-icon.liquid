@@ -1,0 +1,28 @@
+{% case media.type %}
+{% when 'Video' %}
+  {% assign media_icon = 'icon-camrecorder' %}
+{% when 'Audio' %}
+  {% assign media_icon = 'icon-microphone' %}
+{% when 'Slide' %}
+  {% assign media_icon = 'icon-chart' %}
+{% when 'Document' %}
+  {% assign media_icon = 'icon-doc' %}
+{% when 'Image' %}
+  {% assign media_icon = 'icon-picture' %}
+{% when 'Text' %}
+  {% assign media_icon = 'icon-doc' %}
+{% when 'LiveStream' %}
+  {% assign media_icon = 'icon-control-play' %}
+{% when 'VideoSlide' %}
+  {% assign media_icon = 'icon-film' %}
+{% when 'ScormPackage' %}
+  {% assign media_icon = 'icon-layers' %}
+{% when 'Html' %}
+  {% assign media_icon = 'icon-doc' %}
+{% when 'Download' %}
+  {% assign media_icon = 'icon-cloud-download' %}
+{% else %}
+  {% assign media_icon = 'icon-camrecorder' %}
+{% endcase %}
+
+<i class="{{ media_icon }}"></i>

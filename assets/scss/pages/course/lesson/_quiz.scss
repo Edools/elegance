@@ -1,0 +1,26 @@
+.quiz-form {
+  .option-block {
+    margin: 0 auto;
+    margin-bottom: $padding-large-vertical;
+    padding: 0 10px;
+    border: 1px solid $border-color-base;
+    border-radius: $border-radius-base;
+
+    .option-index {
+      display: inline-block;
+      padding: $padding-base-vertical 0;
+    }
+
+    .option-index-imput {
+      margin: 0 auto;
+      width: 60px;
+      height: 30px;
+    }
+
+    .option-text {
+      display: inline-block;
+      margin-left: 5px;
+      text-align: center;
+    }
+  }
+}

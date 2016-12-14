@@ -1,0 +1,104 @@
+{% if courses.size == 0 %}
+  <div class="alert alert-warning">
+    {{ 'path.no_courses' | t }}
+  </div>
+{% else %}
+  <div class="courses-filter">
+    <form accept-charset="UTF-8"
+          method="get" action="/enrollments/{{ enrollment.id }}/paths/{{ path.id }}"
+          data-turbolinks-scroll="false">
+      <div class="input-group input-group-lg">
+      <span class="input-group-addon">
+        <i class="icon-magnifier"></i>
+      </span>
+        <input type="text" name="name"
+               class="form-control"
+               placeholder="{{ 'path.filter_by_name' | t }}"
+               value="{{ current_search.name }}">
+        <span class="input-group-btn">
+            <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+          </span>
+      </div>
+    </form>
+  </div>
+  {% paginate courses by 10 %}
+  <div class="courses-list">
+    <div class="row">
+      {% for course in courses %}
+        <div class="col-md-4 col-sm-6 col-xs-12 active-enrollments">
+          <div class="course">
+            <div class="course-info">
+              <div class="course-header">
+                <a class="title"
+                   href="{{ enrollment | course_path: course.id }}"
+                   title="{{ course.name }}"
+                   data-toggle="{% if course.name.size > 70 %}tooltip{% endif %}">
+                  <div class="course-image">
+                    {% if course.image_url %}
+                      {% image, src: course.image_url, alt: course.name %}
+                    {% else %}
+                      {% assign placeholder = 'missing-course-logo.png' | asset_url %}
+                      {% image, src: placeholder, alt: course.name %}
+                    {% endif %}
+                  </div>
+
+                  <span class="caption">{{ course.name | truncate: 70 }}</span>
+                </a>
+              </div>
+
+              <div class="course-progress">
+                {% assign progress = enrollment | course_progress_card: course %}
+                {% include "progress-card", progress: progress %}
+              </div>
+
+              <div class="course-avaliability">
+                <div class="status">
+                      <span class="alert alert-success"
+                            title="<p>{{ enrollment | available_time_message }}</p><p>{{ enrollment | total_max_attendance_message }}</p><p>{{ enrollment | use_max_attendance_message }}</p>"
+                            data-toggle="tooltip"
+                            data-html="true">
+                        <span>{{ enrollment | status_message }}</span>
+                        <i class="icon-info"></i>
+                      </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="course-action">
+              <a class="btn btn-default" href="{{ enrollment | course_path: course.id }}">
+                <i class="icon-camrecorder"></i>
+                <span>{{ 'enrollment.go_course' | t }}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="text-center">
+    <ul class="pagination">
+      {% if paginate.previous.is_link %}
+        <li>
+          <a href="{{ paginate.previous.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-left"></i></a>
+        </li>
+      {% endif %}
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <li>
+            <a href="{{ part.url }}" data-turbolinks-scroll="false">{{ part.title }}</a>
+          </li>
+        {% else %}
+          <li class="disabled">
+            <span>{{ part.title }}</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+      {% if paginate.next.is_link %}
+        <li>
+          <a href="{{ paginate.next.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-right"></i></a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+  {% endpaginate %}
+{% endif %}

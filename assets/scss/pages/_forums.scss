@@ -1,0 +1,22 @@
+.forums-page {
+  @import 'forums/forum';
+  @import 'forums/questions';
+  @import 'forums/question';
+  @import 'forums/question-item';
+  @import 'forums/new-question';
+  .forum-sections {
+    .section {
+      .title {
+        display: inline-block;
+        margin-bottom: $padding-large-vertical * 2;
+        text-decoration: none;
+        font-size: 24px;
+      }
+    }
+  }
+
+  .forum-questions-heading {
+    margin-top: $padding-large-vertical * 2;
+    margin-bottom: $padding-large-vertical * 4;
+  }
+}

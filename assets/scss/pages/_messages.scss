@@ -1,0 +1,8 @@
+.messages-page {
+  .messages-search {
+    margin-bottom: $padding-base-vertical * 8;
+  }
+}
+
+@import 'messages/new';
+@import 'messages/show';
