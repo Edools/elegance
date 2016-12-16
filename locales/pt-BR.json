@@ -380,7 +380,8 @@
     "course_content": {
       "load_previous": "Carregar aulas anteriores",
       "load_more": "Carregar mais aulas",
-      "views": "Você possui {{ progress.views }} de {{ enrollment.max_attendance_length }} visualizações. (Visualizações no mesmo dia são contabilizadas apenas uma vez)"
+      "views": "Você possui {{ progress.views }} de {{ enrollment.max_attendance_length }} visualizações. (Visualizações no mesmo dia são contabilizadas apenas uma vez)",
+      "blocked_on_trial": "Conteúdo bloqueado em trial"
     },
     "resource": {
       "course": "Conteúdo do curso",
