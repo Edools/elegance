@@ -37,14 +37,14 @@
       <div class="left">
         {% if lesson.type == 'ExamLesson' %}
           {% case lesson.activity.type %}
-          {% when 'Quiz' %}
-          {% assign lesson_icon = 'icon-puzzle' %}
-          {% when 'FileUpload' %}
-          {% assign lesson_icon = 'icon-cloud-upload' %}
-          {% when 'CollaborativeDiscussion' %}
-          {% assign lesson_icon = 'icon-people' %}
-        {% else %}
-          {% assign lesson_icon = 'icon-puzzle' %}
+            {% when 'Quiz' %}
+            {% assign lesson_icon = 'icon-puzzle' %}
+            {% when 'FileUpload' %}
+            {% assign lesson_icon = 'icon-cloud-upload' %}
+            {% when 'CollaborativeDiscussion' %}
+            {% assign lesson_icon = 'icon-people' %}
+            {% else %}
+            {% assign lesson_icon = 'icon-puzzle' %}
           {% endcase %}
           <i class="{{ lesson_icon }}"></i>
         {% else %}
@@ -97,10 +97,10 @@
           {% endif %}
 
           {% unless lesson_released %}
-          <span class="release-date badge">
+            <span class="release-date badge">
               {{ 'lesson.' | append: release_type | t }}
 
-            <span class="js-to-client-timezone" data-timezone="{{ release_date | to_json }}" data-format="DD/MM/YYYY">
+              <span class="js-to-client-timezone" data-timezone="{{ release_date | to_json }}" data-format="DD/MM/YYYY">
                 {{ release_date | date:"%d/%m/%Y" }} UTC
               </span>
             </span>
