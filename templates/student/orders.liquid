@@ -11,6 +11,7 @@
           <th class="col-xs-2 text-center">{{ 'pages.orders.ordered_date' | t }}</th>
           <th class="col-xs-3 text-right">{{ 'pages.orders.total' | t }}</th>
           <th class="col-xs-3"></th>
+          <th class="col-xs-3"></th>
         </tr>
         </thead>
 
@@ -31,6 +32,12 @@
               <a class="btn btn-default btn-sm" onclick="$('#js-order-{{ order.id }}-items').toggleClass('hide')">
                 <i class="icon-info"></i>
                 {{ 'pages.orders.show_order_itens' | t }}
+              </a>
+            </td>
+            <td class="column items text-center">
+              <a class="btn btn-default btn-sm" href="{{ order | order_payments_path }}">
+                <i class="icon-info"></i>
+                {{ 'pages.orders.payments' | t }}
               </a>
             </td>
           </tr>
