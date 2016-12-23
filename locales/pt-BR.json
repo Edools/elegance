@@ -404,6 +404,10 @@
         "other": "{{ count }} cursos neste pacote contendo o termo <i>{{ name }}</i>"
       }
     },
+    "trial": {
+      "one": "com {{ count }} dia de trial",
+      "other": "com {{ count }} dias de trial"
+    },
     "pricing": {
       "common": {
         "unitary": {
