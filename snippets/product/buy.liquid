@@ -19,6 +19,10 @@
       {% endif %}
 
       {{ product_price }}
+
+      {% if first_option.trials > 0 %}
+        <div>{{ 'product.trial' | t: count: first_option.trials }}</div>
+      {% endif %}
     </div>
 
     <div class="btn-group">
@@ -29,8 +33,15 @@
 
         <ul class="dropdown-menu">
           {% for option in product.payment_options %}
-            <li><a id="add-to-cart-product-{{ product.id }}-{{ option.id }}"
-                   href="{{ product | add_to_cart_path: option }}">{{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway }}</a></li>
+            <li>
+              <a id="add-to-cart-product-{{ product.id }}-{{ option.id }}" href="{{ product | add_to_cart_path: option }}">
+                {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway }}
+
+                {% if option.trials > 0 %}
+                  <span>{{ 'product.trial' | t: count: option.trials }}</span>
+                {% endif %}
+              </a>
+            </li>
           {% endfor %}
         </ul>
       {% else %}
