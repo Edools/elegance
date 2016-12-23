@@ -4,6 +4,7 @@
   window.app = {
     bindGlobal: function () {
       FastClick.attach(document.body);
+
       $('.timeago').timeago();
 
       $(document).trigger('app:bind:global');
@@ -46,8 +47,8 @@
 
       app.bindGlobal();
       app.bindBlazy();
-      app.bindMasks();
       app.bindOpenOnLoad();
+      app.bindMasks();
       app.bindTooltips();
       app.bindReadMore();
       app.bindDatepicker();
