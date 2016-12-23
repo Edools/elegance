@@ -27,8 +27,12 @@
         <p>{{ 'checkout.success.transaction_questions' | t: gateway: gateway_credential.name }}</p>
         {% endunless %}
 
-        {% if payment.status == 'under_analysis' or payment.status == 'waiting_boleto' %}
-          <br>
+        {% if trial_purchase %}
+          <div class="note note-warning">
+            {% assign end_trial = order.billing_at | date: "%d/%m/%Y %H:%M" %}
+            {{ 'checkout.success.trial_purchase_warning' | t: trial_limit: end_trial }}
+          </div>
+        {% elsif payment.status == 'under_analysis' or payment.status == 'waiting_boleto' %}
           <div class="note note-warning">
             {{ 'checkout.success.order_processing_warning' | t }}
           </div>

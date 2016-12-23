@@ -520,6 +520,7 @@
       "transaction_made_by": "Sua transação foi processada pelo {{ gateway }}.",
       "transaction_status_is": "A transação está <b>{{ status }}</b> e seu identificador é <b id=\"payment-uuid\">{{ uuid }}</b>.",
       "transaction_questions": "Caso tenha alguma dúvida referente ao pagamento, entre em contato com o {{ gateway }}.",
+      "trial_purchase_warning": "Sua matrícula foi liberada para acesso. O período de trial termina no dia {{ trial_limit }}.",
       "order_processing_warning": "Após a confirmação do pagamento, sua matrícula será liberada.",
       "boleto_warning": "Caso o seu boleto não tenha sido aberto, desative o bloqueio de pop-ups no seu navegador e clique",
       "boleto_warning_click_here": "aqui",
