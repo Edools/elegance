@@ -1,6 +1,18 @@
 .course-content {
+  background-color: $light;
+
   .hidden {
     display: block;
+  }
+
+  .busy {
+    @include transition(.2s ease);
+
+    margin: $padding-large-vertical * 4 auto;
+    width: 44px;
+    height: 44px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTciIGhlaWdodD0iNTciIHZpZXdCb3g9IjAgMCA1NyA1NyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBzdHJva2U9IiMyMjIiPiAgICA8ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPiAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMSAxKSIgc3Ryb2tlLXdpZHRoPSIyIj4gICAgICAgICAgICA8Y2lyY2xlIGN4PSI1IiBjeT0iNTAiIHI9IjUiPiAgICAgICAgICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeSIgICAgICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiIGR1cj0iMi4ycyIgICAgICAgICAgICAgICAgICAgICB2YWx1ZXM9IjUwOzU7NTA7NTAiICAgICAgICAgICAgICAgICAgICAgY2FsY01vZGU9ImxpbmVhciIgICAgICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgICAgICAgICAgICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iY3giICAgICAgICAgICAgICAgICAgICAgYmVnaW49IjBzIiBkdXI9IjIuMnMiICAgICAgICAgICAgICAgICAgICAgdmFsdWVzPSI1OzI3OzQ5OzUiICAgICAgICAgICAgICAgICAgICAgY2FsY01vZGU9ImxpbmVhciIgICAgICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgICAgICAgICA8L2NpcmNsZT4gICAgICAgICAgICA8Y2lyY2xlIGN4PSIyNyIgY3k9IjUiIHI9IjUiPiAgICAgICAgICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeSIgICAgICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiIGR1cj0iMi4ycyIgICAgICAgICAgICAgICAgICAgICBmcm9tPSI1IiB0bz0iNSIgICAgICAgICAgICAgICAgICAgICB2YWx1ZXM9IjU7NTA7NTA7NSIgICAgICAgICAgICAgICAgICAgICBjYWxjTW9kZT0ibGluZWFyIiAgICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAvPiAgICAgICAgICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeCIgICAgICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiIGR1cj0iMi4ycyIgICAgICAgICAgICAgICAgICAgICBmcm9tPSIyNyIgdG89IjI3IiAgICAgICAgICAgICAgICAgICAgIHZhbHVlcz0iMjc7NDk7NTsyNyIgICAgICAgICAgICAgICAgICAgICBjYWxjTW9kZT0ibGluZWFyIiAgICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAvPiAgICAgICAgICAgIDwvY2lyY2xlPiAgICAgICAgICAgIDxjaXJjbGUgY3g9IjQ5IiBjeT0iNTAiIHI9IjUiPiAgICAgICAgICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeSIgICAgICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiIGR1cj0iMi4ycyIgICAgICAgICAgICAgICAgICAgICB2YWx1ZXM9IjUwOzUwOzU7NTAiICAgICAgICAgICAgICAgICAgICAgY2FsY01vZGU9ImxpbmVhciIgICAgICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgICAgICAgICAgICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iY3giICAgICAgICAgICAgICAgICAgICAgZnJvbT0iNDkiIHRvPSI0OSIgICAgICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiIGR1cj0iMi4ycyIgICAgICAgICAgICAgICAgICAgICB2YWx1ZXM9IjQ5OzU7Mjc7NDkiICAgICAgICAgICAgICAgICAgICAgY2FsY01vZGU9ImxpbmVhciIgICAgICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgICAgICAgICA8L2NpcmNsZT4gICAgICAgIDwvZz4gICAgPC9nPjwvc3ZnPg==);
+    background-size: cover;
   }
 
   .modules {
@@ -9,6 +21,27 @@
     list-style-position: inside;
     text-align: left;
 
+    > .list-group-item {
+      padding-right: 0;
+
+      &.module {
+        font-weight: 600;
+        cursor: pointer;
+
+        .list-group {
+          .list-group-item {
+            padding-right: 0;
+            //border-color: lighten($border-color-base, 5%);
+            border-style: dashed;
+            border-top: none;
+            border-right: none;
+            border-bottom: none;
+            border-radius: 0;
+          }
+        }
+      }
+    }
+
     .list-group-item {
       @include user-select(none);
 
@@ -16,7 +49,16 @@
         font-weight: 600;
         cursor: pointer;
 
-        .icon {
+        .busy {
+          float: right;
+          margin: 0;
+          margin-right: $padding-large-horizontal;
+          width: 20px;
+          height: 20px;
+          opacity: 0;
+        }
+
+        .icon-arrow-right {
           @include transition(.2s ease);
 
           margin-right: 8px;
@@ -24,22 +66,21 @@
           font-size: 14px;
         }
 
+        .list-group {
+          margin-top: $padding-large-vertical;
+          margin-left: 7px;
+        }
+
         &:hover {
-          .icon {
+          > .icon {
             color: $brand-primary;
           }
         }
 
         &.expanded {
-          .icon {
+          > .icon {
             @include rotate(90deg);
           }
-        }
-      }
-
-      @for $i from 1 through 9 {
-        &.sub-#{$i} {
-          padding-left: $padding-base-horizontal * ($i);
         }
       }
 
@@ -50,12 +91,14 @@
           position: relative;
           display: block;
           width: 100%;
+          cursor: default;
 
           .left,
           .right,
           .center {
             display: inline-block;
             vertical-align: middle;
+            font-weight: normal;
           }
 
           .left {
@@ -65,8 +108,13 @@
 
           .right {
             float: right;
+            margin-right: $padding-large-horizontal;
             width: auto;
             text-align: right;
+
+            .icon-check {
+              color: $brand-primary;
+            }
           }
 
           .lesson-title {
@@ -96,6 +144,8 @@
       }
 
       &.active {
+        @include box-shadow(7px 0 0 0 $list-group-active-bg);
+
         a,
         span,
         i {
@@ -103,15 +153,5 @@
         }
       }
     }
-  }
-
-  .paginate-link-top {
-    display: block;
-    margin-bottom: $padding-large-vertical * 2;
-  }
-
-  .paginate-link-bottom {
-    display: block;
-    margin-top: $padding-large-vertical * 2;
   }
 }
