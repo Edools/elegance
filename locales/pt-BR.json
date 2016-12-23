@@ -727,6 +727,24 @@
   "mailer": {
     "hello": "Olá, {{first_name}}.",
     "if_link_does_not_work": "Caso o link acima não funcione, copie e cole este endereço no seu navegador: {{url}}",
+    "trial_purchase": {
+      "start_trial": {
+        "subject": "Período de trial iniciado",
+        "first_paragraph": "Sua matrícula no produto {{ product_name }} foi liberada para acesso.",
+        "second_paragraph": "O período de trial termina no dia {{ end_trial }}."
+      },
+      "end_trial_cancel_enroll": {
+        "subject": "Acesso interrompido com fim do trial",
+        "first_paragraph": "Seu acesso no produto {{ product_name }} foi interrompido.",
+        "second_paragraph": "O período de trial terminou e o pagamento não foi efetuado. Para uma nova tentativa de pagamento clique no botão abaixo.",
+        "retry_payment": "Nova tentativa de pagamento"
+      },
+      "end_trial_active_enroll": {
+        "subject": "Fim do período de trial",
+        "first_paragraph": "O período de trial no produto {{ product_name }} chegou ao fim.",
+        "second_paragraph": "O pagamento foi efetuado com sucesso, e o seu acesso permanece ativo normalmente."
+      }
+    },
     "report": {
       "message": "O seu relatório foi gerado com sucesso. Para fazer o download, basta clicar no botão.",
       "download": "Baixar relatório",
