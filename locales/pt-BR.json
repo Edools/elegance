@@ -53,7 +53,8 @@
       }
     },
     "gateway_transaction": {
-      "invalid_email": "O endereço de e-mail enviado não é válido para este Gateway"
+      "invalid_email": "O endereço de e-mail enviado não é válido para este Gateway",
+      "unavailable_gateway": "O Gateway de pagamento esta indisponível no momento"
     },
     "checkout": {
       "no_order": "Pedido não encontrado.",
