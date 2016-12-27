@@ -1,19 +1,55 @@
 {% if course %}
-  <div id="permanent-contents" class="course-content">
-    <div class="busy"></div>
-    <ul id="js-course-tree"
-        class="modules list-group"
-        data-course="{{ course | to_json | replace: '"', '&quot;' | strip_newlines }}"
-        data-enrollment="{{ enrollment | to_json | replace: '"', '&quot;'| strip_newlines }}"
-        data-course_content="{{ content | to_json | replace: '"', '&quot;'| strip_newlines }}"
-        data-user-type="{{ current_user.type }}"
-        data-lesson-actions="{{ lesson_actions }}"
-        data-download-action="{{ download_action }}"
-        data-current-lesson-id="{{ current_lesson_id }}"
-        data-translation-release-at="{{ 'lesson.release_at' | t }}"
-        data-translation-release-after="{{ 'lesson.release_after' | t }}"
-        data-translation-course_content-views="{{ 'product.course_content.views' | t }}"
-        data-api-key="{{ current_api_credentials }}">
-    </ul>
+  {% paginate course.contents by 100 %}
+  <div id="permanent-contents" data-turbolinks-permanent class="course-content">
+    {% if paginate.previous.is_link %}
+      <div id="course-content-prev" class="text-center" data-turbolinks-temporary>
+        <a id="js-course-content-prev-link"
+           class="paginate-link-top"
+           href="{{ paginate.previous.url | append: '?pagination_direction=previous' }}">
+          {{ 'product.course_content.load_previous' | t }}
+        </a>
+
+        <div class="js-paginate-spinner" style="display: none;">
+          <i class='fa fa-spinner fa-spin fa-2x'></i>
+        </div>
+      </div>
+    {% endif %}
+
+    <ol id="js-course-tree" class="modules list-group">
+      {% assign printed_modules = '|' %}
+      {% for content in course.contents %}
+        {% for module in content.parent_modules %}
+          {% assign regex = '|' | append: module.id | append: '|' %}
+          {% unless printed_modules contains regex %}
+          {% assign printed_modules = printed_modules | append: module.id | append: '|' %}
+          <li id="module-{{ module.id }}"
+              class="list-group-item module sub-{{ module.depth }} {% if module.depth > 1 %}hidden{% endif %}">
+            <i class="icon icon-arrow-right"></i>
+            <span>{{ module.name }}</span>
+          </li>
+          {% endunless %}
+        {% endfor %}
+
+        {% include 'course-content-node', content: content, lesson: content.resource,
+        lesson_actions: lesson_actions, enrollment: enrollment,
+        current_lesson_id: current_lesson_id, course_content: content,
+        download_action: download_action %}
+      {% endfor %}
+    </ol>
+
+    {% if paginate.next.is_link %}
+      <div id="course-content-more" class="text-center" data-turbolinks-temporary>
+        <a id="js-course-content-more-link"
+           class="paginate-link-bottom"
+           href="{{ paginate.next.url | append: '?pagination_direction=next' }}">
+          <span class="bold">{{ 'product.course_content.load_more' | t }}</span>
+        </a>
+
+        <div class="js-paginate-spinner" style="display: none;">
+          <i class='fa fa-spinner fa-spin fa-2x'></i>
+        </div>
+      </div>
+    {% endif %}
   </div>
+  {% endpaginate %}
 {% endif %}

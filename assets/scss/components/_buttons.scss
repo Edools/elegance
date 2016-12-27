@@ -57,6 +57,10 @@
     cursor: $cursor-disabled;
   }
 
+  i ~ span {
+    margin-left: 3px;
+  }
+
   // [converter] extracted a& to a.btn
 }
 

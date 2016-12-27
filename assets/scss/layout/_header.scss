@@ -8,7 +8,9 @@ header.navbar {
 
   .navbar-brand {
     display: block;
+    color: $text-color !important;
     text-transform: uppercase !important;
+    opacity: 1;
 
     &.navbar-brand-img {
       padding: 15px 0;

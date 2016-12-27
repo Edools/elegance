@@ -3,398 +3,87 @@
 
   app.lessonSidebar = {
     init: function () {
-      var self = this;
+      this.nextButton().on('click', this.nextLesson);
+      this.prevButton().on('click', this.prevLesson);
+      this.lessons().find('a').on('click', function (e) {
+        e.preventDefault();
+        app.lessonSidebar.changeLesson(null, $(this).parents('.js-content'));
+      });
+      this.lazyLoadButtons().on('click', app.lessonSidebar.resetTooltips);
 
-      self.isActive = self.courseTree().data('is-active');
-      self.course = self.courseTree().data('course');
-      self.enrollment = self.courseTree().data('enrollment');
-      self.courseContent = self.courseTree().data('course-content');
-      self.userType = self.courseTree().data('user-type');
-      self.lessonActions = self.courseTree().data('lesson-actions');
-      self.downloadAction = self.courseTree().data('download-action');
-      self.currentLessonId = parseInt(self.courseTree().data('current-lesson-id'));
-      self.apiKey = self.courseTree().data('api-key');
+      this.handleButtons();
+      this.handleLessons();
 
-      self.translations = {};
-      self.translations['lesson.release_at'] = self.courseTree().data('translation-release-at');
-      self.translations['lesson.release_after'] = self.courseTree().data('translation-release-after');
-      self.translations['product.course_content.views'] = self.courseTree().data('translation-course_content-views');
-
-      if (!self.isActive) {
-        self.bindClicks();
-        self.handleLessons();
-        self.loadTopModules();
-
+      var $courseContent = $('.course-content');
+      if ($courseContent.length <= 0) {
         $(document).trigger('app:bind:lesson_sidebar');
+        return;
       }
-    },
 
-    // Props
+      // Expand first item
+      var $firstModule = $courseContent.find('.module.sub-1').first();
+      app.lessonSidebar.toggleChildren($firstModule, 'expand');
 
-    courseTree: function () {
-      return $('#js-course-tree');
+      $(document).on('page:change', function () {
+        $courseContent.find('.module.expanded').each(function (i, m) {
+          app.lessonSidebar.toggleChildren($(m), 'collapse', function () {
+            app.lessonSidebar.toggleChildren($(m), 'expand');
+          });
+        })
+      });
+
+      $courseContent
+        .off("click")
+        .on('click', '.module', function () {
+          if ($(this).hasClass('expanded')) {
+            app.lessonSidebar.toggleChildren($(this), 'collapse');
+          } else {
+            app.lessonSidebar.toggleChildren($(this), 'expand');
+          }
+        });
+
+      $(document).trigger('app:bind:lesson_sidebar');
     },
 
     lazyLoadButtons: function () {
       return $('#js-course-content-more-link, #js-course-content-prev-link');
     },
 
-    lessons: function () {
-      return this.courseTree().find('.js-content');
+    prevButton: function () {
+      return $('#js-lesson-content-player').find('.js-btn-prev');
     },
 
-    currentLesson: function () {
-      return $($('.lesson-page #js-course-tree')
-        .find('.js-content.active')[0]);
+    nextButton: function () {
+      return $('#js-lesson-content-player').find('.js-btn-next');
     },
 
-    // Actions
+    handleButtons: function () {
+      var $next = this.currentLesson().nextAll('.js-content');
+      var $prev = this.currentLesson().prevAll('.js-content');
 
-    bindClicks: function () {
-      var self = this;
-
-      self.lessons().find('a').on('click', function (e) {
-        e.preventDefault();
-        app.lessonSidebar.changeLesson(null, $(this).parents('.js-content'));
-      });
-
-      self.courseTree().on('click', '.module', function (e) {
-        if (!$(e.target).hasClass('module') && !$(e.target).parent().hasClass('module')) {
-          return;
-        }
-
-        e.stopPropagation();
-        self.loadChildren($(this));
-      });
-
-      self.courseTree().data('is-active', true);
-    },
-
-    getLessonIcon: function (lesson) {
-      var lessonIcon = '';
-
-      if (lesson.type == 'ExamLesson') {
-        switch (lesson.activity.type) {
-          case 'Quiz': {
-            lessonIcon = 'icon-puzzle';
-            break;
-          }
-          case 'FileUpload': {
-            lessonIcon = 'icon-arrow-up-circle';
-            break;
-          }
-          case 'CollaborativeDiscussion': {
-            lessonIcon = 'icon-people';
-            break;
-          }
-          default: {
-            lessonIcon = 'icon-puzzle'
-          }
-        }
+      if ($next.length <= 0 || $next.find('a').length <= 0) {
+        app.lessonSidebar
+          .nextButton().attr('disabled', 'disabled');
       } else {
-        switch (lesson.media) {
-          case 'Video': {
-            lessonIcon = 'icon-camrecorder';
-            break;
-          }
-          case 'Audio': {
-            lessonIcon = 'icon-microphone';
-            break;
-          }
-          case 'Slide': {
-            lessonIcon = 'icon-chart';
-            break;
-          }
-          case 'Document': {
-            lessonIcon = 'fa fa-file-text-o';
-            break;
-          }
-          case 'Image': {
-            lessonIcon = 'icon-picture';
-            break;
-          }
-          case 'Text': {
-            lessonIcon = 'fa fa-file-text-o';
-            break;
-          }
-          case 'LiveStream': {
-            lessonIcon = 'icon-control-play';
-            break;
-          }
-          case 'VideoSlide': {
-            lessonIcon = 'icon-film';
-            break;
-          }
-          case 'ScormPackage': {
-            lessonIcon = 'icon-layers';
-            break;
-          }
-          case 'Html': {
-            lessonIcon = 'icon-doc';
-            break;
-          }
-          default: {
-            lessonIcon = 'icon-camrecorder';
-          }
-
-        }
+        app.lessonSidebar
+          .nextButton().removeAttr('disabled');
       }
 
-      return lessonIcon;
-    },
-
-    getContentPath: function (content) {
-      var self = this;
-
-      var enrollmentId = self.enrollment.id;
-      var courseId = self.course.id;
-
-      var path = enrollmentId ? '/enrollments/' + enrollmentId : '/admin_view';
-      path = path + '/courses/' + courseId + '/course_contents/' + content.id;
-
-      return path;
-    },
-
-    getContentDonwloadPath: function (content) {
-      var self = this;
-      return self.getContentPath(content) + '/download';
-    },
-
-    checkLessonAvailability: function (lesson) {
-      var releaseAt = lesson.release_at;
-      var releaseAfter = lesson.release_after;
-
-      if (!releaseAt && !releaseAfter) {
-        return true;
-      }
-
-      var enrollmentActivatedAt = moment(this.enrollment.activated_at);
-
-      var releaseTime = releaseAt ? moment(releaseAt) : enrollmentActivatedAt.add(releaseAfter, 'days');
-
-      return moment() > releaseTime;
-    },
-
-    fetchModules: function ($parent) {
-      var self = this;
-      var id = $parent.data('id');
-      var level = $parent.data('level');
-      var $list = $parent.find('.list-group').first();
-
-      return $.ajax({
-        url: window.CORE_HOST + '/course_modules/' + id,
-        method: 'GET',
-        headers: {
-          'Authorization': 'Token token=' + self.apiKey
-        },
-        success: function (res) {
-          var modules = _.sortBy(res.course_modules, 'order');
-
-          modules = _.filter(modules, function (m) {
-            var module = _.find(self.allModules, {id: m.id});
-            return module.available != false && (module.course_content_ids.length > 0 || module.course_modules.length > 1);
-          });
-
-          var $modules = _.map(modules, function (module) {
-            return $(
-              '<li class="list-group-item module" ' +
-              'data-id="' + module.id + '"' +
-              'data-level="' + (level + 1) + '">' +
-              '<i class="icon icon-arrow-right"></i>' +
-              '<span>' + module.name + '</span>' +
-              '<i class="busy"></i>' +
-              '</li>');
-          });
-
-          $list.append($modules);
-        }
-      })
-    },
-
-    fetchChildren: function ($parent) {
-      var self = this;
-      var id = $parent.data('id');
-      var level = $parent.data('level');
-      var $list = $parent.find('.list-group').first();
-
-      return $.ajax({
-        url: window.CORE_HOST + '/course_modules/' + id + '/course_contents',
-        method: 'GET',
-        headers: {
-          'Authorization': 'Token token=' + self.apiKey
-        },
-        success: function (res) {
-          var courseContents = _.filter(res.course_contents, function (lesson) {
-            return lesson.available != false;
-          });
-
-          courseContents = _.sortBy(courseContents, 'order');
-
-          var $courseContents = _.map(courseContents, function (content) {
-              var active = (self.currentLessonId == content.id ? 'active js' : '');
-              var lesson = content.lesson;
-              var lessonIcon = self.getLessonIcon(lesson);
-              var hideInProgressIcon = null;
-              var hideCompletedIcon = null;
-              var lessonReleased = self.checkLessonAvailability(lesson);
-              var releaseType = null;
-              var releaseDate = null;
-
-              if (self.enrollment.lessons_info.completed.indexOf(lesson.id) > -1) {
-                hideInProgressIcon = 'hide';
-                hideCompletedIcon = null;
-              } else {
-                if (self.enrollment.lessons_info.in_progress.indexOf(lesson.id) > -1) {
-                  hideInProgressIcon = null;
-                  hideCompletedIcon = 'hide';
-                } else {
-                  hideInProgressIcon = 'hide';
-                  hideCompletedIcon = 'hide';
-                }
-              }
-
-              if (lesson.release_at) {
-                releaseType = 'release_at';
-                releaseDate = lesson.release_at;
-              } else {
-                releaseType = 'release_after';
-                releaseDate = moment(self.enrollment.activated_at).add(lesson.release_after, 'days');
-              }
-
-              var progress = _.find(self.enrollment.lessons_progresses, {lesson_id: lesson.id});
-
-              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + '" ' +
-                'id="content-' + content.id + '" ' +
-                'data-id="' + content.lesson.id + '"' +
-                'data-level="1">' +
-                '<div id="lesson-' + lesson.id + '" class="js-lesson content-lesson class ' + active + '" data-lesson-id="' + lesson.id + '">' +
-                '<div class="class-info">' +
-
-                '<div class="left"><i class="' + lessonIcon + '"></i></div>' +
-
-                '<div class="center">' +
-                (self.lessonActions && lessonReleased && self.userType == 'Student' ?
-                '<a class="lesson-title" href="' + self.getContentPath(content) + '"><span>' + lesson.title + '</span></a>' :
-                '<span class="lesson-title"><span class="disabled">' + lesson.title + '</span></span>') +
-                '</div>' +
-
-                '<div class="right">' +
-                '<span class="progress-icon js-progress-icons">' +
-                '<i class="icon-check js-completed-icon ' + hideCompletedIcon + '"></i>' +
-                '<i class="icon-clock js-in-progress-icon ' + hideInProgressIcon + '"></i>' +
-                '</span>';
-
-              if (self.lessonActions) {
-                if (progress && progress.views <= self.enrollment.max_attendance_length && self.enrollment.max_attendance_type == 'attempts') {
-                  html += '<span class="lesson-views attempt js-attendance" title="' + self.translations['product.course_content.views'] + '" data-tooltip-placement="left" data-toggle="tooltip">' +
-                    '<span>' + progress.views + '/' + self.enrollment.max_attendance_length +
-                    '</span>';
-                }
-
-                if (!lessonReleased) {
-                  var zone = moment.tz.guess();
-                  html += '<span class="release-date badge">' + self.translations['lesson.' + releaseType] + '<span> ' + moment.tz(releaseDate, zone).format('DD/MM/YYYY') + '</span>' + '</span>';
-                }
-
-                if (self.downloadAction && content.downloadable) {
-                  html += '<a class="download-link" href="' + self.getContentDonwloadPath(content) + '" data-no-turbolink>' +
-                    '<i class="icon-cloud-download"></i>' +
-                    '</a>';
-                }
-              }
-
-              html += '</div>' +
-                '</div>' +
-                '</li>';
-
-              return $(html);
-            }
-          );
-
-          $list.append($courseContents);
-        }
-      });
-    },
-
-    loadTopModules: function () {
-      var self = this;
-
-      if (!self.course) return;
-
-      $.ajax({
-        url: window.CORE_HOST + '/courses/' + self.course.id + '/course_modules',
-        method: 'GET',
-        headers: {
-          'Authorization': 'Token token=' + self.apiKey
-        },
-        success: function (res) {
-          if (!res.course_modules || res.course_modules.length <= 0) return;
-
-          self.allModules = res.course_modules;
-
-          self.topModules = _.filter(res.course_modules, function (x) {
-            return (x.parent_course_module == null && x.available != false) &&
-              (x.course_content_ids.length > 0 || x.course_modules.length > 1);
-          });
-
-          self.topModules = _.sortBy(self.topModules, 'order');
-
-          var $modules = _.map(self.topModules, function (module) {
-            return $(
-              '<li class="list-group-item module" ' +
-              'data-id="' + module.id + '"' +
-              'data-level="1">' +
-              '<i class="icon icon-arrow-right"></i>' +
-              '<span>' + module.name + '</span>' +
-              '<i class="busy"></i>' +
-              '</li>');
-          });
-
-          self.courseTree().prev('.busy').fadeOut('fast', function () {
-            self.courseTree().css('display', 'none');
-            self.courseTree().html($modules);
-            self.courseTree().fadeIn('fast');
-          });
-
-        }
-      })
-    },
-
-    loadChildren: function (parent) {
-      var self = this;
-      var $parent = $(parent);
-
-      var id = $parent.data('id');
-      var level = $parent.data('level');
-      var $list = $parent.find('.list-group').first();
-
-      if ($list.length <= 0) {
-        $parent.find('.busy').css({opacity: 1});
-        $list = $('<div class="list-group"></div>');
-        $list.appendTo($parent);
-
-        $.when(self.fetchModules($parent), self.fetchChildren($parent))
-          .then(function () {
-            $parent.addClass('expanded')
-            $parent.find('.busy').css({opacity: 0});
-            ;
-            $list.slideDown('fast');
-          });
+      if ($prev.length <= 0 || $prev.find('a').length <= 0) {
+        app.lessonSidebar
+          .prevButton().attr('disabled', 'disabled');
       } else {
-        if ($parent.hasClass('expanded')) {
-          $parent.removeClass('expanded');
-          $list.slideUp('fast');
-        } else {
-          $parent.addClass('expanded');
-          $list.slideDown('fast');
-        }
+        app.lessonSidebar
+          .prevButton().removeAttr('disabled');
       }
     },
 
     handleLessons: function () {
+      app.lessonSidebar.expandParentModule(app.lessonSidebar.currentLesson());
+
       $(document).on('page:load page:restore', function (e) {
 
-        if (e.originalEvent.data.length == 0) return;
+        if (!e.originalEvent.data || e.originalEvent.data.length == 0) return;
 
         var $html = $(e.originalEvent.data[0]);
         app.lessonSidebar.lessons().each(function (i, el) {
@@ -403,6 +92,15 @@
           $el.html($new.html());
         });
       })
+    },
+
+    lessons: function () {
+      return $('.lesson-page #js-course-tree').find('.js-content');
+    },
+
+    currentLesson: function () {
+      return $($('.lesson-page #js-course-tree')
+        .find('.js-content.active')[0]);
     },
 
     changeLesson: function (direction, lesson) {
@@ -424,6 +122,7 @@
           $targetLesson = $($next[0]);
       }
 
+      app.lessonSidebar.expandParentModule($targetLesson);
       $targetLesson.find('a')[0].click();
     },
 
@@ -433,7 +132,80 @@
 
     nextLesson: function () {
       app.lessonSidebar.changeLesson('next');
-    }
+    },
 
+    getModuleIndex: function (el) {
+      var sub = null;
+      $(el.attr('class').split(' '))
+        .each(function (i, x) {
+          if (x.indexOf('sub-') > -1) {
+            sub = parseInt(x.replace('sub-', ''));
+          }
+        });
+
+      return sub;
+    },
+
+    expandParentModule: function (el) {
+      var parentModules = [];
+
+      var gotTop = false;
+      $(el).prevAll('.module')
+        .each(function (i, el) {
+          var $el = $(el);
+
+          if (!gotTop) {
+            parentModules.push($el);
+          }
+
+          if (app.lessonSidebar.getModuleIndex($el) == 1) {
+            gotTop = true;
+          }
+        });
+
+      parentModules = parentModules.filter(function (module, i) {
+        return i == 0 || app.lessonSidebar.getModuleIndex($(module)) < (app.lessonSidebar.getModuleIndex($(el)) - 1);
+      });
+
+      parentModules = parentModules.reverse();
+
+      $(parentModules).each(function (i, el) {
+        app.lessonSidebar.toggleChildren(el, 'expand');
+      });
+    },
+
+    toggleChildren: function (module, mode, cb) {
+      if (module.length <= 0) return;
+
+      var $module = $(module);
+      var sub = app.lessonSidebar.getModuleIndex($module);
+
+      var $children = $module
+        .nextUntil('.sub-' + sub)
+        .filter(function () {
+          return app.lessonSidebar.getModuleIndex($(this)) == app.lessonSidebar.getModuleIndex($module) + 1;
+        });
+
+      var $childModules = $children.filter(function () {
+        return $(this).hasClass('module');
+      });
+
+      if (mode == 'expand') {
+        $module.addClass('expanded');
+        $children.removeClass('hidden');
+
+      } else if (mode == 'collapse') {
+        $module.removeClass('expanded');
+        $children.addClass('hidden');
+      }
+
+      $childModules.each(function (i, el) {
+        app.lessonSidebar.toggleChildren(el, 'collapse');
+      })
+
+      if (cb) {
+        cb();
+      }
+    }
   };
 })();

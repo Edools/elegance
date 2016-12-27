@@ -86,6 +86,11 @@
     border-top: 1px solid $border-color-base;
     background-color: $light;
 
+    h2 {
+      margin-bottom: $padding-large-vertical * 2;
+      line-height: 1.4;
+    }
+
     .social-networks {
       @include breakpoint(md) {
         text-align: right;
