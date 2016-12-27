@@ -172,7 +172,7 @@
   "sessions": {
     "signed_in": "Entrou com sucesso",
     "signed_out": "Saiu com sucesso",
-    "already_logged_in": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida. Faça login novamente ou mantenha o acesso na outra sessão."
+    "already_logged_in": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida."
   },
   "registrations": {
     "signed_up": "Bem-vindo! Você se registrou com sucesso."
