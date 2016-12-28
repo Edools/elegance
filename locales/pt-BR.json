@@ -53,7 +53,8 @@
       }
     },
     "gateway_transaction": {
-      "invalid_email": "O endereço de e-mail enviado não é válido para este Gateway"
+      "invalid_email": "O endereço de e-mail enviado não é válido para este Gateway",
+      "unavailable_gateway": "O Gateway de pagamento esta indisponível no momento"
     },
     "checkout": {
       "no_order": "Pedido não encontrado.",
@@ -146,7 +147,8 @@
       "can_not_apply_coupon": "Não foi possível aplicar o cupom. Certifique-se de que digitou os caracteres corretamente. Caso o erro persista, entre em contato com nossa equipe para averiguar se o cupom ainda é válido.",
       "limit_subscriptions": "Não foi possível adicionar o item no carrinho. Você só pode assinar um item por compra.",
       "kind_invalid": "Não foi possível adicionar o item no carrinho. Este item não pode ser processado junto com os que se encontram no carrinho, termine a compra e tente novamente.",
-      "invalid_user_coupon" : "Você não tem permissão para utilizar este cupom"
+      "invalid_user_coupon" : "Você não tem permissão para utilizar este cupom",
+      "limit_trial_purchases": "Não foi possível adicionar o item no carrinho. Você só pode adicionar um produto com trial por compra."
     }
   },
   "navbar": {
@@ -170,7 +172,7 @@
   "sessions": {
     "signed_in": "Entrou com sucesso",
     "signed_out": "Saiu com sucesso",
-    "already_logged_in": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida. Faça login novamente ou mantenha o acesso na outra sessão."
+    "already_logged_in": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida."
   },
   "registrations": {
     "signed_up": "Bem-vindo! Você se registrou com sucesso."
@@ -403,6 +405,10 @@
         "other": "{{ count }} cursos neste pacote contendo o termo <i>{{ name }}</i>"
       }
     },
+    "trial": {
+      "one": "com {{ count }} dia de trial",
+      "other": "com {{ count }} dias de trial"
+    },
     "pricing": {
       "common": {
         "unitary": {
@@ -515,6 +521,7 @@
       "transaction_made_by": "Sua transação foi processada pelo {{ gateway }}.",
       "transaction_status_is": "A transação está <b>{{ status }}</b> e seu identificador é <b id=\"payment-uuid\">{{ uuid }}</b>.",
       "transaction_questions": "Caso tenha alguma dúvida referente ao pagamento, entre em contato com o {{ gateway }}.",
+      "trial_purchase_warning": "Sua matrícula foi liberada para acesso. O período de trial termina no dia {{ trial_limit }}.",
       "order_processing_warning": "Após a confirmação do pagamento, sua matrícula será liberada.",
       "boleto_warning": "Caso o seu boleto não tenha sido aberto, desative o bloqueio de pop-ups no seu navegador e clique",
       "boleto_warning_click_here": "aqui",
@@ -721,6 +728,24 @@
   "mailer": {
     "hello": "Olá, {{first_name}}.",
     "if_link_does_not_work": "Caso o link acima não funcione, copie e cole este endereço no seu navegador: {{url}}",
+    "trial_purchase": {
+      "start_trial": {
+        "subject": "Período de trial iniciado",
+        "first_paragraph": "Sua matrícula no produto {{ product_name }} foi liberada para acesso.",
+        "second_paragraph": "O período de trial termina no dia {{ end_trial }}."
+      },
+      "end_trial_cancel_enroll": {
+        "subject": "Acesso interrompido com fim do trial",
+        "first_paragraph": "Seu acesso no produto {{ product_name }} foi interrompido.",
+        "second_paragraph": "O período de trial terminou e o pagamento não foi efetuado. Para uma nova tentativa de pagamento clique no botão abaixo.",
+        "retry_payment": "Nova tentativa de pagamento"
+      },
+      "end_trial_active_enroll": {
+        "subject": "Fim do período de trial",
+        "first_paragraph": "O período de trial no produto {{ product_name }} chegou ao fim.",
+        "second_paragraph": "O pagamento foi efetuado com sucesso, e o seu acesso permanece ativo normalmente."
+      }
+    },
     "report": {
       "message": "O seu relatório foi gerado com sucesso. Para fazer o download, basta clicar no botão.",
       "download": "Baixar relatório",

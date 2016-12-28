@@ -45,7 +45,8 @@
   },
   "errors": {
     "gateway_transaction": {
-      "invalid_email": "The email used is not valid for this gateway"
+      "invalid_email": "The email used is not valid for this gateway",
+      "unavailable_gateway": "The payment gateway is unavailable at the moment"
     },
     "checkout": {
       "no_order": "You order was not found",
