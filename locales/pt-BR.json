@@ -53,7 +53,8 @@
       }
     },
     "gateway_transaction": {
-      "invalid_email": "O endereço de e-mail enviado não é válido para este Gateway"
+      "invalid_email": "O endereço de e-mail enviado não é válido para este Gateway",
+      "unavailable_gateway": "O Gateway de pagamento esta indisponível no momento"
     },
     "checkout": {
       "no_order": "Pedido não encontrado.",
@@ -146,7 +147,8 @@
       "can_not_apply_coupon": "Não foi possível aplicar o cupom. Certifique-se de que digitou os caracteres corretamente. Caso o erro persista, entre em contato com nossa equipe para averiguar se o cupom ainda é válido.",
       "limit_subscriptions": "Não foi possível adicionar o item no carrinho. Você só pode assinar um item por compra.",
       "kind_invalid": "Não foi possível adicionar o item no carrinho. Este item não pode ser processado junto com os que se encontram no carrinho, termine a compra e tente novamente.",
-      "invalid_user_coupon" : "Você não tem permissão para utilizar este cupom"
+      "invalid_user_coupon" : "Você não tem permissão para utilizar este cupom",
+      "limit_trial_purchases": "Não foi possível adicionar o item no carrinho. Você só pode adicionar um produto com trial por compra."
     }
   },
   "navbar": {
@@ -170,7 +172,7 @@
   "sessions": {
     "signed_in": "Entrou com sucesso",
     "signed_out": "Saiu com sucesso",
-    "already_logged_in": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida. Faça login novamente ou mantenha o acesso na outra sessão."
+    "already_logged_in": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida."
   },
   "registrations": {
     "signed_up": "Bem-vindo! Você se registrou com sucesso."
@@ -380,7 +382,8 @@
     "course_content": {
       "load_previous": "Carregar aulas anteriores",
       "load_more": "Carregar mais aulas",
-      "views": "Você possui {{ progress.views }} de {{ enrollment.max_attendance_length }} visualizações. (Visualizações no mesmo dia são contabilizadas apenas uma vez)"
+      "views": "Você possui {{ progress.views }} de {{ enrollment.max_attendance_length }} visualizações. (Visualizações no mesmo dia são contabilizadas apenas uma vez)",
+      "blocked_on_trial": "Conteúdo bloqueado em trial"
     },
     "resource": {
       "course": "Conteúdo do curso",
@@ -401,6 +404,10 @@
         "one": "1 curso neste pacote contendo o termo <i>{{ name }}</i>",
         "other": "{{ count }} cursos neste pacote contendo o termo <i>{{ name }}</i>"
       }
+    },
+    "trial": {
+      "one": "com {{ count }} dia de trial",
+      "other": "com {{ count }} dias de trial"
     },
     "pricing": {
       "common": {
@@ -514,6 +521,7 @@
       "transaction_made_by": "Sua transação foi processada pelo {{ gateway }}.",
       "transaction_status_is": "A transação está <b>{{ status }}</b> e seu identificador é <b id=\"payment-uuid\">{{ uuid }}</b>.",
       "transaction_questions": "Caso tenha alguma dúvida referente ao pagamento, entre em contato com o {{ gateway }}.",
+      "trial_purchase_warning": "Sua matrícula foi liberada para acesso. O período de trial termina no dia {{ trial_limit }}.",
       "order_processing_warning": "Após a confirmação do pagamento, sua matrícula será liberada.",
       "boleto_warning": "Caso o seu boleto não tenha sido aberto, desative o bloqueio de pop-ups no seu navegador e clique",
       "boleto_warning_click_here": "aqui",
@@ -533,7 +541,8 @@
       "confirmed": "Confirmado",
       "reversed": "Estornado",
       "refunded": "Reembolsado",
-      "processing": "Processando"
+      "processing": "Processando",
+      "no_wait_processing": "Trial"
     }
   },
   "path": {
@@ -615,7 +624,40 @@
     "drag_files": "Solte os arquivos aqui"
   },
   "pages": {
+    "retry_payment": {
+      "title": "Nova tentativa de pagamento do pedido #{{ order_id }}",
+      "credit_card": "Cartão de Crédito",
+      "boleto": "Boleto Bancário",
+      "credit_card_number": "Nº do Cartão de Crédito",
+      "credit_card_name": "Nome Impresso",
+      "credit_card_expiry": "Validade (mês/ano)",
+      "credit_card_cvv": "Cód. de Segurança",
+      "credit_card_installments": "Parcelas",
+      "credit_card_pay": "Efetuar Pagamento",
+      "disable_popups_warning": "Desabilite o bloqueio de pop-ups do seu navegador",
+      "boleto_warning": "O prazo para compensação de um boleto bancário é de até 3 dias úteis, após a realização do pagamento. O curso só irá ser liberado após a compensação do mesmo.",
+      "boleto_pay": "Gerar Boleto",
+      "installment_amount": {
+        "one": "{{ amount }} à vista",
+        "other": "{{ count }}x de {{ amount }}"
+      },
+      "installment_amount_with_taxes": {
+        "one": "{{ amount }} à vista s/ juros",
+        "other": "{{ count }}x de {{ amount }} c/ juros {{ amount_with_taxes }}"
+      },
+      "success": "Sua nova tentativa de pagamento foi criada com sucesso"
+    },
+    "payments": {
+      "order_payments": "Pagamentos do pedido #{{ order_id }}",
+      "number": "Nº",
+      "status": "Status",
+      "created_at": "Data do pagamento",
+      "total": "Total",
+      "empty": "Esse pedido ainda não possui nenhum pagamento",
+      "new_payment": "Nova tentativa de pagamento"
+    },
     "orders": {
+      "payments": "Pagamentos",
       "my_orders": "Meus Pedidos",
       "number": "Nº",
       "status": "Status",
@@ -686,6 +728,24 @@
   "mailer": {
     "hello": "Olá, {{first_name}}.",
     "if_link_does_not_work": "Caso o link acima não funcione, copie e cole este endereço no seu navegador: {{url}}",
+    "trial_purchase": {
+      "start_trial": {
+        "subject": "Período de trial iniciado",
+        "first_paragraph": "Sua matrícula no produto {{ product_name }} foi liberada para acesso.",
+        "second_paragraph": "O período de trial termina no dia {{ end_trial }}."
+      },
+      "end_trial_cancel_enroll": {
+        "subject": "Acesso interrompido com fim do trial",
+        "first_paragraph": "Seu acesso no produto {{ product_name }} foi interrompido.",
+        "second_paragraph": "O período de trial terminou e o pagamento não foi efetuado. Para uma nova tentativa de pagamento clique no botão abaixo.",
+        "retry_payment": "Nova tentativa de pagamento"
+      },
+      "end_trial_active_enroll": {
+        "subject": "Fim do período de trial",
+        "first_paragraph": "O período de trial no produto {{ product_name }} chegou ao fim.",
+        "second_paragraph": "O pagamento foi efetuado com sucesso, e o seu acesso permanece ativo normalmente."
+      }
+    },
     "report": {
       "message": "O seu relatório foi gerado com sucesso. Para fazer o download, basta clicar no botão.",
       "download": "Baixar relatório",

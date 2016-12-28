@@ -45,7 +45,8 @@
   },
   "errors": {
     "gateway_transaction": {
-      "invalid_email": "La dirección de correo eletrónico enviado no es válido para este Gateway"
+      "invalid_email": "La dirección de correo eletrónico enviado no es válido para este Gateway",
+      "unavailable_gateway": "La pasarela de pago no está disponible en este momento"
     },
     "checkout": {
       "no_order": "Pedido no encontrado.",
