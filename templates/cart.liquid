@@ -34,7 +34,7 @@
                         {% endif %}
 
                         <div
-                          class="col-xs-12 cart-subtitle {% if item.product.logo %}col-md-7{% else %}col-md-8{% endif %}">
+                          class="col-xs-12 cart-subtitle {% if item.product.logo %}col-md-6{% else %}col-md-7{% endif %}">
                           <h4 class="product-title">
                             {{ item.product.title }}
                           </h4>
@@ -46,14 +46,20 @@
                             <h6 class="text-muted small pull-right">{{ 'checkout.coupon' |t }} {{ item.coupon.name }}</h6>
                           {% endif %}
                         </div>
-                        <div
-                          class="col-xs-12 cart-price {% if item.product.logo %}col-md-2{% else %}col-md-4{% endif %}">
+                        <div class="col-xs-12 cart-price {% if item.product.logo %}col-md-3{% else %}col-md-5{% endif %}">
                           {% if item.coupon %}
-                            <span
-                              class="small">{{ item.total | money_option_presentation: payment_option.kind, payment_option.period, 'full', 1 }}</span>
+                            <span class="small">
+                              {{ item.total | money_option_presentation: payment_option.kind, payment_option.period, 'full', 1 }}
+                            </span>
                           {% endif %}
-                          {{ item.amount_to_pay | money_option_presentation: payment_option.kind, payment_option.period,
-                          'full', 1 }}
+
+                          <div>
+                            {{ item.amount_to_pay | money_option_presentation: payment_option.kind, payment_option.period, 'full', 1 }}
+                          </div>
+
+                          {% if first_option.trials > 0 %}
+                            <div>{{ 'product.trial' | t: count: payment_option.trials }}</div>
+                          {% endif %}
                         </div>
                       </div>
                     </li>

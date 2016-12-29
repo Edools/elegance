@@ -16,12 +16,10 @@
   {% if settings.view.home.header.cover_src contains '<iframe' ||
   settings.view.home.header.cover_src contains '<object' ||
   settings.view.home.header.cover_src contains '<embed' %}
-    {% assign image =  school_image_missing %}
+    {% assign image =  settings.view.home.header.cover_src_image | default: school_image_missing  %}
   {% else %}
     {% assign image =  settings.view.home.header.cover_src | default: school_image_missing %}
   {% endif %}
-
-  {% assign image =  settings.view.home.header.cover_src_image %}
 
   {% assign seo_title = current_school.seo_title | default: main_title %}
   {% assign seo_description = current_school.seo_description %}

@@ -23,6 +23,10 @@
   {% else %}
     {% assign active = nil %}
   {% endif %}
+
+  {% if enrollment.on_trial? %}
+    {% assign released_on_trial = course_content | check_trial_availability: enrollment, school_product %}
+  {% endif %}
 {% endif %}
 
 <li id="content-{{ content.id }}"
@@ -62,7 +66,7 @@
       {% endif %}
 
       <div class="center">
-        {% if lesson_actions and lesson_released and current_user.type == 'Student' %}
+        {% if lesson_actions and lesson_released and current_user.type == 'Student' and (enrollment.on_trial? != true or released_on_trial) %}
           <a class="lesson-title"
             {% if no_turbolinks %} data-no-turbolink {% else %} data-turbolinks-scroll="#activity" {% endif %}
              href="{{ content | content_path: enrollment: enrollment, course: course }}">
@@ -82,21 +86,21 @@
         </span>
 
         {% if lesson_actions %}
-          {% if progress and progress.views <= enrollment.max_attendance_length and enrollment.max_attendance_type ==
-          'attempts' %}
+          {% if progress and progress.views <= enrollment.max_attendance_length and enrollment.max_attendance_type == 'attempts' %}
             <span class="lesson-views attempt js-attendance"
                   title="{{ 'product.course_content.views' | t }}"
                   data-tooltip-placement="left"
                   data-toggle="tooltip">
-            <span>{{ progress.views }}/{{ enrollment.max_attendance_length }}</span>
-          </span>
+
+              <span>{{ progress.views }}/{{ enrollment.max_attendance_length }}</span>
+            </span>
           {% endif %}
 
           {% unless lesson_released %}
-          <span class="release-date badge">
+            <span class="release-date badge">
               {{ 'lesson.' | append: release_type | t }}
 
-            <span class="js-to-client-timezone" data-timezone="{{ release_date | to_json }}" data-format="DD/MM/YYYY">
+              <span class="js-to-client-timezone" data-timezone="{{ release_date | to_json }}" data-format="DD/MM/YYYY">
                 {{ release_date | date:"%d/%m/%Y" }} UTC
               </span>
             </span>
@@ -107,6 +111,12 @@
                data-no-turbolink>
               <i class="icon-cloud-download"></i>
             </a>
+          {% endif %}
+
+          {% if enrollment.on_trial? and released_on_trial != true %}
+            <span title="{{ 'product.course_content.blocked_on_trial' | t }}" data-toggle="tooltip">
+              <i class="icon-lock"></i>
+            </span>
           {% endif %}
         {% endif %}
       </div>
