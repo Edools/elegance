@@ -2,7 +2,7 @@
   <div class="course-page-header page-header">
     <div class="container">
       <div class="control-back">
-        <a id="return-home" class="btn btn-default" href="{{ enrollment.id | enrollments_or_path_path: path_id }}">
+        <a id="return-home" data-no-turbolink class="btn btn-default" href="{{ enrollment.id | enrollments_or_path_path: path_id }}">
           <i class="icon-arrow-left"></i>
           <span>{{ 'general.back' | t }}</span>
         </a>
