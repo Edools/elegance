@@ -328,7 +328,7 @@
   "enrollment": {
     "my_courses": "<span class='lighter'>My</span>&nbsp;<strong>Courses</strong>",
     "no_certificate": "You have no certificates yet",
-    "download_certificate": "<span>Download certificate</span>",
+    "download_certificate": "<span>Download Certificate</span>",
     "my_certificates": "<span class='lighter'>My</span>&nbsp;<strong>Certificates</strong>",
     "not_enrolled_any_course": "You are no enrrolled in any course yet.",
     "go_course": "Go to Course",
