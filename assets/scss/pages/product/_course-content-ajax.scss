@@ -122,6 +122,8 @@ $guideline-color: darken($border-color-base, 5%);
             text-align: left;
 
             i {
+              position: relative;
+
               &:after {
                 position: absolute;
                 top: 50%;
