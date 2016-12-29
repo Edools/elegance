@@ -349,7 +349,7 @@
   "enrollment": {
     "my_courses": "<span class='lighter'>Meus</span>&nbsp;<strong>Cursos</strong>",
     "no_certificate": "Você ainda não tem certificados",
-    "download_certificate": "<span>Download certificado</span>",
+    "download_certificate": "<span>Download Certificado</span>",
     "my_certificates": "<span class='lighter'>Meus</span>&nbsp;<strong>Certificados</strong>",
     "not_enrolled_any_course": "Você ainda não está matriculado em nenhum curso.",
     "go_course": "Ir para o Curso",
@@ -387,7 +387,7 @@
     },
     "resource": {
       "course": "Conteúdo do curso",
-      "continue": "Continuar de onde parei"
+      "continue": "Continuar de Onde Parei"
     },
     "teachers": {
       "about": "Sobre os Instrutores"
