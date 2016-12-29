@@ -4,7 +4,7 @@
       <div id="js-lesson-sidebar" class="col-md-4 js-lesson-sidebar">
         <div class="lesson-page-sidebar">
           <div class="control-back">
-            <a class="btn btn-default" href="{{ enrollment | course_path:course.id }}">
+            <a class="btn btn-default" data-no-turbolink href="{{ enrollment | course_path:course.id }}">
               <i class="icon-arrow-left"></i>
               <span>{{ 'general.back' | t }}</span>
             </a>
