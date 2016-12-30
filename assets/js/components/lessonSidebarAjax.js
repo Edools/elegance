@@ -191,7 +191,7 @@
 
           modules = _.filter(modules, function (m) {
             var module = _.find(self.allModules, {id: m.id});
-            return module.available != false && (module.course_content_ids.length > 0 || module.course_modules.length > 1);
+            return module.available != false && (module.course_content_ids.length > 0 || module.course_modules.length > 0);
           });
 
           var $modules = _.map(modules, function (module) {
@@ -340,7 +340,7 @@
 
           self.topModules = _.filter(res.course_modules, function (x) {
             return (x.parent_course_module == null && x.available != false) &&
-              (x.course_content_ids.length > 0 || x.course_modules.length > 1);
+              (x.course_content_ids.length > 0 || x.course_modules.length > 0);
           });
 
           self.topModules = _.sortBy(self.topModules, 'order');
