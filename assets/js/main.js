@@ -11,5 +11,3 @@
     app.init();
   });
 })();
-
-console.log('hi');
