@@ -105,7 +105,7 @@
             break;
           }
           case 'Document': {
-            lessonIcon = 'fa fa-file-text-o';
+            lessonIcon = 'icon-doc';
             break;
           }
           case 'Image': {
@@ -113,7 +113,7 @@
             break;
           }
           case 'Text': {
-            lessonIcon = 'fa fa-file-text-o';
+            lessonIcon = 'icon-doc';
             break;
           }
           case 'LiveStream': {
