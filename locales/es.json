@@ -326,7 +326,7 @@
   "enrollment": {
     "my_courses": "<span class='lighter'>Mis</span>&nbsp;<strong>Cursos</strong>",
     "no_certificate": "Usted aún no tiene certificados",
-    "download_certificate": "<span>Download certificado</span>",
+    "download_certificate": "<span>Download Certificado</span>",
     "my_certificates": "<span class='lighter'>Meus</span>&nbsp;<strong>Certificados</strong>",
     "not_enrolled_any_course": "Usted aún no está matriculado en ningún curso.",
     "go_course": "Ir al Curso",

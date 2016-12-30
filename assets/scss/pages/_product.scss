@@ -94,9 +94,14 @@
 
   .jumbotron {
     background-color: $light;
+
+    h2 {
+      margin: 0;
+    }
   }
 }
 
 @import 'product/list';
 @import 'product/path-content';
+@import 'product/course-content-ajax';
 @import 'product/course-content';
