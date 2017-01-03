@@ -148,7 +148,7 @@
             {% if answer.approved? %}
               <div class="alert alert-info">
                   <span class="question-right-answer">
-                    <strong>{{ 'quiz.right_answer' | t }}:</strong> {{ correct_option }}
+                    <strong>{{ 'quiz.right_answer' | t }}:</strong> {% if correct_option.correct %} {{ 'quiz.true' | t }} {% else %} {{ 'quiz.false' | t }} {% endif %}
                   </span>
               </div>
             {% endif %}
