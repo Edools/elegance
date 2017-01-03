@@ -141,13 +141,13 @@
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="form-group {{ required }} {% if form.errors.address_state %}has-error{% endif %}">
+                          <div class="form-group {{ required }} {% if form.errors.address_state %}has-error{% endif %}" data-tap-disabled="true">
                             <label class="control-label">{{ 'checkout.complete.address_state' | t }}</label>
                             {% include "select-address", selected_state: address.state %}
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="form-group {{ required }} {% if form.errors.address_zip_code %}has-error{% endif %}" data-tap-disabled="true">
+                          <div class="form-group {{ required }} {% if form.errors.address_zip_code %}has-error{% endif %}">
                             <label class="control-label">{{ 'checkout.complete.address_zip_code' | t }}</label>
                             <input type="text" id="user-cep" name="user[address_attributes][zip_code]"
                                    value="{{ address.zip_code }}" class="form-control" {{ required }}>
