@@ -107,6 +107,8 @@
               </div>
             {% endif %}
           {% when 'TrueOrFalseExamQuestion' %}
+            {% assign correct_option = question.options[0] %}
+
             {% if question.answer.correct %}
               {% assign true_checked = 'checked' %}
               {% assign false_checked = nil %}
@@ -114,7 +116,6 @@
               {% assign false_class = 'without-color' %}
 
               {% if question.options[0].correct == question.answer.correct %}
-                {% assign correct_option = '{{'quiz.true' | t }}' %}
                 {% assign true_class = 'alert-success' %}
               {% else %}
                 {% assign true_class = 'alert-danger' %}
@@ -126,7 +127,6 @@
               {% assign true_class = 'without-color' %}
 
               {% if question.options[0].correct == question.answer.correct %}
-                {% assign correct_option = '{{'quiz.false' | t }}' %}
                 {% assign false_class = 'alert-success' %}
               {% else %}
                 {% assign false_class = 'alert-danger' %}
