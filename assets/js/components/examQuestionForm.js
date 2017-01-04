@@ -23,6 +23,14 @@
     // bind all form's textareas for all types of typing
     $(document).on('input propertychange', '#exam_answer_form', app.checkFormValidity);
 
+    $(document).ajaxSuccess(function(event, jqXHR, ajaxInfo, data) {
+      if (ajaxInfo.url == "/exam_answers" && jqXHR.status == 200) {
+        const lessonID = $('#js-media-player').data('lesson-id');
+        $('.icon-check.js-completed-icon', `#lesson-${lessonID}`).removeClass('hide');
+        $('.icon-clock.js-in-progress-icon', `#lesson-${lessonID}`).addClass('hide');
+      }
+    });
+
     $(document).trigger('app:bind:bind_exam_question_form');
   };
 })();
