@@ -141,7 +141,7 @@
                           </div>
                         </div>
                         <div class="col-md-6">
-                          <div class="form-group {{ required }} {% if form.errors.address_state %}has-error{% endif %}">
+                          <div class="form-group {{ required }} {% if form.errors.address_state %}has-error{% endif %}" data-tap-disabled="true">
                             <label class="control-label">{{ 'checkout.complete.address_state' | t }}</label>
                             {% include "select-address", selected_state: address.state %}
                           </div>
