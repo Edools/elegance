@@ -6,7 +6,9 @@
       {% include "checkout/title-box" %}
       <div class="col-md-7 cart-wizard">
         <div class="wizard">
-          {% include "checkout/wizard-header", step: 1 %}
+          {% if order.kind != 'free' %}
+            {% include "checkout/wizard-header", step: 1 %}
+          {% endif %}
           <div class="wizard-content">
             <!-- <div class="note note-warning">
               <h4 class="note-title">{{ 'general.attention' | t }}</h4>
