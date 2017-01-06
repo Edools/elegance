@@ -74,7 +74,11 @@
           <div class="col-md-5 cart-sidebar">
             <div class="panel panel-default">
               <div class="panel-body">
-                {% include "checkout/security-box" %}
+
+                {% if order.kind != 'free' %}
+                  {% include "checkout/security-box" %}
+                {% endif %}
+
                 {% include "checkout/totals-box" %}
 
                 {% if order.items.size > 0 %}
@@ -92,7 +96,7 @@
 
                 {% include "checkout/payment-methods-box" %}
 
-                {% if order.items.size > 0 and order.kind != 'subscription' and order.amount_to_pay == order.total %}
+                {% if order.items.size > 0 and order.kind != 'subscription' and order.amount_to_pay == order.total and order.kind != 'free' %}
                   <div class="coupon-widget panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">{{ 'checkout.coupon' | t }}</h4>
