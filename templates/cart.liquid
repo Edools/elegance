@@ -75,9 +75,7 @@
             <div class="panel panel-default">
               <div class="panel-body">
 
-                {% if order.kind != 'free' %}
-                  {% include "checkout/security-box" %}
-                {% endif %}
+                {% include "checkout/security-box" %}
 
                 {% include "checkout/totals-box" %}
 
