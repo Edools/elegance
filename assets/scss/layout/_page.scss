@@ -35,3 +35,11 @@
     }
   }
 }
+
+[data-is-bullet-footer] {
+  @include breakpoint(sm) {
+    display: block;
+  }
+
+  display: none;
+}

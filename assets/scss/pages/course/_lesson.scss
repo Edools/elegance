@@ -2,8 +2,57 @@
   background-color: $light;
 
   .lesson-page-sidebar {
+    .lesson-sidebar-header {
+      @include clearfix();
+
+      .lesson-sidebar-toggle {
+        float: left;
+        padding: 20px 0;
+
+        .btn {
+          .icon-arrow-left {
+            display: none;
+          }
+
+          &.active {
+            .icon-arrow-left {
+              display: inline-block;
+            }
+          }
+        }
+      }
+
+      .control-back {
+        float: right;
+      }
+    }
+
+    .lesson-sidebar-panel {
+      @include transition(.2s ease);
+      @include breakpoint(sm) {
+        border-radius: $panel-border-radius;
+      }
+
+      position: absolute;
+      top: 80px;
+      left: -100%;
+      z-index: 1000;
+      max-width: 320px;
+      width: 100%;
+      border-radius: 0;
+
+      &.active {
+        left: 0;
+      }
+    }
+
     .title {
+      @include breakpoint(sm) {
+        font-size: $font-size-large;
+      }
+
       margin: 0;
+      font-size: $font-size-base;
     }
 
     .course-progress {
@@ -81,6 +130,14 @@
     }
   }
 
+  .media-controls {
+    @include breakpoint(sm) {
+      text-align: right;
+    }
+
+    text-align: center;
+  }
+
   .lesson-content-player {
     .lesson-content-player-heading {
       margin-bottom: $padding-large-vertical * 4;
@@ -89,11 +146,12 @@
         @include transition(.2s ease);
 
         padding-top: $padding-large-vertical * 2;
-        text-align: right;
       }
 
       .lesson-title {
         margin-bottom: $padding-large-vertical;
+        text-align: center;
+        font-size: 22px;
         line-height: 1;
       }
 
