@@ -215,6 +215,12 @@ $guideline-color: darken($border-color-base, 5%);
               }
             }
 
+            .right {
+              i {
+                color: $light;
+              }
+            }
+
             .lesson-title {
               &:hover {
                 span {
