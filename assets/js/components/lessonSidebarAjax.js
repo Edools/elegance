@@ -47,6 +47,14 @@
       return $(this.courseTree().find('.js-content.active')[0]);
     },
 
+    toggleButton: function () {
+      return $('.lesson-sidebar-toggle .btn');
+    },
+
+    lessonSidebarPanel: function () {
+      return $('.lesson-sidebar-panel');
+    },
+
     // Actions
 
     bindClicks: function () {
@@ -67,6 +75,8 @@
       });
 
       self.courseTree().data('is-active', true);
+
+      self.toggleButton().on('click', this.toggleSidebar);
     },
 
     getLessonIcon: function (lesson) {
@@ -154,7 +164,7 @@
       return path;
     },
 
-    getContentDonwloadPath: function (content) {
+    getContentDownloadPath: function (content) {
       var self = this;
       return self.getContentPath(content) + '/download';
     },
@@ -230,7 +240,7 @@
           courseContents = _.sortBy(courseContents, 'order');
 
           var $courseContents = _.map(courseContents, function (content) {
-              var active = (self.currentLessonId == content.id ? 'active js' : '');
+              var active = (self.currentLessonId == content.lesson.id ? 'active js' : '');
               var lesson = content.lesson;
               var lessonIcon = self.getLessonIcon(lesson);
               var hideInProgressIcon = 'hide';
@@ -303,7 +313,7 @@
                 }
 
                 if (self.downloadAction && content.downloadable) {
-                  html += '<a class="download-link" href="' + self.getContentDonwloadPath(content) + '" data-no-turbolink>' +
+                  html += '<a class="download-link" href="' + self.getContentDownloadPath(content) + '" data-no-turbolink>' +
                     '<i class="icon-cloud-download"></i>' +
                     '</a>';
                 }
@@ -360,13 +370,17 @@
             self.courseTree().css('display', 'none');
             self.courseTree().html($modules);
             self.courseTree().fadeIn('fast');
+
+            if (self.courseContent) {
+              self.expandParentModules(self.courseContent.parent_modules_hash);
+            }
           });
 
         }
       })
     },
 
-    loadChildren: function (parent) {
+    loadChildren: function (parent, cb) {
       var self = this;
       var $parent = $(parent);
 
@@ -381,10 +395,14 @@
 
         $.when(self.fetchModules($parent), self.fetchChildren($parent))
           .then(function () {
-            $parent.addClass('expanded')
+            $parent.addClass('expanded');
             $parent.find('.busy').css({opacity: 0});
-            ;
+
             $list.slideDown('fast');
+
+            if (typeof cb == 'function') {
+              cb();
+            }
           });
       } else {
         if ($parent.hasClass('expanded')) {
@@ -393,6 +411,10 @@
         } else {
           $parent.addClass('expanded');
           $list.slideDown('fast');
+        }
+
+        if (typeof cb == 'function') {
+          cb();
         }
       }
     },
@@ -439,7 +461,33 @@
 
     nextLesson: function () {
       app.lessonSidebar.changeLesson('next');
-    }
+    },
 
+    expandParentModules: function (parentModules) {
+      var self = this;
+
+      var modules = [];
+      var loopModule = parentModules.course_module;
+      modules.push(loopModule.id);
+
+      while (loopModule.parent_module) {
+        loopModule = loopModule.parent_module;
+        modules.push(loopModule.id);
+      }
+
+      modules = modules.reverse();
+
+      async.eachSeries(modules, function (moduleId, cb) {
+        var $module = $('.module[data-id="' + moduleId + '"]');
+        self.loadChildren($module, cb);
+      });
+
+    },
+
+    toggleSidebar: function () {
+      app.lessonSidebar.toggleButton().toggleClass('active');
+      app.lessonSidebar.lessonSidebarPanel().toggleClass('active');
+    }
   };
+
 })();

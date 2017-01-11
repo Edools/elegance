@@ -12,7 +12,7 @@
             </div>
 
             <div class="control-back">
-              <a class="btn btn-default" data-no-turbolink href="{{ enrollment | course_path:course.id }}">
+              <a class="btn btn-default" href="{{ enrollment | course_path:course.id }}">
                 <i class="icon-arrow-left"></i>
                 <span>{{ 'general.back' | t }}</span>
               </a>
@@ -40,7 +40,7 @@
                 progress.in_progress %}
               </div>
               <div class="other-lessons">
-                {% include 'product/content-course', course: course, lesson_actions: true,
+                {% include 'product/content-course-ajax', course: course, lesson_actions: true,
                 enrollment: enrollment, current_lesson_id: lesson.id, download_action: true %}
               </div>
             </div>
