@@ -5,7 +5,6 @@
     init: function () {
       this.nextButton().on('click', this.nextLesson);
       this.prevButton().on('click', this.prevLesson);
-      this.toggleButton().on('click', this.toggleSidebar);
       this.lessons().find('a').on('click', function (e) {
         e.preventDefault();
         app.lessonSidebar.changeLesson(null, $(this).parents('.js-content'));
@@ -56,14 +55,6 @@
 
     nextButton: function () {
       return $('#js-lesson-content-player').find('.js-btn-next');
-    },
-
-    toggleButton: function () {
-      return $('.lesson-sidebar-toggle .btn');
-    },
-
-    lessonSidebarPanel: function () {
-      return $('.lesson-sidebar-panel');
     },
 
     handleButtons: function () {
@@ -215,11 +206,6 @@
       if (cb) {
         cb();
       }
-    },
-
-    toggleSidebar: function () {
-      app.lessonSidebar.toggleButton().toggleClass('active');
-      app.lessonSidebar.lessonSidebarPanel().toggleClass('active');
     }
   };
 

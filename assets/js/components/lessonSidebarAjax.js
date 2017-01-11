@@ -82,7 +82,7 @@
     getLessonIcon: function (lesson) {
       var lessonIcon = '';
 
-      if (lesson.type == 'ExamLesson') {
+      if (lesson.type == 'ExamLesson' && lesson.activity) {
         switch (lesson.activity.type) {
           case 'Quiz': {
             lessonIcon = 'icon-puzzle';
@@ -100,7 +100,7 @@
             lessonIcon = 'icon-puzzle'
           }
         }
-      } else {
+      } else if (lesson.media) {
         switch (lesson.media) {
           case 'Video': {
             lessonIcon = 'icon-camrecorder';
@@ -485,8 +485,8 @@
     },
 
     toggleSidebar: function () {
-      app.lessonSidebar.toggleButton().toggleClass('active');
-      app.lessonSidebar.lessonSidebarPanel().toggleClass('active');
+      app.lessonSidebarAjax.toggleButton().toggleClass('active');
+      app.lessonSidebarAjax.lessonSidebarPanel().toggleClass('active');
     }
   };
 

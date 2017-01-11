@@ -197,7 +197,9 @@ $guideline-color: darken($border-color-base, 5%);
       }
 
       &.active {
-        @include box-shadow(7px 0 0 0 $list-group-active-bg);
+        @include box-shadow(1px 0 0 0 $list-group-active-bg);
+
+        border-left: 1px solid $list-group-active-bg !important;
 
         a,
         span,
@@ -210,7 +212,7 @@ $guideline-color: darken($border-color-base, 5%);
             .left {
               i {
                 &:after {
-                  border-color: $light;
+                  border-color: lighten($list-group-active-bg, 20%);
                 }
               }
             }
