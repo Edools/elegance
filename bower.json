@@ -33,7 +33,8 @@
     "readmore-js": "^2.2.0",
     "compass-sass-mixins": "*",
     "lodash": "^4.16.4",
-    "bLazy": "blazy#^1.8.2"
+    "bLazy": "blazy#^1.8.2",
+    "async": "^2.1.4"
   },
   "overrides": {
     "jquery": {
