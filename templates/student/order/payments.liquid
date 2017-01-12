@@ -17,6 +17,14 @@
         </h3>
       </div>
 
+      {% if boleto_retry_url %}
+        <div class="note note-warning">
+          {{ 'pages.payments.boleto_warning' | t }} <a href="{{ boleto_retry_url }}"
+          class="js-open-on-load"
+          target="_blank">{{ 'pages.payments.boleto_warning_click_here' | t }}</a>
+        </div>
+      {% endif %}
+
       <table class="payment-table table table-bordered">
         <thead>
           <tr>
@@ -24,6 +32,7 @@
             <th class="col-xs-3">{{ 'pages.payments.status' | t }}</th>
             <th class="col-xs-2 text-center">{{ 'pages.payments.created_at' | t }}</th>
             <th class="col-xs-3 text-right">{{ 'pages.payments.total' | t }}</th>
+            <th class="col-xs-3 text-right">{{ 'pages.payments.boleto' | t }}</th>
           </tr>
         </thead>
 
@@ -39,6 +48,12 @@
               </td>
               <td class="column total text-right">
                 {{ payment.amount | money }}
+              </td>
+              <td class="column total text-right">
+                <a class="btn btn-default btn-sm" href="{{ payment.link }}" target="_blank">
+                  <i class="icon-info"></i>
+                  {{ 'pages.payments.print_boleto' | t }}
+                </a>
               </td>
             </tr>
           {% endfor %}
