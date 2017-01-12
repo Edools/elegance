@@ -654,7 +654,11 @@
       "created_at": "Data do pagamento",
       "total": "Total",
       "empty": "Esse pedido ainda não possui nenhum pagamento",
-      "new_payment": "Nova tentativa de pagamento"
+      "new_payment": "Nova tentativa de pagamento",
+      "boleto": "Boleto",
+      "print_boleto": "Imprimir boleto",
+      "boleto_warning": "Caso o seu boleto não tenha sido aberto, desative o bloqueio de pop-ups no seu navegador e clique",
+      "boleto_warning_click_here": "aqui"
     },
     "orders": {
       "payments": "Pagamentos",
