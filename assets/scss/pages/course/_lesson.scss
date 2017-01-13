@@ -5,10 +5,18 @@
     display: flex;
 
     .number-question {
-      width: 3%;
+      @include breakpoint(sm) {
+        width: 3%;
+      }
+
+      width: 8%;
     }
     .title-question {
-      width: 97%;
+      @include breakpoint(sm) {
+        width: 97%;
+      }
+
+      width: 92%;
     }
   }
 
