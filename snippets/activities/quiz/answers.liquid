@@ -152,6 +152,40 @@
                   </span>
               </div>
             {% endif %}
+          {% when 'TrueOrFalseExamQuestion2' %}
+            {% assign correct_option = nil %}
+
+            {% for option in question.options %}
+              {% if option.correct %}
+                {% assign correct_option = option %}
+              {% endif %}
+
+              {% if option.id == question.answer.multiple_choice_option_id %}
+                {% assign checked = 'checked' %}
+
+                {% if option.correct %}
+                  {% assign radio_class = 'alert alert-success' %}
+                {% else %}
+                  {% assign radio_class = 'alert alert-danger' %}
+                {% endif %}
+              {% else %}
+                {% assign checked = nil %}
+                {% assign radio_class = 'alert without-color' %}
+              {% endif %}
+
+              <div class="{{ radio_class }}">
+                <input type="radio" disabled="true" {{ checked }}>
+                <span>{{ option.title }}</span>
+              </div>
+            {% endfor %}
+
+            {% if answer.approved? %}
+              <div class="alert alert-info">
+                <span class="question-right-answer">
+                  <strong>{{ 'quiz.right_answer' | t }}:</strong> {{ correct_option.title }}
+                </span>
+              </div>
+            {% endif %}
           {% endcase %}
 
           {% if question.comment and ((activity.show_comments == 'always') or (activity.show_comments == 'approved' and answer.approved?)) %}

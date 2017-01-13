@@ -111,6 +111,17 @@
               <span class="lbl">{{ 'quiz.true' | t }}</span>
             </label>
           </p>
+
+        {% when 'TrueOrFalseExamQuestion2' %}
+          {% for option in question.options %}
+            <p>
+              <label>
+                <input type="radio" class="px" value="{{ option.id }}" required
+                       name="exam_answer[exam_question_answers_attributes[{{ index }}][multiple_choice_option_id]]">
+                <span class="lbl">{{ option.title }}</span>
+              </label>
+            </p>
+          {% endfor %}
         {% endcase %}
       </div>
     </div>

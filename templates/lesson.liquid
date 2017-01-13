@@ -3,14 +3,23 @@
     <div class="row">
       <div id="js-lesson-sidebar" class="col-md-4 js-lesson-sidebar">
         <div class="lesson-page-sidebar">
-          <div class="control-back">
-            <a class="btn btn-default" data-no-turbolink href="{{ enrollment | course_path:course.id }}">
-              <i class="icon-arrow-left"></i>
-              <span>{{ 'general.back' | t }}</span>
-            </a>
+          <div class="lesson-sidebar-header">
+            <div class="lesson-sidebar-toggle">
+              <button class="btn btn-default">
+                <i class="icon-arrow-left"></i>
+                <i class="icon-menu"></i>
+              </button>
+            </div>
+
+            <div class="control-back">
+              <a class="btn btn-default" href="{{ enrollment | course_path:course.id }}">
+                <i class="icon-arrow-left"></i>
+                <span>{{ 'general.back' | t }}</span>
+              </a>
+            </div>
           </div>
 
-          <div class="panel panel-default">
+          <div class="panel panel-default lesson-sidebar-panel">
             <div class="panel-heading">
               <h4 class="title">{{ course.name }}</h4>
             </div>
@@ -31,7 +40,7 @@
                 progress.in_progress %}
               </div>
               <div class="other-lessons">
-                {% include 'product/content-course', course: course, lesson_actions: true,
+                {% include 'product/content-course-ajax', course: course, lesson_actions: true,
                 enrollment: enrollment, current_lesson_id: lesson.id, download_action: true %}
               </div>
             </div>
