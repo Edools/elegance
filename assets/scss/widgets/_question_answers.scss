@@ -29,13 +29,19 @@
         border-radius: $border-radius-base;
         background-color: $light;
 
-        // Left Arrow
+        // Arrow
         &:before {
-          @include rotate(-45deg);
+          @include rotate(45deg);
+          @include breakpoint(sm) {
+            @include rotate(-45deg);
+
+            top: 15px;
+            left: -9px;
+          }
 
           position: absolute;
-          top: 15px;
-          left: -9px;
+          top: -9px;
+          left: 11px;
           display: block;
           width: 15px;
           height: 15px;

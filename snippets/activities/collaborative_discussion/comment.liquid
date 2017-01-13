@@ -5,13 +5,13 @@
 {% endif %}
 
 <div id="js-comment-{{ collaborative_comment.id }}" class="answer row">
-  <div class="col-sm-1">
+  <div class="col-xs-12 col-sm-1">
     <div class="avatar">
       {% image, src: collaborative_comment.user.cover_image_url, alt: collaborative_comment.user.first_name %}
     </div>
   </div>
 
-  <div class="col-sm-11">
+  <div class="col-xs-12 col-sm-11">
     <div class="comment-bubble">
       <div class="author">
         <span class="name">{{ collaborative_comment.user | fullname }}</span>
