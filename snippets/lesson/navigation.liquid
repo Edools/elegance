@@ -1,11 +1,19 @@
 <div class="media-controls">
-  <button class="btn btn-default js-btn-prev">
-    <i class="icon-arrow-left"></i>
-    <span>{{ 'lesson.preview' | t }}</span>
-  </button>
+  {% if course_content.prev_content_id %}
+    <a
+      href="/enrollments/{{ enrollment.id }}/courses/{{ course.id }}/course_contents/{{ course_content.prev_content_id }}"
+      class="btn btn-default">
+      <i class="icon-arrow-left"></i>
+      <span>{{ 'lesson.preview' | t }}</span>
+    </a>
+  {% endif %}
 
-  <button class="btn btn-default js-btn-next">
-    <span>{{ 'lesson.next' | t }}</span>
-    <i class="icon-arrow-right"></i>
-  </button>
+  {% if course_content.next_content_id %}
+    <a
+      href="/enrollments/{{ enrollment.id }}/courses/{{ course.id }}/course_contents/{{ course_content.next_content_id }}"
+      class="btn btn-default">
+      <span>{{ 'lesson.next' | t }}</span>
+      <i class="icon-arrow-right"></i>
+    </a>
+  {% endif %}
 </div>
