@@ -1,6 +1,37 @@
 .lesson-page {
   background-color: $light;
 
+  .question {
+    display: flex;
+
+    .number-question {
+      width: 3%;
+    }
+    .title-question {
+      width: 97%;
+    }
+  }
+
+  .option,
+  .option > label {
+    width: 100%;
+  }
+
+  .lbl {
+    display: block;
+    font-weight: normal;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .px {
+    float: left;
+    margin-top: 7px;
+    margin-right: 7px;
+  }
+
   .lesson-page-sidebar {
     .title {
       margin: 0;
