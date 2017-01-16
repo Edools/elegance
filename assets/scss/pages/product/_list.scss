@@ -6,6 +6,12 @@
     @include breakpoint(sm) {
       height: 465px;
     }
+    @include breakpoint(md) {
+      height: 515px;
+    }
+    @include breakpoint(lg) {
+      height: 465px;
+    }
     @extend .panel;
     @extend .panel-default;
 
@@ -60,6 +66,15 @@
       margin-bottom: $padding-large-vertical + 5;
 
       .price {
+        @include breakpoint(md) {
+          width: 100%;
+          text-align: center;
+        }
+        @include breakpoint(lg) {
+          width: auto;
+          text-align: left;
+        }
+
         display: inline-block;
         vertical-align: middle;
 
@@ -72,6 +87,21 @@
         .final-price {
           font-weight: bold;
         }
+      }
+
+      .call-to-action {
+        @include breakpoint(md) {
+          float: none;
+          margin-top: $padding-large-vertical;
+          text-align: center;
+        }
+        @include breakpoint(lg) {
+          float: right;
+          margin: 0;
+          text-align: right;
+        }
+
+        float: right;
       }
     }
   }
