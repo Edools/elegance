@@ -4,6 +4,28 @@
   .lesson-page-sidebar {
     .lesson-sidebar-header {
       @include clearfix();
+      @include transition(background-color .2s ease);
+
+      &.scroll {
+        @include breakpoint(sm) {
+          position: static !important;
+          top: auto !important;
+          left: auto !important;
+          padding-right: 0 !important;
+          padding-left: 0 !important;
+          width: auto !important;
+          height: auto !important;
+          background-color: transparent !important;
+        }
+
+        right: 0 !important;
+        left: 0 !important;
+        padding-right: 15px;
+        padding-left: 15px;
+        width: 100% !important;
+        border-bottom: 1px solid $border-color-base;
+        background-color: $light;
+      }
 
       .lesson-sidebar-toggle {
         @include breakpoint(sm) {
