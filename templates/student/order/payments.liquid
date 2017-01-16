@@ -2,7 +2,6 @@
   {% if payments.size > 0 %}
     <div class="container">
       <div class="heading">
-        <h3>{{ 'pages.payments.order_payments' | t: order_id: order.id }}</h3>
         <h3>
           <a href="/orders" type="button" class="btn btn-default">
             <i class="icon-arrow-left"></i>
@@ -15,6 +14,7 @@
             </a>
           {% endif %}
         </h3>
+        <h3>{{ 'pages.payments.order_payments' | t: order_id: order.id }}</h3>
       </div>
 
       {% if boleto_retry_url %}
@@ -50,10 +50,14 @@
                 {{ payment.amount | money }}
               </td>
               <td class="column total text-right">
+                {% if payment.kind == 'boleto' %}
                 <a class="btn btn-default btn-sm" href="{{ payment.link }}" target="_blank">
                   <i class="icon-info"></i>
                   {{ 'pages.payments.print_boleto' | t }}
                 </a>
+                {% else %}
+                -
+                {% endif %}
               </td>
             </tr>
           {% endfor %}
