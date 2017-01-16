@@ -1,7 +1,29 @@
 <div class="category-page page">
   <div class="product-list">
     <div class="container page-container">
-      <h2 class="title">{{ category.title }}</h2>
+      <ol class="breadcrumb">
+        <li><a href="/">Home</a></li>
+
+        {% if root_category %}
+          <li id="root-category">
+            <a href="/categories/{{ root_category.slug }}">
+              {{ root_category.title }}
+            </a>
+          </li>
+        {% endif %}
+
+        {% if root_category and parent_category %}
+          <li id="parent-category">
+            <a href="/categories/{{ root_category.slug }}/subcategories/{{ parent_category.slug }}">
+              {{ parent_category.title }}
+            </a>
+          </li>
+        {% endif %}
+
+        <li id="current-category" class="active">{{ category.title }}</li>
+      </ol>
+
+      <h2 class="title category-title">{{ category.title }}</h2>
 
       {% form 'category-search-product', category: category.slug %}
         <div class="form-group">
@@ -11,7 +33,23 @@
       {% endform %}
 
       <div class="row">
-        {% include 'product/list', products: products, gateway: gateway %}
+        {% if category_siblings %}
+          <div id="category-siblings" class="col-md-4 col-sm-12">
+            <h5>Subcategorias</h5>
+
+            <ul>
+              {% for subcategory in category_siblings %}
+                <li>{{ subcategory.title }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <div class="{% if category_siblings %} col-md-8 {% else %} col-md-12 {% endif %}">
+          <div class="row">
+            {% include 'product/list', products: products, gateway: gateway %}
+          </div>
+        </div>
       </div>
     </div>
   </div>
