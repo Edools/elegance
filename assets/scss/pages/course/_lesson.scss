@@ -1,9 +1,70 @@
 .lesson-page {
   background-color: $light;
 
+  .question {
+    display: flex;
+
+    .number-question {
+      @include breakpoint(sm) {
+        width: 3%;
+      }
+
+      width: 8%;
+    }
+    .title-question {
+      @include breakpoint(sm) {
+        width: 97%;
+      }
+
+      width: 92%;
+    }
+  }
+
+  .option,
+  .option > label {
+    width: 100%;
+  }
+
+  .lbl {
+    display: block;
+    font-weight: normal;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .px {
+    float: left;
+    margin-top: 7px;
+    margin-right: 7px;
+  }
+
   .lesson-page-sidebar {
     .lesson-sidebar-header {
       @include clearfix();
+      @include transition(background-color .2s ease);
+
+      &.scroll {
+        @include breakpoint(sm) {
+          position: static !important;
+          top: auto !important;
+          left: auto !important;
+          padding-right: 0 !important;
+          padding-left: 0 !important;
+          width: auto !important;
+          height: auto !important;
+          background-color: transparent !important;
+        }
+
+        right: 0 !important;
+        left: 0 !important;
+        padding-right: 15px;
+        padding-left: 15px;
+        width: 100% !important;
+        border-bottom: 1px solid $border-color-base;
+        background-color: $light;
+      }
 
       .lesson-sidebar-toggle {
         @include breakpoint(sm) {

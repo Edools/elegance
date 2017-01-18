@@ -1,4 +1,3 @@
-foo
 <div id="product-card-{{ product.id }}" class="thumbnail product">
   <div class="logo">
     <a href="/{{ product.slug }}">
@@ -36,38 +35,39 @@ foo
           class="final-price">{{ first_option.price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway }}</span>
 
         {% if first_option.trials > 0 %}
-          <div>
-            <span class="final-price">{{ 'product.trial' | t: count: first_option.trials }}</span>
-          </div>
+          <div class="trial-caption">{{ 'product.trial' | t: count: first_option.trials }}</div>
         {% endif %}
       </div>
 
-      {% if product.payment_options.size > 1 %}
-        <div class="btn-group pull-right">
-          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false">
-            {{ 'product.enroll' | t }} <span class="caret"></span>
-          </button>
+      <div class="call-to-action">
+        {% if product.payment_options.size > 1 %}
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+              {{ 'product.enroll' | t }} <span class="caret"></span>
+            </button>
 
-          <ul class="dropdown-menu">
-            {% for option in product.payment_options %}
-              <li>
-                <a id="add-to-cart-product-{{ product.id }}-{{ option.id }}" href="{{ product | add_to_cart_path: option }}">
-                  {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway }}
+            <ul class="dropdown-menu">
+              {% for option in product.payment_options %}
+                <li>
+                  <a id="add-to-cart-product-{{ product.id }}-{{ option.id }}"
+                     href="{{ product | add_to_cart_path: option }}">
+                    {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway }}
 
-                  {% if option.trials > 0 %}
-                    <span>{{ 'product.trial' | t: count: option.trials }}</span>
-                  {% endif %}
-                </a>
+                    {% if option.trials > 0 %}
+                      <span>{{ 'product.trial' | t: count: option.trials }}</span>
+                    {% endif %}
+                  </a>
 
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% else %}
-        {{ 'product.enroll' | t | add_to_cart_link: product, first_option, 'btn btn-primary pull-right' }}
-      {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% else %}
+          {{ 'product.enroll' | t | add_to_cart_link: product, first_option, 'btn btn-primary' }}
+        {% endif %}
+      </div>
     {% endif %}
   </div>
 </div>
