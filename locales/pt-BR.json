@@ -518,10 +518,10 @@
         "semesterly": "Essa assinatura custa {{ price }} por semestre.",
         "yearly": "Essa assinatura custa {{ price }} por ano."
       },
-      "transaction_made_by": "Sua transação foi processada pelo {{ gateway }}.",
-      "transaction_status_is": "A transação está <b>{{ status }}</b> e seu identificador é <b id=\"payment-uuid\">{{ uuid }}</b>.",
+      "transaction_made_by": "Sua transação será realizada pelo {{ gateway }} no fim do período de Trial.",
+      "transaction_status_is": "Enquanto isso, o status da sua transação é <b>{{ status }}</b>. O seu identificador é <b id=\"payment-uuid\">{{ uuid }}</b>.",
       "transaction_questions": "Caso tenha alguma dúvida referente ao pagamento, entre em contato com o {{ gateway }}.",
-      "trial_purchase_warning": "Sua matrícula foi liberada para acesso. O período de trial termina no dia {{ trial_limit }}.",
+      "trial_purchase_warning": "Sua matrícula foi liberada com sucesso e seu período de Trial encerra em {{ trial_limit }}.",
       "order_processing_warning": "Após a confirmação do pagamento, sua matrícula será liberada.",
       "boleto_warning": "Caso o seu boleto não tenha sido aberto, desative o bloqueio de pop-ups no seu navegador e clique",
       "boleto_warning_click_here": "aqui",
@@ -734,20 +734,20 @@
     "if_link_does_not_work": "Caso o link acima não funcione, copie e cole este endereço no seu navegador: {{url}}",
     "trial_purchase": {
       "start_trial": {
-        "subject": "Período de trial iniciado",
-        "first_paragraph": "Sua matrícula no produto {{ product_name }} foi liberada para acesso.",
-        "second_paragraph": "O período de trial termina no dia {{ end_trial }}."
+        "subject": "O seu período de trial do produto {{product_name}} iniciou!",
+        "first_paragraph": "Sua matrícula foi liberada e você pode acessar as aulas agora.",
+        "second_paragraph": "Você tem até {{end_trial}} para efetuar o pagamento e confirmar sua matrícula."
       },
       "end_trial_cancel_enroll": {
-        "subject": "Acesso interrompido com fim do trial",
-        "first_paragraph": "Seu acesso no produto {{ product_name }} foi interrompido.",
-        "second_paragraph": "O período de trial terminou e o pagamento não foi efetuado. Para uma nova tentativa de pagamento clique no botão abaixo.",
-        "retry_payment": "Nova tentativa de pagamento"
+        "subject": "O seu período de Trial do produto {{product_name}} terminou.",
+        "first_paragraph": "Infelizmente, não foi possível detectar um pagamento com sucesso, por isso seu acesso às aulas foi interrompido. ❌",
+        "second_paragraph": "Porém, você pode tentar novamente para retomar o seu acesso!.",
+        "retry_payment": "Novo Pagamento"
       },
       "end_trial_active_enroll": {
-        "subject": "Fim do período de trial",
-        "first_paragraph": "O período de trial no produto {{ product_name }} chegou ao fim.",
-        "second_paragraph": "O pagamento foi efetuado com sucesso, e o seu acesso permanece ativo normalmente."
+        "subject": "O seu período de Trial do produto {{product_name}} terminou.",
+        "first_paragraph": "Nós recebemos o seu pagamento com sucesso e você poderá continuar assistindo as aulas sem problemas. ✅",
+        "second_paragraph": "Ir para curso"
       }
     },
     "report": {
