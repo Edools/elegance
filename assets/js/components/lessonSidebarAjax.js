@@ -289,7 +289,7 @@
                 '<div class="left"><i class="' + lessonIcon + '"></i></div>' +
 
                 '<div class="center">' +
-                (self.lessonActions && lessonReleased && self.userType == 'Student' ?
+                (self.lessonActions && lessonReleased ?
                   '<a class="lesson-title" href="' + self.getContentPath(content) + '"><span>' + lesson.title + '</span></a>' :
                   '<span class="lesson-title"><span class="disabled">' + lesson.title + '</span></span>') +
                 '</div>' +
