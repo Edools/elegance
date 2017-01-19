@@ -66,7 +66,7 @@
       {% endif %}
 
       <div class="center">
-        {% if lesson_actions and lesson_released and current_user.type == 'Student' and (enrollment.on_trial? != true or released_on_trial) %}
+        {% if lesson_actions and lesson_released and ((current_user.type == 'Student' and (enrollment.on_trial? != true or released_on_trial)) or current_user.type == 'Collaborator') %}
           <a class="lesson-title"
             {% if no_turbolinks %} data-no-turbolink {% else %} data-turbolinks-scroll="#activity" {% endif %}
              href="{{ content | content_path: enrollment: enrollment, course: course }}">
