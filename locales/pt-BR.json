@@ -671,6 +671,11 @@
       "custom_template": "<h1> Este é um template customizado</h1>",
       "show_order_itens": "<span>ver itens do pedido</span>",
       "cancel_signature": "Cancelar assinatura",
+      "trial": {
+        "cancel": "Cancelar trial",
+        "canceled": "Trial canceledo com sucesso!",
+        "failed": "Ocorreu um erro no cancelamento do trial."
+      },
       "recurring": {
         "subscriptions": "Assinaturas",
         "subscription": "Assinatura",
