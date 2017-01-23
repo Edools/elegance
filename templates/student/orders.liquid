@@ -12,6 +12,7 @@
           <th class="col-xs-3 text-right">{{ 'pages.orders.total' | t }}</th>
           <th class="col-xs-3"></th>
           <th class="col-xs-3"></th>
+          <th class="col-xs-3"></th>
         </tr>
         </thead>
 
@@ -39,6 +40,16 @@
                 <i class="icon-info"></i>
                 {{ 'pages.orders.payments' | t }}
               </a>
+            </td>
+            <td class="column items text-center">
+              {% if order.status == 'no_wait_processing' %}
+                <a href="{{ order | order_cancel_path }}"
+                   class="btn btn-danger btn-sm cancel-trial"
+                   data-method="patch">
+
+                  {{ 'pages.orders.trial.cancel' | t }}
+                </a>
+              {% endif %}
             </td>
           </tr>
 
