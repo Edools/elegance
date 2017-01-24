@@ -24,10 +24,14 @@
       <div class="panel panel-default" data-question-id="{{ question.id }}">
         <div class="panel-heading">
           <div class="panel-title">
-            <span style="display: inline-block;">{{ forloop.index }}. </span>
-            <p style="display: inline-block; margin: 0;">
-              {{ question.title | default: question.options[0].title }}
-            </p>
+            <div class="question">
+              <div class="number-question">
+                <span style="display: inline-block;">{{ forloop.index }}. </span>
+              </div>
+              <div class="title-question">
+                {{ question.title | default: question.options[0].title }}
+              </div>
+            </div>
           </div>
         </div>
 
