@@ -20,6 +20,11 @@
                   {% if gateway.subscription_payment_methods contains 'boleto' %}{% assign show_boleto = true %}{% endif %}
                 {% endif %}
 
+                <div class="alert info-payment-after-trial">
+                    Você será cobrado apenas no fim do período gratuito de testes. <br/>
+                    É possível cancelar o seu pedido a qualquer momento durante esse período
+                </div>
+
                 <ul class="nav nav-tabs" role="tablist">
                   {% if show_cc %}
                     <li class="{% if active_payment_type == 'credit_card' %} active {% endif %}" role="presentation">
