@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  app.lessonSidebarAjax = {
+  app.lessonList = {
     init: function () {
       var self = this;
 
@@ -32,11 +32,11 @@
     // Props
 
     courseTree: function () {
-      return $('.course-content-ajax #js-course-tree-ajax');
+      return $('.course-content #js-course-tree-ajax');
     },
 
     lazyLoadButtons: function () {
-      return $('.course-content-ajax #js-course-content-more-link, .course-content-ajax #js-course-content-prev-link');
+      return $('.course-content #js-course-content-more-link, .course-content #js-course-content-prev-link');
     },
 
     lessons: function () {
@@ -48,11 +48,11 @@
     },
 
     toggleButton: function () {
-      return $('.lesson-sidebar-toggle .btn');
+      return $('.lesson-list-toggle .btn');
     },
 
-    lessonSidebarPanel: function () {
-      return $('.lesson-sidebar-panel');
+    lessonListPanel: function () {
+      return $('.lesson-list-panel');
     },
 
     // Actions
@@ -62,7 +62,7 @@
 
       self.lessons().find('a').on('click', function (e) {
         e.preventDefault();
-        app.lessonSidebar.changeLesson(null, $(this).parents('.js-content'));
+        app.lessonList.changeLesson(null, $(this).parents('.js-content'));
       });
 
       self.courseTree().on('click', '.module', function (e) {
@@ -283,7 +283,7 @@
                 'id="content-' + content.id + '" ' +
                 'data-id="' + content.lesson.id + '"' +
                 'data-level="1">' +
-                '<div id="lesson-' + lesson.id + '" class="js-lesson content-lesson class ' + active + '" data-lesson-id="' + lesson.id + '">' +
+                '<div id="lesson-' + lesson.id + '" class="js-lesson content-lesson ' + active + (!lessonReleased ? ' not-released' : '') + '" data-lesson-id="' + lesson.id + '">' +
                 '<div class="class-info">' +
 
                 '<div class="left"><i class="' + lessonIcon + '"></i></div>' +
@@ -425,7 +425,7 @@
         if (e.originalEvent.data.length == 0) return;
 
         var $html = $(e.originalEvent.data[0]);
-        app.lessonSidebar.lessons().each(function (i, el) {
+        app.lessonList.lessons().each(function (i, el) {
           var $el = $(el);
           var $new = $html.find('#' + $el.attr('id'));
           $el.html($new.html());
@@ -437,14 +437,14 @@
       var $targetLesson = $(lesson);
 
       if (direction == 'prev') {
-        var $prev = app.lessonSidebar
+        var $prev = app.lessonList
           .currentLesson()
           .prevAll('.js-content');
 
         if ($prev.length > 0 && $prev.find('a').length > 0)
           $targetLesson = $($prev[0]);
       } else if (direction == 'next') {
-        var $next = app.lessonSidebar
+        var $next = app.lessonList
           .currentLesson()
           .nextAll('.js-content');
 
@@ -453,14 +453,6 @@
       }
 
       $targetLesson.find('a')[0].click();
-    },
-
-    prevLesson: function () {
-      app.lessonSidebar.changeLesson('prev');
-    },
-
-    nextLesson: function () {
-      app.lessonSidebar.changeLesson('next');
     },
 
     expandParentModules: function (parentModules) {
@@ -485,8 +477,8 @@
     },
 
     toggleSidebar: function () {
-      app.lessonSidebarAjax.toggleButton().toggleClass('active');
-      app.lessonSidebarAjax.lessonSidebarPanel().toggleClass('active');
+      app.lessonList.toggleButton().toggleClass('active');
+      app.lessonList.lessonListPanel().toggleClass('active');
     }
   };
 
