@@ -1,4 +1,6 @@
-<p><%= I18n.t("mailer.hello", first_name: @to.first_name) %></p>
-<p><%= I18n.t("mailer.proteus_reports.first_paragraph") %></p>
-<p><%= I18n.t("mailer.proteus_reports.second_paragraph") %></p>
-<p><%= link_to @link, @link %></p>
+<p>{{ 'mailer.hello' | t: first_name: to.first_name }}</p>
+<p>{{ 'mailer.proteus_reports.first_paragraph' | t }}</p>
+<p>{{ 'mailer.proteus_reports.second_paragraph' | t }}</p>
+<p><a href="{{ link }}" target="_blank" >{{ link }}</a></p>
+
+
