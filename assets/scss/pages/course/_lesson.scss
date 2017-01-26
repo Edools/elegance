@@ -41,7 +41,7 @@
   }
 
   .lesson-page-sidebar {
-    .lesson-sidebar-header {
+    .lesson-list-header {
       @include clearfix();
       @include transition(background-color .2s ease);
 
@@ -66,7 +66,7 @@
         background-color: $light;
       }
 
-      .lesson-sidebar-toggle {
+      .lesson-list-toggle {
         @include breakpoint(sm) {
           display: none;
         }
@@ -96,7 +96,7 @@
       }
     }
 
-    .lesson-sidebar-panel {
+    .lesson-list-panel {
       @include transition(.2s ease);
       @include box-shadow(none);
       @include breakpoint(sm) {
