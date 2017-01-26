@@ -1,10 +1,10 @@
 <div class="lesson-page page">
   <div class="container page-container">
     <div class="row">
-      <div id="js-lesson-sidebar" class="col-md-4 js-lesson-sidebar">
+      <div id="js-lesson-list" class="col-md-4 js-lesson-list">
         <div class="lesson-page-sidebar">
-          <div class="lesson-sidebar-header js-fix-on-scroll js-fix-on-scroll-mobile">
-            <div class="lesson-sidebar-toggle">
+          <div class="lesson-list-header js-fix-on-scroll js-fix-on-scroll-mobile">
+            <div class="lesson-list-toggle">
               <button class="btn btn-default">
                 <i class="icon-arrow-left"></i>
                 <i class="icon-menu"></i>
@@ -19,7 +19,7 @@
             </div>
           </div>
 
-          <div class="panel panel-default lesson-sidebar-panel">
+          <div class="panel panel-default lesson-list-panel">
             <div class="panel-heading">
               <h4 class="title">{{ course.name }}</h4>
             </div>
@@ -40,7 +40,7 @@
                 progress.in_progress %}
               </div>
               <div class="other-lessons">
-                {% include 'product/content-course-ajax', course: course, lesson_actions: true,
+                {% include 'product/content-course', course: course, lesson_actions: true,
                 enrollment: enrollment, current_lesson_id: lesson.id, download_action: true %}
               </div>
             </div>
