@@ -13,7 +13,7 @@
         data-translation-release-at="{{ 'lesson.release_at' | t }}"
         data-translation-release-after="{{ 'lesson.release_after' | t }}"
         data-translation-course_content-views="{{ 'product.course_content.views' | t }}"
-        data-api-key="{{ current_apps_credentials.course_content }}">
+        data-api-key="{% if current_api_key %}{{current_api_key.credentials}}{% else %}{{ current_apps_credentials.course_content }}{% endif %}">
     </ul>
   </div>
 {% endif %}

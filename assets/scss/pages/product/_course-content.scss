@@ -26,6 +26,12 @@ $guideline-color: darken($border-color-base, 5%);
     > .list-group-item {
       padding-right: 0;
 
+      .disabled {
+        a {
+          pointer-events: none;
+        }
+      }
+
       &.module {
         font-weight: 600;
         cursor: pointer;
