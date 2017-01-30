@@ -211,7 +211,7 @@
               'data-level="' + (level + 1) + '">' +
               '<i class="icon icon-arrow-right"></i>' +
               '<span>' + module.name + '</span>' +
-              '<i class="busy"></i>' +
+              '<i class="course-content-busy"></i>' +
               '</li>');
           });
 
@@ -362,11 +362,11 @@
               'data-level="1">' +
               '<i class="icon icon-arrow-right"></i>' +
               '<span>' + module.name + '</span>' +
-              '<i class="busy"></i>' +
+              '<i class="course-content-busy"></i>' +
               '</li>');
           });
 
-          self.courseTree().prev('.busy').fadeOut('fast', function () {
+          self.courseTree().prev('.course-content-busy').fadeOut('fast', function () {
             self.courseTree().css('display', 'none');
             self.courseTree().html($modules);
             self.courseTree().fadeIn('fast');
@@ -389,14 +389,14 @@
       var $list = $parent.find('.list-group').first();
 
       if ($list.length <= 0) {
-        $parent.find('.busy').css({opacity: 1});
+        $parent.find('.course-content-busy').css({opacity: 1});
         $list = $('<div class="list-group"></div>');
         $list.appendTo($parent);
 
         $.when(self.fetchModules($parent), self.fetchChildren($parent))
           .then(function () {
             $parent.addClass('expanded');
-            $parent.find('.busy').css({opacity: 0});
+            $parent.find('.course-content-busy').css({opacity: 0});
 
             $list.slideDown('fast');
 
