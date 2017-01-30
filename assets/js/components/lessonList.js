@@ -211,7 +211,7 @@
               'data-level="' + (level + 1) + '">' +
               '<i class="icon icon-arrow-right"></i>' +
               '<span>' + module.name + '</span>' +
-              '<i class="course-content-busy"></i>' +
+              '<i class="busy busy-xs"></i>' +
               '</li>');
           });
 
@@ -302,8 +302,8 @@
 
               if (self.lessonActions) {
                 if (progress && progress.views <= self.enrollment.max_attendance_length && self.enrollment.max_attendance_type == 'attempts') {
-                  html += '<span class="lesson-views attempt js-attendance" title="' + self.translations['product.course_content.views'] + '" data-tooltip-placement="left" data-toggle="tooltip">' +
-                    '<span>' + progress.views + '/' + self.enrollment.max_attendance_length +
+                  html += '<span class="lesson-views attempt js-attendance badge" title="' + self.translations['product.course_content.views'] + '" data-tooltip-placement="left" data-toggle="tooltip">' +
+                    '<span>' + progress.views + '/' + self.enrollment.max_attendance_length + '</span>' +
                     '</span>';
                 }
 
@@ -362,7 +362,7 @@
               'data-level="1">' +
               '<i class="icon icon-arrow-right"></i>' +
               '<span>' + module.name + '</span>' +
-              '<i class="course-content-busy"></i>' +
+              '<i class="busy busy-xs"></i>' +
               '</li>');
           });
 
@@ -375,7 +375,6 @@
               self.expandParentModules(self.courseContent.parent_modules_hash);
             }
           });
-
         }
       })
     },
@@ -389,14 +388,14 @@
       var $list = $parent.find('.list-group').first();
 
       if ($list.length <= 0) {
-        $parent.find('.course-content-busy').css({opacity: 1});
+        $parent.find('.busy').css({opacity: 1});
         $list = $('<div class="list-group"></div>');
         $list.appendTo($parent);
 
         $.when(self.fetchModules($parent), self.fetchChildren($parent))
           .then(function () {
             $parent.addClass('expanded');
-            $parent.find('.course-content-busy').css({opacity: 0});
+            $parent.find('.busy').css({opacity: 0});
 
             $list.slideDown('fast');
 
