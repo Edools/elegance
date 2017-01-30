@@ -97,3 +97,79 @@
     }
   }
 }
+
+$loader-gap: 12px !default;
+$loader-animation-duration: 1s !default;
+
+@import '../../../bower_components/spinthatshit/src/animations';
+@import '../../../bower_components/spinthatshit/src/loaders/loader04';
+
+.busy {
+  display: inline-block;
+
+  &.busy-xs {
+    @include loader04(18px, $brand-primary, 1px, $loader-animation-duration);
+  }
+
+  &.busy-sm {
+    @include loader04(32px, $brand-primary, 2px, $loader-animation-duration);
+  }
+
+  &.busy-md {
+    @include loader04(48px, $brand-primary, 3px, $loader-animation-duration);
+  }
+
+  &.busy-lg {
+    @include loader04(64px, $brand-primary, 3px, $loader-animation-duration);
+  }
+}
+
+.btn-primary {
+  .busy {
+    border-color: $btn-primary-color;
+
+    &:after {
+      background-color: $btn-primary-color;;
+    }
+  }
+}
+
+.btn-default {
+  .busy {
+    border-color: $btn-default-color;
+
+    &:after {
+      background-color: $btn-default-color;;
+    }
+  }
+}
+
+.btn-success {
+  .busy {
+    border-color: $btn-success-color;
+
+    &:after {
+      background-color: $btn-success-color;;
+    }
+  }
+}
+
+.btn-danger {
+  .busy {
+    border-color: $btn-danger-color;
+
+    &:after {
+      background-color: $btn-danger-color;;
+    }
+  }
+}
+
+.btn-info {
+  .busy {
+    border-color: $btn-info-color;
+
+    &:after {
+      background-color: $btn-info-color;;
+    }
+  }
+}
