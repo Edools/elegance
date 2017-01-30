@@ -7,7 +7,7 @@ $guideline-color: darken($border-color-base, 5%);
     display: block;
   }
 
-  .busy {
+  .course-content-busy {
     @include transition(.2s ease);
 
     margin: 0 auto;
@@ -65,7 +65,7 @@ $guideline-color: darken($border-color-base, 5%);
         font-weight: 600;
         cursor: pointer;
 
-        .busy {
+        .course-content-busy {
           float: right;
           margin: 0;
           margin-right: $padding-large-horizontal;
