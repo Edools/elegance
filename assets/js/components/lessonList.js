@@ -422,7 +422,7 @@
     handleLessons: function () {
       $(document).on('page:load page:restore', function (e) {
 
-        if (e.originalEvent.data.length == 0) return;
+        if (e.originalEvent && e.originalEvent.data.length == 0) return;
 
         var $html = $(e.originalEvent.data[0]);
         app.lessonList.lessons().each(function (i, el) {
