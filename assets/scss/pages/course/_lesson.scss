@@ -1,44 +1,8 @@
 .lesson-page {
   background-color: $light;
 
-  .question {
-    display: flex;
-
-    .number-question {
-      @include breakpoint(sm) {
-        width: 3%;
-      }
-
-      width: 8%;
-    }
-    .title-question {
-      @include breakpoint(sm) {
-        width: 97%;
-      }
-
-      width: 92%;
-    }
-  }
-
-  .option,
-  .option > label {
-    width: 100%;
-  }
-
-  .lbl {
-    display: block;
-    font-weight: normal;
-
-    p {
-      margin-bottom: 0;
-    }
-  }
-
-  .px {
-    float: left;
-    margin-top: 7px;
-    margin-right: 7px;
-  }
+  @import 'lesson/quiz';
+  @import 'lesson/answers';
 
   .lesson-page-sidebar {
     .lesson-list-header {
@@ -146,7 +110,7 @@
     }
 
     .other-lessons {
-      margin-top: $padding-large-vertical * 6;
+      margin-top: $padding-large-vertical * 4;
     }
   }
 
@@ -160,8 +124,6 @@
 
   .lesson-content-player {
     .lesson-content-player-heading {
-      margin-bottom: $padding-large-vertical * 4;
-
       .media-controls {
         @include transition(.2s ease);
 
@@ -173,7 +135,8 @@
           text-align: left;
         }
 
-        margin-bottom: $padding-large-vertical;
+        margin: 0;
+        padding: 30.5px 0;
         text-align: center;
         font-size: 22px;
         line-height: 1;
@@ -213,6 +176,3 @@
     text-align: right;
   }
 }
-
-@import 'lesson/quiz';
-@import 'lesson/collaborative_dicussion';
