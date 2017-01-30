@@ -9,7 +9,7 @@
         </a>
 
         {% if retry_payment %}
-        <a class="btn btn-success pull-right" href="{{ order | new_order_payment_path }}">
+        <a class="btn btn-primary pull-right" href="{{ order | new_order_payment_path }}">
           {{ 'pages.payments.new_payment' | t }}
         </a>
         {% endif %}
@@ -18,7 +18,7 @@
     </div>
 
     {% if boleto_retry_url %}
-    <div class="note note-warning">
+    <div class="alert alert-warning">
       {{ 'pages.payments.boleto_warning' | t }} <a href="{{ boleto_retry_url }}"
       class="js-open-on-load"
       target="_blank">{{ 'pages.payments.boleto_warning_click_here' | t }}</a>

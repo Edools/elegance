@@ -10,11 +10,11 @@
           <div class="col-md-7">
             <div id="cart-items" class="cart">
               {% if alert %}
-                <div class="note note-danger">{{ alert | t }}</div>
+                <div class="alert alert-danger">{{ alert | t }}</div>
               {% endif %}
 
               {% if notice %}
-                <div class="note note-success">{{ notice | t }}</div>
+                <div class="alert alert-success">{{ notice | t }}</div>
               {% endif %}
 
               {% if order.items.size > 0 %}
@@ -66,7 +66,7 @@
                   {% endfor %}
                 </ul>
               {% else %}
-                <div class="note note-warning">{{ 'checkout.cart.empty' | t }}</div>
+                <div class="alert alert-info">{{ 'checkout.cart.empty' | t }}</div>
               {% endif %}
             </div>
           </div>

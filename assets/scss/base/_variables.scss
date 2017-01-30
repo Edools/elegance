@@ -18,7 +18,7 @@ $brand-primary: #4bbb83 !default;
 $brand-success: #6bd06b !default;
 $brand-info: #4aabe2 !default;
 $brand-warning: #e67e22 !default;
-$brand-danger: #f34646 !default;
+$brand-danger: #f54545 !default;
 
 $light: #fff !default;
 
@@ -700,7 +700,7 @@ $panel-footer-bg: $gray-lighter !default;
 
 $panel-default-text: $gray-dark !default;
 $panel-default-border: $border-color-base !default;
-$panel-default-heading-bg: $gray-lighter !default;
+$panel-default-heading-bg: lighten($body-bg, 4%) !default;
 
 $panel-primary-text: $light !default;
 $panel-primary-border: $brand-primary !default;
