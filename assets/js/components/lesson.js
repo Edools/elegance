@@ -2,7 +2,8 @@
   'use strict';
 
   app.Lesson = function () {
-    var $player = $('.js-edools-player[data-course-content]');
+
+    var $player = $('#js-course-tree-ajax');
     var lessonProgress = $player.data('lesson-progress');
 
     $(document).trigger('current-lesson', {
