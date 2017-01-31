@@ -28,6 +28,7 @@ $guideline-color: darken($border-color-base, 5%);
 
       .disabled {
         a {
+          color: $text-muted;
           pointer-events: none;
         }
       }

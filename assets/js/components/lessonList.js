@@ -34,6 +34,7 @@
             $mediaControls.removeClass('disabled');
           }
 
+
           $('[data-requirements]').each(function(index, item) {
             var $item = $(item);
 
@@ -44,6 +45,12 @@
               $item.removeClass('disabled');
             }
           });
+        });
+
+        $(document).on('current-lesson', function(event, data) {
+          if(data.progress.completed) {
+            $('.btn-next-lesson').removeClass('disabled');
+          }
         });
       }
     },
@@ -432,7 +439,6 @@
             $parent.find('.busy').css({ opacity: 1 });
             $list = $('<div class="list-group"></div>');
             $list.appendTo($parent);
-
 
             $.when(self.fetchModules($parent), self.fetchChildren($parent))
             .then(function (result) {
