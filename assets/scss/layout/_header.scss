@@ -74,11 +74,13 @@ header.navbar {
           width: $size;
           height: $size;
           border-top-left-radius: $border-radius-base + 2;
+          background-color: $panel-default-heading-bg;
         }
       }
 
       top: 150%;
       right: -15px;
+      padding-top: 0;
 
       li {
         a {
@@ -97,8 +99,11 @@ header.navbar {
 
           padding: 8px 15px;
           border-bottom: 1px solid $border-color-base;
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+          background-color: $panel-default-heading-bg;
           vertical-align: middle;
-          line-height: 2.2;
+          line-height: 2.3;
 
           .avatar {
             @include box-shadow(none);
