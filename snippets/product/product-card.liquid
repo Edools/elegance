@@ -31,8 +31,12 @@
           <strike>{{ first_option.base_price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway }}</strike>
         </span>
         {% endif %}
-        <span
-          class="final-price">{{ first_option.price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway }}</span>
+
+        {% if first_option.kind == 'subscription' %}
+          <span class="final-price"> {{ first_option.price | money_option_presentation: first_option.kind, first_option.period, 'full', 1 }} </span>
+        {% else %}
+          <span class="final-price">{{ first_option.price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway }}</span>
+        {% endif %}
 
         {% if first_option.trials > 0 %}
           <div class="trial-caption">{{ 'product.trial' | t: count: first_option.trials }}</div>
