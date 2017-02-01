@@ -4,9 +4,8 @@
       @include breakpoint(sm) {
         height: 440px;
       }
-
-      padding: 0;
-      border: 2px solid darken($gray-lighter, 5%);
+      @extend .panel;
+      @extend .panel-default;
 
       .course-image {
         position: relative;
