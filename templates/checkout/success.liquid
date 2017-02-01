@@ -3,9 +3,7 @@
     <div class="text-center">
       <i class="icon-check"></i>
 
-      <h2 class="text-success">
-        {{ 'checkout.success.order_created_successfully' | t }}
-      </h2>
+      <h2>{{ 'checkout.success.order_created_successfully' | t }}</h2>
 
       {% if order.kind == 'subscription' %}
         {% assign payment_option = order.payment_options.last %}
