@@ -32,14 +32,30 @@ header.navbar {
         margin-right: 2px;
       }
     }
+
+    li {
+      &.mobile {
+        @include breakpoint($grid-float-breakpoint-max) {
+          display: none;
+        }
+      }
+    }
   }
 
   .dropdown {
+    @include breakpoint($grid-float-breakpoint-max) {
+      display: inline-block;
+    }
+
+    display: none;
+
     .dropdown-toggle {
       @include breakpoint($grid-float-breakpoint) {
+        display: block;
         padding: 0 !important;
       }
 
+      display: none;
       padding: $padding-large-vertical * 2 !important;
       padding-right: 15px !important;
       padding-left: 35px !important;
@@ -71,6 +87,7 @@ header.navbar {
 
           top: - ($size / 2) - 1;
           right: 69px;
+          display: block;
           width: $size;
           height: $size;
           border-top-left-radius: $border-radius-base + 2;
@@ -92,6 +109,14 @@ header.navbar {
           i {
             margin-right: 5px;
           }
+        }
+
+        &.user-header-list-item {
+          @include breakpoint($grid-float-breakpoint-max) {
+            display: block;
+          }
+
+          display: none;
         }
 
         .user-header {

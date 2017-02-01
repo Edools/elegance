@@ -41,7 +41,6 @@
           </li>
 
           {% if current_user.type == 'Student' %}
-
             <li>
               <a href="/enrollments">
                 <i class="icon-notebook"></i>
@@ -57,6 +56,8 @@
             </li>
           {% endif %}
 
+          {% include 'navbar-user-links', mobile_class: true %}
+
           <li class="dropdown">
             <a href="#" class="dropdown-toggle user-options" data-toggle="dropdown">
               <i class="icon icon-arrow-down"></i>
@@ -67,65 +68,10 @@
             </a>
 
             <ul class="dropdown-menu">
-              {% if current_user.type == 'Student' %}
-                <li>
-                  <div class="user-header">
-                    <span class="avatar">
-                      {% assign avatar_alt = current_user | fullname %}
-                      {% image, src: current_user.cover_image_url, alt: avatar_alt, class: 'avatar-img' %}
-                    </span>
-                    <div class="caption">
-                      <div class="logged-user">{{ current_user | fullname }}</div>
-                      <div class="logged-user-email">{{ current_user.email }}</div>
-                    </div>
-                  </div>
-                </li>
-              {% endif %}
-
-              {% if current_school.user_social_profile_enabled and current_user.social_profile_disabled != true %}
-                <li>
-                  <a href="/profile/{{ current_user.id }}">
-                    <i class="icon-user"></i>
-                    <span>{{ "navbar.public_profile" | t }}</span>
-                  </a>
-                </li>
-              {% endif %}
-
-              <li>
-                <a href="{{ current_user | profile_path }}">
-                  <i class="icon-note"></i>
-                  <span>{{ "navbar.my_profile" | t }}</span>
-                </a>
-              </li>
-
-              <li>
-                {% capture inbox_link_html %}
-                <i class="icon-envelope-open"></i>
-                <span>{{ 'navbar.messages' | t }}</span>
-                {% endcapture %}
-
-                {{ inbox_link_html | inbox_link }}
-              </li>
-
-              {% if current_user.type == 'Student' %}
-                <li>
-                  <a href="/orders">
-                    <i class="icon-list"></i>
-                    <span>{{ "navbar.my_orders" | t }}</span>
-                  </a>
-                </li>
-              {% endif %}
-
-              <li>
-                {% capture logout_link_html %}
-                <i class="icon-power"></i>
-                <span>{{ "navbar.sign_out" | t }}</span>
-                {% endcapture %}
-
-                {{ logout_link_html | logout_link }}
-              </li>
+              {% include 'navbar-user-links' %}
             </ul>
           </li>
+
         {% else %}
           <li>{{ 'navbar.sign_in' | t | login_link }}</li>
         {% endif %}
