@@ -74,7 +74,10 @@
                       {% assign avatar_alt = current_user | fullname %}
                       {% image, src: current_user.cover_image_url, alt: avatar_alt, class: 'avatar-img' %}
                     </span>
-                    <span class="logged-user">{{ current_user | fullname }}</span>
+                    <div class="caption">
+                      <div class="logged-user">{{ current_user | fullname }}</div>
+                      <div class="logged-user-email">{{ current_user.email }}</div>
+                    </div>
                   </div>
                 </li>
               {% endif %}
