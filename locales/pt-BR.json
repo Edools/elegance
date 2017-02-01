@@ -154,7 +154,7 @@
   "navbar": {
     "cart": "Carrinho",
     "forum": "Fóruns",
-    "sign_in": "Entrar",
+    "sign_in": "<i class=\"icon-user\"></i> Entrar",
     "my_courses": "Meus cursos",
     "public_profile": "Perfil público",
     "my_profile": "Meu Perfil",
