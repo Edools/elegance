@@ -109,8 +109,6 @@ header.navbar {
           }
 
           .caption {
-            @include ellipsis();
-
             display: inline-block;
             margin-left: 10px;
             max-width: 110px;
@@ -125,7 +123,10 @@ header.navbar {
             }
 
             .logged-user {
+              @include ellipsis();
+
               margin-bottom: 3px;
+              max-width: 110px;
               color: darken($text-color, 5%);
             }
 
