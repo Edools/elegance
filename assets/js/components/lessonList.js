@@ -71,6 +71,7 @@
         }
 
         e.stopPropagation();
+
         self.loadChildren($(this));
       });
 
@@ -389,7 +390,7 @@
 
       if ($list.length <= 0) {
         $parent.find('.busy').css({opacity: 1});
-        $list = $('<div class="list-group"></div>');
+        $list = $('<div class="list-group" style="display: none;"></div>');
         $list.appendTo($parent);
 
         $.when(self.fetchModules($parent), self.fetchChildren($parent))
