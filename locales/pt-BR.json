@@ -662,7 +662,7 @@
     },
     "orders": {
       "payments": "Pagamentos",
-      "my_orders": "Meus Pedidos",
+      "my_orders": "Meus <b>Pedidos</b>",
       "number": "Nº",
       "status": "Status",
       "ordered_date": "Data do pedido",

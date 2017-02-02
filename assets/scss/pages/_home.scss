@@ -9,17 +9,26 @@
     padding: $padding-large-vertical * 4 0;
     background-color: $light;
 
+    .row {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+    }
+
     .info {
       color: $text-color;
 
       .title {
+        margin-top: 0;
+        margin-bottom: $padding-large-vertical;
         color: $text-color;
-        font-weight: 600;
-        font-size: 34px;
+        font-weight: 300;
+        font-size: 36px;
       }
 
       .subtitle {
-        font-size: 18px;
+        font-size: 16px;
       }
     }
 
