@@ -1,0 +1,98 @@
+{% form 'profile' %}
+<div class="panel panel-default personal-data-panel">
+  <div class="panel-heading" role="tab">
+    <h4 class="panel-title">
+      <a role="button"
+         data-toggle="collapse"
+         data-parent="#accordion"
+         href="#collapseProfileExtraData"
+         aria-expanded="false"
+         aria-controls="collapseProfileExtraData">{{ 'profile.extra_data' | t }}</a>
+    </h4>
+  </div>
+  <div id="collapseProfileExtraData"
+       class="panel-collapse collapse"
+       role="tabpanel" 
+       aria-labelledby="headingTwo">
+    <div class="panel-body">
+      <div class="extra-data-form">
+        <div class="row tab-form-content">
+          {% for field in custom_fields.fields %}
+            {% case field.type %}
+              {% when 'date' %}
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label">{{ field.title }}</label>
+                    {% capture label %}{{ field.title }}{% endcapture %}
+                    {% capture name %}{{ field.title }}{% endcapture %}
+                    {% capture value %}{{ field.value }}{% endcapture %}
+                    {% include 'datepicker' %}
+                  </div>
+                </div>
+              {% when 'select' %}
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label">{{ field.title }}</label>
+                    <select name="{{field.title}}" class="form-control">
+                      <option disabled selected>{{field.placeholder}}</option>
+                      {% for option in field.options %}
+                        <option value="{{option}}" {% if field.value == option %}selected{% endif %}>{{option}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              {% when 'radiobox' %}
+                <div class="col-md-6">
+                  <label class="control-label">{{ field.title }}</label>
+                  <div class="form-group row">
+                    {% for option in field.options %}
+                      <div class="col-sm-4">
+                        <label class="control-label">
+                          <input type="radio" name="{{field.title}}" value="{{option}}" {% if field.value contains option %}checked{% endif %} />&nbsp;{{option}}
+                        </label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% when 'checkbox' %}
+                <div class="col-md-6">
+                  <label class="control-label">{{ field.title }}</label>
+                  <div class="form-group row">
+                    {% for option in field.options %}
+                      <div class="col-sm-4">
+                        <label class="control-label">
+                          <input type="checkbox" name="{{field.title}}" value="{{option}}" {% if field.value contains option %}checked{% endif %} />&nbsp;{{option}}
+                        </label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% when 'textarea' %}
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label">{{ field.title }}</label>
+                    <textarea name="user[first_name]" class="form-control">{{field.value}}</textarea>
+                  </div>
+                </div>
+              {% else %}
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label">{{ field.title }}</label>
+                    {{slug_values["field.slug"]}}
+                    {{field.value}}
+                    <input type="{{field.type}}" value="{{field.value}}" name="field.title" class="form-control" placeholder="{{field.placeholder}}">
+                  </div>
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+        <div class="row tab-form-content">
+          <div class="col-xs-12 text-right">
+            <input type="submit" class="btn btn-primary" value="{{ 'profile.save' | t }}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endform %}
