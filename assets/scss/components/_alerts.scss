@@ -73,7 +73,7 @@
 .alert-info {
   @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text);
 
-  background-color: lighten($alert-info-bg, 39%);
+  background-color: lighten($alert-info-bg, 38%);
   color: darken($alert-info-bg, 5%);
 }
 
