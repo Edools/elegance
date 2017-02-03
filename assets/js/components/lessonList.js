@@ -32,33 +32,33 @@
           var enrollmentId = lessonProgress.data.enrollment_id;
           var lessonId = lessonProgress.data.lesson_id;
 
-          if($mediaControls.size() > 0) {
+          if ($mediaControls.size() > 0) {
             $mediaControls.removeClass('disabled');
           }
 
-          self.requirementsExists(lessonProgress.data, function($item, content_id) {
-            if(content_id) {
-              self.checkLessonCompleted(enrollmentId, content_id, function(completed) {
-                if(completed) {
+          self.requirementsExists(lessonProgress.data, function ($item, content_id) {
+            if (content_id) {
+              self.checkLessonCompleted(enrollmentId, content_id, function (completed) {
+                if (completed) {
                   $item.removeClass('disabled');
                 }
-              });  
+              });
             }
           });
         });
       }
     },
 
-    requirementsExists : function(lessonProgress, cb, cbNotExists) {
-      $('.lesson-list-panel [data-requirements]').filter(function(index, item) {
+    requirementsExists: function (lessonProgress, cb, cbNotExists) {
+      $('.lesson-list-panel [data-requirements]').filter(function (index, item) {
         return $(item).data('requirements').length > 0;
-      }).each(function(index, item) {
+      }).each(function (index, item) {
         var $item = $(item);
 
         var requirements = $item.data('requirements');
-        var exists = _.find(requirements, { content_id: lessonProgress.lesson_id });
+        var exists = _.find(requirements, {content_id: lessonProgress.lesson_id});
 
-        if(!exists) {
+        if (!exists) {
           if (cbNotExists) {
             cbNotExists($item, null);
           }
@@ -70,12 +70,12 @@
       });
     },
 
-    checkLessonCompleted: function(enrollmentId, id, cb) {
+    checkLessonCompleted: function (enrollmentId, id, cb) {
       var self = this;
       var completed = false;
 
       $.ajax({
-        url: window.CORE_HOST + '/enrollments/'+enrollmentId+'/lessons_progresses?lesson_id=' + id,
+        url: window.CORE_HOST + '/enrollments/' + enrollmentId + '/lessons_progresses?lesson_id=' + id,
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + self.apiKey
@@ -258,7 +258,7 @@
           var modules = _.sortBy(res.course_modules, 'order');
 
           modules = _.filter(modules, function (m) {
-            var module = _.find(self.allModules, { id: m.id });
+            var module = _.find(self.allModules, {id: m.id});
             return module.available != false && (module.course_content_ids.length > 0 || module.course_modules.length > 0);
           });
 
@@ -271,38 +271,38 @@
               '<span>' + module.name + '</span>' +
               '<i class="busy"></i>' +
               '</li>');
-            });
+          });
 
-            $list.append($modules);
-          }
-        })
-      },
+          $list.append($modules);
+        }
+      })
+    },
 
-      fetchChildren: function ($parent) {
-        var self = this;
-        var id = $parent.data('id');
-        var level = $parent.data('level');
-        var $list = $parent.find('.list-group').first();
+    fetchChildren: function ($parent) {
+      var self = this;
+      var id = $parent.data('id');
+      var level = $parent.data('level');
+      var $list = $parent.find('.list-group').first();
 
-        return $.ajax({
-          url: window.CORE_HOST + '/course_modules/' + id + '/course_contents',
-          method: 'GET',
-          headers: {
-            'Authorization': 'Token token=' + self.apiKey
-          },
-          success: function (res) {
-            var courseContents = _.filter(res.course_contents, function (lesson) {
-              return lesson.available != false;
-            });
+      return $.ajax({
+        url: window.CORE_HOST + '/course_modules/' + id + '/course_contents',
+        method: 'GET',
+        headers: {
+          'Authorization': 'Token token=' + self.apiKey
+        },
+        success: function (res) {
+          var courseContents = _.filter(res.course_contents, function (lesson) {
+            return lesson.available != false;
+          });
 
-            courseContents = _.sortBy(courseContents, 'order');
+          courseContents = _.sortBy(courseContents, 'order');
 
-            courseContents = _.map(courseContents, function (content) {
-              content.completed = self.enrollment.lessons_info && self.enrollment.lessons_info.completed.indexOf(content.lesson.id) > -1;
-              return content;
-            });
+          courseContents = _.map(courseContents, function (content) {
+            content.completed = self.enrollment.lessons_info && self.enrollment.lessons_info.completed.indexOf(content.lesson.id) > -1;
+            return content;
+          });
 
-            var $courseContents = _.map(courseContents, function (content) {
+          var $courseContents = _.map(courseContents, function (content) {
               var active = (self.currentLessonId == content.lesson.id ? 'active js' : '');
               var lesson = content.lesson;
               var lessonIcon = self.getLessonIcon(lesson);
@@ -314,7 +314,7 @@
               var progress = null;
               var requirements = content.requirements;
               var available = true;
-              var requirements_ids = requirements.map(function(item){
+              var requirements_ids = requirements.map(function (item) {
                 return item.content_id;
               });
 
@@ -343,34 +343,34 @@
                 }
 
                 if (self.lessonActions) {
-                  progress = _.find(self.enrollment.lessons_progresses, { lesson_id: lesson.id });
+                  progress = _.find(self.enrollment.lessons_progresses, {lesson_id: lesson.id});
                 }
               }
 
-              _.each(requirements_ids, function(id) {
-                var exists = _.find(courseContents, { content_id: id, completed: true });
+              _.each(requirements_ids, function (id) {
+                var exists = _.find(courseContents, {content_id: id, completed: true});
 
 
-                if(!exists) {
+                if (!exists) {
                   available = false;
                 }
               });
 
 
-              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available ? ' disabled' : '') +'" ' +
-              'id="content-' + content.id + '" ' +
-              'data-requirements=\'' + JSON.stringify(requirements) + '\'' +
-              'data-id="' + content.lesson.id + '"' +
-              'data-level="1">' +
-              '<div id="lesson-' + lesson.id + '" class="js-lesson content-lesson ' + active + (!lessonReleased ? ' not-released' : '') + '" data-lesson-id="' + lesson.id + '">' +
-              '<div class="class-info">' +
+              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available ? ' disabled' : '') + '" ' +
+                'id="content-' + content.id + '" ' +
+                'data-requirements=\'' + JSON.stringify(requirements) + '\'' +
+                'data-id="' + content.lesson.id + '"' +
+                'data-level="1">' +
+                '<div id="lesson-' + lesson.id + '" class="js-lesson content-lesson ' + active + (!lessonReleased ? ' not-released' : '') + '" data-lesson-id="' + lesson.id + '">' +
+                '<div class="class-info">' +
 
-              '<div class="left"><i class="' + lessonIcon + '"></i></div>' +
+                '<div class="left"><i class="' + lessonIcon + '"></i></div>' +
 
-              '<div class="center">' +
-              (self.lessonActions && lessonReleased ?
-                '<a class="lesson-title" href="' + self.getContentPath(content) + '"><span>' + lesson.title + '</span></a>' :
-                '<span class="lesson-title"><span class="disabled">' + lesson.title + '</span></span>') +
+                '<div class="center">' +
+                (self.lessonActions && lessonReleased ?
+                  '<a class="lesson-title" href="' + self.getContentPath(content) + '"><span>' + lesson.title + '</span></a>' :
+                  '<span class="lesson-title"><span class="disabled">' + lesson.title + '</span></span>') +
                 '</div>' +
 
                 '<div class="right">' +
@@ -379,201 +379,199 @@
                 '<i class="icon-clock js-in-progress-icon ' + hideInProgressIcon + '"></i>' +
                 '</span>';
 
-                if (self.lessonActions) {
-                  if (progress && progress.views <= self.enrollment.max_attendance_length && self.enrollment.max_attendance_type == 'attempts') {
-                    html += '<span class="lesson-views attempt js-attendance" title="' + self.translations['product.course_content.views'] + '" data-tooltip-placement="left" data-toggle="tooltip">' +
+              if (self.lessonActions) {
+                if (progress && progress.views <= self.enrollment.max_attendance_length && self.enrollment.max_attendance_type == 'attempts') {
+                  html += '<span class="lesson-views attempt js-attendance" title="' + self.translations['product.course_content.views'] + '" data-tooltip-placement="left" data-toggle="tooltip">' +
                     '<span>' + progress.views + '/' + self.enrollment.max_attendance_length +
                     '</span>';
-                  }
-
-                  if (!lessonReleased) {
-                    var zone = moment.tz.guess();
-                    html += '<span class="release-date badge">' + self.translations['lesson.' + releaseType] + '<span> ' + moment.tz(releaseDate, zone).format('DD/MM/YYYY') + '</span>' + '</span>';
-                  }
-
-                  if (self.downloadAction && content.downloadable) {
-                    html += '<a class="download-link" href="' + self.getContentDownloadPath(content) + '" data-no-turbolink>' +
-                    '<i class="icon-cloud-download"></i>' +
-                    '</a>';
-                  }
                 }
 
-                html += '</div>' +
+                if (!lessonReleased) {
+                  var zone = moment.tz.guess();
+                  html += '<span class="release-date badge">' + self.translations['lesson.' + releaseType] + '<span> ' + moment.tz(releaseDate, zone).format('DD/MM/YYYY') + '</span>' + '</span>';
+                }
+
+                if (self.downloadAction && content.downloadable) {
+                  html += '<a class="download-link" href="' + self.getContentDownloadPath(content) + '" data-no-turbolink>' +
+                    '<i class="icon-cloud-download"></i>' +
+                    '</a>';
+                }
+              }
+
+              html += '</div>' +
                 '</div>' +
                 '</li>';
 
-                return $(html);
-              }
-            );
+              return $(html);
+            }
+          );
 
-            $list.append($courseContents);
+          $list.append($courseContents);
 
-            self.checkNextButtonUnlocked();
-          }
-        });
-      },
-
-      checkNextButtonUnlocked: function() {
-        var self = this;
-        var lessonProgress = $('#js-course-tree-ajax').data('lesson-progress');
-        var completed = lessonProgress.completed;
-
-        if(completed) {
-          self.requirementsExists(lessonProgress, false, function() {
-            $('.btn-next-lesson').removeClass('disabled');
-          });
+          self.checkNextButtonUnlocked();
         }
-      },
+      });
+    },
+
+    checkNextButtonUnlocked: function () {
+      var self = this;
+      var lessonProgress = $('#js-course-tree-ajax').data('lesson-progress');
+      var completed = lessonProgress.completed;
+
+      self.requirementsExists(lessonProgress, false, function () {
+        $('.btn-next-lesson').removeClass('disabled');
+      });
+    },
 
 
-      loadTopModules: function () {
-        var self = this;
+    loadTopModules: function () {
+      var self = this;
 
-        if (!self.course) return;
+      if (!self.course) return;
 
-        $.ajax({
-          url: window.CORE_HOST + '/courses/' + self.course.id + '/course_modules',
-          method: 'GET',
-          headers: {
-            'Authorization': 'Token token=' + self.apiKey
-          },
-          success: function (res) {
-            if (!res.course_modules || res.course_modules.length <= 0) return;
-
-            self.allModules = res.course_modules;
-
-            self.topModules = _.filter(res.course_modules, function (x) {
-              return (x.parent_course_module == null && x.available != false) &&
-              (x.course_content_ids.length > 0 || x.course_modules.length > 0);
-            });
-
-            self.topModules = _.sortBy(self.topModules, 'order');
-
-            var $modules = _.map(self.topModules, function (module) {
-              return $(
-                '<li class="list-group-item module" ' +
-                'data-id="' + module.id + '"' +
-                'data-level="1">' +
-                '<i class="icon icon-arrow-right"></i>' +
-                '<span>' + module.name + '</span>' +
-                '<i class="busy"></i>' +
-                '</li>');
-              });
-
-              self.courseTree().prev('.busy').fadeOut('fast', function () {
-                self.courseTree().css('display', 'none');
-                self.courseTree().html($modules);
-                self.courseTree().fadeIn('fast');
-
-                if (self.courseContent) {
-                  self.expandParentModules(self.courseContent.parent_modules_hash);
-                }
-              });
-
-            }
-          })
+      $.ajax({
+        url: window.CORE_HOST + '/courses/' + self.course.id + '/course_modules',
+        method: 'GET',
+        headers: {
+          'Authorization': 'Token token=' + self.apiKey
         },
+        success: function (res) {
+          if (!res.course_modules || res.course_modules.length <= 0) return;
 
-        loadChildren: function (parent, cb) {
-          var self = this;
-          var $parent = $(parent);
+          self.allModules = res.course_modules;
 
-          var id = $parent.data('id');
-          var level = $parent.data('level');
-          var $list = $parent.find('.list-group').first();
+          self.topModules = _.filter(res.course_modules, function (x) {
+            return (x.parent_course_module == null && x.available != false) &&
+              (x.course_content_ids.length > 0 || x.course_modules.length > 0);
+          });
 
-          if ($list.length <= 0) {
-            $parent.find('.busy').css({ opacity: 1 });
-            $list = $('<div class="list-group"></div>');
-            $list.appendTo($parent);
+          self.topModules = _.sortBy(self.topModules, 'order');
 
-            $.when(self.fetchModules($parent), self.fetchChildren($parent))
-            .then(function (result) {
-              $parent.addClass('expanded');
-              $parent.find('.busy').css({ opacity: 0 });
+          var $modules = _.map(self.topModules, function (module) {
+            return $(
+              '<li class="list-group-item module" ' +
+              'data-id="' + module.id + '"' +
+              'data-level="1">' +
+              '<i class="icon icon-arrow-right"></i>' +
+              '<span>' + module.name + '</span>' +
+              '<i class="busy"></i>' +
+              '</li>');
+          });
 
-              $list.slideDown('fast');
+          self.courseTree().prev('.busy').fadeOut('fast', function () {
+            self.courseTree().css('display', 'none');
+            self.courseTree().html($modules);
+            self.courseTree().fadeIn('fast');
 
-              if (typeof cb == 'function') {
-                cb();
-              }
-            });
-          } else {
-            if ($parent.hasClass('expanded')) {
-              $parent.removeClass('expanded');
-              $list.slideUp('fast');
-            } else {
-              $parent.addClass('expanded');
-              $list.slideDown('fast');
+            if (self.courseContent) {
+              self.expandParentModules(self.courseContent.parent_modules_hash);
             }
+          });
+
+        }
+      })
+    },
+
+    loadChildren: function (parent, cb) {
+      var self = this;
+      var $parent = $(parent);
+
+      var id = $parent.data('id');
+      var level = $parent.data('level');
+      var $list = $parent.find('.list-group').first();
+
+      if ($list.length <= 0) {
+        $parent.find('.busy').css({opacity: 1});
+        $list = $('<div class="list-group"></div>');
+        $list.appendTo($parent);
+
+        $.when(self.fetchModules($parent), self.fetchChildren($parent))
+          .then(function (result) {
+            $parent.addClass('expanded');
+            $parent.find('.busy').css({opacity: 0});
+
+            $list.slideDown('fast');
 
             if (typeof cb == 'function') {
               cb();
             }
-          }
-        },
-
-        handleLessons: function () {
-          $(document).on('page:load page:restore', function (e) {
-
-            if (e.originalEvent.data.length == 0) return;
-
-            var $html = $(e.originalEvent.data[0]);
-            app.lessonList.lessons().each(function (i, el) {
-              var $el = $(el);
-              var $new = $html.find('#' + $el.attr('id'));
-              $el.html($new.html());
-            });
-          })
-        },
-
-        changeLesson: function (direction, lesson) {
-          var $targetLesson = $(lesson);
-
-          if (direction == 'prev') {
-            var $prev = app.lessonList
-            .currentLesson()
-            .prevAll('.js-content');
-
-            if ($prev.length > 0 && $prev.find('a').length > 0)
-            $targetLesson = $($prev[0]);
-          } else if (direction == 'next') {
-            var $next = app.lessonList
-            .currentLesson()
-            .nextAll('.js-content');
-
-            if ($next.length > 0 && $next.find('a').length > 0)
-            $targetLesson = $($next[0]);
-          }
-
-          $targetLesson.find('a')[0].click();
-        },
-
-        expandParentModules: function (parentModules) {
-          var self = this;
-
-          var modules = [];
-          var loopModule = parentModules.course_module;
-          modules.push(loopModule.id);
-
-          while (loopModule.parent_module) {
-            loopModule = loopModule.parent_module;
-            modules.push(loopModule.id);
-          }
-
-          modules = modules.reverse();
-
-          async.eachSeries(modules, function (moduleId, cb) {
-            var $module = $('.module[data-id="' + moduleId + '"]');
-            self.loadChildren($module, cb);
           });
-
-        },
-
-        toggleSidebar: function () {
-          app.lessonList.toggleButton().toggleClass('active');
-          app.lessonList.lessonListPanel().toggleClass('active');
+      } else {
+        if ($parent.hasClass('expanded')) {
+          $parent.removeClass('expanded');
+          $list.slideUp('fast');
+        } else {
+          $parent.addClass('expanded');
+          $list.slideDown('fast');
         }
-      };
 
-    })();
+        if (typeof cb == 'function') {
+          cb();
+        }
+      }
+    },
+
+    handleLessons: function () {
+      $(document).on('page:load page:restore', function (e) {
+
+        if (e.originalEvent.data.length == 0) return;
+
+        var $html = $(e.originalEvent.data[0]);
+        app.lessonList.lessons().each(function (i, el) {
+          var $el = $(el);
+          var $new = $html.find('#' + $el.attr('id'));
+          $el.html($new.html());
+        });
+      })
+    },
+
+    changeLesson: function (direction, lesson) {
+      var $targetLesson = $(lesson);
+
+      if (direction == 'prev') {
+        var $prev = app.lessonList
+          .currentLesson()
+          .prevAll('.js-content');
+
+        if ($prev.length > 0 && $prev.find('a').length > 0)
+          $targetLesson = $($prev[0]);
+      } else if (direction == 'next') {
+        var $next = app.lessonList
+          .currentLesson()
+          .nextAll('.js-content');
+
+        if ($next.length > 0 && $next.find('a').length > 0)
+          $targetLesson = $($next[0]);
+      }
+
+      $targetLesson.find('a')[0].click();
+    },
+
+    expandParentModules: function (parentModules) {
+      var self = this;
+
+      var modules = [];
+      var loopModule = parentModules.course_module;
+      modules.push(loopModule.id);
+
+      while (loopModule.parent_module) {
+        loopModule = loopModule.parent_module;
+        modules.push(loopModule.id);
+      }
+
+      modules = modules.reverse();
+
+      async.eachSeries(modules, function (moduleId, cb) {
+        var $module = $('.module[data-id="' + moduleId + '"]');
+        self.loadChildren($module, cb);
+      });
+
+    },
+
+    toggleSidebar: function () {
+      app.lessonList.toggleButton().toggleClass('active');
+      app.lessonList.lessonListPanel().toggleClass('active');
+    }
+  };
+
+})();
