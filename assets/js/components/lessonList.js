@@ -416,8 +416,17 @@
     checkNextButtonUnlocked: function () {
       var self = this;
       var lessonProgress = $('#js-course-tree-ajax').data('lesson-progress');
-
-      self.requirementsExists(lessonProgress, false, function () {
+      var enrollmentId = lessonProgress.enrollment_id;
+      
+      self.requirementsExists(lessonProgress, function ($item, content_id) {
+        if (content_id) {
+          self.checkLessonCompleted(enrollmentId, content_id, function (completed) {
+            if (completed) {
+              $item.removeClass('disabled');
+            }
+          });
+        }
+      }, function () {
         $('.btn-next-lesson').removeClass('disabled');
       });
     },
