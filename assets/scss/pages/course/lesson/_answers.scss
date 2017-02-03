@@ -1,0 +1,19 @@
+.answers {
+  table {
+    tr {
+      background-color: transparent;
+
+      &.alert-success {
+        td {
+          color: $state-success-border;
+        }
+      }
+
+      &.alert-danger {
+        td {
+          color: $state-danger-border;
+        }
+      }
+    }
+  }
+}

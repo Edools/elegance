@@ -4,7 +4,7 @@
       <h3>
         {{ 'forums.forum' | t: title: forum.title }}
         {% permitted forum_section, create %}
-          <button type="button" data-toggle="modal" data-target="#sectionModal" id="new_section" class="btn btn-success pull-right" name="button">
+          <button type="button" data-toggle="modal" data-target="#sectionModal" id="new_section" class="btn btn-primary pull-right" name="button">
             {{ 'forums.new_section' | t }}
           </button>
         {% endpermitted %}
@@ -33,8 +33,8 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-info">Salvar</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Salvar</button>
             </div>
           </div>
           {% endform %}

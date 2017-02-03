@@ -71,6 +71,7 @@
         }
 
         e.stopPropagation();
+
         self.loadChildren($(this));
       });
 
@@ -115,7 +116,7 @@
             break;
           }
           case 'Document': {
-            lessonIcon = 'fa fa-file-text-o';
+            lessonIcon = 'icon-doc';
             break;
           }
           case 'Image': {
@@ -123,7 +124,7 @@
             break;
           }
           case 'Text': {
-            lessonIcon = 'fa fa-file-text-o';
+            lessonIcon = 'icon-doc';
             break;
           }
           case 'LiveStream': {
@@ -211,7 +212,7 @@
               'data-level="' + (level + 1) + '">' +
               '<i class="icon icon-arrow-right"></i>' +
               '<span>' + module.name + '</span>' +
-              '<i class="busy"></i>' +
+              '<i class="busy busy-xs"></i>' +
               '</li>');
           });
 
@@ -302,8 +303,8 @@
 
               if (self.lessonActions) {
                 if (progress && progress.views <= self.enrollment.max_attendance_length && self.enrollment.max_attendance_type == 'attempts') {
-                  html += '<span class="lesson-views attempt js-attendance" title="' + self.translations['product.course_content.views'] + '" data-tooltip-placement="left" data-toggle="tooltip">' +
-                    '<span>' + progress.views + '/' + self.enrollment.max_attendance_length +
+                  html += '<span class="lesson-views attempt js-attendance badge" title="' + self.translations['product.course_content.views'] + '" data-tooltip-placement="left" data-toggle="tooltip">' +
+                    '<span>' + progress.views + '/' + self.enrollment.max_attendance_length + '</span>' +
                     '</span>';
                 }
 
@@ -362,11 +363,11 @@
               'data-level="1">' +
               '<i class="icon icon-arrow-right"></i>' +
               '<span>' + module.name + '</span>' +
-              '<i class="busy"></i>' +
+              '<i class="busy busy-xs"></i>' +
               '</li>');
           });
 
-          self.courseTree().prev('.busy').fadeOut('fast', function () {
+          self.courseTree().prev('.course-content-busy').fadeOut('fast', function () {
             self.courseTree().css('display', 'none');
             self.courseTree().html($modules);
             self.courseTree().fadeIn('fast');
@@ -375,7 +376,6 @@
               self.expandParentModules(self.courseContent.parent_modules_hash);
             }
           });
-
         }
       })
     },
@@ -390,7 +390,7 @@
 
       if ($list.length <= 0) {
         $parent.find('.busy').css({opacity: 1});
-        $list = $('<div class="list-group"></div>');
+        $list = $('<div class="list-group" style="display: none;"></div>');
         $list.appendTo($parent);
 
         $.when(self.fetchModules($parent), self.fetchChildren($parent))
@@ -422,7 +422,7 @@
     handleLessons: function () {
       $(document).on('page:load page:restore', function (e) {
 
-        if (e.originalEvent.data.length == 0) return;
+        if (e.originalEvent && e.originalEvent.data.length == 0) return;
 
         var $html = $(e.originalEvent.data[0]);
         app.lessonList.lessons().each(function (i, el) {

@@ -26,7 +26,7 @@
                  href="{{ user | profile_follow_path }}"
                  data-method="delete"
                  data-remote="true"
-                 data-disable-with="<i class='fa fa-spinner fa-spin'></i> {{ 'profile.unfollow' | t }}">
+                 data-disable-with="<i class='busy busy-xs'></i><span>{{ 'profile.unfollow' | t }}</span>">
 
                 <i class="icon-close"></i> {{ 'profile.unfollow' | t }}
               </a>
@@ -35,7 +35,7 @@
                  href="{{ user | profile_unfollow_path }}"
                  data-method="post"
                  data-remote="true"
-                 data-disable-with="<i class='fa fa-spinner fa-spin'></i> Seguir">
+                 data-disable-with="<i class='busy busy-xs'></i><span>Seguir</span>">
 
                 <i class="icon-feed"></i> {{ 'profile.follow' | t }}
               </a>
