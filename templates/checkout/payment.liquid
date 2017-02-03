@@ -15,15 +15,14 @@
                   {% if gateway.common_payment_methods contains 'credit_card' %}{% assign show_cc = true %}{% endif %}
                   {% if gateway.common_payment_methods contains 'boleto' %}{% assign show_boleto = true %}{% endif %}
                   {% if gateway.common_payment_methods contains 'bank_transfer' %}{% assign show_bt = true %}{% endif %}
-                {% elsif order.kind == 'subscription' %}
+                  {% elsif order.kind == 'subscription' %}
                   {% if gateway.subscription_payment_methods contains 'credit_card' %}{% assign show_cc = true %}{% endif %}
                   {% if gateway.subscription_payment_methods contains 'boleto' %}{% assign show_boleto = true %}{% endif %}
                 {% endif %}
 
-                <div class="alert info-payment-after-trial">
-                    Você será cobrado apenas no fim do período gratuito de testes. <br/>
-                    É possível cancelar o seu pedido a qualquer momento durante esse período
-                </div>
+                {% if trial_purchase %}
+                  <div class="alert alert-info">{{ 'checkout.payment.trial_purchase_warning' | t }}</div>
+                {% endif %}
 
                 <ul class="nav nav-tabs" role="tablist">
                   {% if show_cc %}
@@ -62,89 +61,90 @@
                          aria-labelledby="credit-card-tab">
 
                       {% form 'checkout/payment', id: card-form %}
-                        <input type="hidden" name="order[payment_type]" value="credit_card">
-                        {% if form.errors %}
-                          <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
-                        {% endif %}
+                      <input type="hidden" name="order[payment_type]" value="credit_card">
+                      {% if form.errors %}
+                        <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+                      {% endif %}
 
-                        <div class="form-group card-wrapper"></div>
+                      <div class="form-group card-wrapper"></div>
 
-                        <div class="form-group">
-                          <label class="control-label">{{ 'checkout.payment.credit_card_number' | t }}</label>
-                          <input id="card-number"
+                      <div class="form-group">
+                        <label class="control-label">{{ 'checkout.payment.credit_card_number' | t }}</label>
+                        <input id="card-number"
+                               type="text"
+                               name="order[credit_card][number]"
+                               value="{{ credit_card.number }}"
+                               class="form-control"
+                               required>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="control-label">{{ 'checkout.payment.credit_card_name' | t }}</label>
+                        <input id="card-holder-name"
+                               type="text"
+                               name="order[credit_card][name]"
+                               value="{{ credit_card.name }}"
+                               class="form-control"
+                               required>
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group  col-sm-6">
+                          <label class="control-label">{{ 'checkout.payment.credit_card_expiry' | t }}</label>
+                          <input id="card-expiration"
                                  type="text"
-                                 name="order[credit_card][number]"
-                                 value="{{ credit_card.number }}"
+                                 name="order[credit_card][expiry]"
+                                 value="{{ credit_card.expiry }}"
                                  class="form-control"
                                  required>
                         </div>
-
-                        <div class="form-group">
-                          <label class="control-label">{{ 'checkout.payment.credit_card_name' | t }}</label>
-                          <input id="card-holder-name"
+                        <div class="form-group col-sm-6">
+                          <label class="control-label">{{ 'checkout.payment.credit_card_cvv' | t }}</label>
+                          <input id="card-cvc"
                                  type="text"
-                                 name="order[credit_card][name]"
-                                 value="{{ credit_card.name }}"
+                                 name="order[credit_card][cvc]"
+                                 value="{{ credit_card.cvc }}"
                                  class="form-control"
                                  required>
                         </div>
+                      </div>
 
-                        <div class="row">
-                          <div class="form-group  col-sm-6">
-                            <label class="control-label">{{ 'checkout.payment.credit_card_expiry' | t }}</label>
-                            <input id="card-expiration"
-                                   type="text"
-                                   name="order[credit_card][expiry]"
-                                   value="{{ credit_card.expiry }}"
-                                   class="form-control"
-                                   required>
-                          </div>
-                          <div class="form-group col-sm-6">
-                            <label class="control-label">{{ 'checkout.payment.credit_card_cvv' | t }}</label>
-                            <input id="card-cvc"
-                                   type="text"
-                                   name="order[credit_card][cvc]"
-                                   value="{{ credit_card.cvc }}"
-                                   class="form-control"
-                                   required>
-                          </div>
+                      {% if order.kind == 'common' %}
+                        <div class="form-group">
+                          <label class="control-label">{{ 'checkout.payment.credit_card_installments' | t }}</label>
+                          <select id="credit-card-installments" class="form-control"
+                                  name="order[credit_card][installments]" required>
+                            {% if gateway.installments_forward_taxes %}
+                              {% assign translation_key = 'installment_amount_with_taxes' %}
+                            {% else %}
+                              {% assign translation_key = 'installment_amount' %}
+                            {% endif %}
+
+                            {% for installment in installments %}
+                              {% assign amount_in_money = installment.amount | money %}
+                              {% assign amount_with_taxes = installment.amount |
+                              number_with_taxes: gateway, installment.value | money %}
+
+                              <option value="{{ installment.value }}">
+                                {{ 'checkout.payment.' | append: translation_key | t:
+                                count: installment.value, amount: amount_in_money,
+                                amount_with_taxes: amount_with_taxes }}
+                              </option>
+                            {% endfor %}
+                          </select>
+
                         </div>
+                      {% endif %}
 
-                        {% if order.kind == 'common' %}
-                          <div class="form-group">
-                            <label class="control-label">{{ 'checkout.payment.credit_card_installments' | t }}</label>
-                            <select id="credit-card-installments" class="form-control" name="order[credit_card][installments]" required>
-                              {% if gateway.installments_forward_taxes %}
-                                {% assign translation_key = 'installment_amount_with_taxes' %}
-                              {% else %}
-                                {% assign translation_key = 'installment_amount' %}
-                              {% endif %}
-
-                              {% for installment in installments %}
-                                {% assign amount_in_money = installment.amount | money %}
-                                {% assign amount_with_taxes = installment.amount |
-                                  number_with_taxes: gateway, installment.value | money %}
-
-                                <option value="{{ installment.value }}">
-                                  {{ 'checkout.payment.' | append: translation_key | t:
-                                    count: installment.value, amount: amount_in_money,
-                                    amount_with_taxes: amount_with_taxes }}
-                                </option>
-                              {% endfor %}
-                            </select>
-
-                          </div>
+                      <div class="text-center">
+                        {% if gateway.pagarme %}
+                          <input type="hidden" id="card_hash" name="order[card_hash]">
+                          <input type="hidden" id="pagarme" value="{{ gateway.pagarme }}">
                         {% endif %}
 
-                        <div class="text-center">
-                          {% if gateway.pagarme %}
-                            <input type="hidden" id="card_hash" name="order[card_hash]">
-                            <input type="hidden" id="pagarme" value="{{gateway.pagarme}}">
-                          {% endif %}
-
-                          <input type="submit" value="{{ 'checkout.payment.credit_card_pay' | t }}"
-                                 class="btn btn-primary btn-finalize">
-                        </div>
+                        <input type="submit" value="{{ 'checkout.payment.credit_card_pay' | t }}"
+                               class="btn btn-primary btn-finalize">
+                      </div>
                       {% endform %}
                     </div>
                   {% endif %}
