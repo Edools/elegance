@@ -416,11 +416,10 @@
     checkNextButtonUnlocked: function () {
       var self = this;
       var lessonProgress = $('#js-course-tree-ajax').data('lesson-progress');
-      var enrollmentId = lessonProgress.enrollment_id;
-      
+
       self.requirementsExists(lessonProgress, function ($item, content_id) {
-        if (content_id) {
-          self.checkLessonCompleted(enrollmentId, content_id, function (completed) {
+        if (content_id && lessonProgress.hasOwnProperty('enrollment_id')) {
+          self.checkLessonCompleted(lessonProgress.enrollment_id, content_id, function (completed) {
             if (completed) {
               $item.removeClass('disabled');
             }
