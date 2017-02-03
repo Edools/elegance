@@ -416,7 +416,6 @@
     checkNextButtonUnlocked: function () {
       var self = this;
       var lessonProgress = $('#js-course-tree-ajax').data('lesson-progress');
-      var completed = lessonProgress.completed;
 
       self.requirementsExists(lessonProgress, false, function () {
         $('.btn-next-lesson').removeClass('disabled');
