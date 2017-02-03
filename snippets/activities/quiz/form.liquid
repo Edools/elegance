@@ -25,12 +25,12 @@
         {% when 'DiscursiveExamQuestion' %}
         <div class="discursive-question">
           <div class="form-group">
-          <textarea rows="3"
-                    class="form-control js-ckeditor"
-                    placeholder="Escreva sua resposta"
-                    id="exam_answer_{{ index }}"
-                    name="exam_answer[exam_question_answers_attributes[{{ index }}][text]]"
-                    required></textarea>
+            <textarea rows="3"
+                      class="form-control js-ckeditor"
+                      placeholder="Escreva sua resposta"
+                      id="exam_answer_{{ index }}"
+                      name="exam_answer[exam_question_answers_attributes[{{ index }}][text]]"
+                      required></textarea>
           </div>
         </div>
 
@@ -123,6 +123,22 @@
             <div class="option-text">{{ 'quiz.true' | t }}</div>
           </label>
         </div>
+
+        {% when 'TrueOrFalseExamQuestion2' %}
+        <div class="true-or-false-question true-or-false-question-2">
+          {% for option in question.options %}
+            <div class="option">
+              <label class="question-option">
+                <div class="option-input">
+                  <input type="radio" value="{{ option.id }}" required
+                         name="exam_answer[exam_question_answers_attributes[{{ index }}][multiple_choice_option_id]]">
+                </div>
+                <div class="option-text">{{ option.title }}</div>
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+
         {% endcase %}
       </div>
     </div>
