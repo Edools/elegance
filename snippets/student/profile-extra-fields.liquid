@@ -27,6 +27,7 @@
                       {% capture label %}{{ field.title }}{% endcapture %}
                       {% capture name %}customs[{{field.slug}}]{% endcapture %}
                       {% capture value %}{{ field.value }}{% endcapture %}
+                      {% if field.required %} {% capture required%} required {% endcapture %} {% endif %}
                       {% include 'datepicker' %}
                     </div>
                   </div>
@@ -34,7 +35,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">{{ field.title }}</label>
-                      <select name="customs[{{field.slug}}]" class="form-control">
+                      <select name="customs[{{field.slug}}]" class="form-control" {% if field.required %} required {% endif %}>
                         <option disabled selected>{{field.placeholder}}</option>
                         {% for option in field.options %}
                           <option value="{{option}}" {% if field.value == option %}selected{% endif %}>{{option}}</option>
@@ -49,7 +50,7 @@
                       {% for option in field.options %}
                         <div class="col-sm-4">
                           <label class="control-label">
-                            <input type="radio" name="customs[{{field.slug}}]" value="{{option}}" {% if field.value contains option %}checked{% endif %} />&nbsp;{{option}}
+                            <input type="radio" name="customs[{{field.slug}}]" value="{{option}}" {% if field.value contains option %}checked{% endif %} {% if field.required %} required {% endif %} />&nbsp;{{option}}
                           </label>
                         </div>
                       {% endfor %}
@@ -62,7 +63,7 @@
                       {% for option in field.options %}
                         <div class="col-sm-4">
                           <label class="control-label">
-                            <input type="checkbox" name="customs[{{field.slug}}][]" value="{{option}}" {% if field.value contains option %}checked{% endif %} />&nbsp;{{option}}
+                            <input type="checkbox" name="customs[{{field.slug}}][]" value="{{option}}" {% if field.value contains option %}checked{% endif %} {% if field.required %} required {% endif %} />&nbsp;{{option}}
                           </label>
                         </div>
                       {% endfor %}
@@ -72,14 +73,14 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">{{ field.title }}</label>
-                      <textarea name="customs[{{ field.slug }}]" class="form-control">{{field.value}}</textarea>
+                      <textarea name="customs[{{ field.slug }}]" class="form-control" {% if field.required %} required {% endif %}>{{field.value}}</textarea>
                     </div>
                   </div>
                 {% else %}
                   <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">{{ field.title }}</label>
-                      <input type="{{field.type}}" value="{{field.value}}" name="customs[{{field.slug}}]" class="form-control" placeholder="{{field.placeholder}}">
+                      <input type="{{field.type}}" value="{{field.value}}" name="customs[{{field.slug}}]" class="form-control" placeholder="{{field.placeholder}}" {% if field.required %} required {% endif %} />
                     </div>
                   </div>
               {% endcase %}
