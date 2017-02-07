@@ -159,10 +159,13 @@
                 </div>
               </div>
 
+              {% include 'student/form-profile-extra-fields', form_name: 'checkout/complete' %}
+
               <div class="text-right">
                 <input type="submit" value="{{ 'checkout.go_to_payment' | t }}" class="btn btn-primary">
               </div>
               {% endform %}
+              
             </div>
           </div>
         </div>
