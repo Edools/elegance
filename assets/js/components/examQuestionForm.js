@@ -7,15 +7,18 @@
       $('#form-container').removeClass('hide');
     });
 
-    $(document).on('click', '#js-clean-associative-options', function (e) {
-      $('.js-associative-select option:selected').removeAttr('selected')
+    $(document).on('click', '.js-clean-associative-options', function () {
+      $(this).parents('.associative-question')
+        .find('.js-associative-select option:selected')
+        .removeAttr('selected')
     });
 
-    $(document).on('change', '.js-associative-select', function (e) {
+    $(document).on('change', '.js-associative-select', function () {
+      var $question = $(this).parents('.associative-question');
       var optionIndex = $(this).data('option-index');
       var assertionId = $(this).find('option:selected').data('first-assertion-id');
 
-      $('.js-associate-assertion[data-option-index="'+optionIndex+'"]').val(assertionId);
+      $question.find('.js-associate-assertion[data-option-index="' + optionIndex + '"]').val(assertionId);
     });
 
     // bind all form's inputs

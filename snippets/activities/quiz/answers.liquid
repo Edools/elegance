@@ -1,12 +1,14 @@
 {% if answer.corrected_at %}
-  {% if answer.approved? %}
-    <p class="note note-success">
-      {{ 'quiz.messages.approved' | t: score: answer.score }}
-    </p>
-  {% else %}
-    <p class="note note-danger">
-      {{ 'quiz.messages.disapproved' | t: score: answer.score, min_grade: lesson.min_grade }}
-    </p>
+  {% if lesson.min_grade > 0 %}
+    {% if answer.approved? %}
+      <p class="alert alert-success">
+        {{ 'quiz.messages.approved' | t: score: answer.score }}
+      </p>
+    {% else %}
+      <p class="alert alert-danger">
+        {{ 'quiz.messages.disapproved' | t: score: answer.score, min_grade: lesson.min_grade }}
+      </p>
+    {% endif %}
   {% endif %}
 
   {% if attempts_remaining > 0 %}
@@ -25,10 +27,10 @@
         <div class="panel-heading">
           <div class="panel-title">
             <div class="question">
-              <div class="number-question">
+              <div class="question-number">
                 <span style="display: inline-block;">{{ forloop.index }}. </span>
               </div>
-              <div class="title-question">
+              <div class="question-title">
                 {{ question.title | default: question.options[0].title }}
               </div>
             </div>
@@ -37,11 +39,15 @@
 
         <div class="panel-body">
           {% case question.type %}
-          {% when 'DiscursiveExamQuestion' %}
-            <div class="answer-text">{{ question.answer.text }}</div>
 
+          {% when 'DiscursiveExamQuestion' %}
+          <div class="discursive-answer">
+            <div class="answer-text">{{ question.answer.text }}</div>
             <br/>
+          </div>
+
           {% when 'MultipleChoiceExamQuestion' %}
+          <div class="multiple-choice-answer">
             {% assign correct_option = nil %}
 
             {% for option in question.options %}
@@ -53,29 +59,37 @@
                 {% assign checked = 'checked' %}
 
                 {% if option.correct %}
-                  {% assign radio_class = 'alert alert-success' %}
+                  {% assign radio_class = 'question-option alert alert-success' %}
                 {% else %}
-                  {% assign radio_class = 'alert alert-danger' %}
+                  {% assign radio_class = 'question-option alert alert-danger' %}
                 {% endif %}
+
               {% else %}
                 {% assign checked = nil %}
-                {% assign radio_class = 'alert without-color' %}
+                {% assign radio_class = 'question-option alert without-color' %}
               {% endif %}
 
               <div class="{{ radio_class }}">
-                <input type="radio" disabled="true" {{ checked }}>
-                <span>{{ option.title }}</span>
+                <div class="option-input">
+                  <input type="radio" disabled="true" {{ checked }}>
+                </div>
+                <div class="option-text">
+                  {{ option.title }}
+                </div>
               </div>
             {% endfor %}
 
             {% if answer.approved? %}
-              <div class="alert alert-info">
-                <span class="question-right-answer">
-                  <strong>{{ 'quiz.right_answer' | t }}:</strong> {{ correct_option.title }}
-                </span>
+              <div class="question-option alert alert-info">
+              <span class="question-right-answer">
+                <strong>{{ 'quiz.right_answer' | t }}:</strong> {{ correct_option.title }}
+              </span>
               </div>
             {% endif %}
+          </div>
+
           {% when 'AssociativeExamQuestion' %}
+          <div class="associative-answer">
             <table class="table table-bordered">
               <tbody>
               {% for option in question.answer.associative_options %}
@@ -95,24 +109,25 @@
 
             {% if answer.approved? %}
               <div class="alert alert-info">
-                <span class="question-right-answer">
-                  <strong>{{ 'quiz.right_answer' | t }}:</strong>
-                  <table class="table table-bordered">
-                    <tbody>
+              <span class="question-right-answer">
+                <strong>{{ 'quiz.right_answer' | t }}:</strong>
+                <table class="table table-bordered">
+                  <tbody>
                     {% for option in question.options %}
                       <tr>
                       <td>{{ option.first_assertion.text }}</td>
                       <td>{{ option.second_assertion.text }}</td>
                     </tr>
                     {% endfor %}
-                    </tbody>
-                  </table>
-                </span>
+                  </tbody>
+                </table>
+              </span>
               </div>
             {% endif %}
-          {% when 'TrueOrFalseExamQuestion' %}
-            {% assign correct_option = question.options[0] %}
+          </div>
 
+          {% when 'TrueOrFalseExamQuestion' %}
+          <div class="true-or-false-answer">
             {% if question.answer.correct %}
               {% assign true_checked = 'checked' %}
               {% assign false_checked = nil %}
@@ -120,6 +135,7 @@
               {% assign false_class = 'without-color' %}
 
               {% if question.options[0].correct == question.answer.correct %}
+                {% assign correct_option = 'quiz.true' | t %}
                 {% assign true_class = 'alert-success' %}
               {% else %}
                 {% assign true_class = 'alert-danger' %}
@@ -131,20 +147,25 @@
               {% assign true_class = 'without-color' %}
 
               {% if question.options[0].correct == question.answer.correct %}
+                {% assign correct_option = 'quiz.false' | t %}
                 {% assign false_class = 'alert-success' %}
               {% else %}
                 {% assign false_class = 'alert-danger' %}
               {% endif %}
             {% endif %}
 
-            <div class="alert {{ false_class }}">
-              <input type="radio" {{ false_checked }} disabled="true">
-              <span>{{ 'quiz.false' | t }}</span>
+            <div class="question-option alert {{ false_class }}">
+              <div class="option-input">
+                <input type="radio" {{ false_checked }} disabled="true">
+              </div>
+              <div class="option-text">{{ 'quiz.false' | t }}</div>
             </div>
 
-            <div class="alert {{ true_class }}">
-              <input type="radio" {{ true_checked }} disabled="true">
-              <span>{{ 'quiz.true' | t }}</span>
+            <div class="question-option alert {{ true_class }}">
+              <div class="option-input">
+                <input type="radio" {{ true_checked }} disabled="true">
+              </div>
+              <div class="option-text">{{ 'quiz.true' | t }}</div>
             </div>
 
             <br/>
@@ -152,11 +173,15 @@
             {% if answer.approved? %}
               <div class="alert alert-info">
                   <span class="question-right-answer">
-                    <strong>{{ 'quiz.right_answer' | t }}:</strong> {% if correct_option.correct %} {{ 'quiz.true' | t }} {% else %} {{ 'quiz.false' | t }} {% endif %}
+                    <strong>{{ 'quiz.right_answer' | t }}
+                      :</strong> {% if correct_option.correct %} {{ 'quiz.true' | t }} {% else %} {{ 'quiz.false' | t }} {% endif %}
                   </span>
               </div>
             {% endif %}
+          </div>
+
           {% when 'TrueOrFalseExamQuestion2' %}
+          <div class="true-or-false-2-answer">
             {% assign correct_option = nil %}
 
             {% for option in question.options %}
@@ -190,13 +215,15 @@
                 </span>
               </div>
             {% endif %}
+          </div>
+
           {% endcase %}
 
           {% if question.comment and ((activity.show_comments == 'always') or (activity.show_comments == 'approved' and answer.approved?)) %}
             <div class="alert alert-info">
-                <span class="question-comment">
-                  <strong>{{ 'quiz.teacher_comment' | t }}:</strong> {{ question.comment }}
-                </span>
+              <span class="question-comment">
+                <strong>{{ 'quiz.teacher_comment' | t }}:</strong> {{ question.comment }}
+              </span>
             </div>
           {% endif %}
 
@@ -209,12 +236,11 @@
   </div>
 {% else %}
   <span class="waiting-correction">
-    {{ 'quiz.messages.waiting_correction' | t }}
-  </span>
-
+  {{ 'quiz.messages.waiting_correction' | t }}
+</span>
   {% if attempts_remaining > 0 %}
     <span class="waiting-correction-attempts-message">
-      {{ 'quiz.messages.waiting_correction_attempts_message' | t: attempts_remaining: attempts_remaining }}
-    </span>
+    {{ 'quiz.messages.waiting_correction_attempts_message' | t: attempts_remaining: attempts_remaining }}
+  </span>
   {% endif %}
 {% endif %}

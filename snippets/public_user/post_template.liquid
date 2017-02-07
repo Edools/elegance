@@ -20,7 +20,7 @@
           </a>
 
           <button type="submit" class="btn btn-primary"
-                  data-disable-with="<i class='fa fa-spinner fa-spin'></i>{{ 'general.sending' | t }}...">
+                  data-disable-with="<i class='busy busy-xs'></i><span>{{ 'general.sending' | t }}...</span>">
             {{ 'general.send' | t }}
           </button>
         </div>
@@ -40,7 +40,7 @@
            class="post-delete"
            data-remote="true"
            data-method="delete"
-           data-disable-with="<i class='fa fa-spinner fa-spin'></i>">
+           data-disable-with="<i class='busy busy-xs'></i>">
           <i class="icon-trash"></i>
           <span>{{ 'general.clean' | t }}</span>
         </a>
