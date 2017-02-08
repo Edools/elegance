@@ -1,11 +1,11 @@
 {% if answer.corrected_at %}
   {% if lesson.min_grade > 0 %}
     {% if answer.approved? %}
-      <p class="alert alert-success">
+      <p class="alert alert-success alert-approved">
         {{ 'quiz.messages.approved' | t: score: answer.score }}
       </p>
     {% else %}
-      <p class="alert alert-danger">
+      <p class="alert alert-danger alert-disapproved">
         {{ 'quiz.messages.disapproved' | t: score: answer.score, min_grade: lesson.min_grade }}
       </p>
     {% endif %}
