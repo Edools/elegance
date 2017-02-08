@@ -10,7 +10,7 @@
       @include list-unstyled();
 
       .wizard-step {
-        $base-bg: darken($gray-lighter, 15%);
+        $base-bg: darken($gray-lighter, 12%);
         @include make-xs-column(4);
 
         display: inline-block;

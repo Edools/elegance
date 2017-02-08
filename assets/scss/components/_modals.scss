@@ -36,6 +36,7 @@
     @include translate(0, 0);
   }
 }
+
 .modal-open .modal {
   overflow-x: hidden;
   overflow-y: auto;
@@ -50,13 +51,11 @@
 
 // Actual modal
 .modal-content {
-  @include box-shadow(0 3px 9px rgba(0,0,0,.5));
+  @include box-shadow(0 3px 9px rgba(0, 0, 0, .3));
 
   position: relative;
   // Remove focus outline from opened modal
   outline: 0;
-  border: 1px solid $modal-content-fallback-border-color; //old browsers fallback (ie8 etc)
-  border: 1px solid $modal-content-border-color;
   border-radius: $border-radius-large;
   background-color: $modal-content-bg;
   background-clip: padding-box;
@@ -87,6 +86,7 @@
   min-height: ($modal-title-padding + $modal-title-line-height);
   border-bottom: 1px solid $modal-header-border-color;
 }
+
 // Close icon
 .modal-header .close {
   margin-top: -2px;
@@ -145,7 +145,7 @@
     width: $modal-md;
   }
   .modal-content {
-    @include box-shadow(0 5px 15px rgba(0,0,0,.5));
+    @include box-shadow(0 5px 15px rgba(0, 0, 0, .3));
   }
 
   // Modal sizes

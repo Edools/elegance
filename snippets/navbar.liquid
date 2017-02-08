@@ -20,100 +20,60 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           {% if current_user == nil or current_user.type == 'Student' %}
-          <a href="/cart">
-            <i class="icon-basket"></i>
-            <span>{{ 'navbar.cart' | t }}</span>
-          </a>
+            <a href="/cart">
+              <i class="icon-basket"></i>
+              <span>{{ 'navbar.cart' | t }}</span>
+            </a>
           {% else %}
-          <a href="{{ current_user | sso_admin_path: current_api_key }}">
-            <i class="icon-settings"></i>
-            <span>{{ 'navbar.admin' | t }}</span>
-          </a>
+            <a href="{{ current_user | sso_admin_path: current_api_key }}">
+              <i class="icon-settings"></i>
+              <span>{{ 'navbar.admin' | t }}</span>
+            </a>
           {% endif %}
         </li>
 
         {% if current_user %}
-        <li>
-          <a href="/forums">
-            <i class="icon-bubble"></i>
-            <span>{{ 'navbar.forum' | t }}</span>
-          </a>
-        </li>
+          <li>
+            <a href="/forums">
+              <i class="icon-bubble"></i>
+              <span>{{ 'navbar.forum' | t }}</span>
+            </a>
+          </li>
 
-        {% if current_user.type == 'Student' %}
-
-        <li>
-          <a href="/enrollments">
-            <i class="icon-notebook"></i>
-            <span>{{ 'navbar.my_courses' | t }}</span>
-          </a>
-        </li>
-
-        <li>
-          <a href="/certificates">
-            <i class="icon-graduation"></i>
-            <span>{{ 'navbar.my_certificates' | t }}</span>
-          </a>
-        </li>
-        {% endif %}
-
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle user-options" data-toggle="dropdown">
-            <span class="avatar">
-              {% assign avatar_alt = current_user | fullname %}
-              {% image, src: current_user.cover_image_url, alt: avatar_alt, class: 'avatar-img' %}
-            </span>
-            <span class="logged-user">{{ current_user | fullname }}</span>
-            <span class="caret"></span>
-          </a>
-
-          <ul class="dropdown-menu">
-            {% if current_school.user_social_profile_enabled and current_user.social_profile_disabled != true %}
+          {% if current_user.type == 'Student' %}
             <li>
-              <a href="/profile/{{ current_user.id }}">
-                <i class="icon-user"></i>
-                <span>{{ "navbar.public_profile" | t }}</span>
-              </a>
-            </li>
-            {% endif %}
-
-            <li>
-              <a href="{{ current_user | profile_path }}">
-                <i class="icon-note"></i>
-                <span>{{ "navbar.my_profile" | t }}</span>
+              <a href="/enrollments">
+                <i class="icon-notebook"></i>
+                <span>{{ 'navbar.my_courses' | t }}</span>
               </a>
             </li>
 
             <li>
-              {% capture inbox_link_html %}
-              <i class="icon-envelope-open"></i>
-              <span>{{ 'navbar.messages' | t }}</span>
-              {% endcapture %}
-
-              {{ inbox_link_html | inbox_link }}
-            </li>
-
-            {% if current_user.type == 'Student' %}
-            <li>
-              <a href="/orders">
-                <i class="icon-list"></i>
-                <span>{{ "navbar.my_orders" | t }}</span>
+              <a href="/certificates">
+                <i class="icon-graduation"></i>
+                <span>{{ 'navbar.my_certificates' | t }}</span>
               </a>
             </li>
-            {% endif %}
+          {% endif %}
 
-            <li>
-              {% capture logout_link_html %}
-              <i class="icon-power"></i>
-              <span>{{ "navbar.sign_out" | t }}</span>
-              {% endcapture %}
+          {% include 'navbar-user-links', mobile_class: true %}
 
-              {{ logout_link_html | logout_link }}
-            </li>
-          </ul>
-        </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle user-options" data-toggle="dropdown">
+              <i class="icon icon-arrow-down"></i>
+              <span class="avatar">
+                {% assign avatar_alt = current_user | fullname %}
+                {% image, src: current_user.cover_image_url, alt: avatar_alt, class: 'avatar-img' %}
+              </span>
+            </a>
+
+            <ul class="dropdown-menu">
+              {% include 'navbar-user-links' %}
+            </ul>
+          </li>
+
         {% else %}
-        <li>{{ 'navbar.sign_in' | t | login_link }}</li>
+          <li>{{ 'navbar.sign_in' | t | login_link }}</li>
         {% endif %}
       </ul>
     </div>

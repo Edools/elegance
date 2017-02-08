@@ -34,7 +34,8 @@
     "compass-sass-mixins": "*",
     "lodash": "^4.16.4",
     "bLazy": "blazy#^1.8.2",
-    "async": "^2.1.4"
+    "async": "^2.1.4",
+    "spinthatshit": "SpinThatShit#^1.0.3"
   },
   "overrides": {
     "jquery": {

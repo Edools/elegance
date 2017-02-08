@@ -2,15 +2,11 @@
   margin-top: $padding-large-vertical * 4;
 
   .course {
-    @extend .thumbnail;
     @include breakpoint(sm) {
       height: 518px;
     }
-
-    padding: 0;
-    border: 2px solid darken($gray-lighter, 5%);
-    border-radius: $border-radius-base;
-    background-color: $light;
+    @extend .panel;
+    @extend .panel-default;
 
     .course-image {
       position: relative;
@@ -42,8 +38,7 @@
           display: block;
           margin-top: 0;
           margin-bottom: $padding-large-vertical;
-          padding-right: $padding-base-horizontal + 5;
-          padding-left: $padding-base-horizontal + 5;
+          padding: 10px $padding-base-horizontal + 5;
           color: $text-color;
           font-size: 20px;
           line-height: 1.2;

@@ -29,9 +29,7 @@
 // The dropdown menu (ul)
 .dropdown-menu {
   @include translate(0, 0);
-  @include box-shadow(
-  0px 3px 10px rgba(0, 0, 0, .06),
-  inset 0px 0px 10px rgba(0, 0, 0, .02));
+  @include box-shadow(0 2px 8px rgba(0, 0, 0, .1));
   @include transition(.15s ease);
 
   position: absolute;
@@ -45,7 +43,6 @@
   min-width: 160px;
   border: 1px solid $dropdown-fallback-border; // IE8 fallback
   border: 1px solid $dropdown-border;
-  border-bottom-color: darken($dropdown-border, 6%);
   border-radius: $border-radius-base + 2;
   background-color: $dropdown-bg;
   background-clip: padding-box;
@@ -66,8 +63,8 @@
     display: block;
     width: $size;
     height: $size;
-    border-top: 1.5px solid $dropdown-border;
-    border-left: 1.5px solid $dropdown-border;
+    border-top: 1px solid rgba($dropdown-border, .2);
+    border-left: 1px solid rgba($dropdown-border, .2);
     border-top-left-radius: $border-radius-base + 1;
     background-color: $dropdown-bg;
     content: '';
