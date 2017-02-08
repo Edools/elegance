@@ -30,15 +30,14 @@
         $(document).on('lesson-completed', function (event, lessonProgress) {
           var $mediaControls = $('.btn-next-lesson');
           var enrollmentId = lessonProgress.data.enrollment_id;
-          var lessonId = lessonProgress.data.lesson_id;
 
           if ($mediaControls.size() > 0) {
             $mediaControls.removeClass('disabled');
           }
 
-          self.requirementsExists(lessonProgress.data, function ($item, content_id) {
+          app.requirementsExists(lessonProgress.data, function ($item, content_id) {
             if (content_id) {
-              self.checkLessonCompleted(enrollmentId, content_id, function (completed) {
+              app.checkLessonCompleted(enrollmentId, content_id, function (completed) {
                 if (completed) {
                   $item.removeClass('disabled');
                 }
@@ -47,44 +46,6 @@
           });
         });
       }
-    },
-
-    requirementsExists: function (lessonProgress, cb, cbNotExists) {
-      $('.lesson-list-panel [data-requirements]').filter(function (index, item) {
-        return $(item).data('requirements').length > 0;
-      }).each(function (index, item) {
-        var $item = $(item);
-
-        var requirements = $item.data('requirements');
-        var exists = _.find(requirements, {content_id: lessonProgress.lesson_id});
-
-        if (!exists) {
-          if (cbNotExists) {
-            cbNotExists($item, null);
-          }
-        } else {
-          if (cb) {
-            cb($item, exists.content_id);
-          }
-        }
-      });
-    },
-
-    checkLessonCompleted: function (enrollmentId, id, cb) {
-      var self = this;
-      var completed = false;
-
-      $.ajax({
-        url: window.CORE_HOST + '/enrollments/' + enrollmentId + '/lessons_progresses?lesson_id=' + id,
-        method: 'GET',
-        headers: {
-          'Authorization': 'Token token=' + self.apiKey
-        },
-      }).success(function (data) {
-        completed = data.lessons_progresses[0].completed;
-
-        cb(completed);
-      });
     },
 
     // Props
@@ -414,13 +375,13 @@
     },
 
     checkNextButtonUnlocked: function () {
-      var self = this;
       var lessonProgress = $('#js-course-tree-ajax').data('lesson-progress');
 
-      self.requirementsExists(lessonProgress, function ($item, content_id) {
+      app.requirementsExists(lessonProgress, function ($item, content_id) {
         if (content_id && lessonProgress.hasOwnProperty('enrollment_id')) {
-          self.checkLessonCompleted(lessonProgress.enrollment_id, content_id, function (completed) {
+          app.checkLessonCompleted(lessonProgress.enrollment_id, content_id, function (completed) {
             if (completed) {
+              $('.btn-next-lesson').removeClass('disabled');
               $item.removeClass('disabled');
             }
           });

@@ -42,6 +42,45 @@
       $(document).trigger('app:bind:check_form_validity');
     },
 
+    requirementsExists: function (lessonProgress, cb, cbNotExists) {
+      $('.lesson-list-panel [data-requirements]').filter(function (index, item) {
+        return $(item).data('requirements').length > 0;
+      }).each(function (index, item) {
+        var $item = $(item);
+
+        var requirements = $item.data('requirements');
+        var exists = _.find(requirements, {content_id: lessonProgress.lesson_id});
+
+        if (!exists) {
+          if (cbNotExists) {
+            cbNotExists($item, null);
+          }
+        } else {
+          if (cb) {
+            cb($item, exists.content_id);
+          }
+        }
+      });
+    },
+
+    checkLessonCompleted: function (enrollmentId, id, cb) {
+      var self = this;
+      var completed = false;
+      var apiKey = $('.course-content #js-course-tree-ajax').data('api-key');
+
+      $.ajax({
+        url: window.CORE_HOST + '/enrollments/' + enrollmentId + '/lessons_progresses?lesson_id=' + id,
+        method: 'GET',
+        headers: {
+          'Authorization': 'Token token=' + apiKey
+        },
+      }).success(function (data) {
+        completed = data.lessons_progresses[0].completed;
+
+        cb(completed);
+      });
+    },
+
     init: function () {
       app.pagarme.init();
 
@@ -59,6 +98,7 @@
       app.bindExamQuestionForm();
       app.changeTimeZone();
       app.followBind();
+      app.lessonPage();
       app.bindPostsForm();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
