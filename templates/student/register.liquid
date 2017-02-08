@@ -26,6 +26,65 @@
              placeholder="{{ 'register.password_confirmation' | t }}" required>
     </div>
 
+    {% for field in custom_fields.fields %}
+      {% if field.visible_in_registration %}
+        {% case field.type %}
+          {% when 'date' %}
+            <div class="form-group">
+              {% capture label %}{{ field.title }}{% endcapture %}
+              {% capture name %}customs[{{field.slug}}]{% endcapture %}
+              {% capture value %}{{ field.value }}{% endcapture %}
+              {% capture placeholder %}{{ field.placeholder }}{% endcapture %}
+              {% if field.required %} {% capture required%} required {% endcapture %} {% endif %}
+              {% include 'datepicker' %}
+            </div>
+          {% when 'select' %}
+            <div class="form-group">
+              <select name="customs[{{field.slug}}]" class="form-control" {% if field.required %} required {% endif %}>
+                <option disabled selected>{{field.placeholder}}</option>
+                {% for option in field.options %}
+                  <option value="{{option}}" {% if field.value == option %}selected{% endif %}>{{option}}</option>
+                {% endfor %}
+              </select>
+          {% when 'radiobox' %}
+            <div class="form-group row">
+              <label class="control-label">{{ field.title }}</label>
+              <div class="col-sm-12">
+                {% for option in field.options %}
+                  <div class="col-sm-4">
+                    <label class="control-label">
+                      <input type="radio" name="customs[{{field.slug}}]" value="{{option}}" {% if field.value contains option %}checked{% endif %} {% if field.required %} required {% endif %} />&nbsp;{{option}}
+                    </label>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% when 'checkbox' %}
+            <div class="form-group row">
+              <label class="control-label">{{ field.title }}</label>
+              <div class="col-sm-12">
+              {% for option in field.options %}
+                <div class="col-sm-4">
+                  <label class="control-label">
+                    <input type="checkbox" name="customs[{{field.slug}}][]" value="{{option}}" {% if field.value contains option %}checked{% endif %} {% if field.required %} required {% endif %} />&nbsp;{{option}}
+                  </label>
+                </div>
+              {% endfor %}
+              </div>
+            </div>
+          {% when 'textarea' %}
+            <div class="form-group">
+              <textarea name="customs[{{ field.slug }}]" class="form-control" placeholder="{{ field.placeholder }}" {% if field.required %} required {% endif %}>{{field.value}}</textarea>
+            </div>
+          {% else %}
+            <div class="form-group">
+              <label class="control-label">{{ field.title }}</label>
+              <input type="{{field.type}}" value="{{field.value}}" name="customs[{{field.slug}}]" class="form-control" placeholder="{{field.placeholder}}" {% if field.required %} required {% endif %} />
+            </div>
+        {% endcase %}
+      {% endif %}
+    {% endfor %}
+
     <div class="form-actions">
       <input type="submit" value="{{ 'register.create_account' | t }}"
              class="btn btn-primary btn-flat btn-block btn-lg">

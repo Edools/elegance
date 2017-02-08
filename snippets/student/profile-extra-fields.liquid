@@ -1,0 +1,114 @@
+{% if custom_fields.fields %}
+  <div class="panel panel-default personal-data-panel">
+    <div class="panel-heading" role="tab">
+      {% if form_name == 'profile' %}<h4 class="panel-title">{% endif %}
+        <a role="button"
+           data-toggle="collapse"
+           data-parent="#accordion"
+           href="#collapseProfileExtraData"
+           {% if form_name == 'profile' %} aria-expanded="false" {% else %} aria-expanded="true" {% endif %}
+           aria-controls="collapseProfileExtraData">{{ 'profile.extra_data' | t }}</a>
+      {% if form_name == 'profile' %}</h4>{% endif %}
+    </div>
+    <div id="collapseProfileExtraData"
+         class="panel-collapse collapse {% if form_name != 'profile' %} in {% endif %}"
+         role="tabpanel"
+         aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <div class="extra-data-form">
+          <div class="row tab-form-content">
+            {% for field in custom_fields.fields %}
+
+              {% assign visible_in_profile = false %}
+              {% assign visible_in_checkout = false %}
+
+              {% if form_name == 'profile' and field.visible_in_profile == true %}
+                {% assign visible_in_profile = true %}
+              {% endif %}
+              
+              {% if form_name == 'checkout/complete' and field.visible_in_checkout == true %}
+                {% assign visible_in_checkout = true %}
+              {% endif %}
+
+              {% if visible_in_profile or visible_in_checkout %}
+                  
+                {% case field.type %}
+                  {% when 'date' %}
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">{{ field.title }}</label>
+                        {% capture label %}{{ field.title }}{% endcapture %}
+                        {% capture name %}customs[{{field.slug}}]{% endcapture %}
+                        {% capture value %}{{ field.value }}{% endcapture %}
+                        {% if field.required %} {% capture required%} required {% endcapture %} {% endif %}
+                        {% include 'datepicker' %}
+                      </div>
+                    </div>
+                  {% when 'select' %}
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">{{ field.title }}</label>
+                        <select name="customs[{{field.slug}}]" class="form-control" {% if field.required %} required {% endif %}>
+                          <option disabled selected>{{field.placeholder}}</option>
+                          {% for option in field.options %}
+                            <option value="{{option}}" {% if field.value == option %}selected{% endif %}>{{option}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                  {% when 'radiobox' %}
+                    <div class="col-md-6">
+                      <label class="control-label">{{ field.title }}</label>
+                      <div class="form-group row">
+                        {% for option in field.options %}
+                          <div class="col-sm-4">
+                            <label class="control-label">
+                              <input type="radio" name="customs[{{field.slug}}]" value="{{option}}" {% if field.value contains option %}checked{% endif %} {% if field.required %} required {% endif %} />&nbsp;{{option}}
+                            </label>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% when 'checkbox' %}
+                    <div class="col-md-6">
+                      <label class="control-label">{{ field.title }}</label>
+                      <div class="form-group row">
+                        {% for option in field.options %}
+                          <div class="col-sm-4">
+                            <label class="control-label">
+                              <input type="checkbox" name="customs[{{field.slug}}][]" value="{{option}}" {% if field.value contains option %}checked{% endif %} {% if field.required %} required {% endif %} />&nbsp;{{option}}
+                            </label>
+                          </div>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% when 'textarea' %}
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">{{ field.title }}</label>
+                        <textarea name="customs[{{ field.slug }}]" class="form-control" {% if field.required %} required {% endif %}>{{field.value}}</textarea>
+                      </div>
+                    </div>
+                  {% else %}
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label class="control-label">{{ field.title }}</label>
+                        <input type="{{field.type}}" value="{{field.value}}" name="customs[{{field.slug}}]" class="form-control" placeholder="{{field.placeholder}}" {% if field.required %} required {% endif %} />
+                      </div>
+                    </div>
+                {% endcase %}
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% if form_name == 'profile' %}
+          <div class="row tab-form-content">
+            <div class="col-xs-12 text-right">
+              <input type="submit" class="btn btn-primary" value="{{ 'profile.save' | t }}">
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
