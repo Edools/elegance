@@ -18,7 +18,20 @@
         <div class="extra-data-form">
           <div class="row tab-form-content">
             {% for field in custom_fields.fields %}
-              {% if form_name == 'profile' or field.visible_in_checkout %}
+
+              {% assign visible_in_profile = false %}
+              {% assign visible_in_checkout = false %}
+
+              {% if form_name == 'profile' and field.visible_in_profile == true %}
+                {% assign visible_in_profile = true %}
+              {% endif %}
+              
+              {% if form_name == 'checkout/complete' and field.visible_in_checkout == true %}
+                {% assign visible_in_checkout = true %}
+              {% endif %}
+
+              {% if visible_in_profile or visible_in_checkout %}
+                  
                 {% case field.type %}
                   {% when 'date' %}
                     <div class="col-md-6">
