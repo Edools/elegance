@@ -153,6 +153,7 @@
   },
   "navbar": {
     "cart": "Carrinho",
+    "categories": "Categorias",
     "forum": "Fóruns",
     "sign_in": "<i class=\"icon-user\"></i> Entrar",
     "my_courses": "Meus cursos",
@@ -584,6 +585,9 @@
   },
   "products": {
     "products": "Produtos"
+  },
+  "categories": {
+    "categories": "Categorias"
   },
   "lesson": {
     "release_at": "Agendado para",
