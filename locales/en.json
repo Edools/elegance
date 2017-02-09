@@ -162,7 +162,8 @@
   "sessions": {
     "signed_in": "Signed In",
     "signed_out": "Signed Out",
-    "already_logged_in": "It was identified other active session with your user and this session was interrupted."
+    "already_logged_in": "It was identified other active session with your user and this session was interrupted",
+    "blocked": "It was identified another active session with your user, this session was interrupted and your account was blocked"
   },
   "registrations": {
     "signed_up": "Welcome! You have succesfully entered."
