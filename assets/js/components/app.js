@@ -23,8 +23,8 @@
 
     bindTooltips: function () {
       $("[data-toggle='tooltip']")
-        .tooltip("destroy")
-        .tooltip();
+      .tooltip("destroy")
+      .tooltip();
 
       $(document).trigger('app:bind:tooltips');
     },
@@ -43,24 +43,34 @@
     },
 
     requirementsExists: function (lessonProgress, cb, cbNotExists) {
-      $('.lesson-list-panel [data-requirements]').filter(function (index, item) {
+      var requirementsElements = $('.lesson-list-panel [data-requirements]').filter(function (index, item) {
         return $(item).data('requirements').length > 0;
-      }).each(function (index, item) {
-        var $item = $(item);
+      });
 
-        var requirements = $item.data('requirements');
-        var exists = _.find(requirements, {content_id: lessonProgress.lesson_id});
+      var requirementsUnified = requirementsElements.map(function(idx, item) {
+        return {
+          item: $(item),
+          requirements: $(item).data('requirements')
+        }
+      }).toArray();
 
-        if (!exists) {
+      /* aqui provavelmente vai dar problema quando os requisitos não forem linear ou tiver mais de um.
+         ( porque não sei se find, faz o match exato nessa parte [{ content_id: lessonProgress.lesson_id}] ou se busca apenas fragmento). */
+      var exists = _.find(requirementsUnified, { requirements: [{ content_id: lessonProgress.lesson_id}] });
+
+      if (exists) {
+        var $item = exists.item;
+
+        if (Object.keys(exists || {}).length === 0) {
           if (cbNotExists) {
-            cbNotExists($item, null);
+            return cbNotExists($item, null);
           }
         } else {
           if (cb) {
-            cb($item, exists.content_id);
+            return cb($item, lessonProgress.lesson_id);
           }
         }
-      });
+      }
     },
 
     checkLessonCompleted: function (enrollmentId, id, cb) {
