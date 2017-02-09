@@ -390,7 +390,7 @@
 
       if ($list.length <= 0) {
         $parent.find('.busy').css({opacity: 1});
-        $list = $('<div class="list-group" style="display: none;"></div>');
+        $list = $('<ul class="list-group" style="display: none;"></ul>');
         $list.appendTo($parent);
 
         $.when(self.fetchModules($parent), self.fetchChildren($parent))
@@ -422,7 +422,7 @@
     handleLessons: function () {
       $(document).on('page:load page:restore', function (e) {
 
-        if (e.originalEvent && e.originalEvent.data.length == 0) return;
+        if (!e.originalEvent || !e.originalEvent.data || e.originalEvent.data.length == 0) return;
 
         var $html = $(e.originalEvent.data[0]);
         app.lessonList.lessons().each(function (i, el) {
