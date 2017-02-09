@@ -54,8 +54,6 @@
         }
       }).toArray();
 
-      /* aqui provavelmente vai dar problema quando os requisitos não forem linear ou tiver mais de um.
-         ( porque não sei se find, faz o match exato nessa parte [{ content_id: lessonProgress.lesson_id}] ou se busca apenas fragmento). */
       var exists = _.find(requirementsUnified, { requirements: [{ content_id: lessonProgress.lesson_id}] });
 
       if (exists) {
