@@ -23,8 +23,8 @@
 
     bindTooltips: function () {
       $("[data-toggle='tooltip']")
-        .tooltip("destroy")
-        .tooltip();
+      .tooltip("destroy")
+      .tooltip();
 
       $(document).trigger('app:bind:tooltips');
     },
@@ -40,6 +40,54 @@
       }
 
       $(document).trigger('app:bind:check_form_validity');
+    },
+
+    requirementsExists: function (lessonProgress, cb, cbNotExists) {
+      if(!lessonProgress) {
+        return false;
+      }
+
+      var requirementsElements = $('.lesson-list-panel [data-requirements]').filter(function (index, item) {
+        return $(item).data('requirements').length > 0;
+      });
+
+      var requirementsUnified = requirementsElements.map(function(idx, item) {
+        return {
+          item: $(item),
+          requirements: $(item).data('requirements')
+        }
+      }).toArray();
+
+      var exists = _.find(requirementsUnified, { requirements: [{ content_id: lessonProgress.lesson_id}] });
+
+      if (exists) {
+        var $item = exists.item;
+        if (cb) {
+          return cb($item, lessonProgress.lesson_id);
+        }
+      } else {
+        if (cbNotExists) {
+          return cbNotExists();
+        }
+      }
+    },
+
+    checkLessonCompleted: function (enrollmentId, id, cb) {
+      var self = this;
+      var completed = false;
+      var apiKey = $('.course-content #js-course-tree-ajax').data('api-key');
+
+      $.ajax({
+        url: window.CORE_HOST + '/enrollments/' + enrollmentId + '/lessons_progresses?lesson_id=' + id,
+        method: 'GET',
+        headers: {
+          'Authorization': 'Token token=' + apiKey
+        },
+      }).success(function (data) {
+        completed = data.lessons_progresses[0].completed;
+
+        cb(completed);
+      });
     },
 
     init: function () {
@@ -59,6 +107,7 @@
       app.bindExamQuestionForm();
       app.changeTimeZone();
       app.followBind();
+      app.lessonPage();
       app.bindPostsForm();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
