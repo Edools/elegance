@@ -43,6 +43,10 @@
     },
 
     requirementsExists: function (lessonProgress, cb, cbNotExists) {
+      if(!lessonProgress) {
+        return false;
+      }
+
       var requirementsElements = $('.lesson-list-panel [data-requirements]').filter(function (index, item) {
         return $(item).data('requirements').length > 0;
       });
@@ -58,15 +62,12 @@
 
       if (exists) {
         var $item = exists.item;
-
-        if (Object.keys(exists || {}).length === 0) {
-          if (cbNotExists) {
-            return cbNotExists($item, null);
-          }
-        } else {
-          if (cb) {
-            return cb($item, lessonProgress.lesson_id);
-          }
+        if (cb) {
+          return cb($item, lessonProgress.lesson_id);
+        }
+      } else {
+        if (cbNotExists) {
+          return cbNotExists();
         }
       }
     },
