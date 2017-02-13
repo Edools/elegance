@@ -59,6 +59,13 @@ $guideline-color: darken($border-color-base, 5%);
       display: block;
       cursor: default;
 
+      &.disabled {
+        a {
+          color: $text-muted;
+          pointer-events: none;
+        }
+      }
+
       &.module {
         font-weight: 600;
         cursor: pointer;

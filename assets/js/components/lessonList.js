@@ -26,6 +26,25 @@
         self.loadTopModules();
 
         $(document).trigger('app:bind:lesson_sidebar');
+
+        $(document).on('lesson-completed', function (event, lessonProgress) {
+          var $mediaControls = $('.btn-next-lesson');
+          var enrollmentId = lessonProgress.data.enrollment_id;
+
+          if ($mediaControls.size() > 0) {
+            $mediaControls.removeClass('disabled');
+          }
+
+          app.lessonList.requirementsExists(lessonProgress.data, function ($item, content_id) {
+            if (content_id) {
+              app.checkLessonCompleted(enrollmentId, content_id, function (completed) {
+                if (completed) {
+                  $item.removeClass('disabled');
+                }
+              });
+            }
+          });
+        });
       }
     },
 
@@ -53,6 +72,54 @@
 
     lessonListPanel: function () {
       return $('.lesson-list-panel');
+    },
+
+    requirementsExists: function (lessonProgress, cb, cbNotExists) {
+      if(!lessonProgress) {
+        return false;
+      }
+
+      var requirementsElements = $('.lesson-list-panel [data-requirements]').filter(function (index, item) {
+        return $(item).data('requirements').length > 0;
+      });
+
+      var requirementsUnified = requirementsElements.map(function(idx, item) {
+        return {
+          item: $(item),
+          requirements: $(item).data('requirements')
+        }
+      }).toArray();
+
+      var exists = _.find(requirementsUnified, { requirements: [{ content_id: lessonProgress.lesson_id}] });
+
+      if (exists) {
+        var $item = exists.item;
+        if (cb) {
+          return cb($item, lessonProgress.lesson_id);
+        }
+      } else {
+        if (cbNotExists) {
+          return cbNotExists();
+        }
+      }
+    },
+
+    checkLessonCompleted: function (enrollmentId, id, cb) {
+      var self = this;
+      var completed = false;
+      var apiKey = $('.course-content #js-course-tree-ajax').data('api-key');
+
+      $.ajax({
+        url: window.CORE_HOST + '/enrollments/' + enrollmentId + '/lessons_progresses?lesson_id=' + id,
+        method: 'GET',
+        headers: {
+          'Authorization': 'Token token=' + apiKey
+        },
+      }).success(function (data) {
+        completed = data.lessons_progresses[0].completed;
+
+        cb(completed);
+      });
     },
 
     // Actions
@@ -240,6 +307,11 @@
 
           courseContents = _.sortBy(courseContents, 'order');
 
+          courseContents = _.map(courseContents, function (content) {
+            content.completed = self.enrollment.lessons_info && self.enrollment.lessons_info.completed.indexOf(content.lesson.id) > -1;
+            return content;
+          });
+
           var $courseContents = _.map(courseContents, function (content) {
               var active = (self.currentLessonId == content.lesson.id ? 'active js' : '');
               var lesson = content.lesson;
@@ -250,6 +322,11 @@
               var releaseType = null;
               var releaseDate = null;
               var progress = null;
+              var requirements = content.requirements;
+              var available = true;
+              var requirements_ids = requirements.map(function (item) {
+                return item.content_id;
+              });
 
               if (self.enrollment) {
                 lessonReleased = self.checkLessonAvailability(lesson);
@@ -280,8 +357,18 @@
                 }
               }
 
-              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + '" ' +
+              _.each(requirements_ids, function (id) {
+                var exists = _.find(courseContents, {content_id: id, completed: true});
+
+
+                if (!exists) {
+                  available = false;
+                }
+              });
+
+              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available ? ' disabled' : '') + '" ' +
                 'id="content-' + content.id + '" ' +
+                'data-requirements=\'' + JSON.stringify(requirements) + '\'' +
                 'data-id="' + content.lesson.id + '"' +
                 'data-level="1">' +
                 '<div id="lesson-' + lesson.id + '" class="js-lesson content-lesson ' + active + (!lessonReleased ? ' not-released' : '') + '" data-lesson-id="' + lesson.id + '">' +
@@ -329,7 +416,26 @@
           );
 
           $list.append($courseContents);
+          self.checkNextButtonUnlocked();
+
         }
+      });
+    },
+
+    checkNextButtonUnlocked: function () {
+      var lessonProgress = $('#js-course-tree-ajax').data('lesson-progress');
+
+      app.lessonList.requirementsExists(lessonProgress, function ($item, content_id) {
+        if (content_id && lessonProgress.hasOwnProperty('enrollment_id')) {
+          app.lessonList.checkLessonCompleted(lessonProgress.enrollment_id, content_id, function (completed) {
+            if (completed) {
+              $('.btn-next-lesson').removeClass('disabled');
+              $item.removeClass('disabled');
+            }
+          });
+        }
+      }, function () {
+        $('.btn-next-lesson').removeClass('disabled');
       });
     },
 
