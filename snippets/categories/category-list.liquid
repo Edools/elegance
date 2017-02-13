@@ -1,0 +1,110 @@
+<div class="category-list" id="js-category-list">
+  <ul class="list-group top-categories">
+    {% for top_category in categories %}
+      {% assign has_children = false %}
+      {% assign is_active = false %}
+
+      {% if top_category.subcategories.size > 0 %}
+        {% assign has_children = true %}
+      {% endif %}
+
+      {% if category.slug == top_category.slug %}
+        {% assign is_active = true %}
+      {% endif %}
+
+      <li
+        class="category-item list-group-item{% if has_children %} has-children{% endif %}{% if is_active %} current{% endif %}">
+        <div class="category-info">
+          {% if is_active %}
+            <div class="category-title">
+              <span>{{ top_category.title }}</span>
+            </div>
+          {% else %}
+            <a href="/categories/{{ top_category.slug }}" class="category-title">
+              <span>{{ top_category.title }}</span>
+            </a>
+          {% endif %}
+        </div>
+
+        {% if has_children %}
+          <button class="btn btn-default btn-sm toggle-btn">
+            <i class="icon icon-arrow-down"></i>
+          </button>
+
+          <ul class="list-group collapse">
+            {% for subcategory in top_category.subcategories %}
+              {% assign has_children = false %}
+              {% assign is_active = false %}
+
+              {% if subcategory.subcategories.size > 0 %}
+                {% assign has_children = true %}
+              {% endif %}
+
+              {% if category.slug == subcategory.slug %}
+                {% assign is_active = true %}
+              {% endif %}
+
+              <li
+                class="category-item list-group-item {% if has_children %}has-children{% endif %}{% if is_active %} current{% endif %}">
+                <div class="category-info">
+                  <div class="left">
+                    <i></i>
+                  </div>
+                  <div class="center">
+                    {% if is_active %}
+                      <div class="category-title">
+                        <span>{{ subcategory.title }}</span>
+                      </div>
+                    {% else %}
+                      <a href="/categories/{{ top_category.slug }}/subcategories/{{ subcategory.slug }}"
+                         class="category-title">
+                        <span>{{ subcategory.title }}</span>
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+
+                {% if has_children %}
+                  <button class="btn btn-default btn-sm toggle-btn">
+                    <i class="icon icon-arrow-down"></i>
+                  </button>
+
+                  <ul class="list-group collapse">
+                    {% for subsubcategory in subcategory.subcategories %}
+                      {% assign is_active = false %}
+
+                      {% if category.slug == subsubcategory.slug %}
+                        {% assign is_active = true %}
+                      {% endif %}
+
+                      <li class="category-item list-group-item{% if is_active %} current{% endif %}">
+                        <div class="category-info">
+                          <div class="left">
+                            <i></i>
+                          </div>
+                          <div class="center">
+                            {% if is_active %}
+                              <div class="category-title">
+                                <span>{{ subsubcategory.title }}</span>
+                              </div>
+                            {% else %}
+                              <a
+                                href="/categories/{{ top_category.slug }}/subcategories/{{ subcategory.slug }}/subcategories/{{ subsubcategory.slug }}"
+                                class="category-title">
+                                <span>{{ subsubcategory.title }}</span>
+                              </a>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>

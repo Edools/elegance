@@ -56,6 +56,7 @@
       app.ckeditor.bindCkeditor();
       app.bindCheckout();
       app.lessonList.init();
+      app.categoryList.init();
       app.bindExamQuestionForm();
       app.changeTimeZone();
       app.followBind();
