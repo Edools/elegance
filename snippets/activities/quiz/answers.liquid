@@ -79,7 +79,7 @@
               </div>
             {% endfor %}
 
-            {% if answer.approved or lesson.min_grade <= 0 %}
+            {% if answer.approved? or lesson.min_grade <= 0 or attempts_remaining == 0 %}
               <div class="question-option alert alert-info">
               <span class="question-right-answer">
                 <strong>{{ 'quiz.right_answer' | t }}:</strong> {{ correct_option.title }}
@@ -107,7 +107,7 @@
               </tbody>
             </table>
 
-            {% if answer.approved or lesson.min_grade <= 0 %}
+            {% if answer.approved? or lesson.min_grade <= 0 or attempts_remaining == 0 %}
               <div class="alert alert-info">
               <span class="question-right-answer">
                 <strong>{{ 'quiz.right_answer' | t }}:</strong>
@@ -169,7 +169,7 @@
 
             <br/>
 
-            {% if answer.approved or lesson.min_grade <= 0 %}
+            {% if answer.approved? or lesson.min_grade <= 0 or attempts_remaining == 0 %}
               <div class="alert alert-info">
                   <span class="question-right-answer">
                     <strong>{{ 'quiz.right_answer' | t }}
@@ -207,7 +207,7 @@
               </div>
             {% endfor %}
 
-            {% if answer.approved or lesson.min_grade <= 0 %}
+            {% if answer.approved? or lesson.min_grade <= 0 or attempts_remaining == 0 %}
               <div class="alert alert-info">
                 <span class="question-right-answer">
                   <strong>{{ 'quiz.right_answer' | t }}:</strong> {{ correct_option.title }}
