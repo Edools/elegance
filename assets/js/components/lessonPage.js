@@ -19,9 +19,9 @@
 
         var lessonProgress = $('#js-course-tree-ajax').data('lesson-progress');
 
-        app.requirementsExists(lessonProgress, function ($item, content_id) {
+        app.lessonList.requirementsExists(lessonProgress, function ($item, content_id) {
           if (content_id && lessonProgress.hasOwnProperty('enrollment_id')) {
-            app.checkLessonCompleted(lessonProgress.enrollment_id, content_id, function (completed) {
+            app.lessonList.checkLessonCompleted(lessonProgress.enrollment_id, content_id, function (completed) {
               if (completed) {
                 $('.btn-next-lesson').removeClass('disabled');
                 $item.removeClass('disabled');

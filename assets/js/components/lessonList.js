@@ -35,7 +35,7 @@
             $mediaControls.removeClass('disabled');
           }
 
-          app.requirementsExists(lessonProgress.data, function ($item, content_id) {
+          app.lessonList.requirementsExists(lessonProgress.data, function ($item, content_id) {
             if (content_id) {
               app.checkLessonCompleted(enrollmentId, content_id, function (completed) {
                 if (completed) {
@@ -72,6 +72,54 @@
 
     lessonListPanel: function () {
       return $('.lesson-list-panel');
+    },
+
+    requirementsExists: function (lessonProgress, cb, cbNotExists) {
+      if(!lessonProgress) {
+        return false;
+      }
+
+      var requirementsElements = $('.lesson-list-panel [data-requirements]').filter(function (index, item) {
+        return $(item).data('requirements').length > 0;
+      });
+
+      var requirementsUnified = requirementsElements.map(function(idx, item) {
+        return {
+          item: $(item),
+          requirements: $(item).data('requirements')
+        }
+      }).toArray();
+
+      var exists = _.find(requirementsUnified, { requirements: [{ content_id: lessonProgress.lesson_id}] });
+
+      if (exists) {
+        var $item = exists.item;
+        if (cb) {
+          return cb($item, lessonProgress.lesson_id);
+        }
+      } else {
+        if (cbNotExists) {
+          return cbNotExists();
+        }
+      }
+    },
+
+    checkLessonCompleted: function (enrollmentId, id, cb) {
+      var self = this;
+      var completed = false;
+      var apiKey = $('.course-content #js-course-tree-ajax').data('api-key');
+
+      $.ajax({
+        url: window.CORE_HOST + '/enrollments/' + enrollmentId + '/lessons_progresses?lesson_id=' + id,
+        method: 'GET',
+        headers: {
+          'Authorization': 'Token token=' + apiKey
+        },
+      }).success(function (data) {
+        completed = data.lessons_progresses[0].completed;
+
+        cb(completed);
+      });
     },
 
     // Actions
@@ -377,9 +425,9 @@
     checkNextButtonUnlocked: function () {
       var lessonProgress = $('#js-course-tree-ajax').data('lesson-progress');
 
-      app.requirementsExists(lessonProgress, function ($item, content_id) {
+      app.lessonList.requirementsExists(lessonProgress, function ($item, content_id) {
         if (content_id && lessonProgress.hasOwnProperty('enrollment_id')) {
-          app.checkLessonCompleted(lessonProgress.enrollment_id, content_id, function (completed) {
+          app.lessonList.checkLessonCompleted(lessonProgress.enrollment_id, content_id, function (completed) {
             if (completed) {
               $('.btn-next-lesson').removeClass('disabled');
               $item.removeClass('disabled');
