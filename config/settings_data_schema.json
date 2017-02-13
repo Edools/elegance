@@ -629,6 +629,23 @@
           "label": "Tamanho da Fonte",
           "placeholder": "ex: 16px"
         }
+      },
+      {
+        "template": "<h3>Ícones</h3>"
+      },
+      {
+        "key": "style.type_enable_simple_line_icons",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Habilitar Simple Line Icons (Padrão)"
+        }
+      },
+      {
+        "key": "style.type_enable_font_awesome",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Habilitar Font Awesome"
+        }
       }
     ]
   },
