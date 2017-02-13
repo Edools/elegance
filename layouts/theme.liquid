@@ -33,9 +33,20 @@
 
   {% include 'fonts' %}
 
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" media="none"
-        onload="if(media!='all')media='all'">
+  {% if settings.style.type_enable_simple_line_icons != false %}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
+          media="none"
+          onload="if(media!='all')media='all'">
+  {% endif %}
+
+  {% if settings.style.type_enable_font_awesome != false %}
+    <link rel="stylesheet"
+          href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+          media="none"
+          crossorigin="anonymous"
+          onload="if(media!='all')media='all'">
+  {% endif %}
 
   <link rel="stylesheet" href="{{ 'theme.base.min.css' | asset_url }}">
 
