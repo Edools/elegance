@@ -1,3 +1,55 @@
+.question {
+  display: flex;
+
+  .question-number {
+    @include breakpoint(sm) {
+      width: 3%;
+    }
+
+    width: 8%;
+  }
+
+  .question-title {
+    @include breakpoint(sm) {
+      width: 97%;
+    }
+
+    width: 92%;
+  }
+}
+
+.question-option {
+  @include clearfix();
+
+  display: block;
+  margin-bottom: $padding-large-vertical * 2;
+  width: 100%;
+  font-weight: normal;
+
+  .option-input,
+  .option-text {
+    display: inline-block;
+    float: left;
+  }
+
+  .option-input {
+    width: 30px;
+  }
+
+  .option-text {
+    width: calc(100% - 30px);
+  }
+}
+
+.caption {
+  display: block;
+  font-weight: normal;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
 .quiz-form {
   .option-block {
     margin: 0 auto;

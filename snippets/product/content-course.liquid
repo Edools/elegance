@@ -1,8 +1,11 @@
 {% if course %}
-  <div id="permanent-contents" class="course-content">
-    <div class="busy component-busy"></div>
+  <div class="course-content">
+    <div class="course-content-busy">
+      <div class="busy busy-md"></div>
+    </div>
     <ul id="js-course-tree-ajax"
         class="modules list-group"
+        data-lesson-progress="{{ lesson_progress | to_json | replace: '"', '&quot;' | strip_newlines }}"
         data-course="{{ course | to_json | replace: '"', '&quot;' | strip_newlines }}"
         data-enrollment="{{ enrollment | to_json | replace: '"', '&quot;'| strip_newlines }}"
         data-course-content="{{ course_content | to_json | replace: '"', '&quot;'| strip_newlines }}"
@@ -13,7 +16,7 @@
         data-translation-release-at="{{ 'lesson.release_at' | t }}"
         data-translation-release-after="{{ 'lesson.release_after' | t }}"
         data-translation-course_content-views="{{ 'product.course_content.views' | t }}"
-        data-api-key="{{ current_apps_credentials.course_content }}">
+        data-api-key="{% if current_api_key %}{{current_api_key.credentials }}{% else %}{{ current_apps_credentials.course_content }}{% endif %}">
     </ul>
   </div>
 {% endif %}

@@ -153,8 +153,9 @@
   },
   "navbar": {
     "cart": "Carrinho",
+    "categories": "Categorias",
     "forum": "Fóruns",
-    "sign_in": "Entrar",
+    "sign_in": "<i class=\"icon-user\"></i> Entrar",
     "my_courses": "Meus cursos",
     "public_profile": "Perfil público",
     "my_profile": "Meu Perfil",
@@ -172,7 +173,8 @@
   "sessions": {
     "signed_in": "Entrou com sucesso",
     "signed_out": "Saiu com sucesso",
-    "already_logged_in": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida."
+    "already_logged_in": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida.",
+    "blocked": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida e sua conta bloqueada."
   },
   "registrations": {
     "signed_up": "Bem-vindo! Você se registrou com sucesso."
@@ -275,6 +277,7 @@
     "picture": "Foto do Perfil",
     "edit_picture": "Editar foto do perfil",
     "personal_data": "Dados Pessoais",
+    "extra_data": "Informações Adicionais",
     "reset_password": "Redefinir Senha",
     "first_name": "Nome",
     "last_name": "Sobrenome",
@@ -500,6 +503,7 @@
       "boleto_pay": "Gerar Boleto",
       "bank_transfer_warning": "Você será redirecionado para a página do Banco para inserir as informações necessárias para o débito online. Sendo a transação realizada com sucesso, o curso será liberado.",
       "bank_transfer_pay": "Ir para o Banco",
+      "trial_purchase_warning": "Você será cobrado apenas no fim do período gratuito de testes.<br/>É possível cancelar o seu pedido a qualquer momento durante esse período",
       "installment_amount": {
         "one": "{{ amount }} à vista",
         "other": "{{ count }}x de {{ amount }}"
@@ -584,6 +588,9 @@
   "products": {
     "products": "Produtos"
   },
+  "categories": {
+    "categories": "Categorias"
+  },
   "lesson": {
     "release_at": "Agendado para",
     "release_after": "Agendado para",
@@ -662,7 +669,7 @@
     },
     "orders": {
       "payments": "Pagamentos",
-      "my_orders": "Meus Pedidos",
+      "my_orders": "Meus <b>Pedidos</b>",
       "number": "Nº",
       "status": "Status",
       "ordered_date": "Data do pedido",

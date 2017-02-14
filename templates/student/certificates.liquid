@@ -9,7 +9,7 @@
             {% assign product = certificate.school_product %}
 
             <article class="col-md-4 col-sm-6 col-xs-12">
-              <div class="course thumbnail">
+              <div class="course">
                 <div class="course-image">
                   {% if product.logo %}
                     {% assign product_src = product.logo %}
@@ -41,7 +41,7 @@
         </div>
       </div>
     {% else %}
-      <div class="note note-warning">
+      <div class="alert alert-info">
         {{ 'enrollment.no_certificate' | t }}
       </div>
     {% endif %}

@@ -186,6 +186,8 @@
 
   {% if orders_with_subscription.size == 0 and orders_without_subscription.size == 0 %}
     <div class="container">
+      <h2>{{ 'pages.orders.my_orders' | t }}</h2>
+
       <div class="alert alert-info">
         {{ 'pages.orders.empty' | t }}
       </div>

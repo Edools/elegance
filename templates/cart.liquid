@@ -10,11 +10,11 @@
           <div class="col-md-7">
             <div id="cart-items" class="cart">
               {% if alert %}
-                <div class="note note-danger">{{ alert | t }}</div>
+                <div class="alert alert-danger">{{ alert | t }}</div>
               {% endif %}
 
               {% if notice %}
-                <div class="note note-success">{{ notice | t }}</div>
+                <div class="alert alert-success">{{ notice | t }}</div>
               {% endif %}
 
               {% if order.items.size > 0 %}
@@ -66,7 +66,7 @@
                   {% endfor %}
                 </ul>
               {% else %}
-                <div class="note note-warning">{{ 'checkout.cart.empty' | t }}</div>
+                <div class="alert alert-info">{{ 'checkout.cart.empty' | t }}</div>
               {% endif %}
             </div>
           </div>
@@ -74,7 +74,9 @@
           <div class="col-md-5 cart-sidebar">
             <div class="panel panel-default">
               <div class="panel-body">
+
                 {% include "checkout/security-box" %}
+
                 {% include "checkout/totals-box" %}
 
                 {% if order.items.size > 0 %}
@@ -92,7 +94,7 @@
 
                 {% include "checkout/payment-methods-box" %}
 
-                {% if order.items.size > 0 and order.kind != 'subscription' and order.amount_to_pay == order.total %}
+                {% if order.items.size > 0 and order.kind != 'subscription' and order.amount_to_pay == order.total and order.kind != 'free' %}
                   <div class="coupon-widget panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">{{ 'checkout.coupon' | t }}</h4>

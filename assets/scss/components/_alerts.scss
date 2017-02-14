@@ -65,16 +65,32 @@
 
 .alert-success {
   @include alert-variant($alert-success-bg, $alert-success-border, $alert-success-text);
+
+  background-color: lighten($alert-success-bg, 36%);
+  color: darken($alert-success-bg, 7%);
 }
 
 .alert-info {
   @include alert-variant($alert-info-bg, $alert-info-border, $alert-info-text);
+
+  background-color: lighten($alert-info-bg, 38%);
+  color: darken($alert-info-bg, 5%);
 }
 
 .alert-warning {
   @include alert-variant($alert-warning-bg, $alert-warning-border, $alert-warning-text);
+
+  background-color: lighten($alert-warning-bg, 38%);
+  color: darken($alert-warning-bg, 5%);
 }
 
 .alert-danger {
   @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
+
+  background-color: lighten($alert-danger-bg, 38%);
+  color: darken($alert-danger-bg, 5%);
+}
+
+.alert-outline {
+  background-color: transparent;
 }

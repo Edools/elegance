@@ -162,7 +162,8 @@
   "sessions": {
     "signed_in": "Ha entrado con éxito",
     "signed_out": "Salió con éxito",
-    "already_logged_in": "Se ha identificado una segunda sesión activa con su usuario y la sesión actual se interrumpió. Inicie la sesión de nuevo u mantenga el acceso en otra sesión.."
+    "already_logged_in": "Se ha identificado una segunda sesión activa con su usuario y la sesión actual se interrumpió. Inicie la sesión de nuevo u mantenga el acceso en otra sesión..",
+    "already_logged_in": "Se ha identificado una segunda sesión activa con su usuario y la sesión actual se interrumpió. Su cuenta ha sido bloqueada."
   },
   "registrations": {
     "signed_up": " ¡Bienvenido! Usted se ha registrado con éxito."
@@ -260,6 +261,7 @@
     "picture": "Foto del Perfil",
     "edit_picture": "Editar foto del perfil",
     "personal_data": "Datos Personales",
+    "extra_data": "Informaciones Adicionales",
     "reset_password": "Redefinir Contrasena",
     "first_name": "Nombre",
     "last_name": "Apellido",

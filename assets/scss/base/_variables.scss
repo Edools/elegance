@@ -7,28 +7,27 @@ $bootstrap-sass-asset-helper: true !default;
 //
 //## Gray and brand colors for use across Bootstrap.
 
+//** Background color for `<body>`.
+$body-bg: #f4f2f0 !default;
+
 $gray-base: #050505 !default;
 $gray-darker: lighten($gray-base, 13.5%) !default; // #222
 $gray-dark: lighten($gray-base, 20%) !default; // #333
 $gray: lighten($gray-base, 33.5%) !default; // #555
 $gray-light: lighten($gray-base, 46.7%) !default; // #777
-$gray-lighter: #f5f8fa !default;
+$gray-lighter: lighten($body-bg, 3.2%) !default;
 
 $brand-primary: #4bbb83 !default;
 $brand-success: #6bd06b !default;
 $brand-info: #4aabe2 !default;
 $brand-warning: #e67e22 !default;
-$brand-danger: #f34646 !default;
+$brand-danger: #f54545 !default;
 
 $light: #fff !default;
 
 //== Scaffolding
 //
 //## Settings for some of the most global styles.
-
-//** Background color for `<body>`.
-$body-bg: #f4f2f0 !default;
-$body-bg-gray: $gray-lighter !default;
 
 //** Global text color on `<body>`.
 $text-color: #585858 !default;
@@ -236,7 +235,7 @@ $cursor-disabled: not-allowed !default;
 //** Background for the dropdown menu.
 $dropdown-bg: $light !default;
 //** Dropdown menu `border-color`.
-$dropdown-border: rgba(0, 0, 0, .12) !default;
+$dropdown-border: rgba(0, 0, 0, .10) !default;
 //** Dropdown menu `border-color` **for IE8**.
 $dropdown-fallback-border: $border-color-base !default;
 //** Divider color for between dropdown items.

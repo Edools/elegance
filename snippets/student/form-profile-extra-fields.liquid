@@ -1,0 +1,9 @@
+{% if custom_fields.fields %}
+  {% if form_name == 'profile' %}
+    {% form form_name %}
+      {% include 'student/profile-extra-fields', form_name: form_name %}
+    {% endform %}
+  {% else %}
+    {% include 'student/profile-extra-fields', form_name: form_name %}
+  {% endif %}
+{% endif %}

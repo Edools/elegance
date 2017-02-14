@@ -23,8 +23,8 @@
 
     bindTooltips: function () {
       $("[data-toggle='tooltip']")
-        .tooltip("destroy")
-        .tooltip();
+      .tooltip("destroy")
+      .tooltip();
 
       $(document).trigger('app:bind:tooltips');
     },
@@ -56,9 +56,11 @@
       app.ckeditor.bindCkeditor();
       app.bindCheckout();
       app.lessonList.init();
+      app.categoryList.init();
       app.bindExamQuestionForm();
       app.changeTimeZone();
       app.followBind();
+      app.lessonPage();
       app.bindPostsForm();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);

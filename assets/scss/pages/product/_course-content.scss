@@ -7,14 +7,12 @@ $guideline-color: darken($border-color-base, 5%);
     display: block;
   }
 
-  .busy {
+  .course-content-busy {
     @include transition(.2s ease);
 
     margin: 0 auto;
     width: 44px;
     height: 44px;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTciIGhlaWdodD0iNTciIHZpZXdCb3g9IjAgMCA1NyA1NyIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBzdHJva2U9IiMyMjIiPiAgICA8ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPiAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMSAxKSIgc3Ryb2tlLXdpZHRoPSIyIj4gICAgICAgICAgICA8Y2lyY2xlIGN4PSI1IiBjeT0iNTAiIHI9IjUiPiAgICAgICAgICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeSIgICAgICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiIGR1cj0iMi4ycyIgICAgICAgICAgICAgICAgICAgICB2YWx1ZXM9IjUwOzU7NTA7NTAiICAgICAgICAgICAgICAgICAgICAgY2FsY01vZGU9ImxpbmVhciIgICAgICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgICAgICAgICAgICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iY3giICAgICAgICAgICAgICAgICAgICAgYmVnaW49IjBzIiBkdXI9IjIuMnMiICAgICAgICAgICAgICAgICAgICAgdmFsdWVzPSI1OzI3OzQ5OzUiICAgICAgICAgICAgICAgICAgICAgY2FsY01vZGU9ImxpbmVhciIgICAgICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgICAgICAgICA8L2NpcmNsZT4gICAgICAgICAgICA8Y2lyY2xlIGN4PSIyNyIgY3k9IjUiIHI9IjUiPiAgICAgICAgICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeSIgICAgICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiIGR1cj0iMi4ycyIgICAgICAgICAgICAgICAgICAgICBmcm9tPSI1IiB0bz0iNSIgICAgICAgICAgICAgICAgICAgICB2YWx1ZXM9IjU7NTA7NTA7NSIgICAgICAgICAgICAgICAgICAgICBjYWxjTW9kZT0ibGluZWFyIiAgICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAvPiAgICAgICAgICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeCIgICAgICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiIGR1cj0iMi4ycyIgICAgICAgICAgICAgICAgICAgICBmcm9tPSIyNyIgdG89IjI3IiAgICAgICAgICAgICAgICAgICAgIHZhbHVlcz0iMjc7NDk7NTsyNyIgICAgICAgICAgICAgICAgICAgICBjYWxjTW9kZT0ibGluZWFyIiAgICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAvPiAgICAgICAgICAgIDwvY2lyY2xlPiAgICAgICAgICAgIDxjaXJjbGUgY3g9IjQ5IiBjeT0iNTAiIHI9IjUiPiAgICAgICAgICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJjeSIgICAgICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiIGR1cj0iMi4ycyIgICAgICAgICAgICAgICAgICAgICB2YWx1ZXM9IjUwOzUwOzU7NTAiICAgICAgICAgICAgICAgICAgICAgY2FsY01vZGU9ImxpbmVhciIgICAgICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgICAgICAgICAgICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0iY3giICAgICAgICAgICAgICAgICAgICAgZnJvbT0iNDkiIHRvPSI0OSIgICAgICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiIGR1cj0iMi4ycyIgICAgICAgICAgICAgICAgICAgICB2YWx1ZXM9IjQ5OzU7Mjc7NDkiICAgICAgICAgICAgICAgICAgICAgY2FsY01vZGU9ImxpbmVhciIgICAgICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz4gICAgICAgICAgICA8L2NpcmNsZT4gICAgICAgIDwvZz4gICAgPC9nPjwvc3ZnPg==);
-    background-size: cover;
   }
 
   .modules {
@@ -61,14 +59,20 @@ $guideline-color: darken($border-color-base, 5%);
       display: block;
       cursor: default;
 
+      &.disabled {
+        a {
+          color: $text-muted;
+          pointer-events: none;
+        }
+      }
+
       &.module {
         font-weight: 600;
         cursor: pointer;
 
         .busy {
           float: right;
-          margin: 0;
-          margin-right: $padding-large-horizontal;
+          margin: 0 $padding-large-horizontal 0 0;
           width: 20px;
           height: 20px;
           opacity: 0;
@@ -158,7 +162,7 @@ $guideline-color: darken($border-color-base, 5%);
           .right {
             float: right;
             margin-left: auto;
-            padding-right: $padding-large-horizontal;
+            padding-right: 10px;
             text-align: right;
 
             .icon-check {
@@ -186,16 +190,20 @@ $guideline-color: darken($border-color-base, 5%);
           }
 
           i {
-            width: 25px;
+            width: 22px;
           }
 
           .lesson-views {
             @include user-select(none);
 
-            margin-left: 3px;
+            margin-left: 4px;
+            padding: 3px 4px;
+            border-radius: 8px;
+            background-color: $gray-lighter;
+            color: $text-color;
             vertical-align: middle;
-            line-height: 1;
-            cursor: pointer;
+            font-size: 12px;
+            line-height: 1.1;
           }
 
           .release-date {
@@ -231,6 +239,11 @@ $guideline-color: darken($border-color-base, 5%);
 
             .right {
               i {
+                color: $light;
+              }
+
+              .badge {
+                background-color: lighten($list-group-active-bg, 7%);
                 color: $light;
               }
             }
