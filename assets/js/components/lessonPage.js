@@ -25,6 +25,7 @@
               if (completed) {
                 $('.btn-next-lesson').removeClass('disabled');
                 $item.removeClass('disabled');
+                $item.find('.right > .icon-lock').remove();
               }
             });
           }
