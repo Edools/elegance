@@ -1,6 +1,7 @@
 <div class="home-categories">
   {% assign all_categories = current_school | get_categories %}
-  {% for c in settings.view.home.categories | order_by: 'order' %}
+  {% assign config_categories = settings.view.home.categories | sort: 'order' %}
+  {% for c in config_categories %}
     {% assign current_category = nil %}
     {% for category in all_categories %}
       {% if category.slug == c.slug %}
@@ -12,7 +13,7 @@
 
     <div class="home-category">
       <div class="container">
-        <h3>{{ current_category.title }} Order:{{ c.order }}</h3>
+        <h3>{{ current_category.title }}</h3>
       </div>
 
       <div class="category-products">
