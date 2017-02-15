@@ -193,4 +193,16 @@
       }
     }
   }
+
+  .home-categories {
+    .home-category {
+      .product-list {
+        padding-bottom: $padding-base-vertical * 4;
+      }
+
+      .category-actions {
+        margin-bottom: $padding-large-vertical * 8;
+      }
+    }
+  }
 }

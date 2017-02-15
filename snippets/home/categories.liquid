@@ -9,7 +9,7 @@
       {% endif %}
     {% endfor %}
 
-    {% assign category_products = current_school | get_products_by_category_slug: c.slug, 4 %}
+    {% assign category_products = current_school | get_products_by_category_slug: c.slug, 6 %}
 
     <div class="home-category">
       <div class="container">
@@ -18,6 +18,12 @@
 
       <div class="category-products">
         {% include 'product/list', products: category_products, gateway: gateway %}
+      </div>
+
+      <div class="container">
+        <div class="category-actions text-center">
+          <a href="/categories/{{ c.slug }}" class="btn btn-default">{{ 'general.see_all' | t }}</a>
+        </div>
       </div>
     </div>
   {% endfor %}
