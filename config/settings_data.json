@@ -112,7 +112,22 @@
             "social_instagram_link": false,
             "social_youtube_link": false,
             "social_linkedin_link": false
-          }
+          },
+          "enable_categories": true,
+          "categories": [
+            {
+              "slug": "basic",
+              "order": 1
+            },
+            {
+              "slug": "ruby",
+              "order": 2
+            },
+            {
+              "slug": "advanced",
+              "order": 3
+            }
+          ]
         }
       }
     }
