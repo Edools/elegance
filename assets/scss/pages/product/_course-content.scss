@@ -59,9 +59,9 @@ $guideline-color: darken($border-color-base, 5%);
       display: block;
       cursor: default;
 
-      &.disabled {
+      &.blocked {
         a {
-          color: $text-muted;
+          background: transparent;
           pointer-events: none;
         }
       }

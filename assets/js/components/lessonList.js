@@ -37,9 +37,10 @@
 
           app.lessonList.requirementsExists(lessonProgress.data, function ($item, content_id) {
             if (content_id) {
-              app.checkLessonCompleted(enrollmentId, content_id, function (completed) {
+              app.lessonList.checkLessonCompleted(enrollmentId, content_id, function (completed) {
                 if (completed) {
-                  $item.removeClass('disabled');
+                  $item.removeClass('blocked');
+                  $item.find('.right > .icon-lock').remove();
                 }
               });
             }
@@ -366,7 +367,7 @@
                 }
               });
 
-              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available ? ' disabled' : '') + '" ' +
+              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available ? ' blocked' : '') + '" ' +
                 'id="content-' + content.id + '" ' +
                 'data-requirements=\'' + JSON.stringify(requirements) + '\'' +
                 'data-id="' + content.lesson.id + '"' +
@@ -383,6 +384,7 @@
                 '</div>' +
 
                 '<div class="right">' +
+                ((!available) ? '<i class="icon-lock"></i>' : '') +
                 '<span class="progress-icon js-progress-icons">' +
                 '<i class="icon-check js-completed-icon ' + hideCompletedIcon + '"></i>' +
                 '<i class="icon-clock js-in-progress-icon ' + hideInProgressIcon + '"></i>' +
@@ -430,7 +432,8 @@
           app.lessonList.checkLessonCompleted(lessonProgress.enrollment_id, content_id, function (completed) {
             if (completed) {
               $('.btn-next-lesson').removeClass('disabled');
-              $item.removeClass('disabled');
+              $item.removeClass('blocked');
+              $item.find('.right > .icon-lock').remove();
             }
           });
         }
