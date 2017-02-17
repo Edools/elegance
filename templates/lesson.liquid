@@ -60,6 +60,12 @@
             <h2 class="lesson-title">{{ lesson.title }}</h2>
           </div>
 
+          {% if lesson.description.size > 0 %}
+            <div class="lesson-description">
+              {{ lesson.description }}
+            </div>
+          {% endif %}
+
           <div id="js-media-player" class="media-player" data-lesson-id="{{ lesson.id }}">
             {% if lesson.media %}
               {% media_player lesson: lesson, trackeable: track_lesson,
