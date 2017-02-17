@@ -9,7 +9,7 @@
       {% endif %}
     {% endfor %}
 
-    {% assign category_products = current_school | get_products_by_category_slug: c.slug, 6 %}
+    {% assign category_products = current_school | get_products_by_category_and_subcategories: c.slug, 6 %}
 
     <div class="home-category">
       <div class="container">
