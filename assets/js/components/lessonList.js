@@ -308,10 +308,12 @@
 
           courseContents = _.sortBy(courseContents, 'order');
 
-          courseContents = _.map(courseContents, function (content) {
-            content.completed = self.enrollment.lessons_info && self.enrollment.lessons_info.completed.indexOf(content.lesson.id) > -1;
-            return content;
-          });
+          if (self.enrollment) {
+            courseContents = _.map(courseContents, function (content) {
+              content.completed = self.enrollment.lessons_info && self.enrollment.lessons_info.completed.indexOf(content.lesson.id) > -1;
+              return content;
+            });
+          }
 
           var $courseContents = _.map(courseContents, function (content) {
               var active = (self.currentLessonId == content.lesson.id ? 'active js' : '');
@@ -358,14 +360,16 @@
                 }
               }
 
-              _.each(requirements_ids, function (id) {
-                var exists = _.find(courseContents, {content_id: id, completed: true});
+              if (self.enrollment) {
+                _.each(requirements_ids, function (id) {
+                  var exists = _.find(courseContents, {content_id: id, completed: true});
 
 
-                if (!exists) {
-                  available = false;
-                }
-              });
+                  if (!exists) {
+                    available = false;
+                  }
+                });
+              }
 
               var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available ? ' blocked' : '') + '" ' +
                 'id="content-' + content.id + '" ' +
