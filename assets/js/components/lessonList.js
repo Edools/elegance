@@ -252,7 +252,7 @@
       return moment() > releaseTime;
     },
 
-    checkTrialBy: function(type) {
+    checkTrialByType: function(type) {
       var $tree = $('#js-course-tree-ajax');
       var $enrollment = $tree.data('enrollment');
       var constrains_name = 'trial_' + type + '_ids';
@@ -327,7 +327,7 @@
           'Authorization': 'Token token=' + self.apiKey
         },
         success: function (res) {
-          var blockedContent = self.checkTrialBy('content');
+          var blockedContent = self.checkTrialByType('content');
           var courseContents = _.filter(res.course_contents, function (lesson) {
             return lesson.available != false;
           });
@@ -482,7 +482,7 @@
           'Authorization': 'Token token=' + self.apiKey
         },
         success: function (res) {
-          const blockedModule = self.checkTrialBy('module');
+          const blockedModule = self.checkTrialByType('module');
           if (!res.course_modules || res.course_modules.length <= 0) return;
 
           self.allModules = res.course_modules;
