@@ -327,7 +327,7 @@
           'Authorization': 'Token token=' + self.apiKey
         },
         success: function (res) {
-          var blockContent = self.checkTrialBy('content');
+          var blockedContent = self.checkTrialBy('content');
           var courseContents = _.filter(res.course_contents, function (lesson) {
             return lesson.available != false;
           });
@@ -397,7 +397,7 @@
                 });
               }
 
-              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available || blockContent(content.id) ? ' disabled' : '') + '" ' +
+              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available || blockedContent(content.id) ? ' disabled' : '') + '" ' +
                 'id="content-' + content.id + '" ' +
                 'data-requirements=\'' + JSON.stringify(requirements) + '\'' +
                 'data-id="' + content.lesson.id + '"' +
@@ -482,7 +482,7 @@
           'Authorization': 'Token token=' + self.apiKey
         },
         success: function (res) {
-          const blockModule = self.checkTrialBy('module');
+          const blockedModule = self.checkTrialBy('module');
           if (!res.course_modules || res.course_modules.length <= 0) return;
 
           self.allModules = res.course_modules;
@@ -495,7 +495,7 @@
           self.topModules = _.sortBy(self.topModules, 'order');
 
           var $modules = _.map(self.topModules, function (module) {
-            let disabled = blockModule(module.id);
+            let disabled = blockedModule(module.id);
 
             return $(
               '<li class="list-group-item module '+(disabled ? 'disabled' : '')+'" ' +
