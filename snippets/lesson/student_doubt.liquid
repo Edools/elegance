@@ -1,0 +1,46 @@
+<div id="js-doubt-{{ student_doubt.id }}" class="student-doubt row">
+  <div class="col col-xs-12 col-sm-1">
+    <div class="avatar">
+      {% image, src: student_doubt.student.cover_image_url, alt: student_doubt.student.first_name, lazyload: false %}
+    </div>
+  </div>
+
+  <div class="col col-xs-12 col-sm-11">
+    <div class="comment-bubble">
+      <div class="author">
+        <span class="name">{{ student_doubt.student | fullname }}</span>
+        <span class="date">{{ student_doubt.created_at | time_ago_in_words }}</span>
+      </div>
+
+      <div class="quetion-text">
+        {{ student_doubt.question }}
+      </div>
+
+      {% if student_doubt.answer and student_doubt.answer.size > 0 %}
+        <div class="answer row">
+          <div class="col col-xs-12 col-sm-1">
+            <div class="avatar">
+              {% image, src: student_doubt.collaborator.cover_image_url, alt: student_doubt.collaborator.first_name, lazyload: false %}
+            </div>
+          </div>
+          <div class="col col-xs-12 col-sm-11">
+            <div class="comment-bubble">
+              <div class="author">
+                <span class="name">{{ student_doubt.collaborator | fullname }}</span>
+                <span class="date">{{ student_doubt.updated_at | time_ago_in_words }}</span>
+              </div>
+
+              <div class="answer-text">
+                {{ student_doubt.answer }}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="answer row waiting">
+          <alert class="alert alert-info">Aguardando resposta</alert>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
