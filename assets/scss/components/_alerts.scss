@@ -87,7 +87,7 @@
 .alert-danger {
   @include alert-variant($alert-danger-bg, $alert-danger-border, $alert-danger-text);
 
-  background-color: lighten($alert-danger-bg, 38%);
+  background-color: lighten($alert-danger-bg, 37%);
   color: darken($alert-danger-bg, 5%);
 }
 

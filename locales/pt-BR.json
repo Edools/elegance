@@ -862,5 +862,13 @@
         "invitation_token_invalid": "O token fornecido não é válido!"
       }
     }
+  },
+  "student_doubt": {
+    "doubts": "Dúvidas",
+    "tutor": "Tutor:",
+    "load_more": "Carregar mais...",
+    "ask_to_tutor": "Perguntar aos tutores",
+    "select_tutor": "Selecione o tutor...",
+    "write_your_doubt": "Escreva sua dúvida"
   }
 }
