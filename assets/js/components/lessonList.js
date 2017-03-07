@@ -261,7 +261,7 @@
       var constrains_tree = $tree.data('school-product').trial_constrains;
       var constrains = constrains_tree[payment_method];
 
-      if (!constrains.hasOwnProperty(constrains_name)) {
+      if (constrains && !constrains.hasOwnProperty(constrains_name)) {
         return false;
       }
 
@@ -495,7 +495,7 @@
           self.topModules = _.sortBy(self.topModules, 'order');
 
           var $modules = _.map(self.topModules, function (module) {
-            let disabled = blockedModule(module.id);
+            var disabled = blockedModule(module.id);
 
             return $(
               '<li class="list-group-item module '+(disabled ? 'disabled' : '')+'" ' +
