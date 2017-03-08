@@ -5,7 +5,7 @@
         <h4>{{ 'student_doubt.write_your_doubt' | t }}</h4>
         <div class="form-group form-inline">
           <label for="collaborator_id">{{ 'student_doubt.tutor' | t }}</label>
-          <select class="form-control" id="collaborator_id" name="collaborator_id">
+          <select class="form-control" id="collaborator_id" name="student_doubt[collaborator_id]">
             {% for collaborator in collaborators %}
               <option value="{{ collaborator.id }}">{{ collaborator | fullname }}</option>
             {% endfor %}
