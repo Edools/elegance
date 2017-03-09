@@ -1,0 +1,16 @@
+{
+  'identificador'        => 'Fez uma pergunta no forum  [{{ products | map: 'title' | join: ', ' }}]',
+  'Id do aluno'          =>  {{ user.id }},
+  'Nome do aluno'        => '{{ user | fullname }}',
+  'Email do aluno'       => '{{ user.email }}',
+  'Id da escola'         =>  {{ school.id }},
+  'Nome da escola'       => '{{ school.name }}',
+  'Url da escola'        => '{{ school_url }}',
+  'Id do forum'          => {{ forum_id }},
+  'Nome do forum'        => '{{ forum.title }}',
+  'Link para a pergunta' => '{{ url_question }}',
+  'Título da pergunta'   => '{{ forum_question.title }}',
+  'Conteúdo da pergunta' => '{{ forum_question.description }}',
+  'Nome da seção'        => '{{ section.title }}',
+  'Nome do tópico'       => '{{ topic.title }}'
+}
