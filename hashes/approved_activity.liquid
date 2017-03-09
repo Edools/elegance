@@ -1,0 +1,14 @@
+{
+  'identificador'     => 'Foi aprovado em uma atividade [{{ activity.title }}]',
+  'Id do aluno'       => {{ user.id }},
+  'Nome do aluno'     => '{{ user | fullname }}',
+  'Email do aluno'    => '{{ user.email }}',
+  'Id da escola'      => {{ school.id }},
+  'Nome da escola'    => '{{ school.name }}',
+  'Url da escola'     => '{{ school_url }}',
+  'Nome da atividade' => '{{ activity.title }}',
+  'Nota do aluno'     => '{{ exam_answer.score }}',
+  'Nota máxima'       => '{{ exam_lesson.min_grade }}',
+  'Id do curso'       => {{ course.id }},
+  'Nome do curso'     => '{{ course.name }}'
+}

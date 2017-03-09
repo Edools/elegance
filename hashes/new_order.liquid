@@ -1,0 +1,12 @@
+{
+  'identificador'             => 'Compra iniciada [{{ products | map: 'title' | join: ', ' }}]',
+  'Id do aluno'               =>  {{ user.id }},
+  'Nome do aluno'             => '{{ user | fullname }}',
+  'Email do aluno'            => '{{ user.email }}',
+  'Id da escola'              =>  {{ school.id }},
+  'Nome da escola'            => '{{ school.name }}',
+  'Url da escola'             => '{{ school_url }}',
+  'Produtos'                  => '{{ products | map: 'title' | join: ', ' }}',
+  'Id dos produtos do pedido' => '{{ products_ids | join: ', ' }}',
+  'Valor do pedido'           => {{ order.amount_to_pay | divided_by: 100.0 }}
+}
