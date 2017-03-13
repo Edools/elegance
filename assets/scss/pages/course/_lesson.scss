@@ -3,6 +3,7 @@
 
   @import 'lesson/quiz';
   @import 'lesson/answers';
+  @import 'lesson/student-doubts';
 
   .lesson-page-sidebar {
     .lesson-list-header {
@@ -164,6 +165,14 @@
           padding: 0;
         }
       }
+    }
+  }
+
+  .lesson-tabs {
+    margin-top: $padding-large-vertical * 4;
+
+    .nav-tabs {
+      border-bottom: none;
     }
   }
 

@@ -1,0 +1,111 @@
+.student-doubts {
+  $student-doubts-bg: $light;
+  @extend .panel;
+  @extend .panel-default;
+
+  background-color: $student-doubts-bg;
+
+  .student-doubts-container {
+    @include breakpoint(sm) {
+      padding: $padding-large-horizontal * 2;
+    }
+
+    padding: $padding-large-horizontal;
+  }
+
+  .doubts-list {
+    padding: 0;
+
+    .student-doubt {
+      margin-right: 0;
+      margin-left: 0;
+      padding: $padding-large-horizontal * 2 0;
+      border-bottom: 1px solid $border-color-base;
+
+      &:last-child {
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+
+      .col {
+        padding: 0;
+      }
+
+      .avatar {
+        margin: 0;
+      }
+
+      .comment-bubble {
+        @include breakpoint(sm) {
+          margin-top: 0;
+          padding-left: $padding-large-horizontal;
+        }
+
+        margin-top: $padding-large-vertical;
+
+        .author {
+          font-size: $font-size-small;
+
+          .name {
+            font-weight: bold;
+          }
+        }
+      }
+
+      .answer {
+        position: relative;
+        margin-top: $padding-large-vertical * 3;
+        margin-right: 0;
+        margin-left: 0;
+
+        &:before {
+          position: absolute;
+          top: -25px;
+          left: 22px;
+          z-index: 100;
+          display: block;
+          width: 1px;
+          height: 15px;
+          border-left: 1px dashed $brand-primary;
+          content: '';
+        }
+
+        &.waiting {
+          &:before {
+            border-color: $brand-info;
+          }
+        }
+
+        .avatar {
+          box-shadow: 0 0 0 3px $brand-primary;
+        }
+
+        .author {
+          .name {
+            color: $brand-primary;
+          }
+        }
+      }
+    }
+  }
+
+  .student-doubts-form {
+    @include breakpoint(sm) {
+      padding: $padding-large-horizontal * 2;
+    }
+
+    display: none;
+    padding: $padding-large-horizontal;
+    border-bottom: 1px solid $border-color-base;
+    background-color: $panel-footer-bg;
+
+    h4 {
+      margin-top: 0;
+      margin-bottom: $padding-large-vertical * 3;
+    }
+
+    .form-buttons {
+      margin-top: $padding-large-vertical;
+    }
+  }
+}
