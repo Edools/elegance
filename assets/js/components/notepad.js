@@ -29,7 +29,7 @@ app.notepad = {
     var buttonLabel = $button.html();
     $button.html($button.data("sending"));
     $button.prop('disabled', true);
-    
+
     $.ajax({
       url: window.location.pathname + '/notepads',
       method: 'POST',
@@ -38,8 +38,8 @@ app.notepad = {
         note: note
       },
       success: function () {
-      $button.html(buttonLabel);
-      $button.prop('disabled', false);
+        $button.html(buttonLabel);
+        $button.prop('disabled', false);
         if (typeof cb == 'function') {
           cb();
         }
@@ -51,7 +51,7 @@ app.notepad = {
     var self = this;
     if (this.noteContainer().length <= 0) return;
     this.loadNote($("#lesson_id").val());
-    
+
     $("#notepad_form").on('submit', function(event) {
       event.preventDefault();
       self.saveNote();
