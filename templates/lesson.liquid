@@ -87,11 +87,16 @@
         <div class="lesson-tabs">
           <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#student-doubts">{{ 'student_doubt.doubts' | 't' }}</a></li>
+            <li><a data-toggle="tab" href="#notepad">{{ 'notepad.note' | 't' }}</a></li>
           </ul>
 
           <div class="tab-content">
             <div id="student-doubts" class="tab-pane fade in active">
               {% include 'lesson/student_doubts' %}
+            </div>
+
+            <div id="notepad" class="tab-pane fade in">
+              {% include 'lesson/notepad', current_lesson_id: lesson.id %}
             </div>
           </div>
         </div>

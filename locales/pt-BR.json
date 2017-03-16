@@ -870,5 +870,9 @@
     "ask_to_tutor": "Perguntar aos tutores",
     "select_tutor": "Selecione o tutor...",
     "write_your_doubt": "Escreva sua dúvida"
+  },
+  "notepad": {
+    "note": "Nota",
+    "my_annotations": "Minhas anotações"
   }
 }
