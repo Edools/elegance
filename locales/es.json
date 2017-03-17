@@ -766,5 +766,9 @@
         "invitation_token_invalid": "O token fornecido no es válido!"
       }
     }
+  },
+  "notepad": {
+    "note": "Nota",
+    "my_annotations": "Mis notas"
   }
 }

@@ -742,5 +742,9 @@
         "invitation_token_invalid": "The token informed is not valid!"
       }
     }
+  },
+  "notepad": {
+    "note": "Note",
+    "my_annotations": "My annotations"
   }
 }

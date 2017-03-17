@@ -1,0 +1,16 @@
+.note {
+  margin-bottom: 5px;
+  padding: 10px;
+  min-height: 300px;
+  border: 10px solid #eee;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.notepad {
+  display: none;
+}
+
+a[href=\#notepad] {
+  display: none;
+}
