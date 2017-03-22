@@ -80,16 +80,43 @@
                 {% include "checkout/totals-box" %}
 
                 {% if order.items.size > 0 %}
-                  {% if current_school.terms_of_use.size > 0 %}
-                    {{ 'checkout.finish' | t | checkout_connect_link: 'btn btn-primary btn-lg btn-block cta-checkout-cart disabled' }}
-                    <label class="terms-of-use">
-                      <input type="checkbox" id="js-terms-of-use-check"/>
-                      {{ 'checkout.payment.accept_term_of_use' |t }}
-                    </label>
-                  {% else %}
-                    {{ 'checkout.finish' | t | checkout_connect_link: 'btn btn-primary btn-lg btn-block cta-checkout-cart' }}
-                  {% endif %}
+                  {% capture checkout_finish %}
+                    {% if current_school.terms_of_use.size > 0 %}
+                      {{ 'checkout.finish' | t | checkout_connect_link: 'btn btn-primary btn-lg btn-block cta-checkout-cart disabled' }}
+                      <label class="terms-of-use">
+                        <input type="checkbox" id="js-terms-of-use-check"/>
+                        {{ 'checkout.payment.accept_term_of_use' |t }}
+                      </label>
+                    {% else %}
+                      {{ 'checkout.finish' | t | checkout_connect_link: 'btn btn-primary btn-lg btn-block cta-checkout-cart' }}
+                    {% endif %}
+                  {% endcapture %}
 
+                  {% assign has_feature_pre_approved = current_school | has_feature: 'pre_approved' %}
+
+                  {% if has_feature_pre_approved %}
+                    {% if current_user %}
+                      {% assign current_user_pre_approved = current_user | pre_approved: current_school %}
+
+                      {% if current_user_pre_approved %}
+                        {{ checkout_finish }}
+                      {% else %}
+                        <div class="panel panel-danger">
+                          <div class="panel-body">
+                            <p>{{ 'checkout.school_has_pre_approved.user_not_pre_approved' | t }}</p>
+                          </div>
+                        </div>
+                      {% endif %}
+                    {% else %}
+                        <div class="panel panel-danger">
+                          <div class="panel-body">
+                            <p>{{ 'checkout.school_has_pre_approved.user_not_signed_in' | t }}</p>
+                          </div>
+                        </div>
+                    {% endif %}
+                  {% else %}
+                    {{ checkout_finish }}
+                  {% endif %}
                 {% endif %}
 
                 {% include "checkout/payment-methods-box" %}
