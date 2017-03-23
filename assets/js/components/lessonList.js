@@ -281,8 +281,6 @@
     },
 
     fetchModules: function ($parent) {
-      console.log('fetch modules...');
-
       var self = this;
       var id = $parent.data('id');
       var level = $parent.data('level');
