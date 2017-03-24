@@ -136,7 +136,7 @@
 
         $(document).on("ready page:load", function (e) {
           var path        = window.location.pathname;
-          var lesson_path = lesson_path_regex.test(path)
+          var lesson_path = lesson_path_regex.test(path);
 
           if (course_path_regex.test(path) || lesson_path) {
             self.lessons().removeClass('active');
@@ -145,7 +145,7 @@
               var path_array = path.split('/');
               var content_id = path_array[path_array.length - 1];
 
-              $(".js-content[data-id='" + content_id + "']").addClass('active');
+              $("#content-" + content_id + ".js-content").addClass('active');
             }
           }
         })
