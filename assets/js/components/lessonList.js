@@ -5,6 +5,7 @@
     init: function () {
       var self = this;
 
+      self.courseTreeExists = self.courseTree().length;
       self.isActive = self.courseTree().data('is-active');
       self.course = self.courseTree().data('course');
       self.enrollment = self.courseTree().data('enrollment');
@@ -20,10 +21,11 @@
       self.translations['lesson.release_after'] = self.courseTree().data('translation-release-after');
       self.translations['product.course_content.views'] = self.courseTree().data('translation-course_content-views');
 
-      if (!self.isActive) {
+      if (self.courseTreeExists && !self.isActive) {
         self.bindClicks();
         self.handleLessons();
         self.loadTopModules();
+        self.bindChangeLesson();
 
         $(document).trigger('app:bind:lesson_sidebar');
 
@@ -123,6 +125,31 @@
     },
 
     // Actions
+    bindChangeLesson: function () {
+      var self = this;
+
+      if (!self.bindChangeLessonActive) {
+        self.bindChangeLessonActive = true;
+        var course_path_regex = /enrollments\/\d+\/courses\/\d+$/;
+        var lesson_path_regex = /enrollments\/\d+\/courses\/\d+\/course_contents\/\d+$/;
+
+        $(document).on("ready page:load", function (e) {
+          var path        = window.location.pathname;
+          var lesson_path = lesson_path_regex.test(path);
+
+          if (course_path_regex.test(path) || lesson_path) {
+            self.lessons().removeClass('active');
+
+            if (lesson_path) {
+              var path_array = path.split('/');
+              var content_id = path_array[path_array.length - 1];
+
+              $("#content-" + content_id + ".js-content").addClass('active');
+            }
+          }
+        })
+      }
+    },
 
     bindClicks: function () {
       var self = this;
