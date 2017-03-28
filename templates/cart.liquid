@@ -95,24 +95,28 @@
                   {% assign has_feature_pre_approved = current_school | has_feature: 'pre_approved' %}
 
                   {% if has_feature_pre_approved %}
-                    {% if current_user %}
-                      {% assign current_user_pre_approved = current_user | pre_approved: current_school %}
-
-                      {% if current_user_pre_approved %}
-                        {{ checkout_finish }}
-                      {% else %}
-                        <div class="panel panel-danger">
-                          <div class="panel-body">
-                            <p>{{ 'checkout.school_has_pre_approved.user_not_pre_approved' | t }}</p>
-                          </div>
-                        </div>
-                      {% endif %}
+                    {% if order.coupon_token.code or order.coupon %}
+                      {{ checkout_finish }}
                     {% else %}
-                        <div class="panel panel-danger">
-                          <div class="panel-body">
-                            <p>{{ 'checkout.school_has_pre_approved.user_not_signed_in' | t }}</p>
+                      {% if current_user %}
+                        {% assign current_user_pre_approved = current_user | pre_approved: current_school %}
+
+                        {% if current_user_pre_approved %}
+                          {{ checkout_finish }}
+                        {% else %}
+                          <div class="panel panel-danger">
+                            <div class="panel-body">
+                              <p>{{ 'checkout.school_has_pre_approved.user_not_pre_approved' | t }}</p>
+                            </div>
                           </div>
-                        </div>
+                        {% endif %}
+                      {% else %}
+                          <div class="panel panel-danger">
+                            <div class="panel-body">
+                              <p>{{ 'checkout.school_has_pre_approved.user_not_signed_in' | t }}</p>
+                            </div>
+                          </div>
+                      {% endif %}
                     {% endif %}
                   {% else %}
                     {{ checkout_finish }}
