@@ -39,9 +39,10 @@
 
           app.lessonList.requirementsExists(lessonProgress.data, function ($item, content_id) {
             if (content_id) {
-              app.checkLessonCompleted(enrollmentId, content_id, function (completed) {
+              app.lessonList.checkLessonCompleted(enrollmentId, content_id, function (completed) {
                 if (completed) {
-                  $item.removeClass('disabled');
+                  $item.removeClass('blocked');
+                  $item.find('.right > .icon-lock').remove();
                 }
               });
             }
@@ -77,7 +78,7 @@
     },
 
     requirementsExists: function (lessonProgress, cb, cbNotExists) {
-      if(!lessonProgress) {
+      if (!lessonProgress) {
         return false;
       }
 
@@ -85,14 +86,14 @@
         return $(item).data('requirements').length > 0;
       });
 
-      var requirementsUnified = requirementsElements.map(function(idx, item) {
+      var requirementsUnified = requirementsElements.map(function (idx, item) {
         return {
           item: $(item),
           requirements: $(item).data('requirements')
         }
       }).toArray();
 
-      var exists = _.find(requirementsUnified, { requirements: [{ content_id: lessonProgress.lesson_id}] });
+      var exists = _.find(requirementsUnified, {requirements: [{content_id: lessonProgress.lesson_id}]});
 
       if (exists) {
         var $item = exists.item;
@@ -134,7 +135,7 @@
         var lesson_path_regex = /enrollments\/\d+\/courses\/\d+\/course_contents\/\d+$/;
 
         $(document).on("ready page:load", function (e) {
-          var path        = window.location.pathname;
+          var path = window.location.pathname;
           var lesson_path = lesson_path_regex.test(path);
 
           if (course_path_regex.test(path) || lesson_path) {
@@ -279,7 +280,7 @@
       return moment() > releaseTime;
     },
 
-    checkTrialByType: function(type) {
+    checkTrialByType: function (type) {
       var $tree = $('#js-course-tree-ajax');
       var $enrollment = $tree.data('enrollment');
       var constrains_name = 'trial_' + type + '_ids';
@@ -292,13 +293,13 @@
         return false;
       }
 
-      if(!$enrollment['on_trial?']) {
-        return function(){
+      if (!$enrollment['on_trial?']) {
+        return function () {
           return false;
         }
       }
 
-      return function(id) {
+      return function (id) {
         if (constrains_tree && constrains[constrains_name]) {
           return constrains[constrains_name].indexOf(id) > -1;
         }
@@ -417,14 +418,13 @@
                 _.each(requirements_ids, function (id) {
                   var exists = _.find(courseContents, {content_id: id, completed: true});
 
-
                   if (!exists) {
                     available = false;
                   }
                 });
               }
 
-              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available || blockedContent(content.id) ? ' disabled' : '') + '" ' +
+              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available || blockedContent(content.id) ? ' blocked' : '') + '" ' +
                 'id="content-' + content.id + '" ' +
                 'data-requirements=\'' + JSON.stringify(requirements) + '\'' +
                 'data-id="' + content.lesson.id + '"' +
@@ -441,6 +441,7 @@
                 '</div>' +
 
                 '<div class="right">' +
+                ((!available || blockedContent(content.id)) ? '<i class="icon-lock"></i>' : '') +
                 '<span class="progress-icon js-progress-icons">' +
                 '<i class="icon-check js-completed-icon ' + hideCompletedIcon + '"></i>' +
                 '<i class="icon-clock js-in-progress-icon ' + hideInProgressIcon + '"></i>' +
@@ -488,7 +489,8 @@
           app.lessonList.checkLessonCompleted(lessonProgress.enrollment_id, content_id, function (completed) {
             if (completed) {
               $('.btn-next-lesson').removeClass('disabled');
-              $item.removeClass('disabled');
+              $item.removeClass('blocked');
+              $item.find('.right > .icon-lock').remove();
             }
           });
         }
@@ -525,7 +527,7 @@
             var disabled = blockedModule(module.id);
 
             return $(
-              '<li class="list-group-item module '+(disabled ? 'disabled' : '')+'" ' +
+              '<li class="list-group-item module ' + (disabled ? 'disabled' : '') + '" ' +
               'data-id="' + module.id + '"' +
               'data-level="1">' +
               '<i class="icon icon-arrow-right"></i>' +
