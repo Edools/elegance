@@ -10,8 +10,8 @@
 
       {% if settings.view.home.header.cover_enable %}
         <div class="image col-xs-12 col-md-6 text-center">
-          {% if settings.view.home.header.cover_src contains '<iframe' ||
-          settings.view.home.header.cover_src contains '<object' ||
+          {% if settings.view.home.header.cover_src contains '<iframe' or
+          settings.view.home.header.cover_src contains '<object' or
           settings.view.home.header.cover_src contains '<embed' %}
             <div class="embed-responsive embed-responsive-16by9">
               {{ settings.view.home.header.cover_src }}
