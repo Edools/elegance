@@ -26,13 +26,6 @@
                 <span>{{ 'navbar.cart' | t }}</span>
               </a>
             </li>
-          {% else %}
-            <li>
-              <a href="{{ current_user | sso_admin_path: current_api_key }}">
-                <i class="icon-settings"></i>
-                <span>{{ 'navbar.admin' | t }}</span>
-              </a>
-            </li>
           {% endif %}
 
 
