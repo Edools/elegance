@@ -1,0 +1,144 @@
+.chat-sidebar {
+  margin-left: -15px;
+  padding: $padding-large-vertical * 2.5 0;
+  min-height: 100%;
+  width: 240px;
+  height: 100%;
+  background-color: $chat-sidebar-bg;
+  color: $light;
+
+  .sidebar-header {
+    .profile-list-item {
+      padding-top: 0;
+      padding-bottom: 0;
+      cursor: default;
+
+      &:hover {
+        background-color: transparent;
+      }
+
+      .name {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .separator {
+    margin-right: $padding-large-horizontal * 1.2;
+    margin-left: $padding-large-horizontal * 1.2;
+    padding: 15px 0;
+    border-bottom: 1px solid darken($chat-sidebar-bg, 5%);
+    font-size: 17px;
+    line-height: 1;
+
+    .btn {
+      float: right;
+      padding: 4px 5px;
+      border-color: lighten($chat-sidebar-bg, 25%);
+      color: lighten($chat-sidebar-bg, 50%);
+      font-size: 12px;
+      line-height: 1;
+
+      &:hover,
+      &:focus {
+        border-color: lighten($chat-sidebar-bg, 10%);
+        background-color: lighten($chat-sidebar-bg, 10%);
+        color: $light;
+      }
+    }
+  }
+
+  .scroll {
+    @include user-select(none);
+
+    position: relative;
+
+    .disable {
+      display: none;
+    }
+
+    .noSelect {
+              user-select: none;
+           -o-user-select: none;
+         -moz-user-select: none;
+       -khtml-user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .viewport {
+      position: relative;
+      overflow: hidden;
+
+      .overview {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        margin: 0;
+      }
+    }
+
+    .scrollbar {
+      position: absolute;
+      top: 0;
+      right: 3px;
+      z-index: 100;
+      width: 8px;
+      border-radius: 4px;
+      background-color: darken($chat-sidebar-bg, 3%);
+      background-position: 0 0;
+
+      .track {
+        position: relative;
+        padding: 0 1px;
+        width: 6px;
+        height: 100%;
+
+        .thumb {
+          @include transition(opacity .2s ease);
+
+          position: absolute;
+          top: 0;
+          left: 0;
+          overflow: hidden;
+          width: 8px;
+          height: 20px;
+          border-radius: 4px;
+          background-color: $light;
+          opacity: .4;
+          cursor: pointer;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+
+        .end {
+          overflow: hidden;
+          width: 8px;
+          height: 5px;
+        }
+      }
+    }
+  }
+
+  .sidebar-blocks {
+    .groups-block {
+      .viewport {
+        height: 165px;
+      }
+    }
+
+    .students-block {
+      .viewport {
+        height: 185px;
+      }
+    }
+
+    .team-block {
+      .viewport {
+        height: 120px;
+      }
+    }
+  }
+}
