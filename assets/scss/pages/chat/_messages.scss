@@ -1,0 +1,63 @@
+.chat-messages {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: $chat-sidebar-width;
+
+  .messages {
+    padding: $padding-large-vertical * 2 $padding-large-horizontal * 2;
+
+    .header {
+      padding-bottom: $padding-large-vertical * 2;
+      border-bottom: 1px solid darken($border-color-base, 3%);
+
+      .title {
+        margin: 0;
+        color: darken($text-color, 10%);
+        font-size: 18px;
+      }
+
+      .users-count {
+        color: $text-muted;
+        font-size: 12px;
+        line-height: 1;
+      }
+    }
+  }
+
+  .editor {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100px;
+    border-top: 1px solid $border-color-base;
+    background-color: $light;
+
+    textarea {
+      display: block;
+      padding: $padding-large-vertical * 2.2 $padding-large-horizontal;
+      padding-right: 100px;
+      width: 100%;
+      height: 100%;
+      font-size: 14px;
+      resize: none;
+
+      &,
+      &:focus,
+      &:hover {
+        outline: none;
+        border: none;
+        background-color: transparent;
+      }
+    }
+
+    .btn {
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      margin-top: -16.5px;
+    }
+  }
+}
