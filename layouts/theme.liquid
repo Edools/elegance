@@ -59,7 +59,7 @@
   <script async src="{{ 'theme.base.min.js' | asset_url }}"></script>
 
 </head>
-<body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% endif %}">
+<body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% elsif current_path == '/chat' %}chat-page{% endif %}">
 <div class="content-wrapper">
   {% include 'navbar' %}
   {% include 'alert-notice' %}
