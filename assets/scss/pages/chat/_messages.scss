@@ -28,6 +28,16 @@
     > .content {
       .viewport {
         height: 508px;
+
+        .overview {
+          > .schedule {
+            padding: $padding-large-vertical 0;
+            width: 100%;
+            color: $text-muted;
+            text-align: center;
+            font-size: 14px;
+          }
+        }
       }
 
       .scrollbar {
@@ -82,6 +92,7 @@
       top: 50%;
       right: 25px;
       margin-top: -16.5px;
+      min-width: 80px;
     }
   }
 }
