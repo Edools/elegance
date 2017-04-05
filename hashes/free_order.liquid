@@ -1,0 +1,12 @@
+{
+  'identificador'             => 'Matriculou-se em produto grátis [{{ products | map: 'title' | join: ', ' }}]',
+  'email'                     => '{{ user.email }}',
+  'Id do aluno'               =>  {{ user.id }},
+  'Nome do aluno'             => '{{ user | fullname }}',
+  'Id da escola'              =>  {{ school.id }},
+  'Nome da escola'            => '{{ school.name }}',
+  'Url da escola'             => '{{ school_url }}',
+  'Produtos'                  => '{{ products | map: 'title' | join: ', ' }}',
+  'Id dos produtos do pedido' => '{{ products_ids | join: ', ' }}',
+  'Valor do pedido'           => {{ order.amount_to_pay | divided_by: 100.0 }}
+}

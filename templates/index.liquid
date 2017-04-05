@@ -8,7 +8,11 @@
     </div>
   </div>
 
-  {% include 'product/list', products: products, gateway: gateway %}
+  {% if settings.view.home.enable_categories == true %}
+    {% include 'home/categories', gateway: gateway, categories: categories %}
+  {% else %}
+    {% include 'product/list', products: products, gateway: gateway %}
+  {% endif %}
 
   <div class="home-about-us">
     <div class="container">

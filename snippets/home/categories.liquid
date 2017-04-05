@@ -1,0 +1,35 @@
+<div class="home-categories">
+  {% assign all_categories = current_school | get_categories %}
+  {% assign config_categories = settings.view.home.categories | sort: 'order' %}
+  {% for c in config_categories %}
+    {% assign current_category = nil %}
+    {% for category in all_categories %}
+      {% if category.slug == c.slug %}
+        {% assign current_category = category %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign category_products = current_school | get_products_by_category_and_subcategories: c.slug, 6 %}
+
+    <div class="home-category">
+      <div class="container">
+        <h3>{{ current_category.title }}</h3>
+
+        <div class="category-products">
+          <div class="row">
+            {% for product in category_products %}
+              <div class="col-sm-6 col-md-4">
+                {% include 'product/product-card', product: product, gateway: gateway %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="category-actions text-center">
+          <a href="/categories/{{ c.slug }}" class="btn btn-default">{{ 'general.see_all' | t }}</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+</div>

@@ -112,7 +112,9 @@
             "social_instagram_link": false,
             "social_youtube_link": false,
             "social_linkedin_link": false
-          }
+          },
+          "enable_categories": false,
+          "categories": []
         }
       }
     }

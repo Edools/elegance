@@ -22,6 +22,7 @@
     }
   },
   "general": {
+    "see_all": "Ver todos",
     "load_more": "Carregar mais",
     "attention": "Atenção!",
     "search": "Buscar",
@@ -835,7 +836,8 @@
         "subject": "Seu pedido foi aprovado!",
         "first_paragraph": "O seu pedido na escola <strong>{{school_name}}</strong> foi aprovado! ✅",
         "second_paragraph": "Agora é só acessar e assistir os cursos.",
-        "courses_link": "Acessar meus cursos"
+        "courses_link": "Acessar meus cursos",
+        "payment_success": ""
       },
       "failed": {
         "subject": "Seu pedido não pôde ser concluído",
@@ -869,5 +871,9 @@
     "ask_to_tutor": "Perguntar aos tutores",
     "select_tutor": "Selecione o tutor...",
     "write_your_doubt": "Escreva sua dúvida"
+  },
+  "notepad": {
+    "note": "Bloco de Notas",
+    "my_annotations": "Minhas anotações"
   }
 }
