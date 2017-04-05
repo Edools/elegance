@@ -8,12 +8,14 @@
     <div class="content js-sidebar-scroll scroll">
       {% include 'chat/scrollbar' %}
       <div class="viewport">
-        <div class="overview"></div>
+        <div id="chat-messages" class="overview"></div>
       </div>
     </div>
   </div>
   <div class="editor">
-    <textarea name="" id="" placeholder="{{ 'chat.type_here' | t }}"></textarea>
-    <button class="btn btn-outline-primary btn-sm">{{ 'general.send' | t }}</button>
+    <form id="send-messages">
+      <textarea name="" id="text" placeholder="{{ 'chat.type_here' | t }}"></textarea>
+      <button type="submit" class="btn btn-outline-primary btn-sm">{{ 'general.send' | t }}</button>
+    </form>
   </div>
 </div>
