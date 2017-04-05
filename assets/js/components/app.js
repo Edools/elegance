@@ -57,6 +57,7 @@
       app.bindCheckout();
       app.lessonList.init();
       app.studentDoubts.init();
+      app.notepad.init();
       app.categoryList.init();
       app.bindExamQuestionForm();
       app.changeTimeZone();

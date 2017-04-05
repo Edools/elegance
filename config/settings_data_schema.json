@@ -884,8 +884,49 @@
     ]
   },
   {
-    "name": "Produto",
+    "name": "Categorias",
     "id": "5",
+    "settings": [
+      {
+        "key": "view.home.enable_categories",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Habilitar Categorias na Página Inicial"
+        }
+      },
+      {
+        "template": "<h3>Categorias</h3>"
+      },
+      {
+        "type": "repeatSection",
+        "key": "view.home.categories",
+        "templateOptions": {
+          "btnText": "Adicionar Nova Categoria",
+          "fields": [
+            {
+              "key": "slug",
+              "type": "input",
+              "templateOptions": {
+                "label": "Slug",
+                "required": true
+              }
+            },
+            {
+              "key": "order",
+              "type": "input",
+              "templateOptions": {
+                "label": "Ordem",
+                "required": false
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "Produto",
+    "id": "6",
     "settings": [
       {
         "template": "<h3>Header</h3>"
@@ -923,7 +964,7 @@
   },
   {
     "name": "Footer",
-    "id": "6",
+    "id": "7",
     "settings": [
       {
         "key": "view.general.footer.logo",

@@ -28,6 +28,11 @@ $guideline-color: darken($border-color-base, 5%);
         font-weight: 600;
         cursor: pointer;
 
+        &.disabled {
+          color: $text-muted;
+          pointer-events: none;
+        }
+
         .list-group {
           position: relative;
 

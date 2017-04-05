@@ -78,7 +78,7 @@
     },
 
     requirementsExists: function (lessonProgress, cb, cbNotExists) {
-      if(!lessonProgress) {
+      if (!lessonProgress) {
         return false;
       }
 
@@ -86,14 +86,14 @@
         return $(item).data('requirements').length > 0;
       });
 
-      var requirementsUnified = requirementsElements.map(function(idx, item) {
+      var requirementsUnified = requirementsElements.map(function (idx, item) {
         return {
           item: $(item),
           requirements: $(item).data('requirements')
         }
       }).toArray();
 
-      var exists = _.find(requirementsUnified, { requirements: [{ content_id: lessonProgress.lesson_id}] });
+      var exists = _.find(requirementsUnified, {requirements: [{content_id: lessonProgress.lesson_id}]});
 
       if (exists) {
         var $item = exists.item;
@@ -135,7 +135,7 @@
         var lesson_path_regex = /enrollments\/\d+\/courses\/\d+\/course_contents\/\d+$/;
 
         $(document).on("ready page:load", function (e) {
-          var path        = window.location.pathname;
+          var path = window.location.pathname;
           var lesson_path = lesson_path_regex.test(path);
 
           if (course_path_regex.test(path) || lesson_path) {
@@ -280,6 +280,32 @@
       return moment() > releaseTime;
     },
 
+    checkTrialByType: function (type) {
+      var $tree = $('#js-course-tree-ajax');
+      var $enrollment = $tree.data('enrollment');
+      var constrains_name = 'trial_' + type + '_ids';
+
+      var payment_method = $enrollment.payment_method;
+      var constrains_tree = $tree.data('school-product').trial_constrains;
+      var constrains = constrains_tree[payment_method];
+
+      if (constrains && !constrains.hasOwnProperty(constrains_name)) {
+        return false;
+      }
+
+      if (!$enrollment['on_trial?']) {
+        return function () {
+          return false;
+        }
+      }
+
+      return function (id) {
+        if (constrains_tree && constrains[constrains_name]) {
+          return constrains[constrains_name].indexOf(id) > -1;
+        }
+      }
+    },
+
     fetchModules: function ($parent) {
       var self = this;
       var id = $parent.data('id');
@@ -329,6 +355,7 @@
           'Authorization': 'Token token=' + self.apiKey
         },
         success: function (res) {
+          var blockedContent = self.checkTrialByType('content');
           var courseContents = _.filter(res.course_contents, function (lesson) {
             return lesson.available != false;
           });
@@ -391,14 +418,13 @@
                 _.each(requirements_ids, function (id) {
                   var exists = _.find(courseContents, {content_id: id, completed: true});
 
-
                   if (!exists) {
                     available = false;
                   }
                 });
               }
 
-              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available ? ' blocked' : '') + '" ' +
+              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available || blockedContent(content.id) ? ' blocked' : '') + '" ' +
                 'id="content-' + content.id + '" ' +
                 'data-requirements=\'' + JSON.stringify(requirements) + '\'' +
                 'data-id="' + content.lesson.id + '"' +
@@ -415,7 +441,7 @@
                 '</div>' +
 
                 '<div class="right">' +
-                ((!available) ? '<i class="icon-lock"></i>' : '') +
+                ((!available || blockedContent(content.id)) ? '<i class="icon-lock"></i>' : '') +
                 '<span class="progress-icon js-progress-icons">' +
                 '<i class="icon-check js-completed-icon ' + hideCompletedIcon + '"></i>' +
                 '<i class="icon-clock js-in-progress-icon ' + hideInProgressIcon + '"></i>' +
@@ -485,6 +511,7 @@
           'Authorization': 'Token token=' + self.apiKey
         },
         success: function (res) {
+          const blockedModule = self.checkTrialByType('module');
           if (!res.course_modules || res.course_modules.length <= 0) return;
 
           self.allModules = res.course_modules;
@@ -497,8 +524,10 @@
           self.topModules = _.sortBy(self.topModules, 'order');
 
           var $modules = _.map(self.topModules, function (module) {
+            var disabled = blockedModule(module.id);
+
             return $(
-              '<li class="list-group-item module" ' +
+              '<li class="list-group-item module ' + (disabled ? 'disabled' : '') + '" ' +
               'data-id="' + module.id + '"' +
               'data-level="1">' +
               '<i class="icon icon-arrow-right"></i>' +

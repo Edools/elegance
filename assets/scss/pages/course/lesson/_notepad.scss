@@ -1,0 +1,45 @@
+.notepad {
+  .note {
+    position: relative;
+    display: block;
+    margin: $padding-large-vertical 0;
+    padding: 7px 20px 0 70px;
+    min-height: 395px;
+    width: 100%;
+    border: 1px solid #eee;
+    background: $light -moz-linear-gradient(top, transparent, transparent 35px, #e7eff8 0);
+    background: $light -webkit-linear-gradient(top, transparent, transparent 35px, #e7eff8 0);
+    background-size: 100% 36px;
+    box-shadow: 0 6px 20px -7px rgba(0, 0, 0, .14);
+    font-size: 22px;
+    line-height: 36px;
+    resize: none;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50px;
+      display: block;
+      width: 2px;
+      background-color: #ffa49a;
+      content: '';
+    }
+
+    &:after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 3px;
+      display: block;
+      width: 30px;
+      background: radial-gradient($body-bg 6px, transparent 7px) repeat-y, radial-gradient(darken($body-bg, 10%) 7px, transparent 8px) repeat-y;
+      background-size: 30px 30px;
+      content: '';
+    }
+
+    p {
+      margin-bottom: 36px;
+    }
+  }
+}
