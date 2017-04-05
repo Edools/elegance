@@ -1,6 +1,7 @@
 .chat-page {
   @import 'chat/sidebar';
   @import 'chat/messages';
+  @import 'chat/message';
   @import 'chat/sidebar-list-item';
   @import 'chat/profile-list-item';
   @import 'chat/group-list-item';
@@ -25,6 +26,78 @@
     height: 100%;
     border-radius: $border-radius-base;
     background-color: $body-bg;
+  }
+
+  .scroll {
+    position: relative;
+
+    .disable {
+      display: none;
+    }
+
+    .noSelect {
+              user-select: none;
+           -o-user-select: none;
+         -moz-user-select: none;
+       -khtml-user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .viewport {
+      position: relative;
+      overflow: hidden;
+
+      .overview {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        margin: 0;
+      }
+    }
+
+    .scrollbar {
+      position: absolute;
+      top: 0;
+      right: 3px;
+      z-index: 100;
+      width: 8px;
+      border-radius: 4px;
+      background-color: darken($chat-sidebar-bg, 3%);
+      background-position: 0 0;
+
+      .track {
+        position: relative;
+        padding: 0 1px;
+        width: 6px;
+        height: 100%;
+
+        .thumb {
+          @include transition(opacity .2s ease);
+
+          position: absolute;
+          top: 0;
+          left: 0;
+          overflow: hidden;
+          width: 8px;
+          height: 20px;
+          border-radius: 4px;
+          background-color: $light;
+          opacity: .4;
+          cursor: pointer;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+
+        .end {
+          overflow: hidden;
+          width: 8px;
+          height: 5px;
+        }
+      }
+    }
   }
 
   header#school-header {

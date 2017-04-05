@@ -10,13 +10,7 @@
     <div class="sidebar-block groups-block">
       <div class="separator">{{ 'chat.groups' | t }}</div>
       <div class="js-groups js-sidebar-scroll scroll">
-        <div class="scrollbar">
-          <div class="track">
-            <div class="thumb">
-              <div class="end"></div>
-            </div>
-          </div>
-        </div>
+        {% include 'chat/scrollbar' %}
         <div class="viewport">
           <div class="overview">
             {% include 'chat/group-list-item', name: 'Redonline Escola de Formação em Artes Digitais', users_count: 128 %}
@@ -42,13 +36,7 @@
         <button class="btn btn-outline-default btn-sm">{{ 'chat.follow_student' | t }}</button>
       </div>
       <div class="js-groups js-sidebar-scroll scroll">
-        <div class="scrollbar">
-          <div class="track">
-            <div class="thumb">
-              <div class="end"></div>
-            </div>
-          </div>
-        </div>
+        {% include 'chat/scrollbar' %}
         <div class="viewport">
           <div class="overview">
             {% include 'chat/profile-list-item',
@@ -122,13 +110,7 @@
     <div class="sidebar-block team-block">
       <div class="separator">{{ 'chat.team' | t }}</div>
       <div class="js-groups js-sidebar-scroll scroll">
-        <div class="scrollbar">
-          <div class="track">
-            <div class="thumb">
-              <div class="end"></div>
-            </div>
-          </div>
-        </div>
+        {% include 'chat/scrollbar' %}
         <div class="viewport">
           <div class="overview">
             {% include 'chat/profile-list-item',

@@ -24,6 +24,28 @@
         line-height: 1;
       }
     }
+
+    > .content {
+      .viewport {
+        height: 508px;
+      }
+
+      .scrollbar {
+        right: -28px;
+        background-color: darken($body-bg, 3%);
+
+        .track {
+          .thumb {
+            background-color: $gray-dark;
+            opacity: .1;
+
+            &:hover {
+              opacity: .4;
+            }
+          }
+        }
+      }
+    }
   }
 
   .editor {
@@ -54,6 +76,8 @@
     }
 
     .btn {
+      @include button-variant($chat-sidebar-bg, transparent, $chat-sidebar-bg, true, $light);
+
       position: absolute;
       top: 50%;
       right: 25px;

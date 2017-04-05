@@ -1,8 +1,55 @@
-<div class="chat-messages">
+<div class="chat-messages js-chat-messages">
   <div class="messages">
     <div class="header">
       <div class="title">Manipulação Digital</div>
       <div class="users-count">38 pessoas</div>
+    </div>
+
+    <div class="content js-sidebar-scroll scroll">
+      {% include 'chat/scrollbar' %}
+      <div class="viewport">
+        <div class="overview">
+          {% include 'chat/message',
+          avatar: 'https://pbs.twimg.com/profile_images/3437133571/74455f033fa672f65ac5425d71567b02_400x400.jpeg',
+          name: 'Johnny Depp',
+          text: 'Donec rutrum congue leo eget malesuada. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.',
+          schedule: '10:22' %}
+
+          {% include 'chat/message',
+          avatar: 'https://s-media-cache-ak0.pinimg.com/736x/7b/c7/0d/7bc70d641a5b7986739ed2c768449e65.jpg',
+          name: 'Jason Mraz',
+          text: 'Donec rutrum congue leo eget malesuada. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.',
+          schedule: '10:25' %}
+
+          {% include 'chat/message',
+          text: 'Donec rutrum congue leo eget malesuada. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.',
+          schedule: '10:26' %}
+
+          {% include 'chat/message',
+          avatar: 'https://pbs.twimg.com/profile_images/3437133571/74455f033fa672f65ac5425d71567b02_400x400.jpeg',
+          name: 'Johnny Depp',
+          text: 'Donec rutrum congue leo eget malesuada. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.',
+          schedule: '10:22' %}
+
+          {% include 'chat/message',
+          avatar: 'https://s-media-cache-ak0.pinimg.com/736x/7b/c7/0d/7bc70d641a5b7986739ed2c768449e65.jpg',
+          name: 'Jason Mraz',
+          text: 'Donec rutrum congue leo eget malesuada. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.',
+          schedule: '10:25' %}
+
+          {% include 'chat/message',
+          avatar: 'https://pbs.twimg.com/profile_images/3437133571/74455f033fa672f65ac5425d71567b02_400x400.jpeg',
+          name: 'Johnny Depp',
+          text: 'Donec rutrum congue leo eget malesuada. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.',
+          schedule: '10:22' %}
+
+          {% include 'chat/message',
+          avatar: 'https://s-media-cache-ak0.pinimg.com/736x/7b/c7/0d/7bc70d641a5b7986739ed2c768449e65.jpg',
+          name: 'Jason Mraz',
+          text: 'Donec rutrum congue leo eget malesuada. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.',
+          schedule: '10:25' %}
+        </div>
+      </div>
     </div>
   </div>
   <div class="editor">

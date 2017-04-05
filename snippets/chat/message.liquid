@@ -1,0 +1,21 @@
+{% assign avatar = avatar %}
+<div class="message {% if avatar %}has-avatar{% endif %}">
+  {% if avatar %}
+    <div class="picture">
+      <div class="avatar">
+        {% image, src: avatar, lazyload: false %}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="content">
+    {% if name %}
+      <div class="name">{{ name }}</div>
+    {% endif %}
+    <div class="message-box">
+      <div>{{ text }}</div>
+      <span class="schedule">{{ schedule }}</span>
+    </div>
+  </div>
+</div>
+{% assign avatar = nil %}
