@@ -2,12 +2,13 @@
   @include clearfix;
 
   padding: $padding-large-vertical * 2 0;
-  max-width: 640px;
+  max-width: 100%;
   width: 100%;
+
 
   &.has-avatar {
     > .content {
-      width: calc(100% - 50px);
+      max-width: calc(100% - 50px);
 
       .message-box {
         border: 1px solid darken($body-bg, 3%);
@@ -34,7 +35,7 @@
   > .content {
     display: inline-block;
     float: left;
-    width: 100%;
+    width: auto;
 
     .name {
       margin-bottom: 5px;

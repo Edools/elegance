@@ -25,35 +25,53 @@
       }
     }
 
-    > .content {
-      .viewport {
-        height: 508px;
+    .scroll-container {
+      position: relative;
+      max-height: 80%;
+    }
 
-        .overview {
-          > .schedule {
-            padding: $padding-large-vertical 0;
-            width: 100%;
-            color: $text-muted;
-            text-align: center;
-            font-size: 14px;
-          }
-        }
+    > .content {
+      > .schedule {
+        padding: $padding-large-vertical 0;
+        width: 100%;
+        color: $text-muted;
+        text-align: center;
+        font-size: 14px;
+      }
+    }
+
+    .scroll {
+      min-height: 100%;
+      height: 100%;
+    }
+
+    .scroll-wrapper {
+      overflow: visible !important;
+    }
+
+    .scroll-y {
+      @include transition(opacity .2s ease);
+
+      right: -20px;
+      opacity: 0;
+
+      .scroll-element_track {
+        background-color: darken($body-bg, 3%);
       }
 
-      .scrollbar {
-        right: -28px;
-        background-color: darken($body-bg, 3%);
+      .scroll-bar {
+        background-color: $gray-dark;
+        opacity: .1;
 
-        .track {
-          .thumb {
-            background-color: $gray-dark;
-            opacity: .1;
-
-            &:hover {
-              opacity: .4;
-            }
-          }
+        &:hover {
+          opacity: .4;
         }
+      }
+    }
+
+    &:hover {
+      .scroll-y {
+        opacity: 1;
       }
     }
   }
@@ -67,10 +85,12 @@
     border-top: 1px solid $border-color-base;
     background-color: $light;
 
-    textarea {
+    .input {
       display: block;
+      overflow-y: auto;
       padding: $padding-large-vertical * 2.2 $padding-large-horizontal;
       padding-right: 100px;
+      max-height: 100%;
       width: 100%;
       height: 100%;
       font-size: 14px;
@@ -85,7 +105,7 @@
       }
     }
 
-    .btn {
+    .btn-send {
       @include button-variant($chat-sidebar-bg, transparent, $chat-sidebar-bg, true, $light);
 
       position: absolute;
@@ -93,6 +113,38 @@
       right: 25px;
       margin-top: -16.5px;
       min-width: 80px;
+    }
+
+    .btn-group {
+      $border-color: rgba(0, 0, 0, .14);
+      @include box-shadow(0 3px 6px -2px rgba(0, 0, 0, .24));
+      @include transition(opacity .2s ease);
+
+      position: absolute;
+      top: -32px;
+      left: 15px;
+      visibility: hidden;
+      opacity: 0;
+
+      .btn {
+        border-top-color: $border-color;
+        border-bottom-color: $border-color;
+
+        &:first-child {
+          border-left-color: $border-color;
+        }
+
+        &:last-child {
+          border-right-color: $border-color;
+        }
+      }
+    }
+
+    &.focused {
+      .btn-group {
+        visibility: visible;
+        opacity: 1;
+      }
     }
   }
 }
