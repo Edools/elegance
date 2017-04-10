@@ -49,11 +49,20 @@
       overflow: visible !important;
     }
 
-    .scroll-y {
+    .scroll-element {
       @include transition(opacity .2s ease);
 
       right: -20px;
-      opacity: 0;
+
+      &.scroll-draggable {
+        .scroll-bar {
+          opacity: .4;
+        }
+      }
+
+      &:not(.scroll-draggable) {
+        opacity: 0;
+      }
 
       .scroll-element_track {
         background-color: darken($body-bg, 3%);
@@ -70,7 +79,7 @@
     }
 
     &:hover {
-      .scroll-y {
+      .scroll-element {
         opacity: 1;
       }
     }
@@ -146,5 +155,11 @@
         opacity: 1;
       }
     }
+  }
+}
+
+.chat-sm {
+  .chat-messages {
+    left: $chat-sidebar-width-sm;
   }
 }

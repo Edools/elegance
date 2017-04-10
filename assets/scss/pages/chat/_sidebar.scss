@@ -6,22 +6,6 @@
   background-color: $chat-sidebar-bg;
   color: $light;
 
-  .sidebar-header {
-    .profile-list-item {
-      padding-top: 0;
-      padding-bottom: 0;
-      cursor: default;
-
-      &:hover {
-        background-color: transparent;
-      }
-
-      .name {
-        font-size: 18px;
-      }
-    }
-  }
-
   .separator {
     margin-right: $padding-large-horizontal * 1.2;
     margin-left: $padding-large-horizontal * 1.2;
@@ -62,15 +46,35 @@
     }
   }
 
-  .scroll-y {
+  .scroll-element {
     @include transition(opacity .2s ease);
 
-    opacity: 0;
+    &:not(.scroll-draggable) {
+      opacity: 0;
+    }
   }
 
   &:hover {
     .scroll-y {
       opacity: 1;
+    }
+  }
+}
+
+.chat-sm {
+  .chat-sidebar {
+    width: $chat-sidebar-width-sm;
+
+    .separator {
+      display: none;
+    }
+
+    .groups-block {
+      display: none;
+    }
+
+    .team-block {
+      display: none;
     }
   }
 }
