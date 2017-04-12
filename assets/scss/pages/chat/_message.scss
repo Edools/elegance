@@ -1,6 +1,7 @@
 .chat-message {
   @include clearfix;
 
+  overflow: hidden;
   padding: $padding-large-vertical * 2 0;
   max-width: 100%;
   width: 100%;

@@ -17,7 +17,6 @@
       this.$messagesContainer.empty();
 
       // bind form
-
       self.$text.keyup(function (e) {
         var code = e.keyCode ? e.keyCode : e.which;
         if (code == 13 && !e.shiftKey) {
@@ -45,6 +44,10 @@
     },
 
     bindScroll: function () {
+      var height = this.$jsChat.data('height');
+
+      console.log(height);
+
       this.chatHeight = $(window).height() * .8;
       this.$messagesScrollContainer = this.$jsChat.find('.chat-messages .js-scroll-container');
       this.$messagesScroll = this.$messagesScrollContainer.find('.js-scroll');

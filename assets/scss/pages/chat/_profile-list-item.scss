@@ -68,3 +68,19 @@
     }
   }
 }
+
+.chat-sm {
+  .chat-profile-list-item {
+    text-align: center;
+
+    .avatar {
+      display: inline-block;
+      float: none;
+    }
+
+    .info,
+    .status {
+      display: none;
+    }
+  }
+}

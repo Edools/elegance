@@ -1,12 +1,6 @@
 <div class="chat-page">
-  <div class="chat chat-lg">
-    {% include 'chat/templates' %}
-
-    <div class="container">
-      <div class="chat-wrapper js-chat">
-        {% include 'chat/sidebar' %}
-        {% include 'chat/messages' %}
-      </div>
-    </div>
+  <div class="container">
+    {% include 'chat-widget', size: 'lg', height: '80%' %}
+    {% include 'chat-widget', size: 'sm' %}
   </div>
 </div>
