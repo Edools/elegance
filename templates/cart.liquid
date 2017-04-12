@@ -64,7 +64,7 @@
 
                           {% assign has_feature_item_quantity = current_school | has_feature: 'item_quantity' %}
 
-                          {% if has_feature_item_quantity %}
+                          {% if has_feature_item_quantity and item.payment_option.multi_quantity %}
                             <div class="form-group simple">
                               <div class="input-group">
                                 <span class="small">{{ 'checkout.cart.item_quantity' | t }}</span>
