@@ -464,6 +464,10 @@
       "signin_account": "Já possui uma conta?",
       "signin_again": "Você está entrando em uma área segura. Por favor, faça login novamente"
     },
+    "school_has_pre_approved": {
+      "user_not_pre_approved": "Você ainda não foi aprovado pela escola. Para prosseguir com o checkout é necessário ser um aluno aprovado.",
+      "user_not_signed_in": "Você ainda não é aluno da escola. Para prosseguir com o checkout <a href=\"/users/sign_in\">faça login</a> ou <a href=\"/users/sign_up\">crie sua conta</a>."
+    },
     "finish": "Finalizar Compra",
     "coupon": "Cupom:",
     "coupon_code": "Cupom de desconto",
