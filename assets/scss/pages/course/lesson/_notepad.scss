@@ -1,6 +1,4 @@
 .notepad {
-  display: none;
-
   .note {
     position: relative;
     display: block;
@@ -44,8 +42,4 @@
       margin-bottom: 36px;
     }
   }
-}
-
-a[href=\#notepad] {
-  display: none;
 }
