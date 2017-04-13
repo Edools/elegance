@@ -10,7 +10,7 @@
         {% endif %}
 
         {% if order and order.items.size > 0 %}
-          <b>{{ order.amount_to_pay | money_option_presentation: order.kind, order.period, 'full', 1 }}</b>
+          <b id="js-order-total">{{ order.amount_to_pay | money_option_presentation: order.kind, order.period, 'full', 1 }}</b>
         {% else %}
           -
         {% endif %}
@@ -29,7 +29,7 @@
           {% endif %}
 
           {% if order %}
-            <b>
+            <b id="js-order-installments">
               {{ order.amount_to_pay | number_with_taxes: gateway |
                 divided_by: gateway.installments_limit | money }}
             </b>

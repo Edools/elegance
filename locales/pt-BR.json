@@ -444,7 +444,8 @@
     "cart": {
       "title": "<strong>Carrinho</strong> <span class=\"lighter\">de compras</span>",
       "empty": "Ainda não há items no seu carrinho.",
-      "coupon_applied": "Cupom aplicado com sucesso!"
+      "coupon_applied": "Cupom aplicado com sucesso!",
+      "item_quantity": "Quantidade: "
     },
     "payment_methods": {
       "title": "Formas de Pagamento",
