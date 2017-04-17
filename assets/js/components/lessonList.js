@@ -33,6 +33,15 @@
           var $mediaControls = $('.btn-next-lesson');
           var enrollmentId = lessonProgress.data.enrollment_id;
 
+          if (self.progressIcon('completed').hasClass('hide')) {
+            self.progressIcon('completed').removeClass('hide');
+          }
+
+          if (!self.progressIcon('progress').hasClass('hide')) {
+            self.progressIcon('progress').addClass('hide');
+          }
+
+
           if ($mediaControls.size() > 0) {
             $mediaControls.removeClass('disabled');
           }
@@ -75,6 +84,14 @@
 
     lessonListPanel: function () {
       return $('.lesson-list-panel');
+    },
+
+    progressIcon: function(type) {
+      var typeIcon = {
+        completed: '.js-completed-icon',
+        progress: '.js-in-progress-icon'
+      }
+      return this.currentLesson().find(typeIcon[type]);
     },
 
     requirementsExists: function (lessonProgress, cb, cbNotExists) {
@@ -282,18 +299,18 @@
 
     checkTrialByType: function (type) {
       var $tree = $('#js-course-tree-ajax');
-      var $enrollment = $tree.data('enrollment');
+      var enrollment = $tree.data('enrollment');
       var constrains_name = 'trial_' + type + '_ids';
 
-      var payment_method = $enrollment.payment_method;
-      var constrains_tree = $tree.data('school-product').trial_constrains;
-      var constrains = constrains_tree[payment_method];
+      var payment_method = enrollment && enrollment.payment_method;
+      var constrains_tree = $tree.data('school-product') && $tree.data('school-product').trial_constrains;
+      var constrains = constrains_tree && payment_method && constrains_tree[payment_method];
 
       if (constrains && !constrains.hasOwnProperty(constrains_name)) {
         return false;
       }
 
-      if (!$enrollment['on_trial?']) {
+      if (enrollment && !enrollment['on_trial?']) {
         return function () {
           return false;
         }
