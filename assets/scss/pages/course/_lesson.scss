@@ -162,6 +162,7 @@
 
     .media-player {
       position: relative;
+      margin-bottom: $padding-large-vertical * 4;
 
       .player {
         text-align: left;
@@ -171,12 +172,29 @@
           margin: 0;
           padding: 0;
         }
+
+        .html5-player {
+          @extend .embed-responsive;
+          @extend .embed-responsive-16by9;
+
+          width: 100%;
+          height: auto;
+          border: 2px solid $border-color-base;
+          border-radius: $border-radius-base;
+
+          iframe {
+            @extend .embed-responsive-item;
+
+            width: 100%;
+          }
+        }
       }
     }
   }
 
   .lesson-tabs {
     margin-top: $padding-large-vertical * 4;
+    width: 100%;
 
     .nav-tabs {
       border-bottom: none;
