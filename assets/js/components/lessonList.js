@@ -285,15 +285,15 @@
       var $enrollment = $tree.data('enrollment');
       var constrains_name = 'trial_' + type + '_ids';
 
-      var payment_method = $enrollment.payment_method;
+      var payment_method = $enrollment && $enrollment.hasOwnProperty('payment_method') && $enrollment.payment_method;
       var constrains_tree = $tree.data('school-product') && $tree.data('school-product').trial_constrains;
-      var constrains = constrains_tree && constrains_tree[payment_method];
+      var constrains = constrains_tree && payment_method && constrains_tree[payment_method];
 
       if (constrains && !constrains.hasOwnProperty(constrains_name)) {
         return false;
       }
 
-      if (!$enrollment['on_trial?']) {
+      if ($enrollment && !$enrollment['on_trial?']) {
         return function () {
           return false;
         }
