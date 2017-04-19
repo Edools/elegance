@@ -24,9 +24,14 @@
         }
       });
 
+      self.loadGroups(self.didLoadGroups);
+      self.loadGeneral(self.didLoadGeneral);
+      self.loadFollowers(self.didLoadFollowers);
+
       app.simpleEditor.init('#js-send-messages');
 
       $('#js-send-messages').on('submit', self.submitMessage);
+      $('#js-chat-group-list-item').on('click', self.switchRoom);
 
       const config = {
         apiKey: 'AIzaSyD2oUy-240XWPEWmGrh6PqJRaoA4lJFN4s',
@@ -45,8 +50,6 @@
 
     bindScroll: function () {
       var height = this.$jsChat.data('height');
-
-      console.log(height);
 
       this.chatHeight = $(window).height() * .8;
       this.$messagesScrollContainer = this.$jsChat.find('.chat-messages .js-scroll-container');
@@ -96,23 +99,26 @@
     submitMessage: function (event) {
       event.preventDefault();
 
-      var self = this;
-      var $html = self.sanitizeHtml(self.$text);
+      var $html = this.sanitizeHtml(this.$text);
       var text = $html.html();
 
       if (text.length <= 0) return;
 
-      self.$text.html('').focus();
+      this.$text.html('').focus();
 
       function pad(n) {
         return (n < 10) ? ("0" + n) : n;
       }
 
       var date = new Date();
+      var user = $("#school-header").first().data('user');
 
       app.chat.messages.push({
-        name: 'Pessoa da Edools',
+        id: user.id,
+        name: user.name,
+        avatar_url: user.avatar_url,
         text: text,
+        timestamp: moment().unix(),
         schedule: pad(date.getHours()) + ':' + pad(date.getMinutes())
       });
     },
@@ -120,7 +126,7 @@
     insertMessage: function (data) {
       var self = this;
       var html = self.renderTemplate('chat-message', {
-        avatar: 'https://s-media-cache-ak0.pinimg.com/736x/7b/c7/0d/7bc70d641a5b7986739ed2c768449e65.jpg',
+        avatar: data.avatar_url,
         name: data.name,
         text: data.text,
         schedule: data.schedule
@@ -135,6 +141,96 @@
       var template = Liquid.parse(liquid);
 
       return template.render(data);
+    },
+
+    loadGroups: function (callback) {
+      var apiKey = $('#js-chat-page').data('api-key');
+
+      $.ajax({
+        url: window.CORE_HOST + '/chat/groups',
+        method: 'GET',
+        headers: {
+          'Authorization': 'Token token=' + apiKey
+        },
+      }).success(function (data) {
+        callback(data);
+      });
+    },
+
+    loadGeneral: function (callback) {
+      var apiKey = $('#js-chat-page').data('api-key');
+
+      $.ajax({
+        url: window.CORE_HOST + '/chat/general',
+        method: 'GET',
+        headers: {
+          'Authorization': 'Token token=' + apiKey
+        },
+      }).success(function (data) {
+        callback(data);
+      });
+    },
+
+    loadFollowers: function (callback) {
+      var apiKey = $('#js-chat-page').data('api-key');
+
+      $.ajax({
+        url: window.CORE_HOST + '/chat/followers',
+        method: 'GET',
+        headers: {
+          'Authorization': 'Token token=' + apiKey
+        },
+      }).success(function (data) {
+        callback(data);
+      });
+    },
+
+    didLoadGroups: function (groups) {
+      var groupTemplate = $("#js-chat-group-list-item").html();
+
+      groups.forEach(function (group) {
+        var $template = $(groupTemplate);
+
+        // set group name
+        $('#js-chat-group-name', $template).html(group.name);
+
+        // set users count
+        var $usersCont = $('#js-chat-group-users-count', $template);
+        $usersCont.html(group.users_count + $usersCont.html());
+
+        // append to group list
+        $('.js-groups').append($template);
+      });
+    },
+
+    didLoadGeneral: function (users) {
+      var self = app.chat;
+      self.addProfileItems(users, 'js-team');
+    },
+
+    didLoadFollowers: function (users) {
+      var self = app.chat;
+      self.addProfileItems(users, 'js-students');
+    },
+
+    addProfileItems: function (users, divClass) {
+      var profileTemplate = $("#js-chat-profile-list-item").html();
+
+      users.forEach(function (user) {
+        var $template = $(profileTemplate);
+
+        var $avatar = $('<img />').addClass('animated').attr('src', user.cover_image_url);
+        $('.avatar', $template).append($avatar);
+
+        $('.name', $template).html(user.first_name + ' ' + user.last_name);
+        $('.location', $template).html("Niterói - Rio de Janeiro");
+
+        if (user.status && user.last_seen) {
+          $('.status', $template).html("Niterói - Rio de Janeiro");
+        }
+
+        $('.' + divClass).append($template);
+      });
     }
   }
 

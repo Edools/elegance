@@ -1,18 +1,18 @@
-<div class="chat-profile-list-item chat-sidebar-list-item">
-  <div class="avatar">
-    {% assign avatar = avatar %}
-    {% image, src: avatar, lazyload: false %}
-  </div>
-
-  <div class="info">
-    <div class="name">{{ name }}</div>
-    <div class="location">{{ location }}</div>
-  </div>
-
-  {% if status and last_seen %}
-    <div class="status">
-      <div class="icon icon-{{ status }}"></div>
-      <div class="description">{{ last_seen }}</div>
+<script id="js-chat-profile-list-item" type="text/ng-template">
+  <div class="chat-profile-list-item chat-sidebar-list-item">
+    <div class="avatar">
     </div>
-  {% endif %}
-</div>
+
+    <div class="info">
+      <div class="name"></div>
+      <div class="location"></div>
+    </div>
+
+    {% if status and last_seen %}
+      <div class="status">
+        <div class="icon icon-{{ status }}"></div>
+        <div class="description">{{ last_seen }}</div>
+      </div>
+    {% endif %}
+  </div>
+</script>

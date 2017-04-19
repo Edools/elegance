@@ -1,4 +1,6 @@
-<div class="chat-group-list-item chat-sidebar-list-item">
-  <div class="name">{{ name }}</div>
-  <div class="users-count">{{ users_count }} {{ 'chat.peoples' | t }}</div>
-</div>
+<script id="js-chat-group-list-item" type="text/ng-template">
+  <div id="js-chat-group-item" class="js-chat-group-list-item chat-group-list-item chat-sidebar-list-item">
+    <div id="js-chat-group-name" class="name"></div>
+    <div id="js-chat-group-users-count" class="users-count"> {{ 'chat.peoples' | t }}</div>
+  </div>
+</script>
