@@ -66,7 +66,10 @@
             </div>
           {% endif %}
 
-          <div id="js-media-player" class="media-player" data-lesson-id="{{ lesson.id }}">
+          <div id="js-media-player"
+               class="media-player"
+               data-enable-video-watermark="{{ current_school | has_feature: 'video_watermark' }}"
+               data-lesson-id="{{ lesson.id }}">
             {% if lesson.media %}
               {% media_player lesson: lesson, trackeable: track_lesson,
               enrollment: enrollment, lesson_progress: lesson_progress,
