@@ -55,8 +55,8 @@
   {{ content_for_header }}
 
   <script src="{{ 'theme.base.vendors.min.js' | asset_url }}"></script>
-  <script async src="{{ 'theme.js' | asset_url }}"></script>
   <script async src="{{ 'theme.base.min.js' | asset_url }}"></script>
+  <script async src="{{ 'theme.js' | asset_url }}"></script>
 
 </head>
 <body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% endif %}">
