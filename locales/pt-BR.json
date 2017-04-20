@@ -352,6 +352,7 @@
   },
   "certificates": {
     "title": "Busca de Certificados",
+    "subtitle": "Para verificar a autenticidade de um certificado, busque pelo identificador único do mesmo.",
     "filter_by_token": "Buscar certificado...",
     "not_found": "Não existe certificado com este ID!"
   },
