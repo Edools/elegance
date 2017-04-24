@@ -6,6 +6,8 @@
       this.$jsChat = $('.js-chat');
       this.$text = $('.js-chat-text');
       this.$messagesContainer = $('.js-chat-messages .js-content');
+      this.apiKey = $('#js-chat-page').data('api-key');
+      this.userId = $('#js-chat-page').data('user-id');
 
       if (this.$jsChat.length <= 0) return;
 
@@ -14,7 +16,7 @@
       self.bindScroll();
 
       // empty test messages
-      this.$messagesContainer.empty();
+      self.$messagesContainer.empty();
 
       // bind form
       self.$text.keyup(function (e) {
@@ -31,7 +33,6 @@
       app.simpleEditor.init('#js-send-messages');
 
       $('#js-send-messages').on('submit', self.submitMessage);
-      $('#js-chat-group-list-item').on('click', self.switchRoom);
 
       const config = {
         apiKey: 'AIzaSyD2oUy-240XWPEWmGrh6PqJRaoA4lJFN4s',
@@ -43,9 +44,7 @@
       };
 
       firebase.initializeApp(config);
-      var database = firebase.database();
-      this.messages = database.ref('messages');
-      this.loadMessages();
+      this.database = firebase.database();
     },
 
     bindScroll: function () {
@@ -68,13 +67,15 @@
     },
 
     loadMessages: function () {
+      // $(".js-scroll-container").html('');
+
+      var self = app.chat;
       const setMessage = function (data) {
-        this.insertMessage(data.val());
+        self.insertMessage(data.val());
+      }.bind(self);
 
-      }.bind(this);
-
-      this.messages.limitToLast(12).on('child_added', setMessage);
-      this.messages.limitToLast(12).on('child_changed', setMessage);
+      self.messages.limitToLast(12).on('child_added', setMessage);
+      self.messages.limitToLast(12).on('child_changed', setMessage);
     },
 
     sanitizeHtml: function ($root) {
@@ -98,13 +99,14 @@
 
     submitMessage: function (event) {
       event.preventDefault();
+      var self = app.chat;
 
-      var $html = this.sanitizeHtml(this.$text);
+      var $html = self.sanitizeHtml(self.$text);
       var text = $html.html();
 
       if (text.length <= 0) return;
 
-      this.$text.html('').focus();
+      self.$text.html('').focus();
 
       function pad(n) {
         return (n < 10) ? ("0" + n) : n;
@@ -113,7 +115,7 @@
       var date = new Date();
       var user = $("#school-header").first().data('user');
 
-      app.chat.messages.push({
+      self.messages.push({
         id: user.id,
         name: user.name,
         avatar_url: user.avatar_url,
@@ -124,7 +126,7 @@
     },
 
     insertMessage: function (data) {
-      var self = this;
+      var self = app.chat;
       var html = self.renderTemplate('chat-message', {
         avatar: data.avatar_url,
         name: data.name,
@@ -144,13 +146,12 @@
     },
 
     loadGroups: function (callback) {
-      var apiKey = $('#js-chat-page').data('api-key');
-
+      var self = app.chat;
       $.ajax({
         url: window.CORE_HOST + '/chat/groups',
         method: 'GET',
         headers: {
-          'Authorization': 'Token token=' + apiKey
+          'Authorization': 'Token token=' + self.apiKey
         },
       }).success(function (data) {
         callback(data);
@@ -158,13 +159,12 @@
     },
 
     loadGeneral: function (callback) {
-      var apiKey = $('#js-chat-page').data('api-key');
-
+      var self = app.chat;
       $.ajax({
         url: window.CORE_HOST + '/chat/general',
         method: 'GET',
         headers: {
-          'Authorization': 'Token token=' + apiKey
+          'Authorization': 'Token token=' + self.apiKey
         },
       }).success(function (data) {
         callback(data);
@@ -172,13 +172,12 @@
     },
 
     loadFollowers: function (callback) {
-      var apiKey = $('#js-chat-page').data('api-key');
-
+      var self = app.chat;
       $.ajax({
         url: window.CORE_HOST + '/chat/followers',
         method: 'GET',
         headers: {
-          'Authorization': 'Token token=' + apiKey
+          'Authorization': 'Token token=' + self.apiKey
         },
       }).success(function (data) {
         callback(data);
@@ -186,51 +185,76 @@
     },
 
     didLoadGroups: function (groups) {
-      var groupTemplate = $("#js-chat-group-list-item").html();
+      var self = app.chat;
 
-      groups.forEach(function (group) {
-        var $template = $(groupTemplate);
-
-        // set group name
-        $('#js-chat-group-name', $template).html(group.name);
-
-        // set users count
-        var $usersCont = $('#js-chat-group-users-count', $template);
-        $usersCont.html(group.users_count + $usersCont.html());
-
-        // append to group list
-        $('.js-groups').append($template);
+      groups.forEach(function(group) {
+        var $html = $(self.renderTemplate('chat-group-list-item', group));
+        $html.on('click', app.chat.changeRoom);
+        $('.js-groups').append($html);
       });
+
+      self.selectFirstRoomAvailable();
     },
 
     didLoadGeneral: function (users) {
       var self = app.chat;
       self.addProfileItems(users, 'js-team');
+      self.selectFirstRoomAvailable();
     },
 
     didLoadFollowers: function (users) {
       var self = app.chat;
       self.addProfileItems(users, 'js-students');
+      self.selectFirstRoomAvailable();
     },
 
     addProfileItems: function (users, divClass) {
-      var profileTemplate = $("#js-chat-profile-list-item").html();
+      var self = app.chat;
 
-      users.forEach(function (user) {
-        var $template = $(profileTemplate);
-
-        var $avatar = $('<img />').addClass('animated').attr('src', user.cover_image_url);
-        $('.avatar', $template).append($avatar);
-
-        $('.name', $template).html(user.first_name + ' ' + user.last_name);
-        $('.location', $template).html("Niterói - Rio de Janeiro");
-
-        if (user.status && user.last_seen) {
-          $('.status', $template).html("Niterói - Rio de Janeiro");
-        }
-
-        $('.' + divClass).append($template);
+      users.forEach(function(user) {
+        var $html = $(self.renderTemplate('chat-profile-list-item', user));
+        $html.on('click', app.chat.changeRoom);
+        $('.' + divClass).append($html);
       });
+    },
+
+    changeRoom: function(event) {
+      var self = app.chat;
+      var $div = $(event.currentTarget);
+
+      $(".chat-sidebar-list-item").removeClass('active');
+      $div.addClass('active');
+
+      var roomName = 'messages';
+
+      if ($div.data('type') === 'products') {
+        // room name on firebase
+        roomName += '_products/' + $div.data('id');
+
+        // change room name on div
+        $("#js-room-title").html($('#js-chat-group-name', $div).html());
+        $("#js-room-users-count").html($('#js-chat-group-users-count', $div).html());
+      } else if ($div.data('type') === 'users') {
+        var ids = [self.userId, parseInt($div.data('id'))].sort();
+        roomName += '_users/' + ids[0] + '/' + ids[1];
+
+        // change room name on div
+        $("#js-room-title").html($('.info .name', $div).html());
+        $("#js-room-users-count").html($('.info .location', $div).html());
+      }
+
+      self.$messagesContainer.html('');
+      self.messages = self.database.ref(roomName);
+      self.loadMessages();
+    },
+
+    selectFirstRoomAvailable: function() {
+      if (!self.$selectedRoom) {
+        // Select first room
+        self.$selectedRoom = $(".chat-sidebar-list-item").first();
+        self.$selectedRoom.click();
+      }
+
     }
   }
 

@@ -1,6 +1,5 @@
-<div id="js-chat-page" class="chat-page" data-api-key='{{ current_api_key.credentials }}'>
+<div id="js-chat-page" class="chat-page" data-api-key='{{ current_api_key.credentials }}' data-user-id="{{ current_api_key.owner_id }}">
   <div class="container">
     {% include 'chat-widget', size: 'lg', height: '80%' %}
-    {% include 'chat-widget', size: 'sm' %}
   </div>
 </div>
