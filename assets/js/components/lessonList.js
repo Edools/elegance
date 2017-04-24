@@ -197,7 +197,7 @@
           }
         }
       } else if (lesson.media) {
-        switch (lesson.media) {
+        switch (lesson.media.type) {
           case 'Video': {
             lessonIcon = 'icon-camrecorder';
             break;
@@ -236,6 +236,10 @@
           }
           case 'Html': {
             lessonIcon = 'icon-doc';
+            break;
+          }
+          case 'Html5': {
+            lessonIcon = 'icon-docs';
             break;
           }
           default: {
