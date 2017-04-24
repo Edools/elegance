@@ -66,7 +66,10 @@
             </div>
           {% endif %}
 
-          <div id="js-media-player" class="media-player" data-lesson-id="{{ lesson.id }}">
+          <div id="js-media-player"
+               class="media-player"
+               data-enable-video-watermark="{{ current_school | has_feature: 'video_watermark' }}"
+               data-lesson-id="{{ lesson.id }}">
             {% if lesson.media %}
               {% media_player lesson: lesson, trackeable: track_lesson,
               enrollment: enrollment, lesson_progress: lesson_progress,
@@ -84,20 +87,29 @@
           </div>
         </div>
 
+        {% assign has_notepad_feature = current_school | has_feature: 'notepad' %}
+        {% assign has_student_doubt_feature = current_school | has_feature: 'student_doubt' %}
         <div class="lesson-tabs">
           <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#student-doubts">{{ 'student_doubt.doubts' | 't' }}</a></li>
-            <li><a data-toggle="tab" href="#notepad">{{ 'notepad.note' | 't' }}</a></li>
+            {%if has_student_doubt_feature %}
+              <li class="{% if has_student_doubt_feature %}active{% endif %}"><a data-toggle="tab" href="#student-doubts">{{ 'student_doubt.doubts' | 't' }}</a></li>
+            {% endif %}
+            {%if has_notepad_feature %}
+              <li class="{% unless has_student_doubt_feature %}active{% endunless %}"><a data-toggle="tab" href="#notepad">{{ 'notepad.note' | 't' }}</a></li>
+            {% endif %}
           </ul>
 
           <div class="tab-content">
-            <div id="student-doubts" class="tab-pane fade in active">
+            {%if has_student_doubt_feature %}
+            <div id="student-doubts" class="tab-pane fade in {% if has_student_doubt_feature %}active{% endif %}">
               {% include 'lesson/student_doubts' %}
             </div>
-
-            <div id="notepad" class="tab-pane fade in">
-              {% include 'lesson/notepad', current_lesson_id: lesson.id %}
-            </div>
+            {% endif %}
+            {%if has_notepad_feature %}
+              <div id="notepad" class="tab-pane fade in {% unless has_student_doubt_feature %}active{% endunless %}">
+                {% include 'lesson/notepad', current_lesson_id: lesson.id %}
+              </div>
+            {% endif %}
           </div>
         </div>
       </div>
