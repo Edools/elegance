@@ -446,7 +446,12 @@
 
               if (self.lessonActions) {
                 if (progress && progress.views <= self.enrollment.max_attendance_length && self.enrollment.max_attendance_type == 'attempts') {
-                  html += '<span class="lesson-views attempt js-attendance badge" title="' + self.translations['product.course_content.views'] + '" data-tooltip-placement="left" data-toggle="tooltip">' +
+                  var translation = self.translations['product.course_content.views'];
+
+                  translation = translation.replace('{{ progress.views }}', progress.views);
+                  translation = translation.replace('{{ enrollment.max_attendance_length }}', self.enrollment.max_attendance_length);
+
+                  html += '<span class="lesson-views attempt js-attendance badge" title="' + translation + '" data-tooltip-placement="left" data-toggle="tooltip">' +
                     '<span>' + progress.views + '/' + self.enrollment.max_attendance_length + '</span>' +
                     '</span>';
                 }
