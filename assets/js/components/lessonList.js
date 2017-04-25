@@ -87,11 +87,11 @@
     },
 
     progressIcon: function(type) {
-      var typeIcon = {
+      var iconType = {
         completed: '.js-completed-icon',
         progress: '.js-in-progress-icon'
       }
-      return this.currentLesson().find(typeIcon[type]);
+      return this.currentLesson().find(iconType[type]);
     },
 
     requirementsExists: function (lessonProgress, cb, cbNotExists) {
