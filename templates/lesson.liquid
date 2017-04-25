@@ -51,7 +51,7 @@
       <div class="col-md-8">
         <div id="js-lesson-content-player" class="lesson-content-player">
           <div class="lesson-content-player-heading">
-            {% if course_content.prev_content_id || course_content.next_content_id %}
+            {% if course_content.prev_content_id or course_content.next_content_id %}
               <div class="js-fix-on-scroll">
                 {% include 'lesson/navigation' %}
               </div>
@@ -66,7 +66,10 @@
             </div>
           {% endif %}
 
-          <div id="js-media-player" class="media-player" data-lesson-id="{{ lesson.id }}">
+          <div id="js-media-player"
+               class="media-player"
+               data-enable-video-watermark="{{ current_school | has_feature: 'video_watermark' }}"
+               data-lesson-id="{{ lesson.id }}">
             {% if lesson.media %}
               {% media_player lesson: lesson, trackeable: track_lesson,
               enrollment: enrollment, lesson_progress: lesson_progress,

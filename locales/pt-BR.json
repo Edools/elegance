@@ -350,6 +350,12 @@
     "unfollow": "Deixar de seguir",
     "message": "Mensagem"
   },
+  "certificates": {
+    "title": "Busca de Certificados",
+    "subtitle": "Para verificar a autenticidade de um certificado, busque pelo identificador único do mesmo.",
+    "filter_by_token": "Buscar certificado...",
+    "not_found": "Não existe certificado com este ID!"
+  },
   "enrollment": {
     "my_courses": "<span class='lighter'>Meus</span>&nbsp;<strong>Cursos</strong>",
     "no_certificate": "Você ainda não tem certificados",

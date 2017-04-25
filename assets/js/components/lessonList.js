@@ -214,7 +214,7 @@
           }
         }
       } else if (lesson.media) {
-        switch (lesson.media) {
+        switch (lesson.media.type) {
           case 'Video': {
             lessonIcon = 'icon-camrecorder';
             break;
@@ -253,6 +253,10 @@
           }
           case 'Html': {
             lessonIcon = 'icon-doc';
+            break;
+          }
+          case 'Html5': {
+            lessonIcon = 'icon-docs';
             break;
           }
           default: {
@@ -297,7 +301,7 @@
       return moment() > releaseTime;
     },
 
-    checkTrialByType: function (type) {
+    checkTrialByType: function (type, id) {
       var $tree = $('#js-course-tree-ajax');
       var enrollment = $tree.data('enrollment');
       var constrains_name = 'trial_' + type + '_ids';
@@ -311,16 +315,14 @@
       }
 
       if (enrollment && !enrollment['on_trial?']) {
-        return function () {
-          return false;
-        }
+        return false;
       }
 
-      return function (id) {
-        if (constrains_tree && constrains[constrains_name]) {
-          return constrains[constrains_name].indexOf(id) > -1;
-        }
+      if (constrains_tree && constrains[constrains_name]) {
+        return constrains[constrains_name].indexOf(id) > -1;
       }
+
+      return false;
     },
 
     fetchModules: function ($parent) {
@@ -372,7 +374,6 @@
           'Authorization': 'Token token=' + self.apiKey
         },
         success: function (res) {
-          var blockedContent = self.checkTrialByType('content');
           var courseContents = _.filter(res.course_contents, function (lesson) {
             return lesson.available != false;
           });
@@ -387,7 +388,7 @@
           }
 
           var $courseContents = _.map(courseContents, function (content) {
-              var active = (self.currentLessonId == content.lesson.id ? 'active js' : '');
+              var active = (self.currentLessonId === content.lesson.id ? 'active js' : '');
               var lesson = content.lesson;
               var lessonIcon = self.getLessonIcon(lesson);
               var hideInProgressIcon = 'hide';
@@ -441,7 +442,7 @@
                 });
               }
 
-              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available || blockedContent(content.id) ? ' blocked' : '') + '" ' +
+              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available || (self.enrollment && self.checkTrialByType('content', content.id)) ? ' blocked' : '') + '" ' +
                 'id="content-' + content.id + '" ' +
                 'data-requirements=\'' + JSON.stringify(requirements) + '\'' +
                 'data-id="' + content.lesson.id + '"' +
@@ -458,7 +459,7 @@
                 '</div>' +
 
                 '<div class="right">' +
-                ((!available || blockedContent(content.id)) ? '<i class="icon-lock"></i>' : '') +
+                ((!available || (self.enrollment && self.checkTrialByType('content', content.id))) ? '<i class="icon-lock"></i>' : '') +
                 '<span class="progress-icon js-progress-icons">' +
                 '<i class="icon-check js-completed-icon ' + hideCompletedIcon + '"></i>' +
                 '<i class="icon-clock js-in-progress-icon ' + hideInProgressIcon + '"></i>' +
@@ -466,7 +467,12 @@
 
               if (self.lessonActions) {
                 if (progress && progress.views <= self.enrollment.max_attendance_length && self.enrollment.max_attendance_type == 'attempts') {
-                  html += '<span class="lesson-views attempt js-attendance badge" title="' + self.translations['product.course_content.views'] + '" data-tooltip-placement="left" data-toggle="tooltip">' +
+                  var translation = self.translations['product.course_content.views'];
+
+                  translation = translation.replace('{{ progress.views }}', progress.views);
+                  translation = translation.replace('{{ enrollment.max_attendance_length }}', self.enrollment.max_attendance_length);
+
+                  html += '<span class="lesson-views attempt js-attendance badge" title="' + translation + '" data-tooltip-placement="left" data-toggle="tooltip">' +
                     '<span>' + progress.views + '/' + self.enrollment.max_attendance_length + '</span>' +
                     '</span>';
                 }
@@ -528,7 +534,6 @@
           'Authorization': 'Token token=' + self.apiKey
         },
         success: function (res) {
-          const blockedModule = self.checkTrialByType('module');
           if (!res.course_modules || res.course_modules.length <= 0) return;
 
           self.allModules = res.course_modules;
@@ -541,7 +546,7 @@
           self.topModules = _.sortBy(self.topModules, 'order');
 
           var $modules = _.map(self.topModules, function (module) {
-            var disabled = blockedModule(module.id);
+            var disabled = self.enrollment && self.checkTrialByType('module', module.id);
 
             return $(
               '<li class="list-group-item module ' + (disabled ? 'disabled' : '') + '" ' +
