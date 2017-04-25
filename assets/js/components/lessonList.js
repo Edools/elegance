@@ -425,7 +425,9 @@
                 });
               }
 
-              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available || (self.enrollment && self.checkTrialByType('content', content.id)) ? ' blocked' : '') + '" ' +
+              var lessonNotCompleted = Boolean(hideCompletedIcon && !content.complete);
+
+              var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (lessonNotCompleted && (!available || (self.enrollment && self.checkTrialByType('content', content.id))) ? ' blocked' : '') + '" ' +
                 'id="content-' + content.id + '" ' +
                 'data-requirements=\'' + JSON.stringify(requirements) + '\'' +
                 'data-id="' + content.lesson.id + '"' +
@@ -442,7 +444,7 @@
                 '</div>' +
 
                 '<div class="right">' +
-                ((!available || (self.enrollment && self.checkTrialByType('content', content.id))) ? '<i class="icon-lock"></i>' : '') +
+                (lessonNotCompleted && ((!available || (self.enrollment && self.checkTrialByType('content', content.id)))) ? '<i class="icon-lock"></i>' : '') +
                 '<span class="progress-icon js-progress-icons">' +
                 '<i class="icon-check js-completed-icon ' + hideCompletedIcon + '"></i>' +
                 '<i class="icon-clock js-in-progress-icon ' + hideInProgressIcon + '"></i>' +
