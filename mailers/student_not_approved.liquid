@@ -116,7 +116,17 @@
 </td></tr></table>
 <table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0"  width="100%" style="table-layout: fixed;" data-attributes='%7B%22dropped%22%3Atrue%2C%22child%22%3Afalse%2C%22padding%22%3A%2225%2C20%2C20%2C0%22%2C%22containerbackground%22%3A%22%23ffffff%22%7D'>
 <tr>
-  <td role="module-content"  valign="top" height="100%" style="padding: 25px 20px 0px 20px;" bgcolor="#ffffff"><div> <h5 style="color: inherit; font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; padding-top: 20px; margin-top: 0px; margin-bottom: 10px; line-height: 1.3; word-wrap: normal; font-weight: normal; font-size: 20px; background-color: rgb(254, 254, 254);">{{ 'mailer.hello' | t: first_name: to.first_name }}</h5>  <p class="lead" style="font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; font-weight: normal; padding-bottom: 10px; font-size: 14px; color: rgb(10, 10, 10); line-height: 1.6; background-color: rgb(254, 254, 254);">O aluno {{ student.first_name }} teve sua matrícula não aprovada.</p> </div> </td>
+  <td role="module-content"  valign="top" height="100%" style="padding: 25px 20px 0px 20px;" bgcolor="#ffffff">
+    <div>
+      <h5 style="color: inherit; font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; padding-top: 20px; margin-top: 0px; margin-bottom: 10px; line-height: 1.3; word-wrap: normal; font-weight: normal; font-size: 20px; background-color: rgb(254, 254, 254);">
+        {{ 'mailer.hello' | t: first_name: user.first_name }}
+      </h5>
+
+      <p class="lead" style="font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; font-weight: normal; padding-bottom: 10px; font-size: 14px; color: rgb(10, 10, 10); line-height: 1.6; background-color: rgb(254, 254, 254);">
+        {{ 'mailer.student_not_approved.first_paragraph' }}
+      </p>
+    </div>
+  </td>
 </tr>
 </table>
 
