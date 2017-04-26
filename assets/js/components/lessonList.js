@@ -21,6 +21,10 @@
       self.translations['lesson.release_after'] = self.courseTree().data('translation-release-after');
       self.translations['product.course_content.views'] = self.courseTree().data('translation-course_content-views');
 
+      if (self.lessonProgress() && self.lessonProgress().completed) {
+        $('.btn-next-lesson').removeClass('disabled');
+      }
+
       if (self.courseTreeExists && !self.isActive) {
         self.bindClicks();
         self.handleLessons();
@@ -84,6 +88,10 @@
 
     lessonListPanel: function () {
       return $('.lesson-list-panel');
+    },
+
+    lessonProgress: function () {
+      return $('.js-edools-player').data('lessonProgress');
     },
 
     progressIcon: function(type) {
@@ -442,6 +450,10 @@
                 });
               }
 
+              if (content.completed) {
+                $('.btn-next-lesson').removeClass('disabled');
+              }
+
               var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available || (self.enrollment && self.checkTrialByType('content', content.id)) ? ' blocked' : '') + '" ' +
                 'id="content-' + content.id + '" ' +
                 'data-requirements=\'' + JSON.stringify(requirements) + '\'' +
@@ -505,7 +517,7 @@
     },
 
     checkNextButtonUnlocked: function () {
-      var lessonProgress = $('#js-course-tree-ajax').data('lesson-progress');
+      var lessonProgress = this.lessonProgress();
 
       app.lessonList.requirementsExists(lessonProgress, function ($item, content_id) {
         if (content_id && lessonProgress.hasOwnProperty('enrollment_id')) {
