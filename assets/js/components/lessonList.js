@@ -425,8 +425,8 @@
                 });
               }
 
-              var inProgress = (!!hideInProgressIcon && !!hideCompletedIcon) && !content.complete;
-              var lessonNotCompleted = Boolean(inProgress || !!hideCompletedIcon && !content.complete);
+              var inProgress = !!hideInProgressIcon && !content.completed;
+              var lessonNotCompleted = Boolean(content.completed ? false : inProgress);
 
 
               var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (lessonNotCompleted && (!available || (self.enrollment && self.checkTrialByType('content', content.id))) ? ' blocked' : '') + '" ' +
