@@ -33,6 +33,15 @@
           var $mediaControls = $('.btn-next-lesson');
           var enrollmentId = lessonProgress.data.enrollment_id;
 
+          if (self.progressIcon('completed').hasClass('hide')) {
+            self.progressIcon('completed').removeClass('hide');
+          }
+
+          if (!self.progressIcon('progress').hasClass('hide')) {
+            self.progressIcon('progress').addClass('hide');
+          }
+
+
           if ($mediaControls.size() > 0) {
             $mediaControls.removeClass('disabled');
           }
@@ -75,6 +84,14 @@
 
     lessonListPanel: function () {
       return $('.lesson-list-panel');
+    },
+
+    progressIcon: function(type) {
+      var iconType = {
+        completed: '.js-completed-icon',
+        progress: '.js-in-progress-icon'
+      }
+      return this.currentLesson().find(iconType[type]);
     },
 
     requirementsExists: function (lessonProgress, cb, cbNotExists) {
