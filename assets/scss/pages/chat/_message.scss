@@ -2,7 +2,7 @@
   @include clearfix;
 
   overflow: hidden;
-  padding: $padding-large-vertical * 2 0;
+  margin: $padding-large-vertical 0 $padding-large-vertical * 3 0;
   max-width: 100%;
   width: 100%;
 
@@ -46,16 +46,14 @@
 
     .message-box {
       position: relative;
-      padding: $padding-large-horizontal;
+      padding: 10px $padding-large-horizontal;
       border: 1px solid darken($chat-message-bg, 5%);
       border-radius: $border-radius-base;
       background-color: $chat-message-bg;
       font-size: 14px;
 
       .schedule {
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
+        position: relative;
         color: $text-muted;
         font-size: 11px;
         line-height: 1;

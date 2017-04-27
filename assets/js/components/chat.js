@@ -26,12 +26,7 @@
         }
       });
 
-      self.loadGroups(self.didLoadGroups);
-      self.loadGeneral(self.didLoadGeneral);
-      self.loadFollowers(self.didLoadFollowers);
-
       app.simpleEditor.init('#js-send-messages');
-
       $('#js-send-messages').on('submit', self.submitMessage);
 
       const config = {
@@ -45,6 +40,61 @@
 
       firebase.initializeApp(config);
       this.database = firebase.database();
+
+      this.authenticate();
+
+      self.loadGroups(self.didLoadGroups);
+      self.loadGeneral(self.didLoadGeneral);
+      self.loadFollowers(self.didLoadFollowers);
+    },
+
+    authenticate: function (callback) {
+      var self = app.chat;
+      // prod https://services.edools.com/firebase
+      $.ajax({
+        url: 'https://6qkqv5t2k9.execute-api.us-east-1.amazonaws.com/staging/authenticate',
+        method: 'POST',
+        headers: {
+          'Authorization': 'Token token=e93921df82b231b2873e94cefb0ea8de:d0fa24e82abd334da092a39eef0d6101' // + self.apiKey
+        },
+      }).success(function (data) {
+        firebase.auth().signInWithCustomToken(data.body.firebase_token)
+          .then(function (response) {
+            console.log('authenticated');
+            self.monitorConnectionState(response);
+          })
+          .catch(function (error) {
+            console.log("Error creating custom token:", error);
+          });
+      }).error(function (error) {
+        console.log('could not authenticate');
+        console.log(error);
+      });
+    },
+
+    monitorConnectionState: function (response) {
+      const self = app.chat;
+      const userRef = firebase.database().ref("user_status/" + response.uid);
+
+      // Monitor connection state on browser tab
+      firebase.database().ref(".info/connected")
+        .on("value", function (snap) {
+          if (snap.val()) {
+            // if we lose network then remove this user from the list
+            userRef.onDisconnect().set('offline');;
+            // set user's online status
+            userRef.set('online');
+          }
+        });
+      document.onIdle = function () {
+        userRef.set('idle');
+      }
+      document.onAway = function () {
+        userRef.set('away');
+      }
+      document.onBack = function (isIdle, isAway) {
+        userRef.set('online');
+      }
     },
 
     bindScroll: function () {
@@ -131,7 +181,7 @@
         avatar: data.avatar_url,
         name: data.name,
         text: data.text,
-        schedule: data.schedule
+        schedule: moment.unix(data.timestamp).format('LLL')
       });
 
       self.$messagesContainer.append(html);
@@ -187,7 +237,7 @@
     didLoadGroups: function (groups) {
       var self = app.chat;
 
-      groups.forEach(function(group) {
+      groups.forEach(function (group) {
         var $html = $(self.renderTemplate('chat-group-list-item', group));
         $html.on('click', app.chat.changeRoom);
         $('.js-groups').append($html);
@@ -211,14 +261,14 @@
     addProfileItems: function (users, divClass) {
       var self = app.chat;
 
-      users.forEach(function(user) {
+      users.forEach(function (user) {
         var $html = $(self.renderTemplate('chat-profile-list-item', user));
         $html.on('click', app.chat.changeRoom);
         $('.' + divClass).append($html);
       });
     },
 
-    changeRoom: function(event) {
+    changeRoom: function (event) {
       var self = app.chat;
       var $div = $(event.currentTarget);
 
@@ -248,7 +298,7 @@
       self.loadMessages();
     },
 
-    selectFirstRoomAvailable: function() {
+    selectFirstRoomAvailable: function () {
       if (!self.$selectedRoom) {
         // Select first room
         self.$selectedRoom = $(".chat-sidebar-list-item").first();
