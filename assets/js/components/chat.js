@@ -46,21 +46,21 @@
       self.loadGroups(self.didLoadGroups);
       self.loadGeneral(self.didLoadGeneral);
       self.loadFollowers(self.didLoadFollowers);
+
+      self.listenConnectionChanges();
     },
 
     authenticate: function (callback) {
       var self = app.chat;
-      // prod https://services.edools.com/firebase
       $.ajax({
-        url: 'https://6qkqv5t2k9.execute-api.us-east-1.amazonaws.com/staging/authenticate',
+        url: window.FIREBASE_SERVICE_HOST + 'authenticate',
         method: 'POST',
         headers: {
-          'Authorization': 'Token token=e93921df82b231b2873e94cefb0ea8de:d0fa24e82abd334da092a39eef0d6101' // + self.apiKey
+          'Authorization': self.apiKey
         },
       }).success(function (data) {
         firebase.auth().signInWithCustomToken(data.body.firebase_token)
           .then(function (response) {
-            console.log('authenticated');
             self.monitorConnectionState(response);
           })
           .catch(function (error) {
@@ -74,26 +74,50 @@
 
     monitorConnectionState: function (response) {
       const self = app.chat;
-      const userRef = firebase.database().ref("user_status/" + response.uid);
+      const userRef = firebase.database().ref("user_status").child(response.uid);
 
       // Monitor connection state on browser tab
       firebase.database().ref(".info/connected")
         .on("value", function (snap) {
           if (snap.val()) {
             // if we lose network then remove this user from the list
-            userRef.onDisconnect().set('offline');;
+            userRef.onDisconnect().set("offline");
             // set user's online status
-            userRef.set('online');
+            userRef.set("online");
           }
         });
       document.onIdle = function () {
-        userRef.set('idle');
+        userRef.set("idle");
       }
       document.onAway = function () {
-        userRef.set('away');
+        userRef.set("away");
       }
       document.onBack = function (isIdle, isAway) {
-        userRef.set('online');
+        userRef.set("online");
+      }
+    },
+
+    listenConnectionChanges: function () {
+      var self = app.chat;
+      var connectionsRef = this.database.ref("user_status");
+
+      connectionsRef.on('child_added', function (data) {
+        self.updateStatus(data.val(), data.key);
+      });
+
+      connectionsRef.on('child_changed', function (data) {
+        self.updateStatus(data.val(), data.key);
+      });
+
+      connectionsRef.on('child_removed', function (data) {
+        self.updateStatus(data.val(), 'offline');
+      });
+    },
+
+    updateStatus: function (status, user_id) {
+      var $div = $('*[data-id="' + user_id + '"]')[0];
+      if ($div) {
+        $('.status > .icon', $div).first().attr('class', 'icon icon-' + status);
       }
     },
 
@@ -117,8 +141,6 @@
     },
 
     loadMessages: function () {
-      // $(".js-scroll-container").html('');
-
       var self = app.chat;
       const setMessage = function (data) {
         self.insertMessage(data.val());
@@ -294,6 +316,9 @@
       }
 
       self.$messagesContainer.html('');
+      if (self.messages) {
+        self.messages.off();
+      }
       self.messages = self.database.ref(roomName);
       self.loadMessages();
     },
@@ -304,7 +329,6 @@
         self.$selectedRoom = $(".chat-sidebar-list-item").first();
         self.$selectedRoom.click();
       }
-
     }
   }
 

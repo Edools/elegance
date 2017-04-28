@@ -13,11 +13,9 @@
     {% endif %}
   </div>
 
-  {% if status and last_seen %}
     <div class="status">
-      <div class="icon icon-{{ status }}"></div>
-      <div class="description">{{ last_seen }}</div>
+      <div class="icon icon-offline"></div>
+      {% comment %}<div class="description">{{ last_seen }}</div>{% endcomment %}
     </div>
-  {% endif %}
 </div>
 {% endraw %}
