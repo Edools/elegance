@@ -29,6 +29,7 @@
 
                 $('.btn-next-lesson').removeClass('disabled');
                 $item.removeClass('disabled');
+                $item.removeClass('blocked');
                 $item.find('.right > .icon-lock').remove();
               }
             });
