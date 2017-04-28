@@ -21,6 +21,10 @@
       self.translations['lesson.release_after'] = self.courseTree().data('translation-release-after');
       self.translations['product.course_content.views'] = self.courseTree().data('translation-course_content-views');
 
+      if (self.lessonProgress() && self.lessonProgress().completed) {
+        $('.btn-next-lesson').removeClass('disabled');
+      }
+
       if (self.courseTreeExists && !self.isActive) {
         self.bindClicks();
         self.handleLessons();
@@ -47,7 +51,7 @@
           }
 
           app.lessonList.requirementsExists(lessonProgress.data, function ($item, content_id) {
-            if (content_id) {
+            if ($item && content_id) {
               app.lessonList.checkLessonCompleted(enrollmentId, content_id, function (completed) {
                 if (completed) {
                   $item.removeClass('blocked');
@@ -86,22 +90,28 @@
       return $('.lesson-list-panel');
     },
 
-    progressIcon: function(type) {
+    lessonProgress: function () {
+      return $('#js-media-player').data('lesson-progress');
+    },
+
+    progressIcon: function (type) {
       var iconType = {
         completed: '.js-completed-icon',
         progress: '.js-in-progress-icon'
-      }
+      };
+
       return this.currentLesson().find(iconType[type]);
     },
 
-    requirementsExists: function (lessonProgress, cb, cbNotExists) {
+    requirementsExists: function (lessonProgress, cb) {
       if (!lessonProgress) {
         return false;
       }
 
-      var requirementsElements = $('.lesson-list-panel [data-requirements]').filter(function (index, item) {
-        return $(item).data('requirements').length > 0;
-      });
+      var requirementsElements = $('.lesson-list-panel [data-requirements]')
+        .filter(function (index, item) {
+          return $(item).data('requirements').length > 0;
+        });
 
       var requirementsUnified = requirementsElements.map(function (idx, item) {
         return {
@@ -118,8 +128,8 @@
           return cb($item, lessonProgress.lesson_id);
         }
       } else {
-        if (cbNotExists) {
-          return cbNotExists();
+        if (cb) {
+          return cb(null);
         }
       }
     },
@@ -134,7 +144,7 @@
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + apiKey
-        },
+        }
       }).success(function (data) {
         completed = data.lessons_progresses[0].completed;
 
@@ -195,7 +205,7 @@
     getLessonIcon: function (lesson) {
       var lessonIcon = '';
 
-      if (lesson.type == 'ExamLesson' && lesson.activity) {
+      if (lesson.type === 'ExamLesson' && lesson.activity) {
         switch (lesson.activity.type) {
           case 'Quiz': {
             lessonIcon = 'icon-puzzle';
@@ -342,7 +352,7 @@
 
           modules = _.filter(modules, function (m) {
             var module = _.find(self.allModules, {id: m.id});
-            return module.available != false && (module.course_content_ids.length > 0 || module.course_modules.length > 0);
+            return module.available !== false && (module.course_content_ids.length > 0 || module.course_modules.length > 0);
           });
 
           var $modules = _.map(modules, function (module) {
@@ -375,7 +385,7 @@
         },
         success: function (res) {
           var courseContents = _.filter(res.course_contents, function (lesson) {
-            return lesson.available != false;
+            return lesson.available !== false;
           });
 
           courseContents = _.sortBy(courseContents, 'order');
@@ -442,6 +452,10 @@
                 });
               }
 
+              if (content.completed) {
+                $('.btn-next-lesson').removeClass('disabled');
+              }
+
               var html = '<li class="list-group-item content-lesson js-content list-group-item lesson module-item ' + active + (!available || (self.enrollment && self.checkTrialByType('content', content.id)) ? ' blocked' : '') + '" ' +
                 'id="content-' + content.id + '" ' +
                 'data-requirements=\'' + JSON.stringify(requirements) + '\'' +
@@ -505,10 +519,14 @@
     },
 
     checkNextButtonUnlocked: function () {
-      var lessonProgress = $('#js-course-tree-ajax').data('lesson-progress');
+      var lessonProgress = this.lessonProgress();
 
       app.lessonList.requirementsExists(lessonProgress, function ($item, content_id) {
-        if (content_id && lessonProgress.hasOwnProperty('enrollment_id')) {
+        if ($item && content_id) {
+          if (!content_id || !lessonProgress.hasOwnProperty('enrollment_id')) {
+            return;
+          }
+
           app.lessonList.checkLessonCompleted(lessonProgress.enrollment_id, content_id, function (completed) {
             if (completed) {
               $('.btn-next-lesson').removeClass('disabled');
@@ -517,8 +535,9 @@
             }
           });
         }
-      }, function () {
-        $('.btn-next-lesson').removeClass('disabled');
+        else {
+          $('.btn-next-lesson').removeClass('disabled');
+        }
       });
     },
 
@@ -539,7 +558,7 @@
           self.allModules = res.course_modules;
 
           self.topModules = _.filter(res.course_modules, function (x) {
-            return (x.parent_course_module == null && x.available != false) &&
+            return (!x.parent_course_module && x.available !== false) &&
               (x.course_content_ids.length > 0 || x.course_modules.length > 0);
           });
 
@@ -591,7 +610,7 @@
 
             $list.slideDown('fast');
 
-            if (typeof cb == 'function') {
+            if (typeof cb === 'function') {
               cb();
             }
           });
@@ -604,7 +623,7 @@
           $list.slideDown('fast');
         }
 
-        if (typeof cb == 'function') {
+        if (typeof cb === 'function') {
           cb();
         }
       }
@@ -627,14 +646,14 @@
     changeLesson: function (direction, lesson) {
       var $targetLesson = $(lesson);
 
-      if (direction == 'prev') {
+      if (direction === 'prev') {
         var $prev = app.lessonList
           .currentLesson()
           .prevAll('.js-content');
 
         if ($prev.length > 0 && $prev.find('a').length > 0)
           $targetLesson = $($prev[0]);
-      } else if (direction == 'next') {
+      } else if (direction === 'next') {
         var $next = app.lessonList
           .currentLesson()
           .nextAll('.js-content');
