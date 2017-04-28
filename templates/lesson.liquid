@@ -68,6 +68,7 @@
 
           <div id="js-media-player"
                class="media-player"
+               data-lesson-progress="{{ lesson_progress | to_json | replace: '"', '&quot;' | strip_newlines }}"
                data-enable-video-watermark="{{ current_school | has_feature: 'video_watermark' }}"
                data-lesson-id="{{ lesson.id }}">
             {% if lesson.media %}

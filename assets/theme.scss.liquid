@@ -357,8 +357,19 @@ header.navbar {
     .course-content {
       .lesson {
         &.active {
+          &.active {
+            box-shadow: 1px 0 0 0 $color-primary;
+            border-left: 1px solid $color-primary !important;
+          }
           .content-lesson {
             .class-info {
+              .left {
+                i {
+                  &:after {
+                    border-color: lighten($color-primary, 20%);
+                  }
+                }
+              }
               .lesson-title {
                 &:hover {
                   span {
