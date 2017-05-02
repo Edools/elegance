@@ -12,7 +12,7 @@
       max-width: calc(100% - 50px);
 
       .message-box {
-        border: 1px solid darken($body-bg, 3%);
+        border: 1px solid darken($body-bg, 5%);
         background-color: $light;
       }
     }
@@ -49,7 +49,7 @@
       padding: 10px $padding-large-horizontal;
       border: 1px solid darken($chat-message-bg, 5%);
       border-radius: $border-radius-base;
-      background-color: $chat-message-bg;
+      background-color: $light;
       font-size: 14px;
 
       .schedule {

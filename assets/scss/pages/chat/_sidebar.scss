@@ -6,6 +6,18 @@
   background-color: $chat-sidebar-bg;
   color: $light;
 
+  .btn {
+    border-color: lighten($chat-sidebar-bg, 25%);
+    color: lighten($chat-sidebar-bg, 50%);
+
+    &:hover,
+    &:focus {
+      border-color: lighten($chat-sidebar-bg, 10%);
+      background-color: lighten($chat-sidebar-bg, 10%);
+      color: $light;
+    }
+  }
+
   .separator {
     margin-right: $padding-large-horizontal * 1.2;
     margin-left: $padding-large-horizontal * 1.2;
@@ -17,17 +29,8 @@
     .btn {
       float: right;
       padding: 4px 5px;
-      border-color: lighten($chat-sidebar-bg, 25%);
-      color: lighten($chat-sidebar-bg, 50%);
       font-size: 12px;
       line-height: 1;
-
-      &:hover,
-      &:focus {
-        border-color: lighten($chat-sidebar-bg, 10%);
-        background-color: lighten($chat-sidebar-bg, 10%);
-        color: $light;
-      }
     }
   }
 
@@ -51,6 +54,12 @@
 
     &:not(.scroll-draggable) {
       opacity: 0;
+    }
+  }
+
+  .students-block {
+    .btn-load-more {
+      margin-top: $padding-large-vertical;
     }
   }
 
