@@ -4,10 +4,12 @@
   app.chat = {
     init: function () {
       this.$jsChat = $('.js-chat');
+      this.$chatPage = $('#js-chat-page');
       this.$text = $('.js-chat-text');
       this.$messagesContainer = $('.js-chat-messages .js-content');
-      this.apiKey = $('#js-chat-page').data('api-key');
-      this.userId = $('#js-chat-page').data('user-id');
+      this.user = $("#school-header").first().data('user');
+      this.apiKey = this.$chatPage.data('api-key');
+      this.userId = this.$chatPage.data('user-id');
 
       if (this.$jsChat.length <= 0) return;
 
@@ -21,7 +23,7 @@
       // bind form
       self.$text.keyup(function (e) {
         var code = e.keyCode ? e.keyCode : e.which;
-        if (code == 13 && !e.shiftKey) {
+        if (code === 13 && !e.shiftKey) {
           self.submitMessage(e);
         }
       });
@@ -29,16 +31,7 @@
       app.simpleEditor.init('#js-send-messages');
       $('#js-send-messages').on('submit', self.submitMessage);
 
-      const config = {
-        apiKey: 'AIzaSyD2oUy-240XWPEWmGrh6PqJRaoA4lJFN4s',
-        authDomain: 'edools-chat.firebaseapp.com',
-        databaseURL: 'https://edools-chat.firebaseio.com',
-        projectId: 'edools-chat',
-        storageBucket: 'edools-chat.appspot.com',
-        messagingSenderId: '322321995609'
-      };
-
-      firebase.initializeApp(config);
+      firebase.initializeApp(window.CHAT_CONFIG);
       this.database = firebase.database();
 
       this.authenticate();
@@ -53,11 +46,11 @@
     authenticate: function (callback) {
       var self = app.chat;
       $.ajax({
-        url: window.FIREBASE_SERVICE_HOST + 'authenticate',
+        url: window.CHAT_FIREBASE_SERVICE_HOST + 'authenticate',
         method: 'POST',
         headers: {
           'Authorization': self.apiKey
-        },
+        }
       }).success(function (data) {
         firebase.auth().signInWithCustomToken(data.body.firebase_token)
           .then(function (response) {
@@ -86,12 +79,15 @@
             userRef.set("online");
           }
         });
+
       document.onIdle = function () {
         userRef.set("idle");
-      }
+      };
+
       document.onAway = function () {
         userRef.set("away");
-      }
+      };
+
       document.onBack = function (isIdle, isAway) {
         userRef.set("online");
       }
@@ -156,13 +152,13 @@
       // Removes elements with only '<br/>' children
       $root.children().each(function (i, el) {
         var $el = $(el);
-        if (el.tagName != 'BR' && $el.find('br').length > 0 && $el.find('br').length == $el.children().length) {
+        if (el.tagName !== 'BR' && $el.find('br').length > 0 && $el.find('br').length == $el.children().length) {
           $el.remove();
         }
       });
 
       // Removes last '<br/>'
-      if ($root.last().get(0).tagName == 'BR') {
+      if ($root.last().get(0).tagName === 'BR') {
         $root.last().remove();
       }
 
@@ -185,12 +181,11 @@
       }
 
       var date = new Date();
-      var user = $("#school-header").first().data('user');
 
       self.messages.push({
-        id: user.id,
-        name: user.name,
-        avatar_url: user.avatar_url,
+        id: self.user.id,
+        name: self.user.name,
+        avatar_url: self.user.avatar_url,
         text: text,
         timestamp: moment().unix(),
         schedule: pad(date.getHours()) + ':' + pad(date.getMinutes())
