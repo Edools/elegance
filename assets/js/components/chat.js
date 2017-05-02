@@ -3,15 +3,19 @@
 
   app.chat = {
     init: function () {
-      this.$jsChat = $('.js-chat');
+      this.$chat = $('.js-chat');
       this.$chatPage = $('#js-chat-page');
+      this.$groups = $('.js-groups');
+      this.$roomTitle = $("#js-room-title");
+      this.$roomUsersCount = $("#js-room-users-count");
       this.$text = $('.js-chat-text');
       this.$messagesContainer = $('.js-chat-messages .js-content');
+      this.$sendForm = $('#js-send-messages');
       this.user = $("#school-header").first().data('user');
       this.apiKey = this.$chatPage.data('api-key');
       this.userId = this.$chatPage.data('user-id');
 
-      if (this.$jsChat.length <= 0) return;
+      if (this.$chat.length <= 0) return;
 
       var self = this;
 
@@ -29,7 +33,7 @@
       });
 
       app.simpleEditor.init('#js-send-messages');
-      $('#js-send-messages').on('submit', self.submitMessage);
+      self.$sendForm.on('submit', self.submitMessage);
 
       firebase.initializeApp(window.CHAT_CONFIG);
       this.database = firebase.database();
@@ -43,10 +47,10 @@
       self.listenConnectionChanges();
     },
 
-    authenticate: function (callback) {
+    authenticate: function () {
       var self = app.chat;
       $.ajax({
-        url: window.CHAT_FIREBASE_SERVICE_HOST + 'authenticate',
+        url: window.CHAT_FIREBASE_SERVICE_HOST + '/authenticate',
         method: 'POST',
         headers: {
           'Authorization': self.apiKey
@@ -57,11 +61,11 @@
             self.monitorConnectionState(response);
           })
           .catch(function (error) {
-            console.log("Error creating custom token:", error);
+            console.error("Error creating custom token:", error);
           });
       }).error(function (error) {
-        console.log('could not authenticate');
-        console.log(error);
+        console.error('Could not authenticate');
+        console.error(error);
       });
     },
 
@@ -111,28 +115,28 @@
     },
 
     updateStatus: function (status, user_id) {
-      var $div = $('*[data-id="' + user_id + '"]')[0];
-      if ($div) {
-        $('.status > .icon', $div).first().attr('class', 'icon icon-' + status);
+      var $element = $('*[data-id="' + user_id + '"]')[0];
+      if ($element) {
+        $('.status > .icon', $element).first().attr('class', 'icon icon-' + status);
       }
     },
 
     bindScroll: function () {
-      var height = this.$jsChat.data('height');
+      var height = this.$chat.data('height');
 
       this.chatHeight = $(window).height() * .8;
-      this.$messagesScrollContainer = this.$jsChat.find('.chat-messages .js-scroll-container');
+      this.$messagesScrollContainer = this.$chat.find('.chat-messages .js-scroll-container');
       this.$messagesScroll = this.$messagesScrollContainer.find('.js-scroll');
 
-      var $messagesHeader = this.$jsChat.find('.chat-messages .header');
-      var $messagesFooter = this.$jsChat.find('.chat-messages .editor');
+      var $messagesHeader = this.$chat.find('.chat-messages .header');
+      var $messagesFooter = this.$chat.find('.chat-messages .editor');
 
       var messagesScrollHeight = (this.chatHeight - 42) - ($messagesHeader.height() + $messagesFooter.height());
 
-      this.$jsChat.height(this.chatHeight);
+      this.$chat.height(this.chatHeight);
       this.$messagesScrollContainer.height(messagesScrollHeight);
 
-      this.$jsChat.find('.js-sidebar-scroll').scrollbar({});
+      this.$chat.find('.js-sidebar-scroll').scrollbar({});
       this.$messagesScroll.scrollbar({});
     },
 
@@ -219,7 +223,7 @@
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + self.apiKey
-        },
+        }
       }).success(function (data) {
         callback(data);
       });
@@ -232,7 +236,7 @@
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + self.apiKey
-        },
+        }
       }).success(function (data) {
         callback(data);
       });
@@ -245,7 +249,7 @@
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + self.apiKey
-        },
+        }
       }).success(function (data) {
         callback(data);
       });
@@ -257,7 +261,7 @@
       groups.forEach(function (group) {
         var $html = $(self.renderTemplate('chat-group-list-item', group));
         $html.on('click', app.chat.changeRoom);
-        $('.js-groups').append($html);
+        self.$groups.append($html);
       });
 
       self.selectFirstRoomAvailable();
@@ -287,27 +291,27 @@
 
     changeRoom: function (event) {
       var self = app.chat;
-      var $div = $(event.currentTarget);
+      var $element = $(event.currentTarget);
 
       $(".chat-sidebar-list-item").removeClass('active');
-      $div.addClass('active');
+      $element.addClass('active');
 
       var roomName = 'messages';
 
-      if ($div.data('type') === 'products') {
+      if ($element.data('type') === 'products') {
         // room name on firebase
-        roomName += '_products/' + $div.data('id');
+        roomName += '_products/' + $element.data('id');
 
         // change room name on div
-        $("#js-room-title").html($('#js-chat-group-name', $div).html());
-        $("#js-room-users-count").html($('#js-chat-group-users-count', $div).html());
-      } else if ($div.data('type') === 'users') {
-        var ids = [self.userId, parseInt($div.data('id'))].sort();
+        self.$roomTitle.html($('#js-chat-group-name', $element).html());
+        self.$roomUsersCount.html($('#js-chat-group-users-count', $element).html());
+      } else if ($element.data('type') === 'users') {
+        var ids = [self.userId, parseInt($element.data('id'))].sort();
         roomName += '_users/' + ids[0] + '/' + ids[1];
 
         // change room name on div
-        $("#js-room-title").html($('.info .name', $div).html());
-        $("#js-room-users-count").html($('.info .location', $div).html());
+        self.$roomTitle.html($('.info .name', $element).html());
+        self.$roomUsersCount.html($('.info .location', $element).html());
       }
 
       self.$messagesContainer.html('');
