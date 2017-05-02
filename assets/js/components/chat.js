@@ -2,26 +2,34 @@
   'use strict';
 
   app.chat = {
+    followsPage: 0,
+    followsPerPage: 5,
+    followsTotalPages: 0,
+
     init: function () {
-      this.$chat = $('.js-chat');
-      this.$chatPage = $('#js-chat-page');
-      this.$groups = $('.js-groups');
-      this.$roomTitle = $("#js-room-title");
-      this.$roomUsersCount = $("#js-room-users-count");
-      this.$text = $('.js-chat-text');
-      this.$messagesContainer = $('.js-chat-messages .js-content');
-      this.$sendForm = $('#js-send-messages');
-      this.user = $("#school-header").first().data('user');
-      this.apiKey = this.$chatPage.data('api-key');
-      this.userId = this.$chatPage.data('user-id');
-
-      if (this.$chat.length <= 0) return;
-
       var self = this;
+
+      self.$chat = $('.js-chat');
+      self.$groups = $('.js-groups');
+      self.$roomTitle = $("#js-room-title");
+      self.$roomUsersCount = $("#js-room-users-count");
+      self.$text = $('.js-chat-text');
+      self.$messagesContainer = $('.js-chat-messages .js-content');
+      self.$messagesScroll = $('.js-chat-messages .js-scroll');
+      self.$sendForm = $('#js-send-messages');
+      self.$loadMoreStudentsButton = self.$chat.find('.js-load-more-students');
+      self.$generalChatGroup = self.$chat.find('.js-chat-group-general');
+
+      self.user = $("#school-header").data('user');
+
+      self.schoolId = self.$chat.data('school-id');
+      self.apiKey = self.$chat.data('api-key');
+      self.userId = self.user.id;
+
+      if (self.$chat.length <= 0) return;
 
       self.bindScroll();
 
-      // empty test messages
       self.$messagesContainer.empty();
 
       // bind form
@@ -36,13 +44,23 @@
       self.$sendForm.on('submit', self.submitMessage);
 
       firebase.initializeApp(window.CHAT_CONFIG);
-      this.database = firebase.database();
+      self.database = firebase.database();
 
-      this.authenticate();
+      self.authenticate();
 
       self.loadGroups(self.didLoadGroups);
-      self.loadGeneral(self.didLoadGeneral);
-      self.loadFollowers(self.didLoadFollowers);
+      self.loadCollaborators(self.didLoadCollaborators);
+      self.loadFollows(self.didLoadFollows);
+
+      self.$loadMoreStudentsButton.on('click', function () {
+        self.loadFollows(self.didLoadFollows);
+      });
+
+      self.$generalChatGroup.on('click', function () {
+        self.changeRoom({
+          currentTarget: self.$generalChatGroup
+        })
+      });
 
       self.listenConnectionChanges();
     },
@@ -205,6 +223,11 @@
       });
 
       self.$messagesContainer.append(html);
+      self.scrollToEnd();
+    },
+
+    scrollToEnd: function () {
+      var self = this;
       self.$messagesScroll.scrollTop(self.$messagesScroll[0].scrollHeight);
     },
 
@@ -228,10 +251,10 @@
       });
     },
 
-    loadGeneral: function (callback) {
+    loadCollaborators: function (callback) {
       var self = app.chat;
       $.ajax({
-        url: window.CORE_HOST + '/chat/general',
+        url: window.CORE_HOST + '/chat/collaborators',
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + self.apiKey
@@ -241,21 +264,27 @@
       });
     },
 
-    loadFollowers: function (callback) {
+    loadFollows: function (callback) {
       var self = app.chat;
+      this.followsPage = this.followsPage + 1;
+      self.$loadMoreStudentsButton.attr('disabled', 'disabled');
+
       $.ajax({
-        url: window.CORE_HOST + '/chat/followers',
+        url: window.CORE_HOST + '/chat/follows?per_page=' + self.followsPerPage + '&page=' + self.followsPage,
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + self.apiKey
         }
       }).success(function (data) {
+        self.$loadMoreStudentsButton.removeAttr('disabled', 'disabled');
         callback(data);
       });
     },
 
     didLoadGroups: function (groups) {
       var self = app.chat;
+
+      groups = _.sortBy(groups, {is_school: false});
 
       groups.forEach(function (group) {
         var $html = $(self.renderTemplate('chat-group-list-item', group));
@@ -266,15 +295,21 @@
       self.selectFirstRoomAvailable();
     },
 
-    didLoadGeneral: function (users) {
+    didLoadCollaborators: function (users) {
       var self = app.chat;
       self.addProfileItems(users, 'js-team');
       self.selectFirstRoomAvailable();
     },
 
-    didLoadFollowers: function (users) {
+    didLoadFollows: function (data) {
       var self = app.chat;
-      self.addProfileItems(users, 'js-students');
+      self.followsTotalPages = data.total_pages;
+
+      if (self.followsPage >= self.followsTotalPages) {
+        self.$loadMoreStudentsButton.attr('disabled', 'disabled');
+      }
+
+      self.addProfileItems(data.users, 'js-students');
       self.selectFirstRoomAvailable();
     },
 
@@ -302,8 +337,8 @@
         roomName += '_products/' + $element.data('id');
 
         // change room name on div
-        self.$roomTitle.html($('#js-chat-group-name', $element).html());
-        self.$roomUsersCount.html($('#js-chat-group-users-count', $element).html());
+        self.$roomTitle.html($('.js-chat-group-name', $element).html());
+        self.$roomUsersCount.html($('.js-chat-group-users-count', $element).html());
       } else if ($element.data('type') === 'users') {
         var ids = [self.userId, parseInt($element.data('id'))].sort();
         roomName += '_users/' + ids[0] + '/' + ids[1];
@@ -311,12 +346,21 @@
         // change room name on div
         self.$roomTitle.html($('.info .name', $element).html());
         self.$roomUsersCount.html($('.info .location', $element).html());
+      } else if ($element.data('type') === 'schools') {
+        // room name on firebase
+        roomName += '_schools/' + self.schoolId;
+
+        // change room name on div
+        self.$roomTitle.html($('.js-chat-group-name', $element).html());
+        self.$roomUsersCount.html($('.js-chat-group-users-count', $element).html());
       }
 
       self.$messagesContainer.html('');
+
       if (self.messages) {
         self.messages.off();
       }
+
       self.messages = self.database.ref(roomName);
       self.loadMessages();
     },
