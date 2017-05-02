@@ -6,10 +6,16 @@
   left: $chat-sidebar-width;
 
   .messages {
+    @include box-shadow(inset 0 -10px 10px -12px rgba(0, 0, 0, .12));
+
     padding: $padding-large-vertical * 2 $padding-large-horizontal * 2;
+    padding-bottom: 0;
+    height: 85%;
 
     .header {
       padding-bottom: $padding-large-vertical * 2;
+      min-height: 64px;
+      height: 10%;
       border-bottom: 1px solid darken($border-color-base, 3%);
 
       .title {
@@ -27,7 +33,8 @@
 
     .scroll-container {
       position: relative;
-      max-height: 80%;
+      max-height: calc(100% - 64px);
+      height: 90%;
     }
 
     > .content {
@@ -90,7 +97,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    height: 100px;
+    height: 15%;
     border-top: 1px solid $border-color-base;
     background-color: $light;
 
@@ -126,7 +133,7 @@
 
     .btn-group {
       $border-color: rgba(0, 0, 0, .14);
-      @include box-shadow(0 3px 6px -2px rgba(0, 0, 0, .24));
+      @include box-shadow(0 3px 6px -2px rgba(0, 0, 0, .1));
       @include transition(opacity .2s ease);
 
       position: absolute;

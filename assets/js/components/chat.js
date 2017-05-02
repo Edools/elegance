@@ -123,21 +123,20 @@
 
     bindScroll: function () {
       var height = this.$chat.data('height');
+      var parent = this.$chat.data('parent');
+      var parentHeight = parent ? $(parent).height() : $(window).height();
+      var isPercentHeight = height.indexOf('%') > -1;
+      height = Number(height.replace('%', '').replace('px', ''));
 
-      this.chatHeight = $(window).height() * .8;
-      this.$messagesScrollContainer = this.$chat.find('.chat-messages .js-scroll-container');
-      this.$messagesScroll = this.$messagesScrollContainer.find('.js-scroll');
-
-      var $messagesHeader = this.$chat.find('.chat-messages .header');
-      var $messagesFooter = this.$chat.find('.chat-messages .editor');
-
-      var messagesScrollHeight = (this.chatHeight - 42) - ($messagesHeader.height() + $messagesFooter.height());
+      if (isPercentHeight === true) {
+        this.chatHeight = (parentHeight / 100) * height;
+      } else {
+        this.chatHeight = height;
+      }
 
       this.$chat.height(this.chatHeight);
-      this.$messagesScrollContainer.height(messagesScrollHeight);
-
       this.$chat.find('.js-sidebar-scroll').scrollbar({});
-      this.$messagesScroll.scrollbar({});
+      this.$chat.find('.js-chat-messages .js-scroll').scrollbar({});
     },
 
     loadMessages: function () {
