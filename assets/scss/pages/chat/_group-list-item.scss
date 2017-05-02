@@ -12,4 +12,10 @@
     color: lighten($chat-sidebar-bg, 45%);
     font-size: 12px;
   }
+
+  &.chat-group-school {
+    .name {
+      font-weight: bold;
+    }
+  }
 }
