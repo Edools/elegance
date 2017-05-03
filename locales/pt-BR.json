@@ -784,6 +784,10 @@
         "subject": "O seu período de Trial do produto {{product_name}} terminou.",
         "first_paragraph": "Nós recebemos o seu pagamento com sucesso e você poderá continuar assistindo as aulas sem problemas. ✅",
         "second_paragraph": "Ir para curso"
+      },
+      "new_student": {
+        "subject": "Novo aluno cadastrado",
+        "first_paragraph": "O aluno {{ first_name }} se cadastrou na escola. Seu email de acesso é {{ student_mail }}"
       }
     },
     "report": {
