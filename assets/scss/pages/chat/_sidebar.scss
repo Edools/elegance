@@ -57,10 +57,11 @@
     }
   }
 
-  .students-block {
-    .btn-load-more {
-      margin-top: $padding-large-vertical;
-    }
+  .btn-load-more {
+    margin: $padding-large-vertical 0;
+    padding: 7px 8px;
+    font-size: 12px;
+    line-height: 1;
   }
 
   &:hover {
