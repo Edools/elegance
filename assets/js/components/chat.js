@@ -276,16 +276,16 @@
 
     loadGroups: function (callback) {
       var self = app.chat;
-      self.groupsPagination.page = self.groupsPagination.page + 1;
       self.$loadMoreGroupsButton.attr('disabled', 'disabled');
 
       $.ajax({
-        url: window.CORE_HOST + '/chat/groups?per_page=' + self.groupsPagination.perPage + '&page=' + self.groupsPagination.page,
+        url: window.CORE_HOST + '/chat/groups?per_page=' + self.groupsPagination.perPage + '&page=' + (self.groupsPagination.page + 1),
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + self.apiKey
         }
       }).success(function (data) {
+        self.groupsPagination.page = self.groupsPagination.page + 1;
         self.$loadMoreGroupsButton.removeAttr('disabled', 'disabled');
         callback(data);
       });
@@ -293,16 +293,16 @@
 
     loadCollaborators: function (callback) {
       var self = app.chat;
-      self.collaboratorsPagination.page = self.collaboratorsPagination.page + 1;
       self.$loadMoreCollaboratorsButton.attr('disabled', 'disabled');
 
       $.ajax({
-        url: window.CORE_HOST + '/chat/collaborators?per_page=' + self.collaboratorsPagination.perPage + '&page=' + self.collaboratorsPagination.page,
+        url: window.CORE_HOST + '/chat/collaborators?per_page=' + self.collaboratorsPagination.perPage + '&page=' + (self.collaboratorsPagination.page + 1),
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + self.apiKey
         }
       }).success(function (data) {
+        self.collaboratorsPagination.page = self.collaboratorsPagination.page + 1;
         self.$loadMoreCollaboratorsButton.removeAttr('disabled', 'disabled');
         callback(data);
       });
@@ -310,16 +310,16 @@
 
     loadFollows: function (callback) {
       var self = app.chat;
-      self.followsPagination.page = self.followsPagination.page + 1;
       self.$loadMoreStudentsButton.attr('disabled', 'disabled');
 
       $.ajax({
-        url: window.CORE_HOST + '/chat/follows?per_page=' + self.followsPagination.perPage + '&page=' + self.followsPagination.page,
+        url: window.CORE_HOST + '/chat/follows?per_page=' + self.followsPagination.perPage + '&page=' + (self.followsPagination.page + 1),
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + self.apiKey
         }
       }).success(function (data) {
+        self.followsPagination.page = self.followsPagination.page + 1;
         self.$loadMoreStudentsButton.removeAttr('disabled', 'disabled');
         callback(data);
       });
