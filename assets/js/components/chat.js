@@ -2,9 +2,21 @@
   'use strict';
 
   app.chat = {
-    followsPage: 0,
-    followsPerPage: 5,
-    followsTotalPages: 0,
+    groupsPagination: {
+      page: 0,
+      perPage: 5,
+      totalPages: 0
+    },
+    collaboratorsPagination: {
+      page: 0,
+      perPage: 5,
+      totalPages: 0
+    },
+    followsPagination: {
+      page: 0,
+      perPage: 5,
+      totalPages: 0
+    },
 
     init: function () {
       var self = this;
@@ -17,6 +29,8 @@
       self.$messagesContainer = $('.js-chat-messages .js-content');
       self.$messagesScroll = $('.js-chat-messages .js-scroll');
       self.$sendForm = $('#js-send-messages');
+      self.$loadMoreGroupsButton = self.$chat.find('.js-load-more-groups');
+      self.$loadMoreCollaboratorsButton = self.$chat.find('.js-load-more-collaborators');
       self.$loadMoreStudentsButton = self.$chat.find('.js-load-more-students');
       self.$generalChatGroup = self.$chat.find('.js-chat-group-general');
 
@@ -48,9 +62,18 @@
 
       self.authenticate();
 
+      self.loadSchoolGroup(self.didLoadSchoolGroup);
       self.loadGroups(self.didLoadGroups);
       self.loadCollaborators(self.didLoadCollaborators);
       self.loadFollows(self.didLoadFollows);
+
+      self.$loadMoreGroupsButton.on('click', function () {
+        self.loadGroups(self.didLoadGroups);
+      });
+
+      self.$loadMoreCollaboratorsButton.on('click', function () {
+        self.loadCollaborators(self.didLoadCollaborators);
+      });
 
       self.$loadMoreStudentsButton.on('click', function () {
         self.loadFollows(self.didLoadFollows);
@@ -238,39 +261,60 @@
       return template.render(data);
     },
 
-    loadGroups: function (callback) {
+    loadSchoolGroup: function (callback) {
       var self = app.chat;
       $.ajax({
-        url: window.CORE_HOST + '/chat/groups',
+        url: window.CORE_HOST + '/chat/school_group',
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + self.apiKey
         }
       }).success(function (data) {
+        callback(data);
+      });
+    },
+
+    loadGroups: function (callback) {
+      var self = app.chat;
+      self.groupsPagination.page = self.groupsPagination.page + 1;
+      self.$loadMoreGroupsButton.attr('disabled', 'disabled');
+
+      $.ajax({
+        url: window.CORE_HOST + '/chat/groups?per_page=' + self.groupsPagination.perPage + '&page=' + self.groupsPagination.page,
+        method: 'GET',
+        headers: {
+          'Authorization': 'Token token=' + self.apiKey
+        }
+      }).success(function (data) {
+        self.$loadMoreGroupsButton.removeAttr('disabled', 'disabled');
         callback(data);
       });
     },
 
     loadCollaborators: function (callback) {
       var self = app.chat;
+      self.collaboratorsPagination.page = self.collaboratorsPagination.page + 1;
+      self.$loadMoreCollaboratorsButton.attr('disabled', 'disabled');
+
       $.ajax({
-        url: window.CORE_HOST + '/chat/collaborators',
+        url: window.CORE_HOST + '/chat/collaborators?per_page=' + self.collaboratorsPagination.perPage + '&page=' + self.collaboratorsPagination.page,
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + self.apiKey
         }
       }).success(function (data) {
+        self.$loadMoreCollaboratorsButton.removeAttr('disabled', 'disabled');
         callback(data);
       });
     },
 
     loadFollows: function (callback) {
       var self = app.chat;
-      this.followsPage = this.followsPage + 1;
+      self.followsPagination.page = self.followsPagination.page + 1;
       self.$loadMoreStudentsButton.attr('disabled', 'disabled');
 
       $.ajax({
-        url: window.CORE_HOST + '/chat/follows?per_page=' + self.followsPerPage + '&page=' + self.followsPage,
+        url: window.CORE_HOST + '/chat/follows?per_page=' + self.followsPagination.perPage + '&page=' + self.followsPagination.page,
         method: 'GET',
         headers: {
           'Authorization': 'Token token=' + self.apiKey
@@ -281,10 +325,31 @@
       });
     },
 
-    didLoadGroups: function (groups) {
+    didLoadSchoolGroup: function (group) {
       var self = app.chat;
 
+      group.is_school = true;
+
+      var $html = $(self.renderTemplate('chat-group-list-item', group));
+      $html.on('click', app.chat.changeRoom);
+      self.$groups.prepend($html);
+    },
+
+    didLoadGroups: function (data) {
+      var self = app.chat;
+
+      self.groupsPagination.totalPages = data.total_pages;
+
+      if (self.groupsPagination.page >= self.groupsPagination.totalPages) {
+        self.$loadMoreGroupsButton.attr('disabled', 'disabled');
+      }
+
+      var groups = data.groups;
       groups = _.sortBy(groups, {is_school: false});
+      groups = _.map(groups, function (g) {
+        g.is_school = false;
+        return g;
+      });
 
       groups.forEach(function (group) {
         var $html = $(self.renderTemplate('chat-group-list-item', group));
@@ -295,17 +360,24 @@
       self.selectFirstRoomAvailable();
     },
 
-    didLoadCollaborators: function (users) {
+    didLoadCollaborators: function (data) {
       var self = app.chat;
-      self.addProfileItems(users, 'js-team');
+
+      self.collaboratorsPagination.totalPages = data.total_pages;
+
+      if (self.collaboratorsPagination.page >= self.collaboratorsPagination.totalPages) {
+        self.$loadMoreCollaboratorsButton.attr('disabled', 'disabled');
+      }
+
+      self.addProfileItems(data.collaborators, 'js-team');
       self.selectFirstRoomAvailable();
     },
 
     didLoadFollows: function (data) {
       var self = app.chat;
-      self.followsTotalPages = data.total_pages;
+      self.followsPagination.totalPages = data.total_pages;
 
-      if (self.followsPage >= self.followsTotalPages) {
+      if (self.followsPagination.page >= self.followsPagination.totalPages) {
         self.$loadMoreStudentsButton.attr('disabled', 'disabled');
       }
 
