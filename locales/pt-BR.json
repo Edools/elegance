@@ -756,6 +756,10 @@
   "mailer": {
     "hello": "Olá, {{first_name}}.",
     "if_link_does_not_work": "Caso o link acima não funcione, copie e cole este endereço no seu navegador: {{url}}",
+    "new_student": {
+      "subject": "Novo aluno cadastrado",
+      "first_paragraph": "O aluno {{ first_name }} se cadastrou na escola. Seu email de acesso é {{ student_mail }}"
+    },
     "new_item_quantity_coupons": {
       "subject": "Novos cupons gerados",
       "first_paragraph": "Foram criadas {{ coupon_quantity }} unidades do cupom {{ coupon_name }} para o produto {{ product_title }}."
@@ -788,10 +792,6 @@
         "subject": "O seu período de Trial do produto {{product_name}} terminou.",
         "first_paragraph": "Nós recebemos o seu pagamento com sucesso e você poderá continuar assistindo as aulas sem problemas. ✅",
         "second_paragraph": "Ir para curso"
-      },
-      "new_student": {
-        "subject": "Novo aluno cadastrado",
-        "first_paragraph": "O aluno {{ first_name }} se cadastrou na escola. Seu email de acesso é {{ student_mail }}"
       }
     },
     "report": {
