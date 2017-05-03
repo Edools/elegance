@@ -756,6 +756,10 @@
   "mailer": {
     "hello": "Olá, {{first_name}}.",
     "if_link_does_not_work": "Caso o link acima não funcione, copie e cole este endereço no seu navegador: {{url}}",
+    "new_item_quantity_coupons": {
+      "subject": "Novos cupons gerados",
+      "first_paragraph": "Foram criadas {{ coupon_quantity }} unidades do cupom {{ coupon_name }} para o produto {{ product_title }}."
+    },
     "student_pending_approved": {
       "subject": "Seu cadastro está pendente para aprovação",
       "first_paragraph": "Seu cadastro foi realizado com sucesso, nossa equipe vai realizar uma análise para aprovar ou não sua conta."
