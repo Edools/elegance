@@ -208,7 +208,7 @@
       if (lesson.type === 'ExamLesson' && lesson.activity) {
         switch (lesson.activity.type) {
           case 'Quiz': {
-            lessonIcon = 'icon-puzzle';
+            lessonIcon = '-puzzle';
             break;
           }
           case 'FileUpload': {

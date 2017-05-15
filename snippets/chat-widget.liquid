@@ -1,0 +1,11 @@
+<div class="chat chat-{{ size }}">
+  {% include 'chat/templates' %}
+
+  <div class="chat-wrapper js-chat"
+       data-school-id="{{ current_school.id }}"
+       data-api-key='{{ current_api_key.credentials }}'
+       {% if height %}data-height="{{ height }}"{% endif %}>
+    {% include 'chat/sidebar' %}
+    {% include 'chat/messages' %}
+  </div>
+</div>

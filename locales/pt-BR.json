@@ -906,5 +906,13 @@
   "notepad": {
     "note": "Bloco de Notas",
     "my_annotations": "Minhas anotações"
+  },
+  "chat": {
+    "groups": "Grupos",
+    "students": "Alunos",
+    "teams": "Equipes",
+    "peoples": "pessoas",
+    "follow_student": "Seguir Aluno",
+    "type_here": "Escreva a mensagem aqui..."
   }
 }

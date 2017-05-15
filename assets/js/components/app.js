@@ -56,6 +56,7 @@
       app.ckeditor.bindCkeditor();
       app.bindCheckout();
       app.lessonList.init();
+      app.chat.init();
       app.studentDoubts.init();
       app.notepad.init();
       app.categoryList.init();
