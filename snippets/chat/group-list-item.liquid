@@ -1,0 +1,8 @@
+{% raw %}
+<div class="js-chat-group-list-item chat-group-list-item chat-sidebar-list-item {% if is_school %}chat-group-school{% endif %}"
+     data-id="{{ id }}"
+     data-type="{% if is_school %}schools{% else %}products{% endif %}">
+  <div class="name js-chat-group-name">{{ name }}</div>
+  <div class="users-count js-chat-group-users-count">{{ users_count }} pessoas</div>
+</div>
+{% endraw %}
