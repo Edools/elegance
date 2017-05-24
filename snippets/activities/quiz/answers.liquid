@@ -2,27 +2,28 @@
   {% if lesson.min_grade > 0 %}
     {% if answer.approved? %}
       <p class="alert alert-success alert-approved">
-        {{ 'quiz.messages.approved' | t: score: answer.score }}
+      {{ 'quiz.messages.approved' | t: score: answer.score }}
       </p>
     {% else %}
       <p class="alert alert-danger alert-disapproved">
-        {{ 'quiz.messages.disapproved' | t: score: answer.score, min_grade: lesson.min_grade }}
+      {{ 'quiz.messages.disapproved' | t: score: answer.score, min_grade: lesson.min_grade }}
       </p>
     {% endif %}
   {% endif %}
 
   {% if attempts_remaining > 0 %}
     <p>
-      {{ 'quiz.messages.try' | t: attempts_remaining: attempts_remaining }} &nbsp;
+    {{ 'quiz.messages.try' | t: attempts_remaining: attempts_remaining }} &nbsp;
 
-      <button id="js-remake-exam" class="btn btn-primary btn-xs">
-        {{ 'quiz.messages.click_here' | t }}
-      </button>
+    <button id="js-remake-exam" class="btn btn-primary btn-xs">
+      {{ 'quiz.messages.click_here' | t }}
+    </button>
     </p>
   {% endif %}
 
   <div class="answers">
-    {% for question in activity.exam_questions %}
+    {% for question_answer in answer.exam_question_answers %}
+      {% assign question = question_answer.exam_question %}
       <div class="panel panel-default" data-question-id="{{ question.id }}">
         <div class="panel-heading">
           <div class="panel-title">
@@ -41,180 +42,180 @@
           {% case question.type %}
 
           {% when 'DiscursiveExamQuestion' %}
-          <div class="discursive-answer">
-            <div class="answer-text">{{ question.answer.text }}</div>
-            <br/>
-          </div>
+            <div class="discursive-answer">
+              <div class="answer-text">{{ question_answer.text }}</div>
+              <br/>
+            </div>
 
           {% when 'MultipleChoiceExamQuestion' %}
-          <div class="multiple-choice-answer">
-            {% assign correct_option = nil %}
+            <div class="multiple-choice-answer">
+              {% assign correct_option = nil %}
 
-            {% for option in question.options %}
-              {% if option.correct %}
-                {% assign correct_option = option %}
-              {% endif %}
-
-              {% if option.id == question.answer.multiple_choice_option_id %}
-                {% assign checked = 'checked' %}
-
+              {% for option in question.options %}
                 {% if option.correct %}
-                  {% assign radio_class = 'question-option alert alert-success' %}
-                {% else %}
-                  {% assign radio_class = 'question-option alert alert-danger' %}
+                  {% assign correct_option = option %}
                 {% endif %}
 
-              {% else %}
-                {% assign checked = nil %}
-                {% assign radio_class = 'question-option alert without-color' %}
+                {% if option.id == question_answer.multiple_choice_option_id %}
+                  {% assign checked = 'checked' %}
+
+                  {% if option.correct %}
+                    {% assign radio_class = 'question-option alert alert-success' %}
+                  {% else %}
+                    {% assign radio_class = 'question-option alert alert-danger' %}
+                  {% endif %}
+
+                {% else %}
+                  {% assign checked = nil %}
+                  {% assign radio_class = 'question-option alert without-color' %}
+                {% endif %}
+
+                <div class="{{ radio_class }}">
+                  <div class="option-input">
+                    <input type="radio" disabled="true" {{ checked }}>
+                  </div>
+                  <div class="option-text">
+                    {{ option.title }}
+                  </div>
+                </div>
+              {% endfor %}
+
+              {% if answer.approved? or lesson.min_grade <= 0 or attempts_remaining == 0 %}
+                <div class="question-option alert alert-info">
+                  <span class="question-right-answer">
+                    <strong>{{ 'quiz.right_answer' | t }}:</strong> {{ correct_option.title }}
+                  </span>
+                </div>
               {% endif %}
-
-              <div class="{{ radio_class }}">
-                <div class="option-input">
-                  <input type="radio" disabled="true" {{ checked }}>
-                </div>
-                <div class="option-text">
-                  {{ option.title }}
-                </div>
-              </div>
-            {% endfor %}
-
-            {% if answer.approved? or lesson.min_grade <= 0 or attempts_remaining == 0 %}
-              <div class="question-option alert alert-info">
-              <span class="question-right-answer">
-                <strong>{{ 'quiz.right_answer' | t }}:</strong> {{ correct_option.title }}
-              </span>
-              </div>
-            {% endif %}
-          </div>
+            </div>
 
           {% when 'AssociativeExamQuestion' %}
-          <div class="associative-answer">
-            <table class="table table-bordered">
-              <tbody>
-              {% for option in question.answer.associative_options %}
-                {% if option.correct %}
-                  {% assign correct_class = 'alert-success' %}
-                {% else %}
-                  {% assign correct_class = 'alert-danger' %}
-                {% endif %}
+            <div class="associative-answer">
+              <table class="table table-bordered">
+                <tbody>
+                  {% for option in question_answer.associative_options %}
+                    {% if option.correct %}
+                      {% assign correct_class = 'alert-success' %}
+                    {% else %}
+                      {% assign correct_class = 'alert-danger' %}
+                    {% endif %}
 
-                <tr class="alert {{ correct_class }}">
-                  <td>{{ option.first_assertion.text }}</td>
-                  <td>{{ option.second_assertion.text }}</td>
-                </tr>
-              {% endfor %}
-              </tbody>
-            </table>
-
-            {% if answer.approved? or lesson.min_grade <= 0 or attempts_remaining == 0 %}
-              <div class="alert alert-info">
-              <span class="question-right-answer">
-                <strong>{{ 'quiz.right_answer' | t }}:</strong>
-                <table class="table table-bordered">
-                  <tbody>
-                    {% for option in question.options %}
-                      <tr>
+                    <tr class="alert {{ correct_class }}">
                       <td>{{ option.first_assertion.text }}</td>
                       <td>{{ option.second_assertion.text }}</td>
                     </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </span>
-              </div>
-            {% endif %}
-          </div>
+                  {% endfor %}
+                </tbody>
+              </table>
+
+              {% if answer.approved? or lesson.min_grade <= 0 or attempts_remaining == 0 %}
+                <div class="alert alert-info">
+                  <span class="question-right-answer">
+                    <strong>{{ 'quiz.right_answer' | t }}:</strong>
+                    <table class="table table-bordered">
+                      <tbody>
+                        {% for option in question.options %}
+                          <tr>
+                            <td>{{ option.first_assertion.text }}</td>
+                            <td>{{ option.second_assertion.text }}</td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </span>
+                </div>
+              {% endif %}
+            </div>
 
           {% when 'TrueOrFalseExamQuestion' %}
-          <div class="true-or-false-answer">
-            {% assign correct_option = question.options[0] %}
-            {% if question.answer.correct %}
-              {% assign true_checked = 'checked' %}
-              {% assign false_checked = nil %}
+            <div class="true-or-false-answer">
+              {% assign correct_option = question.options[0] %}
+              {% if question_answer.correct %}
+                {% assign true_checked = 'checked' %}
+                {% assign false_checked = nil %}
 
-              {% assign false_class = 'without-color' %}
+                {% assign false_class = 'without-color' %}
 
-              {% if question.options[0].correct == question.answer.correct %}
-                {% assign true_class = 'alert-success' %}
-              {% else %}
-                {% assign true_class = 'alert-danger' %}
-              {% endif %}
-            {% else %}
-              {% assign true_checked = nil %}
-              {% assign false_checked = 'checked' %}
-
-              {% assign true_class = 'without-color' %}
-
-              {% if question.options[0].correct == question.answer.correct %}
-                {% assign false_class = 'alert-success' %}
-              {% else %}
-                {% assign false_class = 'alert-danger' %}
-              {% endif %}
-            {% endif %}
-
-            <div class="question-option alert {{ false_class }}">
-              <div class="option-input">
-                <input type="radio" {{ false_checked }} disabled="true">
-              </div>
-              <div class="option-text">{{ 'quiz.false' | t }}</div>
-            </div>
-
-            <div class="question-option alert {{ true_class }}">
-              <div class="option-input">
-                <input type="radio" {{ true_checked }} disabled="true">
-              </div>
-              <div class="option-text">{{ 'quiz.true' | t }}</div>
-            </div>
-
-            <br/>
-
-            {% if answer.approved? or lesson.min_grade <= 0 or attempts_remaining == 0 %}
-              <div class="alert alert-info">
-                  <span class="question-right-answer">
-                    <strong>{{ 'quiz.right_answer' | t }}
-                      :</strong> {% if correct_option.correct == true %} {{ 'quiz.true' | t }} {% else %} {{ 'quiz.false' | t }} {% endif %}
-                  </span>
-              </div>
-            {% endif %}
-          </div>
-
-          {% when 'TrueOrFalseExamQuestion2' %}
-          <div class="true-or-false-2-answer">
-            {% assign correct_option = nil %}
-
-            {% for option in question.options %}
-              {% if option.correct %}
-                {% assign correct_option = option %}
-              {% endif %}
-
-              {% if option.id == question.answer.multiple_choice_option_id %}
-                {% assign checked = 'checked' %}
-
-                {% if option.correct %}
-                  {% assign radio_class = 'alert alert-success' %}
+                {% if question.options[0].correct == question_answer.correct %}
+                  {% assign true_class = 'alert-success' %}
                 {% else %}
-                  {% assign radio_class = 'alert alert-danger' %}
+                  {% assign true_class = 'alert-danger' %}
                 {% endif %}
               {% else %}
-                {% assign checked = nil %}
-                {% assign radio_class = 'alert without-color' %}
+                {% assign true_checked = nil %}
+                {% assign false_checked = 'checked' %}
+
+                {% assign true_class = 'without-color' %}
+
+                {% if question.options[0].correct == question_answer.correct %}
+                  {% assign false_class = 'alert-success' %}
+                {% else %}
+                  {% assign false_class = 'alert-danger' %}
+                {% endif %}
               {% endif %}
 
-              <div class="{{ radio_class }}">
-                <input type="radio" disabled="true" {{ checked }}>
-                <span>{{ option.title }}</span>
+              <div class="question-option alert {{ false_class }}">
+                <div class="option-input">
+                  <input type="radio" {{ false_checked }} disabled="true">
+                </div>
+                <div class="option-text">{{ 'quiz.false' | t }}</div>
               </div>
-            {% endfor %}
 
-            {% if answer.approved? or lesson.min_grade <= 0 or attempts_remaining == 0 %}
-              <div class="alert alert-info">
-                <span class="question-right-answer">
-                  <strong>{{ 'quiz.right_answer' | t }}:</strong> {{ correct_option.title }}
-                </span>
+              <div class="question-option alert {{ true_class }}">
+                <div class="option-input">
+                  <input type="radio" {{ true_checked }} disabled="true">
+                </div>
+                <div class="option-text">{{ 'quiz.true' | t }}</div>
               </div>
-            {% endif %}
-          </div>
+
+              <br/>
+
+              {% if answer.approved? or lesson.min_grade <= 0 or attempts_remaining == 0 %}
+                <div class="alert alert-info">
+                  <span class="question-right-answer">
+                    <strong>{{ 'quiz.right_answer' | t }}
+                    :</strong> {% if correct_option.correct == true %} {{ 'quiz.true' | t }} {% else %} {{ 'quiz.false' | t }} {% endif %}
+                    </span>
+                </div>
+              {% endif %}
+            </div>
+
+          {% when 'TrueOrFalseExamQuestion2' %}
+            <div class="true-or-false-2-answer">
+              {% assign correct_option = nil %}
+
+              {% for option in question.options %}
+                {% if option.correct %}
+                  {% assign correct_option = option %}
+                {% endif %}
+
+                {% if option.id == question_answer.multiple_choice_option_id %}
+                  {% assign checked = 'checked' %}
+
+                  {% if option.correct %}
+                    {% assign radio_class = 'alert alert-success' %}
+                  {% else %}
+                    {% assign radio_class = 'alert alert-danger' %}
+                  {% endif %}
+                {% else %}
+                  {% assign checked = nil %}
+                  {% assign radio_class = 'alert without-color' %}
+                {% endif %}
+
+                <div class="{{ radio_class }}">
+                  <input type="radio" disabled="true" {{ checked }}>
+                  <span>{{ option.title }}</span>
+                </div>
+              {% endfor %}
+
+              {% if answer.approved? or lesson.min_grade <= 0 or attempts_remaining == 0 %}
+                <div class="alert alert-info">
+                  <span class="question-right-answer">
+                    <strong>{{ 'quiz.right_answer' | t }}:</strong> {{ correct_option.title }}
+                  </span>
+                </div>
+              {% endif %}
+            </div>
 
           {% endcase %}
 
@@ -227,7 +228,7 @@
           {% endif %}
 
           <div class="pull-right badge">
-            Pontuação: {{ question.answer.score | round }} / {{ question.point }}
+            Pontuação: {{ question_answer.score | round }} / {{ question.point }}
           </div>
         </div>
       </div>
@@ -235,11 +236,11 @@
   </div>
 {% else %}
   <span class="waiting-correction">
-  {{ 'quiz.messages.waiting_correction' | t }}
-</span>
+    {{ 'quiz.messages.waiting_correction' | t }}
+  </span>
   {% if attempts_remaining > 0 %}
     <span class="waiting-correction-attempts-message">
-    {{ 'quiz.messages.waiting_correction_attempts_message' | t: attempts_remaining: attempts_remaining }}
-  </span>
+      {{ 'quiz.messages.waiting_correction_attempts_message' | t: attempts_remaining: attempts_remaining }}
+    </span>
   {% endif %}
 {% endif %}
