@@ -2,22 +2,22 @@
   {% if lesson.min_grade > 0 %}
     {% if answer.approved? %}
       <p class="alert alert-success alert-approved">
-      {{ 'quiz.messages.approved' | t: score: answer.score }}
+        {{ 'quiz.messages.approved' | t: score: answer.score }}
       </p>
     {% else %}
       <p class="alert alert-danger alert-disapproved">
-      {{ 'quiz.messages.disapproved' | t: score: answer.score, min_grade: lesson.min_grade }}
+        {{ 'quiz.messages.disapproved' | t: score: answer.score, min_grade: lesson.min_grade }}
       </p>
     {% endif %}
   {% endif %}
 
   {% if attempts_remaining > 0 %}
     <p>
-    {{ 'quiz.messages.try' | t: attempts_remaining: attempts_remaining }} &nbsp;
+      {{ 'quiz.messages.try' | t: attempts_remaining: attempts_remaining }} &nbsp;
 
-    <button id="js-remake-exam" class="btn btn-primary btn-xs">
-      {{ 'quiz.messages.click_here' | t }}
-    </button>
+      <button id="js-remake-exam" class="btn btn-primary btn-xs">
+        {{ 'quiz.messages.click_here' | t }}
+      </button>
     </p>
   {% endif %}
 
@@ -46,7 +46,6 @@
               <div class="answer-text">{{ question_answer.text }}</div>
               <br/>
             </div>
-
           {% when 'MultipleChoiceExamQuestion' %}
             <div class="multiple-choice-answer">
               {% assign correct_option = nil %}
