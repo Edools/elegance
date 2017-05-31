@@ -71,7 +71,9 @@
 
 .chat-sm {
   .chat-profile-list-item {
+    position: relative;
     text-align: center;
+    cursor: default;
 
     .avatar {
       display: inline-block;
@@ -81,6 +83,11 @@
     .info,
     .status {
       display: none;
+    }
+
+    &:hover,
+    &.active {
+      background-color: transparent;
     }
   }
 }

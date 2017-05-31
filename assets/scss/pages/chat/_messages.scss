@@ -99,6 +99,7 @@
     left: 0;
     height: 15%;
     border-top: 1px solid $border-color-base;
+    border-bottom-right-radius: $border-radius-base;
     background-color: $light;
 
     .input {

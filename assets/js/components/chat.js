@@ -23,8 +23,8 @@
 
       self.$chat = $('.js-chat');
       self.$groups = $('.js-groups');
-      self.$roomTitle = $("#js-room-title");
-      self.$roomUsersCount = $("#js-room-users-count");
+      self.$roomTitle = $('#js-room-title');
+      self.$roomUsersCount = $('#js-room-users-count');
       self.$text = $('.js-chat-text');
       self.$messagesContainer = $('.js-chat-messages .js-content');
       self.$messagesScroll = $('.js-chat-messages .js-scroll');
@@ -34,11 +34,12 @@
       self.$loadMoreStudentsButton = self.$chat.find('.js-load-more-students');
       self.$generalChatGroup = self.$chat.find('.js-chat-group-general');
 
-      self.user = $("#school-header").data('user');
-
+      self.user = self.$chat.data('user');
       self.schoolId = self.$chat.data('school-id');
       self.apiKey = self.$chat.data('api-key');
       self.userId = self.user.id;
+      self.chatType = self.$chat.data('type');
+      self.chatLesson = self.$chat.data('lesson');
 
       if (self.$chat.length <= 0) return;
 
@@ -57,39 +58,59 @@
       app.simpleEditor.init('#js-send-messages');
       self.$sendForm.on('submit', self.submitMessage);
 
-      firebase.initializeApp(window.CHAT_CONFIG);
+      if (firebase.apps.length <= 0) {
+        firebase.initializeApp(window.CHAT_CONFIG);
+      }
+
       self.database = firebase.database();
 
       self.authenticate();
 
-      self.loadSchoolGroup(self.didLoadSchoolGroup);
-      self.loadGroups(self.didLoadGroups);
-      self.loadCollaborators(self.didLoadCollaborators);
-      self.loadFollows(self.didLoadFollows);
+      if (self.chatType === 'lesson-chat') {
+        self.lessonRoomUsers = self.database.ref('lesson_room_users/' + self.chatLesson.id);
+        self.$loadMoreStudentsButton.hide();
+        self.changeRoom(null);
+        self.registerCurrentUser();
+        self.loadRoomOnlineUsers();
 
-      self.$loadMoreGroupsButton.on('click', function () {
-        self.loadGroups(self.didLoadGroups);
-      });
+        $(document).off('page:before-change')
+          .on('page:before-change', function () {
+            if (self.userFirebase) {
+              self.userFirebase.remove();
+            }
+          });
 
-      self.$loadMoreCollaboratorsButton.on('click', function () {
-        self.loadCollaborators(self.didLoadCollaborators);
-      });
+      } else {
+        self.loadSchoolGroup();
+        self.loadGroups();
+        self.loadCollaborators();
+        self.loadFollows();
 
-      self.$loadMoreStudentsButton.on('click', function () {
-        self.loadFollows(self.didLoadFollows);
-      });
+        self.$loadMoreGroupsButton.on('click', function () {
+          self.loadGroups();
+        });
 
-      self.$generalChatGroup.on('click', function () {
-        self.changeRoom({
-          currentTarget: self.$generalChatGroup
-        })
-      });
+        self.$loadMoreCollaboratorsButton.on('click', function () {
+          self.loadCollaborators();
+        });
+
+        self.$loadMoreStudentsButton.on('click', function () {
+          self.loadFollows();
+        });
+
+        self.$generalChatGroup.on('click', function () {
+          self.changeRoom({
+            currentTarget: self.$generalChatGroup
+          })
+        });
+      }
 
       self.listenConnectionChanges();
     },
 
     authenticate: function () {
       var self = app.chat;
+
       $.ajax({
         url: window.CHAT_FIREBASE_SERVICE_HOST + '/authenticate',
         method: 'POST',
@@ -102,45 +123,43 @@
             self.monitorConnectionState(response);
           })
           .catch(function (error) {
-            console.error("Error creating custom token:", error);
+            console.error('Error creating custom token:', error);
           });
       }).error(function (error) {
-        console.error('Could not authenticate');
-        console.error(error);
+        console.error('Could not authenticate', error);
       });
     },
 
     monitorConnectionState: function (response) {
-      const self = app.chat;
-      const userRef = firebase.database().ref("user_status").child(response.uid);
+      const userRef = firebase.database().ref('user_status').child(response.uid);
 
       // Monitor connection state on browser tab
-      firebase.database().ref(".info/connected")
-        .on("value", function (snap) {
+      firebase.database().ref('.info/connected')
+        .on('value', function (snap) {
           if (snap.val()) {
             // if we lose network then remove this user from the list
-            userRef.onDisconnect().set("offline");
+            userRef.onDisconnect().set('offline');
             // set user's online status
-            userRef.set("online");
+            userRef.set('online');
           }
         });
 
       document.onIdle = function () {
-        userRef.set("idle");
+        userRef.set('idle');
       };
 
       document.onAway = function () {
-        userRef.set("away");
+        userRef.set('away');
       };
 
-      document.onBack = function (isIdle, isAway) {
-        userRef.set("online");
+      document.onBack = function () {
+        userRef.set('online');
       }
     },
 
     listenConnectionChanges: function () {
       var self = app.chat;
-      var connectionsRef = this.database.ref("user_status");
+      var connectionsRef = this.database.ref('user_status');
 
       connectionsRef.on('child_added', function (data) {
         self.updateStatus(data.val(), data.key);
@@ -155,10 +174,33 @@
       });
     },
 
-    updateStatus: function (status, user_id) {
-      var $element = $('*[data-id="' + user_id + '"]')[0];
-      if ($element) {
-        $('.status > .icon', $element).first().attr('class', 'icon icon-' + status);
+    updateStatus: function (status, userId) {
+      var self = this;
+
+      var $element = $('*[data-id="' + userId + '"]');
+
+      if (self.chatType === 'lesson-chat') {
+        if (status === 'offline') {
+          if ($element.length) {
+            $element.remove();
+          }
+
+          self.lessonRoomUsers
+            .orderByChild('id')
+            .equalTo(Number(userId))
+            .once('value')
+            .then(function (snapshot) {
+              if (snapshot.hasChildren()) {
+                snapshot.forEach(function (snap) {
+                  self.lessonRoomUsers.child(snap.key).remove();
+                });
+              }
+            });
+        }
+      } else {
+        if ($element.length) {
+          $('.status .icon', $element).first().attr('class', 'icon icon-' + status);
+        }
       }
     },
 
@@ -178,16 +220,6 @@
       this.$chat.height(this.chatHeight);
       this.$chat.find('.js-sidebar-scroll').scrollbar({});
       this.$chat.find('.js-chat-messages .js-scroll').scrollbar({});
-    },
-
-    loadMessages: function () {
-      var self = app.chat;
-      const setMessage = function (data) {
-        self.insertMessage(data.val());
-      }.bind(self);
-
-      self.messages.limitToLast(12).on('child_added', setMessage);
-      self.messages.limitToLast(12).on('child_changed', setMessage);
     },
 
     sanitizeHtml: function ($root) {
@@ -221,22 +253,27 @@
       self.$text.html('').focus();
 
       function pad(n) {
-        return (n < 10) ? ("0" + n) : n;
+        return (n < 10) ? ('0' + n) : n;
       }
 
       var date = new Date();
 
       self.messages.push({
         id: self.user.id,
-        name: self.user.name,
-        avatar_url: self.user.avatar_url,
+        name: self.user.first_name,
+        avatar_url: self.user.cover_image_url,
         text: text,
         timestamp: moment().unix(),
         schedule: pad(date.getHours()) + ':' + pad(date.getMinutes())
       });
     },
 
-    insertMessage: function (data) {
+    scrollToEnd: function () {
+      var self = this;
+      self.$messagesScroll.scrollTop(self.$messagesScroll[0].scrollHeight);
+    },
+
+    renderMessage: function (data) {
       var self = app.chat;
       var html = self.renderTemplate('chat-message', {
         avatar: data.avatar_url,
@@ -249,11 +286,6 @@
       self.scrollToEnd();
     },
 
-    scrollToEnd: function () {
-      var self = this;
-      self.$messagesScroll.scrollTop(self.$messagesScroll[0].scrollHeight);
-    },
-
     renderTemplate: function (key, data) {
       var liquid = $('#' + key + '-template').html();
       var template = Liquid.parse(liquid);
@@ -261,7 +293,32 @@
       return template.render(data);
     },
 
-    loadSchoolGroup: function (callback) {
+    loadMessages: function () {
+      var self = app.chat;
+      const setMessage = function (data) {
+        self.renderMessage(data.val());
+      }.bind(self);
+
+      self.messages.limitToLast(12).on('child_added', setMessage);
+      self.messages.limitToLast(12).on('child_changed', setMessage);
+    },
+
+    loadRoomOnlineUsers: function () {
+      var self = app.chat;
+      const setUser = function (data) {
+        var $html = $(self.renderTemplate('chat-profile-list-item', data.val()));
+        $('.js-students').append($html);
+      }.bind(self);
+
+      const removeUser = function (data) {
+        $('.js-students [data-id="' + data.val().id + '"]').remove();
+      }.bind(self);
+
+      self.lessonRoomUsers.on('child_added', setUser);
+      self.lessonRoomUsers.on('child_removed', removeUser);
+    },
+
+    loadSchoolGroup: function () {
       var self = app.chat;
       $.ajax({
         url: window.CORE_HOST + '/chat/school_group',
@@ -270,11 +327,15 @@
           'Authorization': 'Token token=' + self.apiKey
         }
       }).success(function (data) {
-        callback(data);
+        data.is_school = true;
+
+        var $html = $(self.renderTemplate('chat-group-list-item', data));
+        $html.on('click', app.chat.changeRoom);
+        self.$groups.prepend($html);
       });
     },
 
-    loadGroups: function (callback) {
+    loadGroups: function () {
       var self = app.chat;
       self.$loadMoreGroupsButton.attr('disabled', 'disabled');
 
@@ -287,11 +348,30 @@
       }).success(function (data) {
         self.groupsPagination.page = self.groupsPagination.page + 1;
         self.$loadMoreGroupsButton.removeAttr('disabled', 'disabled');
-        callback(data);
+        self.groupsPagination.totalPages = data.total_pages;
+
+        if (self.groupsPagination.page >= self.groupsPagination.totalPages) {
+          self.$loadMoreGroupsButton.attr('disabled', 'disabled');
+        }
+
+        var groups = data.groups;
+        groups = _.sortBy(groups, {is_school: false});
+        groups = _.map(groups, function (g) {
+          g.is_school = false;
+          return g;
+        });
+
+        groups.forEach(function (group) {
+          var $html = $(self.renderTemplate('chat-group-list-item', group));
+          $html.on('click', app.chat.changeRoom);
+          self.$groups.append($html);
+        });
+
+        self.selectFirstRoomAvailable();
       });
     },
 
-    loadCollaborators: function (callback) {
+    loadCollaborators: function () {
       var self = app.chat;
       self.$loadMoreCollaboratorsButton.attr('disabled', 'disabled');
 
@@ -304,11 +384,18 @@
       }).success(function (data) {
         self.collaboratorsPagination.page = self.collaboratorsPagination.page + 1;
         self.$loadMoreCollaboratorsButton.removeAttr('disabled', 'disabled');
-        callback(data);
+        self.collaboratorsPagination.totalPages = data.total_pages;
+
+        if (self.collaboratorsPagination.page >= self.collaboratorsPagination.totalPages) {
+          self.$loadMoreCollaboratorsButton.attr('disabled', 'disabled');
+        }
+
+        self.addProfileItems(data.collaborators, 'js-team');
+        self.selectFirstRoomAvailable();
       });
     },
 
-    loadFollows: function (callback) {
+    loadFollows: function () {
       var self = app.chat;
       self.$loadMoreStudentsButton.attr('disabled', 'disabled');
 
@@ -321,68 +408,31 @@
       }).success(function (data) {
         self.followsPagination.page = self.followsPagination.page + 1;
         self.$loadMoreStudentsButton.removeAttr('disabled', 'disabled');
-        callback(data);
+        self.followsPagination.totalPages = data.total_pages;
+
+        if (self.followsPagination.page >= self.followsPagination.totalPages) {
+          self.$loadMoreStudentsButton.attr('disabled', 'disabled');
+        }
+
+        self.addProfileItems(data.users, 'js-students');
+        self.selectFirstRoomAvailable();
       });
     },
 
-    didLoadSchoolGroup: function (group) {
-      var self = app.chat;
+    registerCurrentUser: function () {
+      var self = this;
 
-      group.is_school = true;
-
-      var $html = $(self.renderTemplate('chat-group-list-item', group));
-      $html.on('click', app.chat.changeRoom);
-      self.$groups.prepend($html);
-    },
-
-    didLoadGroups: function (data) {
-      var self = app.chat;
-
-      self.groupsPagination.totalPages = data.total_pages;
-
-      if (self.groupsPagination.page >= self.groupsPagination.totalPages) {
-        self.$loadMoreGroupsButton.attr('disabled', 'disabled');
-      }
-
-      var groups = data.groups;
-      groups = _.sortBy(groups, {is_school: false});
-      groups = _.map(groups, function (g) {
-        g.is_school = false;
-        return g;
-      });
-
-      groups.forEach(function (group) {
-        var $html = $(self.renderTemplate('chat-group-list-item', group));
-        $html.on('click', app.chat.changeRoom);
-        self.$groups.append($html);
-      });
-
-      self.selectFirstRoomAvailable();
-    },
-
-    didLoadCollaborators: function (data) {
-      var self = app.chat;
-
-      self.collaboratorsPagination.totalPages = data.total_pages;
-
-      if (self.collaboratorsPagination.page >= self.collaboratorsPagination.totalPages) {
-        self.$loadMoreCollaboratorsButton.attr('disabled', 'disabled');
-      }
-
-      self.addProfileItems(data.collaborators, 'js-team');
-      self.selectFirstRoomAvailable();
-    },
-
-    didLoadFollows: function (data) {
-      var self = app.chat;
-      self.followsPagination.totalPages = data.total_pages;
-
-      if (self.followsPagination.page >= self.followsPagination.totalPages) {
-        self.$loadMoreStudentsButton.attr('disabled', 'disabled');
-      }
-
-      self.addProfileItems(data.users, 'js-students');
-      self.selectFirstRoomAvailable();
+      self.lessonRoomUsers
+        .orderByChild('id')
+        .equalTo(self.user.id)
+        .once('value')
+        .then(function (snapshot) {
+          if (!snapshot.hasChildren()) {
+            self.lessonRoomUsers.push(self.user).then(function (snap) {
+              self.userFirebase = snap;
+            });
+          }
+        });
     },
 
     addProfileItems: function (users, divClass) {
@@ -397,34 +447,43 @@
 
     changeRoom: function (event) {
       var self = app.chat;
-      var $element = $(event.currentTarget);
 
-      $(".chat-sidebar-list-item").removeClass('active');
-      $element.addClass('active');
+      $('.chat-sidebar-list-item').removeClass('active');
 
       var roomName = 'messages';
 
-      if ($element.data('type') === 'products') {
-        // room name on firebase
-        roomName += '_products/' + $element.data('id');
+      if (self.chatType === 'lesson-chat') {
+        roomName += '_lessons/' + self.chatLesson.id;
 
         // change room name on div
-        self.$roomTitle.html($('.js-chat-group-name', $element).html());
-        self.$roomUsersCount.html($('.js-chat-group-users-count', $element).html());
-      } else if ($element.data('type') === 'users') {
-        var ids = [self.userId, parseInt($element.data('id'))].sort();
-        roomName += '_users/' + ids[0] + '/' + ids[1];
+        self.$roomTitle.html(self.chatLesson.description);
+        self.$roomUsersCount.html(0);
+      } else {
+        var $element = $(event.currentTarget);
+        $element.addClass('active');
 
-        // change room name on div
-        self.$roomTitle.html($('.info .name', $element).html());
-        self.$roomUsersCount.html($('.info .location', $element).html());
-      } else if ($element.data('type') === 'schools') {
-        // room name on firebase
-        roomName += '_schools/' + self.schoolId;
+        if ($element.data('type') === 'products') {
+          // room name on firebase
+          roomName += '_products/' + $element.data('id');
 
-        // change room name on div
-        self.$roomTitle.html($('.js-chat-group-name', $element).html());
-        self.$roomUsersCount.html($('.js-chat-group-users-count', $element).html());
+          // change room name on div
+          self.$roomTitle.html($('.js-chat-group-name', $element).html());
+          self.$roomUsersCount.html($('.js-chat-group-users-count', $element).html());
+        } else if ($element.data('type') === 'users') {
+          var ids = [self.userId, parseInt($element.data('id'))].sort();
+          roomName += '_users/' + ids[0] + '/' + ids[1];
+
+          // change room name on div
+          self.$roomTitle.html($('.info .name', $element).html());
+          self.$roomUsersCount.html($('.info .location', $element).html());
+        } else if ($element.data('type') === 'schools') {
+          // room name on firebase
+          roomName += '_schools/' + self.schoolId;
+
+          // change room name on div
+          self.$roomTitle.html($('.js-chat-group-name', $element).html());
+          self.$roomUsersCount.html($('.js-chat-group-users-count', $element).html());
+        }
       }
 
       self.$messagesContainer.html('');
@@ -440,7 +499,7 @@
     selectFirstRoomAvailable: function () {
       if (!self.$selectedRoom) {
         // Select first room
-        self.$selectedRoom = $(".chat-sidebar-list-item").first();
+        self.$selectedRoom = $('.chat-sidebar-list-item').first();
         self.$selectedRoom.click();
       }
     }
