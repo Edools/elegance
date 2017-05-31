@@ -915,5 +915,8 @@
     "peoples": "pessoas",
     "follow_student": "Seguir Aluno",
     "type_here": "Escreva a mensagem aqui..."
+  },
+  "timetags": {
+    "timetags": "Tópicos das Aulas"
   }
 }
