@@ -1,0 +1,27 @@
+<div class="course-list">
+  <div class="container">
+    {% paginate courses by 9 sort { name: :asc } %}
+    <div class="row">
+      <div id="js-course-list">
+        {% for course in courses %}
+          <div class="col-sm-6 col-md-4">
+            {% include 'course/course-card', course: course %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+      {% if paginate.next.is_link %}
+        <div id="course-more" class="col-xs-12 text-center" data-turbolinks-temporary>
+          <a id="js-course-more-link" class="btn btn-default" href="{{ paginate.next.url }}">
+            <span class="bold">{{ 'course.load_more' | t }}</span>
+          </a>
+
+          <div class="js-paginate-spinner" style="display: none;">
+            <i class='busy busy-md'></i>
+          </div>
+        </div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</div>

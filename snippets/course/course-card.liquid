@@ -1,0 +1,23 @@
+<div id="course-card-{{ course.id }}" class="thumbnail course course-card">
+  <div class="logo">
+    <a href="/admin_view/courses/{{course.id}}">
+      {% if course.image_url %}
+        {% image, src: course.image_url, alt: course.name %}
+      {% else %}
+        {% assign placeholder = 'missing-course-logo.png' | asset_url %}
+        {% image, src: placeholder, alt: course.name %}
+      {% endif %}
+    </a>
+  </div>
+
+  <div class="caption">
+    <a class="name"
+       title="{{ course.name }}"
+       data-toggle="{% if course.name.size > 60 %}tooltip{% endif %}"
+       id="course-{{ course.id }}" href="/admin_view/courses/{{course.id}}">
+      {{ course.name | truncate: 60 }}
+    </a>
+
+    <p class="description">{{ course.description | truncate: 112 }}</p>
+  </div>
+</div>

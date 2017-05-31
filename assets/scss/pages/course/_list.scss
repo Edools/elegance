@@ -1,0 +1,121 @@
+.course-list {
+  padding-bottom: $padding-large-vertical * 10;
+  background-color: $body-bg;
+}
+
+.course-card {
+  @include breakpoint(sm) {
+    height: 420px;
+  }
+  @include breakpoint(md) {
+    height: 492px;
+  }
+  @include breakpoint(lg) {
+    height: 420px;
+  }
+  @extend .panel;
+  @extend .panel-default;
+
+  position: relative;
+  padding: 0;
+  background-color: $light;
+
+  .logo {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 230px;
+
+    img {
+      @include translate(-50%, -50%);
+
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  .caption {
+    padding: 0 $padding-large-horizontal + 5;
+
+    .name {
+      @include breakpoint(sm) {
+        height: 65px;
+      }
+
+      display: block;
+      margin-top: $padding-large-vertical;
+      margin-bottom: $padding-large-vertical;
+      color: $text-color;
+      text-decoration: none;
+      font-size: 20px;
+    }
+
+    .description {
+      color: $text-muted;
+    }
+  }
+
+  .footer {
+    @include breakpoint(sm) {
+      margin-bottom: 0;
+    }
+    @include breakpoint(sm) {
+      position: absolute;
+      right: 0;
+      bottom: $padding-large-vertical + 5;
+      left: 0;
+    }
+
+    clear: both;
+    margin-top: $padding-large-vertical * 3;
+    margin-bottom: $padding-large-vertical + 5;
+
+    .price {
+      @include breakpoint(md) {
+        width: 100%;
+        text-align: center;
+      }
+      @include breakpoint(lg) {
+        width: auto;
+        text-align: left;
+      }
+
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1.3;
+
+      .base-price {
+        display: block;
+        font-size: 12px;
+        line-height: 1;
+      }
+
+      .final-price {
+        font-weight: bold;
+      }
+    }
+
+    .call-to-action {
+      @include breakpoint(md) {
+        float: none;
+        margin-top: $padding-large-vertical;
+        text-align: center;
+      }
+      @include breakpoint(lg) {
+        float: right;
+        margin: 0;
+        text-align: right;
+      }
+
+      float: right;
+
+      .dropdown-menu {
+        right: 0;
+        left: auto;
+      }
+    }
+  }
+}
