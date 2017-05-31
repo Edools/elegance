@@ -22,7 +22,8 @@
       var self = this;
 
       self.$chat = $('.js-chat');
-      self.$groups = $('.js-groups');
+      self.$groups = $('.js-groups', self.$chat);
+      self.$students = $('.js-students', self.$chat);
       self.$roomTitle = $('#js-room-title');
       self.$roomUsersCount = $('#js-room-users-count');
       self.$text = $('.js-chat-text');
@@ -195,6 +196,8 @@
                   self.lessonRoomUsers.child(snap.key).remove();
                 });
               }
+
+              self.$roomUsersCount.html($('.chat-profile-list-item', self.$students).length);
             });
         }
       } else {
@@ -307,11 +310,13 @@
       var self = app.chat;
       const setUser = function (data) {
         var $html = $(self.renderTemplate('chat-profile-list-item', data.val()));
-        $('.js-students').append($html);
+        $('.js-students', self.$chat).append($html);
+        self.$roomUsersCount.html($('.chat-profile-list-item', self.$students).length);
       }.bind(self);
 
       const removeUser = function (data) {
         $('.js-students [data-id="' + data.val().id + '"]').remove();
+        self.$roomUsersCount.html($('.chat-profile-list-item', self.$students).length);
       }.bind(self);
 
       self.lessonRoomUsers.on('child_added', setUser);
@@ -456,7 +461,7 @@
         roomName += '_lessons/' + self.chatLesson.id;
 
         // change room name on div
-        self.$roomTitle.html(self.chatLesson.description);
+        self.$roomTitle.html(self.chatLesson.title);
         self.$roomUsersCount.html(0);
       } else {
         var $element = $(event.currentTarget);
