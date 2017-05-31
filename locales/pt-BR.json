@@ -584,7 +584,8 @@
       "statistics": "Estatísticas",
       "missing_activities": "Atividades faltantes",
       "scoring_average": "Média de pontuação"
-    }
+    },
+    "load_more": "Carregar mais cursos"
   },
   "home": {
     "social": {
@@ -599,6 +600,9 @@
   },
   "products": {
     "products": "Produtos"
+  },
+  "courses": {
+    "courses": "Cursos"
   },
   "categories": {
     "categories": "Categorias"

@@ -540,7 +540,8 @@
       "statistics": "Estatísticas",
       "missing_activities": "Actividades faltantes",
       "scoring_average": "Media de puntuación"
-    }
+    },
+    "load_more": "Cargar más cursos"
   },
   "home": {
     "social": {
@@ -554,7 +555,10 @@
     }
   },
   "products": {
-    "products": "Produtos"
+    "products": "Productos"
+  },
+  "courses": {
+    "courses": "Cursos"
   },
   "lesson": {
     "release_at": "Agendado para",

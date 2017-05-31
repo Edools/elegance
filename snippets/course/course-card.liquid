@@ -1,0 +1,49 @@
+<div class="course-card">
+  <div class="course-info">
+    <div class="course-header">
+      <a class="title" href="{{ detail_path }}" title="{{ title }}" data-toggle="{% if title.size > 70 %}tooltip{% endif %}">
+        <div class="course-image">
+          {% if logo != null %}
+            {% image, src: logo, alt: title %}
+          {% else %}
+            {% assign placeholder = 'missing-product-logo.png' | asset_url %}
+            {% image, src: placeholder, alt: title %}
+          {% endif %}
+        </div>
+
+        <span class="caption">{{ title | truncate: 70 }}</span>
+      </a>
+    </div>
+
+    {% if description %}
+      <p class="course-progress">{{ description | truncate: 112 }}</p>
+    {% endif %}
+
+    {% if progress %}
+      <div class="course-progress">
+        {% include "progress-card", progress: progress %}
+      </div>
+    {% endif %}
+
+    {% if available_time_message %}
+    <div class="course-avaliability">
+      <div class="status">
+        <span class="alert alert-success"
+              title="<p>{{ available_time_message }}</p><p>{{ total_max_attendance_message }}</p><p>{{ use_max_attendance_message }}</p>"
+              data-toggle="tooltip"
+              data-html="true">
+          <span>{{ status_message }}</span>
+          <i class="icon-info"></i>
+        </span>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <div class="course-action">
+      <a class="btn btn-default" href="{{ detail_path }}">
+        <i class="icon-camrecorder"></i>
+        <span>{{ detail_label }}</span>
+      </a>
+  </div>
+</div>
