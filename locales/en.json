@@ -542,7 +542,8 @@
       "statistics": "Statistics",
       "missing_activities": "Missing activities",
       "scoring_average": "Average Score"
-    }
+    },
+    "load_more": "Load more courses"
   },
   "home": {
     "social": {
@@ -556,7 +557,10 @@
     }
   },
   "products": {
-    "products": "Produtos"
+    "products": "Products"
+  },
+  "courses": {
+    "courses": "Courses"
   },
   "lesson": {
     "release_at": "Scheduled for",

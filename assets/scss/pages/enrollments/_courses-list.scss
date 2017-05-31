@@ -1,7 +1,7 @@
 .courses-list {
   margin-top: $padding-large-vertical * 4;
 
-  .course {
+  .course-card {
     @include breakpoint(sm) {
       height: 518px;
     }
@@ -58,6 +58,10 @@
 
       .course-progress {
         padding: 0 $padding-large-horizontal + 5;
+      }
+
+      .course-description {
+        margin: $padding-large-vertical 0;
       }
     }
 
