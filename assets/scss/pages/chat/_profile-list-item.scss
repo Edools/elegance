@@ -71,16 +71,26 @@
 
 .chat-sm {
   .chat-profile-list-item {
+    position: relative;
     text-align: center;
+    cursor: default;
 
     .avatar {
       display: inline-block;
       float: none;
     }
 
-    .info,
+    .info {
+      display: none;
+    }
+
     .status {
       display: none;
+    }
+
+    &:hover,
+    &.active {
+      background-color: transparent;
     }
   }
 }

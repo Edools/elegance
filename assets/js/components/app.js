@@ -22,9 +22,11 @@
     },
 
     bindTooltips: function () {
-      $("[data-toggle='tooltip']")
-      .tooltip("destroy")
-      .tooltip();
+      $("body")
+        .tooltip("destroy")
+        .tooltip({
+          selector: '[data-toggle="tooltip"]'
+        });
 
       $(document).trigger('app:bind:tooltips');
     },

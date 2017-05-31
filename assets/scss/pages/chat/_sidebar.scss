@@ -75,16 +75,16 @@
   .chat-sidebar {
     width: $chat-sidebar-width-sm;
 
-    .separator {
-      display: none;
-    }
-
-    .groups-block {
-      display: none;
-    }
-
+    .separator,
+    .groups-block,
     .team-block {
       display: none;
+    }
+
+    .btn-load-more {
+      .caption {
+        display: none;
+      }
     }
   }
 }
