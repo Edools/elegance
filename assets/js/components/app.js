@@ -66,6 +66,7 @@
       app.changeTimeZone();
       app.followBind();
       app.lessonPage();
+      app.timeTags();
       app.bindPostsForm();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
