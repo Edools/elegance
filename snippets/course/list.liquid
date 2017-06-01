@@ -1,9 +1,9 @@
 <div class="enrollments-page page">
   <div class="container page-container">
     <div class="courses-list">
-      {% paginate courses by 6 %}
+      {% paginate courses by 6 sort { name: :asc } %}
       <div class="row">
-        <div id="js-product-list">
+        <div id="js-course-list">
           {% for course in courses %}
             <div class="col-sm-6 col-md-4 active-enrollments">
               {% assign detail_path = enrollment | course_path:course.id %}
