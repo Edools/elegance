@@ -90,25 +90,63 @@
 
         {% assign has_notepad_feature = current_school | has_feature: 'notepad' %}
         {% assign has_student_doubt_feature = current_school | has_feature: 'student_doubt' %}
+        {% assign has_chat_feature = current_school | has_feature: 'chat_realtime' %}
+
+        {% if (current_school | has_feature: 'timetags') and lesson.media.time_tag.meta_tags.size > 0 %}
+          {% assign has_timetags_feature = true %}
+        {% else %}
+          {% assign has_timetags_feature = false %}
+        {% endif %}
+
         <div class="lesson-tabs">
           <ul class="nav nav-tabs">
-            {%if has_student_doubt_feature %}
-              <li class="{% if has_student_doubt_feature %}active{% endif %}"><a data-toggle="tab" href="#student-doubts">{{ 'student_doubt.doubts' | 't' }}</a></li>
+            {% if has_timetags_feature %}
+              <li class="active">
+                <a data-toggle="tab" href="#timetags">{{ 'timetags.timetags' | 't' }}</a>
+              </li>
             {% endif %}
-            {%if has_notepad_feature %}
-              <li class="{% unless has_student_doubt_feature %}active{% endunless %}"><a data-toggle="tab" href="#notepad">{{ 'notepad.note' | 't' }}</a></li>
+            {% if has_student_doubt_feature %}
+              <li
+                class="{% unless has_timetags_feature %}active{% endunless %}">
+                <a data-toggle="tab" href="#student-doubts">{{ 'student_doubt.doubts' | 't' }}</a>
+              </li>
+            {% endif %}
+            {% if has_notepad_feature %}
+              <li
+                class="{% unless has_timetags_feature or has_student_doubt_feature %}active{% endunless %}">
+                <a data-toggle="tab" href="#notepad">{{ 'notepad.note' | 't' }}</a>
+              </li>
+            {% endif %}
+            {% if has_chat_feature %}
+              <li
+                class="{% unless has_timetags_feature or has_notepad_feature or has_student_doubt_feature %}active{% endunless %}">
+                <a data-toggle="tab" href="#chat">{{ 'chat.chat' | 't' }}</a>
+              </li>
             {% endif %}
           </ul>
 
           <div class="tab-content">
-            {%if has_student_doubt_feature %}
-            <div id="student-doubts" class="tab-pane fade in {% if has_student_doubt_feature %}active{% endif %}">
-              {% include 'lesson/student_doubts' %}
-            </div>
+            {% if has_timetags_feature %}
+              <div id="timetags" class="tab-pane fade in active">
+                {% include 'lesson/timetags' %}
+              </div>
             {% endif %}
-            {%if has_notepad_feature %}
-              <div id="notepad" class="tab-pane fade in {% unless has_student_doubt_feature %}active{% endunless %}">
+            {% if has_student_doubt_feature %}
+              <div id="student-doubts"
+                   class="tab-pane fade in {% unless has_timetags_feature %}active{% endunless %}">
+                {% include 'lesson/student_doubts' %}
+              </div>
+            {% endif %}
+            {% if has_notepad_feature %}
+              <div id="notepad"
+                   class="tab-pane fade in {% unless has_timetags_feature or has_student_doubt_feature %}active{% endunless %}">
                 {% include 'lesson/notepad', current_lesson_id: lesson.id %}
+              </div>
+            {% endif %}
+            {% if has_chat_feature %}
+              <div id="chat"
+                   class="tab-pane fade in {% unless has_timetags_feature or has_notepad_feature or has_student_doubt_feature %}active{% endunless %}">
+                {% include 'chat-widget', size: 'sm', chat_type: 'lesson-chat', chat_lesson: lesson, height: '640px' %}
               </div>
             {% endif %}
           </div>

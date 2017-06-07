@@ -25,52 +25,21 @@
   <div class="courses-list">
     <div class="row">
       {% for course in courses %}
-        <div class="col-md-4 col-sm-6 col-xs-12 active-enrollments">
-          <div class="course">
-            <div class="course-info">
-              <div class="course-header">
-                <a class="title"
-                   href="{{ enrollment | course_path: course.id }}"
-                   title="{{ course.name }}"
-                   data-toggle="{% if course.name.size > 70 %}tooltip{% endif %}">
-                  <div class="course-image">
-                    {% if course.image_url %}
-                      {% image, src: course.image_url, alt: course.name %}
-                    {% else %}
-                      {% assign placeholder = 'missing-course-logo.png' | asset_url %}
-                      {% image, src: placeholder, alt: course.name %}
-                    {% endif %}
-                  </div>
+        <div class="col-sm-6 col-md-4 active-enrollments">
+          {% assign progress = enrollment | course_progress_card: course %}
 
-                  <span class="caption">{{ course.name | truncate: 70 }}</span>
-                </a>
-              </div>
+          {% assign available_time_message = enrollment | available_time_message %}
+          {% assign total_max_attendance_message = enrollment | total_max_attendance_message %}
+          {% assign use_max_attendance_message = enrollment | use_max_attendance_message %}
+          {% assign status_message = enrollment | status_message %}
 
-              <div class="course-progress">
-                {% assign progress = enrollment | course_progress_card: course %}
-                {% include "progress-card", progress: progress %}
-              </div>
+          {% assign detail_path = enrollment | course_path:course.id %}
+          {% assign detail_label = 'enrollment.go_course' | t %}
 
-              <div class="course-avaliability">
-                <div class="status">
-                      <span class="alert alert-success"
-                            title="<p>{{ enrollment | available_time_message }}</p><p>{{ enrollment | total_max_attendance_message }}</p><p>{{ enrollment | use_max_attendance_message }}</p>"
-                            data-toggle="tooltip"
-                            data-html="true">
-                        <span>{{ enrollment | status_message }}</span>
-                        <i class="icon-info"></i>
-                      </span>
-                </div>
-              </div>
-            </div>
-
-            <div class="course-action">
-              <a class="btn btn-default" href="{{ enrollment | course_path: course.id }}">
-                <i class="icon-camrecorder"></i>
-                <span>{{ 'enrollment.go_course' | t }}</span>
-              </a>
-            </div>
-          </div>
+          {% include 'course/course-card', detail_path: detail_path, detail_label: detail_label,
+            title: course.name, logo: course.image_url, progress: progress,
+            available_time_message: available_time_message, total_max_attendance_message: total_max_attendance_message,
+            use_max_attendance_message: use_max_attendance_message, status_message: status_message%}
         </div>
       {% endfor %}
     </div>

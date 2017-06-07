@@ -15,7 +15,6 @@
       self.downloadAction = self.courseTree().data('download-action');
       self.currentLessonId = parseInt(self.courseTree().data('current-lesson-id'));
       self.apiKey = self.courseTree().data('api-key');
-
       self.translations = {};
       self.translations['lesson.release_at'] = self.courseTree().data('translation-release-at');
       self.translations['lesson.release_after'] = self.courseTree().data('translation-release-after');
@@ -44,7 +43,6 @@
           if (!self.progressIcon('progress').hasClass('hide')) {
             self.progressIcon('progress').addClass('hide');
           }
-
 
           if ($mediaControls.size() > 0) {
             $mediaControls.removeClass('disabled');
@@ -414,7 +412,7 @@
               });
 
               if (self.enrollment) {
-                lessonReleased = self.checkLessonAvailability(lesson);
+                lessonReleased = self.checkLessonAvailability(lesson) || self.userType === 'Collaborator';
 
                 if (self.enrollment.lessons_info && self.enrollment.lessons_info.completed.indexOf(lesson.id) > -1) {
                   hideInProgressIcon = 'hide';
@@ -444,7 +442,7 @@
 
               if (self.enrollment) {
                 _.each(requirements_ids, function (id) {
-                  var exists = _.find(courseContents, {content_id: id, completed: true});
+                  var exists = _.find(courseContents, {content_id: id, completed: true}) || self.userType === 'Collaborator';
 
                   if (!exists) {
                     available = false;

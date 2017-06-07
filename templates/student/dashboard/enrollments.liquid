@@ -31,62 +31,25 @@
         <div id="js-product-list">
           {% for enrollment in active_enrollments %}
             <div class="col-sm-6 col-md-4 active-enrollments">
-              <div class="course">
-                <div class="course-info">
-                  <div class="course-header">
-                    <a class="title"
-                       href="{% if enrollment.school_product.library_resource.resource_type == 'Course' %}{{ enrollment | course_path }}{% else if enrollment.school_product.library_resource.resource_type == 'Path' %}{{ enrollment.id | path_path: enrollment.school_product.library_resource.resource_id }}{% endif %}"
-                       title="{{ enrollment.school_product.title }}"
-                       data-toggle="{% if enrollment.school_product.title.size > 70 %}tooltip{% endif %}">
-                      <div class="course-image">
-                        {% if enrollment.school_product.logo != null %}
-                          {% image, src: enrollment.school_product.logo, alt: enrollment.school_product.title %}
-                        {% else %}
-                          {% assign placeholder = 'missing-product-logo.png' | asset_url %}
-                          {% image, src: placeholder, alt: enrollment.school_product.title %}
-                        {% endif %}
-                      </div>
+              {% assign progress = enrollment | course_progress_card %}
 
-                      <span class="caption">{{ enrollment.school_product.title | truncate: 70 }}</span>
-                    </a>
-                  </div>
+              {% assign available_time_message = enrollment | available_time_message %}
+              {% assign total_max_attendance_message = enrollment | total_max_attendance_message %}
+              {% assign use_max_attendance_message = enrollment | use_max_attendance_message %}
+              {% assign status_message = enrollment | status_message %}
 
-                  <div class="course-progress">
+              {% if enrollment.school_product.library_resource.resource_type == 'Course' %}
+                {% assign detail_path = enrollment | course_path %}
+                {% assign detail_label = 'enrollment.go_course' | t %}
+              {% elsif enrollment.school_product.library_resource.resource_type == 'Path' %}
+                {% assign detail_path = enrollment.id | path_path: enrollment.school_product.library_resource.resource_id %}
+                {% assign detail_label = 'enrollment.go_path' | t %}
+              {% endif %}
 
-                    {% assign progress = enrollment | course_progress_card %}
-                    {% include "progress-card", progress: progress %}
-                  </div>
-
-                  <div class="course-avaliability">
-                    <div class="status">
-                      <span class="alert alert-success"
-                            title="<p>{{ enrollment | available_time_message }}</p><p>{{ enrollment | total_max_attendance_message }}</p><p>{{ enrollment | use_max_attendance_message }}</p>"
-                            data-toggle="tooltip"
-                            data-html="true">
-                        <span>{{ enrollment | status_message }}</span>
-                        <i class="icon-info"></i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="course-action">
-                  {% if enrollment.school_product.library_resource.resource_type == 'Course' %}
-                    <a class="btn btn-default" href="{{ enrollment | course_path }}">
-                      <i class="icon-camrecorder"></i>
-                      <span>{{ 'enrollment.go_course' | t }}</span>
-                    </a>
-                  {% endif %}
-
-                  {% if enrollment.school_product.library_resource.resource_type == 'Path' %}
-                    <a class="btn btn-default"
-                       href="{{ enrollment.id | path_path: enrollment.school_product.library_resource.resource_id }}">
-                      <i class="icon-layers"></i>
-                      <span>{{ 'enrollment.go_path' | t }}</span>
-                    </a>
-                  {% endif %}
-                </div>
-              </div>
+              {% include 'course/course-card', detail_path: detail_path, detail_label: detail_label, title: enrollment.school_product.title,
+                logo: enrollment.school_product.logo, description: course.description, progress: progress,
+                available_time_message: available_time_message, total_max_attendance_message: total_max_attendance_message,
+                use_max_attendance_message: use_max_attendance_message, status_message: status_message %}
             </div>
           {% endfor %}
         </div>
@@ -118,7 +81,7 @@
         <div class="row">
           {% for enrollment in pending_enrollments %}
             <div class="col-sm-6 col-md-4">
-              <div class="course course-pending">
+              <div class="course-card course-pending">
                 <div class="course-image">
                   {% if enrollment.school_product.logo != null.image_url %}
                     {% image, src: enrollment.school_product.logo, alt: enrollment.school_product.name %}

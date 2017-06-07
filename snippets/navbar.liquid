@@ -59,7 +59,16 @@
                 <span>{{ 'navbar.my_certificates' | t }}</span>
               </a>
             </li>
+          {% elsif current_user.type == 'Collaborator' %}
+            <li>
+              <a href="/courses">
+                <i class="icon-notebook"></i>
+                <span>{{ 'navbar.my_courses' | t }}</span>
+              </a>
+            </li>
           {% endif %}
+
+
 
           {% include 'navbar-user-links', mobile_class: true %}
 

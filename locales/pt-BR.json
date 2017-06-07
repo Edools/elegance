@@ -88,8 +88,8 @@
     "rg": {
       "blank": "RG não pode ficar em branco"
     },
-    "address" : {
-      "address_presences" : "Todos os campos relacionados a endereço exceto complemento são obrigatórios."
+    "address": {
+      "address_presences": "Todos os campos relacionados a endereço exceto complemento são obrigatórios."
     },
     "address_street": {
       "blank": "Logradouro não pode ficar em branco"
@@ -148,7 +148,7 @@
       "can_not_apply_coupon": "Não foi possível aplicar o cupom. Certifique-se de que digitou os caracteres corretamente. Caso o erro persista, entre em contato com nossa equipe para averiguar se o cupom ainda é válido.",
       "limit_subscriptions": "Não foi possível adicionar o item no carrinho. Você só pode assinar um item por compra.",
       "kind_invalid": "Não foi possível adicionar o item no carrinho. Este item não pode ser processado junto com os que se encontram no carrinho, termine a compra e tente novamente.",
-      "invalid_user_coupon" : "Você não tem permissão para utilizar este cupom",
+      "invalid_user_coupon": "Você não tem permissão para utilizar este cupom",
       "limit_trial_purchases": "Não foi possível adicionar o item no carrinho. Você só pode adicionar um produto com trial por compra."
     }
   },
@@ -584,7 +584,8 @@
       "statistics": "Estatísticas",
       "missing_activities": "Atividades faltantes",
       "scoring_average": "Média de pontuação"
-    }
+    },
+    "load_more": "Carregar mais cursos"
   },
   "home": {
     "social": {
@@ -599,6 +600,9 @@
   },
   "products": {
     "products": "Produtos"
+  },
+  "courses": {
+    "courses": "Cursos"
   },
   "categories": {
     "categories": "Categorias"
@@ -908,11 +912,15 @@
     "my_annotations": "Minhas anotações"
   },
   "chat": {
+    "chat": "Chat",
     "groups": "Grupos",
     "students": "Alunos",
     "teams": "Equipes",
     "peoples": "pessoas",
     "follow_student": "Seguir Aluno",
     "type_here": "Escreva a mensagem aqui..."
+  },
+  "timetags": {
+    "timetags": "Tópicos das Aulas"
   }
 }

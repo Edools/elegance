@@ -1,0 +1,21 @@
+<div class="courses-page page">
+
+  <div class="container">
+      <h2 class="title">{{ 'enrollment.my_courses' | t }}</h2>
+
+      <form accept-charset="UTF-8" method="get" action="/courses" data-turbolinks-scroll="false">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon no-background"><i class="icon-magnifier"></i></span>
+          <input type="text" name="name" class="form-control" placeholder="{{ 'forums.filter_by_title' | t }}"
+                 value="{{ current_search.name }}">
+          <span class="input-group-btn">
+            <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+          </span>
+        </div>
+      </form>
+      <br>
+  </div>
+
+  {% include 'course/list', courses: courses %}
+
+</div>

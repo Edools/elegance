@@ -22,9 +22,11 @@
     },
 
     bindTooltips: function () {
-      $("[data-toggle='tooltip']")
-      .tooltip("destroy")
-      .tooltip();
+      $("body")
+        .tooltip("destroy")
+        .tooltip({
+          selector: '[data-toggle="tooltip"]'
+        });
 
       $(document).trigger('app:bind:tooltips');
     },
@@ -64,6 +66,7 @@
       app.changeTimeZone();
       app.followBind();
       app.lessonPage();
+      app.timeTags();
       app.bindPostsForm();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
