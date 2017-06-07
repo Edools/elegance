@@ -54,8 +54,6 @@
 
         img.src = source;
 
-        var range = null;
-
         if (document.caretPositionFromPoint) {
           var pos = document.caretPositionFromPoint(x, y);
           range = document.createRange();
