@@ -22,6 +22,11 @@
       var self = this;
 
       self.$chat = $('.js-chat');
+
+      if (self.$chat.length <= 0) {
+        return
+      }
+
       self.$groups = $('.js-groups', self.$chat);
       self.$students = $('.js-students', self.$chat);
       self.$roomTitle = $('#js-room-title');
@@ -41,8 +46,6 @@
       self.userId = self.user.id;
       self.chatType = self.$chat.data('type');
       self.chatLesson = self.$chat.data('lesson');
-
-      if (self.$chat.length <= 0) return;
 
       self.bindScroll();
 
