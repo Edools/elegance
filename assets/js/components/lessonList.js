@@ -63,7 +63,6 @@
     },
 
     // Props
-
     courseTree: function () {
       return $('.course-content #js-course-tree-ajax');
     },
@@ -407,9 +406,6 @@
               var progress = null;
               var requirements = content.requirements;
               var available = true;
-              var requirements_ids = requirements.map(function (item) {
-                return item.content_id;
-              });
 
               if (self.enrollment) {
                 lessonReleased = self.checkLessonAvailability(lesson) || self.userType === 'Collaborator';
@@ -438,12 +434,9 @@
                 if (self.lessonActions) {
                   progress = _.find(self.enrollment.lessons_progresses, {lesson_id: lesson.id});
                 }
-              }
 
-              if (self.enrollment) {
-                _.each(requirements_ids, function (id) {
-                  var exists = _.find(courseContents, {content_id: id, completed: true}) || self.userType === 'Collaborator';
-
+                _.each(requirements, function (requirement) {
+                  var exists = (self.enrollment.lessons_info && self.enrollment.lessons_info.completed.indexOf(requirement.content_id) > -1) || self.userType === 'Collaborator';
                   if (!exists) {
                     available = false;
                   }
