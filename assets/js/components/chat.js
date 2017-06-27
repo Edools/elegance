@@ -22,6 +22,11 @@
       var self = this;
 
       self.$chat = $('.js-chat');
+
+      if (!self.$chat.length) {
+        return;
+      }
+
       self.$groups = $('.js-groups', self.$chat);
       self.$students = $('.js-students', self.$chat);
       self.$roomTitle = $('#js-room-title');
