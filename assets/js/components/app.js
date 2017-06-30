@@ -45,8 +45,6 @@
     },
 
     init: function () {
-      app.pagarme.init();
-
       app.bindGlobal();
       app.bindBlazy();
       app.bindOpenOnLoad();
