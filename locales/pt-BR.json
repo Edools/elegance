@@ -56,7 +56,9 @@
     "gateway_transaction": {
       "invalid_email": "O endereço de e-mail enviado não é válido para este Gateway",
       "unavailable_gateway": "O Gateway de pagamento esta indisponível no momento",
-      "invalid_credit_card": "O cartão de crédito informado não é válido"
+      "invalid_credit_card": "O cartão de crédito informado não é válido",
+      "unauthorized": "As credenciais do gateway não são válidas",
+      "invalid_plan_code": "Não há planos cadastrados com o código informado"
     },
     "checkout": {
       "no_order": "Pedido não encontrado.",
@@ -562,6 +564,18 @@
       "no_wait_processing": "Trial"
     }
   },
+  "subscription": {
+    "status": {
+      "initiated": "Iniciada",
+      "trial": "Trial",
+      "pending_payment": "Esperando pagamento",
+      "unpaid": "Pagamento não efetuado",
+      "active": "Ativada",
+      "canceled": "Cancelada",
+      "overdue": "Atrasada",
+      "ended": "Encerrada"
+    }
+  },
   "path": {
     "no_courses": "Sem cursos neste pacote.",
     "pinboard": "Quadro de <strong>Avisos</strong>",
@@ -695,12 +709,14 @@
       "custom_template": "<h1> Este é um template customizado</h1>",
       "show_order_itens": "<span>ver itens do pedido</span>",
       "cancel_signature": "Cancelar assinatura",
+      "subscription_status": "Assinatura",
       "trial": {
         "cancel": "Cancelar trial",
         "canceled": "Trial canceledo com sucesso!",
         "failed": "Ocorreu um erro no cancelamento do trial."
       },
       "recurring": {
+        "payment_status": "Status do Pagamento",
         "subscriptions": "Assinaturas",
         "subscription": "Assinatura",
         "product": "Produto",
