@@ -561,7 +561,8 @@
       "reversed": "Estornado",
       "refunded": "Reembolsado",
       "processing": "Processando",
-      "no_wait_processing": "Trial"
+      "no_wait_processing": "Trial",
+      "pending_payment": "Esperando pagamento"
     }
   },
   "subscription": {

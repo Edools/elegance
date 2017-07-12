@@ -115,7 +115,7 @@
               <p>
                 <b>{{ 'pages.orders.recurring.period_start' | t }}:</b>
                 <span>
-                  {{ order.last_payment.created_at | date: "%d/%m/%Y" }}
+                  {{ order.last_payment.created_at | default: order.created_at | date: "%d/%m/%Y" }}
                 </span>
               </p>
 
@@ -136,10 +136,10 @@
               <p>
                 <b>{{ 'pages.orders.recurring.payment_status' | t }}:</b>
                 <span>
-                  {{ 'payment.status.' | append: order.last_payment.status | t }}
+                  {{  order.last_payment.status | default: 'pending_payment' | prepend: 'payment.status.' | t }}
                 </span>
 
-                {% if order.merchant_payment_method == 'boleto' %}
+                {% if order.merchant_payment_method == 'boleto' and order.last_payment %}
                   - <span>
                     <a class="btn btn-default btn-sm" href="{{ order.last_payment.link }}" target="_blank">
                       <i class="icon-info"></i>
