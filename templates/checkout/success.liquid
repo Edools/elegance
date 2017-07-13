@@ -11,18 +11,12 @@
 
         <p>{{ 'checkout.success.subscription_created_successfully' | t: code: order.gateway_reference }}</p>
         <p>{{ 'checkout.success.subscription_info.' | append: payment_option.period | t: price: price }}</p>
-
-        <div class="alert alert-warning">
-          {{ 'checkout.success.order_processing_warning' | t }}
-        </div>
       {% else %}
-        {% capture status %}{{ 'payment.status.' | append: payment.status | t }}{% endcapture %}
         {% unless payment.kind == 'free' %}
-        <p>{{ 'checkout.success.transaction_made_by' | t: gateway: gateway_credential.fullname }}</p>
-        {% endunless %}
-        <p>{{ 'checkout.success.transaction_status_is' | t: status: status, uuid: payment.uuid }}</p>
-        {% unless payment.kind == 'free' %}
-        <p>{{ 'checkout.success.transaction_questions' | t: gateway: gateway_credential.name }}</p>
+          {% capture status %}{{ 'payment.status.' | append: payment.status | t }}{% endcapture %}
+          <p>{{ 'checkout.success.transaction_made_by' | t: gateway: gateway_credential.fullname }}</p>
+          <p>{{ 'checkout.success.transaction_status_is' | t: status: status, gateway_reference: payment.gateway_reference }}</p>
+          <p>{{ 'checkout.success.transaction_questions' | t: gateway: gateway_credential.name }}</p>
         {% endunless %}
 
         {% if trial_purchase %}
@@ -30,14 +24,10 @@
             {% assign end_trial = order.billing_at | date: "%d/%m/%Y %H:%M" %}
             {{ 'checkout.success.trial_purchase_warning' | t: trial_limit: end_trial }}
           </div>
-        {% elsif payment.status == 'under_analysis' or payment.status == 'waiting_boleto' %}
-          <div class="alert alert-warning">
-            {{ 'checkout.success.order_processing_warning' | t }}
-          </div>
         {% endif %}
       {% endif %}
 
-      {% if payment.kind == 'boleto' %}
+      {% if payment && payment.kind == 'boleto' %}
         <div class="alert alert-warning">
           {{ 'checkout.success.boleto_warning' | t }} <a href="{{ payment.link }}"
           class="js-open-on-load"
