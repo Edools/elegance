@@ -530,6 +530,7 @@
     },
     "success": {
       "order_created_successfully": "Seu pedido foi realizado com sucesso!",
+      "transaction_made_by": "Sua transação está sendo realizada pelo {{ gateway }}.",
       "subscription_created_successfully": "Sua assinatura foi criada com o código {{ code }}.",
       "subscription_info": {
         "monthly": "Essa assinatura custa {{ price }} por mês.",
@@ -537,11 +538,9 @@
         "semesterly": "Essa assinatura custa {{ price }} por semestre.",
         "yearly": "Essa assinatura custa {{ price }} por ano."
       },
-      "transaction_made_by": "Sua transação será realizada pelo {{ gateway }} no fim do período de Trial.",
-      "transaction_status_is": "Enquanto isso, o status da sua transação é <b>{{ status }}</b>. O seu identificador é <b id=\"payment-uuid\">{{ uuid }}</b>.",
+      "transaction_status_is": "O status da sua transação é <b>{{ status }}</b>. O seu identificador é <b id=\"payment-uuid\">{{ gateway_reference }}</b>.",
       "transaction_questions": "Caso tenha alguma dúvida referente ao pagamento, entre em contato com o {{ gateway }}.",
       "trial_purchase_warning": "Sua matrícula foi liberada com sucesso e seu período de Trial encerra em {{ trial_limit }}.",
-      "order_processing_warning": "Após a confirmação do pagamento, sua matrícula será liberada.",
       "boleto_warning": "Caso o seu boleto não tenha sido aberto, desative o bloqueio de pop-ups no seu navegador e clique",
       "boleto_warning_click_here": "aqui",
       "go_to_enrollments": "Ir para Meus Cursos"
