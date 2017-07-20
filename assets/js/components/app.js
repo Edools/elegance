@@ -45,6 +45,7 @@
     },
 
     init: function () {
+      app.hotmart.init();
       app.bindGlobal();
       app.bindBlazy();
       app.bindOpenOnLoad();
