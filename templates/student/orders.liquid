@@ -122,7 +122,7 @@
               <p>
                 <b>{{ 'pages.orders.recurring.period_end' | t }}:</b>
                 <span>
-                  {{ order.subscription.next_invoice_at | date: "%d/%m/%Y" }}
+                  {{ order.subscription.next_invoice_at | default: order.subscription.expire_at | date: "%d/%m/%Y" }}
                 </span>
               </p>
 
