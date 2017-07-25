@@ -23,8 +23,8 @@
 
       self.$chat = $('.js-chat');
 
-      if (!self.$chat.length) {
-        return;
+      if (self.$chat.length <= 0) {
+        return
       }
 
       self.$groups = $('.js-groups', self.$chat);
@@ -46,8 +46,6 @@
       self.userId = self.user.id;
       self.chatType = self.$chat.data('type');
       self.chatLesson = self.$chat.data('lesson');
-
-      if (self.$chat.length <= 0) return;
 
       self.bindScroll();
 
