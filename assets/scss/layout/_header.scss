@@ -161,6 +161,8 @@ header.navbar {
             }
 
             .logged-user-email {
+              @include ellipsis();
+
               color: $text-muted;
               font-size: 12px;
             }
