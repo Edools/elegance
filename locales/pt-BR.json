@@ -55,7 +55,10 @@
     },
     "gateway_transaction": {
       "invalid_email": "O endereço de e-mail enviado não é válido para este Gateway",
-      "unavailable_gateway": "O Gateway de pagamento esta indisponível no momento"
+      "unavailable_gateway": "O Gateway de pagamento esta indisponível no momento",
+      "invalid_credit_card": "O cartão de crédito informado não é válido",
+      "unauthorized": "As credenciais do gateway não são válidas",
+      "invalid_plan_code": "Não há planos cadastrados com o código informado"
     },
     "checkout": {
       "no_order": "Pedido não encontrado.",
@@ -527,6 +530,7 @@
     },
     "success": {
       "order_created_successfully": "Seu pedido foi realizado com sucesso!",
+      "transaction_made_by": "Sua transação está sendo realizada pelo {{ gateway }}.",
       "subscription_created_successfully": "Sua assinatura foi criada com o código {{ code }}.",
       "subscription_info": {
         "monthly": "Essa assinatura custa {{ price }} por mês.",
@@ -534,11 +538,9 @@
         "semesterly": "Essa assinatura custa {{ price }} por semestre.",
         "yearly": "Essa assinatura custa {{ price }} por ano."
       },
-      "transaction_made_by": "Sua transação será realizada pelo {{ gateway }} no fim do período de Trial.",
-      "transaction_status_is": "Enquanto isso, o status da sua transação é <b>{{ status }}</b>. O seu identificador é <b id=\"payment-uuid\">{{ uuid }}</b>.",
+      "transaction_status_is": "O status da sua transação é <b>{{ status }}</b>. O seu identificador é <b id=\"payment-uuid\">{{ gateway_reference }}</b>.",
       "transaction_questions": "Caso tenha alguma dúvida referente ao pagamento, entre em contato com o {{ gateway }}.",
       "trial_purchase_warning": "Sua matrícula foi liberada com sucesso e seu período de Trial encerra em {{ trial_limit }}.",
-      "order_processing_warning": "Após a confirmação do pagamento, sua matrícula será liberada.",
       "boleto_warning": "Caso o seu boleto não tenha sido aberto, desative o bloqueio de pop-ups no seu navegador e clique",
       "boleto_warning_click_here": "aqui",
       "go_to_enrollments": "Ir para Meus Cursos"
@@ -558,7 +560,20 @@
       "reversed": "Estornado",
       "refunded": "Reembolsado",
       "processing": "Processando",
-      "no_wait_processing": "Trial"
+      "no_wait_processing": "Trial",
+      "pending_payment": "Esperando pagamento"
+    }
+  },
+  "subscription": {
+    "status": {
+      "initiated": "Iniciada",
+      "trial": "Trial",
+      "pending_payment": "Esperando pagamento",
+      "unpaid": "Pagamento não efetuado",
+      "active": "Ativada",
+      "canceled": "Cancelada",
+      "overdue": "Atrasada",
+      "ended": "Encerrada"
     }
   },
   "path": {
@@ -694,12 +709,14 @@
       "custom_template": "<h1> Este é um template customizado</h1>",
       "show_order_itens": "<span>ver itens do pedido</span>",
       "cancel_signature": "Cancelar assinatura",
+      "subscription_status": "Assinatura",
       "trial": {
         "cancel": "Cancelar trial",
         "canceled": "Trial canceledo com sucesso!",
         "failed": "Ocorreu um erro no cancelamento do trial."
       },
       "recurring": {
+        "payment_status": "Status do Pagamento",
         "subscriptions": "Assinaturas",
         "subscription": "Assinatura",
         "product": "Produto",

@@ -137,11 +137,6 @@
                       {% endif %}
 
                       <div class="text-center">
-                        {% if gateway.pagarme %}
-                          <input type="hidden" id="card_hash" name="order[card_hash]">
-                          <input type="hidden" id="pagarme" value="{{ gateway.pagarme }}">
-                        {% endif %}
-
                         <input type="submit" value="{{ 'checkout.payment.credit_card_pay' | t }}"
                                class="btn btn-primary btn-finalize">
                       </div>

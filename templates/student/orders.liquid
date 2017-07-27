@@ -76,7 +76,7 @@
         <thead>
         <tr>
           <th class="col-xs-5">{{ 'pages.orders.recurring.product' | t }}</th>
-          <th class="col-xs-2 text-center">{{ 'pages.orders.status' | t }}</th>
+          <th class="col-xs-2 text-center">{{ 'pages.orders.subscription_status' | t }}</th>
           <th class="col-xs-2 text-center">{{ 'pages.orders.total' | t }}</th>
           <th class="col-xs-3 text-center">
             {{ 'pages.orders.recurring.started_at' | t }}
@@ -90,8 +90,8 @@
 
           <tr id="order-{{ order.id }}" class="order">
             <td class="column product">{{ item.product.title }}</td>
-            <td class="column status text-center">
-              {{ 'payment.status.' | append: order.status | t }}
+            <td class="column subscription-status status text-center">
+              {{ 'subscription.status.' | append: order.subscription.status | t }}
             </td>
             <td class="column total text-center">
               {{ order.amount_to_pay | money }}
@@ -107,30 +107,46 @@
               <p>
                 <b>{{ 'pages.orders.recurring.plan' | t }}:</b>
                 <span>
-                    {{ item.payment_option | payment_option_to_subscription_sentence }}
+                  {{ item.payment_option | payment_option_to_subscription_sentence }}
                   #{{ order.gateway_reference }}
-                  </span>
+                </span>
               </p>
 
               <p>
                 <b>{{ 'pages.orders.recurring.period_start' | t }}:</b>
                 <span>
-                    {{ order.last_ordered_date | date: "%d/%m/%Y" }}
-                  </span>
+                  {{ order.last_payment.created_at | default: order.created_at | date: "%d/%m/%Y" }}
+                </span>
               </p>
 
               <p>
                 <b>{{ 'pages.orders.recurring.period_end' | t }}:</b>
                 <span>
-                    {{ order.next_invoice_at | date: "%d/%m/%Y" }}
-                  </span>
+                  {{ order.subscription.next_invoice_at | default: order.subscription.expire_at | date: "%d/%m/%Y" }}
+                </span>
               </p>
 
               <p>
                 <b>{{ 'pages.orders.recurring.payment_option' | t }}:</b>
                 <span>
-                    {{ 'checkout.payment_methods.' | append: order.merchant_payment_method | t }}
+                  {{ 'checkout.payment_methods.' | append: order.merchant_payment_method | t }}
+                </span>
+              </p>
+
+              <p>
+                <b>{{ 'pages.orders.recurring.payment_status' | t }}:</b>
+                <span>
+                  {{  order.last_payment.status | default: 'pending_payment' | prepend: 'payment.status.' | t }}
+                </span>
+
+                {% if order.merchant_payment_method == 'boleto' and order.last_payment %}
+                  - <span>
+                    <a class="btn btn-default btn-sm" href="{{ order.last_payment.link }}" target="_blank">
+                      <i class="icon-info"></i>
+                      {{ 'pages.payments.print_boleto' | t }}
+                    </a>
                   </span>
+                {% endif %}
               </p>
 
               {% if order.credit_card and order.kind == 'subscription' %}
@@ -166,7 +182,7 @@
                     </a>
                   {% endif %}
 
-                  {% if order.status == 'confirmed' %}
+                  {% if order.subscription.status != 'canceled' and  order.subscription.status != 'ended' %}
                     <a href="{{ order | order_cancel_path }}"
                        class="btn btn-danger btn-block cancel-order"
                        data-method="patch">
