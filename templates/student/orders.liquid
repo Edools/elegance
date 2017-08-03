@@ -160,20 +160,18 @@
             {% if order.status == 'confirmed' %}
               <td id="order-{{ order.id }}-actions" class="column text-center">
                 <div class="subscription-actions">
-                  {% if order.gateway_name == 'pagarme' and order.merchant_payment_method == 'credit_card' %}
+                  {% if order.merchant_payment_method == 'credit_card' %}
                     {% assign credit_card_label = 'pages.orders.recurring.change_credit_card' %}
                     {% assign credit_card_class = 'change-credit-card' %}
-                    {% elsif order.gateway_name == 'pagarme' %}
+                  {% else %}
                     {% assign credit_card_label = 'pages.orders.recurring.pay_with_credit_card' %}
                     {% assign credit_card_class = 'use-credit-card' %}
                   {% endif %}
 
-                  {% if order.gateway_name == 'pagarme' %}
-                    <a href="orders/{{ order.id }}/edit?title={{ credit_card_label | t }}"
-                       class="btn btn-primary btn-block {{ credit_card_class }}" data-toggle="modal">
-                      {{ credit_card_label | t }}
-                    </a>
-                  {% endif %}
+                  <a href="orders/{{ order.id }}/edit?title={{ credit_card_label | t }}"
+                     class="btn btn-primary btn-block {{ credit_card_class }}" data-toggle="modal">
+                    {{ credit_card_label | t }}
+                  </a>
 
                   {% if order.gateway_name == 'pagarme' and order.merchant_payment_method == 'credit_card' %}
                     <a href="orders/{{ order.id }}?order%5Bpayment_method%5D=boleto" data-method='put'
