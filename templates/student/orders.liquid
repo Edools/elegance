@@ -173,7 +173,7 @@
                     {{ credit_card_label | t }}
                   </a>
 
-                  {% if order.gateway_name == 'pagarme' and order.merchant_payment_method == 'boleto' and gateway.subscription_payment_methods contains 'boleto' %}
+                  {% if order.gateway_name == 'pagarme' and order.merchant_payment_method == 'credit_card' and gateway.subscription_payment_methods contains 'boleto' %}
                     <a href="orders/{{ order.id }}?order%5Bpayment_method%5D=boleto" data-method='put'
                       class="btn btn-primary btn-block pay-with-boleto">
                       {{ 'pages.orders.recurring.pay_with_boleto' | t }}
