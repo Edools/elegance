@@ -2,7 +2,6 @@
   'use strict';
 
   app.simpleEditor = {
-
     createShortcut: function (bindKey, callback) {
       var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 
@@ -18,16 +17,15 @@
           score++;
         }
 
-        if (character == bindKey) {
+        if (character === bindKey) {
           score++;
-        }
 
-        if (score == 2) {
-          e.stopPropagation();
-          e.preventDefault();
-          return callback();
+          if (score === 2) {
+            e.stopPropagation();
+            e.preventDefault();
+            return callback();
+          }
         }
-
       };
 
       $('body').bind('keydown', bindFunction);
@@ -53,6 +51,8 @@
         var img = document.createElement("img");
 
         img.src = source;
+
+        var range = null;
 
         if (document.caretPositionFromPoint) {
           var pos = document.caretPositionFromPoint(x, y);
@@ -93,6 +93,10 @@
 
     init: function (container) {
       this.$container = $(container);
+
+      if(this.$container.length <= 0) {
+        return;
+      }
 
       this.$input = this.$container.find('.js-input');
       this.$btnAction = this.$container.find('.js-btn-action');

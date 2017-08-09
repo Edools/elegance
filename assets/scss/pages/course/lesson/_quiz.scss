@@ -2,19 +2,12 @@
   display: flex;
 
   .question-number {
-    @include breakpoint(sm) {
-      width: 3%;
-    }
-
-    width: 8%;
+    display: inline-block;
+    margin-right: 7px;
   }
 
   .question-title {
-    @include breakpoint(sm) {
-      width: 97%;
-    }
-
-    width: 92%;
+    display: inline-block;
   }
 }
 

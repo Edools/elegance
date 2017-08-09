@@ -174,7 +174,8 @@
           padding: 0;
         }
 
-        .html5-player {
+        .html5-player,
+        #vzaar-player-container {
           @extend .embed-responsive;
           @extend .embed-responsive-16by9;
 
