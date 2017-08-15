@@ -39,7 +39,7 @@
 
         {% if current_user %}
           <li>
-            <a href="/forums">
+            <a href="{% if current_school.new_forum %}/school/forums{% else %}/forums{% endif %}">
               <i class="icon-bubble"></i>
               <span>{{ 'navbar.forum' | t }}</span>
             </a>
