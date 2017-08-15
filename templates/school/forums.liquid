@@ -3,7 +3,7 @@
     <div class="container whitebg course-dashboard-content">
       <h2>{{ 'forums.forums' | t }}</h2>
       <div class="forums-body">
-        <form accept-charset="UTF-8" method="get" action="/forums" data-turbolinks-scroll="false">
+        <form accept-charset="UTF-8" method="get" action="/school/forums" data-turbolinks-scroll="false">
           <div class="input-group input-group-lg">
             <span class="input-group-addon no-background"><i class="icon-magnifier"></i></span>
             <input type="text" name="title" class="form-control" placeholder="{{ 'forums.filter_by_title' | t }}"
@@ -14,21 +14,23 @@
           </div>
         </form>
       </div>
+
       <br>
+
       <div collapse="collapsed" class="forums list-group">
-        {% paginate forums by 10 %}
+        {% paginate forums by 10 sort { order: :asc } %}
           {% if forums.total_count == 0 %}
             <div class="alert alert-info text-center">
               {{ 'forums.empty' | t }}
             </div>
           {% else %}
             {% for forum in forums %}
-              <article class="section list-group-item clearfix">
-                <div class="section-content clearfix">
+              <article id="forum-{{ forum.id }}" class="forum list-group-item clearfix">
+                <div class="forum-content clearfix">
                   <a class="list-group-item-heading title" href="{{ forum | forum_path }}">{{ forum.title }}</a>
                   <p class="list-group-item-text" clamp="3">{{ forum.description }}</p>
                 </div>
-                <div class="section-meta pull-right">
+                <div id="sections_count" class="section-meta pull-right">
                   <b>
                     {{ 'forums.child_forum_sections_count' | t: count: forum.sections_count }}
                   </b>
