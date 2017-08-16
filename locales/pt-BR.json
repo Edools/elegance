@@ -247,6 +247,14 @@
       "zero": "Não há nenhuma resposta",
       "one": "1 resposta",
       "other": "{{ count }} respostas"
+    },
+    "sections": {
+      "empty": "Ainda não há seções aqui.",
+      "topics_count": {
+        "zero": "Não há nenhum tópico",
+        "one": "1 tópico",
+        "other": "{{ count }} tópicos"
+      }
     }
   },
   "messages": {

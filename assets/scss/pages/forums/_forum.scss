@@ -54,3 +54,14 @@
     height: 100%;
   }
 }
+
+&.school-forums-page {
+  .section.list-group-item {
+    padding: 0 15px 0 0;
+  }
+  .forum-page {
+    .section-title {
+      color: $text-color !important;
+    }
+  }
+}

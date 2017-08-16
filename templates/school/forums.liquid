@@ -19,7 +19,7 @@
 
       <div collapse="collapsed" class="forums list-group">
         {% paginate forums by 10 sort { order: :asc } %}
-          {% if forums.total_count == 0 %}
+          {% if forums.total_count == 0 and current_search.size == 0 %}
             <div class="alert alert-info text-center">
               {{ 'forums.empty' | t }}
             </div>
@@ -39,32 +39,7 @@
             {% endfor %}
           {% endif %}
 
-          <div class="text-center">
-            <ul class="pagination">
-              {% if paginate.previous.is_link %}
-                <li>
-                  <a href="{{ paginate.previous.url }}" data-turbolinks-scroll="false"><i
-                      class="icon-arrow-left"></i></a>
-                </li>
-              {% endif %}
-              {% for part in paginate.parts %}
-                {% if part.is_link %}
-                  <li>
-                    <a href="{{ part.url }}" data-turbolinks-scroll="false">{{ part.title }}</a>
-                  </li>
-                {% else %}
-                  <li class="disabled">
-                    <span>{{ part.title }}</span>
-                  </li>
-                {% endif %}
-              {% endfor %}
-              {% if paginate.next.is_link %}
-                <li>
-                  <a href="{{ paginate.next.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-right"></i></a>
-                </li>
-              {% endif %}
-            </ul>
-          </div>
+          {% include 'pagination_links' %}
         {% endpaginate %}
       </div>
     </div>
