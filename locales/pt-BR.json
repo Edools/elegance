@@ -255,6 +255,14 @@
         "one": "1 tópico",
         "other": "{{ count }} tópicos"
       }
+    },
+    "topics": {
+      "empty": "Ainda não há tópicos aqui.",
+      "posts_count": {
+        "zero": "Não há nenhum post",
+        "one": "1 post",
+        "other": "{{ count }} posts"
+      }
     }
   },
   "messages": {
