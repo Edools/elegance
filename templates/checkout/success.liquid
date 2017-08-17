@@ -27,15 +27,26 @@
         {% endif %}
       {% endif %}
 
-      {% if payment && payment.kind == 'boleto' %}
+      {% if payment and payment.kind == 'boleto' %}
         <div class="alert alert-warning">
-          {{ 'checkout.success.boleto_warning' | t }} <a href="{{ payment.link }}"
-          class="js-open-on-load"
-          target="_blank">{{ 'checkout.success.boleto_warning_click_here' | t }}</a>
+          {% if gateway_credential.gateway == 'hotmart' %}
+            {{ 'checkout.success.boleto_email' | t }}
+          {% else %}
+            {{ 'checkout.success.boleto_warning' | t }}
+
+            <a href="{{ payment.link }}" class="js-open-on-load" target="_blank">
+              {{ 'checkout.success.boleto_warning_click_here' | t }}
+            </a>
+          {% endif %}
         </div>
       {% endif %}
 
-      <a href="/enrollments" class='btn btn-primary btn-lg'>{{ 'checkout.success.go_to_enrollments' | t }}</a>
+      {% if gateway_credential.gateway == 'hotmart' and current_user == nil %}
+        {{ 'checkout.success.user_set_password_email' | t }}
+      {% else %}
+        <a href="/enrollments" class='btn btn-primary btn-lg'>{{ 'checkout.success.go_to_enrollments' | t }}</a>
+      {% endif %}
+
     </div>
   </div>
 </div>

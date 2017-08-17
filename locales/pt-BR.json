@@ -529,6 +529,7 @@
       }
     },
     "success": {
+      "user_set_password_email": "Você irá receber um email para definição da sua senha de acesso.",
       "order_created_successfully": "Seu pedido foi realizado com sucesso!",
       "transaction_made_by": "Sua transação está sendo realizada pelo {{ gateway }}.",
       "subscription_created_successfully": "Sua assinatura foi criada com o código {{ code }}.",
