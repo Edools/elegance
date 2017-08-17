@@ -263,6 +263,10 @@
         "one": "1 post",
         "other": "{{ count }} posts"
       }
+    },
+    "posts": {
+      "empty": "Ainda não há posts aqui.",
+      "new": "Novo post"
     }
   },
   "messages": {

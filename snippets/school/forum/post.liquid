@@ -1,0 +1,24 @@
+<article class="{{ object_class }} question-item panel panel-default">
+  <div class="question-body panel-body">
+    <div class="question-user col-xs-3">
+      <div class="avatar">
+        {% assign avatar_alt = object.user | fullname %}
+        {% image, src: object.user.cover_image_url, alt: avatar_alt %}
+      </div>
+      <span class="author-name"><span>{{ object.user | fullname }}</span></span>
+      <span class="date">{{ object.created_at | time_ago_in_words }}</span>
+    </div>
+
+    <div class="question-content col-xs-9 speech-bubble">
+      {% if object.title %}
+        <p class="title">
+          {{ object.title }}
+        </p>
+      {% endif %}
+
+      <p class="description" clamp="3">
+        {{ object.description | default: object.body }}
+      </p>
+    </div>
+  </div>
+</article>

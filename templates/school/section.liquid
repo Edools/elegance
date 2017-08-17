@@ -14,7 +14,8 @@
 
       <div class="modal fade" tabindex="-1" role="dialog" id="sectionModal">
         <div class="modal-dialog" role="document">
-          {% form 'school/forum/topic' %}
+          <form accept-charset="UTF-8" method="post" action="{{ section | topics_path }}">
+            <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
             <input type="hidden" name="section_id" value="{{section.id}}">
 
             <div class="modal-content">
@@ -43,7 +44,7 @@
                 <button type="submit" class="btn btn-primary">Salvar</button>
               </div>
             </div>
-          {% endform %}
+          </form>
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
 
@@ -70,7 +71,7 @@
             {% for topic in topics %}
               <article id="topic-{{ topic.id }}" class="forum list-group-item clearfix">
                 <div class="forum-content clearfix">
-                  <a class="list-group-item-heading title" href="{{ topic | topic_path }}">{{ topic.title }}</a>
+                  <a class="list-group-item-heading title" href="{{ topic | topic_path: section }}">{{ topic.title }}</a>
                 </div>
 
                 <div id="posts-count" class="section-meta pull-right">

@@ -1,0 +1,52 @@
+<div class="forums-page page">
+  <div class="forum-questions-page page">
+    <div class="container">
+      <div class="forum-questions-heading">
+        <a href="{{ topic | section_path: forum_id }}" class="btn btn-default">
+          <i class="icon-arrow-left"></i>
+          <span>{{ 'general.back' | t }}</span>
+        </a>
+
+        {% permitted forum_question, create %}
+          <a href="#new-post" class="btn btn-primary pull-right">
+            <i class="icon-plus"></i>
+            <span>{{ 'forums.posts.new' | t }}</span>
+          </a>
+        {% endpermitted %}
+      </div>
+
+      <div class="topic-question-list">
+        {% paginate posts by 1 %}
+          {% if paginate.current_page == 1 %}
+            {% include 'school/forum/post', object: topic, object_class: 'topic-item' %}
+          {% endif %}
+
+          {% for p in posts %}
+            {% include 'school/forum/post', object: p, object_class: 'post-item' %}
+          {% endfor %}
+
+          {% include 'pagination_links' %}
+        {% endpaginate %}
+
+
+        {% unless !hide_editor %}
+          <div id="new-post" class="answer-panel panel-footer clearfix">
+            <form accept-charset="UTF-8" method="post" action="{{ topic | posts_path: forum_id }}">
+              <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+              <textarea name="forum_answer[text]" type="text"
+                        id="answer-text-{{ post.id }}"
+                        class="js-answer-text-area js-ckeditor form-control"
+                        rows="4"
+                        placeholder="{{ 'forums.click_to_answer' | t }}"></textarea>
+              <br>
+              <input type="submit"
+                     value="{{ 'forums.answer' | t }}"
+                     class="js-answer-submit-button btn btn-primary pull-right">
+            </form>
+          </div>
+        {% endunless %}
+
+      </div>
+    </div>
+  </div>
+</div>
