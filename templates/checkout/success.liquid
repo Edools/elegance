@@ -29,15 +29,11 @@
 
       {% if payment and payment.kind == 'boleto' %}
         <div class="alert alert-warning">
-          {% if gateway_credential.gateway == 'hotmart' %}
-            {{ 'checkout.success.boleto_email' | t }}
-          {% else %}
-            {{ 'checkout.success.boleto_warning' | t }}
+          {{ 'checkout.success.boleto_warning' | t }}
 
-            <a href="{{ payment.link }}" class="js-open-on-load" target="_blank">
-              {{ 'checkout.success.boleto_warning_click_here' | t }}
-            </a>
-          {% endif %}
+          <a href="{{ payment.link }}" class="js-open-on-load" target="_blank">
+            {{ 'checkout.success.boleto_warning_click_here' | t }}
+          </a>
         </div>
       {% endif %}
 
