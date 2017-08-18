@@ -3,9 +3,16 @@
     <div class="container">
       <h3>
         {% permitted school_forum_topic, create %}
-          <button type="button" data-toggle="modal" data-target="#new-topic-modal" id="new_section" class="btn btn-primary pull-right" name="button">
-            {{ 'forums.new_topic' | t }}
-          </button>
+          <div class="page-actions pull-right">
+            <a href="{{ section | forum_path }}" class="btn btn-default">
+              <i class="icon-arrow-left"></i>
+              <span>{{ 'general.back' | t }}</span>
+            </a>
+
+            <button type="button" data-toggle="modal" data-target="#new-topic-modal" id="new_section" class="btn btn-primary" name="button">
+              {{ 'forums.new_topic' | t }}
+            </button>
+          </div>
         {% endpermitted %}
 
         <span class="section-title">{{ section.title }}</span>
