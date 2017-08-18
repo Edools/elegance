@@ -16,13 +16,14 @@
       </div>
 
       <div class="topic-question-list">
-        {% paginate posts by 1 %}
+        {% paginate posts by 10 %}
           {% if paginate.current_page == 1 %}
             {% include 'school/forum/post', object: topic, object_class: 'topic-item' %}
           {% endif %}
 
           {% for p in posts %}
-            {% include 'school/forum/post', object: p, object_class: 'post-item' %}
+            {% assign edit_path = p | post_path: forum_id, section_id %}
+            {% include 'school/forum/post', object: p, object_class: 'post-item', edit_path: edit_path %}
           {% endfor %}
 
           {% include 'pagination_links' %}
@@ -33,15 +34,14 @@
           <div id="new-post" class="answer-panel panel-footer clearfix">
             <form accept-charset="UTF-8" method="post" action="{{ topic | posts_path: forum_id }}">
               <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
-              <textarea name="forum_answer[text]" type="text"
-                        id="answer-text-{{ post.id }}"
-                        class="js-answer-text-area js-ckeditor form-control"
+              <textarea name="post[body]" type="text"
+                        id="new-post-body"
+                        class="js-ckeditor form-control"
                         rows="4"
-                        placeholder="{{ 'forums.click_to_answer' | t }}"></textarea>
+                        required></textarea>
               <br>
-              <input type="submit"
-                     value="{{ 'forums.answer' | t }}"
-                     class="js-answer-submit-button btn btn-primary pull-right">
+
+              <button type="submit" class="btn btn-primary pull-right" disabled="disabled">{{ 'forums.posts.new' | t }}</button>
             </form>
           </div>
         {% endunless %}

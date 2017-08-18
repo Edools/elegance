@@ -1,4 +1,4 @@
-<article class="{{ object_class }} question-item panel panel-default">
+<article id="{{ object_class }}-{{ object.id }}" class="{{ object_class }} question-item panel panel-default">
   <div class="question-body panel-body">
     <div class="question-user col-xs-3">
       <div class="avatar">
@@ -10,15 +10,53 @@
     </div>
 
     <div class="question-content col-xs-9 speech-bubble">
-      {% if object.title %}
-        <p class="title">
-          {{ object.title }}
-        </p>
-      {% endif %}
+      <div class="row">
+        <div class="col-md-9">
+          {% if object.title %}
+            <p class="title">
+              {{ object.title }}
+            </p>
+          {% endif %}
 
-      <p class="description" clamp="3">
-        {{ object.description | default: object.body }}
-      </p>
+          <div class="description" clamp="3">
+            {{ object.description | default: object.body }}
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          {% if object.user_id == current_user.id and object.body %}
+            <button type="button" data-toggle="modal" data-target="#edit-{{ object_class }}-{{ object.id }}" class="btn btn-success  btn-xs pull-right" name="button">
+              <i class="icon-pencil"></i>
+            </button>
+          {% endif %}
+        </div>
+      </div>
+
     </div>
   </div>
 </article>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-{{ object_class }}-{{ object.id }}">
+  <div class="modal-dialog" role="document">
+    <form accept-charset="UTF-8" method="put" action="{{ edit_path }}" data-remote="true">
+      <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+
+      <div class="modal-content">
+        <div class="modal-body">
+          <textarea name="post[body]" type="text"
+            id="post-body-{{ object.id }}"
+            class="js-ckeditor form-control"
+            rows="4"
+            required>
+              {{ object.body }}
+          </textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </div>
+    </form>
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

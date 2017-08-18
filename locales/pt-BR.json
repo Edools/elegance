@@ -266,7 +266,11 @@
     },
     "posts": {
       "empty": "Ainda não há posts aqui.",
-      "new": "Novo post"
+      "new": "Novo post",
+      "edit": "Editar post",
+      "errors": {
+        "empty": "O post deve ter algum conteúdo"
+      }
     }
   },
   "messages": {
