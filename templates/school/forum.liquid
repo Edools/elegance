@@ -45,7 +45,7 @@
                         <div class="section-topics-list">
                           {% for topic in section.topics %}
                             <div class="section-topic section-topic-striped">
-                              <a class="title" href="{{ topic | topic_path: section }}">
+                              <a class="title" href="{{ topic | topic_path: forum.id }}">
                                 {{ topic.title }}
                               </a>
                             </div>

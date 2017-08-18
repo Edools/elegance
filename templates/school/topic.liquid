@@ -7,7 +7,7 @@
           <span>{{ 'general.back' | t }}</span>
         </a>
 
-        {% permitted forum_question, create %}
+        {% permitted school_forum_post, create %}
           <a href="#new-post" class="btn btn-primary pull-right">
             <i class="icon-plus"></i>
             <span>{{ 'forums.posts.new' | t }}</span>
@@ -18,12 +18,15 @@
       <div class="topic-question-list">
         {% paginate posts by 10 %}
           {% if paginate.current_page == 1 %}
-            {% include 'school/forum/post', object: topic, object_class: 'topic-item' %}
+            {% assign edit_path = topic | topic_path: forum_id %}
+            {% include 'school/forum/post', object: topic, object_class: 'topic',
+              edit_path: edit_path %}
           {% endif %}
 
           {% for p in posts %}
             {% assign edit_path = p | post_path: forum_id, section_id %}
-            {% include 'school/forum/post', object: p, object_class: 'post-item', edit_path: edit_path %}
+            {% include 'school/forum/post', object: p, object_class: 'post',
+              edit_path: edit_path %}
           {% endfor %}
 
           {% include 'pagination_links' %}

@@ -257,6 +257,7 @@
       }
     },
     "topics": {
+      "created": "Tópico criado com sucesso",
       "empty": "Ainda não há tópicos aqui.",
       "posts_count": {
         "zero": "Não há nenhum post",

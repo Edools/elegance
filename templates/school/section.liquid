@@ -2,8 +2,8 @@
   <div class="forum-page page">
     <div class="container">
       <h3>
-        {% permitted forum_section, create %}
-          <button type="button" data-toggle="modal" data-target="#sectionModal" id="new_section" class="btn btn-primary pull-right" name="button">
+        {% permitted school_forum_topic, create %}
+          <button type="button" data-toggle="modal" data-target="#new-topic-modal" id="new_section" class="btn btn-primary pull-right" name="button">
             {{ 'forums.new_topic' | t }}
           </button>
         {% endpermitted %}
@@ -12,24 +12,24 @@
         <p class="small">{{ section.description }}</p>
       </h3>
 
-      <div class="modal fade" tabindex="-1" role="dialog" id="sectionModal">
+      <div class="modal fade" tabindex="-1" role="dialog" id="new-topic-modal">
         <div class="modal-dialog" role="document">
           <form accept-charset="UTF-8" method="post" action="{{ section | topics_path }}">
             <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
-            <input type="hidden" name="section_id" value="{{section.id}}">
 
             <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">
                   {{ 'forums.new_topic' | t }}
                 </h4>
               </div>
+
               <div class="modal-body">
                 <div class="form-group">
                   <label for="name_section">Nome</label>
                   <input type="text" class="form-control" name="topic[title]" id="name_section" required />
                 </div>
+
                 <div class="form-group">
                   <label for="description_section">Descrição</label>
                   <textarea rows="3"
@@ -39,9 +39,10 @@
                       required></textarea>
                 </div>
               </div>
+
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="submit" class="btn btn-primary" disabled="disabled">Salvar</button>
               </div>
             </div>
           </form>
@@ -71,7 +72,7 @@
             {% for topic in topics %}
               <article id="topic-{{ topic.id }}" class="forum list-group-item clearfix">
                 <div class="forum-content clearfix">
-                  <a class="list-group-item-heading title" href="{{ topic | topic_path: section }}">{{ topic.title }}</a>
+                  <a class="list-group-item-heading title" href="{{ topic | topic_path: forum_id }}">{{ topic.title }}</a>
                 </div>
 
                 <div id="posts-count" class="section-meta pull-right">

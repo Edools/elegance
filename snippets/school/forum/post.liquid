@@ -1,4 +1,4 @@
-<article id="{{ object_class }}-{{ object.id }}" class="{{ object_class }} question-item panel panel-default">
+<article id="{{ object_class }}-item-{{ object.id }}" class="{{ object_class }}-item question-item panel panel-default">
   <div class="question-body panel-body">
     <div class="question-user col-xs-3">
       <div class="avatar">
@@ -24,8 +24,8 @@
         </div>
 
         <div class="col-md-3">
-          {% if object.user_id == current_user.id and object.body %}
-            <button type="button" data-toggle="modal" data-target="#edit-{{ object_class }}-{{ object.id }}" class="btn btn-success  btn-xs pull-right" name="button">
+          {% if object.user_id == current_user.id %}
+            <button id="{{ object_class }}-item-{{ object.id }}-open-modal" type="button" data-toggle="modal" data-target="#edit-{{ object_class }}-item-{{ object.id }}" class="btn btn-success  btn-xs pull-right" name="button">
               <i class="icon-pencil"></i>
             </button>
           {% endif %}
@@ -36,19 +36,24 @@
   </div>
 </article>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="edit-{{ object_class }}-{{ object.id }}">
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-{{ object_class }}-item-{{ object.id }}">
   <div class="modal-dialog" role="document">
     <form accept-charset="UTF-8" method="put" action="{{ edit_path }}" data-remote="true">
       <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
 
       <div class="modal-content">
         <div class="modal-body">
-          <textarea name="post[body]" type="text"
-            id="post-body-{{ object.id }}"
+          {% if object_class == 'topic' %}
+            {% assign attr = 'description' %}
+          {% else %}
+            {% assign attr = 'body' %}
+          {% endif %}
+          <textarea name="{{ object_class }}[{{ attr }}]" type="text"
+            id="{{ object_class }}-{{ attr }}-{{ object.id }}"
             class="js-ckeditor form-control"
             rows="4"
             required>
-              {{ object.body }}
+              {{ object.body | default: object.description }}
           </textarea>
         </div>
 
