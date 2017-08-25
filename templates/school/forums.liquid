@@ -32,7 +32,11 @@
                 </div>
                 <div id="sections_count" class="section-meta pull-right">
                   <b>
-                    {{ 'forums.child_forum_sections_count' | t: count: forum.sections_count }}
+                    {% if forum.public_sections_count > 0 and current_user.type == 'Student' %}
+                      {{ 'forums.child_forum_sections_count' | t: count: forum.public_sections_count }}
+                    {% else %}
+                      {{ 'forums.child_forum_sections_count' | t: count: forum.sections_count }}
+                    {% endif %}
                   </b>
                 </div>
               </article>
