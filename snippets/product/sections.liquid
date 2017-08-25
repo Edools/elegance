@@ -1,0 +1,11 @@
+{% paginate product_sections by 10 %}
+  <div class="product-sections">
+    <p class="subtitle">Sections</p>
+
+    {% for section in product_sections %}
+      <div class="section">
+        <p class="title">{{ section.title }}</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endpaginate %}
