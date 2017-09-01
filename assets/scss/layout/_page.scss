@@ -7,17 +7,29 @@
   }
 
   .page-header {
+    @include clearfix();
+
     margin: 0;
     margin-bottom: $padding-large-vertical * 4;
-    padding-top: $padding-large-vertical * 2;
+    padding-top: $padding-large-vertical * 4;
     padding-bottom: $padding-large-vertical * 4;
     border-bottom: 1px solid $border-color-base;
-    background-color: $light;
+    background-color: transparent;
 
     .title {
       margin-top: 0;
       margin-bottom: $padding-large-vertical * 4;
+      font-size: 28px;
       line-height: 1;
+
+      b,
+      strong {
+        font-weight: 600;
+      }
+
+      * {
+        font-size: 28px;
+      }
     }
 
     .course-image {
@@ -33,6 +45,26 @@
       margin-bottom: $padding-large-vertical * 2;
       padding-top: 0;
     }
+  }
+
+  .page-title {
+    margin: 50px 0;
+    font-size: 28px;
+
+    * {
+      font-size: 28px;
+    }
+
+    b,
+    strong {
+      font-weight: 600;
+    }
+  }
+
+  .page-subtitle {
+    margin-top: -50px;
+    margin-bottom: 50px;
+    color: $text-muted;
   }
 }
 
