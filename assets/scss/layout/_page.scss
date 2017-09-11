@@ -48,11 +48,20 @@
   }
 
   .page-title {
-    margin: 50px 0;
-    font-size: 28px;
+    @include breakpoint(sm) {
+      margin: 50px 0;
+      font-size: 28px;
+
+      * {
+        font-size: 28px;
+      }
+    }
+
+    margin: 30px 0;
+    font-size: 24px;
 
     * {
-      font-size: 28px;
+      font-size: 24px;
     }
 
     b,
@@ -62,9 +71,16 @@
   }
 
   .page-subtitle {
-    margin-top: -50px;
-    margin-bottom: 50px;
+    @include breakpoint(sm) {
+      margin-top: -50px;
+      margin-bottom: 50px;
+      font-size: $font-size-base;
+    }
+
+    margin-top: -30px;
+    margin-bottom: 30px;
     color: $text-muted;
+    font-size: $font-size-small;
   }
 }
 
