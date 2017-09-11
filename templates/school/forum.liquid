@@ -1,72 +1,73 @@
-<div class="forums-page school-forums-page">
-  <div class="forum-page page">
-    <div class="container">
-      <h3>
-        <span class="forum-title">{{ forum.title }}</span>
-        <p class="small">{{ forum.description }}</p>
-      </h3>
+<div class="school-forum-page page">
+  <div class="container">
+    <h2 class="page-title">{{ forum.title }}</h2>
+    <p class="page-subtitle">{{ forum.description }}</p>
 
-      <form accept-charset="UTF-8" method="get" action="/school/forums/{{ forum.id }}" data-turbolinks-scroll="false">
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon no-background"><i class="icon-magnifier"></i></span>
-          <input type="text" class="form-control" name="title" placeholder="{{ 'forums.filter_by_title' | t }}"
-          value="{{ current_search.title }}">
-          <span class="input-group-btn">
-            <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
-          </span>
+    <div class="forum-sections">
+      {% paginate sections by 10 sort { order: :asc } %}
+      {% if sections.total_count == 0 and current_search.size == 0 %}
+        <div class="alert alert-info text-center">
+          {{ 'forums.sections.empty' | t }}
         </div>
-      </form>
+      {% else %}
+        <table class="table table-responsive forums-table">
+          <thead>
+          <th class="first-header"></th>
+          <th class="main-header">
+            <span class="caption">{{ 'forums.section_title' | t }}</span>
+            <form class="search-form" accept-charset="UTF-8" method="get" action="/school/forums/{{ forum.id }}"
+                  data-turbolinks-scroll="false">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="icon-magnifier"></i></span>
+                <input type="text" class="form-control" name="title" placeholder="{{ 'forums.filter_by_title' | t }}"
+                       value="{{ current_search.title }}">
+                <span class="input-group-btn">
+                  <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+                </span>
+              </div>
+            </form>
+          </th>
+          <th class="right-header">
+            <div class="caption">{{ 'forums.topics_title' | t }}</div>
+          </th>
+          </thead>
+          <tbody>
+          {% for section in sections %}
+            <tr class="forum-item">
+              <td>
+                <div class="icon-container">
+                  <i class="icon icon-bubbles"></i>
+                </div>
+              </td>
+              <td>
+                <div id="section-{{ section.id }}" class="info">
+                  <a class="title" href="{{ section | section_path }}">{{ section.title }}</a>
+                  <p class="description">{{ section.description }}</p>
 
-      <hr/>
-
-      <div class="forum-sections list-group">
-        {% paginate sections by 10 sort { order: :asc } %}
-          {% if sections.total_count == 0 and current_search.size == 0 %}
-            <div class="alert alert-info text-center">
-              {{ 'forums.sections.empty' | t }}
-            </div>
-          {% else %}
-            {% for section in sections %}
-              <article id="section-{{ section.id }}" class="section list-group-item clearfix">
-                <div class="section-content clearfix">
-                  <div class="list-group-item-heading needsclick">
-                    <section class="head-section">
-                      <label class="toggle">
-                        <a class="section-title title" href="{{ section | section_path }}">
-                          {{ section.title }}
+                  {% if section.topics.size > 0 %}
+                    <div id="section-{{ section.id }}-topics" class="section-topics">
+                      {% for topic in section.topics %}
+                        <a class="badge" href="{{ topic | topic_path: forum.id }}">
+                          {{ topic.title }}
                         </a>
-                      </label>
-                      <p class="list-group-item-text">{{ section.description }}</p>
-                      <div class="clearfix"></div>
-                    </section>
-
-                    {% if section.topics.size > 0 %}
-                      <div id="section-{{ section.id }}-topics" class="section-topics">
-                        <div class="section-topics-list">
-                          {% for topic in section.topics %}
-                            <div class="section-topic section-topic-striped">
-                              <a class="title" href="{{ topic | topic_path: forum.id }}">
-                                {{ topic.title }}
-                              </a>
-                            </div>
-                          {% endfor %}
-                        </div>
-                      </div>
-                    {% endif %}
-                  </div>
+                      {% endfor %}
+                    </div>
+                  {% endif %}
                 </div>
-                <div id="topics-count" class="section-meta pull-right">
-                  <b>
-                    {{ 'forums.sections.topics_count' | t: count: section.topics_count }}
-                  </b>
+              </td>
+              <td>
+                <div class="topics-count">
+                  {{ section.topics_count }}
                 </div>
-              </article>
-            {% endfor %}
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
 
-            {% include 'pagination_links' %}
-          {% endif %}
-        {% endpaginate %}
-      </div>
+        {% include 'pagination-links' %}
+      {% endif %}
+      {% endpaginate %}
     </div>
   </div>
 </div>
