@@ -222,8 +222,14 @@
   },
   "forums": {
     "forum": "Fórum: {{ title }}",
-    "forums": "Fóruns",
+    "forum_title": "Fórum",
+    "section_title": "Seção",
+    "topics_title": "Tópicos",
+    "posts_title": "Posts",
+    "forums": "<b>Fóruns</b> da Escola",
     "new_topic": "Novo Tópico",
+    "new_topic_name": "Nome",
+    "new_topic_description": "Descrição",
     "new_section": "Nova Seção",
     "filter_by_title": "Buscar por nome...",
     "empty": "Ainda não há fóruns aqui.",
@@ -249,6 +255,7 @@
       "other": "{{ count }} respostas"
     },
     "sections": {
+      "title": "Seções",
       "empty": "Ainda não há seções aqui.",
       "topics_count": {
         "zero": "Não há nenhum tópico",
@@ -267,8 +274,9 @@
     },
     "posts": {
       "empty": "Ainda não há posts aqui.",
-      "new": "Novo post",
-      "edit": "Editar post",
+      "new": "Novo Post",
+      "send": "Enviar",
+      "edit": "Editar Post",
       "errors": {
         "empty": "O post deve ter algum conteúdo"
       }
