@@ -1,99 +1,128 @@
-<div class="forums-page school-forums-page">
-  <div class="forum-page page">
-    <div class="container">
-      <h3>
+<div class="school-forum-section page">
+  <div class="container">
+    <div class="forum-section-header">
+      {% assign col = 'md-12' %}
+      {% permitted school_forum_topic, create %}
+      {% assign col = 'md-9' %}
+      {% endpermitted %}
+
+      <div class="row">
+        <div class="col-{{ col }}">
+          <h2 class="page-title">{{ section.title }}</h2>
+          <p class="page-subtitle">{{ section.description }}</p>
+        </div>
+
         {% permitted school_forum_topic, create %}
-          <div class="page-actions pull-right">
+        <div class="col-md-3">
+          <div class="page-actions">
             <a href="{{ section | forum_path }}" class="btn btn-default">
               <i class="icon-arrow-left"></i>
               <span>{{ 'general.back' | t }}</span>
             </a>
 
-            <button type="button" data-toggle="modal" data-target="#new-topic-modal" id="new_section" class="btn btn-primary" name="button">
-              {{ 'forums.new_topic' | t }}
+            <button type="button" data-toggle="modal" data-target="#new-topic-modal" id="new_section"
+                    class="btn btn-primary" name="button">
+              <i class="icon-plus"></i>
+              <span>{{ 'forums.new_topic' | t }}</span>
             </button>
           </div>
-        {% endpermitted %}
-
-        <span class="section-title">{{ section.title }}</span>
-        <p class="small">{{ section.description }}</p>
-      </h3>
-
-      <div class="modal fade" tabindex="-1" role="dialog" id="new-topic-modal">
-        <div class="modal-dialog" role="document">
-          <form accept-charset="UTF-8" method="post" action="{{ section | topics_path }}">
-            <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
-
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">
-                  {{ 'forums.new_topic' | t }}
-                </h4>
-              </div>
-
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="name_section">Nome</label>
-                  <input type="text" class="form-control" name="topic[title]" id="name_section" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="description_section">Descrição</label>
-                  <textarea rows="3"
-                      class="form-control js-ckeditor"
-                      id="description_section"
-                      name="topic[description]"
-                      required></textarea>
-                </div>
-              </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary" disabled="disabled">Salvar</button>
-              </div>
-            </div>
-          </form>
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
-
-      <form accept-charset="UTF-8" method="get" action="/school/forums/{{ forum_id }}/sections/{{ section.id }}" data-turbolinks-scroll="false">
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon no-background"><i class="icon-magnifier"></i></span>
-          <input type="text" class="form-control" name="title" placeholder="{{ 'forums.filter_by_title' | t }}"
-          value="{{ current_search.title }}">
-          <span class="input-group-btn">
-            <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
-          </span>
         </div>
-      </form>
-
-      <hr/>
-
-      <div collapse="collapsed" class="section-topics list-group">
-        {% paginate topics by 10 sort { updated_at: :desc } %}
-          {% if topics.total_count == 0 and current_search.size == 0 %}
-            <div class="alert alert-info text-center">
-              {{ 'forums.topics.empty' | t }}
-            </div>
-          {% else %}
-            {% for topic in topics %}
-              <article id="topic-{{ topic.id }}" class="forum list-group-item clearfix">
-                <div class="forum-content clearfix">
-                  <a class="list-group-item-heading title" href="{{ topic | topic_path: forum_id }}">{{ topic.title }}</a>
-                </div>
-
-                <div id="posts-count" class="section-meta pull-right">
-                  <b>
-                    {{ 'forums.topics.posts_count' | t: count: topic.posts_count }}
-                  </b>
-                </div>
-              </article>
-            {% endfor %}
-          {% endif %}
-
-          {% include 'pagination_links' %}
-        {% endpaginate %}
+        {% endpermitted %}
       </div>
     </div>
+
+    <div class="topics">
+      {% paginate topics by 10 sort { updated_at: :desc } %}
+      {% if topics.total_count == 0 and current_search.size == 0 %}
+        <div class="alert alert-info text-center">
+          {{ 'forums.topics.empty' | t }}
+        </div>
+      {% else %}
+        <table class="table table-responsive forums-table">
+          <thead>
+          <th class="first-header"></th>
+          <th class="main-header">
+            <span class="caption">{{ 'forums.section_title' | t }}</span>
+            <form class="search-form" accept-charset="UTF-8" method="get"
+                  action="/school/forums/{{ forum_id }}/sections/{{ section.id }}"
+                  data-turbolinks-scroll="false">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="icon-magnifier"></i></span>
+                <input type="text" class="form-control" name="title" placeholder="{{ 'forums.filter_by_title' | t }}"
+                       value="{{ current_search.title }}">
+                <span class="input-group-btn">
+                  <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+                </span>
+              </div>
+            </form>
+          </th>
+          <th class="right-header">
+            <div class="caption">{{ 'forums.posts_title' | t }}</div>
+          </th>
+          </thead>
+          <tbody>
+          {% for topic in topics %}
+            <tr class="topic forum-item">
+              <td>
+                <div class="icon-container">
+                  <i class="icon icon-bubbles"></i>
+                </div>
+              </td>
+              <td>
+                <div id="topic-{{ topic.id }}" class="info">
+                  <a class="title" href="{{ topic | topic_path: forum_id }}">{{ topic.title }}</a>
+                </div>
+              </td>
+              <td>
+                <div class="posts-count">
+                  {{ topic.posts_count }}
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+      {% include 'pagination-links' %}
+      {% endpaginate %}
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="new-topic-modal">
+      <div class="modal-dialog" role="document">
+        <form accept-charset="UTF-8" method="post" action="{{ section | topics_path }}">
+          <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">
+                {{ 'forums.new_topic' | t }}
+              </h4>
+            </div>
+
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="topic[title]">{{ 'forums.new_topic_name' | t }}</label>
+                <input type="text" class="form-control" name="topic[title]" id="topic[title]" required/>
+              </div>
+
+              <div class="form-group">
+                <label for="topic[description]">{{ 'forums.new_topic_description' | t }}</label>
+                <textarea rows="3"
+                          class="form-control js-ckeditor"
+                          id="topic[description]"
+                          name="topic[description]"
+                          required></textarea>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'general.cancel' | t }}</button>
+              <button type="submit" class="btn btn-primary">{{ 'general.save' | t }}</button>
+            </div>
+          </div>
+        </form>
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
   </div>
 </div>

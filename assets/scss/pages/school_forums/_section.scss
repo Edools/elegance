@@ -1,0 +1,30 @@
+.school-forum-section {
+  .page-actions {
+    @include breakpoint(md) {
+      margin: 0;
+      padding: 50px 0;
+    }
+
+    margin-bottom: 25px;
+    text-align: right;
+  }
+
+  .forums-table {
+    .forum-item {
+      .info {
+        padding-top: 24px;
+        padding-bottom: 24px;
+      }
+
+      .posts-count {
+        @include breakpoint(sm) {
+          display: block;
+        }
+
+        display: none;
+        padding: 28px 0;
+        text-align: center;
+      }
+    }
+  }
+}
