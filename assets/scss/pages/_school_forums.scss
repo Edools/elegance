@@ -1,0 +1,131 @@
+.forums-table {
+  @include box-shadow(0 2px 2px -2px rgba(0, 0, 0, .15));
+  @include breakpoint(sm) {
+    table-layout: fixed;
+  }
+
+  border: 1px solid $border-color-base;
+  background-color: $light;
+  table-layout: fixed;
+
+  thead {
+    th {
+      padding: 15px 10px;
+      border-bottom-width: 1px;
+      font-weight: normal;
+    }
+
+    .first-header {
+      @include breakpoint(sm) {
+        padding: 15px 10px;
+        width: 75px;
+      }
+
+      padding: 0;
+      width: 1px;
+    }
+
+    .main-header {
+      padding: 10px 10px;
+
+      .caption {
+        @include breakpoint(sm) {
+          display: inline-block;
+        }
+
+        display: none;
+        padding: 4px 0;
+      }
+
+      .search-form {
+        @include breakpoint(sm) {
+          max-width: 320px;
+        }
+
+        display: inline-block;
+        float: right;
+        margin: 0 0 0 25px;
+        width: 100%;
+      }
+
+      .input-group {
+        @include breakpoint(sm) {
+          > .form-control,
+          > .input-group-addon,
+          > .input-group-btn > .btn {
+            padding: 5px 10px;
+            height: 33px;
+            font-size: 14px;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+
+    .right-header {
+      @include breakpoint(sm) {
+        padding: 15px 10px;
+        width: 120px;
+      }
+
+      padding: 0;
+      width: 1px;
+      text-align: center;
+
+      .caption {
+        @include breakpoint(sm) {
+          display: inline-block;
+        }
+
+        display: none;
+      }
+    }
+  }
+
+  .icon-container {
+    @include breakpoint(sm) {
+      display: block;
+    }
+
+    display: none;
+    padding: 25px 15px;
+
+    .icon {
+      color: darken($body-bg, 15%);
+      font-size: 28px;
+    }
+  }
+
+  .info {
+    @include breakpoint(sm) {
+      padding: 15px 0;
+    }
+
+    padding: 12px 10px;
+
+    .title {
+      @include breakpoint(sm) {
+        font-size: 18px;
+      }
+
+      display: block;
+      color: $text-color;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .description {
+      @include ellipsis();
+
+      margin: 0;
+      max-width: 100%;
+      color: $text-muted;
+      font-size: $font-size-small;
+    }
+  }
+}
+
+@import 'school_forums/forums';
+@import 'school_forums/forum';
+@import 'school_forums/section';
+@import 'school_forums/topic';
