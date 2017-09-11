@@ -1,0 +1,34 @@
+.school-forums-page {
+  .search-form {
+    margin-bottom: 15px;
+  }
+
+  .forums-table {
+    .forum-item {
+      .info {
+        .product {
+          display: block;
+
+          .badge {
+            @include ellipsis();
+
+            margin-top: 4px;
+            margin-bottom: 5px;
+            max-width: 250px;
+            font-size: 12px;
+          }
+        }
+      }
+
+      .sections-count {
+        @include breakpoint(sm) {
+          display: block;
+        }
+
+        display: none;
+        padding: 28px 0;
+        text-align: center;
+      }
+    }
+  }
+}
