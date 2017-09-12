@@ -48,7 +48,7 @@
                     <div id="section-{{ section.id }}-topics" class="section-topics">
                       {% for topic in section.topics %}
                         <a class="badge" href="{{ topic | topic_path: forum.id }}">
-                          {{ topic.title }}
+                          <span class="topic-title">{{ topic.title }}</span>
                         </a>
                       {% endfor %}
                     </div>
