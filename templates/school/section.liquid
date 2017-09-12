@@ -42,7 +42,7 @@
           <thead>
           <th class="first-header"></th>
           <th class="main-header">
-            <span class="caption">{{ 'forums.section_title' | t }}</span>
+            <span class="caption">{{ 'forums.topic_title' | t }}</span>
             <form class="search-form" accept-charset="UTF-8" method="get"
                   action="/school/forums/{{ forum_id }}/sections/{{ section.id }}"
                   data-turbolinks-scroll="false">
@@ -62,15 +62,16 @@
           </thead>
           <tbody>
           {% for topic in topics %}
-            <tr class="topic forum-item">
+            <tr class="topic forum-item" id="topic-{{ topic.id }}">
               <td>
                 <div class="icon-container">
                   <i class="icon icon-bubbles"></i>
                 </div>
               </td>
               <td>
-                <div id="topic-{{ topic.id }}" class="info">
+                <div class="info">
                   <a class="title" href="{{ topic | topic_path: forum_id }}">{{ topic.title }}</a>
+                  <p class="description">{{ topic.description }}</p>
                 </div>
               </td>
               <td>

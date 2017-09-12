@@ -33,14 +33,14 @@
           </thead>
           <tbody>
           {% for section in sections %}
-            <tr class="forum-item">
+            <tr class="forum-item" id="section-{{ section.id }}">
               <td>
                 <div class="icon-container">
                   <i class="icon icon-bubbles"></i>
                 </div>
               </td>
               <td>
-                <div id="section-{{ section.id }}" class="info">
+                <div class="info">
                   <a class="title" href="{{ section | section_path }}">{{ section.title }}</a>
                   <p class="description">{{ section.description }}</p>
 

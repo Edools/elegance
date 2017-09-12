@@ -2,8 +2,8 @@
   <ul class="pagination">
     {% if paginate.previous.is_link %}
       <li>
-        <a href="{{ paginate.previous.url }}" data-turbolinks-scroll="false"><i
-            class="icon-arrow-left"></i></a>
+        <a href="{{ paginate.previous.url }}" data-turbolinks-scroll="false">
+          <i class="icon-arrow-left"></i></a>
       </li>
     {% endif %}
     {% for part in paginate.parts %}
@@ -19,7 +19,8 @@
     {% endfor %}
     {% if paginate.next.is_link %}
       <li>
-        <a href="{{ paginate.next.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-right"></i></a>
+        <a href="{{ paginate.next.url }}" data-turbolinks-scroll="false">
+          <i class="icon-arrow-right"></i></a>
       </li>
     {% endif %}
   </ul>
