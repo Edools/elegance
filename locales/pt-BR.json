@@ -224,6 +224,7 @@
     "forum": "Fórum: {{ title }}",
     "forum_title": "Fórum",
     "section_title": "Seção",
+    "topic_title": "Tópico",
     "topics_title": "Tópicos",
     "posts_title": "Posts",
     "forums": "<b>Fóruns</b> da Escola",

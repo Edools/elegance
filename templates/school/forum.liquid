@@ -33,14 +33,14 @@
           </thead>
           <tbody>
           {% for section in sections %}
-            <tr class="forum-item">
+            <tr class="forum-item" id="section-{{ section.id }}">
               <td>
                 <div class="icon-container">
                   <i class="icon icon-bubbles"></i>
                 </div>
               </td>
               <td>
-                <div id="section-{{ section.id }}" class="info">
+                <div class="info">
                   <a class="title" href="{{ section | section_path }}">{{ section.title }}</a>
                   <p class="description">{{ section.description }}</p>
 
@@ -48,7 +48,7 @@
                     <div id="section-{{ section.id }}-topics" class="section-topics">
                       {% for topic in section.topics %}
                         <a class="badge" href="{{ topic | topic_path: forum.id }}">
-                          {{ topic.title }}
+                          <span class="topic-title">{{ topic.title }}</span>
                         </a>
                       {% endfor %}
                     </div>

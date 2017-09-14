@@ -32,14 +32,14 @@
           </thead>
           <tbody>
           {% for forum in forums %}
-            <tr class="forum-item">
+            <tr class="forum-item" id="forum-{{ forum.id }}">
               <td>
                 <div class="icon-container">
                   <i class="icon icon-bubbles"></i>
                 </div>
               </td>
               <td>
-                <div id="forum-{{ forum.id }}" class="info">
+                <div class="info">
                   <a class="title" href="{{ forum | forum_path }}">{{ forum.title }}</a>
                   {% if forum.product_slug %}
                     <div class="product">
