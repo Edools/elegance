@@ -1,0 +1,115 @@
+{% for topic in topics %}
+  <div id="topic-item-{{ topic.id }}" class="topic-item panel panel-default">
+    <div class="post-body panel-body">
+      <div class="row">
+        <div class="col col-sm-4">
+          <div class="post-user">
+            <div class="avatar">
+              {% assign avatar_alt = topic.user | fullname %}
+              {% image, src: topic.user.cover_image_url, alt: avatar_alt %}
+            </div>
+            <span class="author-name"><span>{{ topic.user | fullname }}</span></span>
+            <span class="date">{{ topic.created_at | time_ago_in_words }}</span>
+          </div>
+        </div>
+        <div class="col col-sm-8">
+          <div class="post-content">
+            <div class="title">{{ topic.title }}</div>
+
+            <div class="description">
+              {{ topic.description }}
+            </div>
+
+            <div class="actions">
+              {% if topic.user_id == current_user.id %}
+                <button id="topic-item-{{ topic.id }}-open-modal"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#edit-topic-item-{{ topic.id }}"
+                        class="btn btn-default btn-sm edit-btn"
+                        name="button">
+                  <i class="icon-pencil"></i>
+                </button>
+              {% endif %}
+
+              {% if topic.posts_count > 0 %}
+                <span>
+                  <i class="icon icon-bubbles"></i>
+                  {{ topic.posts_count }}
+                </span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if topic.posts_count > 0 %}
+    <div class="posts">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a class="js-collapse-toggle-text" role="button"
+                href="#posts-list-panel-{{ topic.id }}"
+                data-open-text="{{ 'forums.topics.close_posts' | t }}"
+                data-close-text="{{ 'forums.topics.open_posts' | t }}">
+
+                {{ 'forums.topics.open_posts' | t }}
+              </a>
+            </h4>
+          </div>
+
+          <div id="posts-list-panel-{{ topic.id }}" class="panel-collapse collapse" role="tabpanel">
+            <div class="panel-body">
+              {% paginate topic.posts by 1 %}
+                <div id="js-topic-{{ topic.id }}-posts-list">
+                  {% include 'school/forum/feed/posts-list', posts: topic.posts,
+                    section_id: section_id, forum_id: forum_id %}
+                </div>
+
+                {% if paginate.next.is_link %}
+                  <a id="js-topic-{{ topic.id }}-posts-more" href="{{ topic | posts_path: forum_id, paginate.params }}" data-remote="true">
+                    {{ 'general.load_more' | t }}
+                  </a>
+                {% endif %}
+              {% endpaginate %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="edit-topic-item-{{ topic.id }}">
+    <div class="modal-dialog" role="document">
+      <form accept-charset="UTF-8" method="put" action="{{ topic | topic_path: forum_id }}" data-remote="true">
+        <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="topic[title]">{{ 'forums.new_topic_name' | t }}</label>
+              <input type="text" class="form-control" name="topic[title]" id="topic-title-{{ topic.id }}" value="{{ topic.title }}" required/>
+            </div>
+
+            <div class="form-group">
+              <label for="topic[description]">{{ 'forums.new_topic_description' | t }}</label>
+              <textarea rows="3"
+                        class="form-control js-ckeditor"
+                        id="topic-description-{{ topic.id }}"
+                        name="topic[description]"
+                        required>{{ topic.description }}</textarea>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>
+        </div>
+      </form>
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+{% endfor %}

@@ -1,11 +1,15 @@
-{% paginate product_sections by 10 %}
-  <div class="product-sections">
-    <p class="subtitle">Sections</p>
+{% paginate product_sections by 1 sort { order: :asc } %}
+  {% if product_sections.size > 0 %}
+    <div id="js-product-sections">
+      {% include 'product/sections-list', product_sections: product_sections %}
+    </div>
 
-    {% for section in product_sections %}
-      <div class="section">
-        <p class="title">{{ section.title }}</p>
+    {% if paginate.next.is_link %}
+      <div class="text-center pagination">
+          <a id="js-product-sections-more" href="{{ paginate.next.url }}" data-remote="true">
+            {{ 'general.load_more' | t }}
+          </a>
       </div>
-    {% endfor %}
-  </div>
+    {% endif %}
+  {% endif %}
 {% endpaginate %}

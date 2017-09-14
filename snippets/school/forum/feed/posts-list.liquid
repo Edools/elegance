@@ -1,0 +1,61 @@
+{% for post in posts %}
+  <div id="post-item-{{ post.id }}" class="post row">
+    <div class="col-md-4">
+      <div class="post-user">
+        <div class="avatar">
+          {% assign avatar_alt = post.user | fullname %}
+          {% image, src: post.user.cover_image_url, alt: avatar_alt %}
+        </div>
+
+        <div class="author-name">{{ post.user | fullname }}</div>
+
+        <div class="date">{{ post.created_at | time_ago_in_words }}</div>
+      </div>
+    </div>
+
+    <div class="col-md-8 jumbotron">
+      <div class="description">
+        {{ post.body }}
+      </div>
+
+      <div class="actions">
+        {% if post.user_id == current_user.id %}
+          <button id="post-item-{{ post.id }}-open-modal"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#edit-post-item-{{ post.id }}"
+                  class="btn btn-default btn-sm edit-btn"
+                  name="button">
+            <i class="icon-pencil"></i>
+          </button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="edit-post-item-{{ post.id }}">
+    <div class="modal-dialog" role="document">
+      <form accept-charset="UTF-8" method="put" action="{{ post | post_path: section_id, forum_id }}" data-remote="true">
+        <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="form-group">
+              <textarea rows="3"
+                        class="form-control"
+                        id="post-body-{{ post.id }}"
+                        name="post[body]"
+                        required>{{ post.body }}</textarea>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>
+        </div>
+      </form>
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+{% endfor %}

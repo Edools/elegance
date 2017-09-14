@@ -1,0 +1,20 @@
+{% for section in product_sections %}
+  <div class="section">
+    <p class="title">{{ section.title }}</p>
+
+    {% paginate section.topics by 2 sort { order: :asc, updated_at: :desc } %}
+      <div id="js-section-{{ section.id }}-topics-list" class="topics">
+        {% include 'school/forum/feed/topics-list', topics: section.topics,
+          section_id: section.id, forum_id: section.school_forum_id %}
+      </div>
+
+      {% if paginate.next.is_link %}
+        <div class="text-center pagination">
+            <a id="js-section-{{ section.id }}-topics-more" href="{{ section | topics_path: paginate.params }}" data-remote="true">
+              {{ 'general.load_more' | t }}
+            </a>
+        </div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+{% endfor %}
