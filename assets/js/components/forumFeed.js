@@ -22,6 +22,19 @@
     $(document).on("fix_forum_feed", function () {
       app.fixForumFeed();
     });
+
+    $(document).on("forum_feed_post_created", function (event, topicId) {
+      var $postsCounter     = $("#js-topic-item-" + topicId + " .js-posts-count");
+      var $postsCounterSize = $postsCounter.find('.size');
+      var counter           = parseInt($postsCounterSize.html());
+
+      $postsCounterSize.html(counter + 1);
+      $postsCounter.removeClass('hidden');
+      $("#js-topic-" + topicId + "-posts").removeClass('hidden');
+      $("#js-topic-" + topicId + "-posts-list-panel").collapse('show');
+
+      app.fixForumFeed();
+    });
   };
 
   app.fixForumFeed = function () {

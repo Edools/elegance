@@ -269,6 +269,7 @@
       "empty": "Ainda não há tópicos aqui.",
       "open_posts": "Ver respostas",
       "close_posts": "Ocultar respostas",
+      "new_post": "Comentar",
       "posts_count": {
         "zero": "Não há nenhum post",
         "one": "1 post",
@@ -280,6 +281,9 @@
       "new": "Novo Post",
       "send": "Enviar",
       "edit": "Editar Post",
+      "feed: {
+        "new": "Escreva sua resposta aqui..."
+      },
       "errors": {
         "empty": "O post deve ter algum conteúdo"
       }

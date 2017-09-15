@@ -1,4 +1,4 @@
-<div id="topic-item-{{ object.id }}" data-id="{{ object.id }}" class="topic-item panel panel-default js-topic">
+<div id="js-topic-item-{{ object.id }}" data-id="{{ object.id }}" class="topic-item panel panel-default js-topic">
   <div class="post-body panel-body">
     <div class="row">
       <div class="col col-sm-4">
@@ -31,11 +31,16 @@
               </button>
             {% endif %}
 
-            {% if object.posts_count > 0 %}
-              <span>
-                <i class="icon icon-bubbles"></i>
-                {{ object.posts_count }}
-              </span>
+
+            <span class="js-posts-count {% if object.posts_count == 0 %}hidden{% endif %}">
+              <i class="icon icon-bubbles"></i>
+              <span class="size">{{ object.posts_count }}</span>
+            </span>
+
+            {% if current_user %}
+              <span><a href="#js-topic-{{ object.id }}-new-post" data-toggle="collapse">
+                {{ 'forums.topics.new_post' | t }}
+              </a></span>
             {% endif %}
           </div>
         </div>
@@ -44,42 +49,59 @@
   </div>
 </div>
 
-{% if object.posts_count > 0 %}
-  <div class="posts">
-    <div class="panel-group">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">
-            <a class="js-collapse-toggle-text" role="button"
-              href="#posts-list-panel-{{ object.id }}"
-              data-open-text="{{ 'forums.topics.close_posts' | t }}"
-              data-close-text="{{ 'forums.topics.open_posts' | t }}">
+<div id="js-topic-{{ object.id }}-new-post" class="collapse">
+  <div  class="well">
+    <form accept-charset="UTF-8" method="post" action="{{ object | posts_path: forum_id }}" data-remote="true">
+      <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
 
-              {{ 'forums.topics.open_posts' | t }}
-            </a>
-          </h4>
-        </div>
+      <div class="form-group">
+        <textarea rows="3"
+                  class="form-control js-post-body"
+                  id="topic-{{ object.id }}-post-body"
+                  name="post[body]"
+                  placeholder="{{ 'forums.posts.feed.new'| t }}"
+                  required></textarea>
+      </div>
 
-        <div id="posts-list-panel-{{ object.id }}" class="panel-collapse collapse" role="tabpanel">
-          <div class="panel-body">
-            {% paginate object.posts by 1 %}
-              <div id="js-topic-{{ object.id }}-posts-list">
-                {% include 'school/forum/feed/posts-list', posts: object.posts,
-                  section_id: section_id, forum_id: forum_id %}
-              </div>
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+  </div>
+</div>
 
-              {% if paginate.next.is_link %}
-                <a id="js-topic-{{ object.id }}-posts-more" href="{{ object | posts_path: forum_id, paginate.params }}" data-remote="true">
-                  {{ 'general.load_more' | t }}
-                </a>
-              {% endif %}
-            {% endpaginate %}
-          </div>
+<div id="js-topic-{{ object.id }}-posts" class="posts {% if object.posts_count == 0 %} hidden {% endif %}">
+  <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a class="js-collapse-toggle-text" role="button"
+            href="#js-topic-{{ object.id }}-posts-list-panel"
+            data-open-text="{{ 'forums.topics.close_posts' | t }}"
+            data-close-text="{{ 'forums.topics.open_posts' | t }}">
+
+            {{ 'forums.topics.open_posts' | t }}
+          </a>
+        </h4>
+      </div>
+
+      <div id="js-topic-{{ object.id }}-posts-list-panel" class="panel-collapse collapse" role="tabpanel">
+        <div class="panel-body">
+          {% paginate object.posts by 1 %}
+            <div id="js-topic-{{ object.id }}-posts-list">
+              {% include 'school/forum/feed/posts-list', posts: object.posts,
+                section_id: section_id, forum_id: forum_id %}
+            </div>
+
+            {% if paginate.next.is_link %}
+              <a id="js-topic-{{ object.id }}-posts-more" href="{{ object | posts_path: forum_id, paginate.params }}" data-remote="true" data-reject-ids="[]">
+                {{ 'general.load_more' | t }}
+              </a>
+            {% endif %}
+          {% endpaginate %}
         </div>
       </div>
     </div>
   </div>
-{% endif %}
+</div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="edit-topic-item-{{ object.id }}">
   <div class="modal-dialog" role="document">

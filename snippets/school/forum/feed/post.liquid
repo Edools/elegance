@@ -1,0 +1,58 @@
+<div id="post-item-{{ object.id }}" class="post row">
+  <div class="col-md-4">
+    <div class="post-user">
+      <div class="avatar">
+        {% assign avatar_alt = object.user | fullname %}
+        {% image, src: object.user.cover_image_url, alt: avatar_alt %}
+      </div>
+
+      <div class="author-name">{{ object.user | fullname }}</div>
+
+      <div class="date">{{ object.created_at | time_ago_in_words }}</div>
+    </div>
+  </div>
+
+  <div class="col-md-8 well">
+    <div class="description">
+      {{ object.body }}
+    </div>
+
+    <div class="actions">
+      {% if object.user_id == current_user.id %}
+        <button id="post-item-{{ object.id }}-open-modal"
+                type="button"
+                data-toggle="modal"
+                data-target="#edit-post-item-{{ object.id }}"
+                class="btn btn-default btn-sm edit-btn"
+                name="button">
+          <i class="icon-pencil"></i>
+        </button>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-post-item-{{ object.id }}">
+  <div class="modal-dialog" role="document">
+    <form accept-charset="UTF-8" method="put" action="{{ object | post_path: section_id, forum_id }}" data-remote="true">
+      <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="form-group">
+            <textarea rows="3"
+                      class="form-control"
+                      id="post-body-{{ object.id }}"
+                      name="post[body]"
+                      required>{{ object.body }}</textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </div>
+    </form>
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
