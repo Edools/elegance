@@ -15,18 +15,11 @@
         } else {
           $accordionBody.collapse('show');
           $this.html(openText);
+          app.bindBlazy();
         }
     });
 
-    $(document).on("school/forum/sections/index", function () {
-      app.fixForumFeed();
-    });
-
-    $(document).on("school/forum/topics/index", function () {
-      app.fixForumFeed();
-    });
-
-    $(document).on("school/forum/posts/index", function () {
+    $(document).on("fix_forum_feed", function () {
       app.fixForumFeed();
     });
   };
@@ -34,6 +27,5 @@
   app.fixForumFeed = function () {
     app.bindGlobal();
     app.bindBlazy();
-    app.ckeditor.bindCkeditor();
   }
 })();

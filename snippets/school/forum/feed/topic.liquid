@@ -1,0 +1,113 @@
+<div id="topic-item-{{ object.id }}" data-id="{{ object.id }}" class="topic-item panel panel-default js-topic">
+  <div class="post-body panel-body">
+    <div class="row">
+      <div class="col col-sm-4">
+        <div class="post-user">
+          <div class="avatar">
+            {% assign avatar_alt = object.user | fullname %}
+            {% image, src: object.user.cover_image_url, alt: avatar_alt %}
+          </div>
+          <span class="author-name"><span>{{ object.user | fullname }}</span></span>
+          <span class="date">{{ object.created_at | time_ago_in_words }}</span>
+        </div>
+      </div>
+      <div class="col col-sm-8">
+        <div class="post-content">
+          <div class="title">{{ object.title }}</div>
+
+          <div class="description">
+            {{ object.description }}
+          </div>
+
+          <div class="actions">
+            {% if object.user_id == current_user.id %}
+              <button id="topic-item-{{ object.id }}-open-modal"
+                      type="button"
+                      data-toggle="modal"
+                      data-target="#edit-topic-item-{{ object.id }}"
+                      class="btn btn-default btn-sm edit-btn"
+                      name="button">
+                <i class="icon-pencil"></i>
+              </button>
+            {% endif %}
+
+            {% if object.posts_count > 0 %}
+              <span>
+                <i class="icon icon-bubbles"></i>
+                {{ object.posts_count }}
+              </span>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if object.posts_count > 0 %}
+  <div class="posts">
+    <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="js-collapse-toggle-text" role="button"
+              href="#posts-list-panel-{{ object.id }}"
+              data-open-text="{{ 'forums.topics.close_posts' | t }}"
+              data-close-text="{{ 'forums.topics.open_posts' | t }}">
+
+              {{ 'forums.topics.open_posts' | t }}
+            </a>
+          </h4>
+        </div>
+
+        <div id="posts-list-panel-{{ object.id }}" class="panel-collapse collapse" role="tabpanel">
+          <div class="panel-body">
+            {% paginate object.posts by 1 %}
+              <div id="js-topic-{{ object.id }}-posts-list">
+                {% include 'school/forum/feed/posts-list', posts: object.posts,
+                  section_id: section_id, forum_id: forum_id %}
+              </div>
+
+              {% if paginate.next.is_link %}
+                <a id="js-topic-{{ object.id }}-posts-more" href="{{ object | posts_path: forum_id, paginate.params }}" data-remote="true">
+                  {{ 'general.load_more' | t }}
+                </a>
+              {% endif %}
+            {% endpaginate %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-topic-item-{{ object.id }}">
+  <div class="modal-dialog" role="document">
+    <form accept-charset="UTF-8" method="put" action="{{ object | topic_path: forum_id }}" data-remote="true">
+      <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="topic[title]">{{ 'forums.new_topic_name' | t }}</label>
+            <input type="text" class="form-control" name="topic[title]" id="topic-title-{{ object.id }}" value="{{ object.title }}" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="topic[description]">{{ 'forums.new_topic_description' | t }}</label>
+            <textarea rows="3"
+                      class="form-control"
+                      id="topic-description-{{ object.id }}"
+                      name="topic[description]"
+                      required>{{ object.description }}</textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </div>
+    </form>
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
