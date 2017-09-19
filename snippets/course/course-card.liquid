@@ -1,6 +1,15 @@
 <div class="course-card">
   <div class="course-info">
     <div class="course-header">
+      
+      {% if path %} 
+        {% assign path_req_completed = path | requirements_path_completed: course, enrollment %}
+
+        {% unless path_req_completed %}
+          <a class="title" href="#" title="{{ title }}" data-toggle="{% if title.size > 70 %}tooltip{% endif %}">
+        {% endunless %}
+      {%endif%}
+
       <a class="title" href="{{ detail_path }}" title="{{ title }}" data-toggle="{% if title.size > 70 %}tooltip{% endif %}">
         <div class="course-image">
           {% if logo != null %}
@@ -25,7 +34,21 @@
       </div>
     {% endif %}
 
-    {% if available_time_message %}
+    {% if path_req_completed == false %}
+      <div class="course-avaliability">
+        <div class="status">
+          <span class="alert alert-danger"
+          title="<p>Necessário {{path.progress_requirements['min_progress']}}% de progresso no curso anterior</p>" 
+          data-toggle="tooltip"
+          data-html="true">
+          
+          Pré-requisito necessário para acesso
+          <i class="icon-info"></i>
+          </span>
+        </div>
+      </div>
+
+    {% elsif available_time_message %}
     <div class="course-avaliability">
       <div class="status">
         <span class="alert alert-success"
@@ -41,9 +64,16 @@
   </div>
 
   <div class="course-action">
+    {% if path_req_completed == false %}
+      <a class="btn btn-default disabled">
+        <i class="icon-camrecorder"></i>
+        <span>{{ detail_label }}</span>
+      </a>
+    {% else %}
       <a class="btn btn-default" href="{{ detail_path }}">
         <i class="icon-camrecorder"></i>
         <span>{{ detail_label }}</span>
       </a>
+    {% endif %}
   </div>
 </div>
