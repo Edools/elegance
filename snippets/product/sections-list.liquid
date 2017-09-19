@@ -1,5 +1,5 @@
 {% for section in product_sections %}
-  <div class="section">
+  <div id="section-{{ section.id }}" class="section">
     <p class="title">{{ section.title }}</p>
 
     {% if current_user %}

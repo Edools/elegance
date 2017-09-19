@@ -74,7 +74,7 @@
       <div class="panel-heading">
         <h4 class="panel-title">
           <a class="js-collapse-toggle-text" role="button"
-            href="#js-topic-{{ object.id }}-posts-list-panel"
+            href="#js-topic-{{ object.id }}-posts-list"
             data-open-text="{{ 'forums.topics.close_posts' | t }}"
             data-close-text="{{ 'forums.topics.open_posts' | t }}">
 
@@ -83,7 +83,7 @@
         </h4>
       </div>
 
-      <div id="js-topic-{{ object.id }}-posts-list-panel" class="panel-collapse collapse" role="tabpanel">
+      <div id="js-topic-{{ object.id }}-posts-list" class="panel-collapse collapse" role="tabpanel">
         <div class="panel-body">
           {% paginate object.posts by 1 %}
             <div id="js-topic-{{ object.id }}-posts-list">
