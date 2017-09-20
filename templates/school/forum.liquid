@@ -44,15 +44,17 @@
                   <a class="title" href="{{ section | section_path }}">{{ section.title }}</a>
                   <p class="description">{{ section.description }}</p>
 
-                  {% if section.topics.size > 0 %}
-                    <div id="section-{{ section.id }}-topics" class="section-topics">
-                      {% for topic in section.topics %}
-                        <a class="badge" href="{{ topic | topic_path: forum.id }}">
-                          <span class="topic-title">{{ topic.title }}</span>
-                        </a>
-                      {% endfor %}
-                    </div>
-                  {% endif %}
+                  {% paginate section.topics by 5 sort { order: :asc, updated_at: :desc } %}
+                    {% if section.topics.size > 0 %}
+                      <div id="section-{{ section.id }}-topics" class="section-topics">
+                        {% for topic in section.topics %}
+                          <a class="badge" href="{{ topic | topic_path: forum.id }}">
+                            <span class="topic-title">{{ topic.title }}</span>
+                          </a>
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                  {% endpaginate %}
                 </div>
               </td>
               <td>

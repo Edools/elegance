@@ -1,3 +1,9 @@
+{% if object_class == 'topic' %}
+  {% assign attr = 'description' %}
+{% else %}
+  {% assign attr = 'body' %}
+{% endif %}
+
 <div id="js-{{ object_class }}-item-{{ object.id }}" class="{{ object_class }}-item post-item panel panel-default">
   <div class="post-body panel-body">
     <div class="row">
@@ -13,38 +19,33 @@
       </div>
       <div class="col col-sm-10">
         <div class="post-content">
-          <div class="description">
+          <div class="{{ attr }} description">
             {{ object.description | default: object.body }}
-
-            {% if object.user_id == current_user.id %}
-              <button id="{{ object_class }}-item-{{ object.id }}-open-modal"
-                      type="button"
-                      data-toggle="modal"
-                      data-target="#edit-{{ object_class }}-item-{{ object.id }}"
-                      class="btn btn-default btn-sm edit-btn"
-                      name="button">
-                <i class="icon-pencil"></i>
-              </button>
-            {% endif %}
           </div>
+
+          {% if object.user_id == current_user.id %}
+            <button id="js-{{ object_class }}-{{ object.id }}-edit"
+                    type="button"
+                    data-toggle="modal"
+                    data-target="#edit-{{ object_class }}-{{ object.id }}-modal"
+                    class="btn btn-default btn-sm edit-btn"
+                    name="button">
+              <i class="icon-pencil"></i>
+            </button>
+          {% endif %}
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="edit-{{ object_class }}-item-{{ object.id }}">
+<div class="modal fade" tabindex="-1" role="dialog" id="edit-{{ object_class }}-{{ object.id }}-modal">
   <div class="modal-dialog" role="document">
     <form accept-charset="UTF-8" method="put" action="{{ edit_path }}" data-remote="true">
       <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
 
       <div class="modal-content">
         <div class="modal-body">
-          {% if object_class == 'topic' %}
-            {% assign attr = 'description' %}
-          {% else %}
-            {% assign attr = 'body' %}
-          {% endif %}
           <textarea name="{{ object_class }}[{{ attr }}]" type="text"
                     id="{{ object_class }}-{{ attr }}-{{ object.id }}"
                     class="js-ckeditor form-control"
