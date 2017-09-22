@@ -111,12 +111,6 @@
       <div class="modal-content">
         <div class="modal-body">
           <div class="form-group">
-            <label for="topic[title]">{{ 'forums.new_topic_name' | t }}</label>
-            <input type="text" class="form-control" name="topic[title]" id="topic-title-{{ object.id }}" value="{{ object.title }}" required/>
-          </div>
-
-          <div class="form-group">
-            <label for="topic[description]">{{ 'forums.new_topic_description' | t }}</label>
             <textarea rows="3"
                       class="form-control"
                       id="topic-description-{{ object.id }}"
