@@ -41,9 +41,9 @@
               <td>
                 <div class="info">
                   <a class="title" href="{{ forum | forum_path }}">{{ forum.title }}</a>
-                  {% if forum.product_slug %}
+                  {% if forum.product.slug %}
                     <div class="product">
-                      <span class="badge">{{ forum.product_title }}</span>
+                      <span class="badge">{{ forum.product.title }}</span>
                     </div>
                   {% endif %}
                   <p class="description">{{ forum.description }}</p>
