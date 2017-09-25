@@ -1,8 +1,8 @@
 <div class="course-card">
   <div class="course-info">
     <div class="course-header">
-      
-      {% if path %} 
+
+      {% if path %}
         {% assign path_req_completed = path | requirements_path_completed: course, enrollment %}
 
         {% unless path_req_completed %}
@@ -38,12 +38,12 @@
       <div class="course-avaliability">
         <div class="status">
           <span class="alert alert-danger"
-          title="<p>Necessário {{path.progress_requirements['min_progress']}}% de progresso no curso anterior</p>" 
+          title="<p>{{ 'product.path.courses.course_requeriments' | t: path: path }}</p>"
           data-toggle="tooltip"
           data-html="true">
-          
-          Pré-requisito necessário para acesso
-          <i class="icon-info"></i>
+
+          <span>{{ 'product.path.courses.bloqued' | t }}</span>
+          <i class="icon-lock"></i>
           </span>
         </div>
       </div>
