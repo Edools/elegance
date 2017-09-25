@@ -68,24 +68,24 @@
   </div>
 </div>
 
-<div id="js-topic-{{ object.id }}-posts" class="posts {% if object.posts_count == 0 %} hidden {% endif %}">
-  <div class="panel-group">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a class="js-collapse-toggle-text" role="button"
-            href="#js-topic-{{ object.id }}-posts-list-panel"
-            data-open-text="{{ 'forums.topics.close_posts' | t }}"
-            data-close-text="{{ 'forums.topics.open_posts' | t }}">
+{% paginate object.posts by 1 %}
+  <div id="js-topic-{{ object.id }}-posts" class="posts {% if object.posts.size == 0 %} hidden {% endif %}">
+    <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="js-collapse-toggle-text" role="button"
+              href="#js-topic-{{ object.id }}-posts-list-panel"
+              data-open-text="{{ 'forums.topics.close_posts' | t }}"
+              data-close-text="{{ 'forums.topics.open_posts' | t }}">
 
-            {{ 'forums.topics.open_posts' | t }}
-          </a>
-        </h4>
-      </div>
+              {{ 'forums.topics.open_posts' | t }}
+            </a>
+          </h4>
+        </div>
 
-      <div id="js-topic-{{ object.id }}-posts-list-panel" class="panel-collapse collapse" role="tabpanel">
-        <div class="panel-body">
-          {% paginate object.posts by 1 %}
+        <div id="js-topic-{{ object.id }}-posts-list-panel" class="panel-collapse collapse" role="tabpanel">
+          <div class="panel-body">
             <div id="js-topic-{{ object.id }}-posts-list">
               {% include 'school/forum/feed/posts-list', posts: object.posts,
                 section_id: section_id, forum_id: forum_id %}
@@ -96,12 +96,12 @@
                 {{ 'general.load_more' | t }}
               </a>
             {% endif %}
-          {% endpaginate %}
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+{% endpaginate %}
 
 <div class="modal fade" tabindex="-1" role="dialog" id="edit-topic-{{ object.id }}-modal">
   <div class="modal-dialog" role="document">
