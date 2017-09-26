@@ -1,14 +1,13 @@
 <div class="course-card">
   <div class="course-info">
     <div class="course-header">
-
       {% if path %}
-        {% assign path_req_completed = path | requirements_path_completed: course, enrollment %}
+        {% assign released_course = course | check_requirements: approved_courses, lower_course_order %}
 
-        {% unless path_req_completed %}
+        {% unless released_course %}
           <a class="title" href="#" title="{{ title }}" data-toggle="{% if title.size > 70 %}tooltip{% endif %}">
         {% endunless %}
-      {%endif%}
+      {% endif %}
 
       <a class="title" href="{{ detail_path }}" title="{{ title }}" data-toggle="{% if title.size > 70 %}tooltip{% endif %}">
         <div class="course-image">
@@ -34,7 +33,7 @@
       </div>
     {% endif %}
 
-    {% if path_req_completed == false %}
+    {% if released_course == false %}
       <div class="course-avaliability">
         <div class="status">
           <span class="alert alert-danger"
@@ -64,7 +63,7 @@
   </div>
 
   <div class="course-action">
-    {% if path_req_completed == false %}
+    {% if released_course == false %}
       <a class="btn btn-default disabled">
         <i class="icon-camrecorder"></i>
         <span>{{ detail_label }}</span>
