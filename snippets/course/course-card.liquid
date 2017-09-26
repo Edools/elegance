@@ -1,6 +1,14 @@
 <div class="course-card">
   <div class="course-info">
     <div class="course-header">
+      {% if path %}
+        {% assign released_course = course | check_requirements: path, approved_courses, lower_course_order %}
+
+        {% unless released_course %}
+          <a class="title" href="#" title="{{ title }}" data-toggle="{% if title.size > 70 %}tooltip{% endif %}">
+        {% endunless %}
+      {% endif %}
+
       <a class="title" href="{{ detail_path }}" title="{{ title }}" data-toggle="{% if title.size > 70 %}tooltip{% endif %}">
         <div class="course-image">
           {% if logo != null %}
@@ -25,7 +33,21 @@
       </div>
     {% endif %}
 
-    {% if available_time_message %}
+    {% if released_course == false %}
+      <div class="course-avaliability">
+        <div class="status">
+          <span class="alert alert-danger"
+          title="<p>{{ 'product.path.courses.course_requeriments' | t: path: path }}</p>"
+          data-toggle="tooltip"
+          data-html="true">
+
+          <span>{{ 'product.path.courses.bloqued' | t }}</span>
+          <i class="icon-lock"></i>
+          </span>
+        </div>
+      </div>
+
+    {% elsif available_time_message %}
     <div class="course-avaliability">
       <div class="status">
         <span class="alert alert-success"
@@ -41,9 +63,16 @@
   </div>
 
   <div class="course-action">
+    {% if released_course == false %}
+      <a class="btn btn-default disabled">
+        <i class="icon-camrecorder"></i>
+        <span>{{ detail_label }}</span>
+      </a>
+    {% else %}
       <a class="btn btn-default" href="{{ detail_path }}">
         <i class="icon-camrecorder"></i>
         <span>{{ detail_label }}</span>
       </a>
+    {% endif %}
   </div>
 </div>
