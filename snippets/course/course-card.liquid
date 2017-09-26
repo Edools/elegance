@@ -2,7 +2,7 @@
   <div class="course-info">
     <div class="course-header">
       {% if path %}
-        {% assign released_course = course | check_requirements: approved_courses, lower_course_order %}
+        {% assign released_course = course | check_requirements: path, approved_courses, lower_course_order %}
 
         {% unless released_course %}
           <a class="title" href="#" title="{{ title }}" data-toggle="{% if title.size > 70 %}tooltip{% endif %}">
