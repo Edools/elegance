@@ -1,11 +1,11 @@
 <div class="forums-page page">
   <div class="forum-panel">
-    <div class="container whitebg course-dashboard-content">
+    <div class="container course-dashboard-content">
       <h2>{{ 'forums.forums' | t }}</h2>
       <div class="forums-body">
         <form accept-charset="UTF-8" method="get" action="/forums" data-turbolinks-scroll="false">
           <div class="input-group input-group-lg">
-            <span class="input-group-addon no-background"><i class="icon-magnifier"></i></span>
+            <span class="input-group-addon"><i class="icon-magnifier"></i></span>
             <input type="text" name="title" class="form-control" placeholder="{{ 'forums.filter_by_title' | t }}"
                    value="{{ current_search.title }}">
               <span class="input-group-btn">

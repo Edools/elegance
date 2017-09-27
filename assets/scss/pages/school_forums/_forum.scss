@@ -1,0 +1,23 @@
+.school-forum-page {
+  .forums-table {
+    .forum-item {
+      .topics-count {
+        @include breakpoint(sm) {
+          display: block;
+        }
+
+        display: none;
+        padding: 28px 0;
+        text-align: center;
+      }
+
+      .section-topics {
+        margin-top: 10px;
+
+        .badge {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

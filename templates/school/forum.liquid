@@ -1,0 +1,75 @@
+<div class="school-forum-page page">
+  <div class="container">
+    <h2 class="page-title">{{ forum.title }}</h2>
+    <p class="page-subtitle">{{ forum.description }}</p>
+
+    <div class="forum-sections">
+      {% paginate sections by 10 sort { order: :asc } %}
+      {% if sections.total_count == 0 and current_search.size == 0 %}
+        <div class="alert alert-info text-center">
+          {{ 'forums.sections.empty' | t }}
+        </div>
+      {% else %}
+        <table class="table table-responsive forums-table">
+          <thead>
+          <th class="first-header"></th>
+          <th class="main-header">
+            <span class="caption">{{ 'forums.section_title' | t }}</span>
+            <form class="search-form" accept-charset="UTF-8" method="get" action="/school/forums/{{ forum.id }}"
+                  data-turbolinks-scroll="false">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="icon-magnifier"></i></span>
+                <input type="text" class="form-control" name="title" placeholder="{{ 'forums.filter_by_title' | t }}"
+                       value="{{ current_search.title }}">
+                <span class="input-group-btn">
+                  <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+                </span>
+              </div>
+            </form>
+          </th>
+          <th class="right-header">
+            <div class="caption">{{ 'forums.topics_title' | t }}</div>
+          </th>
+          </thead>
+          <tbody>
+          {% for section in sections %}
+            <tr class="forum-item" id="section-{{ section.id }}">
+              <td>
+                <div class="icon-container">
+                  <i class="icon icon-bubbles"></i>
+                </div>
+              </td>
+              <td>
+                <div class="info">
+                  <a class="title" href="{{ section | section_path }}">{{ section.title }}</a>
+                  <p class="description">{{ section.description }}</p>
+
+                  {% paginate section.topics by 5 sort { order: :asc, updated_at: :desc } %}
+                    {% if section.topics.size > 0 %}
+                      <div id="section-{{ section.id }}-topics" class="section-topics">
+                        {% for topic in section.topics %}
+                          <a class="badge" href="{{ topic | topic_path: forum.id }}">
+                            <span class="topic-title">{{ topic.title }}</span>
+                          </a>
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                  {% endpaginate %}
+                </div>
+              </td>
+              <td>
+                <div class="topics-count">
+                  {{ section.topics_count }}
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+
+        {% include 'pagination-links' %}
+      {% endif %}
+      {% endpaginate %}
+    </div>
+  </div>
+</div>

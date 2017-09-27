@@ -1,0 +1,4 @@
+{% for post in posts %}
+  {% include 'school/forum/feed/post', object: post, section_id: section_id,
+    forum_id: forum_id %}
+{% endfor %}
