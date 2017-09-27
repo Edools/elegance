@@ -55,6 +55,7 @@
       app.bindFixOnScroll();
       app.ckeditor.bindCkeditor();
       app.bindCheckout();
+      app.bindForumFeed();
       app.lessonList.init();
       app.chat.init();
       app.studentDoubts.init();
