@@ -119,12 +119,14 @@
                 </span>
               </p>
 
-              <p>
-                <b>{{ 'pages.orders.recurring.period_end' | t }}:</b>
-                <span>
-                  {{ order.subscription.next_invoice_at | default: order.subscription.expire_at | date: "%d/%m/%Y" }}
-                </span>
-              </p>
+              {% if order.gateway_name != 'hotmart' %}
+                <p>
+                  <b>{{ 'pages.orders.recurring.period_end' | t }}:</b>
+                  <span>
+                    {{ order.subscription.next_invoice_at | default: order.subscription.expire_at | date: "%d/%m/%Y" }}
+                  </span>
+                </p>
+              {% endif %}
 
               <p>
                 <b>{{ 'pages.orders.recurring.payment_option' | t }}:</b>
@@ -168,16 +170,18 @@
                     {% assign credit_card_class = 'use-credit-card' %}
                   {% endif %}
 
-                  <a href="orders/{{ order.id }}/edit?title={{ credit_card_label | t }}"
-                     class="btn btn-primary btn-block {{ credit_card_class }}" data-toggle="modal">
-                    {{ credit_card_label | t }}
-                  </a>
-
-                  {% if order.gateway_name == 'pagarme' and order.merchant_payment_method == 'credit_card' and gateway.subscription_payment_methods contains 'boleto' %}
-                    <a href="orders/{{ order.id }}?order%5Bpayment_method%5D=boleto" data-method='put'
-                      class="btn btn-primary btn-block pay-with-boleto">
-                      {{ 'pages.orders.recurring.pay_with_boleto' | t }}
+                  {% if order.gateway_name != 'hotmart' %}
+                    <a href="orders/{{ order.id }}/edit?title={{ credit_card_label | t }}"
+                       class="btn btn-primary btn-block {{ credit_card_class }}" data-toggle="modal">
+                      {{ credit_card_label | t }}
                     </a>
+
+                    {% if order.gateway_name == 'pagarme' and order.merchant_payment_method == 'credit_card' and gateway.subscription_payment_methods contains 'boleto' %}
+                      <a href="orders/{{ order.id }}?order%5Bpayment_method%5D=boleto" data-method='put'
+                        class="btn btn-primary btn-block pay-with-boleto">
+                        {{ 'pages.orders.recurring.pay_with_boleto' | t }}
+                      </a>
+                    {% endif %}
                   {% endif %}
 
                   {% if order.subscription.status != 'canceled' and  order.subscription.status != 'ended' %}

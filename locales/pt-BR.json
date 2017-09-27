@@ -450,7 +450,9 @@
         "zero": "Não há nenhum curso neste pacote",
         "one": "1 curso neste pacote",
         "other": "{{ count }} cursos neste pacote",
-        "search_name_course": "Buscar pelo nome do curso..."
+        "search_name_course": "Buscar pelo nome do curso...",
+        "blocked": "Curso bloqueado",
+        "course_requeriments": "Complete {{path.progress_requirements['min_progress']}}% do curso anterior para desbloquear"
       },
       "courses_filtered": {
         "zero": "Não há nenhum curso neste pacote contendo o termo <i>{{ name }}</i>",
@@ -569,6 +571,7 @@
       }
     },
     "success": {
+      "user_set_password_email": "Você irá receber um email para definição da sua senha de acesso.",
       "order_created_successfully": "Seu pedido foi realizado com sucesso!",
       "transaction_made_by": "Sua transação está sendo realizada pelo {{ gateway }}.",
       "subscription_created_successfully": "Sua assinatura foi criada com o código {{ code }}.",

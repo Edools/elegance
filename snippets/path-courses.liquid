@@ -25,7 +25,7 @@
   <div class="courses-list">
     <div class="row">
       {% for course in courses %}
-        <div class="col-sm-6 col-md-4 active-enrollments">
+        <div id="course-{{ course.id }}" class="col-sm-6 col-md-4 active-enrollments">
           {% assign progress = enrollment | course_progress_card: course %}
 
           {% assign available_time_message = enrollment | available_time_message %}
