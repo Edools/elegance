@@ -411,7 +411,7 @@
         "one": "1 curso neste pacote",
         "other": "{{ count }} cursos neste pacote",
         "search_name_course": "Buscar pelo nome do curso...",
-        "bloqued": "Curso bloqueado",
+        "blocked": "Curso bloqueado",
         "course_requeriments": "Complete {{path.progress_requirements['min_progress']}}% do curso anterior para desbloquear"
       },
       "courses_filtered": {
