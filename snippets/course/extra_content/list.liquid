@@ -31,11 +31,13 @@
 
             <div class="right">
               {% if content_released %}
-                {% if content.downloadable and current_user.type == 'Student' %}
-                  <a class="download-link" href="{{ content | extra_content_download_path: course, enrollment }}"
-                     data-no-turbolink>
-                    <i class="icon-cloud-download"></i>
-                  </a>
+                {% if allow_extra_content_download or content.downloadable %}
+                  {% if content.media.download_type? and current_user.type == 'Student' %}
+                    <a class="download-link" href="{{ content | extra_content_download_path: course, enrollment }}"
+                       data-no-turbolink>
+                      <i class="icon-cloud-download"></i>
+                    </a>
+                  {% endif %}
                 {% endif %}
               {% else %}
                 <span class="release-date badge">
