@@ -56,6 +56,7 @@
       app.ckeditor.bindCkeditor();
       app.bindCheckout();
       app.bindForumFeed();
+      app.bindCourseRating();
       app.lessonList.init();
       app.chat.init();
       app.studentDoubts.init();

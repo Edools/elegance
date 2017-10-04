@@ -1,0 +1,18 @@
+{% if enrollment.progress >= min_progress %}
+  <form id="rate-course-form" accept-charset="UTF-8" method="post" action="{{ course | rate_course_path: enrollment }}" data-remote="true">
+    <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+
+    <input id="js-points" type="number" name="rating[points]" value="0">
+    <textarea name="rating[note]" type="text"
+              id="rating-note"
+              class="form-control"
+              rows="4"
+              placeholder="Deixe um comentário se quiser" ></textarea>
+
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-primary" data-disable-with="{{ 'general.sending' | t }}...">Enviar</button>
+  </form>
+{% else %}
+  {{ 'courses.rating.blocked' | t: min_progress: min_progress}}
+  <button type="button" class="btn btn-default" data-dismiss="modal">ok</button>
+{% endif %}
