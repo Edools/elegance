@@ -1,7 +1,6 @@
-{% assign rating_enable = current_school | has_feature: 'course_rating' %}
-{% if rating_enable %}
+{% if rating_enable and course %}
   <div id="rating-container">
-    {% if product.rating_config.points == 'true' %}
+    {% if product.rating_config.points == 'true' and course.rating %}
       <div id="general-rating">
         {{ 'courses.rating.total_points' | t }}
         {{ course.rating }}
