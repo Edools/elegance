@@ -39,6 +39,14 @@
                 {% include 'progress-bar', total: progress.total, success: progress.completed, warning:
                 progress.in_progress %}
               </div>
+
+              <div class="rating-container">
+                {% assign rating_enable = current_school | has_feature: 'course_rating' %}
+                {% if rating_enable %}
+                  {% include 'course/rating', course: course, enrollment: enrollment %}
+                {% endif %}
+              </div>
+
               <div class="other-lessons">
                 {% include 'product/content-course', course: course, lesson_actions: true,
                 enrollment: enrollment, current_lesson_id: lesson.id, download_action: true %}
