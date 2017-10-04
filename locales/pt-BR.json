@@ -668,7 +668,8 @@
     "rating": {
       "new": "Avaliar curso",
       "blocked": "Você poderá avaliar este curso quando completar {{ min_progress }}% de progresso",
-      "created": "Avaliação criada com sucesso!"
+      "created": "Avaliação criada com sucesso!",
+      "updated": "Avaliação atualizada com sucesso!"
     }
   },
   "categories": {
