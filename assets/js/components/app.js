@@ -46,6 +46,7 @@
 
     init: function () {
       app.bindGlobal();
+      app.bindRecaptcha();
       app.bindBlazy();
       app.bindOpenOnLoad();
       app.bindMasks();

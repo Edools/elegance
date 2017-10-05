@@ -157,6 +157,9 @@
       "kind_invalid": "Não foi possível adicionar o item no carrinho. Este item não pode ser processado junto com os que se encontram no carrinho, termine a compra e tente novamente.",
       "invalid_user_coupon": "Você não tem permissão para utilizar este cupom",
       "limit_trial_purchases": "Não foi possível adicionar o item no carrinho. Você só pode adicionar um produto com trial por compra."
+    },
+    "recaptcha": {
+      "invalid": "Por favor clique em \"Não sou um robô\""
     }
   },
   "navbar": {
