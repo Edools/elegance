@@ -1,0 +1,7 @@
+{% for rating in public_ratings %}
+  <div id="rating-{{ rating.id }}" class="panel">
+    <p>{{ rating.student.first_name }}</p>
+    <p>{{ rating.points }}</p>
+    <p>{{ rating.note }}</p>
+  </div>
+{% endfor %}

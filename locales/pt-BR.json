@@ -48,6 +48,10 @@
     "disabled": "Desabilitado"
   },
   "errors": {
+    "points": {
+      "blank": "Pontuação não pode ficar em branco",
+      "inclusion": "Pontuação deve estar entre zero e cinco"
+    },
     "course": {
       "requirements": {
         "uncompleted": "Você não pode acessar esta aula porque ainda não completou seu pré-requisito"
@@ -660,7 +664,14 @@
     "products": "Produtos"
   },
   "courses": {
-    "courses": "Cursos"
+    "courses": "Cursos",
+    "rating": {
+      "new": "Avaliar curso",
+      "blocked": "Você poderá avaliar este curso quando completar {{ min_progress }}% de progresso",
+      "created": "Avaliação criada com sucesso!",
+      "updated": "Avaliação atualizada com sucesso!",
+      "total_points": "Avaliação geral"
+    }
   },
   "categories": {
     "categories": "Categorias"
