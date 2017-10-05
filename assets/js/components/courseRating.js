@@ -7,7 +7,7 @@
     });
 
     $(document).on("course-rating-created", function (event, courseId) {
-      $('#js-rating-course-'+courseId+'-modal').modal('hide');
+      $('#js-rating-course-' + courseId + '-modal').modal('hide');
     });
   };
 })();
