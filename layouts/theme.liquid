@@ -56,6 +56,11 @@
 
   <script src="{{ 'theme.base.vendors.min.js' | asset_url }}"></script>
   <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
+
+  {% if current_school | has_feature: 'recaptcha' %}
+    <script src='https://www.google.com/recaptcha/api.js?onload=onLoadRecaptcha&render=explicit'></script>
+  {% endif %}
+
   <script async src="{{ 'theme.js' | asset_url }}"></script>
   <script async src="{{ 'theme.base.min.js' | asset_url }}"></script>
   <script async src="{{ 'theme.js' | asset_url }}"></script>

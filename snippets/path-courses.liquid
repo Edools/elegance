@@ -7,7 +7,7 @@
     <form accept-charset="UTF-8"
           method="get" action="/enrollments/{{ enrollment.id }}/paths/{{ path.id }}"
           data-turbolinks-scroll="false">
-      <div class="input-group input-group-lg">
+      <div class="input-group">
       <span class="input-group-addon">
         <i class="icon-magnifier"></i>
       </span>
@@ -25,7 +25,7 @@
   <div class="courses-list">
     <div class="row">
       {% for course in courses %}
-        <div class="col-sm-6 col-md-4 active-enrollments">
+        <div id="course-{{ course.id }}" class="col-sm-6 col-md-4 active-enrollments">
           {% assign progress = enrollment | course_progress_card: course %}
 
           {% assign available_time_message = enrollment | available_time_message %}

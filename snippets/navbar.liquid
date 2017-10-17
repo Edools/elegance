@@ -39,7 +39,8 @@
 
         {% if current_user %}
           <li>
-            <a href="/forums">
+            {% assign new_forum = current_school | has_feature: 'new_forum' %}
+            <a href="{% if new_forum %}/school/forums{% else %}/forums{% endif %}">
               <i class="icon-bubble"></i>
               <span>{{ 'navbar.forum' | t }}</span>
             </a>

@@ -1,0 +1,73 @@
+<div class="school-forums-page page">
+  <div class="container">
+    <h2 class="page-title">{{ 'forums.forums' | t }}</h2>
+
+    <div class="forums">
+      {% paginate forums by 10 sort { order: :asc } %}
+      {% if forums.total_count == 0 and current_search.size == 0 %}
+        <div class="alert alert-info text-center">
+          {{ 'forums.empty' | t }}
+        </div>
+      {% else %}
+        <table class="table table-responsive forums-table">
+          <thead>
+          <th class="first-header"></th>
+          <th class="main-header">
+            <span class="caption">{{ 'forums.forum_title' | t }}</span>
+            <form class="search-form" accept-charset="UTF-8" method="get" action="/school/forums"
+                  data-turbolinks-scroll="false">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="icon-magnifier"></i></span>
+                <input type="text" name="title" class="form-control" placeholder="{{ 'forums.filter_by_title' | t }}"
+                       value="{{ current_search.title }}">
+                <span class="input-group-btn">
+                <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+              </span>
+              </div>
+            </form>
+          </th>
+          <th class="right-header">
+            <div class="caption">{{ 'forums.sections.title' | t }}</div>
+          </th>
+          </thead>
+          <tbody>
+          {% for forum in forums %}
+            <tr class="forum-item" id="forum-{{ forum.id }}">
+              <td>
+                <div class="icon-container">
+                  <i class="icon icon-bubbles"></i>
+                </div>
+              </td>
+              <td>
+                <div class="info">
+                  <a class="title" href="{{ forum | forum_path }}">{{ forum.title }}</a>
+                  {% if forum.product.slug %}
+                    <div class="product">
+                      <span class="badge">{{ forum.product.title }}</span>
+                    </div>
+                  {% endif %}
+                  <p class="description">{{ forum.description }}</p>
+                </div>
+              </td>
+              <td>
+                <div class="sections-count">
+                  {% if forum.public_sections_count > 0 and current_user.type == 'Student' %}
+                    {{ forum.public_sections_count }}
+                    {% elsif forum.sections_count > 0 %}
+                    {{ forum.sections_count }}
+                  {% else %}
+                    0
+                  {% endif %}
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      {% endif %}
+
+      {% include 'pagination-links' %}
+      {% endpaginate %}
+    </div>
+  </div>
+</div>

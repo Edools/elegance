@@ -1,0 +1,115 @@
+.school-forum-topics-page {
+  .page-actions {
+    @include breakpoint(md) {
+      margin: 0;
+      padding: 50px 0;
+    }
+
+    margin-bottom: 25px;
+    text-align: right;
+  }
+
+  .topic-posts-list {
+    .post-item {
+      position: relative;
+
+      .row,
+      .col {
+        position: static;
+      }
+
+      .post-user {
+        position: relative;
+        padding: 15px 0;
+        text-align: center;
+
+        &:after {
+          @include breakpoint(sm) {
+            display: block;
+          }
+
+          position: absolute;
+          top: 50%;
+          right: -10px;
+          display: none;
+          margin-top: -35px;
+          width: 1px;
+          height: 70px;
+          background-color: $border-color-base;
+          content: '';
+        }
+
+        .avatar {
+          display: inline-block;
+          float: none;
+          margin: 0 0 5px;
+        }
+
+        .author-name,
+        .date {
+          display: block;
+          font-size: $font-size-small;
+          line-height: 1;
+        }
+
+        .author-name {
+          @include ellipsis();
+
+          margin-bottom: 5px;
+          font-size: $font-size-base;
+        }
+
+        .date {
+          color: $text-muted;
+          cursor: default;
+
+          .timeago {
+            border: none;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .post-content {
+        .description {
+          padding: 15px;
+        }
+
+        .edit-btn {
+          position: absolute;
+          right: -1px;
+          bottom: -1px;
+          display: inline-block;
+          width: 38px;
+          height: 38px;
+          border-color: $panel-default-border;
+          border-top-right-radius: 0;
+          border-bottom-left-radius: 0;
+          line-height: 1;
+
+          &:hover {
+            border-color: darken($panel-default-border, 5%);
+          }
+
+          i {
+            line-height: 1;
+          }
+        }
+      }
+    }
+  }
+
+  .pagination {
+    margin: 0;
+  }
+
+  .post-create-form {
+    @include clearfix();
+
+    padding: 25px 0;
+
+    .send-btn {
+      margin-top: 15px;
+    }
+  }
+}

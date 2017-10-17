@@ -1,0 +1,16 @@
+<a id="js-rate-course-{{ course.id }}" class="last-lesson-link btn btn-default"
+   href="{{ course | new_rate_course_path: enrollment }}"
+   data-remote="true"
+   data-disable-with="{{ 'general.sending' | t }}...">
+  <span>{{ 'courses.rating.new' | t }}</span>
+  <i class="icon-star"></i>
+</a>
+
+<div id="js-rating-course-{{ course.id }}-modal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div id="js-rating-course-{{ course.id }}" class="modal-body">
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

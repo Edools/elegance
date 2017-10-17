@@ -48,6 +48,10 @@
     "disabled": "Desabilitado"
   },
   "errors": {
+    "points": {
+      "blank": "Pontuação não pode ficar em branco",
+      "inclusion": "Pontuação deve estar entre zero e cinco"
+    },
     "course": {
       "requirements": {
         "uncompleted": "Você não pode acessar esta aula porque ainda não completou seu pré-requisito"
@@ -153,6 +157,9 @@
       "kind_invalid": "Não foi possível adicionar o item no carrinho. Este item não pode ser processado junto com os que se encontram no carrinho, termine a compra e tente novamente.",
       "invalid_user_coupon": "Você não tem permissão para utilizar este cupom",
       "limit_trial_purchases": "Não foi possível adicionar o item no carrinho. Você só pode adicionar um produto com trial por compra."
+    },
+    "recaptcha": {
+      "invalid": "Por favor clique em \"Não sou um robô\""
     }
   },
   "navbar": {
@@ -222,8 +229,15 @@
   },
   "forums": {
     "forum": "Fórum: {{ title }}",
-    "forums": "Fóruns",
+    "forum_title": "Fórum",
+    "section_title": "Seção",
+    "topic_title": "Tópico",
+    "topics_title": "Tópicos",
+    "posts_title": "Posts",
+    "forums": "<b>Fóruns</b> da Escola",
     "new_topic": "Novo Tópico",
+    "new_topic_name": "Nome",
+    "new_topic_description": "Descrição",
     "new_section": "Nova Seção",
     "filter_by_title": "Buscar por nome...",
     "empty": "Ainda não há fóruns aqui.",
@@ -247,6 +261,39 @@
       "zero": "Não há nenhuma resposta",
       "one": "1 resposta",
       "other": "{{ count }} respostas"
+    },
+    "sections": {
+      "title": "Seções",
+      "empty": "Ainda não há seções aqui.",
+      "topics_count": {
+        "zero": "Não há nenhum tópico",
+        "one": "1 tópico",
+        "other": "{{ count }} tópicos"
+      }
+    },
+    "topics": {
+      "created": "Tópico criado com sucesso",
+      "empty": "Ainda não há tópicos aqui.",
+      "open_posts": "Ver respostas",
+      "close_posts": "Ocultar respostas",
+      "new_post": "Comentar",
+      "posts_count": {
+        "zero": "Não há nenhum post",
+        "one": "1 post",
+        "other": "{{ count }} posts"
+      }
+    },
+    "posts": {
+      "empty": "Ainda não há posts aqui.",
+      "new": "Novo Post",
+      "send": "Enviar",
+      "edit": "Editar Post",
+      "feed": {
+        "new": "Escreva sua resposta aqui..."
+      },
+      "errors": {
+        "empty": "O post deve ter algum conteúdo"
+      }
     }
   },
   "messages": {
@@ -410,7 +457,9 @@
         "zero": "Não há nenhum curso neste pacote",
         "one": "1 curso neste pacote",
         "other": "{{ count }} cursos neste pacote",
-        "search_name_course": "Buscar pelo nome do curso..."
+        "search_name_course": "Buscar pelo nome do curso...",
+        "blocked": "Curso bloqueado",
+        "course_requeriments": "Complete {{path.progress_requirements['min_progress']}}% do curso anterior para desbloquear"
       },
       "courses_filtered": {
         "zero": "Não há nenhum curso neste pacote contendo o termo <i>{{ name }}</i>",
@@ -618,7 +667,14 @@
     "products": "Produtos"
   },
   "courses": {
-    "courses": "Cursos"
+    "courses": "Cursos",
+    "rating": {
+      "new": "Avaliar curso",
+      "blocked": "Você poderá avaliar este curso quando completar {{ min_progress }}% de progresso",
+      "created": "Avaliação criada com sucesso!",
+      "updated": "Avaliação atualizada com sucesso!",
+      "total_points": "Avaliação geral"
+    }
   },
   "categories": {
     "categories": "Categorias"
