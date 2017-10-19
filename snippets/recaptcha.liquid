@@ -1,4 +1,5 @@
-{% if current_school | has_feature: 'recaptcha' %}
+{% assign has_recaptcha_feature = current_school | has_feature: 'recaptcha' %}
+{% if has_recaptcha_feature %}
   {% assign id = 10 | random %}
 
   {% if redirect_url %}
