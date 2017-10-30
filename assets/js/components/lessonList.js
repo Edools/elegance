@@ -487,12 +487,13 @@
                   html += '<span class="release-date badge">' + self.translations['lesson.' + releaseType] + '<span> ' + moment.tz(releaseDate, zone).format('DD/MM/YYYY') + '</span>' + '</span>';
                 }
 
-                if (self.downloadAction && content.downloadable) {
+                var isDownloadableMedia = content.lesson.media && ['Document', 'Audio', 'Download'].indexOf(content.lesson.media.type) > -1;
+
+                if ((self.downloadAction || content.downloadable) && isDownloadableMedia)
                   html += '<a class="download-link" href="' + self.getContentDownloadPath(content) + '" data-no-turbolink>' +
                     '<i class="icon-cloud-download"></i>' +
                     '</a>';
                 }
-              }
 
               html += '</div>' +
                 '</div>' +
