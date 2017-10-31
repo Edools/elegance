@@ -6,9 +6,11 @@
   };
 
   app.bindRecaptcha = function () {
-    if (typeof grecaptcha === 'undefined') return;
+    var $recaptcha = $('.js-recaptcha');
+    
+    if (!$recaptcha.length || typeof grecaptcha === 'undefined') return;
 
-    $('.js-recaptcha').each(function (i, el) {
+    $recaptcha.each(function (i, el) {
       const $el = $(el);
       const sitekey = $el.data('sitekey');
       const elId = $el.attr('id');
