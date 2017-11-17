@@ -7,7 +7,7 @@
 
   app.bindRecaptcha = function () {
     var $recaptcha = $('.js-recaptcha');
-    
+
     if (!$recaptcha.length || typeof grecaptcha === 'undefined') return;
 
     $recaptcha.each(function (i, el) {
