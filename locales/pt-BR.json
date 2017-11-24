@@ -190,7 +190,9 @@
     "blocked": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida e sua conta bloqueada."
   },
   "registrations": {
-    "signed_up": "Bem-vindo! Você se registrou com sucesso."
+    "signed_up": "Bem-vindo! Você se registrou com sucesso.",
+    "unconfirmed": "Antes de continuar, confirme a sua conta.",
+    "signed_up_but_unconfirmed": "Uma mensagem com um link de confirmação foi enviada para o seu endereço de e-mail. Por favor, abra o link para confirmar a sua conta."
   },
   "login": {
     "enter_your_account": "Entre com a sua conta",
