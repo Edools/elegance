@@ -192,7 +192,9 @@
   "registrations": {
     "signed_up": "Bem-vindo! Você se registrou com sucesso.",
     "unconfirmed": "Antes de continuar, confirme a sua conta.",
-    "signed_up_but_unconfirmed": "Uma mensagem com um link de confirmação foi enviada para o seu endereço de e-mail. Por favor, abra o link para confirmar a sua conta."
+    "signed_up_but_unconfirmed": "Uma mensagem com um link de confirmação foi enviada para o seu endereço de e-mail. Por favor, abra o link para confirmar a sua conta.",
+    "confirmed": "Sua conta foi confirmada com sucesso.",
+    "send_instructions_to_confirm": "Dentro de minutos, você receberá um e-mail com instruções para a confirmação da sua conta."
   },
   "login": {
     "enter_your_account": "Entre com a sua conta",
