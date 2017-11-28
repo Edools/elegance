@@ -1,0 +1,63 @@
+.rating-form {
+  #rate-course-form {
+    $stars: 5;
+    $star-size: 40px;
+    $star-spacing: 2px;
+    $star-on-color: #f9df4a;
+    $star-off-color: #ccc;
+
+    .rating {
+      margin: 10px auto 20px auto ;
+      padding: 0 0 40px 0;
+      width: 202px;
+      height: $star-size;
+
+      label {
+        position: relative;
+        float: right;
+        width: $star-size;
+        height: $star-size;
+        cursor: pointer;
+
+        &:not(:first-of-type) {
+          padding-right: $star-spacing;
+        }
+
+        &:before {
+          color: $star-off-color;
+          content: '\2605';
+          font-size: $star-size + 2px;
+          line-height: 1;
+        }
+      }
+
+      input {
+        display: none;
+      }
+
+      input:checked ~ label:before,
+      &:not(:checked) > label:hover:before,
+      &:not(:checked) > label:hover ~ label:before {
+        color: $star-on-color;
+      }
+    }
+
+    textarea {
+      margin-bottom: 20px;
+    }
+
+    .actions {
+      text-align: right;
+    }
+  }
+
+  .actions,
+  p {
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  p {
+    margin: 20px 0 30px 0;
+  }
+}
