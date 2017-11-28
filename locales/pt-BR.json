@@ -190,7 +190,11 @@
     "blocked": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida e sua conta bloqueada."
   },
   "registrations": {
-    "signed_up": "Bem-vindo! Você se registrou com sucesso."
+    "signed_up": "Bem-vindo! Você se registrou com sucesso.",
+    "unconfirmed": "Antes de continuar, confirme a sua conta.",
+    "signed_up_but_unconfirmed": "Uma mensagem com um link de confirmação foi enviada para o seu endereço de e-mail. Por favor, abra o link para confirmar a sua conta.",
+    "confirmed": "Sua conta foi confirmada com sucesso.",
+    "send_instructions_to_confirm": "Dentro de minutos, você receberá um e-mail com instruções para a confirmação da sua conta."
   },
   "login": {
     "enter_your_account": "Entre com a sua conta",
@@ -924,6 +928,14 @@
       "your_password_will_not_change": "Sua senha não irá mudar até você acessar o link acima e criar uma nova.",
       "if_you_did_not_requested": "Se você não requisitou a troca de senha, ignore este email.",
       "instructions": "Instruções para troca de senha."
+    },
+    "confirmation_instructions": {
+      "subject": "Instruções para confirmação de email",
+      "hello": "Olá, {{first_name}}. Para confirmar seu email clique no botão abaixo.",
+      "confirm": "Confrimar meu email",
+      "your_password_will_not_change": "Sua senha não irá mudar até você acessar o link acima e criar uma nova.",
+      "if_you_did_not_requested": "Se você não se cadastrou nesse site, ignore este email.",
+      "instructions": "Instruções para confirmação de email"
     },
     "payment": {
       "price": "Preço",
