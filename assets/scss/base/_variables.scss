@@ -8,7 +8,7 @@ $bootstrap-sass-asset-helper: true !default;
 //## Gray and brand colors for use across Bootstrap.
 
 //** Background color for `<body>`.
-$body-bg: #f4f2f0 !default;
+$body-bg: #f9f9f9 !default;
 
 $gray-base: #050505 !default;
 $gray-darker: lighten($gray-base, 13.5%) !default; // #222
@@ -849,3 +849,9 @@ $hr-border: $gray-lighter !default;
 $loader-size: 64px;
 $loader-color: $gray-dark;
 $loader-bg: rgba(255, 255, 255, .5);
+
+// Chat
+$chat-sidebar-bg: darken($brand-primary, 5%);
+$chat-sidebar-width: 240px;
+$chat-sidebar-width-sm: 80px;
+$chat-message-bg: #e9f1f4;

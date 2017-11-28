@@ -22,9 +22,11 @@
     },
 
     bindTooltips: function () {
-      $("[data-toggle='tooltip']")
-      .tooltip("destroy")
-      .tooltip();
+      $("body")
+        .tooltip("destroy")
+        .tooltip({
+          selector: '[data-toggle="tooltip"]'
+        });
 
       $(document).trigger('app:bind:tooltips');
     },
@@ -43,9 +45,8 @@
     },
 
     init: function () {
-      app.pagarme.init();
-
       app.bindGlobal();
+      app.bindRecaptcha();
       app.bindBlazy();
       app.bindOpenOnLoad();
       app.bindMasks();
@@ -55,7 +56,10 @@
       app.bindFixOnScroll();
       app.ckeditor.bindCkeditor();
       app.bindCheckout();
+      app.bindForumFeed();
+      app.bindCourseRating();
       app.lessonList.init();
+      app.chat.init();
       app.studentDoubts.init();
       app.notepad.init();
       app.categoryList.init();
@@ -63,6 +67,7 @@
       app.changeTimeZone();
       app.followBind();
       app.lessonPage();
+      app.timeTags();
       app.bindPostsForm();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);

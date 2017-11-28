@@ -42,6 +42,7 @@
             <div class="landing-modules">
               {% include 'product/content-course', lesson_actions: false %}
               {% include 'product/content-path' %}
+              {% include 'product/sections', product_sections: sections %}
             </div>
           </div>
 
@@ -52,6 +53,7 @@
           </div>
         </div>
         <div class="col-md-4">
+          {% include 'product/ratings' %}
           {% include 'product/teachers' %}
           {% include 'product/product-topics' %}
         </div>

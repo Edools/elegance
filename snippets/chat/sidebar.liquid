@@ -1,0 +1,36 @@
+<div class="chat-sidebar">
+  <div class="js-sidebar-scroll scroll scrollbar-inner">
+    <div class="sidebar-blocks">
+      <div class="sidebar-block groups-block">
+        <div class="separator">{{ 'chat.groups' | t }}</div>
+        <div class="js-groups"></div>
+        <div class="text-center">
+          <button
+            class="js-load-more-groups btn-load-more btn btn-outline-default btn-sm">{{ 'general.load_more' | t }}</button>
+        </div>
+      </div>
+
+      <div class="sidebar-block team-block">
+        <div class="separator">{{ 'chat.teams' | t }}</div>
+        <div class="js-team"></div>
+        <div class="text-center">
+          <button
+            class="js-load-more-collaborators btn-load-more btn btn-outline-default btn-sm">{{ 'general.load_more' | t }}</button>
+        </div>
+      </div>
+
+      <div class="sidebar-block students-block">
+        <div class="separator">
+          <span>{{ 'chat.students' | t }}</span>
+          <button class="btn btn-outline-default btn-sm">{{ 'chat.follow_student' | t }}</button>
+        </div>
+        <div class="js-students"></div>
+        <div class="text-center">
+          <button class="js-load-more-students btn-load-more btn btn-outline-default btn-sm">
+            <span class="caption">{{ 'general.load_more' | t }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

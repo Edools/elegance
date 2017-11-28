@@ -1,0 +1,173 @@
+.chat-messages {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: $chat-sidebar-width;
+
+  .messages {
+    @include box-shadow(inset 0 -10px 10px -12px rgba(0, 0, 0, .12));
+
+    padding: $padding-large-vertical * 2 $padding-large-horizontal * 2;
+    padding-bottom: 0;
+    height: 85%;
+
+    .header {
+      padding-bottom: $padding-large-vertical * 2;
+      min-height: 64px;
+      height: 10%;
+      border-bottom: 1px solid darken($border-color-base, 3%);
+
+      .title {
+        margin: 0;
+        color: darken($text-color, 10%);
+        font-size: 18px;
+      }
+
+      .users-count {
+        color: $text-muted;
+        font-size: 12px;
+        line-height: 1;
+      }
+    }
+
+    .scroll-container {
+      position: relative;
+      max-height: calc(100% - 64px);
+      height: 90%;
+    }
+
+    > .content {
+      > .schedule {
+        padding: $padding-large-vertical 0;
+        width: 100%;
+        color: $text-muted;
+        text-align: center;
+        font-size: 14px;
+      }
+    }
+
+    .scroll {
+      min-height: 100%;
+      height: 100%;
+    }
+
+    .scroll-wrapper {
+      overflow: visible !important;
+    }
+
+    .scroll-element {
+      @include transition(opacity .2s ease);
+
+      right: -20px;
+
+      &.scroll-draggable {
+        .scroll-bar {
+          opacity: .4;
+        }
+      }
+
+      &:not(.scroll-draggable) {
+        opacity: 0;
+      }
+
+      .scroll-element_track {
+        background-color: darken($body-bg, 3%);
+      }
+
+      .scroll-bar {
+        background-color: $gray-dark;
+        opacity: .1;
+
+        &:hover {
+          opacity: .4;
+        }
+      }
+    }
+
+    &:hover {
+      .scroll-element {
+        opacity: 1;
+      }
+    }
+  }
+
+  .editor {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 15%;
+    border-top: 1px solid $border-color-base;
+    border-bottom-right-radius: $border-radius-base;
+    background-color: $light;
+
+    .input {
+      display: block;
+      overflow-y: auto;
+      padding: $padding-large-vertical * 2.2 $padding-large-horizontal;
+      padding-right: 100px;
+      max-height: 100%;
+      width: 100%;
+      height: 100%;
+      font-size: 14px;
+      resize: none;
+
+      &,
+      &:focus,
+      &:hover {
+        outline: none;
+        border: none;
+        background-color: transparent;
+      }
+    }
+
+    .btn-send {
+      @include button-variant($chat-sidebar-bg, transparent, $chat-sidebar-bg, true, $light);
+
+      position: absolute;
+      top: 50%;
+      right: 25px;
+      margin-top: -16.5px;
+      min-width: 80px;
+    }
+
+    .btn-group {
+      $border-color: rgba(0, 0, 0, .14);
+      @include box-shadow(0 3px 6px -2px rgba(0, 0, 0, .1));
+      @include transition(opacity .2s ease);
+
+      position: absolute;
+      top: -32px;
+      left: 15px;
+      visibility: hidden;
+      opacity: 0;
+
+      .btn {
+        border-top-color: $border-color;
+        border-bottom-color: $border-color;
+
+        &:first-child {
+          border-left-color: $border-color;
+        }
+
+        &:last-child {
+          border-right-color: $border-color;
+        }
+      }
+    }
+
+    &.focused {
+      .btn-group {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.chat-sm {
+  .chat-messages {
+    left: $chat-sidebar-width-sm;
+  }
+}

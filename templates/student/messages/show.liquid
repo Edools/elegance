@@ -1,6 +1,6 @@
 <div class="show-message-page page">
   <div class="container page-container">
-    <div class="control-back">
+    <div class="page-header">
       {% capture inbox_link_html %}
       <i class="icon-arrow-left"></i>
       <span>{{ 'general.back' | t }}</span>
@@ -12,7 +12,7 @@
     <div class="channel">
       <div class="channel-header">
         <div class="channel-info">
-          <h2 class="title">{{ channel.subject }}</h2>
+          <h2 class="page-title">{{ channel.subject }}</h2>
           {% include 'channel-team' %}
         </div>
 

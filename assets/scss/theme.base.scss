@@ -54,6 +54,7 @@
 @import 'components/crocodoc-viewer';
 @import 'components/readmore';
 @import 'components/blazy';
+@import 'components/scrollbar';
 
 // Utility classes
 @import 'components/utilities';
@@ -88,3 +89,5 @@
 @import 'pages/payments';
 @import 'pages/categories';
 @import 'pages/retry_payment_page';
+@import 'pages/chat';
+@import 'pages/school_forums';

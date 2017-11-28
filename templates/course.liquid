@@ -44,6 +44,11 @@
                 <i class="icon-arrow-right"></i>
               </a>
             {% endif %}
+
+            {% assign rating_enable = current_school | has_feature: 'course_rating' %}
+            {% if rating_enable %}
+              {% include 'course/rating', course: course, enrollment: enrollment %}
+            {% endif %}
           </div>
         </div>
         <div class="col-md-6">

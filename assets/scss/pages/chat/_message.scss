@@ -1,0 +1,63 @@
+.chat-message {
+  @include clearfix;
+
+  overflow: hidden;
+  margin: $padding-large-vertical 0 $padding-large-vertical * 3 0;
+  max-width: 100%;
+  width: 100%;
+
+
+  &.has-avatar {
+    > .content {
+      max-width: calc(100% - 50px);
+
+      .message-box {
+        border: 1px solid darken($body-bg, 5%);
+        background-color: $light;
+      }
+    }
+  }
+
+  > .picture {
+    display: inline-block;
+    float: left;
+    width: 50px;
+
+    .avatar {
+      @include box-shadow(none);
+
+      float: none;
+      margin: 0 $padding-large-horizontal $padding-large-vertical * 4 0;
+      width: 38px;
+      height: 38px;
+    }
+  }
+
+  > .content {
+    display: inline-block;
+    float: left;
+    width: auto;
+
+    .name {
+      margin-bottom: 5px;
+      color: darken($text-color, 10%);
+      font-size: 14px;
+    }
+
+    .message-box {
+      position: relative;
+      padding: 10px $padding-large-horizontal;
+      border: 1px solid darken($chat-message-bg, 5%);
+      border-radius: $border-radius-base;
+      background-color: $light;
+      font-size: 14px;
+
+      .schedule {
+        position: relative;
+        color: $text-muted;
+        font-size: 11px;
+        line-height: 1;
+      }
+    }
+  }
+}

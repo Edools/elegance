@@ -1,0 +1,10 @@
+.timetags {
+  padding: $padding-large-vertical * 2 0;
+
+  .list-group-item {
+    i {
+      display: inline-block;
+      width: 30px;
+    }
+  }
+}

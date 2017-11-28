@@ -1,0 +1,93 @@
+.chat-profile-list-item {
+  line-height: 1;
+
+  .avatar {
+    @include box-shadow(none);
+
+    display: inline-block;
+    margin: 0;
+    width: 38px;
+    height: 38px;
+    border: none;
+  }
+
+  .info {
+    display: inline-block;
+    margin-top: 2px;
+    margin-left: $padding-large-horizontal;
+    max-width: 100px;
+    line-height: 1;
+
+    .name {
+      @include ellipsis();
+
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .location {
+      @include ellipsis();
+
+      color: lighten($chat-sidebar-bg, 45%);
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+  }
+
+  .status {
+    float: right;
+    padding-top: 4px;
+    min-width: 36px;
+    text-align: center;
+    line-height: 1;
+
+    .icon {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 100%;
+      line-height: 1;
+
+      &.icon-online {
+        background-color: #bce035;
+      }
+
+      &.icon-away {
+        background-color: $light;
+      }
+
+      &.icon-offline {
+        background-color: darken($chat-sidebar-bg, 10%);
+      }
+    }
+
+    .description {
+      font-size: 11px;
+      line-height: 1;
+    }
+  }
+}
+
+.chat-sm {
+  .chat-profile-list-item {
+    position: relative;
+    text-align: center;
+    cursor: default;
+
+    .avatar {
+      display: inline-block;
+      float: none;
+    }
+
+    .info,
+    .status {
+      display: none;
+    }
+
+    &:hover,
+    &.active {
+      background-color: transparent;
+    }
+  }
+}

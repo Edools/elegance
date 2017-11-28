@@ -48,6 +48,10 @@
     "disabled": "Desabilitado"
   },
   "errors": {
+    "points": {
+      "blank": "Pontuação não pode ficar em branco",
+      "inclusion": "Pontuação deve estar entre zero e cinco"
+    },
     "course": {
       "requirements": {
         "uncompleted": "Você não pode acessar esta aula porque ainda não completou seu pré-requisito"
@@ -55,12 +59,16 @@
     },
     "gateway_transaction": {
       "invalid_email": "O endereço de e-mail enviado não é válido para este Gateway",
-      "unavailable_gateway": "O Gateway de pagamento esta indisponível no momento"
+      "unavailable_gateway": "O Gateway de pagamento esta indisponível no momento",
+      "invalid_credit_card": "O cartão de crédito informado não é válido",
+      "unauthorized": "As credenciais do gateway não são válidas",
+      "invalid_plan_code": "Não há planos cadastrados com o código informado"
     },
     "checkout": {
       "no_order": "Pedido não encontrado.",
       "no_payment": "Pagamento não encontrado.",
-      "unprocessable": "Ocorreu um erro no processamento do pedido."
+      "unprocessable": "Ocorreu um erro no processamento do pedido.",
+      "exceeded_orders_limit": "Você atingiu o limite de novas compras!"
     },
     "credit_card": {
       "number_invalid": "Número do cartão inválido",
@@ -88,8 +96,8 @@
     "rg": {
       "blank": "RG não pode ficar em branco"
     },
-    "address" : {
-      "address_presences" : "Todos os campos relacionados a endereço exceto complemento são obrigatórios."
+    "address": {
+      "address_presences": "Todos os campos relacionados a endereço exceto complemento são obrigatórios."
     },
     "address_street": {
       "blank": "Logradouro não pode ficar em branco"
@@ -148,8 +156,12 @@
       "can_not_apply_coupon": "Não foi possível aplicar o cupom. Certifique-se de que digitou os caracteres corretamente. Caso o erro persista, entre em contato com nossa equipe para averiguar se o cupom ainda é válido.",
       "limit_subscriptions": "Não foi possível adicionar o item no carrinho. Você só pode assinar um item por compra.",
       "kind_invalid": "Não foi possível adicionar o item no carrinho. Este item não pode ser processado junto com os que se encontram no carrinho, termine a compra e tente novamente.",
-      "invalid_user_coupon" : "Você não tem permissão para utilizar este cupom",
-      "limit_trial_purchases": "Não foi possível adicionar o item no carrinho. Você só pode adicionar um produto com trial por compra."
+      "invalid_user_coupon": "Você não tem permissão para utilizar este cupom",
+      "limit_trial_purchases": "Não foi possível adicionar o item no carrinho. Você só pode adicionar um produto com trial por compra.",
+      "exceeded_orders_limit": "Você atingiu o limite de novas compras!"
+    },
+    "recaptcha": {
+      "invalid": "Por favor clique em \"Não sou um robô\""
     }
   },
   "navbar": {
@@ -178,7 +190,11 @@
     "blocked": "Foi identificada uma segunda sessão ativa com o seu usuário e a sessão atual foi interrompida e sua conta bloqueada."
   },
   "registrations": {
-    "signed_up": "Bem-vindo! Você se registrou com sucesso."
+    "signed_up": "Bem-vindo! Você se registrou com sucesso.",
+    "unconfirmed": "Antes de continuar, confirme a sua conta.",
+    "signed_up_but_unconfirmed": "Uma mensagem com um link de confirmação foi enviada para o seu endereço de e-mail. Por favor, abra o link para confirmar a sua conta.",
+    "confirmed": "Sua conta foi confirmada com sucesso.",
+    "send_instructions_to_confirm": "Dentro de minutos, você receberá um e-mail com instruções para a confirmação da sua conta."
   },
   "login": {
     "enter_your_account": "Entre com a sua conta",
@@ -219,8 +235,15 @@
   },
   "forums": {
     "forum": "Fórum: {{ title }}",
-    "forums": "Fóruns",
+    "forum_title": "Fórum",
+    "section_title": "Seção",
+    "topic_title": "Tópico",
+    "topics_title": "Tópicos",
+    "posts_title": "Posts",
+    "forums": "<b>Fóruns</b> da Escola",
     "new_topic": "Novo Tópico",
+    "new_topic_name": "Nome",
+    "new_topic_description": "Descrição",
     "new_section": "Nova Seção",
     "filter_by_title": "Buscar por nome...",
     "empty": "Ainda não há fóruns aqui.",
@@ -244,6 +267,39 @@
       "zero": "Não há nenhuma resposta",
       "one": "1 resposta",
       "other": "{{ count }} respostas"
+    },
+    "sections": {
+      "title": "Seções",
+      "empty": "Ainda não há seções aqui.",
+      "topics_count": {
+        "zero": "Não há nenhum tópico",
+        "one": "1 tópico",
+        "other": "{{ count }} tópicos"
+      }
+    },
+    "topics": {
+      "created": "Tópico criado com sucesso",
+      "empty": "Ainda não há tópicos aqui.",
+      "open_posts": "Ver respostas",
+      "close_posts": "Ocultar respostas",
+      "new_post": "Comentar",
+      "posts_count": {
+        "zero": "Não há nenhum post",
+        "one": "1 post",
+        "other": "{{ count }} posts"
+      }
+    },
+    "posts": {
+      "empty": "Ainda não há posts aqui.",
+      "new": "Novo Post",
+      "send": "Enviar",
+      "edit": "Editar Post",
+      "feed": {
+        "new": "Escreva sua resposta aqui..."
+      },
+      "errors": {
+        "empty": "O post deve ter algum conteúdo"
+      }
     }
   },
   "messages": {
@@ -350,6 +406,12 @@
     "unfollow": "Deixar de seguir",
     "message": "Mensagem"
   },
+  "certificates": {
+    "title": "Busca de Certificados",
+    "subtitle": "Para verificar a autenticidade de um certificado, busque pelo identificador único do mesmo.",
+    "filter_by_token": "Buscar certificado...",
+    "not_found": "Não existe certificado com este ID!"
+  },
   "enrollment": {
     "my_courses": "<span class='lighter'>Meus</span>&nbsp;<strong>Cursos</strong>",
     "no_certificate": "Você ainda não tem certificados",
@@ -401,7 +463,9 @@
         "zero": "Não há nenhum curso neste pacote",
         "one": "1 curso neste pacote",
         "other": "{{ count }} cursos neste pacote",
-        "search_name_course": "Buscar pelo nome do curso..."
+        "search_name_course": "Buscar pelo nome do curso...",
+        "blocked": "Curso bloqueado",
+        "course_requeriments": "Complete {{path.progress_requirements['min_progress']}}% do curso anterior para desbloquear"
       },
       "courses_filtered": {
         "zero": "Não há nenhum curso neste pacote contendo o termo <i>{{ name }}</i>",
@@ -520,7 +584,9 @@
       }
     },
     "success": {
+      "user_set_password_email": "Você irá receber um email para definição da sua senha de acesso.",
       "order_created_successfully": "Seu pedido foi realizado com sucesso!",
+      "transaction_made_by": "Sua transação está sendo realizada pelo {{ gateway }}.",
       "subscription_created_successfully": "Sua assinatura foi criada com o código {{ code }}.",
       "subscription_info": {
         "monthly": "Essa assinatura custa {{ price }} por mês.",
@@ -528,11 +594,9 @@
         "semesterly": "Essa assinatura custa {{ price }} por semestre.",
         "yearly": "Essa assinatura custa {{ price }} por ano."
       },
-      "transaction_made_by": "Sua transação será realizada pelo {{ gateway }} no fim do período de Trial.",
-      "transaction_status_is": "Enquanto isso, o status da sua transação é <b>{{ status }}</b>. O seu identificador é <b id=\"payment-uuid\">{{ uuid }}</b>.",
+      "transaction_status_is": "O status da sua transação é <b>{{ status }}</b>. O seu identificador é <b id=\"payment-uuid\">{{ gateway_reference }}</b>.",
       "transaction_questions": "Caso tenha alguma dúvida referente ao pagamento, entre em contato com o {{ gateway }}.",
       "trial_purchase_warning": "Sua matrícula foi liberada com sucesso e seu período de Trial encerra em {{ trial_limit }}.",
-      "order_processing_warning": "Após a confirmação do pagamento, sua matrícula será liberada.",
       "boleto_warning": "Caso o seu boleto não tenha sido aberto, desative o bloqueio de pop-ups no seu navegador e clique",
       "boleto_warning_click_here": "aqui",
       "go_to_enrollments": "Ir para Meus Cursos"
@@ -552,7 +616,20 @@
       "reversed": "Estornado",
       "refunded": "Reembolsado",
       "processing": "Processando",
-      "no_wait_processing": "Trial"
+      "no_wait_processing": "Trial",
+      "pending_payment": "Esperando pagamento"
+    }
+  },
+  "subscription": {
+    "status": {
+      "initiated": "Iniciada",
+      "trial": "Trial",
+      "pending_payment": "Esperando pagamento",
+      "unpaid": "Pagamento não efetuado",
+      "active": "Ativada",
+      "canceled": "Cancelada",
+      "overdue": "Atrasada",
+      "ended": "Encerrada"
     }
   },
   "path": {
@@ -578,7 +655,8 @@
       "statistics": "Estatísticas",
       "missing_activities": "Atividades faltantes",
       "scoring_average": "Média de pontuação"
-    }
+    },
+    "load_more": "Carregar mais cursos"
   },
   "home": {
     "social": {
@@ -593,6 +671,16 @@
   },
   "products": {
     "products": "Produtos"
+  },
+  "courses": {
+    "courses": "Cursos",
+    "rating": {
+      "new": "Avaliar curso",
+      "blocked": "Você poderá avaliar este curso quando completar {{ min_progress }}% de progresso",
+      "created": "Avaliação criada com sucesso!",
+      "updated": "Avaliação atualizada com sucesso!",
+      "total_points": "Avaliação geral"
+    }
   },
   "categories": {
     "categories": "Categorias"
@@ -684,12 +772,14 @@
       "custom_template": "<h1> Este é um template customizado</h1>",
       "show_order_itens": "<span>ver itens do pedido</span>",
       "cancel_signature": "Cancelar assinatura",
+      "subscription_status": "Assinatura",
       "trial": {
         "cancel": "Cancelar trial",
         "canceled": "Trial canceledo com sucesso!",
         "failed": "Ocorreu um erro no cancelamento do trial."
       },
       "recurring": {
+        "payment_status": "Status do Pagamento",
         "subscriptions": "Assinaturas",
         "subscription": "Assinatura",
         "product": "Produto",
@@ -750,6 +840,26 @@
   "mailer": {
     "hello": "Olá, {{first_name}}.",
     "if_link_does_not_work": "Caso o link acima não funcione, copie e cole este endereço no seu navegador: {{url}}",
+    "new_student": {
+      "subject": "Novo aluno cadastrado",
+      "first_paragraph": "O aluno {{ first_name }} se cadastrou na escola. Seu email de acesso é {{ student_mail }}"
+    },
+    "new_item_quantity_coupons": {
+      "subject": "Novos cupons gerados",
+      "first_paragraph": "Foram criadas {{ coupon_quantity }} unidades do cupom {{ coupon_name }} para o produto {{ product_title }}."
+    },
+    "student_pending_approved": {
+      "subject": "Seu cadastro está pendente para aprovação",
+      "first_paragraph": "Seu cadastro foi realizado com sucesso, nossa equipe vai realizar uma análise para aprovar ou não sua conta."
+    },
+    "student_approved": {
+      "subject": "Seu cadastro foi aprovado",
+      "first_paragraph": "Nossa equipe realizou uma análise e o seu cadastro foi aprovado em nossa escola."
+    },
+    "student_not_approved": {
+      "subject": "Seu cadastro foi reprovado",
+      "first_paragraph": "Nossa equipe realizou uma análise e o seu cadastro não foi aprovado em nossa escola."
+    },
     "trial_purchase": {
       "start_trial": {
         "subject": "O seu período de trial do produto {{product_name}} iniciou!",
@@ -819,6 +929,14 @@
       "if_you_did_not_requested": "Se você não requisitou a troca de senha, ignore este email.",
       "instructions": "Instruções para troca de senha."
     },
+    "confirmation_instructions": {
+      "subject": "Instruções para confirmação de email",
+      "hello": "Olá, {{first_name}}. Para confirmar seu email clique no botão abaixo.",
+      "confirm": "Confrimar meu email",
+      "your_password_will_not_change": "Sua senha não irá mudar até você acessar o link acima e criar uma nova.",
+      "if_you_did_not_requested": "Se você não se cadastrou nesse site, ignore este email.",
+      "instructions": "Instruções para confirmação de email"
+    },
     "payment": {
       "price": "Preço",
       "total": "Total",
@@ -880,5 +998,17 @@
   "notepad": {
     "note": "Bloco de Notas",
     "my_annotations": "Minhas anotações"
+  },
+  "chat": {
+    "chat": "Chat",
+    "groups": "Grupos",
+    "students": "Alunos",
+    "teams": "Equipes",
+    "peoples": "pessoas",
+    "follow_student": "Seguir Aluno",
+    "type_here": "Escreva a mensagem aqui..."
+  },
+  "timetags": {
+    "timetags": "Tópicos das Aulas"
   }
 }

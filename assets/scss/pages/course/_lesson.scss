@@ -5,6 +5,8 @@
   @import 'lesson/answers';
   @import 'lesson/student-doubts';
   @import 'lesson/notepad';
+  @import 'lesson/timetags';
+  @import 'lesson/scorm';
 
   .lesson-page-sidebar {
     .lesson-list-header {
@@ -126,6 +128,7 @@
 
   .lesson-description {
     margin-bottom: $padding-large-vertical * 4;
+    color: $text-muted;
   }
 
   .lesson-content-player {
@@ -162,6 +165,7 @@
 
     .media-player {
       position: relative;
+      margin-bottom: $padding-large-vertical * 4;
 
       .player {
         text-align: left;
@@ -171,12 +175,30 @@
           margin: 0;
           padding: 0;
         }
+
+        .html5-player,
+        #vzaar-player-container {
+          @extend .embed-responsive;
+          @extend .embed-responsive-16by9;
+
+          width: 100%;
+          height: auto;
+          border: 2px solid $border-color-base;
+          border-radius: $border-radius-base;
+
+          iframe {
+            @extend .embed-responsive-item;
+
+            width: 100%;
+          }
+        }
       }
     }
   }
 
   .lesson-tabs {
     margin-top: $padding-large-vertical * 4;
+    width: 100%;
 
     .nav-tabs {
       border-bottom: none;

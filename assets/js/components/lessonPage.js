@@ -14,17 +14,22 @@
     };
 
     $(document).ajaxSuccess(function (event, xhr, settings) {
-
       if (isCollaborativeDiscuttion(settings.url) || isExamAnswer(settings.url)) {
-
-        var lessonProgress = $('#js-course-tree-ajax').data('lesson-progress');
+        var lessonProgress = app.lessonList.lessonProgress();
 
         app.lessonList.requirementsExists(lessonProgress, function ($item, content_id) {
-          if (content_id && lessonProgress.hasOwnProperty('enrollment_id')) {
+          if (content_id && lessonProgress.enrollment_id) {
             app.lessonList.checkLessonCompleted(lessonProgress.enrollment_id, content_id, function (completed) {
               if (completed) {
+                var $currentItemIcon = app.lessonList.currentLesson().find('.js-in-progress-icon');
+                $currentItemIcon.removeClass('icon-clock');
+                $currentItemIcon.removeClass('js-in-progress-icon');
+                $currentItemIcon.addClass('js-in-completed-icon');
+                $currentItemIcon.addClass('icon-check');
+
                 $('.btn-next-lesson').removeClass('disabled');
                 $item.removeClass('disabled');
+                $item.removeClass('blocked');
                 $item.find('.right > .icon-lock').remove();
               }
             });
@@ -35,6 +40,5 @@
 
       }
     });
-
   };
 })();

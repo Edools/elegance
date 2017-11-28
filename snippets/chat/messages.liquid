@@ -1,0 +1,25 @@
+<div id="chat-messages" class="chat-messages js-chat-messages">
+  <div class="messages">
+    <div class="header">
+      <div id="js-room-title" class="title"></div>
+      <div class="users-count"><span id="js-room-users-count"></span> pessoa(s)</div>
+    </div>
+
+    <div class="scroll-container js-scroll-container">
+      <div class="js-content content js-scroll scroll scrollbar-inner"></div>
+    </div>
+  </div>
+
+  <form id="js-send-messages" class="editor">
+    <div class="input js-input js-chat-text" contenteditable="true"></div>
+
+    <div class="btn-group btn-group-sm">
+      <button type="button" data-action="bold" class="btn btn-default js-btn-action"><b>B</b></button>
+      <button type="button" data-action="italic" class="btn btn-default js-btn-action"><i>I</i></button>
+      <button type="button" data-action="underline" class="btn btn-default js-btn-action"><u>U</u></button>
+    </div>
+
+    <button type="submit" class="btn btn-outline-primary btn-sm btn-send">{{ 'general.send' | t }}</button>
+  </form>
+
+</div>

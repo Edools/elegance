@@ -1,0 +1,12 @@
+.chat-sidebar-list-item {
+  @include transition(.2s ease);
+
+  padding: $padding-large-vertical $padding-large-horizontal * 1.2;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    background-color: darken($chat-sidebar-bg, 2%);
+  }
+}

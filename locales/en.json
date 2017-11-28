@@ -46,7 +46,10 @@
   "errors": {
     "gateway_transaction": {
       "invalid_email": "The email used is not valid for this gateway",
-      "unavailable_gateway": "The payment gateway is unavailable at the moment"
+      "unavailable_gateway": "The payment gateway is unavailable at the moment",
+      "invalid_credit_card": "The credit card is invalid",
+      "unauthorized": "The gateway's credentials are invalid",
+      "invalid_plan_code": "There are no registered plans with that code"
     },
     "checkout": {
       "no_order": "You order was not found",
@@ -519,6 +522,18 @@
       "processing": "Processing"
     }
   },
+  "subscription": {
+    "status": {
+      "initiated": "Initiated",
+      "trial": "Trial",
+      "pending_payment": "Pending payment",
+      "unpaid": "Unpaid",
+      "active": "Active",
+      "canceled": "Canceled",
+      "overdue": "Overdue",
+      "ended": "Ended"
+    }
+  },
   "path": {
     "no_courses": "No courses available in this package.",
     "pinboard": "<strong>Notice board</strong>",
@@ -542,7 +557,8 @@
       "statistics": "Statistics",
       "missing_activities": "Missing activities",
       "scoring_average": "Average Score"
-    }
+    },
+    "load_more": "Load more courses"
   },
   "home": {
     "social": {
@@ -556,7 +572,10 @@
     }
   },
   "products": {
-    "products": "Produtos"
+    "products": "Products"
+  },
+  "courses": {
+    "courses": "Courses"
   },
   "lesson": {
     "release_at": "Scheduled for",
@@ -608,7 +627,9 @@
       "custom_template": "<h1> This is a customized template</h1>",
       "show_order_itens" : "<span>see order items</span>",
       "cancel_signature" : "Cancel subscription",
+      "subscription_status": "Subscription",
       "recurring": {
+        "payment_status": "Payment status",
         "subscriptions": "Subscriptions",
         "subscription": "Subscription",
         "product": "Product",
