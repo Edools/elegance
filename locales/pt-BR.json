@@ -933,7 +933,7 @@
     "confirmation_instructions": {
       "subject": "Instruções para confirmação de email",
       "hello": "Olá, {{first_name}}. Para confirmar seu email clique no botão abaixo.",
-      "confirm": "Confrimar meu email",
+      "confirm": "Confirmar meu email",
       "your_password_will_not_change": "Sua senha não irá mudar até você acessar o link acima e criar uma nova.",
       "if_you_did_not_requested": "Se você não se cadastrou nesse site, ignore este email.",
       "instructions": "Instruções para confirmação de email"
