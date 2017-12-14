@@ -421,6 +421,7 @@
     "not_enrolled_any_course": "Você ainda não está matriculado em nenhum curso.",
     "go_course": "Ir para o Curso",
     "go_path": "Acessar Pacote",
+    "go_trail": "Acessar Trilha",
     "pending": "<span class='lighter'>Matrículas</span>&nbsp;<strong>pendentes</strong>",
     "available_time_message": {
       "unlimited": "Este curso estará disponível por tempo ilimitado",
