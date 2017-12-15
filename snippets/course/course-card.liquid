@@ -65,12 +65,12 @@
   <div class="course-action">
     {% if released_course == false %}
       <a class="btn btn-default disabled">
-        <i class="icon-camrecorder"></i>
+        <i class="{{icon}}"></i>
         <span>{{ detail_label }}</span>
       </a>
     {% else %}
       <a class="btn btn-default" href="{{ detail_path }}">
-        <i class="icon-camrecorder"></i>
+        <i class="{{icon}}"></i>
         <span>{{ detail_label }}</span>
       </a>
     {% endif %}

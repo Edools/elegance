@@ -194,7 +194,8 @@
     "unconfirmed": "Antes de continuar, confirme a sua conta.",
     "signed_up_but_unconfirmed": "Uma mensagem com um link de confirmação foi enviada para o seu endereço de e-mail. Por favor, abra o link para confirmar a sua conta.",
     "confirmed": "Sua conta foi confirmada com sucesso.",
-    "send_instructions_to_confirm": "Dentro de minutos, você receberá um e-mail com instruções para a confirmação da sua conta."
+    "send_instructions_to_confirm": "Dentro de minutos, você receberá um e-mail com instruções para a confirmação da sua conta.",
+    "change_email_but_unconfirmed": "Uma mensagem com um link de confirmação foi enviada para o seu endereço de e-mail. Por favor, abra o link para confirmar a mudança de email."
   },
   "login": {
     "enter_your_account": "Entre com a sua conta",
@@ -420,6 +421,7 @@
     "not_enrolled_any_course": "Você ainda não está matriculado em nenhum curso.",
     "go_course": "Ir para o Curso",
     "go_path": "Acessar Pacote",
+    "go_trail": "Acessar Trilha",
     "pending": "<span class='lighter'>Matrículas</span>&nbsp;<strong>pendentes</strong>",
     "available_time_message": {
       "unlimited": "Este curso estará disponível por tempo ilimitado",
@@ -932,7 +934,7 @@
     "confirmation_instructions": {
       "subject": "Instruções para confirmação de email",
       "hello": "Olá, {{first_name}}. Para confirmar seu email clique no botão abaixo.",
-      "confirm": "Confrimar meu email",
+      "confirm": "Confirmar meu email",
       "your_password_will_not_change": "Sua senha não irá mudar até você acessar o link acima e criar uma nova.",
       "if_you_did_not_requested": "Se você não se cadastrou nesse site, ignore este email.",
       "instructions": "Instruções para confirmação de email"
