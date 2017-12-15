@@ -41,15 +41,21 @@
               {% if enrollment.school_product.library_resource.resource_type == 'Course' %}
                 {% assign detail_path = enrollment | course_path %}
                 {% assign detail_label = 'enrollment.go_course' | t %}
+                {% assign icon = 'icon-camrecorder' %}
+              {% elsif enrollment.school_product.library_resource.resource_type == 'Path' and enrollment.school_product.path.progress_requirements != nil %}
+                {% assign detail_path = enrollment.id | path_path: enrollment.school_product.library_resource.resource_id %}
+                {% assign detail_label = 'enrollment.go_trail' | t %}
+                {% assign icon = 'icon-directions' %}
               {% elsif enrollment.school_product.library_resource.resource_type == 'Path' %}
                 {% assign detail_path = enrollment.id | path_path: enrollment.school_product.library_resource.resource_id %}
                 {% assign detail_label = 'enrollment.go_path' | t %}
+                {% assign icon = 'icon-camrecorder' %}
               {% endif %}
 
               {% include 'course/course-card', detail_path: detail_path, detail_label: detail_label, title: enrollment.school_product.title,
                 logo: enrollment.school_product.logo, description: course.description, progress: progress,
                 available_time_message: available_time_message, total_max_attendance_message: total_max_attendance_message,
-                use_max_attendance_message: use_max_attendance_message, status_message: status_message %}
+                use_max_attendance_message: use_max_attendance_message, status_message: status_message, icon: icon %}
             </div>
           {% endfor %}
         </div>
