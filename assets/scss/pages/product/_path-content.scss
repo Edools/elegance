@@ -8,6 +8,7 @@
       @extend .thumbnail;
 
       padding: 0;
+      word-wrap: break-word;
       border-width: 2px;
 
       .course-image {
