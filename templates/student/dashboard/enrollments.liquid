@@ -113,5 +113,46 @@
 
     </div>
 
+    <div class="expired-enrollments">
+      {% if expired_enrollments.size != 0 %}
+        <h2 class="title">
+          {{ 'enrollment.expired' | t }}
+        </h2>
+      {% endif %}
+
+      <div class="courses-list">
+        <div class="row">
+          {% for enrollment in expired_enrollments %}
+            <div class="col-sm-6 col-md-4">
+              <div class="course-card course-expired">
+                <div class="course-image">
+                  {% if enrollment.school_product.logo != null.image_url %}
+                    {% image, src: enrollment.school_product.logo, alt: enrollment.school_product.name %}
+                  {% else %}
+                    {% assign placeholder = 'missing-product-logo.png' | asset_url %}
+                    {% image, src: placeholder, alt: product.title %}
+                  {% endif %}
+                </div>
+
+                <div class="course-info">
+                  <div class="title">
+                    <div class="caption">{{ enrollment.school_product.title }}</div>
+                  </div>
+                  <div class="course-avaliability">
+                    <div class="status">
+                      <span class="alert alert-danger"
+                            title="{{ enrollment | status_message }}">
+                        <span>{{ enrollment | status_message }}</span>
+                        <i class="icon-info"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
