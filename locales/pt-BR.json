@@ -423,6 +423,7 @@
     "go_path": "Acessar Pacote",
     "go_trail": "Acessar Trilha",
     "pending": "<span class='lighter'>Matrículas</span>&nbsp;<strong>pendentes</strong>",
+    "expired": "<span class='lighter'>Matrículas</span>&nbsp;<strong>expiradas</strong>",
     "available_time_message": {
       "unlimited": "Este curso estará disponível por tempo ilimitado",
       "available_until": "Este curso estará disponível até {{ date }}"
