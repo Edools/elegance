@@ -682,7 +682,7 @@
       "blocked": "Você poderá avaliar este curso quando completar {{ min_progress }}% de progresso",
       "created": "Avaliação criada com sucesso!",
       "updated": "Avaliação atualizada com sucesso!",
-      "total_points": "Avaliação geral"
+      "total_points": "Avaliação dos alunos"
     }
   },
   "categories": {

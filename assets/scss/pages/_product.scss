@@ -99,6 +99,60 @@
       margin: 0;
     }
   }
+
+  .general-rating {
+    display: flex;
+
+    flex-wrap: wrap;
+    justify-content: center;
+
+    h4,
+    .points {
+      display: inline-block;
+      margin: 0;
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    h4 {
+      margin-top: 15px;
+      color: $gray-light;
+      font-size: 24px;
+    }
+
+    .points {
+      margin: 15px 0;
+    }
+  }
+
+  .rating-student {
+    .student-name {
+      margin: 5px 0 0 0;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    .student-avatar {
+      width: 50px;
+      height: 50px;
+    }
+
+    .student-profile {
+      margin: 0;
+      color: $text-color;
+    }
+
+    .student-points {
+      margin-top: 5px;
+    }
+
+    .student-note {
+      margin-top: 20px;
+    }
+  }
 }
 
 @import 'product/list';
