@@ -1,9 +1,16 @@
 {% if rating_enable and course %}
   <div id="rating-container">
     {% if product.rating_config.points == 'true' and course.rating %}
-      <div id="general-rating">
-        {{ 'courses.rating.total_points' | t }}
-        {{ course.rating }}
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="general-rating">
+            <h4>{{ 'courses.rating.total_points' | t }}</h4>
+
+            <div class="points">
+              {% include 'ui/stars/star', value: course.rating, size: 'normal' %}
+            </div>
+          </div>
+        </div>
       </div>
     {% endif %}
 
