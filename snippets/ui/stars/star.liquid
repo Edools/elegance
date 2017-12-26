@@ -1,87 +1,11 @@
-{% if value == 0 %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-{% endif %}
+{% for i in (1..5) %}
+  {% assign half_value = i | minus: value %}
 
-{% if value > 0 and value < 1 %}
-  {% include 'ui/stars/half-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-{% endif %}
-
-{% if value == 1 %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-{% endif %}
-
-{% if value > 1 and value < 2 %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/half-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-{% endif %}
-
-{% if value == 2 %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-{% endif %}
-
-{% if value > 2 and value < 3 %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/half-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-{% endif %}
-
-{% if value == 3 %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-{% endif %}
-
-{% if value > 3 and value < 4 %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/half-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-{% endif %}
-
-{% if value == 4 %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/half-star', size: size  %}
-  {% include 'ui/stars/empty-star', size: size  %}
-{% endif %}
-
-{% if value > 4 and value < 5 %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/half-star', size: size  %}
-{% endif %}
-
-{% if value == 5 %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-  {% include 'ui/stars/complete-star', size: size  %}
-{% endif %}
+  {% if i <= value %}
+    {% include 'ui/stars/complete-star', size: size %}
+  {% elsif half_value < 1 %}
+    {% include 'ui/stars/half-star', size: size %}
+  {% else %}
+    {% include 'ui/stars/empty-star', size: size %}
+  {% endif %}
+{% endfor %}
