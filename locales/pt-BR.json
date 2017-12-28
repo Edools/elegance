@@ -423,6 +423,7 @@
     "go_path": "Acessar Pacote",
     "go_trail": "Acessar Trilha",
     "pending": "<span class='lighter'>Matrículas</span>&nbsp;<strong>pendentes</strong>",
+    "expired": "<span class='lighter'>Matrículas</span>&nbsp;<strong>expiradas</strong>",
     "available_time_message": {
       "unlimited": "Este curso estará disponível por tempo ilimitado",
       "available_until": "Este curso estará disponível até {{ date }}"
@@ -681,7 +682,7 @@
       "blocked": "Você poderá avaliar este curso quando completar {{ min_progress }}% de progresso",
       "created": "Avaliação criada com sucesso!",
       "updated": "Avaliação atualizada com sucesso!",
-      "total_points": "Avaliação geral"
+      "total_points": "Avaliação dos alunos"
     }
   },
   "categories": {

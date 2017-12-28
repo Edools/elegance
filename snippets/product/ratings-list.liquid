@@ -1,7 +1,25 @@
 {% for rating in public_ratings %}
-  <div id="rating-{{ rating.id }}" class="panel">
-    <p>{{ rating.student.first_name }}</p>
-    <p>{{ rating.points }}</p>
-    <p>{{ rating.note }}</p>
+  <div id="rating-{{ rating.id }}" class="rating-student panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-2">
+          {% image, class: 'img-circle student-avatar' src: rating.student.cover_image_url, alt: rating.student.first_name, width: 50 %}
+        </div>
+        <div class="col-md-6">
+          <p class="student-name">
+            <a href="/profile/{{ rating.student.id }}" class="student-profile">
+              {{ rating.student.first_name }}
+            </a>
+          </p>
+          <div class="student-points">
+            {% include 'ui/stars/star', value: rating.points, size: 'small' %}
+          </div>
+        </div>
+      </div>
+
+      <div class="student-note">
+        <p>{{ rating.note }}</p>
+      </div>
+    </div>
   </div>
 {% endfor %}
