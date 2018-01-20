@@ -52,7 +52,18 @@
 
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
 
-  {{ content_for_css }}
+  {{ content_for_header }}
+
+  <script defer src="{{ 'theme.base.vendors.min.js' | asset_url }}"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
+
+  <script defer src="{{ 'theme.base.min.js' | asset_url }}"></script>
+  <script defer src="{{ 'theme.js' | asset_url }}"></script>
+
+  {% if current_school | has_feature: 'recaptcha' %}
+    <script defer src='https://www.google.com/recaptcha/api.js?onload=onLoadRecaptcha&render=explicit'></script>
+  {% endif %}
+
 </head>
 <body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% elsif current_path == '/chat' %}chat-page{% endif %}">
 <div class="content-wrapper">
@@ -66,16 +77,5 @@
   {% include 'footer' %}
 </div>
 
-  {{ content_for_js }}
-
-  <script src="{{ 'theme.base.vendors.min.js' | asset_url }}"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
-
-  <script src="{{ 'theme.base.min.js' | asset_url }}"></script>
-  <script src="{{ 'theme.js' | asset_url }}"></script>
-
-  {% if current_school | has_feature: 'recaptcha' %}
-    <script src='https://www.google.com/recaptcha/api.js?onload=onLoadRecaptcha&render=explicit'></script>
-  {% endif %}
 </body>
 </html>
