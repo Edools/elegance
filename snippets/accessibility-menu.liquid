@@ -1,0 +1,37 @@
+{% if settings.view.general.accessibility.enabled %}
+     <div id="accessibility-navbar" class="accessibility-menu collapse in">
+          <div class="container">
+               <div id="accessibility-navigation">
+                    {% if settings.view.general.accessibility.navigation %}
+                    <div class="row">
+                         <div id="accessibility-location" class="text-center col-lg-12 col-md-12 col-sm-12 col-xs-12" tabindex="1"></div>
+                    </div>     
+                    <ul class="row" tabindex="0" aria-label="Menu acessível">
+                         <li tabindex=0 id="accessibility-btn-1" class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center">
+                              Ir para o conteúdo principal<br>(SHIFT-1)<!--a tabindex="0" href="#accessibility-beginning-point"> Ir para o conteúdo principal (SHIFT-1)</a-->
+                         </li>     
+                         <li id="accessibility-btn-2" class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center" tabindex="0">Ir para o menu<br>(SHIFT-2)</li>
+                         <li id="accessibility-btn-3" class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center" tabindex="0">Entre em Contato<br>(SHIFT-3)</li>
+                         <li id="accessibility-btn-4" class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center" tabindex="0">Voltar para o topo<br>(SHIFT-4)</li>
+                    </ul>               
+                    {% endif %}
+               </div>
+               {% if settings.view.general.accessibility.contrast %}
+               <div id="accessibility-high-contrast" class="row">
+                    <ul class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">                       
+                         <li class="contrast-on-btn">
+                              <i class="icon-eye"></i>
+                              <span class="contrast-on-btn-text">Alto Contraste Desligado</span>
+                         </li>
+                    </ul>      
+               </div>
+               {% endif %}
+          </div>
+          <div class="accessibility-footer">
+               <a data-toggle="collapse" data-target="#accessibility-navbar">
+                    <i class="icon-arrow-up"></i>                    
+               </a>
+               <p>(Ocultar Acessibilidade)</p>
+          </div>                             
+     </div>
+{% endif %}

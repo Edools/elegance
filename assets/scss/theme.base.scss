@@ -70,6 +70,7 @@
 @import 'widgets/dropzone';
 @import 'widgets/ckeditor';
 // Layout
+
 @import 'layout/header';
 @import 'layout/footer';
 @import 'layout/page';
@@ -92,3 +93,8 @@
 @import 'pages/retry_payment_page';
 @import 'pages/chat';
 @import 'pages/school_forums';
+
+// Acessibility
+
+@import 'components/accessibility-menu';
+@import 'components/accessibility-high-contrast';

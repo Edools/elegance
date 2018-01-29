@@ -17,12 +17,12 @@
     }
 
     .info {
-      color: $text-color;
+      //retirando th color: $text-color;
 
       .title {
         margin-top: 0;
         margin-bottom: $padding-large-vertical;
-        color: $text-color;
+        //retirando th color: $text-color;
         font-weight: 300;
         font-size: 36px;
       }

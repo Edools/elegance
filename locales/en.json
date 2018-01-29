@@ -751,7 +751,7 @@
     "filter_by_product" : "Filter by product"
   },
   "footer": {
-    "contact_us" : "<span class=\"underlined\">Get in touch</span>",
+    "contact_us" : "Get in touch",
     "plataform_by": "Online Education platform by &nbsp"
   },
   "terms_of_use": {

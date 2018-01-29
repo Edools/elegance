@@ -7,8 +7,8 @@
 
       <div class="profile-body col-md-8">
         <div class="row">
-          <div class="col-md-12 tab-content">
-            <h2>{{ 'pages.profile.media.title' | t }}</h2>
+          <div tabindex='1' class="col-md-12 tab-content">
+            <h2 id="accessibility-main-content" tabindex='0'>{{ 'pages.profile.media.title' | t }}</h2>
 
             {% if current_user and current_user.id == user.id %}
               <article id="new-media-form" class="panel panel-default">

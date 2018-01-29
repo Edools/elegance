@@ -1,0 +1,57 @@
+.accessible {
+  $navbar-default-brand-color: white !default;
+
+  * {
+    @include transition(all .1s ease);
+
+    border-color: white;
+    background-color: black !important;
+    color: white !important;
+  }
+
+  .main-header,
+  .home-benefits,
+  .home-call-to-action,
+  .home-about-us,
+  .footer-wrapper {
+    border-top: 1px solid white;
+  }
+
+  .navbar {
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+  }
+
+  .btn-primary {
+    border: 1px solid;
+  }
+
+  .contrast-on-btn {
+    background-color: white !important;
+    color: black !important;
+    transition: all 1s;
+
+    i,
+    span {
+      background: transparent !important;
+      color: black !important;
+    }
+
+    &:hover {
+      border-color: white !important;
+      background-color: black !important;
+      color: white !important;
+
+      i,
+      span {
+        color: white !important;
+      }
+    }
+  }
+
+  /*border-color: white;
+  border-top: white !important;
+  border-right: white !important;
+  border-bottom: white !important;
+  border-left: white !important;*/
+}

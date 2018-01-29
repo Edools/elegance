@@ -1,6 +1,6 @@
 <div id="product-card-{{ product.id }}" class="thumbnail product product-card">
   <div class="logo">
-    <a href="/{{ product.slug }}">
+    <a tabindex="-1" href="/{{ product.slug }}">
       {% if product.logo %}
         {% image, src: product.logo, alt: product.title %}
       {% else %}
@@ -18,24 +18,24 @@
       {{ product.title | truncate: 60 }}
     </a>
 
-    <p class="subtitle">{{ product.subtitle | truncate: 112 }}</p>
+    <p tabindex="0" class="subtitle">{{ product.subtitle | truncate: 112 }}</p>
   </div>
 
   <div class="footer caption clearfix">
     {% assign first_option = product.payment_options[0] %}
     {% if first_option %}
 
-      <div class="price">
+      <div tabindex="0" class="price">
         {% if first_option.promotional == true %}
-          <span class="base-price">
-          <strike>{{ first_option.base_price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway }}</strike>
-        </span>
+          <span aria-hidden="true" class="base-price">
+            <strike >{{ first_option.base_price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway }}</strike>
+          </span>
         {% endif %}
 
         {% if first_option.kind == 'subscription' %}
-          <span class="final-price"> {{ first_option.price | money_option_presentation: first_option.kind, first_option.period, 'full', 1 }} </span>
+          <span  class="final-price"> {{ first_option.price | money_option_presentation: first_option.kind, first_option.period, 'full', 1 }}</span>
         {% else %}
-          <span class="final-price">{{ first_option.price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway }}</span>
+          <span aria-label="{{ first_option.price | money_without_currency | remove: ',00' }} reais" class="final-price">{{ first_option.price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway }} </span>
         {% endif %}
 
         {% if first_option.trials > 0 %}
@@ -52,7 +52,7 @@
               {{ 'product.enroll' | t }} <span class="caret"></span>
             </button>
 
-            <ul class="dropdown-menu">
+            <ul id="" class="dropdown-menu product-accessibility-list">
               {% for option in product.payment_options %}
                 <li>
                   {% if gateway.gateway == 'hotmart' %}
