@@ -62,7 +62,7 @@
       "view": {
         "general": {
           "accessibility": {
-            "enabled": true,
+            "enabled": false,
             "navigation": true,
             "contrast": true
           },

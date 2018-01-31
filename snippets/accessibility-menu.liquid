@@ -8,11 +8,17 @@
                     </div>     
                     <ul class="row" tabindex="0" aria-label="Menu acessível">
                          <li tabindex=0 id="accessibility-btn-1" class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center">
-                              Ir para o conteúdo principal<br>(SHIFT-1)
+                              {{ 'accessibility.navigation.main_content.description' | t }}<br>{{ 'accessibility.navigation.main_content.shortcut' | t }}
                          </li>     
-                         <li id="accessibility-btn-2" class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center" tabindex="0">Ir para o menu<br>(SHIFT-2)</li>
-                         <li id="accessibility-btn-3" class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center" tabindex="0">Entre em Contato<br>(SHIFT-3)</li>
-                         <li id="accessibility-btn-4" class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center" tabindex="0">Voltar para o topo<br>(SHIFT-4)</li>
+                         <li id="accessibility-btn-2" class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center" tabindex="0">
+                              {{ 'accessibility.navigation.menu.description' | t }}<br>{{ 'accessibility.navigation.menu.shortcut' | t }}
+                         </li>
+                         <li id="accessibility-btn-3" class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center" tabindex="0">
+                              {{ 'accessibility.navigation.contact.description' | t }}<br>{{ 'accessibility.navigation.contact.shortcut' | t }}
+                         </li>
+                         <li id="accessibility-btn-4" class="col-lg-3 col-md-6 col-sm-6 col-xs-12 text-center" tabindex="0">
+                              {{ 'accessibility.navigation.top_of_the_page.description' | t }}<br>{{ 'accessibility.navigation.top_of_the_page.shortcut' | t }}
+                         </li>
                     </ul>               
                     {% endif %}
                </div>
@@ -21,7 +27,11 @@
                     <ul class="row col-lg-12 col-md-12 col-sm-12 col-xs-12">                       
                          <li class="contrast-on-btn">
                               <i class="icon-eye"></i>
-                              <span class="contrast-on-btn-text">Alto Contraste Desligado</span>
+                              <span class="contrast-on-btn-text">
+                              {{ 'accessibility.high_contrast.title' | t }}
+                                   <span class="accessibility-constrast-state-on hidden"> {{ 'accessibility.high_contrast.on' | t }}</span>
+                                   <span class="accessibility-constrast-state-off"> {{ 'accessibility.high_contrast.off' | t }}</span>
+                              </span>
                          </li>
                     </ul>      
                </div>
@@ -31,7 +41,9 @@
                <a data-toggle="collapse" data-target="#accessibility-navbar">
                     <i class="icon-arrow-up"></i>                    
                </a>
-               <p>(Ocultar Acessibilidade)</p>
+               <p>
+                    {{ 'accessibility.hide_accessibility' | t }}
+               </p>
           </div>                             
      </div>
 {% endif %}

@@ -1013,5 +1013,31 @@
   },
   "timetags": {
     "timetags": "Tópicos das Aulas"
+  },
+  "accessibility": {
+    "navigation" : {
+      "main_content" : {
+        "description" : "Ir para o conteúdo principal",
+        "shortcut" : "(SHIFT-1)"
+      },
+      "menu" : {
+        "description" : "Ir para o menu",
+        "shortcut" : "(SHIFT-2)"
+      },
+      "contact" : {
+        "description" : "Entre em contato",
+        "shortcut" : "(SHIFT-3)"
+      },
+      "top_of_the_page" : {
+        "description" : "Voltar ao topo",
+        "shortcut" : "(SHIFT-4)"
+      }
+    },
+    "high_contrast" : {
+      "title" : "Alto Contraste",
+      "on" : "Ligado",
+      "off" : "Desligado"
+    } ,
+    "hide_accessibility": "(Ocultar Acessibilidade)"
   }
 }

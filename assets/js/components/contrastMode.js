@@ -49,17 +49,8 @@
 
           var toggleHighContrast = function() {
                $("html").toggleClass('accessible');
-                    
-                    if ($("html").hasClass('accessible')) {
-                         $(".contrast-on-btn-text").fadeOut(200, function(){
-                              $(".contrast-on-btn-text").text("Alto Contraste Ligado").fadeIn(200);
-                         })
-                    }
-                    else {
-                         $(".contrast-on-btn-text").fadeOut(200, function(){
-                              $(".contrast-on-btn-text").text("Alto Contraste Desligado").fadeIn(200);
-                         })
-                    }     
+               $(".accessibility-constrast-state-on").toggleClass("hidden");
+               $(".accessibility-constrast-state-off").toggleClass("hidden");                   
           }
 
           $(".contrast-on-btn").on('click', function(){
