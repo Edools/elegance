@@ -1,7 +1,6 @@
 <header tabindex="0" id="school-header" class="navbar navbar-default navbar-static-top" {% if current_user %} data-user='{"id": {{current_user.id}}, "name": "{{current_user.first_name + ' ' + current_user.last_name}}", "cpf": "{{current_user.cpf}}", "email": "{{current_user.email}}", "avatar_url": "{{current_user.cover_image_url}}"}' {% endif %}>
-
   <div class="container">
-    <div id="main-navbar"  tabindex="0" aria-label="Menu Principal" class="navbar-header row">
+    <div id="main-navbar" tabindex="0" aria-label="Menu Principal" class="navbar-header row">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-menu">
         {{ 'navbar.open_navigation' | t }}
         <span class="icon-bar"></span>

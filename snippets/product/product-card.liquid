@@ -52,7 +52,7 @@
               {{ 'product.enroll' | t }} <span class="caret"></span>
             </button>
 
-            <ul id="" class="dropdown-menu product-accessibility-list">
+            <ul class="dropdown-menu product-accessibility-list">
               {% for option in product.payment_options %}
                 <li>
                   {% if gateway.gateway == 'hotmart' %}

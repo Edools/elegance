@@ -7,48 +7,47 @@
           //This function generates Aria-Labels for the tags with prices.
           //Screen Readers can find some issues when reading '$' and ','.
 
-               var arrayOfPrices = new Array(...$('.product-accessibility-list')
+               var arrayOfPrices = []; 
+               var itemList = $('.product-accessibility-list')
                .find('li')
-               .find('a'));
+               .find('a');
 
-               arrayOfPrices.forEach(element => {
+               for (var i = 0; i < itemList.length; i++) {
+                    arrayOfPrices[i] = itemList[i];
+               }
 
-                    var price = String((element.innerHTML));
-                    var R$Position = price.indexOf('R$');
+               arrayOfPrices.forEach(function(element) {
+
+                    var price = element.innerHTML.replace(/\s+/g,' ')
+                    .replace('<span>', '')
+                    .replace('</span>', '')
+                    .replace('<a>', '')
+                    .replace('</a>', '');
+
+                    var currencyPosition = price.indexOf('R$');
                     var hasPor = price.indexOf('por');
                     var commaPosition = price.indexOf(',');
                     
-                    if(R$Position != -1) {
+                    if(currencyPosition != -1) {
 
                          if (hasPor != -1) {
 
-                              price = price.substring(R$Position + 3, price.length)
-                                   .replace(/\s+/g,' ')
-                                   .replace('<span>', '')
-                                   .replace('</span>', '')
-                                   .replace('<a>', '')
-                                   .replace('</a>', '');
-
-                              var posAfterComma = price.indexOf(',') + 3;
-
+                              price = price.substring(currencyPosition + 3, price.length);                                  
+                              var posAfterComma = commaPosition + 3;
                               price = price.slice(0, posAfterComma) + ' reais' + price.slice( posAfterComma , price.length);
                          }
 
                          else {
-                              price = price.substring(R$Position + 3, commaPosition + 3)+' reais';
+                              price = price.substring(currencyPosition + 3, commaPosition + 3)+' reais';
                          }
 
                          price = price.replace(',00', '');
-                         //console.log(price);                                    
                     }                              
                     element.setAttribute('aria-label', price);
                });
-               console.log('criei as labels');
           }();
 
           var toggleHighContrast = function() {
-          //This function toggles the High Contrast Mode.
-
                $("html").toggleClass('accessible');
                     
                     if ($("html").hasClass('accessible')) {
@@ -63,7 +62,7 @@
                     }     
           }
 
-          $(".contrast-on-btn").click(function(){
+          $(".contrast-on-btn").on('click', function(){
                toggleHighContrast();
           });
 
@@ -72,59 +71,109 @@
           //It works like a map for Blind Users, since they may find it hard to know exactly on which page they're in.
                var possibleAddresses =
                {
-                    "": "Página Inicial",
-                    "cart": "Carrinho",
-                    "sign_in": "Fazer Login",
-                    "enrollments": "Meus Cursos",
-                    "forums": "Fóruns",
-                    "products": "Produtos",
-                    "edit": "Meu Perfil",
-                    "certificates": "Meus Certificados",
-                    "channels": "Mensagens",
-                    "orders": "Meus Pedidos"
+                    "" : {
+                         pageName : "Página Inicial",
+                         divName : "home"
+                    },                    
+                    "cart": {
+                         pageName : "Carrinho",
+                         divName : "cart"
+                    },
+                    "sign_in": {
+                         pageName : "Fazer Login",
+                         divName : "login"
+                    },
+                    "enrollments": {
+                         pageName : "Meus Cursos",
+                         divName : "enrollments"
+                    },                    
+                    "forums": {
+                         pageName : "Fóruns",
+                         divName : "forums"
+                    },
+                    "products": {
+                         pageName : "Produtos",
+                         divName : "products"
+                    },              
+                    "edit": {
+                         pageName : "Meu Perfil",
+                         divName : "profile"
+                    },
+                    "certificates": {
+                         pageName : "Meus Certificados",
+                         divName : "certificates"
+                    },
+                    "channels": {
+                         pageName : "Mensagens",
+                         divName : "messages"
+                    },
+                    "orders": {
+                         pageName : "Meus Pedidos",
+                         divName : "orders"
+                    },
+                    "profile": {
+                         pageName : "Perfil Público",
+                         divName : "profile"
+                    },
+                    "products": {
+                         pageName : "Matrículas",
+                         divName : "products"
+                    },
+                    "media": {
+                         pageName : "Portifólio",
+                         divName : "portifolio"
+                    }
                };
           
-               var address = (window.location.href).
-                    substring(window.location.href.
-                    lastIndexOf('/') + 1, window.location.href.length);
+               var location, address;
+               location = window.location.href;
+          
+               if (location.search('/profile/') != -1) {
+                    if (location.search('products') != -1)
+                         address = 'products';
+                    else if (location.search('media') != -1) {
+                         address = 'media';
+                    }
+                    else {
+                         address = 'profile';
+                    }
+               }
+               else {
+                    address = (location).
+                    substring(location.
+                    lastIndexOf('/') + 1, location.length);
+               }
                
-               address = possibleAddresses[address];
+               window.mainContentDiv = possibleAddresses[address].divName;
+               address = possibleAddresses[address].pageName;
+               $("#accessibility-location").text("Você está em: " + address + " - Topo da Página");
+          }();    
           
-               if (address == undefined) {
-                    if (window.location.href.search('/profile/'))
-                         address = 'Perfil Público';
-                    else
-                         adress = '';  
-               }           
-          
-               $("#accessibility-location").text(`Você está em: ${address} - Topo da Página`);
-               var i = 0;
-               i++; 
-               console.log("rodei" + i + "vezes");  
-          }();         
+          var scrollToDiv = function(id) {
+               $(window).scrollTop($(id).offset().top - 50);
+               $(id).focus(); 
+          };
 
           var checkAccessibiltyFunction = function(selectedElement) {
                // This Function listens to the accessibility-shortcuts.
                // It helps the Screen Readers' users to navigate through the website.
+               var a = mainContentDiv;
+               
                if (selectedElement == null) 
                     var selectedElement = $(':focus').attr('id');
           
                switch(selectedElement) {
                     case 'accessibility-btn-1':
-                         $(window).scrollTop($("#accessibility-main-content").offset().top - 50);
-                         $("#accessibility-main-content").focus();                        
+                         scrollToDiv("#accessibility-main-content-" + mainContentDiv );
                     break;
                     case 'accessibility-btn-2':
-                         $(window).scrollTop($("#main-navbar").offset().top - 50);
-                         $("#main-navbar").focus();
+                         scrollToDiv("#main-navbar");
                     break;
                     case 'accessibility-btn-3':
-                         $(window).scrollTop($("#accessibility-contact").offset().top - 50);
-                         $("#accessibility-contact").focus();
+                         scrollToDiv("#accessibility-contact");
                     break;
                     case 'accessibility-btn-4':
-                         $(window).scrollTop($("#accessibility-location").offset().top - 50);
-                         $("#accessibility-location").focus();
+                         scrollToDiv("#accessibility-location");
                     break;
                }    
           };

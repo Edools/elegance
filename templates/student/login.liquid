@@ -1,6 +1,6 @@
 <div class="login-page page">
   <div class="container page-container">
-    <h1 tabindex="0" id="accessibility-main-content" class="form-header title">{{ 'login.enter_your_account' | t }}</h1>
+    <h1 tabindex="0" id="accessibility-main-content-login" class="form-header title">{{ 'login.enter_your_account' | t }}</h1>
     {% form 'login' %}
     {% if form.errors %}
       <div class="alert alert-danger">{{ form.errors | default_errors }}</div>

@@ -3,13 +3,13 @@
     <div class="row">
       <div class="col-xs-12 {% if settings.view.home.header.cover_enable %} col-md-6 {% endif %}">
         <div class="info">
-          <h2 id="accessibility-main-content" tabindex="0" class="title">{{ settings.view.home.header.title }}</h2>
+          <h2 id="accessibility-main-content-home" tabindex="0" class="title">{{ settings.view.home.header.title }}</h2>
           <p tabindex="0" class="subtitle">{{ settings.view.home.header.subtitle }}</p>
         </div>
       </div>
 
       {% if settings.view.home.header.cover_enable %}
-        <divclass="image col-xs-12 col-md-6 text-center">
+        <div class="image col-xs-12 col-md-6 text-center">
           {% if settings.view.home.header.cover_src contains '<iframe' or
           settings.view.home.header.cover_src contains '<object' or
           settings.view.home.header.cover_src contains '<embed' %}
