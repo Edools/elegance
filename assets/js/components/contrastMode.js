@@ -130,12 +130,10 @@
                     }
                }
                else {
-                    address = (location).
-                    substring(location.
-                    lastIndexOf('/') + 1, location.length);
+                    address = (location).substring(location.lastIndexOf('/') + 1, location.length);
                }
                
-               window.mainContentDiv = possibleAddresses[address].divName;
+               window.$mainContentDiv = possibleAddresses[address].divName;
                address = possibleAddresses[address].pageName;
                $("#accessibility-location").text("Você está em: " + address + " - Topo da Página");
           }();    
@@ -148,14 +146,14 @@
           var checkAccessibiltyFunction = function(selectedElement) {
                // This Function listens to the accessibility-shortcuts.
                // It helps the Screen Readers' users to navigate through the website.
-               var a = mainContentDiv;
+               var a = $mainContentDiv;
                
                if (selectedElement == null) 
                     var selectedElement = $(':focus').attr('id');
           
                switch(selectedElement) {
                     case 'accessibility-btn-1':
-                         scrollToDiv("#accessibility-main-content-" + mainContentDiv );
+                         scrollToDiv("#accessibility-main-content-" + $mainContentDiv );
                     break;
                     case 'accessibility-btn-2':
                          scrollToDiv("#main-navbar");
