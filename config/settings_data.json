@@ -61,6 +61,11 @@
       },
       "view": {
         "general": {
+          "accessibility": {
+            "enabled": false,
+            "navigation": true,
+            "contrast": true
+          },
           "favicon": "",
           "navbar": {
             "title": "Elegance Theme",

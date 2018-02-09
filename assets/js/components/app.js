@@ -69,6 +69,7 @@
       app.lessonPage();
       app.timeTags();
       app.bindPostsForm();
+      app.accessibility();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
     }

@@ -1,14 +1,13 @@
-<header id="school-header" class="navbar navbar-default navbar-static-top" {% if current_user %} data-user='{"id": {{current_user.id}}, "name": "{{current_user.first_name + ' ' + current_user.last_name}}", "cpf": "{{current_user.cpf}}", "email": "{{current_user.email}}", "avatar_url": "{{current_user.cover_image_url}}"}' {% endif %}>
-
+<header tabindex="0" id="school-header" class="navbar navbar-default navbar-static-top" {% if current_user %} data-user='{"id": {{current_user.id}}, "name": "{{current_user.first_name + ' ' + current_user.last_name}}", "cpf": "{{current_user.cpf}}", "email": "{{current_user.email}}", "avatar_url": "{{current_user.cover_image_url}}"}' {% endif %}>
   <div class="container">
-    <div class="navbar-header row">
+    <div id="main-navbar" tabindex="0" aria-label="Menu Principal" class="navbar-header row">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-menu">
         {{ 'navbar.open_navigation' | t }}
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand {% if settings.view.general.navbar.logo.size > 0 %}navbar-brand-img{% endif %}" href="/">
+      <a tabindex="-1" class="navbar-brand {% if settings.view.general.navbar.logo.size > 0 %}navbar-brand-img{% endif %}" href="/">
         {% if settings.view.general.navbar.logo.size > 0 %}
           {% image, src: settings.view.general.navbar.logo %}
         {% else %}
@@ -19,9 +18,8 @@
 
     <div class="collapse navbar-collapse" id="header-menu">
       <ul class="nav navbar-nav navbar-right">
-
           {% if current_user == nil or current_user.type == 'Student' %}
-            <li>
+            <li aria-label="Carrinho de Compras">
               <a href="/cart">
                 <i class="icon-basket"></i>
                 <span>{{ 'navbar.cart' | t }}</span>
@@ -54,7 +52,7 @@
               </a>
             </li>
 
-            <li>
+            <li aria-label="Meus Certificados">
               <a href="/certificates">
                 <i class="icon-graduation"></i>
                 <span>{{ 'navbar.my_certificates' | t }}</span>
@@ -73,8 +71,8 @@
 
           {% include 'navbar-user-links', mobile_class: true %}
 
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle user-options" data-toggle="dropdown">
+          <li aria-label="Opções de Usuário" class="dropdown">
+            <a aria-label="Opções de Usuário" href="#" class="dropdown-toggle user-options" data-toggle="dropdown">
               <i class="icon icon-arrow-down"></i>
               <span class="avatar">
                 {% assign avatar_alt = current_user | fullname %}

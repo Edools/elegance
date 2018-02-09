@@ -3,8 +3,7 @@
     <div class="info">
       <div class="row">
         <div class="col-sm-6 col-md-6">
-          <div class="info">
-
+          <div tabindex="0" class="info">
             {% if settings.view.general.footer.logo %}
               <div class="logo">
                 {% image, src: settings.view.general.footer.logo, class: 'img-responsive' %}
@@ -15,19 +14,19 @@
           </div>
 
           {% if settings.view.general.footer.address and current_school.address %}
-            <address>{{ current_school.address }}</address>
+            <address tabindex="0">{{ current_school.address }}</address>
           {% endif %}
         </div>
 
         <div class="col-md-5 col-md-offset-1">
-          <div class="contact-us">
+          <div tabindex="-1" class="contact-us">
             <h2 class="title underlined">
-              {{ 'footer.contact_us' | t }}
+              <span tabindex="0" id="accessibility-contact" class="underlined">{{ 'footer.contact_us' | t }}</span>             
             </h2>
 
             {% if settings.view.general.footer.phone and current_school.phone %}
               <p>
-                <a href="tel:{{ current_school.phone }}">
+                <a aria-label="Número de Telefone: {{ current_school.phone }}" href="tel:{{ current_school.phone }}">
                   <i class="icon-phone"></i>
                   <span>{{ current_school.phone }}</span>
                 </a>
@@ -55,14 +54,14 @@
             <div class="company-info">
               {% if settings.view.general.footer.razao_social and current_school.company_name %}
                 <p>
-                  <span>{{ current_school.company_name }}</span>
+                  <span tabindex="0">{{ current_school.company_name }}</span>
                 </p>
               {% endif %}
 
               {% if settings.view.general.footer.cnpj and current_school.cnpj %}
                 <p>
                   <b>CNPJ: </b>
-                  <span>{{ current_school.cnpj }}</span>
+                  <span tabindex="0">{{ current_school.cnpj }}</span>
                 </p>
               {% endif %}
             </div>
