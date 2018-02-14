@@ -204,7 +204,8 @@
     "forgot": "Esqueceu?",
     "enter": "Entrar",
     "not_have_account": "Não possui conta?",
-    "create_account": "<b>CRIAR CONTA</b>"
+    "create_account": "<b>CRIAR CONTA</b>",
+    "with_google": "Entrar com o google"
   },
   "register": {
     "first_name": "Seu Nome",

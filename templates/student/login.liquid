@@ -24,6 +24,10 @@
     <br/><br/>
 
     <p class="register">
+      {{ 'login.with_google' | t | login_with_google }}
+    </p>
+
+    <p class="register">
       {{ 'login.not_have_account' | t }}
       {{ 'login.create_account' | t | register_link }}
     </p>
