@@ -1,6 +1,14 @@
 (function () {
   'use strict';
 
+  /*
+    Alguns métodos foram sobrescritos no core,
+    visando manter compatibilidade com temas que não possuem a elegance atualizada.
+    - Métodos sobrescritos:
+      - init
+      - checkTrialByType
+  */
+
   var buildLazyLoadUrl = function (enrollmentId, courseId, type) {
     return ('/enrollments/:enrollment_id/courses/:course_id/' + type)
             .replace(':enrollment_id', enrollmentId)
@@ -11,7 +19,8 @@
   var getPaymentMethod = function (enrollmentId, courseId, apiKey) {
     if (courseId === null || enrollmentId === null) {
       return false;
-    }
+
+    console.warn('executed: lessonList.getPaymentMethod');
 
     var request = $.ajax({
       url: buildLazyLoadUrl(enrollmentId, courseId, 'payment_method'),
@@ -30,7 +39,7 @@
       return false;
     }
 
-    console.warn('executed, getLessonInfo lessonList');
+    console.warn('executed: lessonList.getLessonInfo');
 
     var request = $.ajax({
       url: buildLazyLoadUrl(enrollmentId, courseId, 'lessons_info'),
