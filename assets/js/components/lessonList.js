@@ -19,6 +19,7 @@
   var getPaymentMethod = function (enrollmentId, courseId, apiKey) {
     if (courseId === null || enrollmentId === null) {
       return false;
+    }
 
     console.warn('executed: lessonList.getPaymentMethod');
 
