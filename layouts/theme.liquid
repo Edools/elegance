@@ -54,19 +54,20 @@
 
   {{ content_for_header }}
 
-  <script src="{{ 'theme.base.vendors.min.js' | asset_url }}"></script>
-  <script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
-  
-  <script async src="{{ 'theme.base.min.js' | asset_url }}"></script>
-  <script async src="{{ 'theme.js' | asset_url }}"></script>
+  <script defer src="{{ 'theme.base.vendors.min.js' | asset_url }}"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
+
+  <script defer src="{{ 'theme.base.min.js' | asset_url }}"></script>
+  <script defer src="{{ 'theme.js' | asset_url }}"></script>
 
   {% if current_school | has_feature: 'recaptcha' %}
-    <script async src='https://www.google.com/recaptcha/api.js?onload=onLoadRecaptcha&render=explicit'></script>
+    <script defer src='https://www.google.com/recaptcha/api.js?onload=onLoadRecaptcha&render=explicit'></script>
   {% endif %}
 
 </head>
 <body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% elsif current_path == '/chat' %}chat-page{% endif %}">
 <div class="content-wrapper">
+  {% include 'accessibility-menu' %}
   {% include 'navbar' %}
   {% include 'alert-notice' %}
   {{ content_for_layout }}
@@ -76,6 +77,5 @@
 <div class="footer-wrapper">
   {% include 'footer' %}
 </div>
-
 </body>
 </html>

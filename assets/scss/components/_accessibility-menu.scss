@@ -1,0 +1,97 @@
+.accessibility-menu {
+  height: auto;
+
+  div {
+    margin: 20px 0;
+    height: auto;
+  }
+
+  .container {
+    margin: 10px auto;
+  }
+
+  ul {
+    margin: 0;
+    padding: 10px 0;
+    height: auto;
+    line-height: 60px;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0 auto;
+    padding: 0 15px;
+    list-style: none;
+    line-height: 35px;
+  }
+
+  .contrast-on-btn {
+    @include transition(all .2s ease);
+
+    display: block;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 300px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      border-color: black;
+      background-color: white;
+      color: black;
+    }
+
+    span {
+      background: transparent !important;
+    }
+
+    icon {
+      background: transparent !important;
+    }
+  }
+
+  @keyframes up-and-down-movement {
+    0% {
+      margin-top: 0;
+    };
+    60% {
+      margin-top: -24px;
+    };
+    100% {
+      margin-top: 0;
+    }
+  }
+}
+
+.accessibility-footer {
+  width: 100%;
+  text-align: center;
+
+  a {
+    text-decoration: none;
+  }
+
+  i {
+    @include transition(color .2s ease);
+
+    margin: 0 auto;
+    color: #585858;
+    font-weight: bold;
+    font-size: 24px;
+    animation-name: up-and-down-movement;
+    animation-duration: 1.25s;
+    animation-iteration-count: infinite;
+
+    &:hover {
+      color: lighten(#585858, 40%);
+    }
+  }
+
+  .collapsed i {
+    display: block !important;
+  }
+}

@@ -8,7 +8,7 @@
       <div class="profile-body col-md-8">
         <div class="row">
           <div class="col-md-12 tab-content">
-            <h2>{{ 'pages.profile.posts.title' | t }}</h2>
+            <h2 id="accessibility-main-content-profile" tabindex='0'>{{ 'pages.profile.posts.title' | t }}</h2>
 
             {% if current_user and current_user.id == user.id %}
               <div id="new-post-form" class="panel panel-default">

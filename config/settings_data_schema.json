@@ -1027,5 +1027,32 @@
         }
       }
     ]
+  },
+  {
+    "name": "Acessibilidade",
+    "id": "8",
+    "settings": [
+      {
+        "key": "view.general.accessibility.enabled",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Barra de Acessibilidade"
+        }
+      },
+      {
+        "key": "view.general.accessibility.navigation",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Atalhos de Navegação"
+        }
+      },
+      {
+        "key": "view.general.accessibility.contrast",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Modo de Contraste"
+        }
+      }   
+    ]
   }
 ]
