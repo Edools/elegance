@@ -133,14 +133,21 @@
                     address = (location).substring(location.lastIndexOf('/') + 1, location.length);
                }
                
-               window.$mainContentDiv = possibleAddresses[address].divName;
-               address = possibleAddresses[address].pageName;
-               $("#accessibility-location").text("Você está em: " + address + " - Topo da Página");
+               window.$mainContentDiv = address && possibleAddresses && possibleAddresses[address] && possibleAddresses[address].divName;
+               address = address && possibleAddresses && possibleAddresses[address] && possibleAddresses[address].pageName;
+
+               if (address) {
+                 $("#accessibility-location").text("Você está em: " + address + " - Topo da Página");
+               }
           }();    
           
           var scrollToDiv = function(id) {
-               $(window).scrollTop($(id).offset().top - 50);
-               $(id).focus(); 
+            var $elementToScroll = $(id);
+            
+            if ($elementToScroll.size() > 0) {
+                    $(window).scrollTop($elementToScroll.offset().top - 50);
+                    $elementToScroll.focus();
+                }
           };
 
           var checkAccessibiltyFunction = function(selectedElement) {
