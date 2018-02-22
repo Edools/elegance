@@ -3,11 +3,11 @@
 
      app.accessibility = function () {
 
-          var adjustPricesForAccessibility = function() { 
+          var adjustPricesForAccessibility = function() {
           //This function generates Aria-Labels for the tags with prices.
           //Screen Readers can find some issues when reading '$' and ','.
 
-               var arrayOfPrices = []; 
+               var arrayOfPrices = [];
                var itemList = $('.product-accessibility-list')
                .find('li')
                .find('a');
@@ -27,12 +27,12 @@
                     var currencyPosition = price.indexOf('R$');
                     var hasPor = price.indexOf('por');
                     var commaPosition = price.indexOf(',');
-                    
+
                     if(currencyPosition != -1) {
 
                          if (hasPor != -1) {
 
-                              price = price.substring(currencyPosition + 3, price.length);                                  
+                              price = price.substring(currencyPosition + 3, price.length);
                               var posAfterComma = commaPosition + 3;
                               price = price.slice(0, posAfterComma) + ' reais' + price.slice( posAfterComma , price.length);
                          }
@@ -42,7 +42,7 @@
                          }
 
                          price = price.replace(',00', '');
-                    }                              
+                    }
                     element.setAttribute('aria-label', price);
                });
           }();
@@ -50,7 +50,7 @@
           var toggleHighContrast = function() {
                $("html").toggleClass('accessible');
                $(".accessibility-constrast-state-on").toggleClass("hidden");
-               $(".accessibility-constrast-state-off").toggleClass("hidden");                   
+               $(".accessibility-constrast-state-off").toggleClass("hidden");
           }
 
           $(".contrast-on-btn").on('click', function(){
@@ -65,7 +65,7 @@
                     "" : {
                          pageName : "Página Inicial",
                          divName : "home"
-                    },                    
+                    },
                     "cart": {
                          pageName : "Carrinho",
                          divName : "cart"
@@ -77,7 +77,7 @@
                     "enrollments": {
                          pageName : "Meus Cursos",
                          divName : "enrollments"
-                    },                    
+                    },
                     "forums": {
                          pageName : "Fóruns",
                          divName : "forums"
@@ -85,7 +85,7 @@
                     "products": {
                          pageName : "Produtos",
                          divName : "products"
-                    },              
+                    },
                     "edit": {
                          pageName : "Meu Perfil",
                          divName : "profile"
@@ -115,10 +115,10 @@
                          divName : "portifolio"
                     }
                };
-          
+
                var location, address;
                location = window.location.href;
-          
+
                if (location.search('/profile/') != -1) {
                     if (location.search('products') != -1)
                          address = 'products';
@@ -132,9 +132,9 @@
                else {
                     address = (location).substring(location.lastIndexOf('/') + 1, location.length);
                }
-               
-               window.$mainContentDiv = address && possibleAddresses && possibleAddresses[address] && possibleAddresses[address].divName;
-               address = address && possibleAddresses && possibleAddresses[address] && possibleAddresses[address].pageName;
+
+               window.$mainContentDiv = address && possibleAddresses && possibleAddresses[address].divName;
+               address = address && possibleAddresses && possibleAddresses[address].pageName;
 
                if (address) {
                  $("#accessibility-location").text("Você está em: " + address + " - Topo da Página");
@@ -154,10 +154,10 @@
                // This Function listens to the accessibility-shortcuts.
                // It helps the Screen Readers' users to navigate through the website.
                var a = $mainContentDiv;
-               
-               if (selectedElement == null) 
+
+               if (selectedElement == null)
                     var selectedElement = $(':focus').attr('id');
-          
+
                switch(selectedElement) {
                     case 'accessibility-btn-1':
                          scrollToDiv("#accessibility-main-content-" + $mainContentDiv );
@@ -171,35 +171,35 @@
                     case 'accessibility-btn-4':
                          scrollToDiv("#accessibility-location");
                     break;
-               }    
+               }
           };
 
           $(window).keydown(function(e){
                if(!$(':focus').is('input')) { //It avoids problems with SHIFT inside 'INPUTS'
                     switch (e.which) {
                          case 13: //Enter
-                              checkAccessibiltyFunction(); 
+                              checkAccessibiltyFunction();
                               break;
                          case 49: //1
                               if (e.shiftKey)
-                                   checkAccessibiltyFunction('accessibility-btn-1'); 
+                                   checkAccessibiltyFunction('accessibility-btn-1');
                                    break;
-                         case 50: //2  
+                         case 50: //2
                          if (e.shiftKey)
-                              checkAccessibiltyFunction('accessibility-btn-2'); 
+                              checkAccessibiltyFunction('accessibility-btn-2');
                               break;
                          case 51: //3
                               if (e.shiftKey)
-                                   checkAccessibiltyFunction('accessibility-btn-3'); 
+                                   checkAccessibiltyFunction('accessibility-btn-3');
                                    break;
                          case 52: //4
                               if (e.shiftKey)
-                                   checkAccessibiltyFunction('accessibility-btn-4'); 
+                                   checkAccessibiltyFunction('accessibility-btn-4');
                                    break;
-                    }         
+                    }
                }
           });
 
-          $(document).trigger('app:bind:accessibility');  
+          $(document).trigger('app:bind:accessibility');
      };
 })();
