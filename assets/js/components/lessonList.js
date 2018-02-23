@@ -74,6 +74,12 @@
       self.translations['lesson.release_after'] = self.courseTree().data('translation-release-after');
       self.translations['product.course_content.views'] = self.courseTree().data('translation-course_content-views');
 
+      if (self.course && self.enrollment) {
+        var lessonsInfo = getLessonsInfo(self.enrollment.id, self.course.id, self.apiKey);
+
+        self.courseTree().data('enrollment',  Object.assign({}, self.enrollment, { lessons_info: lessonsInfo }));
+      }
+
       if (self.lessonProgress() && self.lessonProgress().completed) {
         $('.btn-next-lesson').removeClass('disabled');
       }
@@ -81,6 +87,7 @@
       if (self.lessonProgress() && !self.lessonProgress().completed) {
         self.progressIcon('progress').removeClass('hide');
       }
+
 
       if (self.courseTreeExists && !self.isActive) {
         self.bindClicks();
@@ -93,6 +100,14 @@
         $(document).on('lesson-completed', function (event, lessonProgress) {
           var $mediaControls = $('.btn-next-lesson');
           var enrollmentId = lessonProgress.data.enrollment_id;
+
+          if (self.progressIcon('completed').hasClass('hide')) {
+            self.progressIcon('completed').removeClass('hide');
+          }
+
+          if (!self.progressIcon('progress').hasClass('hide')) {
+            self.progressIcon('progress').addClass('hide');
+          }
 
           if ($mediaControls.size() > 0) {
             $mediaControls.removeClass('disabled');
