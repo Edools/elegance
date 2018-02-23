@@ -133,21 +133,21 @@
                     address = (location).substring(location.lastIndexOf('/') + 1, location.length);
                }
 
-               window.$mainContentDiv = address && possibleAddresses && possibleAddresses[address].divName;
-               address = address && possibleAddresses && possibleAddresses[address].pageName;
+               window.$mainContentDiv = address && possibleAddresses && possibleAddresses[address] &&possibleAddresses[address].divName;
+               address = address && possibleAddresses && possibleAddresses[address] && possibleAddresses[address].pageName;
 
                if (address) {
                  $("#accessibility-location").text("Você está em: " + address + " - Topo da Página");
                }
-          }();    
-          
+          }();
+
           var scrollToDiv = function(id) {
             var $elementToScroll = $(id);
-            
+
             if ($elementToScroll.size() > 0) {
-                    $(window).scrollTop($elementToScroll.offset().top - 50);
-                    $elementToScroll.focus();
-                }
+                $(window).scrollTop($elementToScroll.offset().top - 50);
+                $elementToScroll.focus();
+            }
           };
 
           var checkAccessibiltyFunction = function(selectedElement) {
