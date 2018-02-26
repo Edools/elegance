@@ -590,7 +590,7 @@
           $list.append($courseContents);
           self.checkNextButtonUnlocked();
 
-          // $(document).trigger('loaded-children');
+          $(document).trigger('loaded-children');
         }
       });
     },
