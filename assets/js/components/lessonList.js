@@ -85,6 +85,11 @@
         $('.btn-next-lesson').removeClass('disabled');
       }
 
+      if (self.lessonProgress() && !self.lessonProgress().completed) {
+        self.progressIcon('progress').removeClass('hide');
+      }
+
+
       if (self.hasRequirements) {
         self.checkNextButtonUnlocked();
       }
@@ -590,6 +595,7 @@
           $list.append($courseContents);
           self.checkNextButtonUnlocked();
 
+          $(document).trigger('loaded-children');
         }
       });
     },
