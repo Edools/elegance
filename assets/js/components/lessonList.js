@@ -68,6 +68,7 @@
       self.lessonActions = self.courseTree().data('lesson-actions');
       self.downloadAction = self.courseTree().data('download-action');
       self.currentLessonId = parseInt(self.courseTree().data('current-lesson-id'));
+      self.hasRequirements = $('.lesson-list-panel [data-requirements]').length > 0;
       self.apiKey = self.courseTree().data('api-key');
       self.translations = {};
       self.translations['lesson.release_at'] = self.courseTree().data('translation-release-at');
@@ -88,6 +89,10 @@
         self.progressIcon('progress').removeClass('hide');
       }
 
+
+      if (self.hasRequirements) {
+        self.checkNextButtonUnlocked();
+      }
 
       if (self.courseTreeExists && !self.isActive) {
         self.bindClicks();
