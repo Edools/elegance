@@ -1,7 +1,15 @@
 <div class="media-controls">
+  {% if current_user.type == 'Student' %}
+    {% assign content_link = '/enrollments/' | append: enrollment.id %}
+
+    {{ content_link  }}
+  {% else %}
+    {% assign content_link = '/admin_view' %}
+  {% endif %}
+
   {% if course_content.prev_content_id %}
     <a
-      href="/enrollments/{{ enrollment.id }}/courses/{{ course.id }}/course_contents/{{ course_content.prev_content_id }}"
+      href="{{ content_link }}/courses/{{ course.id }}/course_contents/{{ course_content.prev_content_id }}"
       class="btn btn-default">
       <i class="icon-arrow-left"></i>
       <span>{{ 'lesson.preview' | t }}</span>
@@ -10,7 +18,7 @@
 
   {% if course_content.next_content_id %}
     <a
-      href="/enrollments/{{ enrollment.id }}/courses/{{ course.id }}/course_contents/{{ course_content.next_content_id }}"
+      href="{{ content_link }}/courses/{{ course.id }}/course_contents/{{ course_content.next_content_id }}"
       class="btn btn-default btn-next-lesson disabled">
       <span>{{ 'lesson.next' | t }}</span>
       <i class="icon-arrow-right"></i>
