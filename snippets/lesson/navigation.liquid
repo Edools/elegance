@@ -1,8 +1,6 @@
 <div class="media-controls">
   {% if current_user.type == 'Student' %}
     {% assign content_link = '/enrollments/' | append: enrollment.id %}
-
-    {{ content_link  }}
   {% else %}
     {% assign content_link = '/admin_view' %}
   {% endif %}
