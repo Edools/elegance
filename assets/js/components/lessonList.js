@@ -1,7 +1,61 @@
 (function () {
   'use strict';
 
+  /*
+    Alguns métodos foram sobrescritos no core,
+    visando manter compatibilidade com temas que não possuem a elegance atualizada.
+    - Métodos sobrescritos:
+      - init
+      - checkTrialByType
+  */
+
+  var buildLazyLoadUrl = function (enrollmentId, courseId, type) {
+    return ('/enrollments/:enrollment_id/courses/:course_id/' + type)
+            .replace(':enrollment_id', enrollmentId)
+            .replace(':course_id', courseId);
+  };
+
+
+  var getPaymentMethod = function (enrollmentId, courseId, apiKey) {
+    if (courseId === null || enrollmentId === null) {
+      return false;
+    }
+
+    console.warn('executed: lessonList.getPaymentMethod');
+
+    var request = $.ajax({
+      url: buildLazyLoadUrl(enrollmentId, courseId, 'payment_method'),
+      async: false,
+      headers: {
+        'Authorization': 'Token token=' + apiKey
+      }
+    });
+
+    return request && request.responseJSON.payment_method;
+  };
+
+
+  var getLessonsInfo = function (enrollmentId, courseId, apiKey) {
+    if (courseId === null || enrollmentId === null) {
+      return false;
+    }
+
+    console.warn('executed: lessonList.getLessonInfo');
+
+    var request = $.ajax({
+      url: buildLazyLoadUrl(enrollmentId, courseId, 'lessons_info'),
+      async: false,
+      headers: {
+        'Authorization': 'Token token=' + apiKey
+      }
+    });
+
+    return request && request.responseJSON.lessons_info;
+  };
+
   app.lessonList = {
+    onTrial: {},
+    paymentMethod: undefined,
     init: function () {
       var self = this;
 
@@ -14,14 +68,30 @@
       self.lessonActions = self.courseTree().data('lesson-actions');
       self.downloadAction = self.courseTree().data('download-action');
       self.currentLessonId = parseInt(self.courseTree().data('current-lesson-id'));
+      self.hasRequirements = $('.lesson-list-panel [data-requirements]').length > 0;
       self.apiKey = self.courseTree().data('api-key');
       self.translations = {};
       self.translations['lesson.release_at'] = self.courseTree().data('translation-release-at');
       self.translations['lesson.release_after'] = self.courseTree().data('translation-release-after');
       self.translations['product.course_content.views'] = self.courseTree().data('translation-course_content-views');
 
+      if (self.course && self.enrollment) {
+        var lessonsInfo = getLessonsInfo(self.enrollment.id, self.course.id, self.apiKey);
+
+        self.courseTree().data('enrollment',  Object.assign({}, self.enrollment, { lessons_info: lessonsInfo }));
+      }
+
       if (self.lessonProgress() && self.lessonProgress().completed) {
         $('.btn-next-lesson').removeClass('disabled');
+      }
+
+      if (self.lessonProgress() && !self.lessonProgress().completed) {
+        self.progressIcon('progress').removeClass('hide');
+      }
+
+
+      if (self.hasRequirements) {
+        self.checkNextButtonUnlocked();
       }
 
       if (self.courseTreeExists && !self.isActive) {
@@ -309,24 +379,43 @@
     },
 
     checkTrialByType: function (type, id) {
-      var $tree = $('#js-course-tree-ajax');
-      var enrollment = $tree.data('enrollment');
-      var constrains_name = 'trial_' + type + '_ids';
+      var self            = this;
+      var apiKey          = self.apiKey;
+      var constrainsName  = 'trial_' + type + '_ids';
+      var enrollmentId    = self.enrollment && self.enrollment.id;
+      var courseId        = self.course && self.course.id;
 
-      var payment_method = enrollment && enrollment.payment_method;
-      var constrains_tree = $tree.data('school-product') && $tree.data('school-product').trial_constrains;
-      var constrains = constrains_tree && payment_method && constrains_tree[payment_method];
+      var $tree           = $('#js-course-tree-ajax');
+      var enrollment      = $tree.data('enrollment');
+      var schoolProduct   = $tree.data('school-product');
 
-      if (constrains && !constrains.hasOwnProperty(constrains_name)) {
+      self.paymentMethod  = self.paymentMethod !== undefined ? self.paymentMethod : getPaymentMethod(enrollmentId, courseId, apiKey);
+      var constrainsTree  = schoolProduct && schoolProduct.trial_constrains;
+      var constrains      = constrainsTree && self.paymentMethod && constrainsTree[self.paymentMethod] || {};
+      var hasConstrains   = Object.keys(constrains).length > 0;
+
+      if (enrollmentId !== null && courseId !== null && !self.onTrial.hasOwnProperty(enrollmentId)) {
+        var request = $.ajax({
+          url: buildLazyLoadUrl(enrollmentId, courseId, 'on_trial'),
+          async: false,
+          headers: {
+            'Authorization': 'Token token=' + apiKey
+          }
+        });
+
+        self.onTrial[enrollmentId] = request && request.responseJSON.on_trial;
+      }
+
+      if (hasConstrains && !constrains.hasOwnProperty(constrainsName)) {
         return false;
       }
 
-      if (enrollment && !enrollment['on_trial?']) {
-        return false;
+      if (hasConstrains && constrains[constrainsName]) {
+        return constrains[constrainsName].indexOf(id) > -1;
       }
 
-      if (constrains_tree && constrains[constrains_name]) {
-        return constrains[constrains_name].indexOf(id) > -1;
+      if (enrollment && self.onTrial[enrollmentId]) {
+        return self.onTrial[enrollmentId];
       }
 
       return false;
@@ -506,6 +595,7 @@
           $list.append($courseContents);
           self.checkNextButtonUnlocked();
 
+          $(document).trigger('loaded-children');
         }
       });
     },
