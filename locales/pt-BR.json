@@ -205,7 +205,8 @@
     "enter": "Entrar",
     "not_have_account": "Não possui conta?",
     "create_account": "<b>CRIAR CONTA</b>",
-    "with_google": "Entrar com o google",
+    "login_only_with_google": "Entrar com o google",
+    "login_too_with_google": "Entrar com o google",
     "or": "OU"
   },
   "register": {
@@ -531,7 +532,11 @@
     "connect": {
       "create_account": "Crie sua conta",
       "signin_account": "Já possui uma conta?",
-      "signin_again": "Você está entrando em uma área segura. Por favor, faça login novamente"
+      "signin_again": "Você está entrando em uma área segura. Por favor, faça login novamente",
+      "login_only_with_google_title": "Entrar com o google",
+      "login_only_with_google": "Entrar com o google",
+      "login_too_with_google": "Entrar com o google",
+      "or": "OU"
     },
     "school_has_pre_approved": {
       "user_not_pre_approved": "Você ainda não foi aprovado pela escola. Para prosseguir com o checkout é necessário ser um aluno aprovado.",
