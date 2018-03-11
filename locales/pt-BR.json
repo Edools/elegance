@@ -205,7 +205,8 @@
     "enter": "Entrar",
     "not_have_account": "Não possui conta?",
     "create_account": "<b>CRIAR CONTA</b>",
-    "with_google": "Entrar com o google"
+    "with_google": "Entrar com o google",
+    "or": "OU"
   },
   "register": {
     "first_name": "Seu Nome",
