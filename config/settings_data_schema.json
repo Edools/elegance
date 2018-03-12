@@ -766,7 +766,7 @@
         }
       },
       {
-        "template": "<h3>Tópicos</h3><p>Encontre os ícones nestes endereços: <a target=\"_blank\" href=\"http://thesabbir.github.io/simple-line-icons/\">Simple Line Icons</a> e <a target=\"_blank\" href=\"https://fortawesome.github.io/Font-Awesome/icons/\">Fontawesome</a>.</p>"
+        "template": "<h3>Tópicos</h3><p>Encontre os ícones neste endereço: <a target=\"_blank\" href=\"http://thesabbir.github.io/simple-line-icons/\">Simple Line Icons</a>.</p>"
       },
       {
         "type": "repeatSection",
