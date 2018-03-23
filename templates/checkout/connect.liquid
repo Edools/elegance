@@ -22,16 +22,32 @@
               {% if login_only_with_google %}
                 <div class="page-signup-alt col-md-12">
                   <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <div class="title">{{ 'checkout.connect.login_only_with_google_title' | t }}</div>
-                    </div>
-
-                    <div class="panel-body">
-                      {{ 'checkout.connect.login_only_with_google' | t | login_with_google : 'btn btn-lg btn-info btn-block' }}
+                    <div class="panel-body" style="text-align:  center;">
+                      <button class="google-sign-in white" style="text-align: center">
+                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/G-on-clear.svg" alt="Google logo">
+                        {{ 'checkout.connect.login_only_with_google_title' | t | login_with_google : 'text' }}
+                      </button>
                     </div>
                   </div>
                 </div>
               {% else %}
+                {% assign login_too_with_google = current_school | has_feature: 'login_too_with_google' %}
+
+                {% if login_too_with_google %}
+                  <div class="page-signup-alt col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-body" style="text-align:  center;">
+                        <button class="google-sign-in white" style="text-align: center">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/G-on-clear.svg" alt="Google logo">
+                          {{ 'checkout.connect.login_too_with_google' | t | login_with_google : 'text' }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <center><h4>{{ 'checkout.connect.or' | t }}</h4></center>
+                {% endif %}
+
                 <div class="page-signup-alt col-md-6">
                   <div class="panel panel-default">
                     <div class="panel-heading">
@@ -70,15 +86,6 @@
                         </div>
                       {% endform %}
                       <!-- / Form -->
-
-                      {% assign login_too_with_google = current_school | has_feature: 'login_too_with_google' %}
-
-                      {% if login_too_with_google %}
-                        <center><h4>{{ 'checkout.connect.or' | t }}</h4></center>
-                        <p class="register">
-                          {{ 'checkout.connect.login_too_with_google' | t | login_with_google : 'btn btn-lg btn-info btn-block' }}
-                        </p>
-                      {% endif %}
                     </div>
                   </div>
                 </div>
@@ -117,15 +124,6 @@
                         </div>
                       {% endform %}
                       <!-- / Form -->
-
-                      {% assign login_too_with_google = current_school | has_feature: 'login_too_with_google' %}
-
-                      {% if login_too_with_google %}
-                        <center><h4>{{ 'checkout.connect.or' | t }}</h4></center>
-                        <p class="register">
-                          {{ 'checkout.connect.login_too_with_google' | t | login_with_google : 'btn btn-lg btn-info btn-block' }}
-                        </p>
-                      {% endif %}
                     </div>
                   </div>
                 </div>

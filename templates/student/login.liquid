@@ -5,7 +5,10 @@
 
     {% if login_only_with_google %}
       <p class="register">
-        {{ 'login.login_only_with_google' | t | login_with_google : 'btn btn-lg btn-info btn-block' }}
+        <button class="google-sign-in white">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/G-on-clear.svg" alt="Google logo">
+          {{ 'login.login_only_with_google' | t | login_with_google : 'text' }}
+        </button>
       </p>
     {% else %}
       {% form 'login' %}
@@ -32,8 +35,12 @@
       {% if login_too_with_google %}
         <center><h4>{{ 'login.or' | t }}</h4></center>
         <p class="register">
-          {{ 'login.login_too_with_google' | t | login_with_google : 'btn btn-lg btn-info btn-block' }}
+          <button class="google-sign-in white">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/G-on-clear.svg" alt="Google logo">
+            {{ 'login.login_too_with_google' | t | login_with_google : 'text' }}
+          </button>
         </p>
+
       {% endif %}
 
       <br/><br/>
