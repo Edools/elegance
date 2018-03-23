@@ -1,31 +1,54 @@
 <div class="login-page page">
   <div class="container page-container">
     <h1 tabindex="0" id="accessibility-main-content-login" class="form-header title">{{ 'login.enter_your_account' | t }}</h1>
-    {% form 'login' %}
-    {% if form.errors %}
-      <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+    {% assign login_only_with_google = current_school | has_feature: 'login_only_with_google' %}
+
+    {% if login_only_with_google %}
+      <p class="register">
+        <button class="google-sign-in white">
+          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/G-on-clear.svg" alt="Google logo">
+          {{ 'login.login_only_with_google' | t | login_with_google : 'text' }}
+        </button>
+      </p>
+    {% else %}
+      {% form 'login' %}
+        {% if form.errors %}
+          <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+        {% endif %}
+
+        <div class="form-group">
+          <input type="email" name="user[email]" class="form-control input-lg"
+                 placeholder="{{ 'login.email' | t }}" required>
+        </div>
+
+        <div class="form-group signin-password">
+          <input type="password" name="user[password]" class="form-control input-lg error"
+                 placeholder="{{ 'login.password' | t }}" required>
+          {{ 'login.forgot' | t | reset_password_link : 'forgot' }}
+        </div>
+
+        <input type="submit" value="{{ 'login.enter' | t }}" class="btn btn-primary btn-block btn-lg">
+      {% endform %}
+
+      {% assign login_too_with_google = current_school | has_feature: 'login_too_with_google' %}
+
+      {% if login_too_with_google %}
+        <center><h4>{{ 'login.or' | t }}</h4></center>
+        <p class="register">
+          <button class="google-sign-in white">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/G-on-clear.svg" alt="Google logo">
+            {{ 'login.login_too_with_google' | t | login_with_google : 'text' }}
+          </button>
+        </p>
+
+      {% endif %}
+
+      <br/><br/>
+
+      <p class="register">
+        {{ 'login.not_have_account' | t }}
+        {{ 'login.create_account' | t | register_link }}
+      </p>
     {% endif %}
-
-    <div class="form-group">
-      <input type="email" name="user[email]" class="form-control input-lg"
-             placeholder="{{ 'login.email' | t }}" required>
-    </div>
-
-    <div class="form-group signin-password">
-      <input type="password" name="user[password]" class="form-control input-lg error"
-             placeholder="{{ 'login.password' | t }}" required>
-      {{ 'login.forgot' | t | reset_password_link : 'forgot' }}
-    </div>
-
-    <input type="submit" value="{{ 'login.enter' | t }}" class="btn btn-primary btn-block btn-lg">
-
-    {% endform %}
-
-    <br/><br/>
-
-    <p class="register">
-      {{ 'login.not_have_account' | t }}
-      {{ 'login.create_account' | t | register_link }}
-    </p>
   </div>
 </div>

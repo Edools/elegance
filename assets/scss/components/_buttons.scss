@@ -229,3 +229,43 @@ input[type='button'] {
     width: 100%;
   }
 }
+
+.google-sign-in {
+  padding: 1px;
+  border: none;
+  border: none;
+  border-radius: 2px;
+  background-color: #4285f4;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .24), 0 0 1px 0 rgba(0, 0, 0, .12);
+  color: #fff;
+  &:hover {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .24), 0 0 2px 0 rgba(0, 0, 0, .12);
+  }
+  &:active {
+    background: #3367d6;
+  }
+
+  &.white {
+    background: #fff;
+    color: rgba(0,0,0,.54);
+    &:active {
+      background: #eee;
+    }
+  }
+
+  &:disabled {
+    background: rgba(0,0,0,.08);
+    box-shadow: none;
+    color: rgba(0,0,0,.4);
+  }
+
+  .text {
+    padding: 11px;
+    text-align: left;
+    white-space: nowrap;
+    letter-spacing: .2px;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: 'Roboto';
+  }
+}
