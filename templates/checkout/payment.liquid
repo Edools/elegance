@@ -139,8 +139,7 @@
                       {% include 'recaptcha', disable_button: true %}
 
                       <div class="text-center">
-                        <button type="submit"
-                                class="btn btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}</button>
+                        <input type="submit" class="btn btn-primary btn-finalize" value="{{ 'checkout.payment.credit_card_pay' | t }}">
                       </div>
                       {% endform %}
                     </div>
