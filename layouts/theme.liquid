@@ -53,6 +53,7 @@
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
 
   {{ content_for_header }}
+  {{ settings.view.injector.head }}
 
   <script defer src="{{ 'theme.base.vendors.min.js' | asset_url }}"></script>
   <script defer src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
@@ -77,5 +78,7 @@
 <div class="footer-wrapper">
   {% include 'footer' %}
 </div>
+
+  {{ settings.view.injector.body }}
 </body>
 </html>
