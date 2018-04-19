@@ -1054,5 +1054,25 @@
         }
       }
     ]
+  },
+  {
+    "name": "Injetor HTML/CSS/JS",
+    "id": "9",
+    "settings": [
+      {
+        "key": "view.injector.head",
+        "type": "textarea",
+        "templateOptions": {
+          "label": "Conteúdo para o cabeçalho"
+        }
+      },
+      {
+        "key": "view.injector.body",
+        "type": "textarea",
+        "templateOptions": {
+          "label": "Conteúdo para o corpo"
+        }
+      }
+    ]
   }
 ]
