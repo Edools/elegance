@@ -53,7 +53,10 @@
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
 
   {{ content_for_header }}
-  {{ settings.view.injector.head }}
+
+  {% if current_school | has_feature: 'custom_html' %}
+    {{ settings.view.injector.head }}
+  {% endif %}
 
   <script defer src="{{ 'theme.base.vendors.min.js' | asset_url }}"></script>
   <script defer src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
@@ -79,6 +82,8 @@
   {% include 'footer' %}
 </div>
 
-  {{ settings.view.injector.body }}
+  {% if current_school | has_feature: 'custom_html' %}
+    {{ settings.view.injector.body }}
+  {% endif %}
 </body>
 </html>
