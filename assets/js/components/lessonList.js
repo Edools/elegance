@@ -371,11 +371,11 @@
         return true;
       }
 
-      var enrollmentActivatedAt = moment(this.enrollment.activated_at);
+      var enrollmentActivatedAt = moment(this.enrollment.activated_at).startOf('day');
 
-      var releaseTime = releaseAt ? moment(releaseAt) : enrollmentActivatedAt.add(releaseAfter, 'days');
+      var releaseTime = releaseAt ? moment(releaseAt).startOf('day') : enrollmentActivatedAt.add(releaseAfter, 'days');
 
-      return moment() > releaseTime;
+      return moment().startOf('day') >= releaseTime;
     },
 
     checkTrialByType: function (type, id) {
