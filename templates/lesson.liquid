@@ -12,7 +12,7 @@
             </div>
 
             <div class="control-back">
-              <a class="btn btn-default" href="{{ enrollment | course_path:course.id }}">
+              <a class="btn btn-default" href="{{ enrollment | back_path: course.id }}">
                 <i class="icon-arrow-left"></i>
                 <span>{{ 'general.back' | t }}</span>
               </a>
