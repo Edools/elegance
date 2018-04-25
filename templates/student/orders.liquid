@@ -159,7 +159,8 @@
               {% endif %}
             </td>
 
-            {% if 'confirmed, no_wait_processing' contains order.status %}
+            {% assign statuses = "confirmed,no_wait_processing" | split: "," %}
+            {% if statuses contains order.status %}
               <td id="order-{{ order.id }}-actions" class="column text-center">
                 <div class="subscription-actions">
                   {% if order.merchant_payment_method == 'credit_card' %}
