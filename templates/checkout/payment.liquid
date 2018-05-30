@@ -69,12 +69,21 @@
                       <div class="form-group card-wrapper"></div>
 
                       <div class="form-group">
+                        {% if credit_card.active %}
+                          <div class="alert alert-info">
+                            {{ 'checkout.payment.credit_card_warning' | t }}
+                          </div>
+                        {% endif %}
+
                         <label class="control-label">{{ 'checkout.payment.credit_card_number' | t }}</label>
                         <input id="card-number"
                                type="text"
                                name="order[credit_card][number]"
                                value="{{ credit_card.number }}"
                                class="form-control"
+                               {% if credit_card.active %}
+                                 disabled
+                               {% endif %}
                                required>
                       </div>
 
@@ -85,6 +94,9 @@
                                name="order[credit_card][name]"
                                value="{{ credit_card.name }}"
                                class="form-control"
+                               {% if credit_card.active %}
+                                 disabled
+                               {% endif %}
                                required>
                       </div>
 
@@ -96,6 +108,9 @@
                                  name="order[credit_card][expiry]"
                                  value="{{ credit_card.expiry }}"
                                  class="form-control"
+                                 {% if credit_card.active %}
+                                   disabled
+                                 {% endif %}
                                  required>
                         </div>
                         <div class="form-group col-sm-6">
@@ -105,6 +120,9 @@
                                  name="order[credit_card][cvc]"
                                  value="{{ credit_card.cvc }}"
                                  class="form-control"
+                                 {% if credit_card.active %}
+                                   disabled
+                                 {% endif %}
                                  required>
                         </div>
                       </div>
@@ -136,7 +154,9 @@
                         </div>
                       {% endif %}
 
-                      {% include 'recaptcha', disable_button: true %}
+                      {% unless credit_card.active %}
+                        {% include 'recaptcha', disable_button: true %}
+                      {% endunless %}
 
                       <div class="text-center">
                         <button type="submit"
