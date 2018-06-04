@@ -584,6 +584,7 @@
       "bank_transfer_warning": "Você será redirecionado para a página do Banco para inserir as informações necessárias para o débito online. Sendo a transação realizada com sucesso, o curso será liberado.",
       "bank_transfer_pay": "Ir para o Banco",
       "trial_purchase_warning": "Você será cobrado apenas no fim do período gratuito de testes.<br/>É possível cancelar o seu pedido a qualquer momento durante esse período",
+      "credit_card_warning": "Sua conta já possui um cartão ativo, não é possível usar outro.",
       "installment_amount": {
         "one": "{{ amount }} à vista",
         "other": "{{ count }}x de {{ amount }}"
