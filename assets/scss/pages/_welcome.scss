@@ -1,0 +1,28 @@
+.welcome-page {
+  .welcome-page-content {
+    .text-control {
+      text-align: center;
+    }
+
+    .media-control {
+      padding-top: 30px;
+      text-align: center;
+
+      img {
+        display: inline-block;
+        width: 50%;
+        height: auto;
+      }
+    }
+
+    .term-of-use-control {
+      padding-top: 30px;
+      text-align: center;
+    }
+
+    .button-control {
+      padding-top: 30px;
+      text-align: center;
+    }
+  }
+}
