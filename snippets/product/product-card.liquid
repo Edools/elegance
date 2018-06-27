@@ -28,14 +28,14 @@
       <div tabindex="0" class="price">
         {% if first_option.promotional == true %}
           <span aria-hidden="true" class="base-price">
-            <strike >{{ first_option.base_price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway }}</strike>
+            <strike >{{ first_option.base_price | money_option_presentation_with_taxes: first_option, gateway }}</strike>
           </span>
         {% endif %}
 
         {% if first_option.kind == 'subscription' %}
           <span  class="final-price"> {{ first_option.price | money_option_presentation: first_option.kind, first_option.period, 'full', 1 }}</span>
         {% else %}
-          <span aria-label="{{ first_option.price | money_without_currency | remove: ',00' }} reais" class="final-price">{{ first_option.price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway }} </span>
+          <span aria-label="{{ first_option.price | money_without_currency | remove: ',00' }} reais" class="final-price">{{ first_option.price | money_option_presentation_with_taxes: first_option, gateway }} </span>
         {% endif %}
 
         {% if first_option.trials > 0 %}
@@ -57,12 +57,12 @@
                 <li>
                   {% if gateway.gateway == 'hotmart' %}
                     <a href="{{ option.hotmart_config.hotmart_checkout_url }}">
-                      {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway }}
+                      {{ option.price | money_option_presentation_with_taxes: option, gateway }}
                     </a>
                   {% else %}
                     <a id="add-to-cart-product-{{ product.id }}-{{ option.id }}"
                        href="{{ product | add_to_cart_path: option }}">
-                      {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway }}
+                      {{ option.price | money_option_presentation_with_taxes: option, gateway }}
 
                       {% if option.trials > 0 %}
                         <span>{{ 'product.trial' | t: count: option.trials }}</span>
