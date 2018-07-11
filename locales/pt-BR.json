@@ -226,7 +226,8 @@
     "password_reset": "Redefinição de senha",
     "reset": "Redefinir",
     "password": "Nova senha",
-    "password_confirmation": "Confirmação da nova senha"
+    "password_confirmation": "Confirmação da nova senha",
+    "strong": "Sua senha deve conter letras minúsculas, letras maiúsculas, números e caracteres especiais."
   },
   "accept_invitation": {
     "choose_password": "Defina sua senha",

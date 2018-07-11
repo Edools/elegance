@@ -194,7 +194,8 @@
     "password_reset": "Redefinición de contraseña",
     "reset": "Redefinir",
     "password": "Nueva contraseña",
-    "password_confirmation": "Confirmación de nueva contraseña"
+    "password_confirmation": "Confirmación de nueva contraseña",
+    "strong": "Su contraseña debe contener letras minúsculas, letras mayúsculas, números y caracteres especiales."
   },
   "accept_invitation": {
     "choose_password": "Defina su contraseña",
