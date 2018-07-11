@@ -6,10 +6,14 @@
         <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
       {% endif %}
 
+      {% if current_school | has_feature: 'strong_password_policy' %}
+      <div class="alert alert-danger" style="display: none"><li>{{ 'password_reset.strong' | t }}</li></div>
+      {% endif %}
+
       <input type="hidden" name="user[invitation_token]" value="{{ user.invitation_token }}" required>
 
       <div class="form-group signin-password">
-        <input type="password" name="user[password]" class="form-control input-lg error"
+        <input type="password" name="user[password]" class="form-control input-lg error {% if current_school | has_feature: 'strong_password_policy' %}strong--password{% endif %}"
                placeholder="{{ 'accept_invitation.password' | t }}" required>
       </div>
 
