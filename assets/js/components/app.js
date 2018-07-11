@@ -70,6 +70,7 @@
       app.timeTags();
       app.bindPostsForm();
       app.accessibility();
+      app.bindStrongPassword();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
     }
