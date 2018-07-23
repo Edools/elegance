@@ -17,18 +17,22 @@
        aria-labelledby="headingThree">
     <div class="panel-body">
       <div class="account-form">
+        {% if current_school | has_feature: 'strong_password_policy' %}
+        <div class="alert alert-danger" style="display: none"><li>{{ 'password_reset.strong' | t }}</li></div>
+        {% endif %}
+
         <div class="row">
           <div class="col-md-6">
             <div class="form-group signin-password">
               <label class="control-label">{{ 'password_reset.password' | t }}</label>
-              <input type="password" name="user[password]" class="form-control"
+              <input type="password" name="user[password]" class="form-control {% if current_school | has_feature: 'strong_password_policy' %}strong--password{% endif %}"
                      required>
             </div>
 
             <div class="form-group signin-password">
               <label class="control-label">{{ 'password_reset.password_confirmation' | t }}</label>
               <input type="password" name="user[password_confirmation]" class="form-control"
-                     required>
+                    required>
             </div>
           </div>
         </div>

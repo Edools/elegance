@@ -197,7 +197,8 @@
     "password_reset": "Password Reset",
     "reset": "Reset",
     "password": "New Password",
-    "password_confirmation": "Confirm New Password"
+    "password_confirmation": "Confirm New Password",
+    "strong": "Your password must contain lowercase letters, uppercase letters, numbers, and special characters."
   },
   "accept_invitation": {
     "choose_password": "Choose your Password",
