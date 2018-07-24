@@ -35,7 +35,7 @@
 
         $('.strong--password')
             .bind('change focus paste keyup', function () {
-                if ( $(this).val() !== '' && (strength($(this).val()) >= 2) ) {
+                if ( $(this).val() !== '' && (strength($(this).val()) >= 3) ) {
                     alert.hide();
                     form.find('input[type="submit"]').removeClass('disabled');
                 } else {
