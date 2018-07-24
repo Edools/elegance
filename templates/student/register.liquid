@@ -88,9 +88,11 @@
       {% endif %}
     {% endfor %}
 
+    {% include 'recaptcha_by_feature', disable_button: true, feature: 'registrations_with_recaptcha' %}
+
     <div class="form-actions">
       <input type="submit" value="{{ 'register.create_account' | t }}"
-             class="btn btn-primary btn-block btn-lg">
+             class="btn btn-primary btn-block btn-lg"  {% if has_recaptcha_by_feature %}disabled{% endif %} />
     </div>
     {% endform %}
   </div>
