@@ -45,7 +45,6 @@
             })
             .bind('blur', function () {
                 alert.hide();
-                form.find('input[type="submit"]').removeClass('disabled');
             });
     }
   })();
