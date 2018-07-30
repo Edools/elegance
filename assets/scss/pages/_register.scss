@@ -22,4 +22,11 @@
     margin: $padding-large-vertical * 2 0;
     text-align: right;
   }
+
+  .js-recaptcha {
+    display: flex;
+    margin-bottom: 15px;
+
+    justify-content: center;
+  }
 }
