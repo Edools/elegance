@@ -31,9 +31,11 @@
 
     <div class="btn-group">
       {% if product.payment_options.size > 1 %}
-        <a class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown">
-          {{ 'product.buy' | t }}
-        </a>
+        <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+          {{ 'product.buy' | t }} <span class="caret"></span>
+        </button>
 
         <ul class="dropdown-menu">
           {% for option in product.payment_options %}
