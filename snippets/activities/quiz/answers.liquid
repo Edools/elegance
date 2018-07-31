@@ -1,14 +1,27 @@
 {% if answer.corrected_at %}
   {% if lesson.min_grade > 0 %}
-    {% if answer.approved? %}
-      <p class="alert alert-success alert-approved">
-        {{ 'quiz.messages.approved' | t: score: answer.score }}
-      </p>
+
+    {% if lesson.activity.type == 'RandomQuiz' %}
+
+      {% assign messages = answer | by_tags_and_difficult: lesson %}
+      <section class="random-quiz-messages">
+        {% for message in messages %}
+          <p>{{ 'quiz.random_quiz_hits' | t: tag: message.tag, difficult: message.difficult, count: message.hits }}</p>
+        {% endfor %}
+      </section>
+
     {% else %}
-      <p class="alert alert-danger alert-disapproved">
-        {{ 'quiz.messages.disapproved' | t: score: answer.score, min_grade: lesson.min_grade }}
-      </p>
+      {% if answer.approved? %}
+        <p class="alert alert-success alert-approved">
+          {{ 'quiz.messages.approved' | t: score: answer.score }}
+        </p>
+      {% else %}
+        <p class="alert alert-danger alert-disapproved">
+          {{ 'quiz.messages.disapproved' | t: score: answer.score, min_grade: lesson.min_grade }}
+        </p>
+      {% endif %}
     {% endif %}
+
   {% endif %}
 
   {% if attempts_remaining > 0 %}

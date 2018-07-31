@@ -23,7 +23,7 @@
 
         <div class="form-group signin-password">
           <input type="password" name="user[password]" class="form-control input-lg error"
-                 placeholder="{{ 'login.password' | t }}" required>
+                 placeholder="{{ 'login.password' | t }}" {% if current_school | has_feature: 'autocomplete_off' %}autocomplete="off"{% endif %} required>
           {{ 'login.forgot' | t | reset_password_link : 'forgot' }}
         </div>
 

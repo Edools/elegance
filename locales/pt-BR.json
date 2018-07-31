@@ -712,6 +712,10 @@
     "label": "Material complementar"
   },
   "quiz": {
+    "random_quiz_hits": {
+      "one": "Você acertou {{count}} questão de {{tag}} com a dificuldade {{difficult}}.",
+      "other": "Você acertou {{count}} questões de {{tag}} com a dificuldade {{difficult}}."
+    },
     "messages": {
       "foo": "foo",
       "approved": "Você obteve {{score}} pontos, portanto, você foi APROVADO nessa avaliação.",
