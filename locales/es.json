@@ -128,7 +128,7 @@
       "confirmation": "La confirmación de contraseña no está de acuerdo con la contraseña criada"
     },
     "organization_id": {
-      "not_found_user_email": "No fue encontrado ningún alumno con el correo electrónico informado"
+      "not_found_user_email": "Si el e-mail informado tiene una cuenta, le enviaremos el enlace de restablecimiento de contraseña"
     },
     "reset_password_token": {
       "invalid": "Token para crear nueva contraseña no válida"
@@ -188,7 +188,7 @@
     "email": "Email",
     "password_reset": "Redefinición de contraseña",
     "reset": "Redefinir",
-    "successfully_sent": "Listo. Ahora usted va a recibir un correo electrónico con las instrucciones para la recuperación de la contraseña."
+    "successfully_sent": "Si el e-mail informado tiene una cuenta, le enviaremos el enlace de restablecimiento de contraseña"
   },
   "password_reset": {
     "password_reset": "Redefinición de contraseña",

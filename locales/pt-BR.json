@@ -145,7 +145,7 @@
       "confirmation": "A confirmação de senha não bateu com a senha criada"
     },
     "organization_id": {
-      "not_found_user_email": "Não foi encontrado nenhum aluno com o email informado"
+      "not_found_user_email": "Caso o e-mail informado tenha uma conta, enviaremos o link de redefinição de senha"
     },
     "reset_password_token": {
       "invalid": "Token para criar nova senha inválido"
@@ -221,7 +221,7 @@
     "email": "Email",
     "password_reset": "Redefinição de senha",
     "reset": "Redefinir",
-    "successfully_sent": "Pronto. Agora você vai receber um email com as instruções para a recuperação da senha."
+    "successfully_sent": "Caso o e-mail informado tenha uma conta, enviaremos o link de redefinição de senha"
   },
   "password_reset": {
     "password_reset": "Redefinição de senha",
