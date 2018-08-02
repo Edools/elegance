@@ -131,7 +131,7 @@
       "confirmation": "Incorrect Password Confirmation"
     },
     "organization_id": {
-      "not_found_user_email": "No user was found with the e-mail informed"
+      "not_found_user_email": "If the informed email has an account, we will send the password reset link"
     },
     "reset_password_token": {
       "invalid": "Invalid Token to create a new password"
@@ -191,7 +191,7 @@
     "email": "Email",
     "password_reset": "Password Reset",
     "reset": "Reset",
-    "successfully_sent": "Done. Now we sent you an e-mail with instructions to reset your password."
+    "successfully_sent": "If the informed email has an account, we will send the password reset link"
   },
   "password_reset": {
     "password_reset": "Password Reset",
