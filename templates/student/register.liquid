@@ -21,7 +21,9 @@
     </div>
 
     <div class="form-group signin-password">
-      <input type="password" name="user[password]" class="form-control input-lg error {% if current_school | has_feature: 'strong_password_policy' %}strong--password{% endif %}"
+      {% assign has_feature_password = current_school | has_feature: 'strong_password_policy' %}
+
+      <input type="password" name="user[password]" class="form-control input-lg error {% if has_feature_password %}strong--password{% endif %}"
              placeholder="{{ 'register.password' | t }}" required>
     </div>
 
