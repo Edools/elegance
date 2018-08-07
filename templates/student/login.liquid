@@ -28,6 +28,8 @@
         </div>
 
         <input type="submit" value="{{ 'login.enter' | t }}" class="btn btn-primary btn-block btn-lg">
+        
+        {% include 'recaptcha_by_feature', disable_button: true, feature: 'login_with_recaptcha' %}
       {% endform %}
 
       {% assign login_too_with_google = current_school | has_feature: 'login_too_with_google' %}
@@ -43,7 +45,7 @@
 
       {% endif %}
 
-      <br/><br/>
+      <br/>
 
       <p class="register">
         {{ 'login.not_have_account' | t }}
