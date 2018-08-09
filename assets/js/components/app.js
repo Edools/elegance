@@ -53,7 +53,7 @@
           var $parents = $field.parent();
           var $validationMessage = $('<span />', {
             class: 'color-danger',
-            text: 'CPF inválido'
+            text: 'O cpf preenchido é inválido.'
           });
           var $button = $field.parents('form').find('button[type="submit"], input[type="submit"]');
           var $validationMessagesList = $parents.find('.color-danger');
