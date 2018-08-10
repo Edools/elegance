@@ -139,7 +139,8 @@
       "invalid": "O email não é válido"
     },
     "password": {
-      "too_short": "A senha é muito curta (mínimo: {{ count }} caracteres)"
+      "too_short": "A senha é muito curta (mínimo: {{ count }} caracteres)",
+      "used": "Você não pode usar uma senha antiga"
     },
     "password_confirmation": {
       "confirmation": "A confirmação de senha não bateu com a senha criada"

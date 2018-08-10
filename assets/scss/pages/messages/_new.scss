@@ -5,4 +5,15 @@
       max-width: 512px;
     }
   }
+
+  .actions {
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    .js-recaptcha {
+      margin-right: 15px;
+    }
+  }
 }
