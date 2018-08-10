@@ -47,7 +47,7 @@
     bindValidationCpf() {
       var $userCpf = $('#user-cpf');
 
-      if ($userCpf.data('validate-cpf')) {        
+      if ($userCpf.data('validate-cpf')) {
         $userCpf.on('keyup', function() {
           var $field = $(this);
           var $parents = $field.parent();
@@ -58,19 +58,19 @@
           var $button = $field.parents('form').find('button[type="submit"], input[type="submit"]');
           var $validationMessagesList = $parents.find('.color-danger');
           var isValid = CPF.validate($field.val());
-          
-          if ($validationMessagesList.size() < 1 && !isValid) {
+
+          if ($validationMessagesList.size() < 1 && !isValid && $field.val() !== '') {
             $field.after($validationMessage);
 
             $button.prop('disabled', true);
-          } 
-          
+          }
+
           if (isValid || $field.val() === '') {
             $validationMessagesList.remove();
-            
+
             $button.prop('disabled', false);
           }
-    
+
         });
       }
     },
