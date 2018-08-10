@@ -44,6 +44,37 @@
       $(document).trigger('app:bind:check_form_validity');
     },
 
+    bindValidationCpf() {
+      var $userCpf = $('#user-cpf');
+
+      if ($userCpf.data('validate-cpf')) {        
+        $userCpf.on('keyup', function() {
+          var $field = $(this);
+          var $parents = $field.parent();
+          var $validationMessage = $('<span />', {
+            class: 'color-danger',
+            text: 'O cpf preenchido é inválido.'
+          });
+          var $button = $field.parents('form').find('button[type="submit"], input[type="submit"]');
+          var $validationMessagesList = $parents.find('.color-danger');
+          var isValid = CPF.validate($field.val());
+          
+          if ($validationMessagesList.size() < 1 && !isValid) {
+            $field.after($validationMessage);
+
+            $button.prop('disabled', true);
+          } 
+          
+          if (isValid || $field.val() === '') {
+            $validationMessagesList.remove();
+            
+            $button.prop('disabled', false);
+          }
+    
+        });
+      }
+    },
+
     init: function () {
       app.bindGlobal();
       app.bindRecaptcha();
@@ -71,6 +102,7 @@
       app.bindPostsForm();
       app.accessibility();
       app.bindStrongPassword();
+      app.bindValidationCpf();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
     }
