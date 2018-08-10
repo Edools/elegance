@@ -31,12 +31,13 @@
         var $editor = $(editor);
         var $form = $editor.parents('form');
         var editorId = $editor.attr('id');
+        var hasCaptcha = $form.find('.js-recaptcha').size();
 
         if ($form) {
           var $submitButton = $form.find('button[type="submit"]');
 
           CKEDITOR.instances[editorId].on('change', function () {
-            if (this.getData().length) {
+            if (this.getData().length && !hasCaptcha) {
               $submitButton.attr('disabled', false);
             } else {
               $submitButton.attr('disabled', true);

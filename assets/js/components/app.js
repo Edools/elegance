@@ -70,7 +70,6 @@
 
             $button.prop('disabled', false);
           }
-
         });
       }
     },
