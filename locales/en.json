@@ -125,7 +125,8 @@
       "invalid": "E-mail not valid"
     },
     "password": {
-      "too_short": "Password too short (minimum {{ count }} characters"
+      "too_short": "Password too short (minimum {{ count }} characters",
+      "used": "You can't use an old password"
     },
     "password_confirmation": {
       "confirmation": "Incorrect Password Confirmation"
