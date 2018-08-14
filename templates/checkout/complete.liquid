@@ -4,6 +4,8 @@
   {% assign required = 'required' %}
 {% endif %}
 
+{% assign has_cpf_validation = current_school | has_feature: 'cpf_validation' %}
+
 <div class="checkout-page checkout-complete-page page">
   <div class="container">
     {% include "checkout/return", return_url: "/cart" %}
@@ -65,7 +67,7 @@
                           <div class="form-group {{ required }} {% if form.errors.cpf %}has-error{% endif %}">
                             <label class="control-label">{{ 'checkout.complete.cpf' | t }}</label>
                             <input type="text" id="user-cpf" ui-mask="999.999.999-99" name="user[cpf]"
-                                   value="{{ current_user.cpf }}" class="form-control" {{ required }}>
+                                   value="{{ current_user.cpf }}" class="form-control" {% if has_cpf_validation %}data-validate-cpf="true"{% endif %} {{ required }}>
                           </div>
                         </div>
                         <div class="col-md-6">

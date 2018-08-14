@@ -49,3 +49,9 @@ i {
   vertical-align: middle;
   font-size: inherit;
 }
+
+.color-danger {
+  display: inline-block;
+  margin-top: 5px;
+  color: $brand-danger;
+}
