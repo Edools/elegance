@@ -142,7 +142,11 @@
       "can_not_apply_coupon": "It was not possible to apply your discount voucher. Make sure you type the characters correctly. If the error continues, please contact our support team to check if voucher is still valid",
       "limit_subscriptions": "It was not possible to add the item to your cart. You can only subscribe one item per purchase",
       "kind_invalid": "It was not possible to add the item to your cart. This item cannot be processed with the items already in cart. Finish your purchase and try again.",
-      "invalid_user_coupon" : "You don't have permission to use this coupon"
+      "invalid_user_coupon" : "You don't have permission to use this coupon",
+      "limit_trial_purchases": "Could not add item to cart. You can only add one trial product per purchase.",
+      "exceeded_orders_limit": "You have reached the limit of new purchases!",
+      "clone_and_original": "This product can not be sold together",
+      "invalid_payment_config": "Could not add item to cart. You can not add products with different payment methods."
     }
   },
   "navbar": {

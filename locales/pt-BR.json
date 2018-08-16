@@ -159,6 +159,7 @@
       "invalid_user_coupon": "Você não tem permissão para utilizar este cupom",
       "limit_trial_purchases": "Não foi possível adicionar o item no carrinho. Você só pode adicionar um produto com trial por compra.",
       "exceeded_orders_limit": "Você atingiu o limite de novas compras!",
+      "clone_and_original": "Este produto não pode ser vendido em conjunto",
       "invalid_payment_config": "Não foi possível adicionar o item no carrinho. Você não pode adicionar produtos com formas de pagamento diferentes."
     },
     "recaptcha": {
