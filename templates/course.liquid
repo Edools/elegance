@@ -90,13 +90,13 @@
             </li>
 
             {% assign random_quiz_enabled = current_school | has_feature: 'random-quiz-statistics' %}
-            {% unless random_quiz_enabled %}
+            {% if random_quiz_enabled %}
               <li class="title">
                 <a href="#course-statistics" data-toggle="tab">
                   {{ 'path.random_quiz_statistics' | t }}
                 </a>
               </li>
-            {% endunless %}
+            {% endif %}
             
           </ul>
 
