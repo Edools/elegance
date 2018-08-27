@@ -2,8 +2,6 @@
     'use strict';
 
     app.randomQuizStatistics = function () {
-        window.teste = "{{ 'course.random_quiz_statistics.answered_questions' | t }}";
-
         var $statistic = $(".statistic");
         var statisticArray = [];
         var finalArray = [];
