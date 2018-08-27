@@ -1,0 +1,84 @@
+.statistic-item {
+  margin: 20px 0;
+  padding: 20px 20px 40px;
+  border: 1px solid $border-color-base;
+  border-radius: $border-radius-large;
+  background: $body-bg;
+
+  .statistic-label {
+    margin-bottom: 8px;
+    padding: 0 30px;
+  }
+
+  .tag,
+  .difficulty {
+    display: inline-block;
+    margin: 4px 0 8px;
+    padding: 4px 8px;
+    border: 1px solid $btn-info-color;
+    border-radius: $border-radius-large;
+    background-color: $btn-info-bg;
+    color: $btn-info-color;
+    font-size: $font-size-h6;
+  }
+
+  .statistics-board {
+    $color_total: darken($light, 40%);
+    $color_correct: darken($brand-success, 20%);
+    $color_wrong: darken($brand-danger, 15%);
+    $color_performance: $brand-info;
+
+    @mixin statistic-box($color) {
+      border-color: $color;
+      background-color: transparentize($color, .9);
+      color: $color;
+      .box-footer {
+        background-color: transparentize(darken($color, 20%), .2);
+      }
+    }
+
+    .statistic-box {
+      padding: 0;
+      border-width: 1px;
+      border-style: solid;
+      .result {
+        padding: 0 10px;
+        text-align: right;
+        font-weight: 300;
+        font-size: 36px;
+      }
+      .name {
+        margin-top: -24px;
+        padding: 0 12px;
+        text-align: right;
+        text-transform: lowercase;
+        font-weight: 300;
+        font-size: 16px;
+      }
+
+      .box-footer {
+        padding: 4px 10px;
+        width: 100%;
+        p {
+          margin: 0;
+          color: white;
+          text-transform: uppercase;
+          font-size: 12px;
+        }
+      }
+
+      &.total {
+        @include statistic-box($color_total);
+      }
+      &.correct {
+        @include statistic-box($color_correct);
+      }
+      &.wrong {
+        @include statistic-box($color_wrong);
+      }
+      &.performance {
+        @include statistic-box($color_performance);
+      }
+    }
+  }
+}

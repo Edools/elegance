@@ -652,7 +652,8 @@
     "courses": "<strong>Cursos</strong> do pacote",
     "certificate": "Solicitar Certificado",
     "presents": "apresenta :",
-    "filter_by_name": "Buscar por nome do curso"
+    "filter_by_name": "Buscar por nome do curso",
+    "random_quiz_statistics" : "<strong>Desempenho<strong>"
   },
   "course": {
     "billboard": "Quadro de <strong>Avisos</strong>",
@@ -670,7 +671,15 @@
       "missing_activities": "Atividades faltantes",
       "scoring_average": "Média de pontuação"
     },
-    "load_more": "Carregar mais cursos"
+    "load_more": "Carregar mais cursos",
+    "random_quiz_statistics": {
+      "general": "Desempenho Geral",
+      "answered_questions" : "Questões Resolvidas",
+      "right_questions" : "Acertos",
+      "wrong_questions" : "Erros",
+      "performance" : "Questões Resolvidas"
+
+    }
   },
   "home": {
     "social": {

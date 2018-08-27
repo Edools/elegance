@@ -13,7 +13,7 @@
           <div class="course-header-info">
 
             <h2 class="title">{{ course.name }}</h2>
-
+            
             <div class="description">
               <p>{{ enrollment | total_max_attendance_message }}</p>
               <p>{{ enrollment | use_max_attendance_message }}</p>
@@ -88,6 +88,16 @@
                 {{ 'course.complementary_material' | t }}
               </a>
             </li>
+
+            {% assign random_quiz_enabled = current_school | has_feature: 'random-quiz-statistics' %}
+            {% if random_quiz_enabled %}
+              <li class="title">
+                <a href="#course-statistics" data-toggle="tab">
+                  {{ 'path.random_quiz_statistics' | t }}
+                </a>
+              </li>
+            {% endif %}
+            
           </ul>
 
           <div class="dashboards-body tab-content">
@@ -107,6 +117,10 @@
 
             <div role="tabpanel" class="tab-pane" id="course-performance">
               {% include 'course/performance/performance-index' content: enrollment %}
+            </div>
+
+            <div role="tabpanel" class="tab-pane" id="course-statistics">
+              {% include 'lesson/random_quiz_statistics' content: enrollment %}
             </div>
           </div>
         </div>
