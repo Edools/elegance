@@ -89,7 +89,7 @@
               </a>
             </li>
 
-            {% assign random_quiz_enabled = current_school | has_feature: 'random-quiz-statistics' %}
+            {% assign random_quiz_enabled = current_school | has_feature: 'random_quiz_statistics' %}
             {% if random_quiz_enabled %}
               <li class="title">
                 <a href="#course-statistics" data-toggle="tab">
