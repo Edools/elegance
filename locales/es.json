@@ -140,7 +140,11 @@
       "can_not_apply_coupon": " No fue posible aplicar el cupón. Asegúrese de que ha escrito correctamente los caracteres. En caso de que el error persista, póngase en contacto con nuestro equipo para averiguar si el cupón aún es válido.",
       "limit_subscriptions": "No fue posible añadir el articulo a la cesta de compras. Usted sólo puede firmar un articulo por compra.",
       "kind_invalid": "No fue posible añadir el articulo a la cesta. Este artículo no puede ser procesado junto con los que se encuentran en la cesta, termine la compra y entente nuevamente.",
-      "invalid_user_coupon" : "Usted no tiene permiso para utilizar este cupón"
+      "invalid_user_coupon" : "Usted no tiene permiso para utilizar este cupón",
+      "limit_trial_purchases": "No se pudo agregar el elemento en la cesta de compras. Usted sólo puede agregar un producto a prueba de compra.",
+      "exceeded_orders_limit": "Usted ha alcanzado el límite de nuevas compras!",
+      "clone_and_original": "Este producto no se puede vender en conjunto",
+      "invalid_payment_config": "No se pudo agregar el elemento en el carro. No puede agregar productos con formas de pago diferentes."
     }
   },
   "navbar": {
