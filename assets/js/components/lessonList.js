@@ -75,6 +75,12 @@
       self.translations['lesson.release_after'] = self.courseTree().data('translation-release-after');
       self.translations['product.course_content.views'] = self.courseTree().data('translation-course_content-views');
 
+      if (self.renderAttendanceElement) {
+        $(document).on('activated-lesson', function() {
+            self.renderAttendanceElement();
+        });
+      }
+
       if (self.course && self.enrollment) {
         var lessonsInfo = getLessonsInfo(self.enrollment.id, self.course.id, self.apiKey);
 
@@ -598,6 +604,31 @@
           $(document).trigger('loaded-children');
         }
       });
+    },
+
+    renderAttendanceElement: function () {
+      var self = this;
+
+      if (!self.lessonProgress)
+        return false;
+
+      var progress = self.lessonProgress();
+      var translation = self.translations['product.course_content.views'];
+
+      translation = translation.replace('{{ progress.views }}', progress.views);
+      translation = translation.replace('{{ enrollment.max_attendance_length }}', self.enrollment.max_attendance_length);
+
+      var el = $('.js-lesson[data-lesson-id=' + progress.lesson_id + '] .right');
+      var isAttempts = progress && progress.views <= self.enrollment.max_attendance_length && self.enrollment.max_attendance_type == 'attempts';
+
+      if (el.find('.js-attendance').size() === 0 && self.lessonActions && isAttempts) {
+        var html = '<span class="lesson-views attempt js-attendance badge" title="' + translation + '" data-tooltip-placement="left" data-toggle="tooltip">' +
+                    '<span>' + progress.views + '/' + self.enrollment.max_attendance_length + '</span>' +
+                    '</span>';
+
+        el.append(html);
+      }
+
     },
 
     checkNextButtonUnlocked: function () {

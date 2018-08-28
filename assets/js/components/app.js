@@ -102,6 +102,7 @@
       app.accessibility();
       app.bindStrongPassword();
       app.bindValidationCpf();
+      app.randomQuizStatistics();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
     }
