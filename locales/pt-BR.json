@@ -128,6 +128,9 @@
     "login": {
       "invalid": "Email e/ou senha inválidos"
     },
+    "phone": {
+      "format": " telefone precisa ter de 10 à 11 números, incluindo o DDD. Ex (99) 99999-9999"
+    },
     "subject": {
       "blank": "Assunto não pode ficar em branco"
     },
