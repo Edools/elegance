@@ -677,12 +677,12 @@
     },
     "load_more": "Carregar mais cursos",
     "random_quiz_statistics": {
+      "not_ready" : "Você ainda não realizou exames.",
       "general": "Desempenho Geral",
       "answered_questions" : "Questões Resolvidas",
       "right_questions" : "Acertos",
       "wrong_questions" : "Erros",
       "performance" : "Questões Resolvidas"
-
     }
   },
   "home": {
