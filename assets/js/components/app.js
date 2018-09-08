@@ -44,6 +44,18 @@
       $(document).trigger('app:bind:check_form_validity');
     },
 
+    bindCepService() {
+      $(document).on('cep-result', function(_event, result){
+        if (result) {
+          $('input[name="user[address_attributes][street]"]').val(result.street);
+          $('input[name="user[address_attributes][city]"]').val(result.city);
+          $('input[name="user[address_attributes][state]"]').val(result.state);
+          $('input[name="user[address_attributes][district]"]').val(result.neighborhood);
+          $('input[name="user[address_attributes][complement]"]').val(result.complement);
+        }
+      });
+    },
+
     bindValidationCpf() {
       var $userCpf = $('#user-cpf');
 
@@ -103,6 +115,7 @@
       app.bindStrongPassword();
       app.bindValidationCpf();
       app.randomQuizStatistics();
+      app.bindCepService();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
     }
