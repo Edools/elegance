@@ -90,9 +90,6 @@
     "last_name": {
       "blank": "Sobrenome não pode ficar em branco"
     },
-    "phone": {
-      "blank": "Telefone não pode ficar em branco"
-    },
     "rg": {
       "blank": "RG não pode ficar em branco"
     },
@@ -127,6 +124,10 @@
     },
     "login": {
       "invalid": "Email e/ou senha inválidos"
+    },
+    "phone": {
+      "format": "Telefone precisa ter de 10 à 11 números, incluindo o DDD. Ex (99) 99999-9999",
+      "blank": "Telefone não pode ficar em branco"
     },
     "subject": {
       "blank": "Assunto não pode ficar em branco"
@@ -674,12 +675,12 @@
     },
     "load_more": "Carregar mais cursos",
     "random_quiz_statistics": {
+      "not_ready" : "Você ainda não realizou exames.",
       "general": "Desempenho Geral",
       "answered_questions" : "Questões Resolvidas",
       "right_questions" : "Acertos",
       "wrong_questions" : "Erros",
       "performance" : "Questões Resolvidas"
-
     }
   },
   "home": {
