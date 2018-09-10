@@ -569,6 +569,8 @@
   "lesson": {
     "release_at": "Agendado para",
     "release_after": "Agendado para",
+    "lock_at": "Bloqueado el",
+    "lock_after": "Bloqueado el",
     "completed": "clase(s) completa(s)",
     "started": "clase(s) empezada(s)",
     "total": "clase(s) en total",
