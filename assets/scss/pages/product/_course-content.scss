@@ -122,6 +122,18 @@ $guideline-color: darken($border-color-base, 5%);
           }
         }
 
+        &.lesson-locked {
+          .class-info {
+            background-color: lighten($alert-danger-bg, 37%) !important;
+
+            .right {
+              display: block;
+              float: left;
+              width: 100%;
+            }
+          }
+        }
+
         .class-info {
           @include clearfix();
 
@@ -216,6 +228,16 @@ $guideline-color: darken($border-color-base, 5%);
 
             display: block;
             float: left;
+            cursor: default;
+          }
+
+          .lesson-locked-date {
+            @include user-select(none);
+
+            display: block;
+            float: left;
+            border-color: #f54545;
+            background-color: #f54545 !important;
             cursor: default;
           }
         }

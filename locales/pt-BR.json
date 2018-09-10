@@ -713,6 +713,8 @@
   "lesson": {
     "release_at": "Agendado para",
     "release_after": "Agendado para",
+    "lock_at": "Bloqueado em",
+    "lock_after": "Bloqueado em",
     "completed": "aula(s) completa(s)",
     "started": "aula(s) iniciada(s)",
     "total": "aula(s) no total",
