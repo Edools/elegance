@@ -586,6 +586,8 @@
   "lesson": {
     "release_at": "Scheduled for",
     "release_after": "Scheduled for",
+    "lock_at": "Locked",
+    "lock_after": "Locked",
     "completed": "Completed Lessons",
     "started": "Started Lessons",
     "total": "Total Lessons",

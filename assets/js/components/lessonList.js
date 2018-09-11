@@ -73,6 +73,8 @@
       self.translations = {};
       self.translations['lesson.release_at'] = self.courseTree().data('translation-release-at');
       self.translations['lesson.release_after'] = self.courseTree().data('translation-release-after');
+      self.translations['lesson.lock_at'] = self.courseTree().data('translation-lock-at');
+      self.translations['lesson.lock_after'] = self.courseTree().data('translation-lock-after');
       self.translations['product.course_content.views'] = self.courseTree().data('translation-course_content-views');
 
       if (self.renderAttendanceElement) {
@@ -369,6 +371,21 @@
       return self.getContentPath(content) + '/download';
     },
 
+    checkLessonLocked: function (lesson) {
+      var lessonLockAt = lesson.lock_at;
+      var lessonLockAfter = lesson.lock_after;
+
+      if (!lessonLockAt && !lessonLockAfter) {
+        return false;
+      }
+
+      var enrollmentActivatedAt = moment(this.enrollment.activated_at).startOf('day');
+
+      var lessonLockTime = lessonLockAt ? moment(lessonLockAt).startOf('day') : enrollmentActivatedAt.add(lessonLockAfter, 'days');
+
+      return moment().startOf('day') >= lessonLockTime;
+    },
+
     checkLessonAvailability: function (lesson) {
       var releaseAt = lesson.release_at;
       var releaseAfter = lesson.release_after;
@@ -498,12 +515,17 @@
               var lessonReleased = null;
               var releaseType = null;
               var releaseDate = null;
+              var lessonLocked = null;
+              var lockLessonType = null;
+              var lockLessonDate = null;              
               var progress = null;
               var requirements = content.requirements;
               var available = true;
 
               if (self.enrollment) {
                 lessonReleased = self.checkLessonAvailability(lesson) || self.userType === 'Collaborator';
+                
+                lessonLocked = self.checkLessonLocked(lesson) || self.userType === 'Collaborator';
 
                 if (self.enrollment.lessons_info && self.enrollment.lessons_info.completed.indexOf(lesson.id) > -1) {
                   hideInProgressIcon = 'hide';
@@ -524,6 +546,14 @@
                 } else if (lesson.release_after) {
                   releaseType = 'release_after';
                   releaseDate = moment(self.enrollment.activated_at).add(lesson.release_after, 'days');
+                }
+
+                if (lesson.lock_at) {
+                  lockLessonType = 'lock_at';
+                  lockLessonDate = lesson.lock_at;
+                } else if (lesson.lock_after) {
+                  lockLessonType = 'lock_after';
+                  lockLessonDate = moment(self.enrollment.activated_at).add(lesson.lock_after, 'days');
                 }
 
                 if (self.lessonActions) {
@@ -547,13 +577,13 @@
                 'data-requirements=\'' + JSON.stringify(requirements) + '\'' +
                 'data-id="' + content.lesson.id + '"' +
                 'data-level="1">' +
-                '<div id="lesson-' + lesson.id + '" class="js-lesson content-lesson ' + active + (!lessonReleased ? ' not-released' : '') + '" data-lesson-id="' + lesson.id + '">' +
+                '<div id="lesson-' + lesson.id + '" class="js-lesson content-lesson ' + active + (!lessonReleased ? ' not-released' : '') + (lessonLocked ? ' lesson-locked' : '') + '" data-lesson-id="' + lesson.id + '">' +
                 '<div class="class-info">' +
 
                 '<div class="left"><i class="' + lessonIcon + '"></i></div>' +
 
                 '<div class="center">' +
-                (self.lessonActions && lessonReleased ?
+                (self.lessonActions && lessonReleased && !lessonLocked ?
                   '<a class="lesson-title" href="' + self.getContentPath(content) + '"><span>' + lesson.title + '</span></a>' :
                   '<span class="lesson-title"><span class="disabled">' + lesson.title + '</span></span>') +
                 '</div>' +
@@ -580,6 +610,11 @@
                 if (!lessonReleased) {
                   var zone = moment.tz.guess();
                   html += '<span class="release-date badge">' + self.translations['lesson.' + releaseType] + '<span> ' + moment.tz(releaseDate, zone).format('DD/MM/YYYY') + '</span>' + '</span>';
+                }
+
+                if (lessonLocked) {
+                  var zone = moment.tz.guess();
+                  html += '<span class="lesson-locked-date badge">' + self.translations['lesson.' + lockLessonType] + '<span> ' + moment.tz(lockLessonDate, zone).format('DD/MM/YYYY') + '</span>' + '</span>';
                 }
 
                 var isDownloadableMedia = content.lesson.media && ['Document', 'Audio', 'Download'].indexOf(content.lesson.media.type) > -1;

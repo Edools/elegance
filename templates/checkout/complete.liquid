@@ -152,6 +152,7 @@
                           <div class="form-group {{ required }} {% if form.errors.address_zip_code %}has-error{% endif %}">
                             <label class="control-label">{{ 'checkout.complete.address_zip_code' | t }}</label>
                             <input type="text" id="user-cep" name="user[address_attributes][zip_code]"
+                                  {% if current_school | has_feature: 'cep_service' %}data-enable-cep-service="true"{% endif %}
                                    value="{{ address.zip_code }}" class="form-control" {{ required }}>
                           </div>
                         </div>
