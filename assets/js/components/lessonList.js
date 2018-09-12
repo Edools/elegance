@@ -371,9 +371,13 @@
       return self.getContentPath(content) + '/download';
     },
 
-    checkLessonLocked: function (lesson) {
+    checkLessonLocked: function (lesson, userType) {
       var lessonLockAt = lesson.lock_at;
       var lessonLockAfter = lesson.lock_after;
+
+      if (userType === 'Collaborator') {
+        return false;
+      }
 
       if (!lessonLockAt && !lessonLockAfter) {
         return false;
@@ -517,15 +521,15 @@
               var releaseDate = null;
               var lessonLocked = null;
               var lockLessonType = null;
-              var lockLessonDate = null;              
+              var lockLessonDate = null;
               var progress = null;
               var requirements = content.requirements;
               var available = true;
 
               if (self.enrollment) {
                 lessonReleased = self.checkLessonAvailability(lesson) || self.userType === 'Collaborator';
-                
-                lessonLocked = self.checkLessonLocked(lesson) || self.userType === 'Collaborator';
+
+                lessonLocked = self.checkLessonLocked(lesson, self.userType);
 
                 if (self.enrollment.lessons_info && self.enrollment.lessons_info.completed.indexOf(lesson.id) > -1) {
                   hideInProgressIcon = 'hide';
