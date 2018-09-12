@@ -129,7 +129,7 @@
 
           .name-and-date {
             clear: both;
-            margin-bottom: 0 !important;
+            margin-bottom: 0;
             font-size: $font-size-small - 2;
             abbr {
               border: none;
@@ -140,7 +140,7 @@
 
         .post-comment {
           display: flex;
-          margin-bottom: 0 !important;
+          margin-bottom: 0;
 
           align-content: center;
           align-items: center;
