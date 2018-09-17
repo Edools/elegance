@@ -1,6 +1,8 @@
 .forum {
+  $forum-margin-base: 20px;
+  $forum-padding-base: 20px;
   > .description {
-    padding: 10px;
+    padding: $forum-padding-base * .5 0;
     p {
       margin: 0;
     }
@@ -19,26 +21,35 @@
     }
   }
 
+
+
   .new-topic-btn {
-    float: right;
+    float: left;
+    margin: $forum-margin-base 0;
   }
 
   .new-topic-form {
     clear: both;
-    margin: 20px 0;
+    margin: $forum-margin-base 0;
     padding-top: $padding-large-vertical;
   }
 
   .topics {
     clear: both;
-    margin: 20px 0;
+    margin: $forum-margin-base 0;
 
     .topic-item {
-      margin-top: 30px;
+      margin-top: $forum-margin-base * 1.5;
 
       .post-body {
         position: relative;
-        padding: 30px;
+        padding: $forum-padding-base * 1.5;
+
+        .name-and-date {
+          .col {
+            position: unset;
+          }
+        }
 
         .date {
           .timeago {
@@ -52,16 +63,16 @@
 
         .post-information {
           display: flex;
-          margin-bottom: 20px;
+          margin-bottom: $forum-margin-base;
 
           align-items: center;
 
 
           .author-name {
-            margin-bottom: 10px;
+            margin-bottom: $forum-margin-base * .5;
             text-align: center;
             font-weight: 800;
-            font-size: 14px;
+            font-size: $font-size-small;
           }
 
           .user-image {
@@ -97,7 +108,7 @@
         }
 
         .description {
-          font-size: 14px;
+          font-size: $font-size-small;
           &::first-letter {
             text-transform: uppercase;
           }
@@ -109,19 +120,19 @@
 
         .comment {
           display: inline-block;
-          margin: 20px 20px;
-          font-size: 14px;
+          margin: $forum-margin-base $forum-margin-base $forum-margin-base 0;
+          font-size: $font-size-small;
         }
 
         .user-info {
           float: left;
-          margin-left: 10px;
+          margin-left: $forum-margin-base * .5;
 
           .title {
             float: left;
             margin-bottom: -4px;
             font-weight: 600;
-            font-size: 18px;
+            font-size: $font-size-large - 2;
             &::first-letter {
               text-transform: uppercase;
             }
@@ -136,6 +147,12 @@
               text-decoration: none;
             }
           }
+        }
+
+        .controls button {
+          position: absolute;
+          top: 36px;
+          right: 30px;
         }
 
         .post-comment {
@@ -155,7 +172,11 @@
         }
 
         .post {
-          padding: 20px 0;
+          @include breakpoint(md) {
+            padding: $forum-padding-base 0;
+          }
+
+          padding: $forum-padding-base;
         }
 
         .actions {

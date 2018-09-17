@@ -89,7 +89,7 @@
     },
     "last_name": {
       "blank": "Sobrenome não pode ficar em branco"
-    },
+    },    
     "rg": {
       "blank": "RG não pode ficar em branco"
     },
@@ -247,7 +247,7 @@
     "section_title": "Seção",
     "topic_title": "Tópico",
     "topics_title": "Tópicos",
-    "posts_title": "Posts",
+    "posts_title": "Comentários",
     "forums": "<b>Fóruns</b> da Escola",
     "new_topic": "Novo Tópico",
     "new_topic_name": "Nome",
@@ -290,24 +290,24 @@
       "created": "Tópico criado com sucesso",
       "empty": "Ainda não há tópicos aqui.",
       "open_posts": "Ver respostas",
-      "close_posts": "Ocultar respostas",
+      "close_posts": "Ocultar comentários",
       "new_post": "Comentar",
       "posts_count": {
-        "zero": "Não há nenhum post",
+        "zero": "Não há nenhum comentário",
         "one": "1 post",
-        "other": "{{ count }} posts"
+        "other": "{{ count }} comentários"
       }
     },
     "posts": {
-      "empty": "Ainda não há posts aqui.",
-      "new": "Novo Post",
+      "empty": "Ainda não há comentários aqui.",
+      "new": "Novo comentário",
       "send": "Enviar",
-      "edit": "Editar Post",
+      "edit": "Editar comentário",
       "feed": {
-        "new": "Escreva sua resposta aqui..."
+        "new": "Escreva seu comentário aqui..."
       },
       "errors": {
-        "empty": "O post deve ter algum conteúdo"
+        "empty": "O comentário deve ter algum conteúdo"
       }
     }
   },
@@ -1036,7 +1036,7 @@
     "hint": "Este espaço é dedicado a discutir assuntos relacionados à seção do Fórum. Aqui você pode criar, reponder dúvidas ou simplesmente trocar conhecimentos com outros alunos.",
     "posts" : {
       "last_post" : {
-        "name_and_date" : "{{ object.user.first_name | prepend: 'por ' | append: ' ' | append: object.user.last_name | append: ' | ' | append : last_post_date }}"
+        "name_and_date" : "{{ object.user.first_name | prepend: 'criado por ' | append: ' ' | append: object.user.last_name | append: ' | ' | append : last_post_date }}"
       }
     }
   },

@@ -28,7 +28,7 @@
           </div>
       </div>
 
-      <div class="col-md-12">
+      <div class="col col-md-12">
         <div class="controls">
           <div class="">
             {% if object.user_id == current_user.id %}
@@ -42,20 +42,24 @@
               </button>
             {% endif %}
 
-            <a id="js-topic-{{ object.id }}-new-post" href="#js-topic-{{ object.id }}-new-post-form" data-toggle="collapse">
+            <a id="js-topic-{{ object.id }}-new-post" class="hidden" href="#js-topic-{{ object.id }}-new-post-form" data-toggle="collapse">
               <button class="btn btn-default btn-sm edit-btn" name="button">
                   <i class="icon-bubble"></i>
               </button>
             </a>
             
-            <div class="comment">
-              <a class="js-collapse-toggle-text" role="button"
-                href="#js-topic-{{ object.id }}-posts-list-panel"
-                data-open-text="{{ 'forums.topics.close_posts' | t }}"
-                data-close-text="{{ 'forums.topics.total_of_posts' | t: total: object.posts_count }}">
+              <div class="comment">
+              {% if object.posts_count > 0 %}
+                  <a class="js-collapse-toggle-text" role="button"
+                    href="#js-topic-{{ object.id }}-posts-list-panel"
+                    data-open-text="{{ 'forums.topics.close_posts' | t }}"
+                    data-close-text="{{ 'forums.topics.total_of_posts' | t: total: object.posts_count }}">
+                    {{ 'forums.topics.total_of_posts' | t: total: object.posts_count }}
+                  </a>
+              {% else %}
                 {{ 'forums.topics.total_of_posts' | t: total: object.posts_count }}
-              </a>
-            </div>
+              {% endif %}
+              </div>
             
           </div>
         </div>
@@ -86,7 +90,8 @@
       </div>
       {% endpaginate %}
 
-      <div id="js-topic-{{ object.id }}-new-post-form" class="collapse">
+      <p></p>
+      <div id="js-topic-{{ object.id }}-new-post-form" class="collapse in">
         <div  class="well">
           <form accept-charset="UTF-8" method="post" action="{{ object | posts_path: forum_id }}" data-remote="true">
             <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
@@ -95,11 +100,11 @@
                         class="form-control js-post-body"
                         id="topic-{{ object.id }}-post-body"
                         name="post[body]"
-                        placeholder="{{ 'forums.posts.feed.new'| t }}"
-                        required>
-              </textarea>
+                        
+                        placeholder="{% if object.posts.size > 0 %}{{ 'forums.posts.feed.new'| t }}{% else %}Ainda não há comentários neste tópico. Faça o primeiro!{% endif %}"
+                        required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary">{{ "forums.posts.send" | t }}</button>
           </form>
         </div>
       </div>
@@ -125,7 +130,7 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Salvar</button>
+          <button type="submit" class="btn btn-primary">{{ "forums.posts.edit" | t }}</button>
         </div>
       </div>
     </form>
