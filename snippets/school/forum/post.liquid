@@ -3,8 +3,7 @@
 {% else %}
   {% assign attr = 'body' %}
 {% endif %}
-
-<div id="js-{{ object_class }}-item-{{ object.id }}" class="{{ object_class }}-item post-item panel panel-default">
+<div id="js-{{ object_class }}-item-{{ object.id }}" class="{{ object_class }}-item post-item panel panel-default {% if forloop.index >= 1%}idented{% endif %}">
   <div class="post-body panel-body">
     <div class="row">
       <div class="col col-sm-2">
@@ -18,8 +17,14 @@
         </div>
       </div>
       <div class="col col-sm-10">
+        
+        
         <div class="post-content">
+          
           <div class="{{ attr }} description">
+            {% unless forloop.index >= 1 %}
+            <h3 class="title">{{ topic.title }}</h3>
+          {% endunless %}
             {{ object.description | default: object.body }}
           </div>
 

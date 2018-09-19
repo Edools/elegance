@@ -25,7 +25,8 @@
       width: 1px;
     }
 
-    .main-header {
+    .main-header,
+    .topic-header {
       padding: 10px 10px;
 
       .caption {
@@ -42,7 +43,6 @@
           max-width: 320px;
         }
 
-        display: inline-block;
         float: right;
         margin: 0 0 0 25px;
         width: 100%;
@@ -60,6 +60,10 @@
           }
         }
       }
+    }
+
+    .topic-header {
+      width: 240px;
     }
 
     .right-header {
@@ -104,14 +108,9 @@
     padding: 12px 10px;
 
     .title {
-      @include breakpoint(sm) {
-        font-size: 18px;
-      }
-
       display: block;
-      color: $text-color;
       text-decoration: none;
-      font-size: 16px;
+      font-size: $font-size-large + 2;
     }
 
     .description {
@@ -120,7 +119,19 @@
       margin: 0;
       max-width: 100%;
       color: $text-muted;
-      font-size: $font-size-small;
+      font-size: $font-size-base;
+    }
+
+    .product {
+      .related {
+        color: $text-muted;
+        font-style: italic;
+        font-size: $font-size-small;
+        .name {
+          color: $text-muted;
+          font-weight: 600;
+        }
+      }
     }
   }
 }
