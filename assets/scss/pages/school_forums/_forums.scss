@@ -1,21 +1,36 @@
 .school-forums-page {
   .search-form {
-    margin-bottom: 15px;
+    margin: 50px 0;
   }
 
   .forums-table {
     .forum-item {
+      > td {
+        vertical-align: middle;
+      }
+
       .info {
+        .title {
+          display: inline-block;
+          font-weight: 600;
+          &::first-letter {
+            text-transform: uppercase;
+          }
+        }
         .product {
-          display: block;
+          display: inline-block;
+          margin-top: 20px;
 
           .badge {
             @include ellipsis();
 
-            margin-top: 4px;
-            margin-bottom: 5px;
+            margin-top: -3px;
             max-width: 250px;
-            font-size: 12px;
+            border-radius: $border-radius-small;
+            background-color: lighten($text-color, 25%);
+            text-transform: lowercase;
+            font-weight: 600;
+            font-size: $font-size-small - 2;
           }
         }
       }

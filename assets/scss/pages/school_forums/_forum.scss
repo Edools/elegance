@@ -1,6 +1,49 @@
 .school-forum-page {
+  .col {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .vertical-flex-center {
+    display: flex;
+    padding-right: 0;
+    height: 170px;
+
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .page-actions {
+    @include breakpoint(md) {
+      margin: 0;
+      margin-bottom: -60px;
+      padding: 50px 0 20px;
+      .left {
+        float: left;
+      }
+    }
+
+    margin-bottom: 25px;
+    text-align: right;
+  }
+
   .forums-table {
     .forum-item {
+      .vertical-center {
+        vertical-align: middle;
+      }
+
+
+
+      .section-info {
+        padding-right: 30px;
+        .title {
+          @include capitalize-first-letter();
+
+          font-weight: 600;
+          line-height: 30px;
+        }
+      }
       .topics-count {
         @include breakpoint(sm) {
           display: block;
@@ -11,13 +54,77 @@
         text-align: center;
       }
 
-      .section-topics {
+      .recent {
         margin-top: 10px;
+        margin-bottom: -8px;
+        font-size: $font-size-small;
+      }
+
+      .section-topics {
+        overflow: hidden;
+        padding-top: 4px;
+        height: 30px;
+        white-space: nowrap;
+
+
 
         .badge {
-          font-size: 12px;
+          @include capitalize-first-letter();
+
+          padding: 0;
+          padding-right: 2px;
+          border: none;
+          border-radius: 0;
+          background: transparent;
+          color: $brand-primary;
+          font-weight: 400;
+          font-size: $font-size-small;
+          &:hover {
+            color: darken($brand-primary, 15%);
+          }
         }
       }
+
+
+
+      .last-topic {
+        clear: both;
+        margin-top: 10px;
+        font-size: $font-size-base;
+        abbr {
+          border: none;
+          text-decoration: none;
+          cursor: unset;
+        }
+
+        &.name-and-date {
+          @include capitalize-first-letter();
+
+          font-style: italic;
+          font-size: $font-size-small;
+        }
+      }
+
+      .last-topic-title {
+        @include capitalize-first-letter();
+
+        margin-bottom: 0;
+        font-weight: 600;
+        font-size: $font-size-base;
+      }
+
+      .last-topic-description {
+        @include capitalize-first-letter();
+
+        margin-bottom: 0;
+        font-size: $font-size-base;
+      }
+    }
+  }
+
+  .forum-sections {
+    > td {
+      vertical-align: middle;
     }
   }
 }

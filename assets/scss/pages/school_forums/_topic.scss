@@ -1,8 +1,21 @@
 .school-forum-topics-page {
+  .page-title {
+    @include capitalize-first-letter();
+
+    line-height: $font-size-h2 * 1.15 ;
+  }
+
+  .idented {
+    margin-left: 100px;
+  }
+
   .page-actions {
     @include breakpoint(md) {
       margin: 0;
       padding: 50px 0;
+      .left {
+        float: left;
+      }
     }
 
     margin-bottom: 25px;
@@ -73,6 +86,12 @@
       .post-content {
         .description {
           padding: 15px;
+          .title {
+            @include capitalize-first-letter();
+
+            margin: 0 0 10px;
+            font-weight: 400;
+          }
         }
 
         .edit-btn {

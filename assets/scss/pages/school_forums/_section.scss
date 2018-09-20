@@ -1,8 +1,18 @@
 .school-forum-section {
+  .page-title {
+    @include capitalize-first-letter();
+
+    margin: 10px 0 75px;
+    line-height: $font-size-h2 * 1.15 ;
+  }
   .page-actions {
     @include breakpoint(md) {
       margin: 0;
-      padding: 50px 0;
+      padding: 50px 0 20px;
+
+      .left {
+        float: left;
+      }
     }
 
     margin-bottom: 25px;
@@ -11,9 +21,22 @@
 
   .forums-table {
     .forum-item {
+      .vertical-center {
+        vertical-align: middle;
+      }
       .info {
         padding-top: 24px;
         padding-bottom: 24px;
+        .title {
+          @include capitalize-first-letter();
+
+          font-weight: 600;
+          line-height: 30px;
+        }
+
+        .description {
+          @include capitalize-first-letter();
+        }
       }
 
       .posts-count {
