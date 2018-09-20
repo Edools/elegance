@@ -1,11 +1,7 @@
 <div class="school-forum-section page">
   <div class="container">
     <div class="forum-section-header">
-      {% assign col = 'md-12' %}
-      {% permitted school_forum_topic, create %}
-      {% assign col = 'md-9' %}
-      {% endpermitted %}
-
+     
       <div class="row">
         <div class="col-md-12">
           <div class="page-actions">
@@ -13,12 +9,13 @@
               <i class="icon-arrow-left"></i>
               <span>{{ 'general.back' | t }}</span>
             </a>
-
-            <button type="button" data-toggle="modal" data-target="#new-topic-modal" id="new_section"
-                    class="btn btn-primary" name="button">
-              <i class="icon-plus"></i>
-              <span>{{ 'forums.new_topic' | t }}</span>
-            </button>
+            {% permitted school_forum_topic, create %}
+              <button type="button" data-toggle="modal" data-target="#new-topic-modal" id="new_section"
+                      class="btn btn-primary" name="button">
+                <i class="icon-plus"></i>
+                <span>{{ 'forums.new_topic' | t }}</span>
+              </button>
+            {% endpermitted %}
           </div>
         </div>
 
@@ -41,10 +38,7 @@
               </div>
             </form>
         </div>
-
-        {% permitted school_forum_topic, create %}
         
-        {% endpermitted %}
       </div>
     </div>
 
