@@ -3,6 +3,7 @@
 {% else %}
   {% assign attr = 'body' %}
 {% endif %}
+
 <div id="js-{{ object_class }}-item-{{ object.id }}" class="{{ object_class }}-item post-item panel panel-default {% if forloop.index >= 1%}idented{% endif %}">
   <div class="post-body panel-body">
     <div class="row">
@@ -12,15 +13,12 @@
             {% assign avatar_alt = object.user | fullname %}
             {% image, src: object.user.cover_image_url, alt: avatar_alt %}
           </div>
-          <span class="author-name"><span>{{ object.user | fullname }}</span></span>
+          <span class="author-name"><spaan>{{ object.user | fullname }}</spaan>
           <span class="date">{{ object.created_at | time_ago_in_words }}</span>
         </div>
       </div>
       <div class="col col-sm-10">
-        
-        
         <div class="post-content">
-          
           <div class="{{ attr }} description">
             {% unless forloop.index >= 1 %}
             <h3 class="title">{{ topic.title }}</h3>
@@ -48,7 +46,6 @@
   <div class="modal-dialog" role="document">
     <form accept-charset="UTF-8" method="put" action="{{ edit_path }}" data-remote="true">
       <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
-
       <div class="modal-content">
         <div class="modal-body">
           <textarea name="{{ object_class }}[{{ attr }}]" type="text"
