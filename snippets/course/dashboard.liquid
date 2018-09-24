@@ -1,45 +1,124 @@
 <div class="row">
   <div class="col-md-12">
     <div class="row">
-      <div class="col-md-3 text-center">
-        <h4 class="subtitle"><strong>{{ 'course.dashboard.content_lessons_completed' | t }}</strong></h4>
-        <div role="tabpanel" class="tab-pane active" id="course-messages">
-          <div class="pinboard">
-            <div class="well">
-              <strong>{{ enrollment_course_dashboard.content_lessons_completed_count }}</strong>
+      <div class="row">
+        <div class="col-md-3 text-center">
+          <h4 class="subtitle"><strong>{{ 'course.dashboard.content_lessons_completed' | t }}</strong></h4>
+        <div role="tabpanel" class="tab-pane active">
+            <div class="pinboard">
+              <div class="well">
+                <strong>{{ enrollment_course_dashboard.content_lessons_completed_count }}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-1"></div>
+
+        <div class="col-md-3 text-center">
+          <h4 class="subtitle"><strong>{{ 'course.dashboard.content_lessons_uncompleted' | t }}</strong></h4>
+          <div role="tabpanel" class="tab-pane active">
+            <div class="pinboard">
+              <div class="well">
+                <strong>{{ enrollment_course_dashboard.content_lessons_uncompleted_count }}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-1"></div>
+
+        <div class="col-md-3 text-center">
+          <h4 class="subtitle"><strong>{{ 'course.dashboard.content_lessons_total' | t }}</strong></h4>
+          <div role="tabpanel" class="tab-pane active">
+            <div class="pinboard">
+              <div class="well">
+                <strong>{{ enrollment_course_dashboard.content_lessons_total_count }}</strong>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-3 text-center">
-        <h4 class="subtitle"><strong>{{ 'course.dashboard.content_lessons_total' | t }}</strong></h4>
-        <div role="tabpanel" class="tab-pane active" id="course-messages">
-          <div class="pinboard">
-            <div class="well">
-              <strong>{{ enrollment_course_dashboard.content_lessons_total_count }}</strong>
+      <div class="row">
+        <div class="col-md-3 text-center">
+          <h4 class="subtitle"><strong>{{ 'course.dashboard.exam_lessons_completed' | t }}</strong></h4>
+          <div role="tabpanel" class="tab-pane active">
+            <div class="pinboard">
+              <div class="well">
+                <strong>{{ enrollment_course_dashboard.exam_lessons_completed_count }}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-1"></div>        
+
+        <div class="col-md-3 text-center">
+          <h4 class="subtitle"><strong>{{ 'course.dashboard.exam_lessons_uncompleted' | t }}</strong></h4>
+          <div role="tabpanel" class="tab-pane active">
+            <div class="pinboard">
+              <div class="well">
+                <strong>{{ enrollment_course_dashboard.exam_lessons_uncompleted_count }}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-1"></div>        
+
+        <div class="col-md-3 text-center">
+          <h4 class="subtitle"><strong>{{ 'course.dashboard.exam_lessons_total' | t }}</strong></h4>
+          <div role="tabpanel" class="tab-pane active">
+            <div class="pinboard">
+              <div class="well">
+                <strong>{{ enrollment_course_dashboard.exam_lessons_total_count }}</strong>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-3 text-center">
-        <h4 class="subtitle"><strong>{{ 'course.dashboard.exam_lessons_completed' | t }}</strong></h4>
-        <div role="tabpanel" class="tab-pane active" id="course-messages">
-          <div class="pinboard">
-            <div class="well">
-              <strong>{{ enrollment_course_dashboard.exam_lessons_completed_count }}</strong>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default personal-data-panel">
+            <div class="panel-heading" role="tab">
+              <h4 class="panel-title">
+                <strong>{{ 'course.dashboard.exam_lessons_completed' | t }}</strong>
+              </h4>
+            </div>
+            
+            <div class="panel-body">
+              <div class="panel-body">
+                {% for exam_answer in enrollment_course_dashboard.exam_answers %}
+                  <div class="col-md-9 text-left">
+                    <strong>{{ exam_answer.exam_lesson.title }}</strong>
+                  </div>
+                  <div class="col-md-3 text-right">
+                    <strong>{{ exam_answer.score }}</strong>
+                  </div>
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="col-md-3 text-center">
-        <h4 class="subtitle"><strong>{{ 'course.dashboard.exam_lessons_uncompleted' | t }}</strong></h4>
-        <div role="tabpanel" class="tab-pane active" id="course-messages">
-          <div class="pinboard">
-            <div class="well">
-              <strong>{{ enrollment_course_dashboard.exam_lessons_uncompleted_count }}</strong>
+        
+        <div class="col-md-6">
+          <div class="panel panel-default personal-data-panel">
+            <div class="panel-heading" role="tab">
+              <h4 class="panel-title">
+                <strong>{{ 'course.dashboard.exam_lessons_uncompleted' | t }}</strong>
+              </h4>
+            </div>
+            
+            <div class="panel-body">
+              <div class="panel-body">
+                {% for exam_lesson in enrollment_course_dashboard.exam_lessons_uncompleted %}
+                  <div class="col-md-12 text-left">
+                    <strong>{{ exam_lesson.title }}</strong>
+                  </div>
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
