@@ -7,7 +7,7 @@
         <div role="tabpanel" class="tab-pane active">
             <div class="pinboard">
               <div class="well">
-                <strong>{{ enrollment_course_dashboard.content_lessons_completed_count }}</strong>
+                <strong>{{ enrollment_analytics.content_lessons_completed_count }}</strong>
               </div>
             </div>
           </div>
@@ -20,7 +20,7 @@
           <div role="tabpanel" class="tab-pane active">
             <div class="pinboard">
               <div class="well">
-                <strong>{{ enrollment_course_dashboard.content_lessons_uncompleted_count }}</strong>
+                <strong>{{ enrollment_analytics.content_lessons_uncompleted_count }}</strong>
               </div>
             </div>
           </div>
@@ -33,7 +33,7 @@
           <div role="tabpanel" class="tab-pane active">
             <div class="pinboard">
               <div class="well">
-                <strong>{{ enrollment_course_dashboard.content_lessons_total_count }}</strong>
+                <strong>{{ enrollment_analytics.content_lessons_total_count }}</strong>
               </div>
             </div>
           </div>
@@ -46,7 +46,7 @@
           <div role="tabpanel" class="tab-pane active">
             <div class="pinboard">
               <div class="well">
-                <strong>{{ enrollment_course_dashboard.exam_lessons_completed_count }}</strong>
+                <strong>{{ enrollment_analytics.exam_lessons_completed_count }}</strong>
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@
           <div role="tabpanel" class="tab-pane active">
             <div class="pinboard">
               <div class="well">
-                <strong>{{ enrollment_course_dashboard.exam_lessons_uncompleted_count }}</strong>
+                <strong>{{ enrollment_analytics.exam_lessons_uncompleted_count }}</strong>
               </div>
             </div>
           </div>
@@ -72,7 +72,7 @@
           <div role="tabpanel" class="tab-pane active">
             <div class="pinboard">
               <div class="well">
-                <strong>{{ enrollment_course_dashboard.exam_lessons_total_count }}</strong>
+                <strong>{{ enrollment_analytics.exam_lessons_total_count }}</strong>
               </div>
             </div>
           </div>
@@ -90,7 +90,7 @@
             
             <div class="panel-body">
               <div class="panel-body">
-                {% for exam_answer in enrollment_course_dashboard.exam_answers %}
+                {% for exam_answer in enrollment_analytics.exam_answers %}
                   <div class="col-md-9 text-left">
                     <strong>{{ exam_answer.exam_lesson.title }}</strong>
                   </div>
@@ -113,7 +113,7 @@
             
             <div class="panel-body">
               <div class="panel-body">
-                {% for exam_lesson in enrollment_course_dashboard.exam_lessons_uncompleted %}
+                {% for exam_lesson in enrollment_analytics.exam_lessons_uncompleted %}
                   <div class="col-md-12 text-left">
                     <strong>{{ exam_lesson.title }}</strong>
                   </div>

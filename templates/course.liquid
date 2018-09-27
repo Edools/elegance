@@ -63,12 +63,7 @@
         </div>
       </div>
 
-      {% assign course_dashboard = current_school | has_feature: 'course_dashboard' %}
-      {% if course_dashboard %}
-        {% include 'course/dashboard', course: course, enrollment: enrollment %}
-      {% endif %}
-        
-      {% include 'course/dashboard', enrollment_course_dashboard: enrollment_course_dashboard %}
+      {% include_async 'course/dashboard', course_id: course.id, enrollment_id: enrollment.id %}
 
     </div>
   </div>
