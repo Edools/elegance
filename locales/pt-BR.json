@@ -681,6 +681,14 @@
       "right_questions" : "Acertos",
       "wrong_questions" : "Erros",
       "performance" : "Questões Resolvidas"
+    },
+    "dashboard": {
+      "content_lessons_completed": "Aulas assistidas",
+      "content_lessons_uncompleted": "Aulas não assistidas",
+      "content_lessons_total": "Aulas totais",
+      "exam_lessons_completed": "Provas realizadas",
+      "exam_lessons_uncompleted": "Provas não realizadas",
+      "exam_lessons_total": "Provas totais"
     }
   },
   "home": {

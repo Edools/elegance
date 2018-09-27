@@ -13,6 +13,15 @@
     .last-lesson-link {
       margin-bottom: $padding-large-vertical * 2;
     }
+
+    .course-image {
+      width: 100%;
+
+      img {
+        width: 60%;
+        height: auto;
+      }
+    }
   }
 
   .course-page-content {
