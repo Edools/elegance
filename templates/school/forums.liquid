@@ -18,6 +18,9 @@
     </div>
 
     <div class="forums">
+      <div class="alert alert-info text-center clear">
+          {{ 'forums.helptext' | t }}
+      </div>
       {% paginate forums by 10 sort { order: :asc } %}
       {% if forums.total_count == 0 and current_search.size == 0 %}
         <div class="alert alert-info text-center">
