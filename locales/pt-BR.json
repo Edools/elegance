@@ -518,7 +518,7 @@
     },
     "cart": {
       "title": "<strong>Carrinho</strong> <span class=\"lighter\">de compras</span>",
-      "empty": "Ainda não há items no seu carrinho.",
+      "empty": "Ainda não há itens no seu carrinho.",
       "coupon_applied": "Cupom aplicado com sucesso!",
       "item_quantity": "Quantidade: "
     },
