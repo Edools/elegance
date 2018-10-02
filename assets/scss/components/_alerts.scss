@@ -11,6 +11,10 @@
   border: 1px solid transparent;
   border-radius: $alert-border-radius;
 
+  &.clear {
+    clear: both;
+  }
+
   // Headings for larger alerts
   h4 {
     margin-top: 0;

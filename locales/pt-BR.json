@@ -266,6 +266,7 @@
     "answers": "Respostas",
     "question_title": "Título da sua pergunta",
     "ask": "Perguntar",
+    "helptext" : "Apenas administradores podem criar <strong>fóruns</strong> e <strong>seções</strong>. Para criar um <strong>tópico</strong>, escolha abaixo o fórum que se encaixa no seu assunto de interesse e participe!",
     "child_forum_sections_count": {
       "zero": "Não há nenhuma seção",
       "one": "1 seção",
@@ -518,7 +519,7 @@
     },
     "cart": {
       "title": "<strong>Carrinho</strong> <span class=\"lighter\">de compras</span>",
-      "empty": "Ainda não há items no seu carrinho.",
+      "empty": "Ainda não há itens no seu carrinho.",
       "coupon_applied": "Cupom aplicado com sucesso!",
       "item_quantity": "Quantidade: "
     },
@@ -681,6 +682,14 @@
       "right_questions" : "Acertos",
       "wrong_questions" : "Erros",
       "performance" : "Questões Resolvidas"
+    },
+    "dashboard": {
+      "content_lessons_completed": "Aulas assistidas",
+      "content_lessons_uncompleted": "Aulas não assistidas",
+      "content_lessons_total": "Aulas totais",
+      "exam_lessons_completed": "Provas realizadas",
+      "exam_lessons_uncompleted": "Provas não realizadas",
+      "exam_lessons_total": "Provas totais"
     }
   },
   "home": {
@@ -1033,7 +1042,7 @@
   "forum": {
     "forum": "Fórum",
     "section" : "Você está na seção:  ",
-    "hint": "Este espaço é dedicado a discutir assuntos relacionados à seção do Fórum. Aqui você pode criar, reponder dúvidas ou simplesmente trocar conhecimentos com outros alunos.",
+    "hint": "Este espaço é dedicado a discutir assuntos relacionados à seção do Fórum. Aqui você pode criar, responder dúvidas ou simplesmente trocar conhecimentos com outros alunos.",
     "posts" : {
       "last_post" : {
         "name_and_date" : "{{ object.user.first_name | prepend: 'criado por ' | append: ' ' | append: object.user.last_name | append: ' | ' | append : last_post_date }}"
