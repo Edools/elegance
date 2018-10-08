@@ -12,8 +12,9 @@
 {% else %}
 
   {% assign school_image_missing = 'capa_tema_classico.png' | asset_url %}
-
-  {% if settings.view.home.header.cover_src contains '<iframe' or
+  {% if settings.view.general.thumbnail and settings.view.general.thumbnail != "" %}
+    {% assign image = settings.view.general.thumbnail | default: school_image_missing  %}
+  {% elsif settings.view.home.header.cover_src contains '<iframe' or
   settings.view.home.header.cover_src contains '<object' or
   settings.view.home.header.cover_src contains '<embed' %}
     {% assign image =  settings.view.home.header.cover_src_image | default: school_image_missing  %}
