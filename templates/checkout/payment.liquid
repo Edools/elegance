@@ -33,7 +33,7 @@
                     {% if gateway.subscription_payment_methods contains 'boleto' %}{% assign show_boleto = true %}{% endif %}
                   {% endif %}
                 {% endif %}
-
+                
                 {% if gateway.common_payment_methods contains 'bank_transfer' and order.kind != 'subscription' %}{% assign show_bt = true %}{% endif %}
 
                 {% if trial_purchase %}
@@ -136,6 +136,9 @@
                                  name="order[credit_card][cvc]"
                                  value="{{ credit_card.cvc }}"
                                  class="form-control"
+                                 {% if credit_card.active %}
+                                   disabled
+                                 {% endif %}
                                  required>
                         </div>
                       </div>
