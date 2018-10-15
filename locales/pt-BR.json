@@ -48,6 +48,14 @@
     "disabled": "Desabilitado"
   },
   "errors": {
+    "order": {
+      "totals_were_updated": "Os valores foram atualizados",
+      "contains_unpublished_products": "Produto ainda não publicado",
+      "contains_unavailable_coupons": "O cupom inserido é inválido"
+    },
+    "institution": {
+      "blank": "Instituição não pode ficar em branco"
+    },
     "points": {
       "blank": "Pontuação não pode ficar em branco",
       "inclusion": "Pontuação deve estar entre zero e cinco"
@@ -89,7 +97,7 @@
     },
     "last_name": {
       "blank": "Sobrenome não pode ficar em branco"
-    },    
+    },
     "rg": {
       "blank": "RG não pode ficar em branco"
     },
