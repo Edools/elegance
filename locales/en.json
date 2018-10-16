@@ -44,6 +44,14 @@
     "send_answers": "Send answers..."
   },
   "errors": {
+    "order": {
+      "totals_were_updated": "Totals were updated",
+      "contains_unpublished_products": "Unpublished products",
+      "contains_unavailable_coupons": "Unavailable coupons"
+    },
+    "institution": {
+      "blank": "Institution cannot be empty"
+    },
     "gateway_transaction": {
       "invalid_email": "The email used is not valid for this gateway",
       "unavailable_gateway": "The payment gateway is unavailable at the moment",

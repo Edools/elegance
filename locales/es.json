@@ -44,6 +44,14 @@
     "send_answers": "Enviar respuestas"
   },
   "errors": {
+    "order": {
+      "totals_were_updated": "Los totales fueron actualizados",
+      "contains_unpublished_products": "Productos no publicados",
+      "contains_unavailable_coupons": "Cupones no disponibles"
+    },
+    "institution": {
+      "blank": "La institución no puede estar vacía"
+    },
     "gateway_transaction": {
       "invalid_email": "La dirección de correo eletrónico enviado no es válido para este Gateway",
       "unavailable_gateway": "La pasarela de pago no está disponible en este momento"
