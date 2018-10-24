@@ -27,12 +27,6 @@
           </div>
 
           <div class="row">
-            <div class="term-of-use-control">
-              <p>{{ 'welcome_screen.term_of_use' | t }}</p>
-            </div>
-          </div>
-
-          <div class="row">
             <div class="button-control">
               {% if product.library_resource.resource_type == 'Course' %}
                 {% assign go_path = enrollment | course_path: product.library_resource.resource_id %}
@@ -42,13 +36,7 @@
                 {% assign go_path = enrollment.id | path_path: product.library_resource.resource_id %}
               {% endif %}
 
-              <a class="btn btn-default" href="/enrollments">
-                <i class="icon-arrow-left"></i>
-                <span>{{ 'welcome_screen.not_go' | t }}</span>
-              </a>
-
               <a class="btn btn-default" href="{{ go_path }}">
-                <i class="icon-check"></i>
                 <span>{{ 'welcome_screen.go' | t }}</span>
               </a>
             </div>

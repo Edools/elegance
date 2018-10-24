@@ -1096,8 +1096,6 @@
     "hide_accessibility": "(Ocultar Acessibilidade)"
   },
   "welcome_screen": {
-    "go": "Aceito os termos de uso",
-    "not_go": "Não concordo com os termos de uso",
-    "term_of_use": "<a href=\"/terms-of-use\" target=\"_blank\">Clique aqui para conhecer os Termos de Uso na nossa escola</a>"
+    "go": "Ir para o Curso"
   }
 }
