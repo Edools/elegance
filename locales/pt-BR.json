@@ -48,6 +48,9 @@
     "disabled": "Desabilitado"
   },
   "errors": {
+    "payment_type": {
+      "unavailable": "Nenhum método de pagamento disponível, entre em contato com o suporte da escola.",
+    },
     "order": {
       "totals_were_updated": "Os valores foram atualizados",
       "contains_unpublished_products": "Produto ainda não publicado",

@@ -44,6 +44,9 @@
     "send_answers": "Send answers..."
   },
   "errors": {
+    "payment_type": {
+      "unavailable": "No payment methods available, please contact your school support.",
+    },
     "order": {
       "totals_were_updated": "Totals were updated",
       "contains_unpublished_products": "Unpublished products",
