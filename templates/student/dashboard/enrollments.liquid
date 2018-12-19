@@ -1,6 +1,5 @@
 <div class="enrollments-page page">
   <div class="container page-container">
-
     <div class="page-header">
       <a class="btn btn-default pull-left" href="/">
         <i class="icon-arrow-left"></i>
@@ -160,5 +159,25 @@
         </div>
       </div>
     </div>
+
+    {% assign user_badges = current_user | badges %}
+
+    {% if user_badges.size != 0 %}
+      <h2 tabindex='0' class="page-title">
+        {{ 'enrollment.my_badges' | t }}
+      </h2>
+
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="form-group profile-photo">
+            {% for badge in user_badges %}
+              <div class="thumbnail">
+                {% image, src: badge.image, lazyload: false %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
   </div>
 </div>
