@@ -14,7 +14,7 @@
               {% if welcome_config.video %}
                 {% media_player media: welcome_config.video %}
               {% elsif welcome_config.image %}
-                {% image, src: welcome_config.image, alt: product.title %}
+                {% image, src: welcome_config.image.s3_file_url, alt: product.title %}
               {% elsif product.video_cover %}
                 {% media_player media: product.video_cover %}
               {% elsif product.logo %}
