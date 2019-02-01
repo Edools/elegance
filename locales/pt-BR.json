@@ -520,6 +520,10 @@
       "credit": {
         "unitary": "{{ price }} Créditos"
       }
+    },
+    "payemnt_methods": {
+      "credit_card": "no cartão",
+      "boleto": "no boleto"
     }
   },
   "checkout": {
