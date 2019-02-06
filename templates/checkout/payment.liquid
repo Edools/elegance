@@ -26,15 +26,27 @@
                   {% assign payment_type = active_payment_type %}
 
                   {% if order.kind == 'common' %}
-                    {% if gateway.common_payment_methods contains 'credit_card' %}{% assign show_cc = true %}{% endif %}
-                    {% if gateway.common_payment_methods contains 'boleto' %}{% assign show_boleto = true %}{% endif %}
+                    {% if gateway.common_payment_methods contains 'credit_card' %}
+                      {% assign show_cc = true %}
+                    {% endif %}
+
+                    {% if gateway.common_payment_methods contains 'boleto' %}
+                      {% assign show_boleto = true %}
+                    {% endif %}
+
+                    {% if gateway.common_payment_methods contains 'bank_transfer'%}
+                      {% assign show_bt = true %}
+                    {% endif %}
                   {% elsif order.kind == 'subscription' %}
-                    {% if gateway.subscription_payment_methods contains 'credit_card' %}{% assign show_cc = true %}{% endif %}
-                    {% if gateway.subscription_payment_methods contains 'boleto' %}{% assign show_boleto = true %}{% endif %}
+                    {% if gateway.subscription_payment_methods contains 'credit_card' %}
+                      {% assign show_cc = true %}
+                    {% endif %}
+
+                    {% if gateway.subscription_payment_methods contains 'boleto' %}
+                      {% assign show_boleto = true %}
+                    {% endif %}
                   {% endif %}
                 {% endif %}
-                
-                {% if gateway.common_payment_methods contains 'bank_transfer' and order.kind != 'subscription' %}{% assign show_bt = true %}{% endif %}
 
                 {% if trial_purchase %}
                   <div class="alert alert-info">{{ 'checkout.payment.trial_purchase_warning' | t }}</div>

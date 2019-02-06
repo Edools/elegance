@@ -425,6 +425,10 @@
       "credit": {
         "unitary": "{{ price }} Credits"
       }
+    },
+    "payemnt_methods": {
+      "credit_card": "credit card",
+      "boleto": "boleto"
     }
   },
   "checkout": {

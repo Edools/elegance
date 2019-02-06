@@ -420,6 +420,10 @@
       "credit": {
         "unitary": "{{price}} Créditos"
       }
+    },
+    "payemnt_methods": {
+      "credit_card": "no tarjeta de crédito",
+      "boleto": "no boleto"
     }
   },
   "checkout": {
