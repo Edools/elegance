@@ -155,7 +155,8 @@
       "limit_trial_purchases": "No se pudo agregar el elemento en la cesta de compras. Usted sólo puede agregar un producto a prueba de compra.",
       "exceeded_orders_limit": "Usted ha alcanzado el límite de nuevas compras!",
       "clone_and_original": "Este producto no se puede vender en conjunto",
-      "invalid_payment_config": "No se pudo agregar el elemento en el carro. No puede agregar productos con formas de pago diferentes."
+      "invalid_payment_config": "No se pudo agregar el elemento en el carro. No puede agregar productos con formas de pago diferentes.",
+      "option_invalid": "Opción de pago no válida"
     }
   },
   "navbar": {

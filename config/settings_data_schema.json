@@ -206,7 +206,7 @@
           "placeholder": "ex: 16px"
         }
       },
-      
+
       {
         "template": "<br><h3>Textos</h3>"
       },
@@ -300,8 +300,8 @@
           "placeholder": "ex: 16px"
         }
       },
-      
-      
+
+
       {
         "template": "<br><h3>Botões Primários</h3>"
       },
@@ -328,7 +328,7 @@
       {
         "template": "<p>Os <b>botões secundários</b> são os botões de navegação entre as páginas de sua Escola. <br>Exemplos:<i> Ir para o Curso, Voltar, Buscar. </i></p>"
       },
-      
+
       {
         "key": "style.color_button_secondary_bg",
         "type": "color",
@@ -370,7 +370,7 @@
           "label": "Cor de Fundo"
         }
       },
-      
+
       {
         "key": "view.general.navbar.title",
         "type": "input",
@@ -388,7 +388,7 @@
           "label": ""
         }
       },
-      
+
       {
         "template": "<h3>Ícones</h3>"
       },
@@ -493,7 +493,7 @@
           "placeholder": "ex: 16px"
         }
       }
-      
+
     ]
   },
   {
@@ -585,7 +585,7 @@
           "label": "Razão Social"
         }
       }
-      
+
     ]
   },
   {
@@ -654,7 +654,7 @@
           "placeholder": "ex: https://host.com/capa.png"
         }
       }
-      
+
     ]
   },
   {
@@ -686,9 +686,9 @@
           "label": "Cor do texto abaixo do título"
         }
       },
-      
+
       {
-        "template": "<h3>Conteúdo dos Tópicos</h3><p>Encontre os ícones neste endereço: <a target=\"_blank\" href=\"http://thesabbir.github.io/simple-line-icons/\">Simple Line Icons</a>.</p>"
+        "template": "<h3>Conteúdo dos Tópicos</h3><p>Encontre os ícones neste endereço: <a target=\"_blank\" href=\"https://simplelineicons.github.io/\">Simple Line Icons</a>.</p>"
       },
       {
         "type": "repeatSection",
@@ -902,7 +902,7 @@
       }
     ]
   },
-  
+
   {
     "name": "Injetor HTML/CSS/JS",
     "icon" : "code",

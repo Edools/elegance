@@ -158,7 +158,8 @@
       "limit_trial_purchases": "Could not add item to cart. You can only add one trial product per purchase.",
       "exceeded_orders_limit": "You have reached the limit of new purchases!",
       "clone_and_original": "This product can not be sold together",
-      "invalid_payment_config": "Could not add item to cart. You can not add products with different payment methods."
+      "invalid_payment_config": "Could not add item to cart. You can not add products with different payment methods.",
+      "option_invalid": "Invalid payment option"
     }
   },
   "navbar": {

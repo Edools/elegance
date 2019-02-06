@@ -13,7 +13,7 @@
           <div class="course-header-info">
 
             <h2 class="title">{{ course.name }}</h2>
-            
+
             <div class="description">
               <p>{{ enrollment | total_max_attendance_message }}</p>
               <p>{{ enrollment | use_max_attendance_message }}</p>
@@ -99,7 +99,7 @@
                 </a>
               </li>
             {% endif %}
-            
+
           </ul>
 
           <div class="dashboards-body tab-content">
@@ -117,12 +117,8 @@
               {% include 'pinboard', messages: messages %}
             </div>
 
-            <div role="tabpanel" class="tab-pane" id="course-performance">
-              {% include 'course/performance/performance-index' content: enrollment %}
-            </div>
-
             <div role="tabpanel" class="tab-pane" id="course-statistics">
-              {% include 'lesson/random_quiz_statistics' content: enrollment %}
+              {% include_async 'lesson/random_quiz_statistics', enrollment_id: enrollment.id %}
             </div>
           </div>
         </div>
