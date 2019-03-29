@@ -266,6 +266,8 @@
     "new_topic_description": "Descrição",
     "new_section": "Nova Seção",
     "filter_by_title": "Buscar por nome...",
+    "last_topic_title": "Último tópico",
+    "associated_to": "Associado a",
     "empty": "Ainda não há fóruns aqui.",
     "new_question": "Fazer pergunta",
     "click_to_answer": "Clique para responder",
