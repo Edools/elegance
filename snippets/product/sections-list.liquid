@@ -4,7 +4,7 @@
 
     {% if current_user %}
       <div id="js-section-{{ section.id }}-new-topic" class="row">
-        <div class="col col-sm-6">
+        <div class="col col-sm-1">
           <div class="post-user">
             <div class="avatar">
               {% assign avatar_alt = current_user | fullname %}
@@ -13,7 +13,7 @@
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-11">
           <form accept-charset="UTF-8" method="post" action="{{ section | topics_path }}" data-remote="true">
             <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
             <div class="input-group">

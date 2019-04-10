@@ -1,24 +1,33 @@
 [
   {
-    "name": "Cores",
+    "name": "Configurações Gerais",
     "id": "1",
+    "icon" : "globe",
     "settings": [
       {
-        "template": "<h3>Geral</h3>"
+        "template": "<h3>Thumbnail</h3><p>Thumbnail é a imagem que aparecerá quando você compartilhar o link de sua escola em redes sociais como <i>Facebook, Twitter, Linkedin</i>.<br><strong>Exemplo</strong>: <img src='https://edools-3-production.s3.amazonaws.com/org-1388%2Fschool-1387%2F0834e6d3ab7ce47f4b1da0c241e1b495%2Fthumbnail_academia.png'></p>"
       },
       {
-        "key": "style.color_primary",
-        "type": "color",
+        "key": "view.general.thumbnail",
+        "type": "textarea",
         "templateOptions": {
-          "label": "Cor Principal"
+          "label": "Url da Imagem",
+          "rows" : 3
         }
       },
       {
-        "key": "style.color_body_bg",
-        "type": "color",
+        "template": "<h3>Favicon</h3><p>Dica: faça o upload da Imagem na Biblioteca e copie sua URL.</p>"
+      },
+      {
+        "key": "view.general.favicon",
+        "type": "textarea",
         "templateOptions": {
-          "label": "Fundo"
+          "label": "",
+          "rows": 3
         }
+      },
+      {
+        "template": "<h3>Cores</h3>"
       },
       {
         "key": "style.color_content_bg",
@@ -28,130 +37,10 @@
         }
       },
       {
-        "key": "style.color_border",
-        "type": "color",
-        "templateOptions": {
-          "label": "Bordas"
-        }
-      },
-      {
-        "template": "<h3>Navbar</h3>"
-      },
-      {
-        "key": "style.color_navbar_bg",
-        "type": "color",
-        "templateOptions": {
-          "label": "Fundo"
-        }
-      },
-      {
-        "key": "style.color_navbar_links",
-        "type": "color",
-        "templateOptions": {
-          "label": "Links"
-        }
-      },
-      {
-        "template": "<h3>Botões</h3>"
-      },
-      {
-        "key": "style.color_button_primary_bg",
-        "type": "color",
-        "templateOptions": {
-          "label": "Primários"
-        }
-      },
-      {
-        "key": "style.color_button_secondary_bg",
-        "type": "color",
-        "templateOptions": {
-          "label": "Secundários"
-        }
-      },
-      {
-        "template": "<h3>Texto</h3>"
-      },
-      {
-        "key": "style.color_body_text",
-        "type": "color",
-        "templateOptions": {
-          "label": "Geral"
-        }
-      },
-      {
-        "key": "style.color_titles",
-        "type": "color",
-        "templateOptions": {
-          "label": "Títulos"
-        }
-      },
-      {
-        "key": "style.color_subtitles",
-        "type": "color",
-        "templateOptions": {
-          "label": "Sub-títulos"
-        }
-      },
-      {
-        "key": "style.color_paragraphs",
-        "type": "color",
-        "templateOptions": {
-          "label": "Parágrafos"
-        }
-      },
-      {
-        "key": "style.color_links",
-        "type": "color",
-        "templateOptions": {
-          "label": "Links"
-        }
-      },
-      {
-        "key": "style.color_button_primary_text",
-        "type": "color",
-        "templateOptions": {
-          "label": "Texto dos botões primários"
-        }
-      },
-      {
-        "key": "style.color_button_secondary_text",
-        "type": "color",
-        "templateOptions": {
-          "label": "Texto dos botões secundários"
-        }
-      },
-      {
-        "template": "<h3>Rodapé</h3>"
-      },
-      {
-        "key": "style.color_footer_bg",
-        "type": "color",
-        "templateOptions": {
-          "label": "Fundo"
-        }
-      },
-      {
-        "key": "style.color_footer_text",
-        "type": "color",
-        "templateOptions": {
-          "label": "Texto"
-        }
-      },
-      {
-        "key": "style.color_footer_links",
-        "type": "color",
-        "templateOptions": {
-          "label": "Links"
-        }
-      }
-    ]
-  },
-  {
-    "name": "Tipografia",
-    "id": "2",
-    "settings": [
-      {
         "template": "<h3>Geral</h3>"
+      },
+      {
+        "template": "<p>Conteúdos, informações e subtítulos. <br>Ex: Destaque do curso, texto do rodapé e subtítulos do Fórum</p><br>"
       },
       {
         "key": "style.type_base_family",
@@ -231,87 +120,14 @@
         }
       },
       {
-        "template": "<h3>Links da Navbar</h3>"
+        "template": "<br><h3>Títulos</h3>"
       },
       {
-        "key": "style.type_navbar_family",
-        "type": "select",
+        "key": "style.color_titles",
+        "type": "color",
         "templateOptions": {
-          "label": "Fonte",
-          "options": [
-            {
-              "name": "Proxima Nova",
-              "value": "Proxima Nova"
-            },
-            {
-              "name": "Open Sans",
-              "value": "Open Sans"
-            },
-            {
-              "name": "Roboto",
-              "value": "Roboto"
-            },
-            {
-              "name": "Merriweather",
-              "value": "Merriweather"
-            },
-            {
-              "name": "Lato",
-              "value": "Lato"
-            },
-            {
-              "name": "Anonymous Pro",
-              "value": "Anonymous Pro"
-            },
-            {
-              "name": "Crimson Text",
-              "value": "Crimson Text"
-            },
-            {
-              "name": "Chivo",
-              "value": "Chivo"
-            },
-            {
-              "name": "Karla",
-              "value": "Karla"
-            },
-            {
-              "name": "Alegreya Sans",
-              "value": "Alegreya Sans"
-            },
-            {
-              "name": "Source Serif Pro",
-              "value": "Source Serif Pro"
-            },
-            {
-              "name": "Helvetica",
-              "value": "Helvetica"
-            },
-            {
-              "name": "Verdana",
-              "value": "Verdana"
-            },
-            {
-              "name": "Arial",
-              "value": "Arial"
-            },
-            {
-              "name": "Courier New",
-              "value": "Courier New"
-            }
-          ]
+          "label": "Cor"
         }
-      },
-      {
-        "key": "style.type_navbar_size",
-        "type": "input",
-        "templateOptions": {
-          "label": "Tamanho da Fonte",
-          "placeholder": "ex: 16px"
-        }
-      },
-      {
-        "template": "<h3>Títulos</h3>"
       },
       {
         "key": "style.type_title_family",
@@ -390,88 +206,22 @@
           "placeholder": "ex: 16px"
         }
       },
+
       {
-        "template": "<h3>Sub Títulos</h3>"
+        "template": "<br><h3>Textos</h3>"
       },
       {
-        "key": "style.type_subtitle_family",
-        "type": "select",
+        "template": "<p>Textos corridos.<br> Exemplos: header, destaque na home e produto, etc. </p>"
+      },
+      {
+        "key": "style.color_paragraphs",
+        "type": "color",
         "templateOptions": {
-          "label": "Fonte",
-          "options": [
-            {
-              "name": "Proxima Nova",
-              "value": "Proxima Nova"
-            },
-            {
-              "name": "Open Sans",
-              "value": "Open Sans"
-            },
-            {
-              "name": "Roboto",
-              "value": "Roboto"
-            },
-            {
-              "name": "Merriweather",
-              "value": "Merriweather"
-            },
-            {
-              "name": "Lato",
-              "value": "Lato"
-            },
-            {
-              "name": "Anonymous Pro",
-              "value": "Anonymous Pro"
-            },
-            {
-              "name": "Crimson Text",
-              "value": "Crimson Text"
-            },
-            {
-              "name": "Chivo",
-              "value": "Chivo"
-            },
-            {
-              "name": "Karla",
-              "value": "Karla"
-            },
-            {
-              "name": "Alegreya Sans",
-              "value": "Alegreya Sans"
-            },
-            {
-              "name": "Source Serif Pro",
-              "value": "Source Serif Pro"
-            },
-            {
-              "name": "Helvetica",
-              "value": "Helvetica"
-            },
-            {
-              "name": "Verdana",
-              "value": "Verdana"
-            },
-            {
-              "name": "Arial",
-              "value": "Arial"
-            },
-            {
-              "name": "Courier New",
-              "value": "Courier New"
-            }
-          ]
+          "label": "Cor"
         }
       },
       {
-        "key": "style.type_subtitle_size",
-        "type": "input",
-        "templateOptions": {
-          "label": "Tamanho da Fonte",
-          "placeholder": "ex: 16px"
-        }
-      },
-      {
-        "template": "<h3>Parágrafos</h3>"
+        "template": "<br><h3>Textos e Botões</h3>"
       },
       {
         "key": "style.type_paragraph_family",
@@ -550,11 +300,124 @@
           "placeholder": "ex: 16px"
         }
       },
+
+
       {
-        "template": "<h3>Botões</h3>"
+        "template": "<br><h3>Botões Primários</h3>"
       },
       {
-        "key": "style.type_button_family",
+        "template": "<p>Os <b>botões primários</b> são os botões principais da sua Escola. <br> Exemplos: <i>Fazer Login, Matricule-se, Finalizar Compra.</i></p>"
+      },
+      {
+        "key": "style.color_button_primary_bg",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor de Fundo"
+        }
+      },
+      {
+        "key": "style.color_button_primary_text",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor do Texto"
+        }
+      },
+      {
+        "template": "<h3>Botões Secundários</h3>"
+      },
+      {
+        "template": "<p>Os <b>botões secundários</b> são os botões de navegação entre as páginas de sua Escola. <br>Exemplos:<i> Ir para o Curso, Voltar, Buscar. </i></p>"
+      },
+
+      {
+        "key": "style.color_button_secondary_bg",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor de Fundo"
+        }
+      },
+      {
+        "key": "style.color_button_secondary_text",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor do Texto"
+        }
+      },
+      {
+        "template": "<br><h3>Links</h3>"
+      },
+      {
+        "key": "style.color_links",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Navbar",
+    "id": "2",
+    "icon" : "globe",
+    "settings": [
+      {
+        "template": "<h3>Estilo da Navbar</h3>"
+      },
+      {
+        "key": "style.color_navbar_bg",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor de Fundo"
+        }
+      },
+
+      {
+        "key": "view.general.navbar.title",
+        "type": "input",
+        "templateOptions": {
+          "label": "Texto Exibido"
+        }
+      },
+      {
+        "template": "<label>URL da Logo</label><p><small>Dica: faça o upload da Imagem na Biblioteca e copie sua URL.</small></p>"
+      },
+      {
+        "key": "view.general.navbar.logo",
+        "type": "input",
+        "templateOptions": {
+          "label": ""
+        }
+      },
+
+      {
+        "template": "<h3>Ícones</h3>"
+      },
+      {
+        "key": "style.type_enable_simple_line_icons",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Habilitar Simple Line Icons (Padrão)"
+        }
+      },
+      {
+        "key": "style.type_enable_font_awesome",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Habilitar Font Awesome"
+        }
+      },
+      {
+        "template": "<h3>Links da Navbar</h3>"
+      },
+      {
+        "key": "style.color_navbar_links",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor"
+        }
+      },
+      {
+        "key": "style.type_navbar_family",
         "type": "select",
         "templateOptions": {
           "label": "Fonte",
@@ -623,67 +486,111 @@
         }
       },
       {
-        "key": "style.type_button_size",
+        "key": "style.type_navbar_size",
         "type": "input",
         "templateOptions": {
           "label": "Tamanho da Fonte",
           "placeholder": "ex: 16px"
         }
-      },
-      {
-        "template": "<h3>Ícones</h3>"
-      },
-      {
-        "key": "style.type_enable_simple_line_icons",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "Habilitar Simple Line Icons (Padrão)"
-        }
-      },
-      {
-        "key": "style.type_enable_font_awesome",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "Habilitar Font Awesome"
-        }
       }
+
     ]
   },
   {
-    "name": "Navbar",
+    "name": "Footer",
     "id": "3",
+    "icon" : "globe",
     "settings": [
       {
-        "key": "view.general.navbar.title",
-        "type": "input",
+        "template": "<h3>Footer</h3>"
+      },
+      {
+        "key": "style.color_footer_bg",
+        "type": "color",
         "templateOptions": {
-          "label": "Texto Exibido"
+          "label": "Fundo"
         }
       },
       {
-        "template": "<label>URL da Logo</label><p><small>Dica: faça o upload da Imagem na Biblioteca e copie sua URL.</small></p>"
-      },
-      {
-        "key": "view.general.navbar.logo",
-        "type": "input",
+        "key": "style.color_footer_text",
+        "type": "color",
         "templateOptions": {
-          "label": ""
+          "label": "Texto"
         }
       },
       {
-        "template": "<label>Favicon</label><p><small>Dica: faça o upload da Imagem na Biblioteca e copie sua URL.</small></p>"
+        "key": "style.color_footer_links",
+        "type": "color",
+        "templateOptions": {
+          "label": "Links"
+        }
       },
       {
-        "key": "view.general.favicon",
+        "key": "view.general.footer.logo",
         "type": "input",
         "templateOptions": {
-          "label": ""
+          "label": "URL da Logo"
+        }
+      },
+      {
+        "key": "view.general.footer.text",
+        "type": "textarea",
+        "templateOptions": {
+          "label": "Texto",
+          "rows": 5
+        }
+      },
+      {
+        "template": "<h3>Dados da Escola</h3>"
+      },
+      {
+        "key": "view.general.footer.site",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Site"
+        }
+      },
+      {
+        "key": "view.general.footer.email",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Email"
+        }
+      },
+      {
+        "key": "view.general.footer.phone",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Telefone"
+        }
+      },
+      {
+        "key": "view.general.footer.address",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Endereço"
+        }
+      },
+      {
+        "key": "view.general.footer.cnpj",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "CNPJ"
+        }
+      },
+      {
+        "key": "view.general.footer.razao_social",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Razão Social"
         }
       }
+
     ]
   },
   {
-    "name": "Home Page",
+    "name": "Header",
+    "icon" : "home",
     "id": "4",
     "settings": [
       {
@@ -704,32 +611,14 @@
         }
       },
       {
+        "template": "<br>"
+      },
+      {
         "key": "style.home.header_background_image",
         "type": "input",
         "templateOptions": {
           "label": "Imagem de fundo",
           "placeholder": "ex: https://host.com/header.jpg"
-        }
-      },
-      {
-        "key": "style.home.benefits.color_icon",
-        "type": "color",
-        "templateOptions": {
-          "label": "Cor do Ícone"
-        }
-      },
-      {
-        "key": "style.home.benefits.color_title",
-        "type": "color",
-        "templateOptions": {
-          "label": "Cor do Título"
-        }
-      },
-      {
-        "key": "style.home.benefits.color_text",
-        "type": "color",
-        "templateOptions": {
-          "label": "Cor do texto abaixo do título"
         }
       },
       {
@@ -764,9 +653,42 @@
           "label": "Caso tenha utilizado um vídeo acima, cole a URL de uma imagem para servir como thumbnail.",
           "placeholder": "ex: https://host.com/capa.png"
         }
+      }
+
+    ]
+  },
+  {
+    "name": "Tópicos",
+    "icon" : "home",
+    "id": "5",
+    "settings": [
+      {
+        "template": "<br><h3>Cores</h3>"
       },
       {
-        "template": "<h3>Tópicos</h3><p>Encontre os ícones neste endereço: <a target=\"_blank\" href=\"https://simplelineicons.github.io/\">Simple Line Icons</a>.</p>"
+        "key": "style.home.benefits.color_icon",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor do Ícone"
+        }
+      },
+      {
+        "key": "style.home.benefits.color_title",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor do Título"
+        }
+      },
+      {
+        "key": "style.home.benefits.color_text",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor do texto abaixo do título"
+        }
+      },
+
+      {
+        "template": "<h3>Conteúdo dos Tópicos</h3><p>Encontre os ícones neste endereço: <a target=\"_blank\" href=\"https://simplelineicons.github.io/\">Simple Line Icons</a>.</p>"
       },
       {
         "type": "repeatSection",
@@ -800,25 +722,41 @@
             }
           ]
         }
-      },
+      }
+    ]
+  },
+  {
+    "name": "Destaque de Produtos",
+    "icon" : "home",
+    "id": "6",
+    "settings": [
       {
         "template": "<h3>Título da lista de produtos</h3>"
       },
       {
         "key": "view.home.product_list_title",
-        "type": "input",
+        "type": "textarea",
         "templateOptions": {
-          "label": "Título"
+          "label": "Título",
+          "rows" : 4
         }
-      },
+      }
+    ]
+  },
+  {
+    "name": "Apresentação",
+    "icon" : "home",
+    "id": "7",
+    "settings": [
       {
-        "template": "<h3>Rodapé da Home Page</h3>"
+        "template": "<h3>Sobre</h3>"
       },
       {
         "key": "view.home.footer.title",
-        "type": "input",
+        "type": "textarea",
         "templateOptions": {
-          "label": "Título"
+          "label": "Título",
+          "rows" : 3
         }
       },
       {
@@ -884,8 +822,9 @@
     ]
   },
   {
-    "name": "Categorias",
-    "id": "5",
+    "name": "Divisão por Categorias",
+    "icon" : "home",
+    "id": "8",
     "settings": [
       {
         "key": "view.home.enable_categories",
@@ -925,11 +864,12 @@
     ]
   },
   {
-    "name": "Produto",
-    "id": "6",
+    "name": "Página de Produto",
+    "icon" : "book",
+    "id": "9",
     "settings": [
       {
-        "template": "<h3>Header</h3>"
+        "template": "<h3>Estilos</h3>"
       },
       {
         "key": "style.product.header_bg",
@@ -962,75 +902,32 @@
       }
     ]
   },
+
   {
-    "name": "Footer",
-    "id": "7",
+    "name": "Injetor HTML/CSS/JS",
+    "icon" : "code",
+    "id": "10",
     "settings": [
       {
-        "key": "view.general.footer.logo",
-        "type": "input",
-        "templateOptions": {
-          "label": "URL da Logo"
-        }
-      },
-      {
-        "key": "view.general.footer.text",
+        "key": "view.injector.head",
         "type": "textarea",
         "templateOptions": {
-          "label": "Texto",
-          "rows": 5
+          "label": "Conteúdo para o cabeçalho"
         }
       },
       {
-        "template": "<h3>Dados da Escola</h3>"
-      },
-      {
-        "key": "view.general.footer.site",
-        "type": "checkbox",
+        "key": "view.injector.body",
+        "type": "textarea",
         "templateOptions": {
-          "label": "Site"
-        }
-      },
-      {
-        "key": "view.general.footer.email",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "Email"
-        }
-      },
-      {
-        "key": "view.general.footer.phone",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "Telefone"
-        }
-      },
-      {
-        "key": "view.general.footer.address",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "Endereço"
-        }
-      },
-      {
-        "key": "view.general.footer.cnpj",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "CNPJ"
-        }
-      },
-      {
-        "key": "view.general.footer.razao_social",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "Razão Social"
+          "label": "Conteúdo para o corpo"
         }
       }
     ]
   },
   {
     "name": "Acessibilidade",
-    "id": "8",
+    "id": "11",
+    "icon" : "wheelchair",
     "settings": [
       {
         "key": "view.general.accessibility.enabled",
@@ -1051,26 +948,6 @@
         "type": "checkbox",
         "templateOptions": {
           "label": "Modo de Contraste"
-        }
-      }
-    ]
-  },
-  {
-    "name": "Injetor HTML/CSS/JS",
-    "id": "9",
-    "settings": [
-      {
-        "key": "view.injector.head",
-        "type": "textarea",
-        "templateOptions": {
-          "label": "Conteúdo para o cabeçalho"
-        }
-      },
-      {
-        "key": "view.injector.body",
-        "type": "textarea",
-        "templateOptions": {
-          "label": "Conteúdo para o corpo"
         }
       }
     ]

@@ -1,8 +1,26 @@
 <div class="school-forums-page page">
   <div class="container">
-    <h2 class="page-title">{{ 'forums.forums' | t }}</h2>
+    <div class="col-lg-8">
+      <h2 class="page-title">{{ 'forums.forums' | t }}</h2>
+    </div>
+    <div class="col-lg-4">
+      <form class="search-form" accept-charset="UTF-8" method="get" action="/school/forums"
+                  data-turbolinks-scroll="false">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon-magnifier"></i></span>
+          <input type="text" name="title" class="form-control" placeholder="{{ 'forums.filter_by_title' | t }}"
+                  value="{{ current_search.title }}">
+          <span class="input-group-btn">
+          <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+        </span>
+        </div>
+      </form>
+    </div>
 
     <div class="forums">
+      <div class="alert alert-info text-center clear">
+            {{ 'forums.helptext' | t }}
+      </div>
       {% paginate forums by 10 sort { order: :asc } %}
       {% if forums.total_count == 0 and current_search.size == 0 %}
         <div class="alert alert-info text-center">
@@ -14,17 +32,7 @@
           <th class="first-header"></th>
           <th class="main-header">
             <span class="caption">{{ 'forums.forum_title' | t }}</span>
-            <form class="search-form" accept-charset="UTF-8" method="get" action="/school/forums"
-                  data-turbolinks-scroll="false">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="icon-magnifier"></i></span>
-                <input type="text" name="title" class="form-control" placeholder="{{ 'forums.filter_by_title' | t }}"
-                       value="{{ current_search.title }}">
-                <span class="input-group-btn">
-                <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
-              </span>
-              </div>
-            </form>
+            
           </th>
           <th class="right-header">
             <div class="caption">{{ 'forums.sections.title' | t }}</div>
@@ -41,12 +49,14 @@
               <td>
                 <div class="info">
                   <a class="title" href="{{ forum | forum_path }}">{{ forum.title }}</a>
+                  
+                  <p class="description">{{ forum.description }}</p>
+
                   {% if forum.product.slug %}
                     <div class="product">
-                      <span class="badge">{{ forum.product.title }}</span>
+                      <p class="related">{{ 'forums.associated_to' | t }} <a class="link" href="/{{ forum.product.slug }}">{{ forum.product.title }}</a></p>
                     </div>
                   {% endif %}
-                  <p class="description">{{ forum.description }}</p>
                 </div>
               </td>
               <td>

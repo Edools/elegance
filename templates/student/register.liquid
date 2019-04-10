@@ -20,11 +20,6 @@
              placeholder="{{ 'register.email' | t }}" required>
     </div>
 
-    <div class="form-group">
-      <input type="text" value="{{ user.phone }}" name="user[phone]" class="form-control input-lg"
-             placeholder="{{ 'register.phone' | t }}" required>
-    </div>
-
     <div class="form-group signin-password">
       {% assign has_feature_password = current_school | has_feature: 'strong_password_policy' %}
 

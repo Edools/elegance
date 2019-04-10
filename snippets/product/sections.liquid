@@ -1,5 +1,5 @@
 <div class="product-sections-container row">
-  {% paginate product_sections by 1 sort { order: :desc } %}
+  {% paginate product_sections by 1 sort { order: :asc } %}
     {% if product_sections.size > 0 %}
       <div id="js-product-sections">
         {% include 'product/sections-list', product_sections: product_sections %}

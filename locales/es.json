@@ -44,6 +44,17 @@
     "send_answers": "Enviar respuestas"
   },
   "errors": {
+    "payment_type": {
+      "unavailable": "Ningún método de pago disponible, póngase en contacto con el soporte escolar."
+    },
+    "order": {
+      "totals_were_updated": "Los totales fueron actualizados",
+      "contains_unpublished_products": "Productos no publicados",
+      "contains_unavailable_coupons": "Cupones no disponibles"
+    },
+    "institution": {
+      "blank": "La institución no puede estar vacía"
+    },
     "gateway_transaction": {
       "invalid_email": "La dirección de correo eletrónico enviado no es válido para este Gateway",
       "unavailable_gateway": "La pasarela de pago no está disponible en este momento"
@@ -144,7 +155,8 @@
       "limit_trial_purchases": "No se pudo agregar el elemento en la cesta de compras. Usted sólo puede agregar un producto a prueba de compra.",
       "exceeded_orders_limit": "Usted ha alcanzado el límite de nuevas compras!",
       "clone_and_original": "Este producto no se puede vender en conjunto",
-      "invalid_payment_config": "No se pudo agregar el elemento en el carro. No puede agregar productos con formas de pago diferentes."
+      "invalid_payment_config": "No se pudo agregar el elemento en el carro. No puede agregar productos con formas de pago diferentes.",
+      "option_invalid": "Opción de pago no válida"
     }
   },
   "navbar": {
@@ -408,6 +420,10 @@
       "credit": {
         "unitary": "{{price}} Créditos"
       }
+    },
+    "payemnt_methods": {
+      "credit_card": "no tarjeta de crédito",
+      "boleto": "no boleto"
     }
   },
   "checkout": {

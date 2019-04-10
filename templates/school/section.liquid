@@ -1,33 +1,44 @@
 <div class="school-forum-section page">
   <div class="container">
     <div class="forum-section-header">
-      {% assign col = 'md-12' %}
-      {% permitted school_forum_topic, create %}
-      {% assign col = 'md-9' %}
-      {% endpermitted %}
-
+     
       <div class="row">
-        <div class="col-{{ col }}">
+        <div class="col-md-12">
+          <div class="page-actions">
+            <a href="{{ section | forum_path }}" class="btn btn-default left">
+              <i class="icon-arrow-left"></i>
+              <span>{{ 'general.back' | t }}</span>
+            </a>
+            {% permitted school_forum_topic, create %}
+              <button type="button" data-toggle="modal" data-target="#new-topic-modal" id="new_section"
+                      class="btn btn-primary" name="button">
+                <i class="icon-plus"></i>
+                <span>{{ 'forums.new_topic' | t }}</span>
+              </button>
+            {% endpermitted %}
+          </div>
+        </div>
+
+        <div class="col-md-8">
           <h2 class="page-title">{{ section.title }}</h2>
           <p class="page-subtitle">{{ section.description }}</p>
         </div>
 
-        {% permitted school_forum_topic, create %}
-        <div class="col-md-3">
-          <div class="page-actions">
-            <a href="{{ section | forum_path }}" class="btn btn-default">
-              <i class="icon-arrow-left"></i>
-              <span>{{ 'general.back' | t }}</span>
-            </a>
-
-            <button type="button" data-toggle="modal" data-target="#new-topic-modal" id="new_section"
-                    class="btn btn-primary" name="button">
-              <i class="icon-plus"></i>
-              <span>{{ 'forums.new_topic' | t }}</span>
-            </button>
-          </div>
+        <div class="col-md-4">
+          <form class="search-form" accept-charset="UTF-8" method="get"
+                  action="/school/forums/{{ forum_id }}/sections/{{ section.id }}"
+                  data-turbolinks-scroll="false">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="icon-magnifier"></i></span>
+                <input type="text" class="form-control" name="title" placeholder="{{ 'forums.filter_by_title' | t }}"
+                       value="{{ current_search.title }}">
+                <span class="input-group-btn">
+                  <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+                </span>
+              </div>
+            </form>
         </div>
-        {% endpermitted %}
+        
       </div>
     </div>
 
@@ -43,18 +54,6 @@
           <th class="first-header"></th>
           <th class="main-header">
             <span class="caption">{{ 'forums.topic_title' | t }}</span>
-            <form class="search-form" accept-charset="UTF-8" method="get"
-                  action="/school/forums/{{ forum_id }}/sections/{{ section.id }}"
-                  data-turbolinks-scroll="false">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="icon-magnifier"></i></span>
-                <input type="text" class="form-control" name="title" placeholder="{{ 'forums.filter_by_title' | t }}"
-                       value="{{ current_search.title }}">
-                <span class="input-group-btn">
-                  <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
-                </span>
-              </div>
-            </form>
           </th>
           <th class="right-header">
             <div class="caption">{{ 'forums.posts_title' | t }}</div>
@@ -63,7 +62,7 @@
           <tbody>
           {% for topic in topics %}
             <tr class="topic forum-item" id="topic-{{ topic.id }}">
-              <td>
+              <td class="vertical-center">
                 <div class="icon-container">
                   <i class="icon icon-bubbles"></i>
                 </div>
@@ -74,7 +73,7 @@
                   <p class="description">{{ topic.description }}</p>
                 </div>
               </td>
-              <td>
+              <td class="vertical-center">
                 <div class="posts-count">
                   {{ topic.posts_count }}
                 </div>

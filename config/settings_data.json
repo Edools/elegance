@@ -10,42 +10,42 @@
           "Arial",
           "Courier New"
         ],
-        "color_primary": "#e66425",
+        "color_primary": "#4bbb83",
         "color_body_bg": "#f9f9f9",
         "color_body_text": "#585858",
-        "color_content_bg": "#f9f9f9",
-        "color_border": "#ededed",
+        "color_content_bg": "#F9F9F9",
+        "color_border": "#dedede",
         "color_navbar_bg": "#ffffff",
-        "color_navbar_links": "#222222",
+        "color_navbar_links": "#222",
         "color_button_primary_text": "#ffffff",
-        "color_button_primary_bg": "#e66425",
+        "color_button_primary_bg": "#4bbb83",
         "color_button_secondary_text": "#585858",
         "color_button_secondary_bg": "#ffffff",
         "color_titles": "#585858",
         "color_subtitles": "#585858",
         "color_paragraphs": "#585858",
-        "color_links": "#e66425",
+        "color_links": "#4bbb83",
         "color_footer_bg": "#2e3234",
         "color_footer_text": "#747474",
         "color_footer_links": "#b8b8b8",
-        "type_base_family": "Lato",
+        "type_base_family": "Proxima Nova",
         "type_base_size": "16px",
-        "type_navbar_family": "Lato",
+        "type_navbar_family": "Proxima Nova",
         "type_navbar_size": "16px",
-        "type_title_family": "Lato",
+        "type_title_family": "Proxima Nova",
         "type_title_size": "32px",
-        "type_subtitle_family": "Lato",
+        "type_subtitle_family": "Proxima Nova",
         "type_subtitle_size": "20px",
-        "type_paragraph_family": "Lato",
+        "type_paragraph_family": "Proxima Nova",
         "type_paragraph_size": "16px",
-        "type_button_family": "Lato",
+        "type_button_family": "Proxima Nova",
         "type_button_size": "16px",
         "type_enable_simple_line_icons": true,
         "type_enable_font_awesome": false,
         "home": {
-          "header_bg": "#e66425",
-          "header_text_color": "#ff9100",
-          "header_background_image": "https://edools-3-production.s3.amazonaws.com/org-7114%2Fschool-7395%2F697ad6b8d24358ec4600fd8bf7bace83%2Fheader_edools_edti.png",
+          "header_bg": "#41a875",
+          "header_text_color": "#ffffff",
+          "header_background_image": "",
           "benefits": {
             "color_icon": "#585858",
             "color_title": "#585858",
@@ -66,16 +66,16 @@
             "navigation": true,
             "contrast": true
           },
-          "favicon": "https://edools-3-production.s3.amazonaws.com/org-7114%2Fschool-7395%2F4a00ccaadd5413983eb3a5559efb2a20%2Ffavicon_edti.png",
+          "favicon": "",
           "navbar": {
-            "title": "Escola EDTI",
-            "logo": "https://edools-3-production.s3.amazonaws.com/org-7114%2Fschool-7395%2Fe858af827aa7157c0550fb87a96927fe%2Flogo_edti_300x300.png"
+            "title": "Elegance Theme",
+            "logo": ""
           },
           "footer": {
-            "logo": "https://www.escolaedti.com.br/wp-content/uploads/2017/03/logo_1-300x13-300x138.png",
-            "text": "<a href=\"https://escola-edti.myedools.com/terms-of-use\">Termos de Uso</a> | <a href=\"https://escola-edti.myedools.com/pages/politicas-de-cancelamento-e-arrependimento-da-escola-edti\">Política de Cancelamento</a>\n<br>\n<br>\n<a href=\"https://www.escolaedti.com.br\">Escola EDTI</a> | <a href=\"https://www.escolaedti.com.br/blog/\">Blog</a> | <a href=\"https://www.escolaedti.com.br/livros-e-apostilas/\">Materiais Gratuitos</a> | <a href=\"https://edtisensei.zendesk.com/hc/pt-br\">EDTI Sensei</a>",
-            "site": true,
-            "email": true,
+            "logo": "",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lectus, pretium quis lobortis sollicitu",
+            "site": false,
+            "email": false,
             "phone": true,
             "address": true,
             "cnpj": true,
@@ -84,31 +84,42 @@
         },
         "home": {
           "header": {
-            "title": "",
-            "subtitle": "",
+            "title": "Seja Bem-Vindo",
+            "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lectus, pretium quis lobortis sollicitudin, viverra eget lacus. Curabitur vitae hendrerit ex, id iaculis tellus",
             "cover_enable": true,
-            "cover_src": "https://edools-3-production.s3.amazonaws.com/org-7114%2Fschool-7395%2Fe858af827aa7157c0550fb87a96927fe%2Flogo_edti_300x300.png",
-            "cover_src_image": null
+            "cover_src": ""
           },
-          "topics": [],
-          "product_list_title": "<a id=\"cursos\" name=\"cursos\"></a><strong>Participe de nossos cursos</strong>",
+          "topics": [
+            {
+              "title": "Assista onde preferir",
+              "subtitle": "no seu computador, tablet ou celular",
+              "icon": "icon-screen-smartphone"
+            },
+            {
+              "title": "Certificados",
+              "subtitle": "Você irá receber nosso certificado na conclusão",
+              "icon": "icon-graduation"
+            },
+            {
+              "title": "Materiais Extras",
+              "subtitle": "Para complementar seu estudo além das video-aulas.",
+              "icon": "icon-docs"
+            }
+          ],
+          "product_list_title": "<strong>Participe de nossos cursos</strong>, basta escolher e assistir",
           "footer": {
-            "title": "Palavra do presidente da Escola EDTI",
-            "text": "A EDTI, com base em uma longa experiência de trabalho de consultoria em diversas indústrias, está plenamente capacitada para treinar e orientar equipes em atividades de melhoria, desenvolver processos de inovação e dar suporte à análise de dados (inteligência analítica) para subsidiar decisões de negócios.\n\nPara permanecer no negócio e crescer, as organizações precisam canalizar esforços para produzir produtos e serviços que os clientes desejam e pelos quais estão dispostos a pagar. Isso requer o domínio por parte da organização de um método eficiente e eficaz de realizar melhorias.\n\nA EDTI acredita que a formação sólida de seus consultores, aliada à experiência e conhecimento do mercado, são fundamentais para ajudar a liderança da organização na exploração de oportunidades de crescimento.\n\nDr. Ademir José Petenate, Sócio fundador da Escola EDTI, e Professor da UNICAMP desde 1974",
+            "title": "Donec sollicitudin molestie malesuada. Donec sollicitudin molestie malesuada.",
+            "text": "Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus.",
             "social_twitter_link": true,
             "social_facebook_link": true,
             "social_pinterest_link": false,
             "social_google_plus_link": false,
-            "social_instagram_link": true,
+            "social_instagram_link": false,
             "social_youtube_link": false,
-            "social_linkedin_link": true
+            "social_linkedin_link": false
           },
           "enable_categories": false,
           "categories": []
-        },
-        "injector": {
-          "head": "<script type=\"text/javascript\">\nwindow.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=\nd.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.\n_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute(\"charset\",\"utf-8\");\n$.src=\"https://v2.zopim.com/?4c3MLDyDuU7fvqFqTLmDbu4x9S58JY5N\";z.t=+new Date;$.\ntype=\"text/javascript\";e.parentNode.insertBefore($,e)})(document,\"script\");\n</script>",
-          "body": ""
         }
       }
     }

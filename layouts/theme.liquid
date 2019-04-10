@@ -54,15 +54,14 @@
 
   {{ content_for_header }}
 
-  {% if current_school | has_feature: 'custom_html' %}
-    {{ settings.view.injector.head }}
-  {% endif %}
+  {{ settings.view.injector.head }}
 
   <script defer src="{{ 'theme.base.vendors.min.js' | asset_url }}"></script>
   <script defer src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
 
   <script defer src="{{ 'theme.base.min.js' | asset_url }}"></script>
   <script defer src="{{ 'theme.js' | asset_url }}"></script>
+  <script defer src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
 
   {% if current_school | has_feature: 'recaptcha' %}
     <script defer src='https://www.google.com/recaptcha/api.js?onload=onLoadRecaptcha&render=explicit'></script>
@@ -82,8 +81,6 @@
   {% include 'footer' %}
 </div>
 
-  {% if current_school | has_feature: 'custom_html' %}
-    {{ settings.view.injector.body }}
-  {% endif %}
+  {{ settings.view.injector.body }}
 </body>
 </html>

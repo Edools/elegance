@@ -48,6 +48,17 @@
     "disabled": "Desabilitado"
   },
   "errors": {
+    "payment_type": {
+      "unavailable": "Nenhum método de pagamento disponível, entre em contato com o suporte da escola."
+    },
+    "order": {
+      "totals_were_updated": "Os valores foram atualizados",
+      "contains_unpublished_products": "Produto ainda não publicado",
+      "contains_unavailable_coupons": "O cupom inserido é inválido"
+    },
+    "institution": {
+      "blank": "Instituição não pode ficar em branco"
+    },
     "points": {
       "blank": "Pontuação não pode ficar em branco",
       "inclusion": "Pontuação deve estar entre zero e cinco"
@@ -89,7 +100,7 @@
     },
     "last_name": {
       "blank": "Sobrenome não pode ficar em branco"
-    },    
+    },
     "rg": {
       "blank": "RG não pode ficar em branco"
     },
@@ -161,7 +172,8 @@
       "invalid_user_coupon": "Você não tem permissão para utilizar este cupom",
       "limit_trial_purchases": "Não foi possível adicionar o item no carrinho. Você só pode adicionar um produto com trial por compra.",
       "exceeded_orders_limit": "Você atingiu o limite de novas compras!",
-      "invalid_payment_config": "Não foi possível adicionar o item no carrinho. Você não pode adicionar produtos com formas de pagamento diferentes."
+      "invalid_payment_config": "Não foi possível adicionar o item no carrinho. Você não pode adicionar produtos com formas de pagamento diferentes.",
+      "option_invalid": "Opção de pagamento inválida"
     },
     "recaptcha": {
       "invalid": "Por favor clique em \"Não sou um robô\""
@@ -217,8 +229,7 @@
     "email": "Seu Email",
     "password": "Crie uma Senha",
     "password_confirmation": "Repita sua Senha",
-    "create_account": "Criar conta",
-    "phone": "Telefone"
+    "create_account": "Criar conta"
   },
   "password_request": {
     "email": "Email",
@@ -255,6 +266,8 @@
     "new_topic_description": "Descrição",
     "new_section": "Nova Seção",
     "filter_by_title": "Buscar por nome...",
+    "last_topic_title": "Último tópico",
+    "associated_to": "Associado a",
     "empty": "Ainda não há fóruns aqui.",
     "new_question": "Fazer pergunta",
     "click_to_answer": "Clique para responder",
@@ -267,6 +280,7 @@
     "answers": "Respostas",
     "question_title": "Título da sua pergunta",
     "ask": "Perguntar",
+    "helptext" : "Apenas administradores podem criar <strong>fóruns</strong> e <strong>seções</strong>. Para criar um <strong>tópico</strong>, escolha abaixo o fórum que se encaixa no seu assunto de interesse e participe!",
     "child_forum_sections_count": {
       "zero": "Não há nenhuma seção",
       "one": "1 seção",
@@ -423,6 +437,7 @@
     "not_found": "Não existe certificado com este ID!"
   },
   "enrollment": {
+    "my_badges": "<span class='lighter'>Meus</span>&nbsp;<strong>Badges</strong>",
     "my_courses": "<span class='lighter'>Meus</span>&nbsp;<strong>Cursos</strong>",
     "no_certificate": "Você ainda não tem certificados",
     "download_certificate": "<span>Download Certificado</span>",
@@ -508,6 +523,10 @@
       "credit": {
         "unitary": "{{ price }} Créditos"
       }
+    },
+    "payemnt_methods": {
+      "credit_card": "no cartão",
+      "boleto": "no boleto"
     }
   },
   "checkout": {
@@ -519,7 +538,7 @@
     },
     "cart": {
       "title": "<strong>Carrinho</strong> <span class=\"lighter\">de compras</span>",
-      "empty": "Ainda não há items no seu carrinho.",
+      "empty": "Ainda não há itens no seu carrinho.",
       "coupon_applied": "Cupom aplicado com sucesso!",
       "item_quantity": "Quantidade: "
     },
@@ -682,6 +701,14 @@
       "right_questions" : "Acertos",
       "wrong_questions" : "Erros",
       "performance" : "Questões Resolvidas"
+    },
+    "dashboard": {
+      "content_lessons_completed": "Aulas assistidas",
+      "content_lessons_uncompleted": "Aulas não assistidas",
+      "content_lessons_total": "Aulas totais",
+      "exam_lessons_completed": "Provas realizadas",
+      "exam_lessons_uncompleted": "Provas não realizadas",
+      "exam_lessons_total": "Provas totais"
     }
   },
   "home": {
@@ -1034,7 +1061,7 @@
   "forum": {
     "forum": "Fórum",
     "section" : "Você está na seção:  ",
-    "hint": "Este espaço é dedicado a discutir assuntos relacionados à seção do Fórum. Aqui você pode criar, reponder dúvidas ou simplesmente trocar conhecimentos com outros alunos.",
+    "hint": "Este espaço é dedicado a discutir assuntos relacionados à seção do Fórum. Aqui você pode criar, responder dúvidas ou simplesmente trocar conhecimentos com outros alunos.",
     "posts" : {
       "last_post" : {
         "name_and_date" : "{{ object.user.first_name | prepend: 'criado por ' | append: ' ' | append: object.user.last_name | append: ' | ' | append : last_post_date }}"
@@ -1080,8 +1107,6 @@
     "hide_accessibility": "(Ocultar Acessibilidade)"
   },
   "welcome_screen": {
-    "go": "Aceito os termos de uso",
-    "not_go": "Não concordo com os termos de uso",
-    "term_of_use": "<a href=\"/terms-of-use\" target=\"_blank\">Clique aqui para conhecer os Termos de Uso na nossa escola</a>"
+    "go": "Ir para o Curso"
   }
 }

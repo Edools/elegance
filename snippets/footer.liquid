@@ -24,10 +24,10 @@
 
             {% if settings.view.general.footer.phone and current_school.phone %}
               <p>
-                <p aria-label="Número de Telefone: {{ current_school.phone }}">
+                <a aria-label="Número de Telefone: {{ current_school.phone }}" href="tel:{{ current_school.phone }}">
                   <i class="icon-phone"></i>
                   <span>{{ current_school.phone }}</span>
-                </p>
+                </a>
               </p>
             {% endif %}
 
@@ -49,23 +49,32 @@
               </p>
             {% endif %}
 
-            
+            <div class="company-info">
+              {% if settings.view.general.footer.razao_social and current_school.company_name %}
+                <p>
+                  <span tabindex="0">{{ current_school.company_name }}</span>
+                </p>
+              {% endif %}
+
+              {% if settings.view.general.footer.cnpj and current_school.cnpj %}
+                <p>
+                  <b>CNPJ: </b>
+                  <span tabindex="0">{{ current_school.cnpj }}</span>
+                </p>
+              {% endif %}
+            </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
 
     <div class="copyright">
       <div class="container">
-      R. José Rocha Bonfim, 214 – Jardim Santa Genebra, Campinas – SP, 13080-650,<br>Condomínio Horizontal Praça Capital, Ed. São Paulo, Sala 123<br>CNPJ: 14.718.560/0001-90
-      <br>
-        Plataforma de ensino por 
-        <a ng-click="fireAnalytics()" href="https://www.escolaedti.com.br" class="brand scroller" target="blank"
-           title="Escola EDTI">
-          {% assign logo_edools_img = 'https://www.escolaedti.com.br/wp-content/uploads/2017/03/logo_1-300x13-300x138.png' | asset_url %}
-          {% image, src: "https://www.escolaedti.com.br/wp-content/uploads/2017/03/logo_1-300x13-300x138.png", alt: 'Escola EDTI', width: 90 %}
+        {{ 'footer.plataform_by' | t }}
+        <a ng-click="fireAnalytics()" href="http://www.edools.com" class="brand scroller" target="blank"
+           title="Edools">
+          {% assign logo_edools_img = 'logo-edools.png' | asset_url %}
+          {% image, src: logo_edools_img, alt: 'Edools', width: 90 %}
         </a>
       </div>
     </div>
