@@ -21,7 +21,6 @@
     {% endif %}
 
     {% if lesson.activity.type == 'RandomQuiz' %}
-
       {% assign messages = answer | by_tags_and_difficult: lesson %}
       <section class="random-quiz-messages">
         <h4>{{ 'quiz.random_quiz.message' | t }}</h4>
@@ -37,17 +36,6 @@
         </div>
         {% endfor %}
       </section>
-
-    {% else %}
-      {% if answer.approved? %}
-        <p class="alert alert-success alert-approved">
-          {{ 'quiz.messages.approved' | t: score: answer.score }}
-        </p>
-      {% else %}
-        <p class="alert alert-danger alert-disapproved">
-          {{ 'quiz.messages.disapproved' | t: score: answer.score, min_grade: lesson.min_grade }}
-        </p>
-      {% endif %}
     {% endif %}
 
   {% endif %}
