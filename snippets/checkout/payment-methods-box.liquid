@@ -1,0 +1,51 @@
+{% if order.kind == 'common' or order.kind == 'subscription' %}
+  <div class="payment-methods">
+    <span class="title"> {{ 'checkout.payment_methods.title' | t }}</span>
+    <p class="description">
+    <dl class="payment-methods-list">
+      {% if order.kind == 'common' and gateway.common_payment_methods contains 'credit_card' %}
+        {% assign show_cc = true %}
+      {% elsif order.kind == 'subscription' and gateway.subscription_payment_methods contains 'credit_card' %}
+        {% assign show_cc = true %}
+      {% endif %}
+      {% if show_cc %}
+        <dt>
+          <small><i class="icon-check"></i> {{ 'checkout.payment_methods.credit_card' | t }}</small>
+        </dt>
+        <dd>
+          {% for card in gateway.supported_cardtypes %}
+            <span class="card-flag {{ card }}"></span>
+          {% endfor %}
+        </dd>
+      {% endif %}
+
+      {% if order.kind == 'common' and gateway.common_payment_methods contains 'bank_transfer' %}
+        <dt>
+          <small><i class="icon-check"></i> {{ 'checkout.payment_methods.bank_transfer' | t }}</small>
+        </dt>
+        <dd>
+          {% for bank in gateway.supported_banks %}
+            <span class="bank-flag {{ bank }}"></span>
+          {% endfor %}
+        </dd>
+      {% endif %}
+
+      {% if order.kind == 'common' and gateway.common_payment_methods contains 'boleto' %}
+        {% assign show_boleto = true %}
+        {% elsif order.kind == 'subscription' and gateway.subscription_payment_methods contains 'boleto' %}
+        {% assign show_boleto = true %}
+      {% endif %}
+      {% if show_boleto %}
+        <dt>
+          <small><i class="icon-check"></i> {{ 'checkout.payment_methods.boleto' | t }}</small>
+        </dt>
+        <dd>
+          {% for boleto in gateway.supported_boletos %}
+            <span class="boleto-flag {{ boleto }}"></span>
+          {% endfor %}
+        </dd>
+      {% endif %}
+    </dl>
+    </p>
+  </div>
+{% endif %}

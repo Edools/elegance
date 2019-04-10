@@ -1,0 +1,54 @@
+{% if collaborators.size > 0 %}
+  <div id="js-doubts-container" class="student-doubts">
+    <div id="js-student-doubts-form" class="student-doubts-form">
+      {% form 'student_doubt', id: student_doubt_form, remote: true %}
+        <h4>{{ 'student_doubt.write_your_doubt' | t }}</h4>
+        <div class="form-group form-inline">
+          <label for="collaborator_id">{{ 'student_doubt.tutor' | t }}</label>
+          <select class="form-control" id="collaborator_id" name="student_doubt[collaborator_id]">
+            {% for collaborator in collaborators %}
+              <option value="{{ collaborator.id }}">{{ collaborator | fullname }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <textarea id="js-doubt" class="js-ckeditor" rows="10" cols="80"
+                  name="student_doubt[question]" title=""></textarea>
+
+        <div class="form-buttons clearfix">
+          <div class="btn-group pull-right">
+            <button type="button"
+                    id="js-hide-student-doubts-form"
+                    class="btn btn-default">
+              {{ 'general.cancel' | t }}
+            </button>
+
+            <button type="submit" class="btn btn-primary"
+                    data-disable-with="<i class='busy busy-xs'></i><span>{{ 'general.sending' | t }}...</span>"
+                    disabled>
+              {{ 'general.send' | t }}
+            </button>
+          </div>
+        </div>
+      {% endform %}
+    </div>
+
+    <div class="student-doubts-container">
+      <div class="text-right">
+        <button id="js-expand-student-doubts-form" class="btn btn-default">
+          <i class="icon-bubble"></i>
+          <span>{{ 'student_doubt.ask_to_tutor' | t }}</span>
+        </button>
+      </div>
+
+      <ul class="doubts-list"></ul>
+
+      <div class="text-center">
+        <button id="js-load-more-doubts" class="btn btn-default">
+          <i class="icon-refresh"></i>
+          <span>{{ 'student_doubt.load_more' | t }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+{% endif %}

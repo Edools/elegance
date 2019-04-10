@@ -1,0 +1,34 @@
+<div class="extra-content-page lesson-page page">
+  <div class="container page-container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="control-back">
+          <a class="btn btn-default" href="{{ enrollment | course_path:course.id }}">
+            <i class="icon-arrow-left"></i>
+            <span>{{ 'general.back' | t }}</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="panel panel-default course-content">
+          <div class="panel-heading">
+            {{ 'extra_content.label' | t }}
+          </div>
+
+          {% include 'course/extra_content/list', extra_contents: course.extra_contents,
+            course: course, enrollment: enrollment %}
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div class="course-content-player">
+          {% if extra_content.media %}
+            {% media_player media: extra_content.media, enrollment: enrollment,
+              extra_content: extra_content, course: course %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<footer class="page-footer">
+  <div class="container">
+    <div class="info">
+      <div class="row">
+        <div class="col-sm-6 col-md-6">
+          <div tabindex="0" class="info">
+            {% if settings.view.general.footer.logo %}
+              <div class="logo">
+                {% image, src: settings.view.general.footer.logo, class: 'img-responsive' %}
+              </div>
+            {% endif %}
+
+            {{ settings.view.general.footer.text }}
+          </div>
+
+          {% if settings.view.general.footer.address and current_school.address %}
+            <address tabindex="0">{{ current_school.address }}</address>
+          {% endif %}
+        </div>
+
+        <div class="col-md-5 col-md-offset-1">
+          <div tabindex="-1" class="contact-us">
+              <h2 tabindex="0" id="accessibility-contact" class="underlined">{{ 'footer.contact_us' | t }}</h2>
+
+            {% if settings.view.general.footer.phone and current_school.phone %}
+              <p>
+                <p aria-label="Número de Telefone: {{ current_school.phone }}">
+                  <i class="icon-phone"></i>
+                  <span>{{ current_school.phone }}</span>
+                </p>
+              </p>
+            {% endif %}
+
+            {% if settings.view.general.footer.email and current_school.email %}
+              <p>
+                <a href="mailto:{{ current_school.email }}">
+                  <i class="icon-envelope"></i>
+                  <span>{{ current_school.email }}</span>
+                </a>
+              </p>
+            {% endif %}
+
+            {% if settings.view.general.footer.site and current_school.site %}
+              <p>
+                <a href="{{ current_school.site }}">
+                  <i class="icon-globe"></i>
+                  <span>{{ current_school.site }}</span>
+                </a>
+              </p>
+            {% endif %}
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+
+    <div class="copyright">
+      <div class="container">
+      R. José Rocha Bonfim, 214 – Jardim Santa Genebra, Campinas – SP, 13080-650,<br>Condomínio Horizontal Praça Capital, Ed. São Paulo, Sala 123<br>CNPJ: 14.718.560/0001-90
+      <br>
+        Plataforma de ensino por 
+        <a ng-click="fireAnalytics()" href="https://www.escolaedti.com.br" class="brand scroller" target="blank"
+           title="Escola EDTI">
+          {% assign logo_edools_img = 'https://www.escolaedti.com.br/wp-content/uploads/2017/03/logo_1-300x13-300x138.png' | asset_url %}
+          {% image, src: "https://www.escolaedti.com.br/wp-content/uploads/2017/03/logo_1-300x13-300x138.png", alt: 'Escola EDTI', width: 90 %}
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

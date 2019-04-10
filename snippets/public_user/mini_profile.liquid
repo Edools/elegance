@@ -1,0 +1,68 @@
+<div class="profile text-center {% if user.id == current_user.id %}own-profile{% endif %}">
+  {% assign profile_picture = (user.cover_image_url != null) ? user.cover_image_url : 'https://cdn.edools.com/assets/images/users/default.jpg' %}
+  <div class="bg-picture" style="background-image: url({{ profile_picture }})"></div>
+
+  <div class="profile-body">
+    <a href="/profile/{{ user.id }}" class="profile-picture">
+      {% image, src: profile_picture, alt: 'profile-picture', animate: false %}
+    </a>
+
+    <div tabindex='0' aria-label="Seu Perfil - Informações" class="info-profile">
+      <a href="/profile/{{ user.id }}">
+        <div class="info">
+          <h3 class="name">{{ user | fullname }}</h3>
+        </div>
+      </a>
+
+      {% if hide_actions != true and current_user and current_user.id != user.id %}
+        <div class="actions">
+          <div class="js-follow-actions follow-actions">
+            {% if followed_by_current_user %}
+              <a id="js-following" class="btn btn-default btn-flat btn-sm btn-following">
+                <i class="icon-check"></i> {{ 'profile.following' | t }}
+              </a>
+
+              <a id="js-unfollow" class="btn btn-sm btn-danger hidden"
+                 href="{{ user | profile_follow_path }}"
+                 data-method="delete"
+                 data-remote="true"
+                 data-disable-with="<i class='busy busy-xs'></i><span>{{ 'profile.unfollow' | t }}</span>">
+
+                <i class="icon-close"></i> {{ 'profile.unfollow' | t }}
+              </a>
+            {% else %}
+              <a id="js-follow" class="btn btn-sm btn-primary"
+                 href="{{ user | profile_unfollow_path }}"
+                 data-method="post"
+                 data-remote="true"
+                 data-disable-with="<i class='busy busy-xs'></i><span>Seguir</span>">
+
+                <i class="icon-feed"></i> {{ 'profile.follow' | t }}
+              </a>
+            {% endif %}
+          </div>
+
+          <a id="new-message" class="btn btn-sm btn-default" href="{{ user | new_profile_message_path }}">
+            <i class="icon-speech"></i> {{ 'profile.message' | t }}
+          </a>
+        </div>
+      {% endif %}
+
+      <ul class="follow-info">
+        <li>
+          <a href="{{ user | profile_followers_path }}">
+            <span>{{ 'profile.followers' | t }}</span>
+            <span id="js-followers-count" class="followers-count">{{ user.followers_count }}</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="{{ user | profile_following_path }}">
+            <span>{{ 'profile.following' | t }}</span>
+            <span id="js-follow-count" class="followed-count">{{ user.follow_count }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

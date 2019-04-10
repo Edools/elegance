@@ -1,0 +1,45 @@
+<div class="product-page page">
+  <header class="product-header page-header">
+    <div class="container">
+      <h2 class="title">{{ course.name }}</h2>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="image">
+            {% if course.image_url %}
+              {% image, src: course.image_url, alt: course.name %}
+            {% else %}
+              {% assign placeholder = 'missing-course-logo.png' | asset_url %}
+              {% image, src: placeholder, alt: course.name %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="product-body">
+    <div class="container page-container">
+      <div class="row">
+        <div class="col-md-8">
+          {% if course.description %}
+            <article class="product-description">
+              {{ course.description }}
+            </article>
+          {% endif %}
+
+          <div class="product-content">
+            <div class="landing-modules">
+              {% include 'product/content-course', lesson_actions: false %}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          {% include 'product/ratings' %}
+          {% include 'product/teachers' %}
+          {% include 'product/product-topics' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

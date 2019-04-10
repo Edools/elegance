@@ -1,0 +1,89 @@
+<!doctype html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+  <!-- Basic page needs ================================================== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="shortcut icon"
+        href="{% if settings.view.general.favicon %}{{ settings.view.general.favicon }}{% else %}{{ 'favicon.png' | asset_url }}{% endif %}"
+        type="image/png"/>
+
+  <!-- Title ========================================================= -->
+  {% assign sub_title = current_page_title | default: '' %}
+  <title>
+    {{ current_school.name }}{% if sub_title.size > 0 %} | {{ sub_title }}{% endif %}
+  </title>
+
+  <!-- Social meta ================================================== -->
+  {% include 'social-meta-tags' %}
+
+  <!-- Helpers ================================================== -->
+  <!-- <link rel="canonical" href="{ { canonical_url } }"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- CSS ================================================== -->
+
+  {% include 'fonts' %}
+
+  {% if settings.style.type_enable_simple_line_icons != false %}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
+          media="none"
+          onload="if(media!='all')media='all'">
+  {% endif %}
+
+  {% if settings.style.type_enable_font_awesome != false %}
+    <link rel="stylesheet"
+          href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+          media="none"
+          crossorigin="anonymous"
+          onload="if(media!='all')media='all'">
+  {% endif %}
+
+  <link rel="stylesheet" href="{{ 'theme.base.min.css' | asset_url }}">
+
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+
+  {{ content_for_header }}
+
+  {% if current_school | has_feature: 'custom_html' %}
+    {{ settings.view.injector.head }}
+  {% endif %}
+
+  <script defer src="{{ 'theme.base.vendors.min.js' | asset_url }}"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
+
+  <script defer src="{{ 'theme.base.min.js' | asset_url }}"></script>
+  <script defer src="{{ 'theme.js' | asset_url }}"></script>
+
+  {% if current_school | has_feature: 'recaptcha' %}
+    <script defer src='https://www.google.com/recaptcha/api.js?onload=onLoadRecaptcha&render=explicit'></script>
+  {% endif %}
+
+</head>
+<body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% elsif current_path == '/chat' %}chat-page{% endif %}">
+<div class="content-wrapper">
+  {% include 'accessibility-menu' %}
+  {% include 'navbar' %}
+  {% include 'alert-notice' %}
+  {{ content_for_layout }}
+  <div class="content-push"></div>
+</div>
+
+<div class="footer-wrapper">
+  {% include 'footer' %}
+</div>
+
+  {% if current_school | has_feature: 'custom_html' %}
+    {{ settings.view.injector.body }}
+  {% endif %}
+</body>
+</html>

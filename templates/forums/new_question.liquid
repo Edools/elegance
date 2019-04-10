@@ -1,0 +1,43 @@
+<div class="forums-page page">
+  <div class="forum-new-question-page page">
+    <div class="container">
+      <h2 class="title">{{ 'forums.new_question' | t }}</h2>
+
+      {% form 'forum/question' %}
+
+      <article class="question row">
+        {% if form.errors %}
+          <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+        {% endif %}
+        <div class="question-user col-xs-12 col-sm-1">
+          <div class="avatar">
+            {% image, src: current_user.cover_image_url, alt: current_user.first_name %}
+          </div>
+          <span class="name">{{ current_user.first_name }}</span>
+        </div>
+        <div class="content col-xs-12 col-sm-11">
+          <div class="form-group">
+            <input type="text" class="title form-control" name="forum_question[title]" value="{{ question.title }}"
+                   placeholder="{{ 'forums.question_title' | t }}" required>
+          </div>
+
+          <div class="description form-group">
+            <textarea id="question-description" class="js-ckeditor" rows="10" cols="80"
+                      name="forum_question[description]"></textarea>
+          </div>
+
+          <div class="forum-new-question-footer text-left">
+            <a href="{{ topic | topic_path }}" class="btn btn-default">
+              <i class="icon-arrow-left"></i>
+              <span>{{ 'general.back' | t }}</span>
+            </a>
+            <input type="submit" value="{{ 'forums.ask' | t }}" class="btn btn-primary pull-right">
+          </div>
+        </div>
+      </article>
+
+
+      {% endform %}
+    </div>
+  </div>
+</div>

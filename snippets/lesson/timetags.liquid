@@ -1,0 +1,12 @@
+<div class="timetags js-timetags">
+  {% assign tags = lesson.media.time_tag.meta_tags %}
+
+  <div class="list-group">
+    {% for tag in tags %}
+      <a href="#" data-time="{{ tag.time }}" class="list-group-item">
+        <i class="icon-pin"></i>
+        <span>{{ tag.text }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</div>

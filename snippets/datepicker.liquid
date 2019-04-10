@@ -1,0 +1,13 @@
+<div class="form-group">
+  <label class="control-label ">{{ label }}</label>
+  <div class="input-group date">
+    <input type="text"
+           class="form-control datepicker"
+           id="{{ name }}"
+           value="{% if value %}{{ value }}{% endif %}"
+           name="{{ name }}">
+    <div class="input-group-addon">
+      <i class="icon-calendar"></i>
+    </div>
+  </div>
+</div>

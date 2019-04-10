@@ -1,0 +1,21 @@
+{% raw %}
+<div class="chat-profile-list-item chat-sidebar-list-item" data-id="{{id}}" data-type="users">
+  <div class="avatar" title="{{ first_name }}">
+    <img class="animated" src="{{cover_image_url}}" />
+  </div>
+
+  <div class="info">
+    <div class="name">{{ first_name }} {{last_name}}</div>
+    {% if address %}
+      <div class="location">{{ address.city }} - {{ address.state}}</div>
+    {% else %}
+      <div class="location">...</div>
+    {% endif %}
+  </div>
+
+    <div class="status">
+      <div class="icon icon-offline"></div>
+      {% comment %}<div class="description">{{ last_seen }}</div>{% endcomment %}
+    </div>
+</div>
+{% endraw %}

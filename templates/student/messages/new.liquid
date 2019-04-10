@@ -1,0 +1,66 @@
+<div class="new-message-page page">
+  <div class="container page-container">
+    <div class="page-header">
+        {% capture inbox_link_html %}
+        <i class="icon-arrow-left"></i>
+        <span>{{ 'general.back' | t }}</span>
+        {% endcapture %}
+
+        {{ inbox_link_html | inbox_link : 'btn btn-default' }}
+    </div>
+
+    <h2 class="page-title">
+      <span>{{ 'messages.new_message' | t }}</span>
+    </h2>
+
+    {% form 'channel' %}
+      {% if form.errors %}
+        <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+      {% endif %}
+
+      {% if receiver %}
+        <input type="hidden" name="channel[user_ids][]" value="{{ receiver.id }}">
+        <input type="hidden" name="channel[permission_key]" value="profile_message">
+
+        <label class="control-label">{{ 'messages.new.to' | t }}</label>
+        <span>{{ receiver | fullname }}</span>
+      {% else %}
+        <div class="form-group">
+          <label class="control-label">{{ 'messages.new.to_team' | t }}</label>
+          {% assign permissions = "content_management|school_management|finance" | split: "|" %}
+          <select class="form-control" name="channel[permission_key]" required>
+            {% for permission in permissions %}
+              {% if permission == channel.permission_key %}
+              <option value="{{ permission }}" selected="selected">
+              {% else %}
+                <option value="{{ permission }}">
+              {% endif %}
+              {{ 'messages.' | append: permission | t }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      {% endif %}
+
+      <div class="form-group">
+        <label class="control-label">{{ 'messages.new.subject' | t }}</label>
+        <input type="text" class="form-control" name="channel[subject]" value="{{ channel.subject }}" required>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">{{ 'messages.new.message' | t }}</label>
+            <textarea id="js-message-text" class="js-ckeditor form-control" rows="10" cols="80"
+                      name="channel[messages_attributes][text]"></textarea>
+      </div>
+
+      <div class="form-group actions">
+        {% include 'recaptcha_by_feature', disable_button: true, feature: 'messages_with_recaptcha' %}
+
+        <button type="submit" class="btn btn-primary">
+          <i class="icon-paper-plane btn-label"></i>
+          <span> {{ 'messages.new.send' | t }}</span>
+        </button>
+      </div>
+    {% endform %}
+  </div>
+</div>

@@ -1,0 +1,33 @@
+{% if rating_enable and course %}
+  <div id="rating-container">
+    {% if product.rating_config.points == 'true' and course.rating %}
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div id="general-rating" class="general-rating">
+            <h4>{{ 'courses.rating.total_points' | t }}</h4>
+
+            <div class="points">
+              {% include 'ui/stars/star', value: course.rating, size: 'normal' %}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if product.rating_config.public_notes == 'true' %}
+      <div id="public-notes">
+        {% paginate public_ratings by 1 %}
+          <div id="js-course-{{ course.id }}-ratings-list">
+            {% include 'product/ratings-list' %}
+          </div>
+
+          {% if paginate.next.is_link %}
+            <a id="js-course-{{ course.id }}-ratings-more" href="{{ course | ratings_path: paginate.params }}" data-remote="true" data-reject-ids="[]">
+              {{ 'general.load_more' | t }}
+            </a>
+          {% endif %}
+        {% endpaginate %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

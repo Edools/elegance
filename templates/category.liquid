@@ -1,0 +1,70 @@
+<div class="categories-page page">
+  <div class="container">
+    <h2 class="page-title">{{ 'categories.categories' | t }}</h2>
+
+    <div class="row">
+      <div class="col-sm-4">
+        {% include 'categories/category-list', categories: categories %}
+      </div>
+
+      <div class="col-sm-8">
+        <div class="category-products-form">
+          {% capture form_content %}
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="icon-magnifier"></i></span>
+              <input id="filter-title-input" name="title" class="form-control"
+                     type="text" value="{{ params.title }}" placeholder="{{ 'category.filter_by_product' | t }}">
+              <span class="input-group-btn">
+                <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+              </span>
+            </div>
+          </div>
+          {% endcapture %}
+
+          {% if category.parent_category_id == nil %}
+            {% form 'root-category-search-product', root_category: category.slug %}
+            {{ form_content }}
+            {% endform %}
+            {% elsif root_category and parent_category == nil %}
+            {% form 'parent-category-search-product', root_category: root_category.slug, parent_category: category.slug %}
+            {{ form_content }}
+            {% endform %}
+          {% else %}
+            {% form 'category-search-product', root_category: root_category.slug, parent_category: parent_category.slug, category: category.slug %}
+            {{ form_content }}
+            {% endform %}
+          {% endif %}
+        </div>
+
+        {% if products.size > 0 %}
+          <div class="product-list">
+            {% paginate products by 9 sort { title: :asc } %}
+            <div class="row">
+              <div id="js-product-list">
+                {% for product in products %}
+                  <div class="col-sm-12 col-md-6">
+                    {% include 'product/product-card', product: product, gateway: gateway %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+
+            {% if paginate.next.is_link %}
+              <div id="product-more" class="col-xs-12 text-center" data-turbolinks-temporary>
+                <a id="js-product-more-link" class="btn btn-default" href="{{ paginate.next.url }}">
+                  <span class="bold">{{ 'product.load_more' | t }}</span>
+                </a>
+
+                <div class="js-paginate-spinner" style="display: none;">
+                  <i class="busy busy-md"></i>
+                </div>
+              </div>
+            {% endif %}
+            {% endpaginate %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

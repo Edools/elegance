@@ -1,0 +1,57 @@
+{% if current_user.type == 'Student' and mobile_class != true %}
+  <li class="user-header-list-item">
+    <div class="user-header">
+                    <span class="avatar">
+                      {% assign avatar_alt = current_user | fullname %}
+                      {% image, src: current_user.cover_image_url, alt: avatar_alt, class: 'avatar-img' %}
+                    </span>
+      <div class="caption">
+        <div class="logged-user" title="{{ current_user | fullname }}">{{ current_user | fullname }}</div>
+        <div class="logged-user-email" title="{{ current_user.email }}">{{ current_user.email }}</div>
+      </div>
+    </div>
+  </li>
+{% endif %}
+
+{% if current_school.user_social_profile_enabled and current_user.social_profile_disabled != true %}
+  <li class="{% if mobile_class == true %}mobile{% endif %}">
+    <a href="/profile/{{ current_user.id }}">
+      <i class="icon-user"></i>
+      <span>{{ "navbar.public_profile" | t }}</span>
+    </a>
+  </li>
+{% endif %}
+
+<li class="{% if mobile_class == true %}mobile{% endif %}">
+  <a href="{{ current_user | profile_path }}">
+    <i class="icon-note"></i>
+    <span>{{ "navbar.my_profile" | t }}</span>
+  </a>
+</li>
+
+<li class="{% if mobile_class == true %}mobile{% endif %}">
+  {% capture inbox_link_html %}
+  <i class="icon-envelope-open"></i>
+  <span>{{ 'navbar.messages' | t }}</span>
+  {% endcapture %}
+
+  {{ inbox_link_html | inbox_link }}
+</li>
+
+{% if current_user.type == 'Student' %}
+  <li class="{% if mobile_class == true %}mobile{% endif %}">
+    <a href="/orders">
+      <i class="icon-list"></i>
+      <span>{{ "navbar.my_orders" | t }}</span>
+    </a>
+  </li>
+{% endif %}
+
+<li class="{% if mobile_class == true %}mobile{% endif %}">
+  {% capture logout_link_html %}
+  <i class="icon-power"></i>
+  <span>{{ "navbar.sign_out" | t }}</span>
+  {% endcapture %}
+
+  {{ logout_link_html | logout_link }}
+</li>

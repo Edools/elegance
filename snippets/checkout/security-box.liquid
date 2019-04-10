@@ -1,0 +1,20 @@
+{% if order.kind != 'free' %}
+<div class="security-widget">
+  <div class="row">
+    <div class="col-md-2 text-center ssl-lock">
+      <i class="icon-lock"></i>
+    </div>
+    <div class="col-md-6">
+      <span class="title">{{ 'checkout.safety.title' | t }}</span>
+      <p class="description">{{ 'checkout.safety.description' | t }}</p>
+    </div>
+    <div class="col-md-4 security-seals text-center">
+      {% if gateway %}
+        <span>{{ 'checkout.safety.processed_by' | t }}</span>
+        {% assign gateway_id =  gateway.gateway | append: '-logo' %}
+        {% image, id: gateway_id, src: gateway.logo, alt: gateway.name, width: 90 %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}

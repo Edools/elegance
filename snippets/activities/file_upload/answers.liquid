@@ -1,0 +1,17 @@
+<div id="sent-files">
+  {% if answer.files.size > 0 %}
+    <h4>{{ 'upload.files_sent' | t }}</h4>
+
+    {% for file in answer.files %}
+      <h5>
+        <a href="{{ file.url }}" download>
+          {{ file.name }}
+        </a>
+      </h5>
+    {% endfor %}
+  {% else %}
+    <div class="alert alert-warning alert-outline">
+      <h5 class="note-title">{{ 'upload.any_uploaded_file' | t }}</h5>
+    </div>
+  {% endif %}
+</div>

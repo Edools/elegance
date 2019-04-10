@@ -1,0 +1,27 @@
+<div class="product-list">
+  <div class="container">
+    {% paginate products by 9 sort { title: :asc } %}
+    <div class="row">
+      <div id="js-product-list">
+        {% for product in products %}
+          <div class="col-sm-6 col-md-4">
+            {% include 'product/product-card', product: product, gateway: gateway %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if paginate.next.is_link %}
+      <div id="product-more" class="col-xs-12 text-center" data-turbolinks-temporary>
+        <a id="js-product-more-link" class="btn btn-default" href="{{ paginate.next.url }}">
+          <span class="bold">{{ 'product.load_more' | t }}</span>
+        </a>
+
+        <div class="js-paginate-spinner" style="display: none;">
+          <i class='busy busy-md'></i>
+        </div>
+      </div>
+    {% endif %}
+    {% endpaginate %}
+  </div>
+</div>

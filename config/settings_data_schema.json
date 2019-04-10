@@ -1,0 +1,1078 @@
+[
+  {
+    "name": "Cores",
+    "id": "1",
+    "settings": [
+      {
+        "template": "<h3>Geral</h3>"
+      },
+      {
+        "key": "style.color_primary",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor Principal"
+        }
+      },
+      {
+        "key": "style.color_body_bg",
+        "type": "color",
+        "templateOptions": {
+          "label": "Fundo"
+        }
+      },
+      {
+        "key": "style.color_content_bg",
+        "type": "color",
+        "templateOptions": {
+          "label": "Conteúdo Principal"
+        }
+      },
+      {
+        "key": "style.color_border",
+        "type": "color",
+        "templateOptions": {
+          "label": "Bordas"
+        }
+      },
+      {
+        "template": "<h3>Navbar</h3>"
+      },
+      {
+        "key": "style.color_navbar_bg",
+        "type": "color",
+        "templateOptions": {
+          "label": "Fundo"
+        }
+      },
+      {
+        "key": "style.color_navbar_links",
+        "type": "color",
+        "templateOptions": {
+          "label": "Links"
+        }
+      },
+      {
+        "template": "<h3>Botões</h3>"
+      },
+      {
+        "key": "style.color_button_primary_bg",
+        "type": "color",
+        "templateOptions": {
+          "label": "Primários"
+        }
+      },
+      {
+        "key": "style.color_button_secondary_bg",
+        "type": "color",
+        "templateOptions": {
+          "label": "Secundários"
+        }
+      },
+      {
+        "template": "<h3>Texto</h3>"
+      },
+      {
+        "key": "style.color_body_text",
+        "type": "color",
+        "templateOptions": {
+          "label": "Geral"
+        }
+      },
+      {
+        "key": "style.color_titles",
+        "type": "color",
+        "templateOptions": {
+          "label": "Títulos"
+        }
+      },
+      {
+        "key": "style.color_subtitles",
+        "type": "color",
+        "templateOptions": {
+          "label": "Sub-títulos"
+        }
+      },
+      {
+        "key": "style.color_paragraphs",
+        "type": "color",
+        "templateOptions": {
+          "label": "Parágrafos"
+        }
+      },
+      {
+        "key": "style.color_links",
+        "type": "color",
+        "templateOptions": {
+          "label": "Links"
+        }
+      },
+      {
+        "key": "style.color_button_primary_text",
+        "type": "color",
+        "templateOptions": {
+          "label": "Texto dos botões primários"
+        }
+      },
+      {
+        "key": "style.color_button_secondary_text",
+        "type": "color",
+        "templateOptions": {
+          "label": "Texto dos botões secundários"
+        }
+      },
+      {
+        "template": "<h3>Rodapé</h3>"
+      },
+      {
+        "key": "style.color_footer_bg",
+        "type": "color",
+        "templateOptions": {
+          "label": "Fundo"
+        }
+      },
+      {
+        "key": "style.color_footer_text",
+        "type": "color",
+        "templateOptions": {
+          "label": "Texto"
+        }
+      },
+      {
+        "key": "style.color_footer_links",
+        "type": "color",
+        "templateOptions": {
+          "label": "Links"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Tipografia",
+    "id": "2",
+    "settings": [
+      {
+        "template": "<h3>Geral</h3>"
+      },
+      {
+        "key": "style.type_base_family",
+        "type": "select",
+        "templateOptions": {
+          "label": "Fonte",
+          "options": [
+            {
+              "name": "Proxima Nova",
+              "value": "Proxima Nova"
+            },
+            {
+              "name": "Open Sans",
+              "value": "Open Sans"
+            },
+            {
+              "name": "Roboto",
+              "value": "Roboto"
+            },
+            {
+              "name": "Merriweather",
+              "value": "Merriweather"
+            },
+            {
+              "name": "Lato",
+              "value": "Lato"
+            },
+            {
+              "name": "Anonymous Pro",
+              "value": "Anonymous Pro"
+            },
+            {
+              "name": "Crimson Text",
+              "value": "Crimson Text"
+            },
+            {
+              "name": "Chivo",
+              "value": "Chivo"
+            },
+            {
+              "name": "Karla",
+              "value": "Karla"
+            },
+            {
+              "name": "Alegreya Sans",
+              "value": "Alegreya Sans"
+            },
+            {
+              "name": "Source Serif Pro",
+              "value": "Source Serif Pro"
+            },
+            {
+              "name": "Helvetica",
+              "value": "Helvetica"
+            },
+            {
+              "name": "Verdana",
+              "value": "Verdana"
+            },
+            {
+              "name": "Arial",
+              "value": "Arial"
+            },
+            {
+              "name": "Courier New",
+              "value": "Courier New"
+            }
+          ]
+        }
+      },
+      {
+        "key": "style.type_base_size",
+        "type": "input",
+        "templateOptions": {
+          "label": "Tamanho da Fonte",
+          "placeholder": "ex: 16px"
+        }
+      },
+      {
+        "template": "<h3>Links da Navbar</h3>"
+      },
+      {
+        "key": "style.type_navbar_family",
+        "type": "select",
+        "templateOptions": {
+          "label": "Fonte",
+          "options": [
+            {
+              "name": "Proxima Nova",
+              "value": "Proxima Nova"
+            },
+            {
+              "name": "Open Sans",
+              "value": "Open Sans"
+            },
+            {
+              "name": "Roboto",
+              "value": "Roboto"
+            },
+            {
+              "name": "Merriweather",
+              "value": "Merriweather"
+            },
+            {
+              "name": "Lato",
+              "value": "Lato"
+            },
+            {
+              "name": "Anonymous Pro",
+              "value": "Anonymous Pro"
+            },
+            {
+              "name": "Crimson Text",
+              "value": "Crimson Text"
+            },
+            {
+              "name": "Chivo",
+              "value": "Chivo"
+            },
+            {
+              "name": "Karla",
+              "value": "Karla"
+            },
+            {
+              "name": "Alegreya Sans",
+              "value": "Alegreya Sans"
+            },
+            {
+              "name": "Source Serif Pro",
+              "value": "Source Serif Pro"
+            },
+            {
+              "name": "Helvetica",
+              "value": "Helvetica"
+            },
+            {
+              "name": "Verdana",
+              "value": "Verdana"
+            },
+            {
+              "name": "Arial",
+              "value": "Arial"
+            },
+            {
+              "name": "Courier New",
+              "value": "Courier New"
+            }
+          ]
+        }
+      },
+      {
+        "key": "style.type_navbar_size",
+        "type": "input",
+        "templateOptions": {
+          "label": "Tamanho da Fonte",
+          "placeholder": "ex: 16px"
+        }
+      },
+      {
+        "template": "<h3>Títulos</h3>"
+      },
+      {
+        "key": "style.type_title_family",
+        "type": "select",
+        "templateOptions": {
+          "label": "Fonte",
+          "options": [
+            {
+              "name": "Proxima Nova",
+              "value": "Proxima Nova"
+            },
+            {
+              "name": "Open Sans",
+              "value": "Open Sans"
+            },
+            {
+              "name": "Roboto",
+              "value": "Roboto"
+            },
+            {
+              "name": "Merriweather",
+              "value": "Merriweather"
+            },
+            {
+              "name": "Lato",
+              "value": "Lato"
+            },
+            {
+              "name": "Anonymous Pro",
+              "value": "Anonymous Pro"
+            },
+            {
+              "name": "Crimson Text",
+              "value": "Crimson Text"
+            },
+            {
+              "name": "Chivo",
+              "value": "Chivo"
+            },
+            {
+              "name": "Karla",
+              "value": "Karla"
+            },
+            {
+              "name": "Alegreya Sans",
+              "value": "Alegreya Sans"
+            },
+            {
+              "name": "Source Serif Pro",
+              "value": "Source Serif Pro"
+            },
+            {
+              "name": "Helvetica",
+              "value": "Helvetica"
+            },
+            {
+              "name": "Verdana",
+              "value": "Verdana"
+            },
+            {
+              "name": "Arial",
+              "value": "Arial"
+            },
+            {
+              "name": "Courier New",
+              "value": "Courier New"
+            }
+          ]
+        }
+      },
+      {
+        "key": "style.type_title_size",
+        "type": "input",
+        "templateOptions": {
+          "label": "Tamanho da Fonte",
+          "placeholder": "ex: 16px"
+        }
+      },
+      {
+        "template": "<h3>Sub Títulos</h3>"
+      },
+      {
+        "key": "style.type_subtitle_family",
+        "type": "select",
+        "templateOptions": {
+          "label": "Fonte",
+          "options": [
+            {
+              "name": "Proxima Nova",
+              "value": "Proxima Nova"
+            },
+            {
+              "name": "Open Sans",
+              "value": "Open Sans"
+            },
+            {
+              "name": "Roboto",
+              "value": "Roboto"
+            },
+            {
+              "name": "Merriweather",
+              "value": "Merriweather"
+            },
+            {
+              "name": "Lato",
+              "value": "Lato"
+            },
+            {
+              "name": "Anonymous Pro",
+              "value": "Anonymous Pro"
+            },
+            {
+              "name": "Crimson Text",
+              "value": "Crimson Text"
+            },
+            {
+              "name": "Chivo",
+              "value": "Chivo"
+            },
+            {
+              "name": "Karla",
+              "value": "Karla"
+            },
+            {
+              "name": "Alegreya Sans",
+              "value": "Alegreya Sans"
+            },
+            {
+              "name": "Source Serif Pro",
+              "value": "Source Serif Pro"
+            },
+            {
+              "name": "Helvetica",
+              "value": "Helvetica"
+            },
+            {
+              "name": "Verdana",
+              "value": "Verdana"
+            },
+            {
+              "name": "Arial",
+              "value": "Arial"
+            },
+            {
+              "name": "Courier New",
+              "value": "Courier New"
+            }
+          ]
+        }
+      },
+      {
+        "key": "style.type_subtitle_size",
+        "type": "input",
+        "templateOptions": {
+          "label": "Tamanho da Fonte",
+          "placeholder": "ex: 16px"
+        }
+      },
+      {
+        "template": "<h3>Parágrafos</h3>"
+      },
+      {
+        "key": "style.type_paragraph_family",
+        "type": "select",
+        "templateOptions": {
+          "label": "Fonte",
+          "options": [
+            {
+              "name": "Proxima Nova",
+              "value": "Proxima Nova"
+            },
+            {
+              "name": "Open Sans",
+              "value": "Open Sans"
+            },
+            {
+              "name": "Roboto",
+              "value": "Roboto"
+            },
+            {
+              "name": "Merriweather",
+              "value": "Merriweather"
+            },
+            {
+              "name": "Lato",
+              "value": "Lato"
+            },
+            {
+              "name": "Anonymous Pro",
+              "value": "Anonymous Pro"
+            },
+            {
+              "name": "Crimson Text",
+              "value": "Crimson Text"
+            },
+            {
+              "name": "Chivo",
+              "value": "Chivo"
+            },
+            {
+              "name": "Karla",
+              "value": "Karla"
+            },
+            {
+              "name": "Alegreya Sans",
+              "value": "Alegreya Sans"
+            },
+            {
+              "name": "Source Serif Pro",
+              "value": "Source Serif Pro"
+            },
+            {
+              "name": "Helvetica",
+              "value": "Helvetica"
+            },
+            {
+              "name": "Verdana",
+              "value": "Verdana"
+            },
+            {
+              "name": "Arial",
+              "value": "Arial"
+            },
+            {
+              "name": "Courier New",
+              "value": "Courier New"
+            }
+          ]
+        }
+      },
+      {
+        "key": "style.type_paragraph_size",
+        "type": "input",
+        "templateOptions": {
+          "label": "Tamanho da Fonte",
+          "placeholder": "ex: 16px"
+        }
+      },
+      {
+        "template": "<h3>Botões</h3>"
+      },
+      {
+        "key": "style.type_button_family",
+        "type": "select",
+        "templateOptions": {
+          "label": "Fonte",
+          "options": [
+            {
+              "name": "Proxima Nova",
+              "value": "Proxima Nova"
+            },
+            {
+              "name": "Open Sans",
+              "value": "Open Sans"
+            },
+            {
+              "name": "Roboto",
+              "value": "Roboto"
+            },
+            {
+              "name": "Merriweather",
+              "value": "Merriweather"
+            },
+            {
+              "name": "Lato",
+              "value": "Lato"
+            },
+            {
+              "name": "Anonymous Pro",
+              "value": "Anonymous Pro"
+            },
+            {
+              "name": "Crimson Text",
+              "value": "Crimson Text"
+            },
+            {
+              "name": "Chivo",
+              "value": "Chivo"
+            },
+            {
+              "name": "Karla",
+              "value": "Karla"
+            },
+            {
+              "name": "Alegreya Sans",
+              "value": "Alegreya Sans"
+            },
+            {
+              "name": "Source Serif Pro",
+              "value": "Source Serif Pro"
+            },
+            {
+              "name": "Helvetica",
+              "value": "Helvetica"
+            },
+            {
+              "name": "Verdana",
+              "value": "Verdana"
+            },
+            {
+              "name": "Arial",
+              "value": "Arial"
+            },
+            {
+              "name": "Courier New",
+              "value": "Courier New"
+            }
+          ]
+        }
+      },
+      {
+        "key": "style.type_button_size",
+        "type": "input",
+        "templateOptions": {
+          "label": "Tamanho da Fonte",
+          "placeholder": "ex: 16px"
+        }
+      },
+      {
+        "template": "<h3>Ícones</h3>"
+      },
+      {
+        "key": "style.type_enable_simple_line_icons",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Habilitar Simple Line Icons (Padrão)"
+        }
+      },
+      {
+        "key": "style.type_enable_font_awesome",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Habilitar Font Awesome"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Navbar",
+    "id": "3",
+    "settings": [
+      {
+        "key": "view.general.navbar.title",
+        "type": "input",
+        "templateOptions": {
+          "label": "Texto Exibido"
+        }
+      },
+      {
+        "template": "<label>URL da Logo</label><p><small>Dica: faça o upload da Imagem na Biblioteca e copie sua URL.</small></p>"
+      },
+      {
+        "key": "view.general.navbar.logo",
+        "type": "input",
+        "templateOptions": {
+          "label": ""
+        }
+      },
+      {
+        "template": "<label>Favicon</label><p><small>Dica: faça o upload da Imagem na Biblioteca e copie sua URL.</small></p>"
+      },
+      {
+        "key": "view.general.favicon",
+        "type": "input",
+        "templateOptions": {
+          "label": ""
+        }
+      }
+    ]
+  },
+  {
+    "name": "Home Page",
+    "id": "4",
+    "settings": [
+      {
+        "template": "<h3>Header</h3>"
+      },
+      {
+        "key": "style.home.header_bg",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor de Fundo"
+        }
+      },
+      {
+        "key": "style.home.header_text_color",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor do texto"
+        }
+      },
+      {
+        "key": "style.home.header_background_image",
+        "type": "input",
+        "templateOptions": {
+          "label": "Imagem de fundo",
+          "placeholder": "ex: https://host.com/header.jpg"
+        }
+      },
+      {
+        "key": "style.home.benefits.color_icon",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor do Ícone"
+        }
+      },
+      {
+        "key": "style.home.benefits.color_title",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor do Título"
+        }
+      },
+      {
+        "key": "style.home.benefits.color_text",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor do texto abaixo do título"
+        }
+      },
+      {
+        "key": "view.home.header.title",
+        "type": "input",
+        "templateOptions": {
+          "label": "Título",
+          "placeholder": "ex: Elegance Theme"
+        }
+      },
+      {
+        "key": "view.home.header.subtitle",
+        "type": "textarea",
+        "templateOptions": {
+          "label": "Subtítulo",
+          "rows": 5,
+          "placeholder": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lectus, pretium quis lobortis sollicitudin, viverra eget lacus. Curabitur vitae hendrerit ex, id iaculis tellus"
+        }
+      },
+      {
+        "key": "view.home.header.cover_src",
+        "type": "input",
+        "templateOptions": {
+          "label": "Cole a URL da imagem ou o código do iframe do vídeo.",
+          "placeholder": "ex: https://host.com/capa.png"
+        }
+      },
+      {
+        "key": "view.home.header.cover_src_image",
+        "type": "input",
+        "templateOptions": {
+          "label": "Caso tenha utilizado um vídeo acima, cole a URL de uma imagem para servir como thumbnail.",
+          "placeholder": "ex: https://host.com/capa.png"
+        }
+      },
+      {
+        "template": "<h3>Tópicos</h3><p>Encontre os ícones neste endereço: <a target=\"_blank\" href=\"https://simplelineicons.github.io/\">Simple Line Icons</a>.</p>"
+      },
+      {
+        "type": "repeatSection",
+        "key": "view.home.topics",
+        "templateOptions": {
+          "btnText": "Adicionar Novo Tópico",
+          "fields": [
+            {
+              "key": "title",
+              "type": "input",
+              "templateOptions": {
+                "label": "Título",
+                "required": true
+              }
+            },
+            {
+              "key": "subtitle",
+              "type": "input",
+              "templateOptions": {
+                "label": "Sub Título",
+                "required": true
+              }
+            },
+            {
+              "key": "icon",
+              "type": "input",
+              "templateOptions": {
+                "label": "Ícone",
+                "required": true
+              }
+            }
+          ]
+        }
+      },
+      {
+        "template": "<h3>Título da lista de produtos</h3>"
+      },
+      {
+        "key": "view.home.product_list_title",
+        "type": "input",
+        "templateOptions": {
+          "label": "Título"
+        }
+      },
+      {
+        "template": "<h3>Rodapé da Home Page</h3>"
+      },
+      {
+        "key": "view.home.footer.title",
+        "type": "input",
+        "templateOptions": {
+          "label": "Título"
+        }
+      },
+      {
+        "key": "view.home.footer.text",
+        "type": "textarea",
+        "templateOptions": {
+          "label": "Texto",
+          "rows": 5
+        }
+      },
+      {
+        "template": "<h3>Redes Sociais</h3>"
+      },
+      {
+        "key": "view.home.footer.social_facebook_link",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Facebook"
+        }
+      },
+      {
+        "key": "view.home.footer.social_twitter_link",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Twitter"
+        }
+      },
+      {
+        "key": "view.home.footer.social_pinterest_link",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Pinterest"
+        }
+      },
+      {
+        "key": "view.home.footer.social_google_plus_link",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Google+"
+        }
+      },
+      {
+        "key": "view.home.footer.social_instagram_link",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Instagram"
+        }
+      },
+      {
+        "key": "view.home.footer.social_youtube_link",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Youtube"
+        }
+      },
+      {
+        "key": "view.home.footer.social_linkedin_link",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "LinkedIn"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Categorias",
+    "id": "5",
+    "settings": [
+      {
+        "key": "view.home.enable_categories",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Habilitar Categorias na Página Inicial"
+        }
+      },
+      {
+        "template": "<h3>Categorias</h3>"
+      },
+      {
+        "type": "repeatSection",
+        "key": "view.home.categories",
+        "templateOptions": {
+          "btnText": "Adicionar Nova Categoria",
+          "fields": [
+            {
+              "key": "slug",
+              "type": "input",
+              "templateOptions": {
+                "label": "Slug",
+                "required": true
+              }
+            },
+            {
+              "key": "order",
+              "type": "input",
+              "templateOptions": {
+                "label": "Ordem",
+                "required": false
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "Produto",
+    "id": "6",
+    "settings": [
+      {
+        "template": "<h3>Header</h3>"
+      },
+      {
+        "key": "style.product.header_bg",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor de Fundo"
+        }
+      },
+      {
+        "key": "style.product.header_text_color",
+        "type": "color",
+        "templateOptions": {
+          "label": "Cor do texto"
+        }
+      },
+      {
+        "key": "style.product.header_background_image",
+        "type": "input",
+        "templateOptions": {
+          "label": "Imagem de fundo",
+          "placeholder": "ex: https://host.com/header.jpg"
+        }
+      },
+      {
+        "key": "style.product.footer_text",
+        "type": "input",
+        "templateOptions": {
+          "label": "Título após descrição"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "id": "7",
+    "settings": [
+      {
+        "key": "view.general.footer.logo",
+        "type": "input",
+        "templateOptions": {
+          "label": "URL da Logo"
+        }
+      },
+      {
+        "key": "view.general.footer.text",
+        "type": "textarea",
+        "templateOptions": {
+          "label": "Texto",
+          "rows": 5
+        }
+      },
+      {
+        "template": "<h3>Dados da Escola</h3>"
+      },
+      {
+        "key": "view.general.footer.site",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Site"
+        }
+      },
+      {
+        "key": "view.general.footer.email",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Email"
+        }
+      },
+      {
+        "key": "view.general.footer.phone",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Telefone"
+        }
+      },
+      {
+        "key": "view.general.footer.address",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Endereço"
+        }
+      },
+      {
+        "key": "view.general.footer.cnpj",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "CNPJ"
+        }
+      },
+      {
+        "key": "view.general.footer.razao_social",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Razão Social"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Acessibilidade",
+    "id": "8",
+    "settings": [
+      {
+        "key": "view.general.accessibility.enabled",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Barra de Acessibilidade"
+        }
+      },
+      {
+        "key": "view.general.accessibility.navigation",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Atalhos de Navegação"
+        }
+      },
+      {
+        "key": "view.general.accessibility.contrast",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Modo de Contraste"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Injetor HTML/CSS/JS",
+    "id": "9",
+    "settings": [
+      {
+        "key": "view.injector.head",
+        "type": "textarea",
+        "templateOptions": {
+          "label": "Conteúdo para o cabeçalho"
+        }
+      },
+      {
+        "key": "view.injector.body",
+        "type": "textarea",
+        "templateOptions": {
+          "label": "Conteúdo para o corpo"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,159 @@
+<div class="checkout-page checkout-connect-page page">
+  <div class="container">
+    {% include "checkout/return", return_url: "/cart" %}
+
+    <div class="row">
+      {% include "checkout/title-box" %}
+      <div class="col-md-7 cart-wizard">
+        <div class="wizard">
+
+          {% if order.kind != 'free' %}
+            {% include "checkout/wizard-header", step: 1 %}
+          {% endif %}
+
+          <div class="wizard-content">
+            <!-- <div class="alert alert-warning">
+              <h4 class="note-title">{{ 'general.attention' | t }}</h4>
+              <span>{{ 'checkout.connect.signin_again' | t }}</span>
+            </div> -->
+            <div class="row">
+              {% assign login_only_with_google = current_school | has_feature: 'login_only_with_google' %}
+
+              {% if login_only_with_google %}
+                <div class="page-signup-alt col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-body" style="text-align:  center;">
+                      <button class="google-sign-in white" style="text-align: center">
+                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/G-on-clear.svg" alt="Google logo">
+                        {{ 'checkout.connect.login_only_with_google_title' | t | login_with_google : 'text' }}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              {% else %}
+                {% assign login_too_with_google = current_school | has_feature: 'login_too_with_google' %}
+
+                {% if login_too_with_google %}
+                  <div class="page-signup-alt col-md-12">
+                    <div class="panel panel-default">
+                      <div class="panel-body" style="text-align:  center;">
+                        <button class="google-sign-in white" style="text-align: center">
+                          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/8399/G-on-clear.svg" alt="Google logo">
+                          {{ 'checkout.connect.login_too_with_google' | t | login_with_google : 'text' }}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <center><h4>{{ 'checkout.connect.or' | t }}</h4></center>
+                {% endif %}
+
+                <div class="page-signup-alt col-md-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <div class="title">{{ 'checkout.connect.create_account' | t }}</div>
+                    </div>
+                    <div class="panel-body">
+                      <!-- Form -->
+                      {% form 'register' %}
+                        {% if form.errors and last_used_form == 'register' %}
+                          <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+                        {% endif %}
+
+                        {% if current_school | has_feature: 'strong_password_policy' %}
+                        <div class="alert alert-danger" style="display: none"><li>{{ 'password_reset.strong' | t }}</li></div>
+                        {% endif %}
+
+                        <div class="form-group">
+                          <input type="text" value="{{ user.first_name }}" autofocus="true" name="user[first_name]"
+                                 class="form-control input-md" placeholder="{{ 'register.first_name' | t }}" required>
+                        </div>
+
+                        <div class="form-group">
+                          <input type="email" value="{{ user.email }}" name="user[email]" class="form-control input-md"
+                                 placeholder="{{ 'register.email' | t }}" required>
+                        </div>
+
+                        <div class="form-group">
+                          <input type="text" value="{{ user.phone }}" name="user[phone]" class="form-control input-md"
+                                 placeholder="{{ 'register.phone' | t }}" required>
+                        </div>
+
+                        <div class="form-group signin-password">
+                          {% assign has_feature_password = current_school | has_feature: 'strong_password_policy' %}
+
+                          <input type="password" name="user[password]" class="form-control input-md {% if has_feature_password %}strong--password{% endif %}"
+                                 placeholder="{{ 'register.password' | t }}" required>
+                        </div>
+
+                        <div class="form-group signin-password">
+                          <input type="password" name="user[password_confirmation]" class="form-control input-md"
+                                 placeholder="{{ 'register.password_confirmation' | t }}" required>
+                        </div>
+
+                        <div class="text-right">
+                          <input type="submit" value="{{ 'register.create_account' | t }}"
+                                 class="btn btn-primary btn-create-account">
+                        </div>
+                      {% endform %}
+                      <!-- / Form -->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="page-signin-alt col-md-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <div class="title">
+                        {{ 'checkout.connect.signin_account' | t }}
+                      </div>
+                    </div>
+                    <div class="panel-body">
+                      <!-- Form -->
+                      {% form 'login' %}
+                        {% if form.errors and last_used_form == 'login' %}
+                          <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+                        {% endif %}
+
+                        <div class="form-group">
+                          <input type="email" autofocus="true" name="user[email]" class="form-control input-md"
+                                 placeholder="{{ 'login.email' | t }}" required>
+                        </div>
+
+                        <div class="form-group signin-password">
+                          <input type="password" name="user[password]" class="form-control input-md"
+                                 placeholder="{{ 'login.password' | t }}" required>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-xs-8 text-left">
+                            <small>{{ 'Esqueceu a senha?' | reset_password_link : 'forgot' }}</small>
+                          </div>
+                          <div class="col-xs-4 text-right">
+                            <input type="submit" value="{{ 'login.enter' | t }}" class="btn btn-primary btn-login-form">
+                          </div>
+                        </div>
+                      {% endform %}
+                      <!-- / Form -->
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <br>
+      </div>
+      <div class="col-md-5 cart-sidebar">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            {% include "checkout/security-box" %}
+            {% include "checkout/totals-box", closed_borders: true %}
+            {% include "checkout/payment-methods-box", closed_borders: true %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div role="button" class="panel panel-default profile-picture-panel">
+  <div class="panel-heading" role="tab">
+    <h4 class="panel-title">
+      <a role="button"
+         data-toggle="collapse"
+         data-parent="#accordion"
+         href="#collapseProfilePicture"
+         aria-expanded="false"
+         aria-controls="collapseProfilePicture">
+        {{ 'profile.picture' | t }}
+      </a>
+    </h4>
+  </div>
+  <div id="collapseProfilePicture"
+       class="panel-collapse collapse"
+       role="tabpanel"
+       aria-labelledby="headingOne">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="form-group profile-photo">
+            <div class="thumbnail">
+              {% if user.cover_image_url != null %}
+                {% image, src: user.cover_image_url, lazyload: false %}
+              {% else %}
+                {% assign user_placeholder = 'user-placeholder.jpg' | asset_url %}
+                {% image, src: user_placeholder, lazyload: false %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          {% dropzone 'profile-picture', accepted_files: 'image/*' %}
+          <div class="dz-default dz-message">
+            <span>{{ 'general.drop_files_to_upload' | t }}</span>
+          </div>
+          {% enddropzone %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

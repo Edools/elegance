@@ -1,0 +1,215 @@
+<div class="orders-page page">
+  {% if orders_without_subscription.size > 0 %}
+    <div id="orders-without-subscription" class="container">
+      <h2 id="accessibility-main-content-orders" tabindex='0' class="page-title">{{ 'pages.orders.my_orders' | t }}</h2>
+
+      <table class="order-table table table-bordered">
+        <thead>
+        <tr>
+          <th class="col-xs-1">{{ 'pages.orders.number' | t }}</th>
+          <th class="col-xs-3">{{ 'pages.orders.status' | t }}</th>
+          <th class="col-xs-2 text-center">{{ 'pages.orders.ordered_date' | t }}</th>
+          <th class="col-xs-3 text-right">{{ 'pages.orders.total' | t }}</th>
+          <th class="col-xs-3"></th>
+          <th class="col-xs-3"></th>
+          <th class="col-xs-3"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for order in orders_without_subscription %}
+          <tr id="order-{{ order.id }}" class="order">
+            <td tabindex='0' class="column id">{{ order.id }}</td>
+            <td tabindex='0' class="column status">
+              {{ 'payment.status.' | append: order.status | t }}
+            </td>
+            <td tabindex='0' class="column creation text-center">
+              {{ order.last_ordered_date | default: order.created_at | date: "%d/%m/%Y" }}
+            </td>
+            <td tabindex='0' class="column total text-right">
+              {{ order.amount_to_pay | money }}
+            </td>
+            <td class="column items text-center">
+              <a tabindex='0' class="btn btn-default btn-sm" onclick="$('#js-order-{{ order.id }}-items').toggleClass('hide')">
+                <i class="icon-info"></i>
+                {{ 'pages.orders.show_order_itens' | t }}
+              </a>
+            </td>
+            <td class="column items text-center">
+              <a  tabindex='0' class="btn btn-default btn-sm" href="{{ order | order_payments_path }}">
+                <i class="icon-info"></i>
+                {{ 'pages.orders.payments' | t }}
+              </a>
+            </td>
+            <td class="column items text-center">
+              {% if order.status == 'no_wait_processing' %}
+                <a href="{{ order | order_cancel_path }}"
+                   class="btn btn-danger btn-sm cancel-trial"
+                   data-method="patch">
+
+                  {{ 'pages.orders.trial.cancel' | t }}
+                </a>
+              {% endif %}
+            </td>
+          </tr>
+
+          <tr id="js-order-{{ order.id }}-items" class="hide">
+            <td class="order-items" colspan="5">
+              {% for item in order.items %}
+                <div class="item">
+                  <span class="label label-default">{{ item.product.title }}</span>
+                </div>
+              {% endfor %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  {% if orders_with_subscription.size > 0 %}
+    <div id="orders-with-subscription" class="container">
+      <h2>{{ 'pages.orders.recurring.subscriptions' | t }}</h2>
+
+      <table class="subscriptions-table table table-bordered">
+        <thead>
+        <tr>
+          <th class="col-xs-5">{{ 'pages.orders.recurring.product' | t }}</th>
+          <th class="col-xs-2 text-center">{{ 'pages.orders.subscription_status' | t }}</th>
+          <th class="col-xs-2 text-center">{{ 'pages.orders.total' | t }}</th>
+          <th class="col-xs-3 text-center">
+            {{ 'pages.orders.recurring.started_at' | t }}
+          </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for order in orders_with_subscription %}
+          {% assign item = order.items.first %}
+
+          <tr id="order-{{ order.id }}" class="order">
+            <td class="column product">{{ item.product.title }}</td>
+            <td class="column subscription-status status text-center">
+              {{ 'subscription.status.' | append: order.subscription.status | t }}
+            </td>
+            <td class="column total text-center">
+              {{ order.amount_to_pay | money }}
+            </td>
+            <td class="column creation text-center">
+              {{ order.created_at | date: "%d/%m/%Y" }}
+            </td>
+          </tr>
+
+          <tr>
+            <td
+              class="subscription-details column" {% if order.status == 'confirmed' %} colspan="3" {% else %} colspan="4" {% endif %}>
+              <p>
+                <b>{{ 'pages.orders.recurring.plan' | t }}:</b>
+                <span>
+                  {{ item.payment_option | payment_option_to_subscription_sentence }}
+                  #{{ order.gateway_reference }}
+                </span>
+              </p>
+
+              <p>
+                <b>{{ 'pages.orders.recurring.period_start' | t }}:</b>
+                <span>
+                  {{ order.last_payment.created_at | default: order.created_at | date: "%d/%m/%Y" }}
+                </span>
+              </p>
+
+              {% if order.gateway_name != 'hotmart' %}
+                <p>
+                  <b>{{ 'pages.orders.recurring.period_end' | t }}:</b>
+                  <span>
+                    {{ order.subscription.next_invoice_at | default: order.subscription.expire_at | date: "%d/%m/%Y" }}
+                  </span>
+                </p>
+              {% endif %}
+
+              <p>
+                <b>{{ 'pages.orders.recurring.payment_option' | t }}:</b>
+                <span>
+                  {{ 'checkout.payment_methods.' | append: order.merchant_payment_method | t }}
+                </span>
+              </p>
+
+              <p>
+                <b>{{ 'pages.orders.recurring.payment_status' | t }}:</b>
+                <span>
+                  {{  order.last_payment.status | default: 'pending_payment' | prepend: 'payment.status.' | t }}
+                </span>
+
+                {% if order.merchant_payment_method == 'boleto' and order.last_payment %}
+                  - <span>
+                    <a class="btn btn-default btn-sm" href="{{ order.last_payment.link }}" target="_blank">
+                      <i class="icon-info"></i>
+                      {{ 'pages.payments.print_boleto' | t }}
+                    </a>
+                  </span>
+                {% endif %}
+              </p>
+
+              {% if order.credit_card and order.kind == 'subscription' %}
+                <p>
+                  <b>{{ 'pages.orders.recurring.credit_card_used' | t }}:</b>
+                  <span>{{ order.credit_card }}</span>
+                </p>
+              {% endif %}
+            </td>
+
+            {% assign statuses = "confirmed,no_wait_processing" | split: "," %}
+            {% if statuses contains order.status %}
+              <td id="order-{{ order.id }}-actions" class="column text-center">
+                <div class="subscription-actions">
+                  {% if order.merchant_payment_method == 'credit_card' %}
+                    {% assign credit_card_label = 'pages.orders.recurring.change_credit_card' %}
+                    {% assign credit_card_class = 'change-credit-card' %}
+                  {% else %}
+                    {% assign credit_card_label = 'pages.orders.recurring.pay_with_credit_card' %}
+                    {% assign credit_card_class = 'use-credit-card' %}
+                  {% endif %}
+
+                  {% if order.gateway_name != 'hotmart' %}
+                    <a href="orders/{{ order.id }}/edit?title={{ credit_card_label | t }}"
+                       class="btn btn-primary btn-block {{ credit_card_class }}" data-toggle="modal">
+                      {{ credit_card_label | t }}
+                    </a>
+
+                    {% if order.gateway_name == 'pagarme' and order.merchant_payment_method == 'credit_card' and gateway.subscription_payment_methods contains 'boleto' %}
+                      <a href="orders/{{ order.id }}?order%5Bpayment_method%5D=boleto" data-method='put'
+                        class="btn btn-primary btn-block pay-with-boleto">
+                        {{ 'pages.orders.recurring.pay_with_boleto' | t }}
+                      </a>
+                    {% endif %}
+                  {% endif %}
+
+                  {% if order.subscription.status != 'canceled' and  order.subscription.status != 'ended' %}
+                    <a href="{{ order | order_cancel_path }}"
+                       class="btn btn-danger btn-block cancel-order"
+                       data-method="patch">
+
+                      {{ 'pages.orders.recurring.cancel' | t }}
+                    </a>
+                  {% endif %}
+                </div>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  {% if orders_with_subscription.size == 0 and orders_without_subscription.size == 0 %}
+    <div class="container">
+      <h2>{{ 'pages.orders.my_orders' | t }}</h2>
+
+      <div class="alert alert-info">
+        {{ 'pages.orders.empty' | t }}
+      </div>
+    </div>
+  {% endif %}
+</div>

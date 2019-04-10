@@ -1,0 +1,12 @@
+{
+  'identificador'   => 'Certificado emitido [{{ school_product.title | remove_quotation_marks }}]',
+  'email'           => '{{ user.email }}',
+  'Id do aluno'     =>  {{ user.id }},
+  'Nome do aluno'   => '{{ user | fullname | remove_quotation_marks }}',
+  'Id da escola'    =>  {{ school.id }},
+  'Nome da escola'  => '{{ school.name | remove_quotation_marks }}',
+  'Url da escola'   => '{{ school_url }}',
+  'Id do produto'   => {{ school_product.id }},
+  'Nome do produto' => '{{ school_product.title | remove_quotation_marks }}',
+  'Data de Emissão' => '{{ certificate.created_at }}'
+}

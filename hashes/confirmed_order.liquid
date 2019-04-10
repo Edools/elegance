@@ -1,0 +1,13 @@
+{
+  'identificador'             => 'Compra confirmada [{{ products | map: 'title' | join: ', ' | remove_quotation_marks }}]',
+  'email'                     => '{{ user.email }}',
+  'Id do aluno'               =>  {{ user.id }},
+  'Nome do aluno'             => '{{ user | fullname | remove_quotation_marks }}',
+  'Id da escola'              =>  {{ school.id }},
+  'Nome da escola'            => '{{ school.name | remove_quotation_marks }}',
+  'Url da escola'             => '{{ school_url }}',
+  'Produtos'                  => '{{ products | map: 'title' | join: ', ' | remove_quotation_marks }}',
+  'Id dos produtos do pedido' => '{{ products_ids | join: ', ' }}',
+  'Valor do pedido'           => {{ order.amount_to_pay | divided_by: 100.0 }},
+  'Id da matrícula'           => '{{ enrollments_ids | join: ', ' }}'
+}

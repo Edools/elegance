@@ -1,0 +1,17 @@
+<div class="product-sections-container row">
+  {% paginate product_sections by 1 sort { order: :desc } %}
+    {% if product_sections.size > 0 %}
+      <div id="js-product-sections">
+        {% include 'product/sections-list', product_sections: product_sections %}
+      </div>
+
+      {% if paginate.next.is_link %}
+        <div class="text-center pagination">
+            <a id="js-product-sections-more" href="{{ paginate.next.url }}" data-remote="true">
+              {{ 'general.load_more' | t }}
+            </a>
+        </div>
+      {% endif %}
+    {% endif %}
+  {% endpaginate %}
+</div>

@@ -1,0 +1,26 @@
+{% include 'public_user/mini_profile' %}
+
+<ul class="nav nav-tabs nav-stacked">
+  <li class="{{ posts_link }}" role="presentation">
+    <a href="/profile/{{ user.id }}">
+      <i class="icon-feed"></i>
+      <span>{{ 'profile.posts' | t }}</span>
+    </a>
+  </li>
+
+  {% if current_user == nil or current_user.type == 'Student' %}
+    <li class="{{ products_link }}" role="presentation">
+      <a href="/profile/{{ user.id }}/products">
+        <i class="icon-layers"></i>
+        <span>{{ 'profile.enrollments' | t }}</span>
+      </a>
+    </li>
+  {% endif %}
+
+  <li class="{{ files_link }}" role="presentation">
+    <a href="/profile/{{ user.id }}/media">
+      <i class="icon-picture"></i>
+      <span>{{ 'profile.portfolio' | t }}</span>
+    </a>
+  </li>
+</ul>

@@ -1,0 +1,29 @@
+<div class="home-page page">
+  {% include 'home/header' %}
+  {% include 'home/benefits' %}
+
+  <div tabindex="-1" class="home-call-to-action jumbotron text-center">
+    <div class="container">
+      <h2 tabindex="0" class="title">{{ settings.view.home.product_list_title }}</h2>
+    </div>
+  </div>
+
+  {% if settings.view.home.enable_categories == true %}
+    {% include 'home/categories', gateway: gateway, categories: categories %}
+  {% else %}
+    {% include 'product/list', products: products, gateway: gateway %}
+  {% endif %}
+
+  <div class="home-about-us">
+    <div class="container">
+      <section class="row">
+        <div class="col-xs-12 col-md-8">
+          <h2>{{ settings.view.home.footer.title }}</h2>
+          <p>{{ settings.view.home.footer.text }}</p>
+        </div>
+
+        {% include 'home/social' %}
+      </section>
+    </div>
+  </div>
+</div>

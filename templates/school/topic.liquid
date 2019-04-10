@@ -1,0 +1,64 @@
+<div class="school-forum-topics-page page">
+  <div class="container">
+    <div class="forum-topics-header">
+      <div class="row">
+        <div class="col-md-8">
+          <h2 class="page-title">{{ topic.title }}</h2>
+        </div>
+        <div class="col-md-4">
+          <div class="page-actions">
+            <a href="{{ topic | section_path: forum_id }}" class="btn btn-default">
+              <i class="icon-arrow-left"></i>
+              <span>{{ 'general.back' | t }}</span>
+            </a>
+
+            {% permitted school_forum_post, create %}
+            <a href="#new-post" class="btn btn-primary">
+              <i class="icon-plus"></i>
+              <span>{{ 'forums.posts.new' | t }}</span>
+            </a>
+            {% endpermitted %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="topic-posts-list">
+      {% paginate posts by 10 %}
+      {% if paginate.current_page == 1 %}
+        {% assign edit_topic_path = topic | topic_path: forum_id %}
+        {% include 'school/forum/post', object: topic, object_class: 'topic',
+        edit_path: edit_topic_path %}
+      {% endif %}
+
+      {% for p in posts %}
+        {% assign edit_post_path = p | post_path: section_id, forum_id %}
+        {% include 'school/forum/post', object: p, object_class: 'post',
+        edit_path: edit_post_path %}
+      {% endfor %}
+
+      {% include 'pagination-links' %}
+      {% endpaginate %}
+
+      {% unless hide_editor %}
+      <div id="new-post" class="post-create-form">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form accept-charset="UTF-8" method="post" action="{{ topic | posts_path: forum_id }}">
+              <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+              <textarea name="post[body]" type="text"
+                        id="new-post-body"
+                        class="js-ckeditor form-control"
+                        rows="4"
+                        required></textarea>
+
+              <button type="submit" class="btn btn-primary pull-right send-btn"
+                      disabled="disabled">{{ 'forums.posts.send' | t }}</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endunless %}
+    </div>
+  </div>
+</div>

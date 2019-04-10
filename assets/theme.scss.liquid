@@ -1,0 +1,399 @@
+/* General */
+$color-primary: {{ settings.style.color_primary | default: 'inherit' }};
+$color-body-bg: {{ settings.style.color_body_bg | default: 'inherit' }};
+$color-content-bg: {{ settings.style.color_content_bg | default: 'inherit' }};
+$color-border: {{ settings.style.color_border | default: 'inherit' }};
+$type-base-family: '{{ settings.style.type_base_family | default: 'inherit' }}';
+$type-base-size: {{ settings.style.type_base_size | default: 'inherit' }};
+
+/* Navbar */
+$color-navabar-bg: {{ settings.style.color_navbar_bg | default: 'inherit' }};
+$color-navabar-links: {{ settings.style.color_navbar_links | default: 'inherit' }};
+$type-navbar-family: '{{ settings.style.type_navbar_family | default: 'inherit' }}';
+$type-navbar-size: {{ settings.style.type_navbar_size | default: 'inherit' }};
+
+/* Buttons */
+$color-button-primary-bg: {{ settings.style.color_button_primary_bg | default: 'inherit' }};
+$color-button-secondary-bg: {{ settings.style.color_button_secondary_bg | default: 'inherit' }};
+
+/* Text */
+$color-titles: {{ settings.style.color_titles | default: 'inherit' }};
+$color-subtitles: {{ settings.style.color_subtitles | default: 'inherit' }};
+$color-links: {{ settings.style.color_links | default: 'inherit' }};
+$color-paragraphs: {{ settings.style.color_paragraphs | default: 'inherit' }};
+$color-button-primary-text: {{ settings.style.color_button_primary_text | default: 'inherit' }};
+$color-button-secondary-text: {{ settings.style.color_button_secondary_text | default: 'inherit' }};
+$color-footer-bg: {{ settings.style.color_footer_bg | default: 'inherit' }};
+$color-footer-text: {{ settings.style.color_footer_text | default: 'inherit' }};
+$color-footer-links: {{ settings.style.color_footer_links | default: 'inherit' }};
+$type-title-family: '{{ settings.style.type_title_family | default: 'inherit' }}';
+$type-title-size: {{ settings.style.type_title_size | default: 'inherit' }};
+$type-subtitle-family: '{{ settings.style.type_subtitle_family | default: 'inherit' }}';
+$type-subtitle-size: {{ settings.style.type_subtitle_size | default: 'inherit' }};
+$type-paragraph-family: '{{ settings.style.type_paragraph_family | default: 'inherit' }}';
+$type-paragraph-size: {{ settings.style.type_paragraph_size | default: 'inherit' }};
+$type-button-family: '{{ settings.style.type_paragraph_family | default: 'inherit' }}';
+$type-button-size: {{ settings.style.type_paragraph_size | default: 'inherit' }};
+
+
+/* Home Page */
+$home-header-background: {{ settings.style.home.header_bg | default: '#ffffff' }};
+$home-header-text-color: {{ settings.style.home.header_text_color | default: 'inherit' }};
+$home-header-background-image: "{{ settings.style.home.header_background_image | default: '' }}";
+
+
+/* Home Page benefits */
+$home-benefits-icon-color: {{ settings.style.home.benefits.color_icon | default: '#000000' }};
+$home-benefits-title-color: {{ settings.style.home.benefits.color_title | default: '#000000' }};
+$home-benefits-text-color: {{ settings.style.home.benefits.color_text | default: '#000000' }};
+
+/* Product Page */
+$product-header-background: {{ settings.style.product.header_bg | default: '#ffffff' }};
+$product-header-text-color: {{ settings.style.product.header_text_color | default: 'inherit' }};
+$product-header-background-image: "{{ settings.style.product.header_background_image | default: ''}}";
+
+/* General */
+
+#blockColorblindContent {
+  display: none;
+}
+
+html.turbolinks-progress-bar::before {
+  background-color: $color-primary;
+}
+
+body {
+  font-family: $type-base-family, Helvetica, Arial, sans-serif, sans-serif;;
+  font-size: $type-base-size;
+  background-color: $color-body-bg;
+}
+
+.page {
+  background-color: $color-content-bg;
+}
+
+/* Text */
+
+h1, h2 {
+  font-family: $type-title-family;
+
+  * {
+    color: $color-titles;
+  }
+}
+
+h3, h4, h5 {
+  font-family: $type-subtitle-family;
+
+  * {
+    color: $color-subtitles;
+  }
+}
+
+h1 {
+  * {
+    font-size: $type-title-size * 1.3;
+  }
+}
+
+h2 {
+  * {
+    font-size: $type-title-size;
+  }
+}
+
+h3 {
+  * {
+    font-size: $type-subtitle-size * 1.3;
+  }
+}
+
+h4 {
+  * {
+    font-size: $type-subtitle-size;
+  }
+}
+
+h5 {
+  * {
+    font-size: $type-subtitle-size * 0.7;
+  }
+}
+
+p {
+  font-family: $type-paragraph-family;
+  font-size: $type-paragraph-size;
+
+  * {
+    color: $color-paragraphs;
+  }
+}
+
+a {
+  color: $color_links;
+}
+
+.page-footer {
+  background-color: $color-footer-bg;
+
+  * {
+    color: $color-footer-text;
+  }
+
+  a {
+    * {
+      color: $color-footer-links;
+    }
+
+    &:hover {
+      * {
+        color: lighten($color-footer-text, 45%);
+      }
+    }
+  }
+
+  b {
+    * {
+      color: lighten($color-footer-text, 15%);
+    }
+  }
+
+  h2 {
+    * {
+      color: lighten($color-footer-text, 35%);
+    }
+  }
+}
+
+/* Navbar */
+
+header.navbar {
+  background-color: $color-navabar-bg;
+
+  a,
+  .dropdown a {
+    color: rgba($color-navabar-links, .6);
+
+    &:hover, &:focus {
+      color: $color-navabar-links;
+    }
+  }
+
+  .nav {
+    a {
+      font-family: $type-navbar-family;
+      font-size: $type-navbar-size;
+      color: rgba($color-navabar-links, .6);
+    }
+  }
+
+  $dropdown-menu-bg: lighten($color-navabar-bg, 3%);
+  .dropdown-menu {
+    background-color: $dropdown-menu-bg;
+
+    &:before {
+      background-color: $dropdown-menu-bg;
+    }
+
+    li {
+      a {
+        &:hover {
+          @if (lightness($dropdown-menu-bg) > 50) {
+            background-color: darken($color-navabar-bg, 2%);
+          } @else {
+            background-color: $color-navabar-bg;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Buttons */
+
+.btn {
+  font-family: $type-button-family;
+
+  * {
+    font-size: $type-button-size;
+  }
+}
+
+.btn-default {
+  background-color: $color-button-secondary-bg;
+  border-color: darken($color-button-secondary-bg, 15%);
+
+  * {
+    color: $color-button-secondary-text;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: darken($color-button-secondary-bg, 5%);
+    border-color: darken($color-button-secondary-bg, 5%);
+  }
+
+  &:active {
+    &,
+    &:hover {
+      background-color: darken($color-button-secondary-bg, 8%);
+      border-color: darken($color-button-secondary-bg, 8%);
+    }
+  }
+}
+
+.open {
+  > .btn-default.dropdown-toggle {
+    &,
+    &:focus,
+    &:hover {
+      background-color: darken($color-button-secondary-bg, 8%);
+      border-color: darken($color-button-secondary-bg, 8%);
+    }
+  }
+}
+
+.btn-primary {
+  background-color: $color-button-primary-bg;
+  border-color: $color-button-primary-bg;
+
+  * {
+    color: $color-button-primary-text;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: lighten($color-button-primary-bg, 5%);
+    border-color: lighten($color-button-primary-bg, 5%);
+  }
+
+  &:active {
+    &,
+    &:hover {
+      background-color: darken($color-button-primary-bg, 8%);
+      border-color: darken($color-button-primary-bg, 8%);
+    }
+  }
+}
+
+.open {
+  > .btn-primary.dropdown-toggle {
+    &,
+    &:focus,
+    &:hover {
+      background-color: darken($color-button-primary-bg, 8%);
+      border-color: darken($color-button-primary-bg, 8%);
+    }
+  }
+}
+
+/* List Group */
+.list-group {
+  .list-group-item {
+    &.active {
+      background-color: $color-primary;
+      border-color: $color-primary;
+
+      @if (lightness($color-primary) > 50) {
+        color: #222;
+      } @else {
+        color: #fff;
+      }
+    }
+  }
+}
+
+/* Home Page */
+
+.home-page {
+  .home-header {
+    background-color: $home-header-background;
+    background-image: url($home-header-background-image);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    * {
+      color: $home-header-text-color;
+    }
+  }
+
+  .home-benefits {
+    .media {
+      .benefits-icon {
+        color: $home-benefits-icon-color;
+      }
+
+      h2 {
+        color: $home-benefits-title-color;
+      }
+
+      p {
+        color: $home-benefits-text-color;
+      }
+    }
+  }
+}
+
+/* Product Page */
+
+.product-page {
+  .product-header {
+    background-color: $product-header-background;
+    background-image: url($product-header-background-image);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    h2,
+    h4,
+    p,
+    .price {
+      color: $product-header-text-color;
+    }
+  }
+}
+
+/* Lesson Page */
+.lesson-page {
+  .lesson-page-sidebar {
+    .course-content {
+      .lesson {
+        &.active {
+          &.active {
+            box-shadow: 1px 0 0 0 $color-primary;
+            border-left: 1px solid $color-primary;
+          }
+          .content-lesson {
+            .class-info {
+              .left {
+                i {
+                  &:after {
+                    border-color: lighten($color-primary, 20%);
+                  }
+                }
+              }
+              .lesson-title {
+                &:hover {
+                  span {
+                    background-color: rgba($color-primary, .8);
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Course Content Page */
+.course-container {
+  .title.active > a {
+    &,
+    &:focus,
+    &:hover {
+      color: $color-primary;
+      border-color: $color-primary;
+    }
+  }
+}

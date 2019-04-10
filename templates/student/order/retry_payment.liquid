@@ -1,0 +1,158 @@
+{% if gateway.common_payment_methods contains 'credit_card' %}{% assign show_cc = true %}{% endif %}
+{% if gateway.common_payment_methods contains 'boleto' %}{% assign show_boleto = true %}{% endif %}
+
+<div class="retry-payment-page page">
+  <div class="container">
+    <div class="heading">
+      <a href="{{ order | order_payments_path }}" type="button" class="btn btn-default">
+        <i class="icon-arrow-left"></i>
+        <span>{{ 'general.back' | t }}</span>
+      </a>
+
+      <h3 class="title">
+        {{ 'pages.retry_payment.title' | t: order_id: order.id }}
+      </h3>
+      <hr class="payments">
+    </div>
+
+    <div class="container">
+      <div class="row">
+        {% if show_cc %}
+        <div class="col-xs-6 credit-card-payment">
+          <h3>{{ 'pages.retry_payment.credit_card' | t }}</h3>
+
+          <div id="credit-card" class="credit-card">
+            {% form 'order/retry_payment', id: card-form %}
+            <input type="hidden" name="order[payment_type]" value="credit_card">
+            {% if form.errors %}
+            <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+            {% endif %}
+
+            <div class="form-group card-wrapper"></div>
+
+            <div class="form-group">
+              <label class="control-label">{{ 'pages.retry_payment.credit_card_number' | t }}</label>
+              <input id="card-number"
+              type="text"
+              name="order[credit_card][number]"
+              value="{{ credit_card.number }}"
+              class="form-control"
+              required>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">{{ 'pages.retry_payment.credit_card_name' | t }}</label>
+              <input id="card-holder-name"
+              type="text"
+              name="order[credit_card][name]"
+              value="{{ credit_card.name }}"
+              class="form-control"
+              required>
+            </div>
+
+            <div class="row">
+              <div class="form-group  col-sm-6">
+                <label class="control-label">{{ 'pages.retry_payment.credit_card_expiry' | t }}</label>
+                <input id="card-expiration"
+                type="text"
+                name="order[credit_card][expiry]"
+                value="{{ credit_card.expiry }}"
+                class="form-control"
+                required>
+              </div>
+              <div class="form-group col-sm-6">
+                <label class="control-label">{{ 'pages.retry_payment.credit_card_cvv' | t }}</label>
+                <input id="card-cvc"
+                type="text"
+                name="order[credit_card][cvc]"
+                value="{{ credit_card.cvc }}"
+                class="form-control"
+                required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="control-label">{{ 'pages.retry_payment.credit_card_installments' | t }}</label>
+              <select id="credit-card-installments" class="form-control" name="order[credit_card][installments]" required>
+                {% if gateway.installments_forward_taxes %}
+                {% assign translation_key = 'installment_amount_with_taxes' %}
+                {% else %}
+                {% assign translation_key = 'installment_amount' %}
+                {% endif %}
+
+                {% for installment in installments %}
+                {% assign amount_in_money = installment.amount | money %}
+                {% assign amount_with_taxes = installment.amount |
+                  number_with_taxes: gateway, installment.value | money %}
+
+                  <option value="{{ installment.value }}">
+                    {{ 'pages.retry_payment.' | append: translation_key | t:
+                    count: installment.value, amount: amount_in_money,
+                    amount_with_taxes: amount_with_taxes }}
+                  </option>
+                  {% endfor %}
+                </select>
+
+              </div>
+
+              <div class="text-center">
+                <input type="submit" value="{{ 'pages.retry_payment.credit_card_pay' | t }}"
+                class="btn btn-primary btn-finalize">
+              </div>
+              {% endform %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if show_boleto %}
+          <div class="col-xs-6">
+            <h3>{{ 'pages.retry_payment.boleto' | t }}</h3>
+
+            <div id="boleto"class="boleto">
+              <div class="alert alert-warning">
+                <span>{{ 'pages.retry_payment.disable_popups_warning' | t }}</span>
+              </div>
+              <div class="alert alert-info">
+                <span>{{ 'pages.retry_payment.boleto_warning' | t }}</span>
+              </div>
+
+              {% form 'order/retry_payment' %}
+              <input type="hidden" name="order[payment_type]" value="boleto">
+
+              {% if form.errors %}
+              <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+              {% endif %}
+
+              <div class="text-center">
+                <input type="submit" value="{{ 'pages.retry_payment.boleto_pay' | t }}"
+                class="btn btn-primary btn-finalize">
+              </div>
+              {% endform %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  $(document).on('ready page:load', function () {
+    $('#card-form').card({
+      container: '.card-wrapper',
+
+      formSelectors: {
+        numberInput: 'input[name="order[credit_card][number]"]',
+        expiryInput: 'input[name="order[credit_card][expiry]"]',
+        cvcInput: 'input[name="order[credit_card][cvc]"]',
+        nameInput: 'input[name="order[credit_card][name]"]',
+      },
+      placeholders: {
+        number: '•••• •••• •••• ••••',
+        name: "{{ 'pages.retry_payment.credit_card_name' | t }}",
+        expiry: '•• / ••',
+        cvc: '•••'
+      }
+    });
+  });
+  </script>

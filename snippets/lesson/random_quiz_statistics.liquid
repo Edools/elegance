@@ -1,0 +1,86 @@
+{% assign correct_answers = 0.0 %}
+
+{% assign total_of_questions = 0 %}
+{% for item in exam_answers %}
+    {% assign total_of_questions = total_of_questions | plus: item.exam_question_answers.size %}
+    {% for score in item.exam_question_answers %}
+        {% if score.score > 0 %}
+            {% assign correct_answers = correct_answers | plus: 1 %}
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+{% if total_of_questions == 0 %}
+    <p>{{ 'course.random_quiz_statistics.not_ready' | t: }}</p>
+{% else %}
+
+    {% assign performance = correct_answers | divided_by: total_of_questions | times: 100 | round %}
+    {% assign correct_questions = correct_answers | round: 0 %}
+    {% assign wrong_questions = total_of_questions | minus: correct_questions | round: 0 %}
+    {% assign performance = performance | append: '%' %}
+
+    <div class="row statistic-item">    
+        <div class="statistics-board">        
+            <div class="row statistic-label">
+                <h2 class="tag">{{ 'course.random_quiz_statistics.general' | t }}</h2>
+            </div>
+            <div class="col-md-3 box-outline">
+                <div class="statistic-box total">
+                    <p class="result">{{ total_of_questions }}</p>
+                    <p class="name">{{ 'course.random_quiz_statistics.answered_questions' | t }}</p>
+                    <div class="box-footer">        
+                    </div>
+                </div>
+            </div> 
+            <div class="col-md-3 box-outline">
+                <div class=" statistic-box correct">
+                    <p class="result">{{ correct_questions }}</p>
+                    <p class="name">{{ 'course.random_quiz_statistics.right_questions' | t }}</p>
+                    <div class="box-footer">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 box-outline">
+                <div class="statistic-box wrong">
+                    <p class="result">{{ wrong_questions }}</p>
+                    <p class="name">{{ 'course.random_quiz_statistics.wrong_questions' | t }}</p>
+                    <div class="box-footer">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 box-outline">
+                <div class="statistic-box performance">
+                    <p class="result">{{ performance }}</p>
+                    <p class="name">{{ 'course.random_quiz_statistics.performance' | t }}</p>
+                    <div class="box-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="statistic-texts"
+        data-text-answered="{{ 'course.random_quiz_statistics.answered_questions' | t }}"
+        data-text-right="{{ 'course.random_quiz_statistics.right_questions' | t }}"
+        data-text-wrong="{{ 'course.random_quiz_statistics.wrong_questions' | t }}"
+        data-text-performance="{{ 'course.random_quiz_statistics.performance' | t }}">
+    </div>
+
+    {% for exam_answer in exam_answers %}
+
+        {% assign statistic_by_tag = exam_answer | by_tags_and_difficult: exam_answer.exam_lesson %}
+        {% for result in statistic_by_tag %}
+
+            {% assign tag_wrong_questions = result.quantity | minus: result.hits %}
+            {% assign percentage = result.hits | times: 1.0 | divided_by: result.quantity | times: 100 | round: 0 | append: '%'%}
+
+            <div class="statistic"
+            data-tag="{{ result.tag }}"
+            data-difficulty="{{ result.difficult }}"
+            data-quantity="{{ result.quantity }}"
+            data-hits="{{ result.hits }}">
+            </div>
+            
+        {% endfor %}
+    {% endfor %}
+{% endif %}

@@ -1,0 +1,27 @@
+<header class="main-header home-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 {% if settings.view.home.header.cover_enable %} col-md-6 {% endif %}">
+        <h2 id="accessibility-main-content-home" tabindex="0" class="title">{{ settings.view.home.header.title }}</h2>
+        <p tabindex="0" class="subtitle">{{ settings.view.home.header.subtitle }}</p>
+      </div>
+
+      {% if settings.view.home.header.cover_enable %}
+        <div class="image col-xs-12 col-md-6 text-center">
+          {% if settings.view.home.header.cover_src contains '<iframe' or
+          settings.view.home.header.cover_src contains '<object' or
+          settings.view.home.header.cover_src contains '<embed' %}
+            <div class="embed-responsive embed-responsive-16by9">
+              {{ settings.view.home.header.cover_src }}
+            </div>
+          {% elsif settings.view.home.header.cover_src.size > 0 %}
+            {% image, src: settings.view.home.header.cover_src %}
+          {% else %}
+            {% assign placeholder = 'capa_tema_classico.png' | asset_url %}
+            {% image, src: placeholder %}
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</header>

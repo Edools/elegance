@@ -1,0 +1,8 @@
+{% assign states = "AC|AL|AM|AP|BA|CE|DF|ES|GO|MA|MG|MS|MT|PA|PB|PE|PI|PR|RJ|RN|RO|RR|RS|SC|SE|SP|TO" | split: "|" %}
+<select value="{{ selected_state }}" name="user[address_attributes][state]" class="form-control" required>
+  {% for state in states %}
+    <option value="{{ state }}" {% if state == selected_state %}selected{% endif %}>
+      {{ 'profile.states.' | append: state | t }}
+    </option>
+  {% endfor %}
+</select>

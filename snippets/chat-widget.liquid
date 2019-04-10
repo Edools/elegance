@@ -1,0 +1,14 @@
+<div class="chat chat-{{ size }}">
+  {% include 'chat/templates' %}
+
+  <div class="chat-wrapper js-chat"
+       data-school-id="{{ current_school.id }}"
+       data-api-key='{{ current_api_key.credentials }}'
+       data-type="{{ chat_type }}"
+       data-lesson="{{ chat_lesson | to_json | replace: '"', '&quot;' | strip_newlines }}"
+       data-user="{{ current_user | to_json | replace: '"', '&quot;' | strip_newlines }}"
+       {% if height %}data-height="{{ height }}"{% endif %}>
+    {% include 'chat/sidebar' %}
+    {% include 'chat/messages' %}
+  </div>
+</div>

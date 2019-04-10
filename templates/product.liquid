@@ -1,0 +1,63 @@
+<div class="product-page page">
+  <header class="product-header page-header">
+    <div class="container">
+      <h2 class="title">{{ product.title }}</h2>
+      <h4 class="subtitle">{{ product.subtitle }}</h4>
+
+      <div class="row">
+        <div class="col-md-8">
+          <div class="image">
+            {% if product.video_cover %}
+              {% media_player media: product.video_cover %}
+            {% elsif product.logo %}
+              {% image, src: product.logo, alt: product.title %}
+            {% else %}
+              {% assign placeholder = 'missing-product-logo.png' | asset_url %}
+              {% image, src: placeholder, alt: product.title %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="product-info">
+            {% include 'product/buy' %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="product-body">
+    <div class="container page-container">
+      <div class="row">
+        <div class="col-md-8">
+          {% if product.description %}
+            <article class="product-description">
+              {{ product.description }}
+            </article>
+          {% endif %}
+
+          <div class="product-content">
+            <h3 class="title">{{ 'product.resource.course' | t }}</h3>
+
+            <div class="landing-modules">
+              {% include 'product/content-course', lesson_actions: false %}
+              {% include 'product/content-path' %}
+              {% include 'product/sections', product_sections: sections %}
+            </div>
+          </div>
+
+          <div class="text-center jumbotron">
+            <h2 class="title">{{ settings.style.product.footer_text }}</h2>
+            <br>
+            {% include 'product/buy' %}
+          </div>
+        </div>
+        <div class="col-md-4">
+          {% include 'product/ratings' %}
+          {% include 'product/teachers' %}
+          {% include 'product/product-topics' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

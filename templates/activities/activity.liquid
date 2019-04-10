@@ -1,0 +1,11 @@
+<div id="activity">
+  {% if activity.type == 'Quiz' or activity.type == 'RandomQuiz' %}
+    {% quiz activity: activity, lesson: lesson,
+      attempts_remaining: attempts_remaining, answer: answer,
+      lesson_progress: lesson_progress %}
+  {% elsif activity.type == 'FileUpload' %}
+    {% include 'activities/file_upload' %}
+  {% elsif activity.type == 'CollaborativeDiscussion' %}
+    {% include 'activities/collaborative_discussion' %}
+  {% endif %}
+</div>

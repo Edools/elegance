@@ -1,0 +1,170 @@
+<div class="checkout-page checkout-cart-page page">
+  <div class="container page-container">
+    {% include "checkout/return" %}
+
+    <div class="checkout">
+      <div class="checkout-panel">
+        <div class="row">
+          {% include "checkout/title-box" %}
+
+          <div class="col-md-7">
+            <div id="cart-items" class="cart">
+              {% if alert %}
+                <div class="alert alert-danger">{{ alert | t }}</div>
+              {% endif %}
+
+              {% if notice %}
+                <div class="alert alert-success">{{ notice | t }}</div>
+              {% endif %}
+
+              {% if order.items.size > 0 %}
+                <ul class="list-group">
+                  {% for item in order.items %}
+                    {% assign payment_option = item.payment_option %}
+                    <li class="cart-product list-group-item" id="product-{{ item.product.id }}">
+                      <div class="row">
+
+
+                        {% if item.product.logo %}
+                          <div class="col-md-3">
+                            <div class="cart-image">
+                              {% image, src: item.product.logo, alt: item.product.title %}
+                            </div>
+                          </div>
+                        {% endif %}
+
+                        <div
+                          class="col-xs-12 cart-subtitle {% if item.product.logo %}col-md-6{% else %}col-md-7{% endif %}">
+                          <h4 tabindex='0' class="product-title">
+                            {{ item.product.title }}
+                          </h4>
+                          <p class="description">{{ item.product.subtitle }}</p>
+
+                          {% if item.coupon_token.code %}
+                            <h6 class="text-muted small pull-right">{{ 'checkout.coupon' |t }} {{ item.coupon_token.code }}</h6>
+                            {% elsif item.coupon %}
+                            <h6 class="text-muted small pull-right">{{ 'checkout.coupon' |t }} {{ item.coupon.name }}</h6>
+                          {% endif %}
+                        </div>
+                        <div tabindex="0" class="col-xs-12 cart-price {% if item.product.logo %}col-md-3{% else %}col-md-5{% endif %}">
+                          {% if item.coupon %}
+                            <span class="small">
+                              {{ item.total | money_option_presentation: payment_option.kind, payment_option.period, 'full', 1 }}
+                            </span>
+                          {% endif %}
+
+                          <div id="js-item-total-{{ item.id }}">
+                            {{ item.amount_to_pay | money_option_presentation: payment_option.kind, payment_option.period, 'full', 1 }}
+                          </div>
+
+                          {% if first_option.trials > 0 %}
+                            <div>{{ 'product.trial' | t: count: payment_option.trials }}</div>
+                          {% endif %}
+
+                          {% assign has_feature_item_quantity = current_school | has_feature: 'item_quantity' %}
+
+                          {% if has_feature_item_quantity and item.payment_option.multi_quantity %}
+                            <div class="form-group simple">
+                              <div class="input-group">
+                                <span class="small">{{ 'checkout.cart.item_quantity' | t }}</span>
+
+                                {% item_quantity, item: item %}
+                              </div>
+                            </div>
+                          {% endif %}
+                        </div>
+                          {{ '<i aria-label="Retirar do Carrinho" class="icon-trash"></i>' | remove_from_cart_link: item, 'pointer' }}
+                      </div>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <div class="alert alert-info">{{ 'checkout.cart.empty' | t }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="col-md-5 cart-sidebar">
+            <div class="panel panel-default">
+              <div class="panel-body">
+
+                {% include "checkout/security-box" %}
+
+                {% include "checkout/totals-box" %}
+
+                {% if order.items.size > 0 %}
+                  {% capture checkout_finish %}
+                    {% if current_school.terms_of_use.size > 0 %}
+                      {{ 'checkout.finish' | t | checkout_connect_link: 'btn btn-primary btn-lg btn-block cta-checkout-cart disabled' }}
+                      <label class="terms-of-use">
+                        <input type="checkbox" id="js-terms-of-use-check"/>
+                        {{ 'checkout.payment.accept_term_of_use' |t }}
+                      </label>
+                    {% else %}
+                      {{ 'checkout.finish' | t | checkout_connect_link: 'btn btn-primary btn-lg btn-block cta-checkout-cart' }}
+                    {% endif %}
+                  {% endcapture %}
+
+                  {% assign has_feature_pre_approved = current_school | has_feature: 'pre_approved' %}
+
+                  {% if has_feature_pre_approved %}
+                    {% if order.coupon_token.code or order.coupon %}
+                      {{ checkout_finish }}
+                    {% else %}
+                      {% if current_user %}
+                        {% assign current_user_pre_approved = current_user | pre_approved: current_school %}
+
+                        {% if current_user_pre_approved %}
+                          {{ checkout_finish }}
+                        {% else %}
+                          <div class="panel panel-danger">
+                            <div class="panel-body">
+                              <p>{{ 'checkout.school_has_pre_approved.user_not_pre_approved' | t }}</p>
+                            </div>
+                          </div>
+                        {% endif %}
+                      {% else %}
+                          <div class="panel panel-danger">
+                            <div class="panel-body">
+                              <p>{{ 'checkout.school_has_pre_approved.user_not_signed_in' | t }}</p>
+                            </div>
+                          </div>
+                      {% endif %}
+                    {% endif %}
+                  {% else %}
+                    {{ checkout_finish }}
+                  {% endif %}
+                {% endif %}
+
+                {% include "checkout/payment-methods-box" %}
+
+                {% if order.items.size > 0 and order.kind != 'subscription' and order.amount_to_pay == order.total and order.kind != 'free' %}
+                  <div class="coupon-widget panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">{{ 'checkout.coupon' | t }}</h4>
+                    </div>
+                    <div class="panel-body">
+                      <form id="course-filter" accept-charset="UTF-8" method="get" action="/cart/apply_coupon"
+                            data-turbolinks-scroll="false">
+                        <div class="form-group simple">
+                          <div class="input-group">
+                            <input type="text" name="coupon" class="form-control"
+                                   placeholder="{{ 'checkout.coupon_code' | t }}">
+                            <span class="input-group-btn">
+                              <input type="submit" class="btn btn-primary" value="Ok">
+                            </span>
+                          </div>
+                          <!-- <p class="help-block" ng-if="coupon.errorMessages.length > 0">{ { coupon.errorMessages.join(', ') } }</p> -->
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

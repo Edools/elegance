@@ -1,0 +1,53 @@
+{% form 'profile' %}
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab">
+      <h4 class="panel-title">
+        <a role="button"
+           data-toggle="collapse"
+           data-parent="#accordion"
+           href="#collapsePublicProfile"
+           aria-expanded="false"
+           aria-controls="collapsePublicProfile">{{ 'profile.public_profile' | t }}</a>
+      </h4>
+    </div>
+
+    <div id="collapsePublicProfile"
+         class="panel-collapse collapse"
+         role="tabpanel"
+         aria-labelledby="headingThree">
+      <div class="panel-body">
+        <div class="public-profile-form">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                {% if user.social_profile_disabled == true %}
+                  {% assign disabled_profile = 'checked' %}
+                {% else %}
+                  {% assign enabled_profile = 'checked' %}
+                {% endif %}
+
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="user[social_profile_disabled]" value='false' {{ enabled_profile }}>
+                    <span>{{ 'general.enabled' | t }}</span>
+                  </label>
+                </div>
+
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="user[social_profile_disabled]" value='true' {{ disabled_profile }}>
+                    <span>{{ 'general.disabled' | t }}</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-right">
+            <input type="submit" class="btn btn-primary" value="{{ 'profile.save' | t }}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endform %}

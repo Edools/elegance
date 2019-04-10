@@ -1,0 +1,50 @@
+<article class="question-item panel panel-default">
+
+  <div class="question-body panel-body">
+
+    <div class="question-user col-xs-3">
+      <div class="avatar">
+        {% assign avatar_alt = question.user | fullname %}
+        {% image, src: question.user.cover_image_url, alt: avatar_alt %}
+      </div>
+      <span class="author-name"><span>{{ question.user | fullname }}</span></span>
+      <span class="date">{{ question.created_at | time_ago_in_words }}</span>
+    </div>
+
+    <div class="question-content col-xs-9 speech-bubble">
+      <a class="title" href="{{ question | question_path: topic }}">
+        {{ question.title }}
+      </a>
+
+      <p class="description" clamp="3">
+        {{ question.description }}
+      </p>
+
+      <span class="attached">
+        <a href="{{ question | question_path: topic }}">
+          {{ 'forums.forum_answers_count' | t: count: question.forum_answers_count }}
+        </a>
+      </span>
+    </div>
+
+  </div>
+  {% permitted forum_answer, create %}
+  {% unless !hide_editor %}
+  <div class="answer-panel panel-footer clearfix">
+    <form accept-charset="UTF-8" method="post" action="/forum_questions/{{ question.id }}/forum_answers">
+      <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+      <textarea name="forum_answer[text]" type="text"
+                id="answer-text-{{ question.id }}"
+                class="js-answer-text-area js-ckeditor form-control"
+                rows="4"
+                placeholder="{{ 'forums.click_to_answer' | t }}"></textarea>
+      <br>
+      <input type="submit"
+             value="{{ 'forums.answer' | t }}"
+             class="js-answer-submit-button btn btn-primary pull-right">
+    </form>
+  </div>
+  {% endunless %}
+  {% endpermitted %}
+
+</article>

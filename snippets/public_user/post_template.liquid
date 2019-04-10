@@ -1,0 +1,53 @@
+<article id="post-{{ post.id }}" class="js-post post panel panel-default">
+
+  <div class="panel-body">
+    <div class="post-body js-post-body">{{ post.body }}</div>
+
+    <div class="js-post-form hidden">
+      <form accept-charset="UTF-8" method="patch" action="{{ post | profile_post_path: user }}" data-remote="true">
+        <input type="hidden" name="authenticity_token" id="authenticity_token" value="{{ authenticity_token }}">
+        <input type="hidden" name="_method" id="_method" value="put">
+
+        <div class="form-group required">
+          <textarea id="edit-post-{{ post.id }}" name="post[body]" class="form-control js-ckeditor"
+                    placeholder="{{ 'pages.profile.posts.share' | t }}"
+                    rows="5" cols="80" required>{{ post.body }}</textarea>
+        </div>
+
+        <div class="form-actions pull-right">
+          <a class="js-post-cancel btn btn-danger">
+            {{ 'general.cancel' | t }}
+          </a>
+
+          <button type="submit" class="btn btn-primary"
+                  data-disable-with="<i class='busy busy-xs'></i><span>{{ 'general.sending' | t }}...</span>">
+            {{ 'general.send' | t }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="panel-footer">
+    {% if current_user and current_user.id == user.id %}
+      <span class="actions">
+        <a href="javascript:void(0)" class="js-post-edit post-edit">
+          <i class="icon-pencil"></i>
+          <span>{{ 'general.edit' | t }}</span>
+        </a>
+
+        <a href="{{ post | profile_post_path: user }}"
+           class="post-delete"
+           data-remote="true"
+           data-method="delete"
+           data-disable-with="<i class='busy busy-xs'></i>">
+          <i class="icon-trash"></i>
+          <span>{{ 'general.clean' | t }}</span>
+        </a>
+      </span>
+    {% endif %}
+
+    <span class="post-date pull-right">{{ post.created_at | time_ago_in_words }}</span>
+    <div class="clearfix"></div>
+  </div>
+</article>

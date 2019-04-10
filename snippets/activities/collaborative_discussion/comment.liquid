@@ -1,0 +1,81 @@
+{% if collaborative_comment.user.id == current_user.id %}
+  {% assign can_manage = true %}
+{% else %}
+  {% assign can_manage = false %}
+{% endif %}
+
+<div id="js-comment-{{ collaborative_comment.id }}" class="answer row">
+  <div class="col-xs-12 col-sm-1">
+    <div class="avatar">
+      {% image, src: collaborative_comment.user.cover_image_url, alt: collaborative_comment.user.first_name %}
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-11">
+    <div class="comment-bubble">
+      <div class="author">
+        <span class="name">{{ collaborative_comment.user | fullname }}</span>
+        <span class="date">{{ collaborative_comment.created_at | time_ago_in_words }}</span>
+      </div>
+
+      <div class="js-show-comment content">
+        <div class="comment-text">
+          {{ collaborative_comment.text }}
+        </div>
+
+        {% if can_manage %}
+          <div class="comment-actions text-right">
+            <div class="btn-group">
+              <button type="button"
+                      class="js-edit-button btn btn-default btn-sm"
+                      data-comment-id="{{ collaborative_comment.id }}">
+                <i class="icon-pencil"></i>
+                <span>{{ 'general.edit' | t }}</span>
+              </button>
+
+              <a href="/collaborative_comments/{{ collaborative_comment.id }}"
+                 class="js-delete btn btn-default btn-sm"
+                 data-method="delete"
+                 data-remote="true">
+                <i class="icon-trash"></i>
+                <span>{{ 'general.clean' | t }}</span>
+              </a>
+            </div>
+          </div>
+        {% endif %}
+
+      </div>
+
+      {% if can_manage %}
+        <div class="js-edit-container hide">
+          <form class="answer-form" accept-charset="UTF-8" method="patch"
+                action="/collaborative_comments/{{ collaborative_comment.id }}"
+                data-remote="true">
+            <input type="hidden" name="authenticity_token" id="authenticity_token" value="{{ authenticity_token }}">
+            <input type="hidden" name="_method" id="_method" value="put">
+
+            <textarea id="js-comment-{{ collaborative_comment.id }}-text"
+                      class="js-ckeditor"
+                      rows="10"
+                      name="collaborative_comment[text]">
+          {{ collaborative_comment.text }}
+        </textarea>
+
+            <div class="text-right action">
+              <div class="btn-group">
+                <button type="button"
+                        class="js-cancel-button btn btn-default btn-sm"
+                        data-comment-id="{{ collaborative_comment.id }}">
+                  <span>{{ 'general.cancel' | t }}</span>
+                </button>
+                <button type="submit" class="btn btn-primary btn-sm">
+                  <span>{{ 'general.save' | t }}</span>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>

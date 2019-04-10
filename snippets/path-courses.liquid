@@ -1,0 +1,73 @@
+{% if courses.size == 0 %}
+  <div class="alert alert-warning">
+    {{ 'path.no_courses' | t }}
+  </div>
+{% else %}
+  <div class="courses-filter">
+    <form accept-charset="UTF-8"
+          method="get" action="/enrollments/{{ enrollment.id }}/paths/{{ path.id }}"
+          data-turbolinks-scroll="false">
+      <div class="input-group">
+      <span class="input-group-addon">
+        <i class="icon-magnifier"></i>
+      </span>
+        <input type="text" name="name"
+               class="form-control"
+               placeholder="{{ 'path.filter_by_name' | t }}"
+               value="{{ current_search.name }}">
+        <span class="input-group-btn">
+            <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+          </span>
+      </div>
+    </form>
+  </div>
+  {% paginate courses by 10 %}
+  <div class="courses-list">
+    <div class="row">
+      {% for course in courses %}
+        <div id="course-{{ course.id }}" class="col-sm-6 col-md-4 active-enrollments">
+          {% assign progress = enrollment | course_progress_card: course %}
+
+          {% assign available_time_message = enrollment | available_time_message %}
+          {% assign total_max_attendance_message = enrollment | total_max_attendance_message %}
+          {% assign use_max_attendance_message = enrollment | use_max_attendance_message %}
+          {% assign status_message = enrollment | status_message %}
+
+          {% assign detail_path = enrollment | course_path:course.id %}
+          {% assign detail_label = 'enrollment.go_course' | t %}
+
+          {% include 'course/course-card', detail_path: detail_path, detail_label: detail_label,
+            title: course.name, logo: course.image_url, progress: progress,
+            available_time_message: available_time_message, total_max_attendance_message: total_max_attendance_message,
+            use_max_attendance_message: use_max_attendance_message, status_message: status_message%}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="text-center">
+    <ul class="pagination">
+      {% if paginate.previous.is_link %}
+        <li>
+          <a href="{{ paginate.previous.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-left"></i></a>
+        </li>
+      {% endif %}
+      {% for part in paginate.parts %}
+        {% if part.is_link %}
+          <li>
+            <a href="{{ part.url }}" data-turbolinks-scroll="false">{{ part.title }}</a>
+          </li>
+        {% else %}
+          <li class="disabled">
+            <span>{{ part.title }}</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+      {% if paginate.next.is_link %}
+        <li>
+          <a href="{{ paginate.next.url }}" data-turbolinks-scroll="false"><i class="icon-arrow-right"></i></a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+  {% endpaginate %}
+{% endif %}

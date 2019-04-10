@@ -1,0 +1,21 @@
+{% raw %}
+  <div class="chat-message {% if avatar %}has-avatar{% endif %}">
+    {% if avatar %}
+      <div class="picture">
+        <div class="avatar">
+          <img class="animated" src="{{ avatar }}" alt="avatar" />
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="content">
+      {% if name %}
+        <div class="name">{{ name }}</div>
+      {% endif %}
+      <div class="message-box">
+        <div>{{ text }}</div>
+        <span class="schedule">{{ schedule }}</span>
+      </div>
+    </div>
+  </div>
+{% endraw %}

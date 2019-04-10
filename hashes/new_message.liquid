@@ -1,0 +1,12 @@
+{
+  'identificador'        => 'Enviou uma mensagem',
+  'email'                => '{{ user.email }}',
+  'Id do aluno'          =>  {{ user.id }},
+  'Nome do aluno'        => '{{ user | fullname | remove_quotation_marks }}',
+  'Id da escola'         =>  {{ school.id }},
+  'Nome da escola'       => '{{ school.name | remove_quotation_marks }}',
+  'Url da escola'        => '{{ school_url }}',
+  'Conteúdo da mensagem' => '{{ message.text | remove_quotation_marks }}',
+  'Assunto da mensagem'  => '{{ channel.subject | remove_quotation_marks }}',
+  'Área da mensagem'     => '{{ area_message | remove_quotation_marks }}'
+}

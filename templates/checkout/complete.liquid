@@ -1,0 +1,191 @@
+{% if gateway.checkout_complete_form_validation_disabled %}
+  {% assign required = nil %}
+{% else %}
+  {% assign required = 'required' %}
+{% endif %}
+
+{% assign has_cpf_validation = current_school | has_feature: 'cpf_validation' %}
+
+<div class="checkout-page checkout-complete-page page">
+  <div class="container">
+    {% include "checkout/return", return_url: "/cart" %}
+
+    <div class="row">
+      {% include "checkout/title-box" %}
+
+      <div class="col-md-7 cart-wizard">
+        <div class="wizard">
+          {% include "checkout/wizard-header", step: 2, infos_completed: infos_completed %}
+
+          <div class="wizard-content">
+            <div class="registration-complete">
+              {% form 'checkout/complete', class: customerForm %}
+              {% if form.errors %}
+                <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+              {% endif %}
+              <div class="user-form">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <a role="button"
+                       data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#collapseUserForm"
+                       aria-expanded="false"
+                       class="panel-title"
+                       aria-controls="collapseUserForm">{{ 'checkout.complete.personal_information' | t }}</a>
+                  </div>
+                  <div id="collapseUserForm"
+                       class="panel-collapse collapse in"
+                       role="tabpanel"
+                       aria-labelledby="headingThree">
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div
+                            class="form-group has-feedback {{ required }} {% if form.errors.first_name %}has-error{% endif %}">
+                            <label class="control-label">{{ 'checkout.complete.first_name' | t }}</label>
+                            <input type="text" name="user[first_name]" value="{{ current_user.first_name }}"
+                                   class="form-control" {{ required }}>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group {{ required }} {% if form.errors.last_name %}has-error{% endif %}">
+                            <label class="control-label">{{ 'checkout.complete.last_name' | t }}</label>
+                            <input type="text" name="user[last_name]" value="{{ current_user.last_name }}"
+                                   class="form-control"
+                                   {{ required }}>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group {{ required }} {% if form.errors.phone %}has-error{% endif %}">
+                            <label class="control-label">{{ 'checkout.complete.phone' | t }}</label>
+                            <input type="text" id="user-phone" name="user[phone]"
+                                   value="{{ current_user.phone }}" class="form-control" {{ required }}>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group {{ required }} {% if form.errors.cpf %}has-error{% endif %}">
+                            <label class="control-label">{{ 'checkout.complete.cpf' | t }}</label>
+                            <input type="text" id="user-cpf" ui-mask="999.999.999-99" name="user[cpf]"
+                                   value="{{ current_user.cpf }}" class="form-control" {% if has_cpf_validation %}data-validate-cpf="true"{% endif %} {{ required }}>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group {{ required }} {% if form.errors.rg %}has-error{% endif %}">
+                            <label class="control-label">{{ 'checkout.complete.rg' | t }}</label>
+                            <input type="text" id="user-rg" name="user[rg]" value="{{ current_user.rg }}"
+                                   class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          {% capture label %}{{ 'profile.born_at' | t }}{% endcapture %}
+                          {% capture name %}{{ 'user[born_at]' }}{% endcapture %}
+                          {% capture value %}{{ current_user.born_at }}{% endcapture %}
+                          {% include 'datepicker' %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="address-form">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <a role="button"
+                       class="panel-title"
+                       data-toggle="collapse"
+                       data-parent="#accordion"
+                       href="#collapseAddressForm"
+                       aria-expanded="false"
+                       aria-controls="collapseAddressForm">{{ 'checkout.complete.address' | t }}</a>
+                  </div>
+                  <div id="collapseAddressForm"
+                       class="panel-collapse collapse in"
+                       role="tabpanel"
+                       aria-labelledby="headingThree">
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group {{ required }} {% if form.errors.address_street %}has-error{% endif %}">
+                            <label class="control-label">{{ 'checkout.complete.address_street' | t }}</label>
+                            <input type="text" name="user[address_attributes][street]" value="{{ address.street }}"
+                                   class="form-control" {{ required }}>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group {{ required }} {% if form.errors.address_number %}has-error{% endif %}">
+                            <label class="control-label">{{ 'checkout.complete.address_number' | t }}</label>
+                            <input type="text" name="user[address_attributes][number]" value="{{ address.number }}"
+                                   class="form-control" {{ required }}>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="control-label">{{ 'checkout.complete.address_complement' | t }}</label>
+                            <input type="text" name="user[address_attributes][complement]"
+                                   value="{{ address.complement }}"
+                                   class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group {{ required }}">
+                            <label class="control-label">{{ 'checkout.complete.address_district' | t }}</label>
+                            <input type="text" name="user[address_attributes][district]" value="{{ address.district }}"
+                                   class="form-control" {{ required }}>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group {{ required }} {% if form.errors.address_city %}has-error{% endif %}">
+                            <label class="control-label">{{ 'checkout.complete.address_city' | t }}</label>
+                            <input type="text" name="user[address_attributes][city]" value="{{ address.city }}"
+                                   class="form-control" {{ required }}>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group {{ required }} {% if form.errors.address_state %}has-error{% endif %}" data-tap-disabled="true">
+                            <label class="control-label">{{ 'checkout.complete.address_state' | t }}</label>
+                            {% include "select-address", selected_state: address.state %}
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group {{ required }} {% if form.errors.address_zip_code %}has-error{% endif %}">
+                            <label class="control-label">{{ 'checkout.complete.address_zip_code' | t }}</label>
+                            <input type="text" id="user-cep" name="user[address_attributes][zip_code]"
+                                  {% if current_school | has_feature: 'cep_service' %}data-enable-cep-service="true"{% endif %}
+                                   value="{{ address.zip_code }}" class="form-control" {{ required }}>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {% include 'student/form-profile-extra-fields', form_name: 'checkout/complete' %}
+
+              <div class="text-right">
+                <input type="submit" value="{{ 'checkout.go_to_payment' | t }}" class="btn btn-primary">
+              </div>
+              {% endform %}
+              
+            </div>
+          </div>
+        </div>
+
+        <br>
+      </div>
+
+      <div class="col-md-5 cart-sidebar">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            {% include "checkout/security-box" %}
+            {% include "checkout/totals-box" %}
+            {% include "checkout/payment-methods-box" %}
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>

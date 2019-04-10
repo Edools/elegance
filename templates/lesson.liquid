@@ -1,0 +1,176 @@
+<div class="lesson-page page">
+  <div class="container page-container">
+    <div class="row">
+      <div id="js-lesson-list" class="col-md-4 js-lesson-list">
+        <div class="lesson-page-sidebar">
+          <div class="lesson-list-header js-fix-on-scroll js-fix-on-scroll-mobile">
+            <div class="lesson-list-toggle">
+              <button class="btn btn-default">
+                <i class="icon-arrow-left"></i>
+                <i class="icon-menu"></i>
+              </button>
+            </div>
+
+            <div class="control-back">
+              <a class="btn btn-default" href="{{ enrollment | back_path: course.id }}">
+                <i class="icon-arrow-left"></i>
+                <span>{{ 'general.back' | t }}</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="panel panel-default lesson-list-panel">
+            <div class="panel-heading">
+              <h4 class="title">{{ course.name }}</h4>
+            </div>
+
+            <div class="panel-body">
+              <div class="course-progress js-progress">
+                {% assign progress = enrollment | course_progress_card: course %}
+                <p> {{ progress.total }} {{ 'lesson.total' | t }}</p>
+                <div class="progress-header">
+                <span class="label label-success">
+                  <span class="js-completed-counter">{{ progress.completed }}</span> {{ 'lesson.completed' | t }}
+                </span>
+                  <span class="label label-info">
+                  <span class="js-in-progress-counter">{{ progress.in_progress }}</span> {{ 'lesson.started' | t }}
+                </span>
+                </div>
+                {% include 'progress-bar', total: progress.total, success: progress.completed, warning:
+                progress.in_progress %}
+              </div>
+
+              <div class="rating-container">
+                {% assign rating_enable = current_school | has_feature: 'course_rating' %}
+                {% if rating_enable %}
+                  {% include 'course/rating', course: course, enrollment: enrollment %}
+                {% endif %}
+              </div>
+
+              <div class="other-lessons">
+                {% include 'product/content-course', course: course, lesson_actions: true,
+                enrollment: enrollment, current_lesson_id: lesson.id, download_action: true %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8">
+        <div id="js-lesson-content-player" class="lesson-content-player">
+          <div class="lesson-content-player-heading">
+            {% if course_content.prev_content_id or course_content.next_content_id %}
+              <div class="js-fix-on-scroll">
+                {% include 'lesson/navigation' %}
+              </div>
+            {% endif %}
+
+            <h2 class="lesson-title">{{ lesson.title }}</h2>
+          </div>
+
+          {% if lesson.description.size > 0 %}
+            <div class="lesson-description">
+              {{ lesson.description }}
+            </div>
+          {% endif %}
+
+          <div id="js-media-player"
+               class="media-player"
+               data-lesson-progress="{{ lesson_progress | to_json | replace: '"', '&quot;' | strip_newlines }}"
+               data-enable-video-watermark="{{ current_school | has_feature: 'video_watermark' }}"
+               data-lesson-id="{{ lesson.id }}">
+            {% if lesson.media %}
+              {% media_player lesson: lesson, trackeable: track_lesson,
+              enrollment: enrollment, lesson_progress: lesson_progress,
+              course_content: course_content, course: course %}
+            {% else if lesson.activity %}
+              {% activity lesson: lesson, enrollment: enrollment,
+              lesson_progress: lesson_progress, answer: answer,
+              attempts_remaining: attempts_remaining,
+              course_content: course_content, course: course %}
+            {% endif %}
+          </div>
+
+          <div class="footer-navigation">
+            {% include 'lesson/navigation' %}
+          </div>
+        </div>
+
+        {% assign has_notepad_feature = current_school | has_feature: 'notepad' %}
+        {% assign has_student_doubt_feature = current_school | has_feature: 'student_doubt' %}
+        {% assign has_chat_feature = current_school | has_feature: 'chat_realtime' %}
+
+        {% if (current_school | has_feature: 'timetags') and lesson.media.time_tag.meta_tags.size > 0 %}
+          {% assign has_timetags_feature = true %}
+        {% else %}
+          {% assign has_timetags_feature = false %}
+        {% endif %}
+
+        <div class="lesson-tabs">
+          <ul class="nav nav-tabs">
+            {% if has_timetags_feature %}
+              <li class="active">
+                <a data-toggle="tab" href="#timetags">{{ 'timetags.timetags' | 't' }}</a>
+              </li>
+            {% endif %}
+            {% if has_student_doubt_feature %}
+              <li
+                class="{% unless has_timetags_feature %}active{% endunless %}">
+                <a data-toggle="tab" href="#student-doubts">{{ 'student_doubt.doubts' | 't' }}</a>
+              </li>
+            {% endif %}
+            {% if has_notepad_feature %}
+              <li
+                class="{% unless has_timetags_feature or has_student_doubt_feature %}active{% endunless %}">
+                <a data-toggle="tab" href="#notepad">{{ 'notepad.note' | 't' }}</a>
+              </li>
+            {% endif %}
+            {% if has_chat_feature %}
+              <li
+                class="{% unless has_timetags_feature or has_notepad_feature or has_student_doubt_feature %}active{% endunless %}">
+                <a data-toggle="tab" href="#chat">{{ 'chat.chat' | 't' }}</a>
+              </li>
+            {% endif %}
+            {% if section %}
+              <li>
+                <a id="forum-section-tab" data-toggle="tab" href="#section">
+                  {{ 'forum.forum' | t }}
+                </a>
+              </li>
+            {% endif %}
+          </ul>
+
+          <div class="tab-content">
+            {% if has_timetags_feature %}
+              <div id="timetags" class="tab-pane fade in active">
+                {% include 'lesson/timetags' %}
+              </div>
+            {% endif %}
+            {% if has_student_doubt_feature %}
+              <div id="student-doubts"
+                   class="tab-pane fade in {% unless has_timetags_feature %}active{% endunless %}">
+                {% include 'lesson/student_doubts' %}
+              </div>
+            {% endif %}
+            {% if has_notepad_feature %}
+              <div id="notepad"
+                   class="tab-pane fade in {% unless has_timetags_feature or has_student_doubt_feature %}active{% endunless %}">
+                {% include 'lesson/notepad', current_lesson_id: lesson.id %}
+              </div>
+            {% endif %}
+            {% if has_chat_feature %}
+              <div id="chat"
+                   class="tab-pane fade in {% unless has_timetags_feature or has_notepad_feature or has_student_doubt_feature %}active{% endunless %}">
+                {% include 'chat-widget', size: 'sm', chat_type: 'lesson-chat', chat_lesson: lesson, height: '640px' %}
+              </div>
+            {% endif %}
+
+            {% if section %}
+              {% include 'lesson/forum' %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

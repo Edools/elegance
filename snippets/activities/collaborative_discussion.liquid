@@ -1,0 +1,49 @@
+<div id="collaborative-discussion" class="collaborative-dicussion">
+  <h4>{{ activity.description }}</h4>
+
+  <div class="comment send-comment">
+    <div class="row">
+      <div class="col-sm-1">
+        <div class="avatar">
+          {% image, src: current_user.cover_image_url, alt: current_user.first_name %}
+        </div>
+      </div>
+      <div class="col-sm-11">
+        <div class="comment-body">
+          {% form 'collaborative_comment', id: collaborative_comment_form, remote: true %}
+          <input type="hidden" name="lesson_progress_id" value="{{ lesson_progress.id }}">
+          <input type="hidden" name="collaborative_comment[collaborative_discussion_id]" value="{{ activity.id }}">
+
+          <textarea id="js-comment" class="js-ckeditor" rows="10" cols="80"
+                    name="collaborative_comment[text]"></textarea>
+
+          <div class="expanding-input-hidden expanding-input-content" style="margin-top: 10px;">
+            <button type="submit" class="btn btn-primary pull-right"
+                    data-disable-with="<i class='busy busy-xs'></i><span>{{ 'general.sending' | t }}...</span>"
+                    disabled>
+              {{ 'general.send' | t }}
+            </button>
+          </div>
+
+          <div class="expanding-input-overlay">
+            <div class="expanding-input-placeholder">{{ 'colaborative_discussion.write_your_comment' | t }}</div>
+          </div>
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="js-comments-container" class="question-answers">
+    <h4 class="title">
+      <i class="icon-bubbles"></i>
+      <span>{{ 'colaborative_discussion.comments' | t }}</span>
+    </h4>
+    <div class="answers-list">
+      {% for comment in activity.collaborative_comments %}
+        {% include 'activities/collaborative_discussion/comment', collaborative_comment: comment %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+

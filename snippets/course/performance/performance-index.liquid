@@ -1,0 +1,23 @@
+{% if course %}
+  <div class="row">
+    <div class="col-md-8">
+      <div id="course-performance-list" class="course-performance-list course-content">
+        <ol id="js-course-tree" class="list-group">
+          <li  class="list-group-item" style="font-weight: 600;">
+            {{'course.performance.performed_activities' | t }}
+          </li>
+          {% for content in course.contents %}
+            {% if content.resource.activity.type == 'Quiz' %}
+              {% include 'course/performance/performance-node' content: content, course_content: content %}
+            {% endif %}
+          {% endfor %}
+        </ol>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div id="course-performance-statistics" class="course-performance-statistics course-content">
+          {% include 'course/performance/performance-statistics' %}
+      </div>
+    </div>
+  </div>
+{% endif %}

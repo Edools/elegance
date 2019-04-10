@@ -1,0 +1,154 @@
+{% form 'exam_answer', id: exam_answer_form, remote: true %}
+<div class="quiz-form">
+  <input type="hidden" name="exam_answer[activity_id]" value="{{ activity.id }}" required>
+  <input type="hidden" name="exam_answer[lesson_progress_id]" value="{{ lesson_progress.id }}" required>
+
+  {% for question in activity.exam_questions %}
+    {% assign index = forloop.index %}
+
+    <div class="panel panel-default" data-question-id="{{ question.id }}">
+      <div class="panel-heading">
+        <div class="panel-title">
+          <div class="question">
+            <div class="question-number">{{ index }}.</div>
+            <div class="question-title">{{ question.title | default: question.options[0].title }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <input type="hidden" name="exam_answer[exam_question_answers_attributes[{{ index }}][exam_question_id]]"
+               value="{{ question.id }}">
+
+        {% case question.type %}
+
+        {% when 'DiscursiveExamQuestion' %}
+        <div class="discursive-question">
+          <div class="form-group">
+            <textarea rows="3"
+                      class="form-control js-ckeditor"
+                      placeholder="Escreva sua resposta"
+                      id="exam_answer_{{ index }}"
+                      name="exam_answer[exam_question_answers_attributes[{{ index }}][text]]"
+                      required></textarea>
+          </div>
+        </div>
+
+        {% when 'MultipleChoiceExamQuestion' %}
+        <div class="multiple-choice-question">
+          {% for option in question.options %}
+            <label class="question-option">
+              <div class="option-input">
+                <input type="radio" value="{{ option.id }}" required
+                       name="exam_answer[exam_question_answers_attributes[{{ index }}][multiple_choice_option_id]]"
+                       id="exam_answer[exam_question_answers_attributes[{{ index }}][multiple_choice_option_id]]">
+              </div>
+              <div class="option-text">{{ option.title }}</div>
+            </label>
+          {% endfor %}
+        </div>
+
+        {% when 'AssociativeExamQuestion' %}
+        <div class="associative-question">
+          {% assign first_assertion = nil %}
+          {% assign second_assertion = nil %}
+          {% assign option_index = nil %}
+
+          {% for option in question.options %}
+            {% assign first_assertion = question.first_assertions[forloop.index0] %}
+            {% assign second_assertion = question.second_assertions[forloop.index0] %}
+            {% assign option_index = forloop.index %}
+
+            <input type="hidden"
+                   name="exam_answer[exam_question_answers_attributes[{{ index }}][associative_options_attributes[{{ option_index }}][first_assertion_id]]]"
+                   value="" class="js-associate-assertion" data-option-index="{{ option_index }}" required>
+            <input type="hidden"
+                   name="exam_answer[exam_question_answers_attributes[{{ index }}][associative_options_attributes[{{ option_index }}][second_assertion_id]]]"
+                   value="{{ second_assertion.id }}">
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="option-block" data-assertion-id="{{ first_assertion.id }}">
+                  <div class="option-index">({{ option_index }})</div>
+                  <div class="option-text">{{ first_assertion.text }}</div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="option-block" data-assertion-id="{{ second_assertion.id }}">
+                  <div class="option-index">
+                    <select class="form-control option-index-imput js-associative-select"
+                            data-option-index="{{ option_index }}" required>
+                      <option></option>
+
+                      {% for first_assertion in question.first_assertions %}
+                        <option data-first-assertion-id="{{ first_assertion.id }}">
+                          {{ forloop.index }}
+                        </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                  <div class="option-text"><span class="caption">{{ second_assertion.text }}</span></div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+          <div class="text-right">
+            <button class="js-clean-associative-options btn btn-default btn-sm"
+                    data-toggle="tooltip"
+                    data-placement="bottom"
+                    title="{{ 'quiz.clean_associations' | t }}">
+              <i class="icon-reload"></i>
+            </button>
+          </div>
+        </div>
+
+        {% when 'TrueOrFalseExamQuestion' %}
+        <div class="true-or-false-question">
+          <label class="question-option">
+            <div class="option-input">
+              <input type="radio" value="false" required
+                     name="exam_answer[exam_question_answers_attributes[{{ index }}][correct]]">
+            </div>
+            <div class="option-text">{{ 'quiz.false' | t }}</div>
+          </label>
+
+          <label class="question-option">
+            <div class="option-input">
+              <input type="radio" value="true" required
+                     name="exam_answer[exam_question_answers_attributes[{{ index }}][correct]]">
+            </div>
+            <div class="option-text">{{ 'quiz.true' | t }}</div>
+          </label>
+        </div>
+
+        {% when 'TrueOrFalseExamQuestion2' %}
+        <div class="true-or-false-question true-or-false-question-2">
+          {% for option in question.options %}
+            <div class="option">
+              <label class="question-option">
+                <div class="option-input">
+                  <input type="radio" value="{{ option.id }}" required
+                         name="exam_answer[exam_question_answers_attributes[{{ index }}][multiple_choice_option_id]]">
+                </div>
+                <div class="option-text">{{ option.title }}</div>
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% endcase %}
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="text-right">
+    <button type="submit" class="btn btn-primary" disabled data-disable-with='{{ 'general.sending_dots' | t }}'>
+      {{ 'general.send_answers' | t }}
+    </button>
+  </div>
+
+</div>
+{% endform %}

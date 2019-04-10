@@ -1,0 +1,109 @@
+<div class="forums-page ">
+  <div class="forum-page page">
+    <div class="container">
+      <h3>
+        {{ 'forums.forum' | t: title: forum.title }}
+        {% permitted forum_section, create %}
+          <button type="button" data-toggle="modal" data-target="#sectionModal" id="new_section" class="btn btn-primary pull-right" name="button">
+            {{ 'forums.new_section' | t }}
+          </button>
+        {% endpermitted %}
+      </h3>
+
+      <div class="modal fade" tabindex="-1" role="dialog" id="sectionModal">
+        <div class="modal-dialog" role="document">
+          {% form 'forum/section' %}
+          <input type="hidden" name="forum_id" value="{{forum.forum_id}}">
+          <input type="hidden" name="forum_section[parent_forum_section_id]" value="{{forum.id}}">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">
+                {{ 'forums.new_section' | t }}
+              </h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="name_section">Nome</label>
+                <input type="text" class="form-control" name="forum_section[title]" id="name_section" required />
+              </div>
+              <div class="form-group">
+                <label for="description_section">Descrição</label>
+                <input type="text" class="form-control" name="forum_section[description]" id="description_section" required />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+          </div>
+          {% endform %}
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+
+      <form accept-charset="UTF-8" method="get" action="/forums/{{ forum.id }}" data-turbolinks-scroll="false">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon"><i class="icon-magnifier"></i></span>
+          <input type="text" class="form-control" name="title" placeholder="{{ 'forums.filter_by_title' | t }}"
+          value="{{ current_search.title }}">
+          <span class="input-group-btn">
+            <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+          </span>
+        </div>
+      </form>
+
+      <hr/>
+
+      <div class="forum-sections list-group">
+        {% paginate forum.sections by 10 %}
+        {% for section in forum.sections %}
+
+        <article class="section list-group-item">
+          <div class="section-content clearfix">
+            <div class="list-group-item-heading needsclick">
+              {% if section.topics.size > 0 %}
+              <input type="checkbox" class="section-check hidden" id="section-{{ section.id }}-check">
+              {% endif %}
+
+              <section class="head-section">
+                {% permitted forum_section, create %}
+                <section class="actions pull-right">
+                  <a href="/forums/{{ forum.id }}/forum_sections/{{ section.id }}/topic/new" class="new_topic btn btn-default btn-sm">
+                    {{ 'forums.new_topic' | t }}
+                  </a>
+                </section>
+                {% endpermitted %}
+
+                <label class="toggle needsclick"
+                {% if section.topics.size> 0 %}for="section-{{ section.id }}-check"{% endif %}>
+                <span class="sub-section-title">{{ section.title }}</span>
+              </label>
+              <p class="list-group-item-text">{{ section.description }}</p>
+              <div class="clearfix"></div>
+            </section>
+
+
+            {% if section.topics.size > 0 %}
+            <div id="section-{{ section.id }}-topics" class="section-topics">
+              <div class="section-topics-list">
+                {% for topic in section.topics %}
+                <div class="section-topic section-topic-striped">
+                  <a class="title" href="{{ topic | topic_path }}">
+                    {{ topic.title }}
+                  </a>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+          </div>
+
+        </div>
+      </article>
+      {% endfor %}
+      {% endpaginate %}
+    </div>
+
+  </div>
+</div>
+</div>

@@ -1,0 +1,77 @@
+<div class="payments-page page">
+  {% if payments.size > 0 %}
+    <div class="container">
+      <div class="heading">
+        <h3>
+          <a href="/orders" type="button" class="btn btn-default">
+            <i class="icon-arrow-left"></i>
+            <span>{{ 'general.back' | t }}</span>
+          </a>
+
+          {% if retry_payment %}
+            <a class="btn btn-primary pull-right" href="{{ order | new_order_payment_path }}">
+              {{ 'pages.payments.new_payment' | t }}
+            </a>
+          {% endif %}
+        </h3>
+        <h3>{{ 'pages.payments.order_payments' | t: order_id: order.id }}</h3>
+      </div>
+
+      {% if boleto_retry_url %}
+        <div class="alert alert-warning">
+          {{ 'pages.payments.boleto_warning' | t }} <a href="{{ boleto_retry_url }}"
+                                                       class="js-open-on-load"
+                                                       target="_blank">{{ 'pages.payments.boleto_warning_click_here' | t }}</a>
+        </div>
+      {% endif %}
+
+      <table class="payment-table table table-bordered">
+        <thead>
+        <tr>
+          <th class="col-xs-1">{{ 'pages.payments.number' | t }}</th>
+          <th class="col-xs-3">{{ 'pages.payments.status' | t }}</th>
+          <th class="col-xs-2 text-center">{{ 'pages.payments.created_at' | t }}</th>
+          <th class="col-xs-3 text-right">{{ 'pages.payments.total' | t }}</th>
+          <th class="col-xs-3 text-right">{{ 'pages.payments.boleto' | t }}</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for payment in payments %}
+          <tr id="payment-{{ payment.id }}" class="payment">
+            <td class="column id">{{ payment.id }}</td>
+            <td class="column status">
+              {{ 'payment.status.' | append: payment.status | t }}
+            </td>
+            <td class="column creation text-center">
+              {{ payment.created_at | date: "%d/%m/%Y %H:%M" }}
+            </td>
+            <td class="column total text-right">
+              {{ payment.amount | money }}
+            </td>
+            <td class="column total text-right">
+              {% if payment.kind == 'boleto' %}
+                <a class="btn btn-default btn-sm" href="{{ payment.link }}" target="_blank">
+                  <i class="icon-info"></i>
+                  {{ 'pages.payments.print_boleto' | t }}
+                </a>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+
+  {% if payments.size == 0 %}
+    <div class="container">
+      <h3>{{ 'pages.payments.order_payments' | t: order_id: order.id }}</h3>
+      <div class="alert alert-info">
+        {{ 'pages.payments.empty' | t }}
+      </div>
+    </div>
+  {% endif %}
+</div>

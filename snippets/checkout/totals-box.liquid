@@ -1,0 +1,56 @@
+<div id="cart-total" class="cart-total sidebar-widget border right bottom {% if closed_borders %}left{% endif %}">
+  <div class="panel-body row">
+    <div class="col-xs-6">
+      {{ 'checkout.total_amount_to_pay' | t }}
+    </div>
+    <div class="col-xs-6">
+      <span class="pull-right text-right total-price">
+        {% if order.coupon %}
+          <s class="small">{{ order.total | money_option_presentation: order.kind, order.period, 'full', 1 }}</s><br>
+        {% endif %}
+
+        {% if order and order.items.size > 0 %}
+          <b id="js-order-total">{{ order.amount_to_pay | money_option_presentation: order.kind, order.period, 'full', 1 }}</b>
+        {% else %}
+          -
+        {% endif %}
+      </span>
+    </div>
+
+    {% if order.kind == 'common' %}
+      <div class="col-xs-6">
+        {{ 'checkout.total_amount_to_pay_in_installments' | t: installments: gateway.installments_limit }}
+      </div>
+
+      <div class="col-xs-6">
+        <span class="pull-right text-right installment-price">
+          {% if order.coupon %}
+            <s class="small">{{ order.total | divided_by: gateway.installments_limit | money }}</s><br>
+          {% endif %}
+
+          {% if order %}
+            <b id="js-order-installments">
+              {{ order.amount_to_pay | number_with_taxes: gateway |
+                divided_by: gateway.installments_limit | money }}
+            </b>
+          {% else %}
+            -
+          {% endif %}
+        </span>
+      </div>
+    {% endif %}
+
+    {% if order.coupon_token.code or order.coupon %}
+      <br>
+      <div class="col-xs-12 order-total-coupon">
+        <span class="text-muted small pull-right">{{'checkout.coupon' |t }}
+          {% if order.coupon_token.code %}
+            {{ order.coupon_token.code }}
+            {% elsif order.coupon %}
+            {{ order.coupon.name }}
+          {% endif %}
+        </span>
+      </div>
+    {% endif %}
+  </div>
+</div>
