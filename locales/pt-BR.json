@@ -760,8 +760,8 @@
     },
     "messages": {
       "foo": "foo",
-      "approved": "Você obteve {{score}} pontos, portanto, você foi APROVADO nessa avaliação.",
-      "disapproved": "Você obteve {{score}} pontos. Para ser aprovado você precisa de {{min_grade}} pontos.",
+      "approved": "Parabéns, você acertou {{performance}}% das questões. Continue assim, você está no caminho certo!",
+      "disapproved": "Você acertou {{performance}}% das questões, mas não precisa desanimar.<br> Faça o simulado novamente para melhorar sua nota!",
       "try": "Você ainda pode responder {{ attempts_remaining }} vezes, deseja tentar novamente?",
       "click_here": "Clique aqui",
       "waiting_correction": "Suas respostas estão aguardando correção.",
