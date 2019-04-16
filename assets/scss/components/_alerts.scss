@@ -95,6 +95,13 @@
   color: darken($alert-danger-bg, 5%);
 }
 
+.alert-neutral {
+  @include alert-variant(lighten(black, 35%), lighten(black, 35%), lighten(black, 35%));
+
+  background-color: transparentize($light, .5);
+  color: lighten(black, 35%);
+}
+
 .alert-outline {
   background-color: transparent;
 }

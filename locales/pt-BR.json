@@ -754,9 +754,13 @@
     "label": "Material complementar"
   },
   "quiz": {
-    "random_quiz_hits": {
-      "one": "Você acertou {{count}} questão de {{tag}} com a dificuldade {{difficult}}.",
-      "other": "Você acertou {{count}} questões de {{tag}} com a dificuldade {{difficult}}."
+    "random_quiz_statistics": {
+      "not_ready" : "Você ainda não realizou exames.",
+      "general": "Desempenho Geral",
+      "answered_questions" : "Questões Resolvidas",
+      "right_questions" : "Acertos",
+      "wrong_questions" : "Erros",
+      "performance" : "Questões Resolvidas"
     },
     "messages": {
       "foo": "foo",
