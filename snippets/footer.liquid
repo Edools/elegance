@@ -67,8 +67,9 @@
         </div>
       </div>
     </div>
-
-    <div class="copyright">
+    
+    {% assign has_copyright = current_school | has_feature: 'deactivate_copyright' %}
+    <div class="copyright {% if has_copyright == true %}hidden{% endif %}">
       <div class="container">
         {{ 'footer.plataform_by' | t }}
         <a ng-click="fireAnalytics()" href="http://www.edools.com" class="brand scroller" target="blank"
