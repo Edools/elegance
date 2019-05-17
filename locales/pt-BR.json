@@ -754,14 +754,18 @@
     "label": "Material complementar"
   },
   "quiz": {
-    "random_quiz_hits": {
-      "one": "Você acertou {{count}} questão de {{tag}} com a dificuldade {{difficult}}.",
-      "other": "Você acertou {{count}} questões de {{tag}} com a dificuldade {{difficult}}."
+    "random_quiz_statistics": {
+      "not_ready" : "Você ainda não realizou exames.",
+      "general": "Desempenho Geral",
+      "answered_questions" : "Questões Resolvidas",
+      "right_questions" : "Acertos",
+      "wrong_questions" : "Erros",
+      "performance" : "Questões Resolvidas"
     },
     "messages": {
       "foo": "foo",
-      "approved": "Você obteve {{score}} pontos, portanto, você foi APROVADO nessa avaliação.",
-      "disapproved": "Você obteve {{score}} pontos. Para ser aprovado você precisa de {{min_grade}} pontos.",
+      "approved": "Parabéns, você acertou {{performance}}% das questões. Continue assim, você está no caminho certo!",
+      "disapproved": "Você acertou {{performance}}% das questões, mas não precisa desanimar.<br> Faça o simulado novamente para melhorar sua nota!",
       "try": "Você ainda pode responder {{ attempts_remaining }} vezes, deseja tentar novamente?",
       "click_here": "Clique aqui",
       "waiting_correction": "Suas respostas estão aguardando correção.",
