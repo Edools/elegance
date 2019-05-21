@@ -754,6 +754,13 @@
     "label": "Material complementar"
   },
   "quiz": {
+    "random_quiz": {
+      "message" : "Veja qual foi seu aproveitamento em cada tema:",
+      "hits" : {
+        "one": "{{ percentage }} | Você acertou {{ count }} de {{ quantity }} questões.",
+        "other": "{{ percentage }} | Você acertou {{ count }} de {{ quantity }} questões."
+      }
+    },
     "random_quiz_statistics": {
       "not_ready" : "Você ainda não realizou exames.",
       "general": "Desempenho Geral",
