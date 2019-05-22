@@ -14,6 +14,30 @@
       {% endif %}
     </div>
 
+    {% assign user_badges = current_user | badges %}
+
+    {% if user_badges.size != 0 %}
+      <div class="badges-list">
+        <h2 tabindex='0' class="page-title">
+          {{ 'enrollment.my_badges' | t }}
+        </h2>
+      
+        <div class="row">
+          {% for badge in (user_badges) %}
+            <div class="col-md-3 col-sm-6">
+              <div class="user-badge thumbnail">
+                {% image, src: badge.image, lazyload: false, class: 'image' %}
+                <div class="caption">
+                  <p class="title">{{ badge.title }}</p>
+                  <p class="subtitle">{{ badge.description | truncate: 70 }}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
     <h2 tabindex='0' id="accessibility-main-content-enrollments" class="page-title">
       {{ 'enrollment.my_courses' | t }}
     </h2>
@@ -160,24 +184,6 @@
       </div>
     </div>
 
-    {% assign user_badges = current_user | badges %}
-
-    {% if user_badges.size != 0 %}
-      <h2 tabindex='0' class="page-title">
-        {{ 'enrollment.my_badges' | t }}
-      </h2>
-
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="form-group profile-photo">
-            {% for badge in user_badges %}
-              <div class="thumbnail">
-                {% image, src: badge.image, lazyload: false %}
-              </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-    {% endif %}
+    
   </div>
 </div>
