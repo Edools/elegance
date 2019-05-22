@@ -1,25 +1,41 @@
 {% if answer.corrected_at %}
   {% if lesson.min_grade > 0 %}
 
-    {% if lesson.activity.type == 'RandomQuiz' %}
+    {% assign questions_size = answer.exam_question_answers.size %}
+    {% assign correct_answers = 0.0 %}
+    {% for score in answer.exam_question_answers %}
+      {% if score.score > 0 %}
+        {% assign correct_answers = correct_answers | plus: 1 %}
+      {% endif %}
+    {% endfor %}
 
+    {% assign performance = correct_answers | divided_by: questions_size | times: 100 | round %}
+    {% if answer.approved? %}    
+      <p class="alert alert-success alert-approved">
+        {{ 'quiz.messages.approved' | t: performance: performance }}
+      </p>
+    {% else %}
+      <p class="alert alert-danger alert-disapproved">
+        {{ 'quiz.messages.disapproved' | t: performance: performance }}
+      </p>
+    {% endif %}
+
+    {% if lesson.activity.type == 'RandomQuiz' %}
       {% assign messages = answer | by_tags_and_difficult: lesson %}
       <section class="random-quiz-messages">
+        <h4>{{ 'quiz.random_quiz.message' | t }}</h4>
         {% for message in messages %}
-          <p>{{ 'quiz.random_quiz_hits' | t: tag: message.tag, difficult: message.difficult, count: message.hits }}</p>
+        <div class="alert alert-neutral random-quiz-result">
+        {% assign percentage = message.hits | times: 1.0 | divided_by: message.quantity | times: 100 | round: 0 | append: '%'%}
+          <span class="label tag">{{message.tag}}</span>
+          <span class="label difficulty">{{message.difficult}}</span>
+          <h1 class="hidden">
+            {{message}}
+          </h1>
+          <p>{{ 'quiz.random_quiz.hits' | t: difficult: message.difficult, count: message.hits, percentage: percentage, quantity: message.quantity }}</p>
+        </div>
         {% endfor %}
       </section>
-
-    {% else %}
-      {% if answer.approved? %}
-        <p class="alert alert-success alert-approved">
-          {{ 'quiz.messages.approved' | t: score: answer.score }}
-        </p>
-      {% else %}
-        <p class="alert alert-danger alert-disapproved">
-          {{ 'quiz.messages.disapproved' | t: score: answer.score, min_grade: lesson.min_grade }}
-        </p>
-      {% endif %}
     {% endif %}
 
   {% endif %}

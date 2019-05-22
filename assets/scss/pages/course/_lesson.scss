@@ -167,6 +167,19 @@
       position: relative;
       margin-bottom: $padding-large-vertical * 4;
 
+      .random-quiz-result {
+        .label {
+          display: inline-block;
+          margin: 4px 0 8px;
+          padding: 4px 8px;
+          border: 1px solid $btn-info-color;
+          border-radius: $border-radius-large;
+          background-color: $btn-info-bg;
+          color: $btn-info-color;
+          font-size: $font-size-h6;
+        }
+      }
+
       .player {
         text-align: left;
 
