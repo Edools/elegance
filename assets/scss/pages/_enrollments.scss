@@ -3,25 +3,26 @@
     .user-badge {
       padding: 0;
 
+      .caption {
+        min-height: 215px;
+        height: auto;
+      }
+
       .image {
         width: 100%;
       }
 
       .title {
-        @include breakpoint(sm) {
-          height: 65px;
-        }
-
         display: block;
         margin-top: $padding-large-vertical;
         margin-bottom: $padding-large-vertical;
         color: $text-color;
         text-decoration: none;
         font-size: 20px;
+        line-height: 1.2;
       }
 
       .subtitle {
-        height: 40px;
         color: $text-muted;
       }
     }
