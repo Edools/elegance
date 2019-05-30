@@ -29,7 +29,7 @@
                 {% image, src: badge.image, lazyload: false, class: 'image' %}
                 <div class="caption">
                   <p class="title">{{ badge.title }}</p>
-                  <p class="subtitle">{{ badge.description | truncate: 70 }}</p>
+                  <p class="subtitle" role="readmore" data-collapsed-height="80">{{ badge.description }}</p>
                 </div>
               </div>
             </div>
