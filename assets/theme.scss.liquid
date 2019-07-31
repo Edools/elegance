@@ -384,6 +384,17 @@ header.navbar {
       }
     }
   }
+
+  .lesson-tabs {
+    .nav-tabs {
+      .active {
+        a, a:hover, a:focus, a:active {
+          color: $color_primary;
+          border-bottom-color: $color_primary; 
+        }
+      }
+    }
+  }
 }
 
 /* Course Content Page */
@@ -396,4 +407,40 @@ header.navbar {
       border-color: $color-primary;
     }
   }
+}
+
+.course-content-busy .busy {
+    border-color: transparentize($color_primary, .5);
+  &:before, &:after {
+    background: $color_primary;
+  }
+}
+
+#js-course-tree-ajax {
+
+  .lesson-title {
+      span {
+        color: $color_primary;
+    }
+  }
+
+  .list-group-item.module {
+    &:hover {
+      .icon {
+        color: $color_primary;
+      }
+    }
+  }
+
+  .icon-check.js-completed-icon {
+    color: $color_primary;
+  }
+
+   .busy {
+      border-color: transparentize($color_primary, .5);
+      
+      &:before, &:after {
+        background: $color_primary;
+      }
+    }
 }
