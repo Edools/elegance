@@ -246,7 +246,7 @@ $guideline-color: darken($border-color-base, 5%);
       &.active {
         @include box-shadow(1px 0 0 0 $list-group-active-bg);
 
-        border-left: 1px solid $list-group-active-bg !important;
+        border-left: 1px solid $list-group-active-bg;
 
         a,
         span,
