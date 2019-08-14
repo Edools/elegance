@@ -1,0 +1,16 @@
+<!-- placeholders -->
+<div class="webinar-page webinar">
+  <div class="container-fluid webinar-container">
+    <div class="row">
+      <div class="webinar-player-wrapper col-md-8">
+          <h3 class="title">{{ webinar.title }}</h3>
+          {% include 'webinar/player', webinar: webinar %}
+      </div>
+      <div class="webinar-chat-wrapper col-md-4">
+        <!--<h3>{{ Chat }}</h3>-->
+        {% include 'webinar/chat' %}
+      </div>
+    </div>
+  </div>
+</div>
+{{ stage.page_capture_js }}
