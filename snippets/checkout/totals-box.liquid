@@ -17,7 +17,8 @@
       </span>
     </div>
 
-    {% if order.kind == 'common' %}
+    {% assign payment_config = current_school | has_feature: 'product_payment_config' %}
+    {% if order.kind == 'common' and payment_config == false  %}
       <div class="col-xs-6">
         {{ 'checkout.total_amount_to_pay_in_installments' | t: installments: installments_limit }}
       </div>
