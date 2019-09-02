@@ -291,10 +291,10 @@ header.navbar {
 .list-group {
   .list-group-item {
     &.active {
-      background-color: $color-primary;
-      border-color: $color-primary;
+      background-color: $color-button-primary-bg;
+      border-color: $color-button-primary-bg;
 
-      @if (lightness($color-primary) > 50) {
+      @if (lightness($color-button-primary-bg) > 50) {
         color: #222;
       } @else {
         color: #fff;
@@ -359,27 +359,38 @@ header.navbar {
       .lesson {
         &.active {
           &.active {
-            box-shadow: 1px 0 0 0 $color-primary;
-            border-left: 1px solid $color-primary;
+            box-shadow: 1px 0 0 0 $color-button-primary-bg;
+            border-left: 1px solid $color-button-primary-bg;
           }
           .content-lesson {
             .class-info {
               .left {
                 i {
                   &:after {
-                    border-color: lighten($color-primary, 20%);
+                    border-color: lighten($color-button-primary-bg, 20%);
                   }
                 }
               }
               .lesson-title {
                 &:hover {
                   span {
-                    background-color: rgba($color-primary, .8);
+                    background-color: rgba($color-button-primary-bg, .8);
                   }
                 }
               }
             }
           }
+        }
+      }
+    }
+  }
+
+  .lesson-tabs {
+    .nav-tabs {
+      .active {
+        a, a:hover, a:focus, a:active {
+          color: $color-button-primary-bg;
+          border-color: $color-button-primary-bg; 
         }
       }
     }
@@ -392,8 +403,48 @@ header.navbar {
     &,
     &:focus,
     &:hover {
-      color: $color-primary;
-      border-color: $color-primary;
+      color: $color-button-primary-bg;
+      border-color: $color-button-primary-bg;
     }
   }
+}
+
+.course-content-busy .busy {
+    border-color: transparentize($color-button-primary-bg, .5);
+  &:before, &:after {
+    background: $color-button-primary-bg;
+  }
+}
+
+#js-course-tree-ajax {
+  .content-lesson {
+    &:not(.active) {
+      .lesson-title {
+          span {
+            color: $color-button-primary-bg;
+        }
+      }
+    }
+  }
+  
+
+  .list-group-item.module {
+    &:hover {
+      .icon {
+        color: $color-button-primary-bg;
+      }
+    }
+  }
+
+  .icon-check.js-completed-icon {
+    color: $color-button-primary-bg;
+  }
+
+   .busy {
+      border-color: transparentize($color-button-primary-bg, .5);
+      
+      &:before, &:after {
+        background: $color-button-primary-bg;
+      }
+    }
 }

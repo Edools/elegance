@@ -43,6 +43,7 @@
     .title {
       @include breakpoint(sm) {
         height: 65px;
+        overflow: hidden;
       }
 
       display: block;
