@@ -66,8 +66,8 @@
   {% if current_school | has_feature: 'recaptcha' %}
     <script defer src='https://www.google.com/recaptcha/api.js?onload=onLoadRecaptcha&render=explicit'></script>
   {% endif %}
-</head>
 
+</head>
 <body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% elsif current_path == '/chat' %}chat-page{% endif %}">
 <div class="content-wrapper">
   {% include 'accessibility-menu' %}
