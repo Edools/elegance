@@ -1,17 +1,17 @@
 .webinar-chat-wrapper {
-  min-height: 580px;
+  min-height: 685px;
 }
 
 div.deadpool-chat {
-  min-height: 580px;
+  min-height: 685px;
   background-color: #efefef;
 }
 
 .chat-message-list {
   overflow-x: hidden;
   overflow-y: auto;
-  min-height: 530px;
-  max-height: 600px;
+  min-height: 685px;
+  max-height: 685px;
   height: 100%;
 
   .message-item {
@@ -35,6 +35,11 @@ div.deadpool-chat {
         white-space: nowrap;
         font-weight: 400;
         line-height: normal;
+      }
+
+      i {
+        font-weight: 500;
+        font-size: 16px;
       }
 
       div.message-timestamp {

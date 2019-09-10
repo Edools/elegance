@@ -8,3 +8,16 @@
 .webinar-player-wrapper {
   padding-bottom: 100px;
 }
+
+.watching-count {
+  float: right;
+  padding: 15px 0 0 0;
+  font-size: 22px;
+  line-height: 1;
+}
+
+video {
+  box-sizing: border-box;
+  max-height: 100%;
+  width: 100%;
+}
