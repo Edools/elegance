@@ -1,3 +1,14 @@
-<div>
-  CHAT BOX
+<div class="deadpool-chat" data-jwt={{ jwt }} data-chat-room={{ chat_room }} >
+  <div class="chat-message-list">
+    <!-- Message items go here -->
+  </div>
+
+  <div class="chat-message-input">
+    <form id="message">
+      <textarea type="text" class="message-body" name="message-body" placeholder="Type your message..."></textarea>
+      <button type="submit" class="btn btn-primary btn-lg submit-message" name="submit-message">
+        <i class="icon-paper-plane"></i>
+      </button>
+    </form>
+  </div>
 </div>

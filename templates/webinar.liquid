@@ -1,17 +1,25 @@
 <link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet">
-<!-- placeholders -->
+
 <div class="webinar-page webinar">
-  <div class="container-fluid webinar-container pb-2">
+  <div class="container-fluid webinar-container">
     <div class="row">
-      <div class="webinar-player-wrapper col-md-offset-2 col-md-8">
+      <div class="col-md-12">
           <h3 class="title">{{ webinar.title }}</h3>
-          {% media_player media: webinar %}
       </div>
 
-      <!-- <div class="webinar-chat-wrapper col-md-4"> -->
-        <!--<h3>{{ Chat }}</h3>-->
-        <!-- {% include 'webinar/chat' %} -->
-      <!-- </div> -->
+      {% if webinar.is_ready == true %}
+        <div class="webinar-player-wrapper col-md-8">
+          {% media_player media: webinar %}
+        </div>
+
+        <div class="webinar-chat-wrapper col-md-4">
+          {% include 'webinar/chat', jwt: lead_jwt, chat_room: webinar.host_key %}
+        </div>
+      {% else %}
+        <div class="webinar-player-wrapper-off col-md-12">
+          {% media_player media: webinar %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>

@@ -100,6 +100,7 @@
       app.bindCheckout();
       app.bindForumFeed();
       app.bindCourseRating();
+      app.deadpoolChat.bindDeadpool();
       app.lessonList.init();
       app.chat.init();
       app.studentDoubts.init();

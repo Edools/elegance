@@ -1,0 +1,96 @@
+.webinar-chat-wrapper {
+  min-height: 685px;
+}
+
+div.deadpool-chat {
+  min-height: 685px;
+  background-color: #efefef;
+}
+
+.chat-message-list {
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 685px;
+  max-height: 685px;
+  height: 100%;
+
+  .message-item {
+    padding: 15px;
+    min-height: 60px;
+    height: auto;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: #fff;
+    border-radius: 0;
+
+    .message-header {
+      max-height: 40px;
+      height: 25px;
+
+      h5 {
+        overflow: hidden;
+        margin: 0;
+        width: 75%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 400;
+        line-height: normal;
+      }
+
+      i {
+        font-weight: 500;
+        font-size: 16px;
+      }
+
+      div.message-timestamp {
+        text-align: end;
+        font-size: 12px;
+      }
+
+      span.message-timestamp {
+        width: 20%;
+        white-space: nowrap;
+        line-height: normal;
+      }
+    }
+
+    div.message-body {
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+div.chat-message-input {
+  overflow: auto;
+
+  .message-body {
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    margin-top: 0;
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 1px;
+    padding-left: 2px;
+    width: 85%;
+    height: 50px;
+    border-width: 1px 1px 1px 1px;
+    border-style: solid;
+    border-radius: 0;
+    background: none;
+    background-color: #fff;
+    line-height: 15px;
+  }
+
+  .submit-message {
+    display: block;
+    float: right;
+    width: 15%;
+
+    i {
+      font-size: 27px;
+    }
+  }
+}
