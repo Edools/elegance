@@ -7,16 +7,19 @@
           <h3 class="title">{{ webinar.title }}</h3>
       </div>
 
-      <div class="webinar-player-wrapper col-md-8">
+      {% if webinar.is_ready == true %}
+        <div class="webinar-player-wrapper col-md-8">
           {% media_player media: webinar %}
-          <i data-toggle="tooltip" data-placement="bottom" title="Usuários online" class="watching-count icon-people">
-            0
-          </i>
-      </div>
+        </div>
 
-      <div class="webinar-chat-wrapper col-md-4">
-        {% include 'webinar/chat', jwt: lead_jwt, chat_room: webinar.host_key %}
-      </div>
+        <div class="webinar-chat-wrapper col-md-4">
+          {% include 'webinar/chat', jwt: lead_jwt, chat_room: webinar.host_key %}
+        </div>
+      {% else %}
+        <div class="webinar-player-wrapper-off col-md-12">
+          {% media_player media: webinar %}
+        </div>
+      {% endif %}
     </div>
   </div>
 </div>
