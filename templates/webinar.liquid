@@ -3,8 +3,9 @@
 <div class="webinar-page webinar">
   <div class="container-fluid webinar-container">
     <div class="row">
-      <div class="col-md-12">
-          <h3 class="title">{{ webinar.title }}</h3>
+      <div class="col-md-12 info">
+          <div class="title">{{ webinar.title }}</div>
+          <div class="info-date">{{ webinar.start_at }}</div>
       </div>
 
       {% if webinar.is_ready == true %}
