@@ -5,7 +5,7 @@
     <div class="row">
       <div class="info">
           <div class="title">{{ webinar.title }}</div>
-          <div class="info-date">{{ webinar.start_at }}</div>
+          <div class="info-date">{{ webinar.start_at | date: "%d-%m-%Y" }} de {{ webinar.start_at | date: "%H:%M" }}</div>
       </div>
 
       {% if webinar.is_ready == true %}

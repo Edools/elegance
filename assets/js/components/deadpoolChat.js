@@ -70,6 +70,7 @@
     },
     renderNewMessage: function(message) {
       var date = new Date(message.date).toLocaleString();
+      var hour = moment(date).format("HH:mm");
 
       if (this.time_to_start < 0) {
         var $msg_html = $(`
@@ -79,7 +80,7 @@
                 ${ message.notification == true ? '<i class="icon-'+message.type+'"> Notificação</i>' : '<h5>'+message.user.name+'</h5>' }
               </div>
               <div class="col-md-3 message-timestamp">
-                <span class="message-timestamp">${date}</span>
+                <span class="message-timestamp">${hour}</span>
               </div>
             </div>
             <div class="col-md-12 message-body">
