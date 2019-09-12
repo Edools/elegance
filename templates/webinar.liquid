@@ -14,7 +14,7 @@
         </div>
 
         <div class="webinar-chat-wrapper col-md-4">
-          {% include 'webinar/chat', jwt: lead_jwt, chat_room: webinar.host_key %}
+          {% include 'webinar/chat', jwt: lead_jwt, chat_room: webinar.host_key, start_at: webinar.start_at %}
         </div>
       {% else %}
         <div class="webinar-player-wrapper-off col-md-12">
