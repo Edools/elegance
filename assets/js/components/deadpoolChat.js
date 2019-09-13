@@ -15,6 +15,7 @@
       this.$deadpool = $('.deadpool-chat');
       this.$jwt = this.$deadpool.data("jwt");
       this.$message_list = $('.chat-message-list');
+      this.$message_inputs = $('.message-inputs');
       this.$chat_room = this.$deadpool.data("chat-room");
       this.$is_before = this.$deadpool.data("is-before");
       this.$message_form = $('form#message');
@@ -64,6 +65,7 @@
         }
 
         app.deadpoolChat.renderNewMessage(app.deadpoolChat.buildNotification(notification));
+        this.$message_inputs.attr('disabled', 'disabled');
       }
     },
     renderNewMessage: function(message) {
