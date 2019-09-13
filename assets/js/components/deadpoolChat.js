@@ -16,13 +16,11 @@
       this.$jwt = this.$deadpool.data("jwt");
       this.$message_list = $('.chat-message-list');
       this.$chat_room = this.$deadpool.data("chat-room");
-      this.$start_at = moment(this.$deadpool.data("start-at"));
+      this.$is_before = this.$deadpool.data("is-before");
       this.$message_form = $('form#message');
       this.$message_input = this.$message_form.find('textarea[name=message-body]');
-
-      var time_to_start = moment.duration(moment().diff(this.$start_at)).asDays();
-
-      if (time_to_start > 0) {
+      
+      if (!this.$is_before) {
         if (this.$deadpool.length) {
           var that = this;
           loadAsset('Deadpool', src, function() {
@@ -72,12 +70,12 @@
       var date = new Date(message.date).toLocaleString();
       var hour = moment(date).format("HH:mm");
 
-      if (this.time_to_start > 0) {
+      if (this.$is_before) {
         var $msg_html = $(`
           <div class="row message-item">
             <div class="message-header">
               <div class="col-md-9">
-                ${ message.notification == true ? '<i class="icon-'+message.type+'"> Notificação</i>' : '<h5>'+message.user.name+'</h5>' }
+                ${ message.notification ? '<i class="icon-'+message.type+'"> Notificação</i>' : '<h5>'+message.user.name+'</h5>' }
               </div>
               <div class="col-md-3 message-timestamp">
                 <span class="message-timestamp">${hour}</span>
