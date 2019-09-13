@@ -1118,6 +1118,10 @@
     "hide_accessibility": "(Ocultar Acessibilidade)"
   },
   "webinar": {
+    "chat": {
+      "message": "Mensagem",
+      "write_here": "Escreva algo aqui e mande no chat..."
+    },
     "info_started": "Transmissão iniciou em {{ datetime | date: '%H:%M' }} de {{ datetime | date: '%d/%m/%Y' }}",
     "info_not_started": "Será transmitido em {{ datetime | date: '%d/%m/%Y' }} {{ datetime | date: '%H:%M' }}"
   },
