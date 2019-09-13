@@ -67,8 +67,7 @@
       }
     },
     renderNewMessage: function(message) {
-      var date = new Date(message.date).toLocaleString();
-      var hour = moment(date).format("HH:mm");
+      var hour = moment(message.date).format("HH:mm");
 
       if (this.$is_before) {
         var $msg_html = $(`
