@@ -20,9 +20,9 @@
       this.$message_form = $('form#message');
       this.$message_input = this.$message_form.find('textarea[name=message-body]');
 
-      var time_to_start = moment.duration(moment().diff(this.$start_at)).asMinutes();
+      var time_to_start = moment.duration(moment().diff(this.$start_at)).asDays();
 
-      if (time_to_start < 0) {
+      if (time_to_start > 0) {
         if (this.$deadpool.length) {
           var that = this;
           loadAsset('Deadpool', src, function() {
@@ -72,7 +72,7 @@
       var date = new Date(message.date).toLocaleString();
       var hour = moment(date).format("HH:mm");
 
-      if (this.time_to_start < 0) {
+      if (this.time_to_start > 0) {
         var $msg_html = $(`
           <div class="row message-item">
             <div class="message-header">
