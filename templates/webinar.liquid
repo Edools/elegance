@@ -6,7 +6,7 @@
       <div class="info">
         <div class="title">{{ webinar.title }}</div>
         <div class="info-date">{{ 'webinar.info_started' | t: datetime: webinar.start_at }}</div>
-        <div class="info-date">{{ 'webinar.info_not_started' | t: datetime: webinar.start_at }}</div>
+        {% comment %} <div class="info-date">{{ 'webinar.info_not_started' | t: datetime: webinar.start_at }}</div> {% endcomment %}
       </div>
 
       {% if webinar.is_ready == true %}
