@@ -4,8 +4,9 @@
   <div class="container-fluid webinar-container">
     <div class="row">
       <div class="info">
-          <div class="title">{{ webinar.title }}</div>
-          <div class="info-date">{{ webinar.start_at | date: "%d-%m-%Y" }} de {{ webinar.start_at | date: "%H:%M" }}</div>
+        <div class="title">{{ webinar.title }}</div>
+        <div class="info-date">{{ 'webinar.info_started' | t: datetime: webinar.start_at }}</div>
+        <div class="info-date">{{ 'webinar.info_not_started' | t: datetime: webinar.start_at }}</div>
       </div>
 
       {% if webinar.is_ready == true %}
