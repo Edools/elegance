@@ -1120,10 +1120,11 @@
   "webinar": {
     "chat": {
       "message": "Mensagem",
-      "write_here": "Escreva algo aqui e mande no chat..."
+      "write_here": "Digite sua mensagem aqui..."
     },
     "info_started": "Transmissão iniciou em {{ datetime | date: '%H:%M' }} de {{ datetime | date: '%d/%m/%Y' }}",
-    "info_not_started": "Será transmitido em {{ datetime | date: '%d/%m/%Y' }} {{ datetime | date: '%H:%M' }}"
+    "info_not_started": "Será transmitido em {{ datetime | date: '%d/%m/%Y' }} {{ datetime | date: '%H:%M' }}",
+    "watch_count": "{{ count }} usuários online"
   },
   "welcome_screen": {
     "go": "Ir para o Curso"

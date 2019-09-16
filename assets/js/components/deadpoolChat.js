@@ -65,7 +65,6 @@
         }
 
         app.deadpoolChat.renderNewMessage(app.deadpoolChat.buildNotification(notification));
-        this.$message_inputs.attr('disabled', 'disabled');
       }
     },
     renderNewMessage: function(message) {
@@ -110,6 +109,7 @@
           app.deadpoolChat.bindMessageEvents();
           app.deadpoolChat.bindPresenceEvent();
 
+          this.$message_inputs.removeAttr('disabled');
           app.deadpoolChat.renderNewMessage(app.deadpoolChat.buildNotification(notification));
         });
 
