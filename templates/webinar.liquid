@@ -3,17 +3,22 @@
 <div class="webinar-page webinar">
   <div class="container-fluid webinar-container">
     <div class="row">
-      <div class="col-md-12">
-          <h3 class="title">{{ webinar.title }}</h3>
+      <div class="info">
+        <div class="title">{{ webinar.title }}</div>
+        {% if webinar.is_before == true %}
+          <div class="info-date">{{ 'webinar.info_not_started' | t: datetime: webinar.start_at }}</div>
+        {% else %}
+          <div class="info-date">{{ 'webinar.info_started' | t: datetime: webinar.start_at }}</div>
+        {% endif %}
       </div>
 
       {% if webinar.is_ready == true %}
-        <div class="webinar-player-wrapper col-md-8">
+        <div id="webinar" class="webinar-player-wrapper col-md-8">
           {% media_player media: webinar %}
         </div>
 
         <div class="webinar-chat-wrapper col-md-4">
-          {% include 'webinar/chat', jwt: lead_jwt, chat_room: webinar.host_key %}
+          {% include 'webinar/chat', jwt: lead_jwt, chat_room: webinar.host_key, is_before: webinar.is_before %}
         </div>
       {% else %}
         <div class="webinar-player-wrapper-off col-md-12">

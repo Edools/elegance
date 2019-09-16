@@ -15,65 +15,87 @@
       this.$deadpool = $('.deadpool-chat');
       this.$jwt = this.$deadpool.data("jwt");
       this.$message_list = $('.chat-message-list');
+      this.$message_inputs = $('.message-inputs');
       this.$chat_room = this.$deadpool.data("chat-room");
+      this.$is_before = this.$deadpool.data("is-before");
       this.$message_form = $('form#message');
       this.$message_input = this.$message_form.find('textarea[name=message-body]');
+      
+      if (!this.$is_before) {
+        if (this.$deadpool.length) {
+          var that = this;
+          loadAsset('Deadpool', src, function() {
+            try {
+              deadpool.default.on(`connected`, () => {
+                app.deadpoolChat.joinRoom();
+              });
+  
+              deadpool.default.on(`connection_failed`, () => {
+                var notification = {
+                  "type": "close",
+                  "message_body": "Falha ao conectar com o chat!"
+                }
+  
+                app.deadpoolChat.renderNewMessage(app.deadpoolChat.buildNotification(notification));
+              });
+  
+              deadpool.default.on(`disconnected`, () => {
+                var notification = {
+                  "type": "exclamation",
+                  "message_body": "A conexão com o chat foi encerrada!"
+                }
+  
+                app.deadpoolChat.renderNewMessage(app.deadpoolChat.buildNotification(notification));
+              });
+  
+              deadpool.default.connect("wss://deadpool.herospark.com/chat-service", that.$jwt);
+            } catch (error) {
+                console.log(error);
+            }
+  
+            $(document).trigger('app:deadpool:connected');
+          });
+  
+          $(document).trigger('app:bind:deadpool');
+        }
+      } else {
+        var notification = {
+          "type": "exclamation",
+          "message_body": "Esse Webinar ainda não começou"
+        }
 
-      if (this.$deadpool.length) {
-        var that = this;
-        loadAsset('Deadpool', src, function() {
-          try {
-            deadpool.default.on(`connected`, () => {
-              app.deadpoolChat.joinRoom();
-            });
-
-            deadpool.default.on(`connection_failed`, () => {
-              var notification = {
-                "type": "close",
-                "message_body": "Falha ao conectar com o chat!"
-              }
-
-              app.deadpoolChat.renderNewMessage(app.deadpoolChat.buildNotification(notification));
-            });
-
-            deadpool.default.on(`disconnected`, () => {
-              var notification = {
-                "type": "exclamation",
-                "message_body": "A conexão com o chat foi encerrada!"
-              }
-
-              app.deadpoolChat.renderNewMessage(app.deadpoolChat.buildNotification(notification));
-            });
-
-            deadpool.default.connect("wss://deadpool.herospark.com/chat-service", that.$jwt);
-          } catch (error) {
-              console.log(error);
-          }
-
-          $(document).trigger('app:deadpool:connected');
-        });
-
-        $(document).trigger('app:bind:deadpool');
+        app.deadpoolChat.renderNewMessage(app.deadpoolChat.buildNotification(notification));
+        this.$message_inputs.attr('disabled', 'disabled');
       }
     },
     renderNewMessage: function(message) {
-      var date = new Date(message.date).toLocaleString();
+      var hour = moment(message.date).format("HH:mm");
 
-      var $msg_html = $(`
-        <div class="row message-item">
-          <div class="message-header">
-            <div class="col-md-9">
-              ${ message.notification == true ? '<i class="icon-'+message.type+'"> Notificação</i>' : '<h5>'+message.user.name+'</h5>' }
+      if (this.$is_before) {
+        var $msg_html = $(`
+          <div class="row message-item">
+            <div class="message-header">
+              <div class="col-md-9">
+                ${ message.notification ? '<i class="icon-'+message.type+'"> Notificação</i>' : '<h5>'+message.user.name+'</h5>' }
+              </div>
+              <div class="col-md-3 message-timestamp">
+                <span class="message-timestamp">${hour}</span>
+              </div>
             </div>
-            <div class="col-md-3 message-timestamp">
-              <span class="message-timestamp">${date}</span>
+            <div class="col-md-12 message-body">
+              <p>${message.message}</p>
             </div>
           </div>
-          <div class="col-md-12 message-body">
-            <p>${message.message}</p>
+        `)
+      } else {
+        var $msg_html = $(`
+          <div class="row message-item">
+            <div class="col-md-12 message-header">
+              <i class="icon-${message.type}"> ${message.message}</i>
+            </div>
           </div>
-        </div>
-      `)
+        `)
+      }
 
       this.$message_list.append($msg_html);
     },

@@ -1,1 +1,5 @@
 /* Liquid Js */
+$(window).on('load resize', function() { 
+    var videoHeight = $('#webinar').height();
+    $('#chat-message-list').css('height', videoHeight-100 + 'px');
+}); 
