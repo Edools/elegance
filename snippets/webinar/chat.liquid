@@ -6,7 +6,7 @@
   <div class="chat-message-input">
     <div id="message">
     <small>{{ 'webinar.chat.message' | t }}</small>
-      <form>
+      <form id="message">
         <textarea rows="1" type="text" class="message-inputs message-body" name="message-body" placeholder="{{ 'webinar.chat.write_here' | t }}"></textarea>
         <button type="button" class="btn btn-sm btn-link" name="emoji-message" disabled="disabled">
           <i class="icon-emotsmile"></i>
@@ -14,7 +14,7 @@
         <button type="submit" class="message-inputs btn btn-primary btn-sm submit-message" name="submit-message">
           <i class="icon-paper-plane"></i>
         </button>
-        <button type="button" class="btn btn-sm btn-link" name="options-message" disabled="disabled">
+        <button type="button" class="message-inputs btn btn-sm btn-link" name="options-message" disabled="disabled">
           <i class="icon-options-vertical"></i>
         </button>
       </form>

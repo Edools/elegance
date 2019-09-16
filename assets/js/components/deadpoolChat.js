@@ -71,12 +71,12 @@
     renderNewMessage: function(message) {
       var hour = moment(message.date).format("HH:mm");
 
-      if (this.$is_before) {
+      if (!this.$is_before && !message.notification) {
         var $msg_html = $(`
           <div class="row message-item">
             <div class="message-header">
               <div class="col-md-9">
-                ${ message.notification ? '<i class="icon-'+message.type+'"> Notificação</i>' : '<h5>'+message.user.name+'</h5>' }
+                <h5>${message.user.name}</h5>
               </div>
               <div class="col-md-3 message-timestamp">
                 <span class="message-timestamp">${hour}</span>
@@ -191,7 +191,6 @@
       var notification = {
         "notification": true,
         "type": options.type,
-        "date": new Date(),
         "message": options.message_body
       }
 
