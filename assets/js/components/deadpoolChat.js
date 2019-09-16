@@ -10,7 +10,7 @@
 
   app.deadpoolChat = {
     bindDeadpool: function () {
-      var src = "http://staging-cdn.eadbox.com/deadpooljs/dist.js";
+      var src = "https://staging-cdn.eadbox.com/deadpooljs/dist.js";
 
       this.$deadpool = $('.deadpool-chat');
       this.$jwt = this.$deadpool.data("jwt");
@@ -20,7 +20,7 @@
       this.$is_before = this.$deadpool.data("is-before");
       this.$message_form = $('form#message');
       this.$message_input = this.$message_form.find('textarea[name=message-body]');
-      
+
       if (!this.$is_before) {
         if (this.$deadpool.length) {
           var that = this;
@@ -29,33 +29,33 @@
               deadpool.default.on(`connected`, () => {
                 app.deadpoolChat.joinRoom();
               });
-  
+
               deadpool.default.on(`connection_failed`, () => {
                 var notification = {
                   "type": "close",
                   "message_body": "Falha ao conectar com o chat!"
                 }
-  
+
                 app.deadpoolChat.renderNewMessage(app.deadpoolChat.buildNotification(notification));
               });
-  
+
               deadpool.default.on(`disconnected`, () => {
                 var notification = {
                   "type": "exclamation",
                   "message_body": "A conexão com o chat foi encerrada!"
                 }
-  
+
                 app.deadpoolChat.renderNewMessage(app.deadpoolChat.buildNotification(notification));
               });
-  
+
               deadpool.default.connect("wss://deadpool.herospark.com/chat-service", that.$jwt);
             } catch (error) {
                 console.log(error);
             }
-  
+
             $(document).trigger('app:deadpool:connected');
           });
-  
+
           $(document).trigger('app:bind:deadpool');
         }
       } else {
