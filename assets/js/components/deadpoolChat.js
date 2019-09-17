@@ -178,7 +178,7 @@
       // Binding the other events
       deadpool.default.on(`presence`, presenceList => {
         // `presenceList` is an array of users, use this to track who is online
-        $('.watching-count').text(' '+presenceList.length);
+        $('#watch-number').text(' '+presenceList.length);
       });
     },
     submitMessage: function() {

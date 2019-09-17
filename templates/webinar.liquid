@@ -15,7 +15,7 @@
       <div id="webinar-player" class="webinar-player-wrapper col-md-8">
         {% media_player media: webinar %}
         <div class="watching-count">
-          {{ 'webinar.watch_count' | t: count: 0 }}
+          <span id="watch-number">2</span>{{ 'webinar.watch_count' | t }}
         </div>
       </div>
 
