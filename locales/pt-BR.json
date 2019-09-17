@@ -294,6 +294,7 @@
     "sections": {
       "title": "Seções",
       "empty": "Ainda não há seções aqui.",
+      "recent" : " Tópicos recentes: ",
       "topics_count": {
         "zero": "Não há nenhum tópico",
         "one": "1 tópico",
