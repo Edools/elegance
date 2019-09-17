@@ -12,19 +12,16 @@
         {% endif %}
       </div>
 
-      {% if webinar.is_ready == true %}
-        <div id="webinar" class="webinar-player-wrapper col-md-8">
-          {% media_player media: webinar %}
+      <div id="webinar-player" class="webinar-player-wrapper col-md-8">
+        {% media_player media: webinar %}
+        <div class="watching-count">
+          <span id="watch-number">2</span>{{ 'webinar.watch_count' | t }}
         </div>
+      </div>
 
-        <div class="webinar-chat-wrapper col-md-4">
-          {% include 'webinar/chat', jwt: lead_jwt, chat_room: webinar.host_key, is_before: webinar.is_before %}
-        </div>
-      {% else %}
-        <div class="webinar-player-wrapper-off col-md-12">
-          {% media_player media: webinar %}
-        </div>
-      {% endif %}
+      <div class="webinar-chat-wrapper col-md-4">
+        {% include 'webinar/chat', jwt: lead_jwt, chat_room: webinar.host_key, is_before: webinar.is_before %}
+      </div>
     </div>
   </div>
 </div>

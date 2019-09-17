@@ -65,7 +65,6 @@
         }
 
         app.deadpoolChat.renderNewMessage(app.deadpoolChat.buildNotification(notification));
-        this.$message_inputs.attr('disabled', 'disabled');
       }
     },
     renderNewMessage: function(message) {
@@ -110,6 +109,7 @@
           app.deadpoolChat.bindMessageEvents();
           app.deadpoolChat.bindPresenceEvent();
 
+          this.$message_inputs.removeAttr('disabled');
           app.deadpoolChat.renderNewMessage(app.deadpoolChat.buildNotification(notification));
         });
 
@@ -178,7 +178,7 @@
       // Binding the other events
       deadpool.default.on(`presence`, presenceList => {
         // `presenceList` is an array of users, use this to track who is online
-        $('.watching-count').text(' '+presenceList.length);
+        $('#watch-number').text(' '+presenceList.length);
       });
     },
     submitMessage: function() {

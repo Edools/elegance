@@ -8,6 +8,7 @@
 .webinar-player-wrapper {
   padding: 0;
   background: #fff;
+  box-shadow: 0 0 10px 0 rgba(38,38,38,.05);
 }
 
 .webinar-player-wrapper-off {
@@ -16,10 +17,19 @@
 }
 
 .watching-count {
-  float: right;
-  padding: 15px 0 0 0;
-  font-size: 22px;
-  line-height: 1;
+  display: flex;
+  float: left;
+  margin-left: 2rem;
+  height: 100px;
+  color: #797979;
+  font-size: 18px;
+  font-family: Muli;
+
+  align-items: center;
+
+  #watch-number {
+    padding: 0 5px;
+  }
 }
 
 video {
