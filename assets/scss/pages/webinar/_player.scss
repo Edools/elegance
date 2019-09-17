@@ -1,0 +1,39 @@
+.video-js .vjs-big-play-button {
+  top: 50% !important; // !important because of the load order of the CSS
+  left: 50% !important;
+  margin-top: -.8em !important;
+  margin-left: -1.5em !important;
+}
+
+.webinar-player-wrapper {
+  padding: 0;
+  background: #fff;
+  box-shadow: 0 0 10px 0 rgba(38,38,38,.05);
+}
+
+.webinar-player-wrapper-off {
+  padding-top: 180px;
+  padding-bottom: 200px;
+}
+
+.watching-count {
+  display: flex;
+  float: left;
+  margin-left: 2rem;
+  height: 100px;
+  color: #797979;
+  font-size: 18px;
+  font-family: Muli;
+
+  align-items: center;
+
+  #watch-number {
+    padding: 0 5px;
+  }
+}
+
+video {
+  box-sizing: border-box;
+  max-height: 100%;
+  width: 100%;
+}
