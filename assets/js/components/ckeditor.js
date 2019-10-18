@@ -23,21 +23,15 @@
     },
 
     buildConfiguration: function (ckeditorObj) {
-      var uploadImage = $(ckeditorObj).data('upload-image');
-      var uploadUrl = '/files/full_upload';
       var config = {
         language: 'pt-br',
-        skin: 'moono',
-        extraPlugins: 'uploadimage'
+        skin: 'moono'
       };
 
-      if (uploadImage) {
-        var params =  $.param({
-          school_id: $(ckeditorObj).data('upload-school-id'),
-          type: $(ckeditorObj).data('upload-type'),
-          id: $(ckeditorObj).data('upload-id')
-        })
+      if ($(ckeditorObj).data('upload-image') == true) {
+        var uploadUrl = '/files/full_upload';
 
+        config.extraPlugins = 'uploadimage';
         config.imageUploadUrl = uploadUrl;
         config.filebrowserImageUploadUrl = uploadUrl;
       }
@@ -56,7 +50,7 @@
           var $submitButton = $form.find('button[type="submit"]');
           var editor = CKEDITOR.instances[editorId];
 
-          app.ckeditor.buidNotifications(editor);
+          app.ckeditor.bindNotifications(editor);
 
           editor.on('change', function () {
             if (this.getData().length && !hasCaptcha) {
@@ -71,7 +65,7 @@
       $(document).trigger('app:bind:ckeditor_submit');
     },
 
-    buidNotifications: function (editor) {
+    bindNotifications: function (editor) {
       var cancelNotification = function (evt) {
         if (evt.data.notification.override !== true) {
           evt.cancel();
