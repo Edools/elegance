@@ -13,10 +13,10 @@
         "color_primary": "#4bbb83",
         "color_body_bg": "#f9f9f9",
         "color_body_text": "#585858",
-        "color_content_bg": "#F9F9F9",
+        "color_content_bg": "#f9f9f9",
         "color_border": "#dedede",
-        "color_navbar_bg": "#ffffff",
-        "color_navbar_links": "#222",
+        "color_navbar_bg": "#302929",
+        "color_navbar_links": "#222222",
         "color_button_primary_text": "#ffffff",
         "color_button_primary_bg": "#4bbb83",
         "color_button_secondary_text": "#585858",
@@ -80,30 +80,35 @@
             "address": true,
             "cnpj": true,
             "razao_social": true
-          }
+          },
+          "thumbnail": null
         },
         "home": {
           "header": {
             "title": "Seja Bem-Vindo",
             "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lectus, pretium quis lobortis sollicitudin, viverra eget lacus. Curabitur vitae hendrerit ex, id iaculis tellus",
             "cover_enable": true,
-            "cover_src": ""
+            "cover_src": "",
+            "cover_src_image": null
           },
           "topics": [
             {
               "title": "Assista onde preferir",
               "subtitle": "no seu computador, tablet ou celular",
-              "icon": "icon-screen-smartphone"
+              "icon": "icon-screen-smartphone",
+              "$$hashKey": "object:629"
             },
             {
               "title": "Certificados",
               "subtitle": "Você irá receber nosso certificado na conclusão",
-              "icon": "icon-graduation"
+              "icon": "icon-graduation",
+              "$$hashKey": "object:630"
             },
             {
               "title": "Materiais Extras",
               "subtitle": "Para complementar seu estudo além das video-aulas.",
-              "icon": "icon-docs"
+              "icon": "icon-docs",
+              "$$hashKey": "object:631"
             }
           ],
           "product_list_title": "<strong>Participe de nossos cursos</strong>, basta escolher e assistir",
@@ -120,6 +125,10 @@
           },
           "enable_categories": false,
           "categories": []
+        },
+        "injector": {
+          "head": null,
+          "body": null
         }
       }
     }
