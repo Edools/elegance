@@ -7,13 +7,9 @@
 
       if ($('.js-ckeditor').length) {
         loadAsset('window.CKEDITOR', src, function () {
-          var config = {
-            language: 'pt-br',
-            skin: 'bootstrapck'
-          };
-
           $('.js-ckeditor').each(function (index, ckeditorObj) {
             if (!$('#cke_' + ckeditorObj.id).length) {
+              var config = app.ckeditor.buildConfiguration(ckeditorObj);
               config.placeholder = ckeditorObj.placeholder; // TODO: fix it
 
               CKEDITOR.replace(ckeditorObj.id, config);
@@ -26,6 +22,29 @@
       }
     },
 
+    buildConfiguration: function (ckeditorObj) {
+      var uploadImage = $(ckeditorObj).data('upload-image');
+      var uploadUrl = '/files/full_upload';
+      var config = {
+        language: 'pt-br',
+        skin: 'moono',
+        extraPlugins: 'uploadimage'
+      };
+
+      if (uploadImage) {
+        var params =  $.param({
+          school_id: $(ckeditorObj).data('upload-school-id'),
+          type: $(ckeditorObj).data('upload-type'),
+          id: $(ckeditorObj).data('upload-id')
+        })
+
+        config.imageUploadUrl = uploadUrl;
+        config.filebrowserImageUploadUrl = uploadUrl;
+      }
+
+      return config;
+    },
+
     bindCkeditorSubmit: function () {
       $.each($('.js-ckeditor'), function (index, editor) {
         var $editor = $(editor);
@@ -35,8 +54,11 @@
 
         if ($form) {
           var $submitButton = $form.find('button[type="submit"]');
+          var editor = CKEDITOR.instances[editorId];
 
-          CKEDITOR.instances[editorId].on('change', function () {
+          app.ckeditor.buidNotifications(editor);
+
+          editor.on('change', function () {
             if (this.getData().length && !hasCaptcha) {
               $submitButton.attr('disabled', false);
             } else {
@@ -47,6 +69,34 @@
       });
 
       $(document).trigger('app:bind:ckeditor_submit');
+    },
+
+    buidNotifications: function (editor) {
+      var cancelNotification = function (evt) {
+        if (evt.data.notification.override !== true) {
+          evt.cancel();
+        }
+      }
+
+      editor.on('notificationShow', cancelNotification);
+      editor.on('notificationUpdate', cancelNotification);
+
+      editor.on( 'fileUploadRequest', function() {
+        editor.notification = new CKEDITOR.plugins.notification(editor, {
+          message: editor.lang.uploadwidget.uploadOne.replace( '({percentage}%)', '' ),
+          type: 'progress',
+          override: true
+        });
+
+        editor.notification.show();
+      });
+
+      editor.on( 'fileUploadResponse', function() {
+        editor.notification.update( {
+          message: editor.lang.uploadwidget.doneOne,
+          type: 'success'
+        });
+      });
     }
   }
 })();
