@@ -48,6 +48,7 @@
               </div>
 
               <div class="other-lessons">
+                {% comment %} CTODO: rever lógica do js para mostrar icones {% endcomment %}
                 {% include 'product/content-course', course: course, lesson_actions: true,
                 enrollment: enrollment, current_lesson_id: lesson.id, download_action: true %}
               </div>
@@ -74,22 +75,46 @@
             </div>
           {% endif %}
 
-          <div id="js-media-player"
-               class="media-player"
-               data-lesson-progress="{{ lesson_progress | to_json | replace: '"', '&quot;' | strip_newlines }}"
-               data-enable-video-watermark="{{ current_school | has_feature: 'video_watermark' }}"
-               data-lesson-id="{{ lesson.id }}">
-            {% if lesson.media %}
-              {% media_player lesson: lesson, trackeable: track_lesson,
-              enrollment: enrollment, lesson_progress: lesson_progress,
-              course_content: course_content, course: course %}
-            {% else if lesson.activity %}
-              {% activity lesson: lesson, enrollment: enrollment,
+          {% if lesson.media %}
+            {% if lesson.contents.size > 1 %}
+              {% for content in lesson.contents %}
+                {% if track_lesson and content.id == lesson.media.id %}
+                  {% assign trackeable_content = true %}
+                {% else %}
+                  {% assign trackeable_content = false %}
+                {% endif %}
+
+                <div id="content-{{content.id}}">
+                  <div id="js-media-player"
+                    class="media-player"
+                    data-lesson-progress="{{ lesson_progress | to_json | replace: '"', '&quot;' | strip_newlines }}"
+                    data-enable-video-watermark="{{ current_school | has_feature: 'video_watermark' }}"
+                    data-lesson-id="{{ lesson.id }}">
+
+                    {% media_player lesson: lesson, trackeable: trackeable_content,
+                      enrollment: enrollment, lesson_progress: lesson_progress,
+                      course_content: course_content, course: course, media: content %}
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              <div id="js-media-player"
+                class="media-player"
+                data-lesson-progress="{{ lesson_progress | to_json | replace: '"', '&quot;' | strip_newlines }}"
+                data-enable-video-watermark="{{ current_school | has_feature: 'video_watermark' }}"
+                data-lesson-id="{{ lesson.id }}">
+
+                {% media_player lesson: lesson, trackeable: track_lesson,
+                  enrollment: enrollment, lesson_progress: lesson_progress,
+                  course_content: course_content, course: course %}
+              </div>
+            {% endif %}
+          {% else if lesson.activity %}
+            {% activity lesson: lesson, enrollment: enrollment,
               lesson_progress: lesson_progress, answer: answer,
               attempts_remaining: attempts_remaining,
               course_content: course_content, course: course %}
-            {% endif %}
-          </div>
+          {% endif %}
 
           <div class="footer-navigation">
             {% include 'lesson/navigation' %}
