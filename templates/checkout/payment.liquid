@@ -53,6 +53,9 @@
                 {% endif %}
 
                 <ul class="nav nav-tabs" role="tablist">
+                  <input type="hidden" name="order[ingenico_session_token]" value="{{ ingenico_session_token }}">
+                  <input type="hidden" name="order[ingenico_temp_token]">
+
                   {% if show_cc %}
                     <li class="{% if payment_type == 'credit_card' %} active {% endif %}" role="presentation">
                       <a href="#credit-card" id="credit-card-tab" role="tab" data-toggle="tab"
@@ -277,6 +280,8 @@
   </div>
 </div>
 
+{% spark_pay_ingenico, gateway: gateway %}
+
 <script>
   $(document).on('ready page:load', function () {
     $('#card-form').card({
@@ -294,6 +299,14 @@
         expiry: '•• / ••',
         cvc: '•••'
       }
+    });
+
+    $('#card-form').on('submit', function(e){
+      e.preventDefault();
+
+      spark_pay_tokenize();
+
+      this.submit();
     });
   });
 </script>
