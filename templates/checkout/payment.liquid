@@ -53,9 +53,6 @@
                 {% endif %}
 
                 <ul class="nav nav-tabs" role="tablist">
-                  <input type="hidden" name="order[ingenico_session_token]" value="{{ ingenico_session_token }}">
-                  <input type="hidden" name="order[ingenico_temp_token]">
-
                   {% if show_cc %}
                     <li class="{% if payment_type == 'credit_card' %} active {% endif %}" role="presentation">
                       <a href="#credit-card" id="credit-card-tab" role="tab" data-toggle="tab"
@@ -93,6 +90,8 @@
 
                       {% form 'checkout/payment', id: card-form %}
                       <input type="hidden" name="order[payment_type]" value="credit_card">
+                      <input type="hidden" name="order[spark_pay_session_token]">
+                      <input type="hidden" name="order[spark_pay_temp_token]">
                       {% if form.errors %}
                         <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
                       {% endif %}
@@ -301,12 +300,20 @@
       }
     });
 
+    ingenico_input_token = $('input[name="order[spark_pay_temp_token]"]');
+
+    ingenico_input_token.on('change', function() {
+      $('#card-form').submit();
+    });
+
     $('#card-form').on('submit', function(e){
       e.preventDefault();
 
-      spark_pay_tokenize();
-
-      this.submit();
+      if('{{ gateway.gateway}}' == 'spark_pay' && ingenico_input_token.val() == '') {
+        spark_pay_tokenize();
+      } else {
+        this.submit();
+      }
     });
   });
 </script>
