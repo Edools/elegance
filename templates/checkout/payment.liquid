@@ -90,7 +90,7 @@
 
                       {% form 'checkout/payment', id: card-form %}
                       <input type="hidden" name="order[payment_type]" value="credit_card">
-                      <input type="hidden" name="order[spark_pay_token]">
+                      <input type="hidden" name="order[spark_pay_temp_token]">
                       {% if form.errors %}
                         <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
                       {% endif %}
@@ -299,9 +299,9 @@
       }
     });
 
-    spark_pay_session_token = $('input[name="order[spark_pay_token]"]');
+    spark_pay_token = $('input[name="order[spark_pay_temp_token]"]');
 
-    spark_pay_session_token.on('change', function() {
+    spark_pay_token.on('change', function() {
       $('#card-form').submit();
     });
 
@@ -310,8 +310,8 @@
 
       $('.overlay').fadeIn();
 
-      if('{{ gateway.gateway}}' == 'spark_pay' && spark_pay_session_token.val() == '') {
-        spark_pay_tokenize();
+      if('{{ gateway.gateway}}' == 'spark_pay' && spark_pay_token.val() == '') {
+        spark_pay_tokenize('{{ order.total }}');
       } else {
         this.submit();
       }
