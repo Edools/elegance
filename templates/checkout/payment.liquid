@@ -90,6 +90,7 @@
 
                       {% form 'checkout/payment', id: card-form %}
                       <input type="hidden" name="order[payment_type]" value="credit_card">
+                      <input type="hidden" name="order[spark_pay_temp_token]">
                       {% if form.errors %}
                         <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
                       {% endif %}
@@ -160,16 +161,16 @@
                           <label class="control-label">{{ 'checkout.payment.credit_card_installments' | t }}</label>
                           <select id="credit-card-installments" class="form-control"
                                   name="order[credit_card][installments]" required>
-                            {% if gateway.installments_forward_taxes %}
-                              {% assign translation_key = 'installment_amount_with_taxes' %}
-                            {% else %}
-                              {% assign translation_key = 'installment_amount' %}
-                            {% endif %}
 
                             {% for installment in installments %}
                               {% assign amount_in_money = installment.amount | money %}
                               {% assign amount_with_taxes = installment.amount |
                               number_with_taxes: gateway, installment.value | money %}
+                              {% if gateway.installments_forward_taxes and amount_in_money != amount_with_taxes %}
+                                {% assign translation_key = 'installment_amount_with_taxes' %}
+                              {% else %}
+                                {% assign translation_key = 'installment_amount' %}
+                              {% endif %}
 
                               <option value="{{ installment.value }}">
                                 {{ 'checkout.payment.' | append: translation_key | t:
@@ -277,6 +278,8 @@
   </div>
 </div>
 
+{% spark_pay_ingenico, gateway: gateway %}
+
 <script>
   $(document).on('ready page:load', function () {
     $('#card-form').card({
@@ -294,6 +297,26 @@
         expiry: '•• / ••',
         cvc: '•••'
       }
+    });
+
+    spark_pay_token = $('input[name="order[spark_pay_temp_token]"]');
+
+    spark_pay_token.on('change', function() {
+      $('#card-form').submit();
+    });
+
+    $('#card-form').on('submit', function(e){
+      e.preventDefault();
+
+      $('.overlay').fadeIn();
+
+      if('{{ gateway.gateway}}' == 'spark_pay' && spark_pay_token.val() == '') {
+        spark_pay_tokenize('{{ order.total }}');
+      } else {
+        this.submit();
+      }
+
+      $('.overlay').fadeOut();
     });
   });
 </script>
