@@ -302,6 +302,10 @@
     spark_pay_token = $('input[name="order[spark_pay_temp_token]"]');
 
     spark_pay_token.on('change', function() {
+      $('input[name="order[credit_card][number]"]').val('');
+      $('input[name="order[credit_card][expiry]"]').val('');
+      $('input[name="order[credit_card][cvc]"]').val('');
+
       $('#card-form').submit();
     });
 
