@@ -41,6 +41,10 @@
           {% elsif coupon %}
             {{ coupon.name }}
           {% endif %}
+
+          <a class="btn btn-xs btn-danger" href="/express_checkout/remove_coupon?payment_option_id={{ payment_option.id }}" data-remote="true" data-disable-with="<i class='busy busy-xs'></i>">
+            <i class="icon-trash"></i>
+          </a>
         </span>
       </div>
     {% endif %}
