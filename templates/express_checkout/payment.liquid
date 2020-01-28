@@ -108,7 +108,7 @@
                          aria-labelledby="credit-card-tab">
 
                       {% form 'express_checkout/pay', id: card-form %}
-                        <input type="hidden" name="coupon_id">
+                        <input type="hidden" name="coupon_name">
                         <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
                         <input type="hidden" name="order[payment_type]" value="credit_card">
                         {% if form.errors %}
@@ -210,7 +210,7 @@
                         <span>{{ 'checkout.payment.boleto_warning' | t }}</span>
                       </div>
                       {% form 'express_checkout/pay' %}
-                        <input type="hidden" name="coupon_id">
+                        <input type="hidden" name="coupon_name">
                         <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
                         <input type="hidden" name="order[payment_type]" value="boleto">
 
@@ -242,7 +242,7 @@
                         <span>{{ 'checkout.payment.bank_transfer_warning' | t }}</span>
                       </div>
                       {% form 'express_checkout/pay' %}
-                        <input type="hidden" name="coupon_id">
+                        <input type="hidden" name="coupon_name">
                         <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
                         <input type="hidden" name="order[payment_type]" value="bank_transfer">
 
