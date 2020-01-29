@@ -1,21 +1,23 @@
-<div class="coupon-widget panel panel-default">
-  <div class="panel-heading">
-    <h4 class="panel-title">{{ 'checkout.coupon' | t }}</h4>
-  </div>
-  <div class="panel-body">
-    {% form 'check_coupon', remote: true %}
-      <div class="form-group simple">
-        <div class="input-group">
-          <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
-          <input type="text" name="coupon" class="form-control" placeholder="{{ 'checkout.coupon_code' | t }}" required>
+{% if payment_option.kind != 'subscription' %}
+  <div class="coupon-widget panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">{{ 'checkout.coupon' | t }}</h4>
+    </div>
+    <div class="panel-body">
+      {% form 'check_coupon', remote: true %}
+        <div class="form-group simple">
+          <div class="input-group">
+            <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
+            <input type="text" name="coupon" class="form-control" placeholder="{{ 'checkout.coupon_code' | t }}" required>
 
-          <span class="input-group-btn">
-            <button type="submit" class="btn btn-primary" data-disable-with="<i class='busy busy-xs'></i><span>{{ 'general.sending' | t }}...</span>">
-              Verificar
-            </button>
-          </span>
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-primary" data-disable-with="<i class='busy busy-xs'></i><span>{{ 'general.sending' | t }}...</span>">
+                Verificar
+              </button>
+            </span>
+          </div>
         </div>
-      </div>
-    {% endform %}
+      {% endform %}
+    </div>
   </div>
-</div>
+{% endif %}
