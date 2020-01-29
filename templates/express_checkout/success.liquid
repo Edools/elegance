@@ -37,7 +37,7 @@
         </div>
       {% endif %}
 
-      {% if gateway_credential.gateway == 'hotmart' and current_user == nil %}
+      {% if current_user == nil %}
         {{ 'checkout.success.user_set_password_email' | t }}
       {% else %}
         <a href="/enrollments" class='btn btn-primary btn-lg'>{{ 'checkout.success.go_to_enrollments' | t }}</a>
