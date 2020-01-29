@@ -276,3 +276,23 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).on('ready page:load', function () {
+    $('#card-form').card({
+      container: '.card-wrapper',
+      formSelectors: {
+        numberInput: 'input[name="order[credit_card][number]"]',
+        expiryInput: 'input[name="order[credit_card][expiry]"]',
+        cvcInput: 'input[name="order[credit_card][cvc]"]',
+        nameInput: 'input[name="order[credit_card][name]"]',
+      },
+      placeholders: {
+        number: '•••• •••• •••• ••••',
+        name: "{{ 'checkout.payment.credit_card_name' | t }}",
+        expiry: '•• / ••',
+        cvc: '•••'
+      }
+    });
+  });
+</script>
