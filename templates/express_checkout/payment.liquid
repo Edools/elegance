@@ -86,7 +86,7 @@
                       <div class="student-fields row">
                         <div class="form-group {% if form.errors.email %}has-error{% endif %} col-md-6">
                           <label class="control-label">{{ 'login.email' | t }}</label>
-                          <input type="email" name="user[email]" class="form-control" value="{{ params.user.email }}" required>
+                          <input type="email" id="user-email" name="user[email]" class="form-control" value="{{ params.user.email }}" required>
                         </div>
 
                         <div class="form-group {% if form.errors.cpf %}has-error{% endif %} col-md-6">
