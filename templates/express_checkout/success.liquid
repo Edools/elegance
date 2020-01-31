@@ -13,7 +13,7 @@
         <p>{{ 'checkout.success.subscription_info.' | append: payment_option.period | t: price: price }}</p>
       {% else %}
         {% unless payment.kind == 'free' %}
-          {% capture status %}{{ 'payment.status.' | append: payment.status | t }}{% endcapture %}
+          {% capture status %}{{ 'payment.status.' | append: order.status | t }}{% endcapture %}
           <p>{{ 'checkout.success.transaction_made_by' | t: gateway: gateway_credential.fullname }}</p>
           <p>{{ 'checkout.success.transaction_status_is' | t: status: status, gateway_reference: payment.uuid }}</p>
           <p>{{ 'checkout.success.transaction_questions' | t: gateway: gateway_credential.name }}</p>
