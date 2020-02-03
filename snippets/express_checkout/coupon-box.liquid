@@ -4,7 +4,7 @@
       <h4 class="panel-title">{{ 'checkout.coupon' | t }}</h4>
     </div>
     <div class="panel-body">
-      {% form 'check_coupon', remote: true %}
+      {% form 'check_coupon', id: check-coupon-form, remote: true %}
         <div class="form-group simple">
           <div class="input-group">
             <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
