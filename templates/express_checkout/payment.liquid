@@ -110,6 +110,7 @@
                       {% form 'express_checkout/pay', id: card-form %}
                         <input type="hidden" name="coupon_name">
                         <input type="hidden" name="order[src]" value="{{ params.src }}">
+                        <input type="hidden" name="order[xcod]" value="{{ params.xcod }}">
                         <input type="hidden" name="order[payment_type]" value="credit_card">
                         <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
                         {% if form.errors %}
@@ -212,6 +213,7 @@
                       {% form 'express_checkout/pay' %}
                         <input type="hidden" name="coupon_name">
                         <input type="hidden" name="order[src]" value="{{ params.src }}">
+                        <input type="hidden" name="order[xcod]" value="{{ params.src }}">
                         <input type="hidden" name="order[payment_type]" value="boleto">
                         <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
 
@@ -245,6 +247,7 @@
                       {% form 'express_checkout/pay' %}
                         <input type="hidden" name="coupon_name">
                         <input type="hidden" name="order[src]" value="{{ params.src }}">
+                        <input type="hidden" name="order[xcod]" value="{{ params.src }}">
                         <input type="hidden" name="order[payment_type]" value="bank_transfer">
                         <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
 
@@ -262,7 +265,7 @@
                         </div>
 
                         {{ student_fields }}
-                        {% comment %} {% include 'recaptcha', disable_button: true %} {% endcomment %}
+                        {% include 'recaptcha', disable_button: true %}
 
                         <div class="text-center">
                           <input type="submit" value="{{ 'checkout.payment.bank_transfer_pay' | t }}"
