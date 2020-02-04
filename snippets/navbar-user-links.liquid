@@ -29,6 +29,7 @@
   </a>
 </li>
 
+{% comment %}
 <li class="{% if mobile_class == true %}mobile{% endif %}">
   {% capture inbox_link_html %}
   <i class="icon-envelope-open"></i>
@@ -37,7 +38,9 @@
 
   {{ inbox_link_html | inbox_link }}
 </li>
+{% endcomment %}  
 
+{% comment %}
 {% if current_user.type == 'Student' %}
   <li class="{% if mobile_class == true %}mobile{% endif %}">
     <a href="/orders">
@@ -46,6 +49,7 @@
     </a>
   </li>
 {% endif %}
+{% endcomment %}
 
 <li class="{% if mobile_class == true %}mobile{% endif %}">
   {% capture logout_link_html %}

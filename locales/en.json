@@ -44,17 +44,6 @@
     "send_answers": "Send answers..."
   },
   "errors": {
-    "payment_type": {
-      "unavailable": "No payment methods available, please contact your school support."
-    },
-    "order": {
-      "totals_were_updated": "Totals were updated",
-      "contains_unpublished_products": "Unpublished products",
-      "contains_unavailable_coupons": "Unavailable coupons"
-    },
-    "institution": {
-      "blank": "Institution cannot be empty"
-    },
     "gateway_transaction": {
       "invalid_email": "The email used is not valid for this gateway",
       "unavailable_gateway": "The payment gateway is unavailable at the moment",
@@ -136,14 +125,13 @@
       "invalid": "E-mail not valid"
     },
     "password": {
-      "too_short": "Password too short (minimum {{ count }} characters",
-      "used": "You can't use an old password"
+      "too_short": "Password too short (minimum {{ count }} characters"
     },
     "password_confirmation": {
       "confirmation": "Incorrect Password Confirmation"
     },
     "organization_id": {
-      "not_found_user_email": "If the informed email has an account, we will send the password reset link"
+      "not_found_user_email": "No user was found with the e-mail informed"
     },
     "reset_password_token": {
       "invalid": "Invalid Token to create a new password"
@@ -154,12 +142,7 @@
       "can_not_apply_coupon": "It was not possible to apply your discount voucher. Make sure you type the characters correctly. If the error continues, please contact our support team to check if voucher is still valid",
       "limit_subscriptions": "It was not possible to add the item to your cart. You can only subscribe one item per purchase",
       "kind_invalid": "It was not possible to add the item to your cart. This item cannot be processed with the items already in cart. Finish your purchase and try again.",
-      "invalid_user_coupon" : "You don't have permission to use this coupon",
-      "limit_trial_purchases": "Could not add item to cart. You can only add one trial product per purchase.",
-      "exceeded_orders_limit": "You have reached the limit of new purchases!",
-      "clone_and_original": "This product can not be sold together",
-      "invalid_payment_config": "Could not add item to cart. You can not add products with different payment methods.",
-      "option_invalid": "Invalid payment option"
+      "invalid_user_coupon" : "You don't have permission to use this coupon"
     }
   },
   "navbar": {
@@ -208,14 +191,13 @@
     "email": "Email",
     "password_reset": "Password Reset",
     "reset": "Reset",
-    "successfully_sent": "If the informed email has an account, we will send the password reset link"
+    "successfully_sent": "Done. Now we sent you an e-mail with instructions to reset your password."
   },
   "password_reset": {
     "password_reset": "Password Reset",
     "reset": "Reset",
     "password": "New Password",
-    "password_confirmation": "Confirm New Password",
-    "strong": "Your password must contain lowercase letters, uppercase letters, numbers, and special characters."
+    "password_confirmation": "Confirm New Password"
   },
   "accept_invitation": {
     "choose_password": "Choose your Password",
@@ -425,10 +407,6 @@
       "credit": {
         "unitary": "{{ price }} Credits"
       }
-    },
-    "payemnt_methods": {
-      "credit_card": "credit card",
-      "boleto": "boleto"
     }
   },
   "checkout": {
@@ -602,8 +580,6 @@
   "lesson": {
     "release_at": "Scheduled for",
     "release_after": "Scheduled for",
-    "lock_at": "Locked",
-    "lock_after": "Locked",
     "completed": "Completed Lessons",
     "started": "Started Lessons",
     "total": "Total Lessons",
@@ -775,7 +751,7 @@
     "filter_by_product" : "Filter by product"
   },
   "footer": {
-    "contact_us" : "Get in touch",
+    "contact_us" : "<span class=\"underlined\">Get in touch</span>",
     "plataform_by": "Online Education platform by &nbsp"
   },
   "terms_of_use": {

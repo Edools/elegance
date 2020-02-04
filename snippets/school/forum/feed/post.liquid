@@ -1,22 +1,18 @@
 <div id="js-post-item-{{ object.id }}" class="post row js-post">
-  <div class="col-md-3">
-    <div class="post-information post-comment"> 
-      <div class="user">
-        <div class="author-name">
-          {{ object.user | fullname }}
-        </div>
-        <div class="user-image">
-          {% assign avatar_alt = object.user | fullname %}
-          {% image, src: object.user.cover_image_url, alt: avatar_alt %}
-        </div>
-        </div>
+  <div class="col-md-4">
+    <div class="post-user">
+      <div class="avatar">
+        {% assign avatar_alt = object.user | fullname %}
+        {% image, src: object.user.cover_image_url, alt: avatar_alt %}
       </div>
+
+      <div class="author-name">{{ object.user | fullname }}</div>
+
+      <div class="date">{{ object.created_at | time_ago_in_words }}</div>
+    </div>
   </div>
 
   <div class="col-md-8 well">
-    <div class="date">
-      {{ object.created_at | time_ago_in_words }}
-    </div>
     <div class="body">
       {{ object.body }}
     </div>

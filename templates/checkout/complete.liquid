@@ -3,7 +3,6 @@
 {% else %}
   {% assign required = 'required' %}
 {% endif %}
-
 {% assign has_cpf_validation = current_school | has_feature: 'cpf_validation' %}
 
 <div class="checkout-page checkout-complete-page page">
@@ -67,7 +66,8 @@
                           <div class="form-group {{ required }} {% if form.errors.cpf %}has-error{% endif %}">
                             <label class="control-label">{{ 'checkout.complete.cpf' | t }}</label>
                             <input type="text" id="user-cpf" ui-mask="999.999.999-99" name="user[cpf]"
-                                   value="{{ current_user.cpf }}" class="form-control" {% if has_cpf_validation %}data-validate-cpf="true"{% endif %} {{ required }}>
+                            {% if has_cpf_validation %}data-validate-cpf="true"{% endif %}
+                                   value="{{ current_user.cpf }}" class="form-control" {{ required }}>
                           </div>
                         </div>
                         <div class="col-md-6">
@@ -149,10 +149,13 @@
                           </div>
                         </div>
                         <div class="col-md-6">
+                                    {% assign has_cep_service = current_school | has_feature: 'cep_service' %}
+
                           <div class="form-group {{ required }} {% if form.errors.address_zip_code %}has-error{% endif %}">
                             <label class="control-label">{{ 'checkout.complete.address_zip_code' | t }}</label>
                             <input type="text" id="user-cep" name="user[address_attributes][zip_code]"
-                                  {% if current_school | has_feature: 'cep_service' %}data-enable-cep-service="true"{% endif %}
+                                          {% if has_cep_service %}data-enable-cep-service="true"{% endif %}
+
                                    value="{{ address.zip_code }}" class="form-control" {{ required }}>
                           </div>
                         </div>

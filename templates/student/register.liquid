@@ -1,13 +1,10 @@
 <div class="register-page page">
   <div class="container page-container">
+  {% assign has_cpf_validation = current_school | has_feature: 'cpf_validation' %}
     <h1 class="title">{{ 'register.create_account' | t }}</h1>
     {% form 'register' %}
     {% if form.errors %}
       <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
-    {% endif %}
-
-    {% if current_school | has_feature: 'strong_password_policy' %}
-    <div class="alert alert-danger" style="display: none"><li>{{ 'password_reset.strong' | t }}</li></div>
     {% endif %}
 
     <div class="form-group">
@@ -16,14 +13,79 @@
     </div>
 
     <div class="form-group">
+      <input type="text" value="{{ user.last_name }}" autofocus="true" name="user[last_name]"
+             class="form-control input-lg" placeholder="{{ 'checkout.complete.last_name' | t }}" required>
+    </div>
+
+    <div class="form-group">
       <input type="email" value="{{ user.email }}" name="user[email]" class="form-control input-lg"
              placeholder="{{ 'register.email' | t }}" required>
     </div>
 
-    <div class="form-group signin-password">
-      {% assign has_feature_password = current_school | has_feature: 'strong_password_policy' %}
+    {% assign has_cep_service = current_school | has_feature: 'cep_service' %}
+    <div class="form-group">
+      <input type="text" name="user[cpf]" ui-mask="999.999.999-99" id="user-cpf" class="form-control input-lg"
+                  {% if has_cpf_validation %}data-validate-cpf="true"{% endif %}
+             placeholder="{{ 'checkout.complete.cpf' | t }}" required>
+    </div>
+    
+      <div class="form-group">
+      <input type="hidden" id="user[born_at]" name="user[born_at]"><div class="input-group date">
+        <input type="text" class="form-control datepicker register_born_at" placeholder="Data de nascimento" required>
+        <div class="input-group-addon">
+          <i class="icon-calendar"></i>
+        </div>
+      </div>
+      <p class="text-error" id="borntextvalidate"></p>
+    </div>
 
-      <input type="password" name="user[password]" class="form-control input-lg error {% if has_feature_password %}strong--password{% endif %}"
+    <div class="form-group">
+      <input type="text"  name="user[phone]" class="form-control input-lg"
+             placeholder="{{ 'checkout.complete.phone' | t }}" required>
+    </div>
+    
+    <div class="form-group">
+        <input type="text" name="user[address_attributes][zip_code]" class="form-control input-lg" id="user-cep"
+              {% if has_cep_service %}data-enable-cep-service="true"{% endif %}
+                placeholder="{{ 'checkout.complete.address_zip_code' | t }}" required>
+    </div>
+
+      <div class="form-group">
+      {% include "select-address", selected_state: address.state %}
+      </div>
+      
+       <div class="form-group">
+        <input type="text" name="user[address_attributes][city]" class="form-control input-lg"
+                placeholder="{{ 'checkout.complete.address_city' | t }}" required>
+    </div>
+    
+    
+       <div class="form-group">
+        <input type="text" name="user[address_attributes][district]" class="form-control input-lg"
+                placeholder="{{ 'checkout.complete.address_district' | t }}" required>
+    </div>
+    
+    
+    <div class="form-group">
+        <input type="text" name="user[address_attributes][street]" class="form-control input-lg"
+                placeholder="{{ 'checkout.complete.address_street' | t }}" required>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="user[address_attributes][number]" class="form-control input-lg"
+                placeholder="{{ 'checkout.complete.address_number' | t }}" required>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="user[address_attributes][complement]" class="form-control input-lg"
+                placeholder="{{ 'checkout.complete.address_complement' | t }}" required>
+    </div>
+
+
+
+
+    <div class="form-group signin-password">
+      <input type="password" name="user[password]" class="form-control input-lg error"
              placeholder="{{ 'register.password' | t }}" required>
     </div>
 
@@ -90,11 +152,9 @@
       {% endif %}
     {% endfor %}
 
-    {% include 'recaptcha_by_feature', disable_button: true, feature: 'registrations_with_recaptcha' %}
-
     <div class="form-actions">
       <input type="submit" value="{{ 'register.create_account' | t }}"
-             class="btn btn-primary btn-block btn-lg"  {% if has_recaptcha_by_feature %}disabled{% endif %} />
+             class="btn btn-primary btn-block btn-lg">
     </div>
     {% endform %}
   </div>

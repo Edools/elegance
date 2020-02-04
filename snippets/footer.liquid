@@ -3,7 +3,8 @@
     <div class="info">
       <div class="row">
         <div class="col-sm-6 col-md-6">
-          <div tabindex="0" class="info">
+          <div class="info">
+
             {% if settings.view.general.footer.logo %}
               <div class="logo">
                 {% image, src: settings.view.general.footer.logo, class: 'img-responsive' %}
@@ -14,17 +15,19 @@
           </div>
 
           {% if settings.view.general.footer.address and current_school.address %}
-            <address tabindex="0">{{ current_school.address }}</address>
+            <address>{{ current_school.address }}</address>
           {% endif %}
         </div>
 
         <div class="col-md-5 col-md-offset-1">
-          <div tabindex="-1" class="contact-us">
-              <h2 tabindex="0" id="accessibility-contact" class="underlined">{{ 'footer.contact_us' | t }}</h2>
+          <div class="contact-us">
+            <h2 class="title underlined">
+              {{ 'footer.contact_us' | t }}
+            </h2>
 
             {% if settings.view.general.footer.phone and current_school.phone %}
               <p>
-                <a aria-label="Número de Telefone: {{ current_school.phone }}" href="tel:{{ current_school.phone }}">
+                <a href="tel:{{ current_school.phone }}">
                   <i class="icon-phone"></i>
                   <span>{{ current_school.phone }}</span>
                 </a>
@@ -52,14 +55,14 @@
             <div class="company-info">
               {% if settings.view.general.footer.razao_social and current_school.company_name %}
                 <p>
-                  <span tabindex="0">{{ current_school.company_name }}</span>
+                  <span>{{ current_school.company_name }}</span>
                 </p>
               {% endif %}
 
               {% if settings.view.general.footer.cnpj and current_school.cnpj %}
                 <p>
                   <b>CNPJ: </b>
-                  <span tabindex="0">{{ current_school.cnpj }}</span>
+                  <span>{{ current_school.cnpj }}</span>
                 </p>
               {% endif %}
             </div>
@@ -67,9 +70,8 @@
         </div>
       </div>
     </div>
-    
-    {% assign has_copyright = current_school | has_feature: 'deactivate_copyright' %}
-    <div class="copyright {% if has_copyright == true %}hidden{% endif %}">
+
+    <div class="copyright">
       <div class="container">
         {{ 'footer.plataform_by' | t }}
         <a ng-click="fireAnalytics()" href="http://www.edools.com" class="brand scroller" target="blank"

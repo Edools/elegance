@@ -11,41 +11,13 @@
           <div class="wizard-content">
             <div class="payment-form">
               <div class="ed-tabs">
-                {% assign product_payment_option = order.items.first.payment_option %}
-
-                {% if product_payment_option and product_payment_option.payment_method != nil %}
-                  {% case product_payment_option.payment_method %}
-                    {% when 'boleto' %}
-                      {% assign show_boleto = true %}
-                      {% assign payment_type = 'boleto' %}
-                    {% else %}
-                      {% assign show_cc = true %}
-                      {% assign payment_type = 'credit_card' %}
-                  {% endcase %}
-                {% else %}
-                  {% assign payment_type = active_payment_type %}
-
-                  {% if order.kind == 'common' %}
-                    {% if gateway.common_payment_methods contains 'credit_card' %}
-                      {% assign show_cc = true %}
-                    {% endif %}
-
-                    {% if gateway.common_payment_methods contains 'boleto' %}
-                      {% assign show_boleto = true %}
-                    {% endif %}
-
-                    {% if gateway.common_payment_methods contains 'bank_transfer'%}
-                      {% assign show_bt = true %}
-                    {% endif %}
+                {% if order.kind == 'common' %}
+                  {% if gateway.common_payment_methods contains 'credit_card' %}{% assign show_cc = true %}{% endif %}
+                  {% if gateway.common_payment_methods contains 'boleto' %}{% assign show_boleto = true %}{% endif %}
+                  {% if gateway.common_payment_methods contains 'bank_transfer' %}{% assign show_bt = true %}{% endif %}
                   {% elsif order.kind == 'subscription' %}
-                    {% if gateway.subscription_payment_methods contains 'credit_card' %}
-                      {% assign show_cc = true %}
-                    {% endif %}
-
-                    {% if gateway.subscription_payment_methods contains 'boleto' %}
-                      {% assign show_boleto = true %}
-                    {% endif %}
-                  {% endif %}
+                  {% if gateway.subscription_payment_methods contains 'credit_card' %}{% assign show_cc = true %}{% endif %}
+                  {% if gateway.subscription_payment_methods contains 'boleto' %}{% assign show_boleto = true %}{% endif %}
                 {% endif %}
 
                 {% if trial_purchase %}
@@ -54,7 +26,7 @@
 
                 <ul class="nav nav-tabs" role="tablist">
                   {% if show_cc %}
-                    <li class="{% if payment_type == 'credit_card' %} active {% endif %}" role="presentation">
+                    <li class="{% if active_payment_type == 'credit_card' %} active {% endif %}" role="presentation">
                       <a href="#credit-card" id="credit-card-tab" role="tab" data-toggle="tab"
                          aria-controls="credit-card"
                          aria-expanded="false" data-toggle="pill">
@@ -63,7 +35,7 @@
                     </li>
                   {% endif %}
                   {% if show_boleto %}
-                    <li class="{% if payment_type == 'boleto' %} active {% endif %}" role="presentation">
+                    <li class="{% if active_payment_type == 'boleto' %}active{% endif %}" role="presentation">
                       <a href="#boleto" id="boleto-tab" role="tab" data-toggle="tab" aria-controls="boleto"
                          aria-expanded="false" data-toggle="pill">
                         {{ 'checkout.payment.boleto' | t }}
@@ -71,7 +43,7 @@
                     </li>
                   {% endif %}
                   {% if show_bt %}
-                    <li class="{% if payment_type == 'bank_transfer' %} active {% endif %}" role="presentation">
+                    <li class="{% if active_payment_type == 'bank_transfer' %}active{% endif %}" role="presentation">
                       <a href="#bank-transfer" id="bank-transfer-tab" role="tab" data-toggle="tab"
                          aria-controls="boleto"
                          aria-expanded="false" data-toggle="pill">
@@ -84,7 +56,7 @@
                 <div class="tab-content">
                   {% if show_cc %}
                     <div id="credit-card"
-                         class="credit-card tab-pane {% if payment_type == 'credit_card' %}active{% endif %}"
+                         class="credit-card tab-pane {% if active_payment_type == 'credit_card' %}active{% endif %}"
                          role="tabpanel"
                          aria-labelledby="credit-card-tab">
 
@@ -97,21 +69,12 @@
                       <div class="form-group card-wrapper"></div>
 
                       <div class="form-group">
-                        {% if credit_card.active %}
-                          <div class="alert alert-info">
-                            {{ 'checkout.payment.credit_card_warning' | t }}
-                          </div>
-                        {% endif %}
-
                         <label class="control-label">{{ 'checkout.payment.credit_card_number' | t }}</label>
                         <input id="card-number"
                                type="text"
                                name="order[credit_card][number]"
                                value="{{ credit_card.number }}"
                                class="form-control"
-                               {% if credit_card.active %}
-                                 disabled
-                               {% endif %}
                                required>
                       </div>
 
@@ -122,9 +85,6 @@
                                name="order[credit_card][name]"
                                value="{{ credit_card.name }}"
                                class="form-control"
-                               {% if credit_card.active %}
-                                 disabled
-                               {% endif %}
                                required>
                       </div>
 
@@ -136,9 +96,6 @@
                                  name="order[credit_card][expiry]"
                                  value="{{ credit_card.expiry }}"
                                  class="form-control"
-                                 {% if credit_card.active %}
-                                   disabled
-                                 {% endif %}
                                  required>
                         </div>
                         <div class="form-group col-sm-6">
@@ -148,9 +105,6 @@
                                  name="order[credit_card][cvc]"
                                  value="{{ credit_card.cvc }}"
                                  class="form-control"
-                                 {% if credit_card.active %}
-                                   disabled
-                                 {% endif %}
                                  required>
                         </div>
                       </div>
@@ -160,16 +114,16 @@
                           <label class="control-label">{{ 'checkout.payment.credit_card_installments' | t }}</label>
                           <select id="credit-card-installments" class="form-control"
                                   name="order[credit_card][installments]" required>
+                            {% if gateway.installments_forward_taxes %}
+                              {% assign translation_key = 'installment_amount_with_taxes' %}
+                            {% else %}
+                              {% assign translation_key = 'installment_amount' %}
+                            {% endif %}
 
                             {% for installment in installments %}
                               {% assign amount_in_money = installment.amount | money %}
                               {% assign amount_with_taxes = installment.amount |
                               number_with_taxes: gateway, installment.value | money %}
-                              {% if gateway.installments_forward_taxes and amount_in_money != amount_with_taxes %}
-                                {% assign translation_key = 'installment_amount_with_taxes' %}
-                              {% else %}
-                                {% assign translation_key = 'installment_amount' %}
-                              {% endif %}
 
                               <option value="{{ installment.value }}">
                                 {{ 'checkout.payment.' | append: translation_key | t:
@@ -182,19 +136,18 @@
                         </div>
                       {% endif %}
 
-                      {% unless credit_card.active %}
-                        {% include 'recaptcha', disable_button: true %}
-                      {% endunless %}
+                      {% include 'recaptcha', disable_button: true %}
 
                       <div class="text-center">
-                        <input type="submit" class="btn btn-primary btn-finalize" value="{{ 'checkout.payment.credit_card_pay' | t }}">
+                        <button type="submit"
+                                class="btn btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}</button>
                       </div>
                       {% endform %}
                     </div>
                   {% endif %}
                   {% if show_boleto %}
                     <div id="boleto"
-                         class="boleto tab-pane {% if payment_type == 'boleto' %}active{% endif %}"
+                         class="boleto tab-pane {% if active_payment_type == 'boleto' %}active{% endif %}"
                          role="tabpanel"
                          aria-labelledby="boleto-tab">
 
@@ -222,7 +175,7 @@
                   {% endif %}
                   {% if show_bt %}
                     <div id="bank-transfer"
-                         class="bank-transfer tab-pane payment-methods {% if payment_type == 'bank_transfer' %}active{% endif %}"
+                         class="bank-transfer tab-pane payment-methods {% if active_payment_type == 'bank_transfer' %}active{% endif %}"
                          role="tabpanel"
                          aria-labelledby="boleto-tab">
 
@@ -281,6 +234,7 @@
   $(document).on('ready page:load', function () {
     $('#card-form').card({
       container: '.card-wrapper',
+
       formSelectors: {
         numberInput: 'input[name="order[credit_card][number]"]',
         expiryInput: 'input[name="order[credit_card][expiry]"]',

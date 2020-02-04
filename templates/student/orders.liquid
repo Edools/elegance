@@ -1,7 +1,7 @@
 <div class="orders-page page">
   {% if orders_without_subscription.size > 0 %}
     <div id="orders-without-subscription" class="container">
-      <h2 id="accessibility-main-content-orders" tabindex='0' class="page-title">{{ 'pages.orders.my_orders' | t }}</h2>
+      <h2 class="page-title">{{ 'pages.orders.my_orders' | t }}</h2>
 
       <table class="order-table table table-bordered">
         <thead>
@@ -19,24 +19,24 @@
         <tbody>
         {% for order in orders_without_subscription %}
           <tr id="order-{{ order.id }}" class="order">
-            <td tabindex='0' class="column id">{{ order.id }}</td>
-            <td tabindex='0' class="column status">
+            <td class="column id">{{ order.id }}</td>
+            <td class="column status">
               {{ 'payment.status.' | append: order.status | t }}
             </td>
-            <td tabindex='0' class="column creation text-center">
+            <td class="column creation text-center">
               {{ order.last_ordered_date | default: order.created_at | date: "%d/%m/%Y" }}
             </td>
-            <td tabindex='0' class="column total text-right">
+            <td class="column total text-right">
               {{ order.amount_to_pay | money }}
             </td>
             <td class="column items text-center">
-              <a tabindex='0' class="btn btn-default btn-sm" onclick="$('#js-order-{{ order.id }}-items').toggleClass('hide')">
+              <a class="btn btn-default btn-sm" onclick="$('#js-order-{{ order.id }}-items').toggleClass('hide')">
                 <i class="icon-info"></i>
                 {{ 'pages.orders.show_order_itens' | t }}
               </a>
             </td>
             <td class="column items text-center">
-              <a  tabindex='0' class="btn btn-default btn-sm" href="{{ order | order_payments_path }}">
+              <a class="btn btn-default btn-sm" href="{{ order | order_payments_path }}">
                 <i class="icon-info"></i>
                 {{ 'pages.orders.payments' | t }}
               </a>
@@ -159,8 +159,7 @@
               {% endif %}
             </td>
 
-            {% assign statuses = "confirmed,no_wait_processing" | split: "," %}
-            {% if statuses contains order.status %}
+            {% if order.status == 'confirmed' %}
               <td id="order-{{ order.id }}-actions" class="column text-center">
                 <div class="subscription-actions">
                   {% if order.merchant_payment_method == 'credit_card' %}
@@ -184,7 +183,7 @@
                       </a>
                     {% endif %}
                   {% endif %}
-
+                <!-- botão removido por marcio
                   {% if order.subscription.status != 'canceled' and  order.subscription.status != 'ended' %}
                     <a href="{{ order | order_cancel_path }}"
                        class="btn btn-danger btn-block cancel-order"
@@ -193,6 +192,7 @@
                       {{ 'pages.orders.recurring.cancel' | t }}
                     </a>
                   {% endif %}
+                -->
                 </div>
               </td>
             {% endif %}

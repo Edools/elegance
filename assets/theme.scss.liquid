@@ -54,12 +54,8 @@ $product-header-background-image: "{{ settings.style.product.header_background_i
 
 /* General */
 
-#blockColorblindContent {
-  display: none;
-}
-
 html.turbolinks-progress-bar::before {
-  background-color: $color-primary;
+  background-color: $color-primary !important;
 }
 
 body {
@@ -147,14 +143,14 @@ a {
 
     &:hover {
       * {
-        color: lighten($color-footer-text, 45%);
+        color: lighten($color-footer-text, 45%) !important;
       }
     }
   }
 
   b {
     * {
-      color: lighten($color-footer-text, 15%);
+      color: lighten($color-footer-text, 15%) !important;
     }
   }
 
@@ -172,10 +168,10 @@ header.navbar {
 
   a,
   .dropdown a {
-    color: rgba($color-navabar-links, .6);
+    color: rgba($color-navabar-links, .6) !important;
 
     &:hover, &:focus {
-      color: $color-navabar-links;
+      color: $color-navabar-links !important;;
     }
   }
 
@@ -183,7 +179,6 @@ header.navbar {
     a {
       font-family: $type-navbar-family;
       font-size: $type-navbar-size;
-      color: rgba($color-navabar-links, .6);
     }
   }
 
@@ -236,8 +231,8 @@ header.navbar {
   &:active {
     &,
     &:hover {
-      background-color: darken($color-button-secondary-bg, 8%);
-      border-color: darken($color-button-secondary-bg, 8%);
+      background-color: darken($color-button-secondary-bg, 8%) !important;
+      border-color: darken($color-button-secondary-bg, 8%) !important;
     }
   }
 }
@@ -270,8 +265,8 @@ header.navbar {
   &:active {
     &,
     &:hover {
-      background-color: darken($color-button-primary-bg, 8%);
-      border-color: darken($color-button-primary-bg, 8%);
+      background-color: darken($color-button-primary-bg, 8%) !important;
+      border-color: darken($color-button-primary-bg, 8%) !important;
     }
   }
 }
@@ -291,10 +286,10 @@ header.navbar {
 .list-group {
   .list-group-item {
     &.active {
-      background-color: $color-button-primary-bg;
-      border-color: $color-button-primary-bg;
+      background-color: $color-primary;
+      border-color: $color-primary;
 
-      @if (lightness($color-button-primary-bg) > 50) {
+      @if (lightness($color-primary) > 50) {
         color: #222;
       } @else {
         color: #fff;
@@ -313,22 +308,22 @@ header.navbar {
     background-size: cover;
 
     * {
-      color: $home-header-text-color;
+      color: $home-header-text-color !important;
     }
   }
 
   .home-benefits {
     .media {
       .benefits-icon {
-        color: $home-benefits-icon-color;
+        color: $home-benefits-icon-color !important;
       }
 
       h2 {
-        color: $home-benefits-title-color;
+        color: $home-benefits-title-color !important;
       }
 
       p {
-        color: $home-benefits-text-color;
+        color: $home-benefits-text-color  !important;
       }
     }
   }
@@ -359,22 +354,22 @@ header.navbar {
       .lesson {
         &.active {
           &.active {
-            box-shadow: 1px 0 0 0 $color-button-primary-bg;
-            border-left: 1px solid $color-button-primary-bg;
+            box-shadow: 1px 0 0 0 $color-primary;
+            border-left: 1px solid $color-primary !important;
           }
           .content-lesson {
             .class-info {
               .left {
                 i {
                   &:after {
-                    border-color: lighten($color-button-primary-bg, 20%);
+                    border-color: lighten($color-primary, 20%);
                   }
                 }
               }
               .lesson-title {
                 &:hover {
                   span {
-                    background-color: rgba($color-button-primary-bg, .8);
+                    background-color: rgba($color-primary, .8);
                   }
                 }
               }
@@ -384,67 +379,6 @@ header.navbar {
       }
     }
   }
-
-  .lesson-tabs {
-    .nav-tabs {
-      .active {
-        a, a:hover, a:focus, a:active {
-          color: $color-button-primary-bg;
-          border-color: $color-button-primary-bg; 
-        }
-      }
-    }
-  }
 }
 
-/* Course Content Page */
-.course-container {
-  .title.active > a {
-    &,
-    &:focus,
-    &:hover {
-      color: $color-button-primary-bg;
-      border-color: $color-button-primary-bg;
-    }
-  }
-}
-
-.course-content-busy .busy {
-    border-color: transparentize($color-button-primary-bg, .5);
-  &:before, &:after {
-    background: $color-button-primary-bg;
-  }
-}
-
-#js-course-tree-ajax {
-  .content-lesson {
-    &:not(.active) {
-      .lesson-title {
-          span {
-            color: $color-button-primary-bg;
-        }
-      }
-    }
-  }
-  
-
-  .list-group-item.module {
-    &:hover {
-      .icon {
-        color: $color-button-primary-bg;
-      }
-    }
-  }
-
-  .icon-check.js-completed-icon {
-    color: $color-button-primary-bg;
-  }
-
-   .busy {
-      border-color: transparentize($color-button-primary-bg, .5);
-      
-      &:before, &:after {
-        background: $color-button-primary-bg;
-      }
-    }
-}
+.text-error { color: red; }

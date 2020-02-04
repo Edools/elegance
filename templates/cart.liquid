@@ -23,6 +23,7 @@
                     {% assign payment_option = item.payment_option %}
                     <li class="cart-product list-group-item" id="product-{{ item.product.id }}">
                       <div class="row">
+                        {{ '<i class="icon-trash"></i>' | remove_from_cart_link: item, 'pointer' }}
 
 
                         {% if item.product.logo %}
@@ -35,7 +36,7 @@
 
                         <div
                           class="col-xs-12 cart-subtitle {% if item.product.logo %}col-md-6{% else %}col-md-7{% endif %}">
-                          <h4 tabindex='0' class="product-title">
+                          <h4 class="product-title">
                             {{ item.product.title }}
                           </h4>
                           <p class="description">{{ item.product.subtitle }}</p>
@@ -46,7 +47,7 @@
                             <h6 class="text-muted small pull-right">{{ 'checkout.coupon' |t }} {{ item.coupon.name }}</h6>
                           {% endif %}
                         </div>
-                        <div tabindex="0" class="col-xs-12 cart-price {% if item.product.logo %}col-md-3{% else %}col-md-5{% endif %}">
+                        <div class="col-xs-12 cart-price {% if item.product.logo %}col-md-3{% else %}col-md-5{% endif %}">
                           {% if item.coupon %}
                             <span class="small">
                               {{ item.total | money_option_presentation: payment_option.kind, payment_option.period, 'full', 1 }}
@@ -73,7 +74,6 @@
                             </div>
                           {% endif %}
                         </div>
-                          {{ '<i aria-label="Retirar do Carrinho" class="icon-trash"></i>' | remove_from_cart_link: item, 'pointer' }}
                       </div>
                     </li>
                   {% endfor %}
@@ -168,3 +168,24 @@
     </div>
   </div>
 </div>
+
+<script>
+function getHashValue(key) {
+  var matches = location.hash.match(new RegExp(key+'=([^&]*)'));
+  return matches ? matches[1] : null;
+}
+
+// usage
+
+$( document ).ready(function () {
+var coupon = getHashValue('coupon');
+    if(coupon) 
+	{
+      window.location.href='https://ead.ricodomingues.com.br/cart/apply_coupon?coupon=' + coupon; 
+	console.log(coupon);
+	}
+})
+
+
+
+</script>

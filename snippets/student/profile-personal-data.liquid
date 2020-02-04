@@ -1,6 +1,5 @@
-{% assign has_cpf_validation = current_school | has_feature: 'cpf_validation' %}
-
 {% form 'profile' %}
+{% assign has_cpf_validation = current_school | has_feature: 'cpf_validation' %}
 <div class="panel panel-default personal-data-panel">
   <div class="panel-heading" role="tab">
     <h4 class="panel-title">
@@ -55,7 +54,8 @@
             <div class="form-group">
               <label class="control-label">{{ 'profile.cpf' | t }}</label>
               <input id="user-cpf" type="text" value="{{ user.cpf }}" ui-mask="999.999.999-99" name="user[cpf]"
-                     class="form-control" {% if has_cpf_validation %}data-validate-cpf="true"{% endif %}/>
+              {% if has_cpf_validation %}data-validate-cpf="true"{% endif %}
+                     class="form-control">
             </div>
           </div>
           <div class="col-sm-6">

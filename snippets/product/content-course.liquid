@@ -11,12 +11,10 @@
         data-course-content="{{ course_content | to_json | replace: '"', '&quot;'| strip_newlines }}"
         data-user-type="{{ current_user.type }}"
         data-lesson-actions="{{ lesson_actions }}"
-        data-download-action="{% if allow_course_content_download %}{{ download_action }}{% endif %}"
+        data-download-action="{{ download_action }}"
         data-current-lesson-id="{{ current_lesson_id }}"
         data-translation-release-at="{{ 'lesson.release_at' | t }}"
         data-translation-release-after="{{ 'lesson.release_after' | t }}"
-        data-translation-lock-at="{{ 'lesson.lock_at' | t }}"
-        data-translation-lock-after="{{ 'lesson.lock_after' | t }}"
         data-translation-course_content-views="{{ 'product.course_content.views' | t }}"
         data-api-key="{% if current_api_key %}{{current_api_key.credentials }}{% else %}{{ current_apps_credentials.course_content }}{% endif %}">
     </ul>

@@ -1,33 +1,8 @@
 <div class="school-forum-page page">
   <div class="container">
-
-  <div class="col col-md-12 col-lg-12">
-     <div class="page-actions">
-        <a href="/school/forums" class="btn btn-default left">
-          <i class="icon-arrow-left"></i>
-          <span>{{ 'general.back' | t }}</span>
-        </a>
-      </div>
-  </div>
-  
-  <div class="col col-md-8 col-lg-8">
     <h2 class="page-title">{{ forum.title }}</h2>
     <p class="page-subtitle">{{ forum.description }}</p>
-  </div>
-  <div class="col col-md-4 col-lg-4 vertical-flex-center">
-    <form class="search-form" accept-charset="UTF-8" method="get" action="/school/forums/{{ forum.id }}"
-          data-turbolinks-scroll="false">
-      <div class="input-group">
-        <span class="input-group-addon"><i class="icon-magnifier"></i></span>
-        <input type="text" class="form-control" name="title" placeholder="{{ 'forums.filter_by_title' | t }}"
-                value="{{ current_search.title }}">
-        <span class="input-group-btn">
-          <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
-        </span>
-      </div>
-    </form>
-  </div>
-  
+
     <div class="forum-sections">
       {% paginate sections by 10 sort { order: :asc } %}
       {% if sections.total_count == 0 and current_search.size == 0 %}
@@ -40,12 +15,17 @@
           <th class="first-header"></th>
           <th class="main-header">
             <span class="caption">{{ 'forums.section_title' | t }}</span>
-            
-          </th>
-          <th class="topic-header">
-           <span class="caption">{{ 'forums.last_topic_title' | t }}</span>
-            
-            
+            <form class="search-form" accept-charset="UTF-8" method="get" action="/school/forums/{{ forum.id }}"
+                  data-turbolinks-scroll="false">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="icon-magnifier"></i></span>
+                <input type="text" class="form-control" name="title" placeholder="{{ 'forums.filter_by_title' | t }}"
+                       value="{{ current_search.title }}">
+                <span class="input-group-btn">
+                  <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+                </span>
+              </div>
+            </form>
           </th>
           <th class="right-header">
             <div class="caption">{{ 'forums.topics_title' | t }}</div>
@@ -54,22 +34,22 @@
           <tbody>
           {% for section in sections %}
             <tr class="forum-item" id="section-{{ section.id }}">
-              <td class="vertical-center">
+              <td>
                 <div class="icon-container">
                   <i class="icon icon-bubbles"></i>
                 </div>
               </td>
               <td>
-                <div class="info section-info">
+                <div class="info">
                   <a class="title" href="{{ section | section_path }}">{{ section.title }}</a>
+                  <p class="description">{{ section.description }}</p>
 
                   {% paginate section.topics by 5 sort { order: :asc, updated_at: :desc } %}
                     {% if section.topics.size > 0 %}
-                      <p class="recent">{{ 'forums.sections.recent' | t }}</p>
                       <div id="section-{{ section.id }}-topics" class="section-topics">
                         {% for topic in section.topics %}
                           <a class="badge" href="{{ topic | topic_path: forum.id }}">
-                            <span class="topic-title">{{ topic.title }}{% if topic != section.topics.last %},{% else %}...{% endif %}</span>
+                            <span class="topic-title">{{ topic.title }}</span>
                           </a>
                         {% endfor %}
                       </div>
@@ -77,20 +57,7 @@
                   {% endpaginate %}
                 </div>
               </td>
-
               <td>
-                <div class="info">
-                {% if section.topics.first %}
-                  <p class="last-topic-title">{{ section.topics.first.title }}</p>
-                  <p class="last-topic-description">{{ section.topics.first.description }}</p>
-                  <p class="last-topic name-and-date">{{ section.topics.first.created_at | time_ago_in_words }}</p>
-                {% else %}  
-                  <p class="last-topic">{{ 'forums.sections.topics_count.zero' | t }}</p>
-                {% endif %}
-                </div>
-              </td>
-
-              <td class="vertical-center">
                 <div class="topics-count">
                   {{ section.topics_count }}
                 </div>

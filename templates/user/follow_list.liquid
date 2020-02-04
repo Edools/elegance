@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col-md-12 tab-content">
             <div id="follow-list" class="tab-pane active">
-              <h2 id="accessibility-main-content" tabindex='0'>{{ 'pages.profile.' | append: follow_page | append: '.title' | t }}</h2>
+              <h2>{{ 'pages.profile.' | append: follow_page | append: '.title' | t }}</h2>
 
               {% paginate follows by 9 %}
               <div id="js-follow-list" class="followed-list row">

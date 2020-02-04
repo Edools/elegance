@@ -1,33 +1,18 @@
-<div class="rating-form">
-  {% if enrollment.progress >= min_progress %}
-    <form id="rate-course-form" accept-charset="UTF-8" method="post" action="{{ course | rate_course_path: enrollment }}" data-remote="true">
-      <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+{% if enrollment.progress >= min_progress %}
+  <form id="rate-course-form" accept-charset="UTF-8" method="post" action="{{ course | rate_course_path: enrollment }}" data-remote="true">
+    <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
 
-      <div class="rating">
-          <input type="radio" id="star5" name="rating[points]" value="5" {% if rating.points == 5 %} checked {% endif %} /><label for="star5"></label>
-          <input type="radio" id="star4" name="rating[points]" value="4" {% if rating.points == 4 %} checked {% endif %} /><label for="star4"></label>
-          <input type="radio" id="star3" name="rating[points]" value="3" {% if rating.points == 3 %} checked {% endif %} /><label for="star3"></label>
-          <input type="radio" id="star2" name="rating[points]" value="2" {% if rating.points == 2 %} checked {% endif %} /><label for="star2"></label>
-          <input type="radio" id="star1" name="rating[points]" value="1" {% if rating.points == 1 %} checked {% endif %} /><label for="star1"></label>
-      </div>
+    <input id="js-points" type="number" name="rating[points]" value="{{ rating.points }}">
+    <textarea name="rating[note]" type="text"
+              id="rating-note"
+              class="form-control"
+              rows="4"
+              placeholder="Deixe um comentário se quiser" >{{ rating.note }}</textarea>
 
-      <textarea name="rating[note]" type="text"
-                id="rating-note"
-                class="form-control"
-                rows="4"
-                placeholder="Deixe um comentário se quiser" >{{ rating.note }}</textarea>
-
-      <div class="actions">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="submit" class="btn btn-primary" data-disable-with="{{ 'general.sending' | t }}...">Enviar</button>
-      </div>
-
-    </form>
-  {% else %}
-    <p>{{ 'courses.rating.blocked' | t: min_progress: min_progress}}</p>
-    <div class="actions">
-      <button type="button" class="btn btn-default" data-dismiss="modal">ok</button>
-    </div>
-  {% endif %}
-
-</div>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+    <button type="submit" class="btn btn-primary" data-disable-with="{{ 'general.sending' | t }}...">Enviar</button>
+  </form>
+{% else %}
+  {{ 'courses.rating.blocked' | t: min_progress: min_progress}}
+  <button type="button" class="btn btn-default" data-dismiss="modal">ok</button>
+{% endif %}

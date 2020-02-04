@@ -1,5 +1,6 @@
 <div class="enrollments-page page">
   <div class="container page-container">
+
     <div class="page-header">
       <a class="btn btn-default pull-left" href="/">
         <i class="icon-arrow-left"></i>
@@ -14,31 +15,7 @@
       {% endif %}
     </div>
 
-    {% assign user_badges = current_user | badges %}
-
-    {% if user_badges.size != 0 %}
-      <div class="badges-list">
-        <h2 tabindex='0' class="page-title">
-          {{ 'enrollment.my_badges' | t }}
-        </h2>
-      
-        <div class="row">
-          {% for badge in (user_badges) %}
-            <div class="col-md-3 col-sm-6">
-              <div class="user-badge thumbnail">
-                {% image, src: badge.image, lazyload: false, class: 'image' %}
-                <div class="caption">
-                  <p class="title">{{ badge.title }}</p>
-                  <p class="subtitle" role="readmore" data-collapsed-height="80">{{ badge.description }}</p>
-                </div>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    {% endif %}
-
-    <h2 tabindex='0' id="accessibility-main-content-enrollments" class="page-title">
+    <h2 class="page-title">
       {{ 'enrollment.my_courses' | t }}
     </h2>
 
@@ -53,6 +30,9 @@
       <div class="row">
         <div id="js-product-list">
           {% for enrollment in active_enrollments %}
+          {% if 
+          enrollment.school_product.library_resource.resource_id <> "18847" 
+          %}
             <div class="col-sm-6 col-md-4 active-enrollments">
               {% assign progress = enrollment | course_progress_card %}
 
@@ -64,22 +44,17 @@
               {% if enrollment.school_product.library_resource.resource_type == 'Course' %}
                 {% assign detail_path = enrollment | course_path %}
                 {% assign detail_label = 'enrollment.go_course' | t %}
-                {% assign icon = 'icon-camrecorder' %}
-              {% elsif enrollment.school_product.library_resource.resource_type == 'Path' and enrollment.school_product.path.progress_requirements != nil %}
-                {% assign detail_path = enrollment.id | path_path: enrollment.school_product.library_resource.resource_id %}
-                {% assign detail_label = 'enrollment.go_trail' | t %}
-                {% assign icon = 'icon-directions' %}
               {% elsif enrollment.school_product.library_resource.resource_type == 'Path' %}
                 {% assign detail_path = enrollment.id | path_path: enrollment.school_product.library_resource.resource_id %}
                 {% assign detail_label = 'enrollment.go_path' | t %}
-                {% assign icon = 'icon-camrecorder' %}
               {% endif %}
-
-              {% include 'course/course-card', detail_path: detail_path, detail_label: detail_label, title: enrollment.school_product.title,
-                logo: enrollment.school_product.logo, description: course.description, progress: progress,
-                available_time_message: available_time_message, total_max_attendance_message: total_max_attendance_message,
-                use_max_attendance_message: use_max_attendance_message, status_message: status_message, icon: icon %}
+             
+                {% include 'course/course-card', detail_path: detail_path, detail_label: detail_label, title: enrollment.school_product.title,
+                  logo: enrollment.school_product.logo, description: course.description, progress: progress,
+                  available_time_message: available_time_message, total_max_attendance_message: total_max_attendance_message,
+                  use_max_attendance_message: use_max_attendance_message, status_message: status_message %}
             </div>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -142,48 +117,5 @@
 
     </div>
 
-    <div class="expired-enrollments">
-      {% if expired_enrollments.size != 0 %}
-        <h2 class="title">
-          {{ 'enrollment.expired' | t }}
-        </h2>
-      {% endif %}
-
-      <div class="courses-list">
-        <div class="row">
-          {% for enrollment in expired_enrollments %}
-            <div class="col-sm-6 col-md-4">
-              <div class="course-card course-expired">
-                <div class="course-image">
-                  {% if enrollment.school_product.logo != null.image_url %}
-                    {% image, src: enrollment.school_product.logo, alt: enrollment.school_product.name %}
-                  {% else %}
-                    {% assign placeholder = 'missing-product-logo.png' | asset_url %}
-                    {% image, src: placeholder, alt: product.title %}
-                  {% endif %}
-                </div>
-
-                <div class="course-info">
-                  <div class="title">
-                    <div class="caption">{{ enrollment.school_product.title }}</div>
-                  </div>
-                  <div class="course-avaliability">
-                    <div class="status">
-                      <span class="alert alert-danger"
-                            title="{{ enrollment | status_message }}">
-                        <span>{{ enrollment | status_message }}</span>
-                        <i class="icon-info"></i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-
-    
   </div>
 </div>

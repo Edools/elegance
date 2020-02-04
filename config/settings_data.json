@@ -11,12 +11,12 @@
           "Courier New"
         ],
         "color_primary": "#4bbb83",
-        "color_body_bg": "#f9f9f9",
+        "color_body_bg": "#ffffff",
         "color_body_text": "#585858",
-        "color_content_bg": "#F9F9F9",
+        "color_content_bg": "#f9f9f9",
         "color_border": "#dedede",
-        "color_navbar_bg": "#ffffff",
-        "color_navbar_links": "#222",
+        "color_navbar_bg": "#00354f",
+        "color_navbar_links": "#ffffff",
         "color_button_primary_text": "#ffffff",
         "color_button_primary_bg": "#4bbb83",
         "color_button_secondary_text": "#585858",
@@ -43,8 +43,8 @@
         "type_enable_simple_line_icons": true,
         "type_enable_font_awesome": false,
         "home": {
-          "header_bg": "#41a875",
-          "header_text_color": "#ffffff",
+          "header_bg": "#ffffff",
+          "header_text_color": "#585858",
           "header_background_image": "",
           "benefits": {
             "color_icon": "#585858",
@@ -53,29 +53,24 @@
           }
         },
         "product": {
-          "header_bg": "#41a875",
-          "header_text_color": "#ffffff",
+          "header_bg": "#ffffff",
+          "header_text_color": "#585858",
           "header_background_image": "",
-          "footer_text": "Assista ao curso e aumente a performance da sua organização!"
+          "footer_text": "Estude com quem tem compromisso com o seu sucesso"
         }
       },
       "view": {
         "general": {
-          "accessibility": {
-            "enabled": false,
-            "navigation": true,
-            "contrast": true
-          },
-          "favicon": "",
+          "favicon": "https://edools-3-production.s3.amazonaws.com/org-6668%2Fschool-6787%2F6961c8de09288866c6c3a68763a2c100%2Ffavicon.ico",
           "navbar": {
-            "title": "Elegance Theme",
-            "logo": ""
+            "title": "",
+            "logo": "https://edools-3-production.s3.amazonaws.com/org-6668%2Fschool-6787%2F69ee643c00fadfae35eca5ea3a3d1434%2Flogo-rodape-grande.png"
           },
           "footer": {
-            "logo": "",
-            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lectus, pretium quis lobortis sollicitu",
-            "site": false,
-            "email": false,
+            "logo": "https://static-cdn.myedools.com/org-6526%2Fschool-6550%2F4fe2c56414f36068d11a6ec9c73118f1%2Flogo-rico-site.png",
+            "text": "(48) 3334.3529 / 3364.6934 - Horário de atendimento: de Seg. à Sex das 09h às 12h e das 13h às 17h.",
+            "site": true,
+            "email": true,
             "phone": true,
             "address": true,
             "cnpj": true,
@@ -84,42 +79,52 @@
         },
         "home": {
           "header": {
-            "title": "Seja Bem-Vindo",
-            "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lectus, pretium quis lobortis sollicitudin, viverra eget lacus. Curabitur vitae hendrerit ex, id iaculis tellus",
+            "title": "Rico Domingues Concursos EAD",
+            "subtitle": "O sucesso mais perto de você!",
             "cover_enable": true,
-            "cover_src": ""
+            "cover_src": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/hnZEWHBnrCM\" frameborder=\"0\" allowfullscreen></iframe>",
+            "cover_src_image": null
           },
           "topics": [
             {
               "title": "Assista onde preferir",
               "subtitle": "no seu computador, tablet ou celular",
-              "icon": "icon-screen-smartphone"
+              "icon": "icon-screen-smartphone",
+              "$$hashKey": "object:572"
             },
             {
-              "title": "Certificados",
-              "subtitle": "Você irá receber nosso certificado na conclusão",
-              "icon": "icon-graduation"
+              "title": "Cursos 100% focados",
+              "subtitle": "Os cursos do Rico Domingues são 100% focados na banca de cada edital",
+              "icon": "icon-graduation",
+              "$$hashKey": "object:573"
             },
             {
               "title": "Materiais Extras",
               "subtitle": "Para complementar seu estudo além das video-aulas.",
-              "icon": "icon-docs"
+              "icon": "icon-docs",
+              "$$hashKey": "object:574"
             }
           ],
-          "product_list_title": "<strong>Participe de nossos cursos</strong>, basta escolher e assistir",
+          "product_list_title": "<strong>Escolha um de nossos cursos</strong>",
           "footer": {
-            "title": "Donec sollicitudin molestie malesuada. Donec sollicitudin molestie malesuada.",
-            "text": "Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus.",
-            "social_twitter_link": true,
+            "title": "Rico Domingues Concursos EAD. Seu sucesso mais perto de você.",
+            "text": "",
+            "social_twitter_link": false,
             "social_facebook_link": true,
             "social_pinterest_link": false,
             "social_google_plus_link": false,
             "social_instagram_link": false,
-            "social_youtube_link": false,
+            "social_youtube_link": true,
             "social_linkedin_link": false
           },
-          "enable_categories": false,
-          "categories": []
+          "enable_categories": true,
+          "categories": [
+            {
+              "$$hashKey": "object:2014",
+              "slug": "destaques",
+              "order": "1"
+            }
+          ]
         }
       }
     }

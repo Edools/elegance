@@ -1,7 +1,7 @@
 <div class="enrollments-page page">
   <div class="container page-container">
     <div class="courses-list">
-      {% paginate courses by 6 sort { name: :asc } %}
+      {% paginate courses by 60 sort { id: :desc } %}
       <div class="row">
         <div id="js-course-list">
           {% for course in courses %}
@@ -10,7 +10,7 @@
               {% assign detail_label = 'enrollment.go_course' | t %}
 
               {% include 'course/course-card', detail_path: detail_path, detail_label: detail_label, title: course.name,
-                          logo: course.image_url, description: course.description %}
+                          logo: course.image_url %}
             </div>
           {% endfor %}
         </div>

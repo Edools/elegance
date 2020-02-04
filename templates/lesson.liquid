@@ -12,7 +12,7 @@
             </div>
 
             <div class="control-back">
-              <a class="btn btn-default" href="{{ enrollment | back_path: course.id }}">
+              <a class="btn btn-default" href="{{ enrollment | course_path:course.id }}">
                 <i class="icon-arrow-left"></i>
                 <span>{{ 'general.back' | t }}</span>
               </a>
@@ -23,6 +23,8 @@
             <div class="panel-heading">
               <h4 class="title">{{ course.name }}</h4>
             </div>
+
+<!--Mixpanel here-->
 
             <div class="panel-body">
               <div class="course-progress js-progress">
@@ -73,47 +75,41 @@
               {{ lesson.description }}
             </div>
           {% endif %}
-
-          {% if lesson.media %}
-            {% if lesson.contents.size > 1 %}
-              {% for content in lesson.contents %}
-                {% if track_lesson and content.id == lesson.media.id %}
-                  {% assign trackeable_content = true %}
-                {% else %}
-                  {% assign trackeable_content = false %}
-                {% endif %}
-
-                <div id="content-{{content.id}}">
-                  <div id="js-media-player"
-                    class="media-player"
-                    data-lesson-progress="{{ lesson_progress | to_json | replace: '"', '&quot;' | strip_newlines }}"
-                    data-enable-video-watermark="{{ current_school | has_feature: 'video_watermark' }}"
-                    data-lesson-id="{{ lesson.id }}">
-
-                    {% media_player lesson: lesson, trackeable: trackeable_content,
-                      enrollment: enrollment, lesson_progress: lesson_progress,
-                      course_content: course_content, course: course, media: content %}
-                  </div>
-                </div>
-              {% endfor %}
-            {% else %}
-              <div id="js-media-player"
-                class="media-player"
-                data-lesson-progress="{{ lesson_progress | to_json | replace: '"', '&quot;' | strip_newlines }}"
-                data-enable-video-watermark="{{ current_school | has_feature: 'video_watermark' }}"
-                data-lesson-id="{{ lesson.id }}">
-
-                {% media_player lesson: lesson, trackeable: track_lesson,
-                  enrollment: enrollment, lesson_progress: lesson_progress,
-                  course_content: course_content, course: course %}
-              </div>
-            {% endif %}
-          {% else if lesson.activity %}
-            {% activity lesson: lesson, enrollment: enrollment,
+          <div id="js-media-player"
+               class="media-player"
+               data-lesson-progress="{{ lesson_progress | to_json | replace: '"', '&quot;' | strip_newlines }}"
+               data-enable-video-watermark="{{ current_school | has_feature: 'video_watermark' }}"
+               data-lesson-id="{{ lesson.id }}">
+            {% if lesson.media %}
+              {% media_player lesson: lesson, trackeable: track_lesson,
+              enrollment: enrollment, lesson_progress: lesson_progress,
+              course_content: course_content, course: course %}
+            {% else if lesson.activity %}
+              {% activity lesson: lesson, enrollment: enrollment,
               lesson_progress: lesson_progress, answer: answer,
               attempts_remaining: attempts_remaining,
               course_content: course_content, course: course %}
-          {% endif %}
+            {% endif %}
+            
+            <div id="cpf" class="cpf-player"></div>
+            <style type="text/css" media="screen" id="cpf-style">
+            .cpf-player {
+              position:absolute;
+              top:5px;
+              left:5px;
+              z-index:99999;
+	            color:white;
+	            font-size: 12px;
+	            font-weight: bold;
+            }
+            .jw-display-icon-container {
+              pointer-events: inherit !important;
+            }
+            a[href^="http://flowplayer.org"] {
+              display: none !important;
+            }
+            </style>
+          </div>
 
           <div class="footer-navigation">
             {% include 'lesson/navigation' %}
@@ -157,9 +153,7 @@
             {% endif %}
             {% if section %}
               <li>
-                <a id="forum-section-tab" data-toggle="tab" href="#section">
-                  {{ 'forum.forum' | t }}
-                </a>
+                <a id="forum-section-tab" data-toggle="tab" href="#section">{{ section.title }}</a>
               </li>
             {% endif %}
           </ul>
@@ -190,7 +184,57 @@
             {% endif %}
 
             {% if section %}
-              {% include 'lesson/forum' %}
+              <div id="section" class="tab-pane fade in">
+                {% if current_user %}
+                  <div id="js-section-{{ section.id }}-new-topic" class="row">
+                    <div class="col col-sm-1">
+                      <div class="post-user">
+                        <div class="avatar">
+                          {% assign avatar_alt = current_user | fullname %}
+                          {% image, src: current_user.cover_image_url, alt: avatar_alt %}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-md-11">
+                      <form accept-charset="UTF-8" method="post" action="{{ section | topics_path }}" data-remote="true">
+                        <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
+                        <div class="input-group">
+                          <input type="text" class="form-control js-topic-title" name="topic[title]" id="topic-title-{{ topic.id }}" value="{{ topic.title }}" placeholder="{{ 'forums.new_topic_name' | t }}"required/>
+
+                          <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                          </span>
+                        </div>
+
+                        <div class="form-group">
+                          <textarea rows="3"
+                                    class="form-control js-topic-description"
+                                    id="topic-description-{{ topic.id }}"
+                                    name="topic[description]"
+                                    placeholder="{{ 'forums.new_topic_description' | t }}"
+                                    required>{{ topic.description }}</textarea>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                {% endif %}
+
+                {% paginate section.topics by 2 sort { order: :asc, updated_at: :desc } %}
+                  <div id="js-section-{{ section.id }}-topics-list" class="topics">
+                    {% include 'school/forum/feed/topics-list', topics: section.topics,
+                      section_id: section.id, forum_id: section.school_forum_id %}
+                  </div>
+
+                  {% if paginate.next.is_link %}
+                    <div class="text-center pagination">
+                        <a id="js-section-{{ section.id }}-topics-more" href="{{ section | topics_path: paginate.params }}" data-remote="true" data-reject-ids="[]">
+                          {{ 'general.load_more' | t }}
+                        </a>
+                    </div>
+                  {% endif %}
+                {% endpaginate %}
+              </div>
             {% endif %}
           </div>
         </div>
@@ -198,3 +242,53 @@
     </div>
   </div>
 </div>
+<script>
+
+var cpf = document.getElementById("school-header").getAttribute("data-user").split(",")[2].substr(9,11);
+function mascaraCpf(valor) {
+    return valor.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4");
+}
+document.getElementById("cpf").innerHTML = mascaraCpf(cpf);
+
+function mascaraNoIFrame() {
+    if(cpf === '949.551.239'){
+    var sambaPlayer = $($(document).find("div[data-host='Samba']" )[0]);
+    // console.log(sambaPlayer);
+    var sambaIFrameElement = sambaPlayer.find("iframe")[0];
+
+  
+    if(sambaIFrameElement){
+        var url = sambaIFrameElement.src;
+       
+       var iframe = $(sambaIFrameElement).clone();
+       // $(sambaIFrameElement).remove();
+       $(iframe).removeAttr('src');
+       $(iframe).attr('id','output');
+       sambaPlayer.append(iframe);
+       
+        $.getJSON('https://api.allorigins.ml/get?url=' + encodeURIComponent(url) + '&callback=?', function(data){
+            // $(sambaIFrameElement).remove();
+            var iFrameDoc = iframe[0].contentDocument || iframe[0].contentWindow.document;
+            iFrameDoc.write(data.contents);
+            iFrameDoc.close();
+            
+            var cpf = $('#cpf');
+            var cpfStyle = $('#cpf-style');
+            
+            $(iFrameDoc).find('#player').append(cpfStyle);
+            $(iFrameDoc).find('#player').append(cpf);
+            
+            console.log($(iFrameDoc).find('.fp-ui')[0]);
+        });
+    
+    }
+  
+  }
+}
+
+$(window).ready(function () {
+  // setTimeout(function() {
+    // mascaraNoIFrame();
+  // }, 1000)
+})
+</script>

@@ -21,10 +21,40 @@
       </div>
     </form>
   </div>
-  {% paginate courses by 10 %}
+  {% paginate courses by 30 sort { id: :desc }  %}
   <div class="courses-list">
     <div class="row">
       {% for course in courses %}
+      {% if 
+      course.id  != 18848 and 
+      course.id  != 20289 and 
+      course.id  != 23123 and 
+      course.id  != 23012 and 
+      course.id  != 23473 and 
+      course.id  != 23666 and 
+      course.id  != 24218 and 
+      course.id  != 24351 and 
+      course.id  != 25609 and 
+      course.id  != 17242 and 
+      course.id  != 17149 and 
+      course.id  != 26065 and 
+      course.id  != 26405 and 
+      course.id  != 27269 and 
+      course.id  != 27268 and
+      course.id  != 27831 and
+      course.id  != 28628 and
+      course.id  != 28629 and
+      course.id  != 28630 and 
+      course.id  != 28631 and 
+      course.id  != 28632 and
+      course.id  != 28633 and
+      course.id  != 28634 and
+      course.id  != 28636 and
+      course.id  != 29237 and
+      course.id  != 29804 and
+      course.id  != 30716 
+      %}
+      
         <div id="course-{{ course.id }}" class="col-sm-6 col-md-4 active-enrollments">
           {% assign progress = enrollment | course_progress_card: course %}
 
@@ -41,6 +71,7 @@
             available_time_message: available_time_message, total_max_attendance_message: total_max_attendance_message,
             use_max_attendance_message: use_max_attendance_message, status_message: status_message%}
         </div>
+      {% endif %}
       {% endfor %}
     </div>
   </div>

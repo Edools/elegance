@@ -7,7 +7,7 @@
           <span>{{ 'general.back' | t }}</span>
         </a>
       </div>
-
+    
       <div class="row">
         <div class="col-md-6">
           <div class="course-header-info">
@@ -19,6 +19,17 @@
               <p>{{ enrollment | use_max_attendance_message }}</p>
             </div>
 
+
+<script type="text/javascript">
+mixpanel.identify("data-user.id");
+mixpanel.people.set({
+    "$name": "data-user.name",
+    "$cpf": "data-user.cpf",
+    "$email": "data-user.email"
+});
+</script>
+            
+            
             {% if enrollment.available_until %}
               <span class="course-instructor">
               <span class="available-title">
@@ -51,7 +62,7 @@
             {% endif %}
           </div>
         </div>
-        <div class="col-md-6 text-right">
+        <div class="col-md-6">
           <div class="course-image">
             {% if course.image_url %}
               {% image, src: course.image_url, alt: course.name %}
@@ -62,8 +73,6 @@
           </div>
         </div>
       </div>
-
-      {% include_async 'course/dashboard', course_id: course.id, enrollment_id: enrollment.id %}
 
     </div>
   </div>
@@ -90,16 +99,6 @@
                 {{ 'course.complementary_material' | t }}
               </a>
             </li>
-
-            {% assign random_quiz_enabled = current_school | has_feature: 'random_quiz_statistics' %}
-            {% if random_quiz_enabled %}
-              <li class="title">
-                <a href="#course-statistics" data-toggle="tab">
-                  {{ 'path.random_quiz_statistics' | t }}
-                </a>
-              </li>
-            {% endif %}
-
           </ul>
 
           <div class="dashboards-body tab-content">
@@ -117,8 +116,8 @@
               {% include 'pinboard', messages: messages %}
             </div>
 
-            <div role="tabpanel" class="tab-pane" id="course-statistics">
-              {% include_async 'lesson/random_quiz_statistics', enrollment_id: enrollment.id %}
+            <div role="tabpanel" class="tab-pane" id="course-performance">
+              {% include 'course/performance/performance-index' content: enrollment %}
             </div>
           </div>
         </div>

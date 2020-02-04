@@ -31,4 +31,16 @@
       </div>
     </div>
   </div>
-</div>
+        
+        </div>
+        
+        <script>
+        //codigo abaixo, serve para trocar a src do embed e adicionar a url destino com a adicao do id e cpf do usuario.
+        
+        var $urlDestino = document.getElementsByTagName("iframe")[0].src;
+        var $id = document.getElementById("school-header").getAttribute("data-user").split(",")[0].substr(7);
+        var $cpf = document.getElementById("school-header").getAttribute("data-user").split(",")[2].substr(9,11);
+        $urlDestino += "?id=" + $id + "&cpf=" + $cpf;
+        document.getElementsByTagName("iframe")[0].src = $urlDestino;
+        </script>
+

@@ -1,12 +1,12 @@
 {% if path %}
-  {% paginate path.courses by 10 %}
+  {% paginate path.courses by 10 sort { id: :desc }  %}
 
   <div class="path-content">
     {% if current_search.name %}
       <p
         class="subtitle">{{ 'product.path.courses_filtered' | t: count: paginate.items, name: current_search.name }}</p>
     {% else %}
-      <p class="subtitle">{{ 'product.path.courses' | t: count: paginate.items }}</p>
+      <!--<p class="subtitle">{{ 'product.path.courses' | t: count: paginate.items }}</p>-->
     {% endif %}
 
     <div class="landing-modules">
@@ -28,6 +28,24 @@
       <div class="path-courses">
         <div class="row">
           {% for course in path.courses %}
+            {% if 
+            course.id  != 18848 and 
+            course.id  != 20289 and 
+            course.id  != 23123 and 
+            course.id  != 23012 and 
+            course.id  != 23473 and 
+            course.id  != 23666 and 
+            course.id  != 24218 and 
+            course.id  != 24351 and 
+            course.id  != 25609 and 
+            course.id  != 17242 and 
+            course.id  != 17149 and 
+            course.id  != 26065 and 
+            course.id  != 26405 and 
+            course.id  != 27269 and 
+            course.id  != 27268 
+            %}
+          
             <div class="col-sm-6">
               <div class="course-item">
                 <a href="{{ course | course_preview_path: product }}" class="course-link">
@@ -46,11 +64,12 @@
                         data-toggle="{% if course.name.size > 60 %}tooltip{% endif %}">
                       {{ course.name | truncate: 60 }}
                     </h4>
-                    <span class="subtitle">{{ course.description }}</span>
+                    <!--<span class="subtitle">{{ course.description }}</span>-->
                   </div>
                 </a>
               </div>
             </div>
+          {% endif %}
           {% endfor %}
         </div>
       </div>

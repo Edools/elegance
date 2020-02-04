@@ -17,22 +17,21 @@
       </span>
     </div>
 
-    {% assign payment_config = current_school | has_feature: 'product_payment_config' %}
-    {% if order.kind == 'common' and payment_config == false  %}
+    {% if order.kind == 'common' %}
       <div class="col-xs-6">
-        {{ 'checkout.total_amount_to_pay_in_installments' | t: installments: installments_limit }}
+        {{ 'checkout.total_amount_to_pay_in_installments' | t: installments: gateway.installments_limit }}
       </div>
 
       <div class="col-xs-6">
         <span class="pull-right text-right installment-price">
           {% if order.coupon %}
-            <s class="small">{{ order.total | divided_by: installments_limit | money }}</s><br>
+            <s class="small">{{ order.total | divided_by: gateway.installments_limit | money }}</s><br>
           {% endif %}
 
           {% if order %}
             <b id="js-order-installments">
               {{ order.amount_to_pay | number_with_taxes: gateway |
-                divided_by: installments_limit | money }}
+                divided_by: gateway.installments_limit | money }}
             </b>
           {% else %}
             -

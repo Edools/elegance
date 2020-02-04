@@ -4,9 +4,9 @@
     <div class="row">
       <div id="js-product-list">
         {% for product in products %}
-          <div class="col-sm-6 col-md-4">
-            {% include 'product/product-card', product: product, gateway: gateway %}
-          </div>
+            <div class="col-sm-6 col-md-4">
+              {% include 'product/product-card', product: product, gateway: gateway %}
+             </div>
         {% endfor %}
       </div>
     </div>

@@ -1,6 +1,6 @@
 <div class="certificates-page page">
   <div class="container page-container">
-    <h2 tabindex='0' id="accessibility-main-content-certificates" class="page-title">{{ 'enrollment.my_certificates' | t }}</h2>
+    <h2 class="page-title">{{ 'enrollment.my_certificates' | t }}</h2>
 
     {% if certificates.size > 0 %}
       <div class="certificates-list">
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="course-header">
-              <span tabindex='0' class="title"
+              <span class="title"
                     title="{{ product.title }}"
                     data-toggle="{% if product.title.size > 70 %}tooltip{% endif %}">
               {{ product.title | truncate: 70 }}

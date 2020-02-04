@@ -24,11 +24,6 @@
                    href="/enrollments/{{ enrollment.id }}/courses/{{ course.id }}/extra_contents/{{ content.id }}">
                   {{ content.title }}
                 </a>
-              {% elsif current_user.type == 'Collaborator' %}
-                <a class="title"
-                   href="/admin_view/courses/{{ course.id }}/extra_contents/{{ content.id }}">
-                  {{ content.title }}
-                </a>              
               {% else %}
                 <span class="title">{{ content.title }}</span>
               {% endif %}
