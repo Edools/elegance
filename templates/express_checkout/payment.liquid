@@ -109,8 +109,9 @@
 
                       {% form 'express_checkout/pay', id: card-form %}
                         <input type="hidden" name="coupon_name">
-                        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
+                        <input type="hidden" name="order[src]" value="{{ params.src }}">
                         <input type="hidden" name="order[payment_type]" value="credit_card">
+                        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
                         {% if form.errors %}
                           <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
                         {% endif %}
@@ -186,8 +187,7 @@
                         {{ student_fields }}
 
                         {% unless credit_card.active %}
-                          {% comment %} TODO: ATIVAR NOS FINALMENTES {% endcomment %}
-                          {% comment %} {% include 'recaptcha', disable_button: true %} {% endcomment %}
+                          {% include 'recaptcha', disable_button: true %}
                         {% endunless %}
 
                         <div class="text-center">
@@ -211,8 +211,9 @@
                       </div>
                       {% form 'express_checkout/pay' %}
                         <input type="hidden" name="coupon_name">
-                        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
+                        <input type="hidden" name="order[src]" value="{{ params.src }}">
                         <input type="hidden" name="order[payment_type]" value="boleto">
+                        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
 
                         {% if form.errors %}
                           <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
@@ -243,8 +244,9 @@
                       </div>
                       {% form 'express_checkout/pay' %}
                         <input type="hidden" name="coupon_name">
-                        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
+                        <input type="hidden" name="order[src]" value="{{ params.src }}">
                         <input type="hidden" name="order[payment_type]" value="bank_transfer">
+                        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
 
                         {% if form.errors %}
                           <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
