@@ -222,7 +222,7 @@
                         {% endif %}
 
                         {{ student_fields }}
-                        {% comment %} {% include 'recaptcha', disable_button: true %} {% endcomment %}
+                        {% include 'recaptcha', disable_button: true %}
 
                         <div class="text-center">
                           <input type="submit" value="{{ 'checkout.payment.boleto_pay' | t }}"

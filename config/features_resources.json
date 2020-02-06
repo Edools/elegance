@@ -1,0 +1,13 @@
+{
+  "express_checkout": {
+    "liquid": [
+      "templates/express_checkout/payment.liquid",
+      "templates/express_checkout/success.liquid",
+      "snippets/express_checkout/credit-card-installments.liquid",
+      "snippets/express_checkout/product-box.liquid",
+      "snippets/express_checkout/totals-box.liquid",
+      "snippets/express_checkout/coupon-box.liquid",
+      "snippets/express_checkout/payment-methods-box.liquid"
+    ]
+  }
+}
