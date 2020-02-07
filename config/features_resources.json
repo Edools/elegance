@@ -1,13 +1,11 @@
 {
-  "express_checkout": {
-    "liquid": [
-      "templates/express_checkout/payment.liquid",
-      "templates/express_checkout/success.liquid",
-      "snippets/express_checkout/credit-card-installments.liquid",
-      "snippets/express_checkout/product-box.liquid",
-      "snippets/express_checkout/totals-box.liquid",
-      "snippets/express_checkout/coupon-box.liquid",
-      "snippets/express_checkout/payment-methods-box.liquid"
-    ]
-  }
+  "express_checkout": [
+    { "key": "templates/express_checkout/payment.liquid", "variables": ["gateway", "payment_option", "product", "installments", "installments_limit"] },
+    { "key": "templates/express_checkout/success.liquid", "variables": ["trial_purchase", "order", "payment", "gateway_credential"] },
+    { "key": "snippets/express_checkout/credit-card-installments.liquid", "variables": ["gateway", "installments", "installments_limit"] },
+    { "key": "snippets/express_checkout/product-box.liquid", "variables": ["product"] },
+    { "key": "snippets/express_checkout/totals-box.liquid", "variables": ["coupon", "current_school", "gateway", "payment_option", "current_active_features", "installments_limit"] },
+    { "key": "snippets/express_checkout/coupon-box.liquid", "variables": ["payment_option"] },
+    { "key": "snippets/express_checkout/payment-methods-box.liquid", "variables": ["gateway", "payment_option"] }
+  ]
 }
