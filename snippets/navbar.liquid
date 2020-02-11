@@ -19,15 +19,12 @@
     <div class="collapse navbar-collapse" id="header-menu">
       <ul class="nav navbar-nav navbar-right">
           {% if current_user == nil or current_user.type == 'Student' %}
-            {% assign express_checkout = current_school | has_feature: 'express_checkout' %}
-            {% unless express_checkout %}
-              <li aria-label="Carrinho de Compras">
-                <a href="/cart">
-                  <i class="icon-basket"></i>
-                  <span>{{ 'navbar.cart' | t }}</span>
-                </a>
-              </li>
-            {% endunless %}
+            <li aria-label="Carrinho de Compras">
+              <a href="/cart">
+                <i class="icon-basket"></i>
+                <span>{{ 'navbar.cart' | t }}</span>
+              </a>
+            </li>
           {% else %}
             <li>
               <a href="{{ current_user | sso_admin_path: current_api_key }}">
