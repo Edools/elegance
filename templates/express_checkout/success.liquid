@@ -1,0 +1,48 @@
+<div class="checkout-success-page page">
+  <div class="container">
+    <div class="text-center">
+      <i class="icon-check"></i>
+
+      <h2>{{ 'checkout.success.order_created_successfully' | t }}</h2>
+
+      {% if order.kind == 'subscription' %}
+        {% assign payment_option = order.payment_options.last %}
+        {% assign price = payment_option.price | money %}
+
+        <p>{{ 'checkout.success.subscription_created_successfully' | t: code: order.gateway_reference }}</p>
+        <p>{{ 'checkout.success.subscription_info.' | append: payment_option.period | t: price: price }}</p>
+      {% else %}
+        {% unless payment.kind == 'free' %}
+          {% capture status %}{{ 'payment.status.' | append: order.status | t }}{% endcapture %}
+          <p>{{ 'checkout.success.transaction_made_by' | t: gateway: gateway_credential.fullname }}</p>
+          <p>{{ 'checkout.success.transaction_status_is' | t: status: status, gateway_reference: payment.uuid }}</p>
+          <p>{{ 'checkout.success.transaction_questions' | t: gateway: gateway_credential.name }}</p>
+        {% endunless %}
+
+        {% if trial_purchase %}
+          <div class="alert alert-warning">
+            {% assign end_trial = order.billing_at | date: "%d/%m/%Y %H:%M" %}
+            {{ 'checkout.success.trial_purchase_warning' | t: trial_limit: end_trial }}
+          </div>
+        {% endif %}
+      {% endif %}
+
+      {% if payment and payment.kind == 'boleto' %}
+        <div class="alert alert-warning">
+          {{ 'checkout.success.boleto_warning' | t }}
+
+          <a href="{{ payment.link }}" class="js-open-on-load" target="_blank">
+            {{ 'checkout.success.boleto_warning_click_here' | t }}
+          </a>
+        </div>
+      {% endif %}
+
+      {% if current_user == nil %}
+        {{ 'checkout.success.user_set_password_email' | t }}
+      {% else %}
+        <a href="/enrollments" class='btn btn-primary btn-lg'>{{ 'checkout.success.go_to_enrollments' | t }}</a>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
