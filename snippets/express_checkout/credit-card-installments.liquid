@@ -1,0 +1,21 @@
+<select id="js-credit-card-installments" class="form-control"
+        name="order[credit_card][installments]" required>
+
+  {% assign payment_installments = credit_card.installments | plus: 0 %}
+  {% for installment in installments %}
+    {% assign amount_in_money = installment.amount | money %}
+    {% assign amount_with_taxes = installment.amount |
+    number_with_taxes: gateway, installment.value | money %}
+    {% if gateway.installments_forward_taxes and amount_in_money != amount_with_taxes %}
+      {% assign translation_key = 'installment_amount_with_taxes' %}
+    {% else %}
+      {% assign translation_key = 'installment_amount' %}
+    {% endif %}
+
+    <option value="{{ installment.value }}" {% if payment_installments == installment.value %} selected {% endif %} >
+      {{ 'checkout.payment.' | append: translation_key | t:
+      count: installment.value, amount: amount_in_money,
+      amount_with_taxes: amount_with_taxes }}
+    </option>
+  {% endfor %}
+</select>

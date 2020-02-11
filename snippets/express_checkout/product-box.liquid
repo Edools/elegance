@@ -1,0 +1,16 @@
+<div id="product-{{ product.id }}" class="row">
+  {% if product.logo %}
+    <div class="col-md-6">
+      <div class="product-image">
+        {% image, src: product.logo, alt: product.title %}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="col-xs-12 cart-subtitle {% if product.logo %}col-md-6{% else %}col-md-7{% endif %}">
+    <h4 tabindex='0' class="product-title">
+      {{ product.title }}
+    </h4>
+    <p class="description">{{ product.subtitle }}</p>
+  </div>
+</div>

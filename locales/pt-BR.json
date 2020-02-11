@@ -530,6 +530,9 @@
       "boleto": "no boleto"
     }
   },
+  "express_checkout": {
+    "coupon_available": "Cupom disponível para uso!"
+  },
   "checkout": {
     "wizard": {
       "connect": "Conecte-se",
