@@ -1,16 +1,42 @@
 <div id="product-{{ product.id }}" class="row">
-  {% if product.logo %}
-    <div class="col-md-6">
-      <div class="product-image">
-        {% image, src: product.logo, alt: product.title %}
-      </div>
+  <div class="col-md-12">
+    <div class="product-image">
+      {% if product.logo %}
+      {% image, src: product.logo, alt: product.title %}
+      {% else %}
+      {% assign placeholder = 'missing-product-logo.png' | asset_url %}
+      {% image, src: placeholder, alt: product.title %}
+      {% endif %}
     </div>
-  {% endif %}
+  </div>
 
-  <div class="col-xs-12 cart-subtitle {% if product.logo %}col-md-6{% else %}col-md-7{% endif %}">
+  <div class="col-md-12">
     <h4 tabindex='0' class="product-title">
       {{ product.title }}
     </h4>
-    <p class="description">{{ product.subtitle }}</p>
   </div>
 </div>
+
+<style>
+  .product-image {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: auto;
+    filter: brightness(70%);
+  }
+
+  .product-title {
+    position: absolute;
+    top: -90px;
+    left: 28px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    width: 330px;
+    overflow-wrap: break-word;
+  }
+</style>
