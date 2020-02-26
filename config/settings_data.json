@@ -42,7 +42,7 @@
         "type_button_size": "16px",
         "type_enable_simple_line_icons": true,
         "type_enable_font_awesome": false,
-        "type_enable_new_font_awesome": false,
+        "type_enable_new_font_awesome": true,
         "home": {
           "header_bg": "#41a875",
           "header_text_color": "#ffffff",

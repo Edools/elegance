@@ -406,7 +406,6 @@
           "label": "Habilitar Font Awesome"
         }
       },
-
       {
         "key": "style.type_enable_new_font_awesome",
         "type": "checkbox",
