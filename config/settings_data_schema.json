@@ -406,6 +406,14 @@
           "label": "Habilitar Font Awesome"
         }
       },
+
+      {
+        "key": "style.type_enable_new_font_awesome",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Habilitar Novo Font Awesome"
+        }
+      },
       {
         "template": "<h3>Links da Navbar</h3>"
       },

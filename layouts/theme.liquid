@@ -48,6 +48,14 @@
           onload="if(media!='all')media='all'">
   {% endif %}
 
+  {% if settings.style.type_enable_new_font_awesome != false %}
+    <link rel="stylesheet"
+          href="https://pro.fontawesome.com/releases/v5.12.1/css/all.css"
+          integrity="sha384-TxKWSXbsweFt0o2WqfkfJRRNVaPdzXJ/YLqgStggBVRREXkwU7OKz+xXtqOU4u8+"
+          crossorigin="anonymous"
+          onload="if(media!='all')media='all'">
+  {% endif %}
+
   <link rel="stylesheet" href="{{ 'theme.base.min.css' | asset_url }}">
 
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
@@ -62,6 +70,7 @@
   <script defer src="{{ 'theme.base.min.js' | asset_url }}"></script>
   <script defer src="{{ 'theme.js' | asset_url }}"></script>
   <script defer src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+  <script defer src='https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js'></script>
 
   {% if current_school | has_feature: 'recaptcha' %}
     <script defer src='https://www.google.com/recaptcha/api.js?onload=onLoadRecaptcha&render=explicit'></script>
