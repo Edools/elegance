@@ -539,14 +539,16 @@
     "apply_coupon": "Aplicar",
     "checkbox_terms_of_service": "Li e aceito os <a target='_blank' href='{{ url }}'>Termos de Serviço e Política de Privacidade.</a>",
     "coupon_available": "Cupom disponível para uso!",
+    "description_where_to_find": "São os 3 a 4 dígitos localizados no verso do seu cartão.",
+    "discount_text": "Desconto:",
     "has_a_discount_coupon": "Possui um cupom de desconto?",
     "herospark_at_work": "- HeroSpark a serviço de {{ name }} - CNPJ {{ cnpj }}",
     "processed_by": "O processamento deste pedido é feito através da tecnologia de pagamento ",
+    "original_price_text": "Preço original:",
     "title_payment_method": "2. ESCOLHA O MÉTODO DE PAGAMENTO",
     "title_personal_data": "1. PREENCHA SEUS DADOS PESSOAIS",
     "title_purchase_summary": "RESUMO DA COMPRA",
-    "original_price_text": "Preço original:",
-    "discount_text": "Desconto:"
+    "where_to_find": "Onde encontrar?"
   },
   "checkout": {
     "wizard": {
