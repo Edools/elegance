@@ -83,7 +83,7 @@
     },
     "credit_card": {
       "number_invalid": "Insira um cartão de crédito válido.",
-      "name_invalid": "Insira um cartão de crédito válido.",
+      "name_invalid": "Adicione um nome válido.",
       "first_name_invalid": "Primeiro nome impresso no cartão inválido",
       "last_name_invalid": "Último nome impresso no cartão inválido",
       "year_month_invalid": "Insira uma data válida.",
@@ -642,11 +642,24 @@
       }
     },
     "success": {
+      "title":{
+        "success": "Obrigado pela sua compra!",
+        "processing": "Estamos processando seu pedido",
+        "error": "Ops! Ocorreu um erro :("
+      },
+      "description":{
+        "success_logged_user": "Está tudo pronto para acessar o seu produto! Confira os detalhes da sua compra no email que enviamos para você :)",
+        "success_unlogged_user": "Seu pagamento foi aprovado! Agora é só <b>conferir o email que enviamos</b> com todos os detalhes para acessar e aproveitar o seu produto :)",
+        "processing": "Seu produto estará disponível em breve. Enquanto isso, aproveite para explorar a nossa plataforma!",
+        "error": "Não foi possível processar o seu pedido. Por favor, revise os dados do seu cartão ou, se preferir, realize sua compra via boleto bancário."
+      },
+      "buttons":{
+        "success_logged_user": "Acessar curso",
+        "success_unlogged_user": "Acessar {{ platform }}",
+        "processing": "Acessar a plataforma",
+        "error": "Voltar"
+      },
       "user_set_password_email": "Você irá receber um email para definição da sua senha de acesso.",
-      "thanks_purchase_description_logged_user": "Está tudo pronto para acessar o seu produto! Confira os detalhes da sua compra no email que enviamos para você :)",
-      "thanks_purchase_description_unlogged_user": "Seu pagamento foi aprovado! Agora é só <b>conferir o email que enviamos</b> com todos os detalhes para acessar e aproveitar o seu produto :)",
-      "thanks_purchase_title": "Obrigado pela sua compra!",
-      "access_button_content": "Acessar {{ platform }}",
       "order_created_successfully": "Seu pedido foi realizado com sucesso!",
       "transaction_made_by": "Sua transação está sendo realizada pelo {{ gateway }}.",
       "subscription_created_successfully": "Sua assinatura foi criada com o código {{ code }}.",
@@ -660,8 +673,6 @@
       "transaction_questions": "Caso tenha alguma dúvida referente ao pagamento, entre em contato com o {{ gateway }}.",
       "trial_purchase_warning": "Sua matrícula foi liberada com sucesso e seu período de Trial encerra em {{ trial_limit }}.",
       "boleto_description": "Confira os detalhes do seu pedido no email que enviamos para você :)",
-      "boleto_download": "Baixar boleto",
-      "boleto_title": "Seu boleto está pronto!",
       "boleto_warning": "Caso o seu boleto não tenha sido aberto, desative o bloqueio de pop-ups no seu navegador e clique",
       "boleto_warning_click_here": "aqui",
       "go_to_enrollments": "Acessar curso"
