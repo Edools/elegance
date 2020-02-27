@@ -283,7 +283,8 @@
           <img src="{{ 'protected-data.png' | asset_url }}" alt="Protected Data Image">
         </div>
 
-        {% include "express_checkout/payment-processing-message-box" %}
+        {% include "express_checkout/payment-processing-message-box" with gateway %}
+
       </div>
     </div>
   </div>
@@ -322,6 +323,7 @@
 </script>
 
 <style>
+
   .express-checkout-payment-page {
     font-size: 14px;
   }
