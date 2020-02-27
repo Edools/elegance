@@ -6,7 +6,6 @@
     { "key": "snippets/express_checkout/product-box.liquid", "variables": ["product"] },
     { "key": "snippets/express_checkout/totals-box.liquid", "variables": ["coupon", "current_school", "gateway", "payment_option", "current_active_features", "installments_limit"] },
     { "key": "snippets/express_checkout/coupon-box.liquid", "variables": ["payment_option"] },
-    { "key": "snippets/express_checkout/payment-methods-box.liquid", "variables": ["gateway", "payment_option"] },
-    { "key": "snippets/express_checkout/payment-processing-message-box.liquid", "variables": ["gateway"] }
+    { "key": "snippets/express_checkout/payment-methods-box.liquid", "variables": ["gateway", "payment_option"] }
   ]
 }
