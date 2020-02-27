@@ -1,105 +1,124 @@
 <div class="checkout-success-page page">
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-md-11 col-md-offset-1 cart-wizard">
-        {% include "checkout/return" %}
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-xs-12 col-sm-5 col-sm-push-7 col-md-4 col-md-offset-0 cart-sidebar">
-        <h4 class="title-form">{{ 'express_checkout.title_purchase_summary' | t }}</h4>
-        {% include "express_checkout/product-box" %}
-        {% include "express_checkout/coupon-box" %}
-        {% include "express_checkout/totals-box" %}
-      </div>
+    <div class="container-spacing">
 
-      <div class="col-xs-12 col-sm-7 col-sm-pull-5 col-md-5 col-md-offset-2 cart-wizard">
-
-        <div class="form-container text-center">
-
-          <div id="icon-congratulations"></div>
-
-          <!-- {% if payment and payment.kind == 'boleto' %}
-          <div>
-
-            <h3 id="thank-you-for-buying-text">{{ 'checkout.success.boleto_title' | t }}</h3>
-
-            <p>{{ 'checkout.success.boleto_description' | t }}</p>
-
-            <div class="buttons-padding">
-              <a href="{{ payment.link }}" class="btn btn-light btn-success-options btn-block js-open-on-load"
-                target="_blank">
-
-              </a>
-            </div>
-
-          </div>
-          {% endif %} -->
-
-          {% if current_user == nil %}
-
-          <h2 class="thank-you-for-buying-text">{{ 'checkout.success.thanks_purchase_title' | t }}</h2>
-
-          <p> {{ 'checkout.success.thanks_purchase_description_unlogged_user' | t }}</p>
-
-          <div class="buttons-padding">
-            <a href="https://gmail.com" target="_blank" class="btn btn-light btn-success-options btn-block">
-              <i class="icon-credit-card"></i>
-              {{ 'checkout.success.access_button_content' | t: platform: 'Gmail' }}</a>
-            <br>
-            <a href="https://hotmail.com" target="_blank" class="btn btn-light btn-success-options btn-block">
-              <i class="icon-credit-card"></i>
-              {{ 'checkout.success.access_button_content' | t: platform: 'Hotmail' }}</a>
-          </div>
-          {% else %}
-
-          <h3 class="thank-you-for-buying-text">{{ 'checkout.success.thanks_purchase_title' | t }}</h3>
-
-          <p> {{ 'checkout.success.thanks_purchase_description_logged_user' | t }}</p>
-
-          <div class="buttons-padding">
-            <a href="/enrollments" class='btn btn-primary btn-lg'>{{ 'checkout.success.go_to_enrollments' | t }}</a>
-          </div>
-          {% endif %}
+      <div class="row">
+        <div class="col-xs-12 col-sm-5 col-sm-push-7 col-md-4">
+          <h4 class="title-purchage-summary">{{ 'express_checkout.title_purchase_summary' | t }}</h4>
+          {% include "express_checkout/product-box" %}
+          {% include "express_checkout/totals-box" %}
         </div>
 
-        {% include "express_checkout/payment-processing-message-box" %}
-      </div>
-    </div>
-  </div>
-</div>
+        <div class="col-xs-12 col-sm-7 col-sm-pull-5 col-md-5 col-md-offset-2">
 
+          <div class="card-container text-center">
+            <br>
+            {% if order.kind == 'subscription' %}
+            {% assign payment_option = order.payment_options.last %}
+            {% assign price = payment_option.price | money %}
+
+            <p>{{ 'checkout.success.subscription_created_successfully' | t: code: order.gateway_reference }}</p>
+            <p>{{ 'checkout.success.subscription_info.' | append: payment_option.period | t: price: price }}</p>
+
+            {% else %}
+
+              {% if order.status == 'processing' or order.status == 'initiated' %}
+                <img src="{{ 'processing-icon.png' | asset_url }}" alt="Processing icon" width="74"
+                  height="68">
+                <h3 class="title-buying-text color-title-processing">{{ 'checkout.success.title.processing' | t }}</h3>
+                <p>{{ 'checkout.success.description.processing' | t }}</p>
+                <div class="buttons-padding">
+                  <a href="/users/sign_in" class="btn btn-light btn-primary-options btn-block">
+                    {{ 'checkout.success.buttons.processing' | t }}
+                  </a>
+                </div>
+              {% elsif order.status == 'authorized' or order.status == 'confirmed' %}
+                <img src="{{ 'success-icon.png' | asset_url }}" alt="Success icon" width="70"
+                  height="64">
+                <h3 class="title-buying-text color-title-confirmed">{{ 'checkout.success.title.success' | t }}</h3>
+
+                {% unless payment.kind == 'free' %}
+                  {% if current_user == nil %}
+                    <p> {{ 'checkout.success.description.success_unlogged_user' | t }}</p>
+                    <div class="buttons-padding">
+                      <a href="https://gmail.com" target="_blank" class="btn btn-light btn-success-options btn-block">
+                        {{ 'checkout.success.buttons.success_unlogged_user' | t: platform: 'Gmail' }}</a>
+                      <br>
+                      <a href="https://hotmail.com" target="_blank" class="btn btn-light btn-success-options btn-block">
+                        {{ 'checkout.success.buttons.success_unlogged_user' | t: platform: 'Hotmail' }}</a>
+                    </div>
+                  {% else %}
+                    <p> {{ 'checkout.success.description.success_logged_user' | t }}</p>
+                    <div class="buttons-padding">
+                      <a href="/enrollments" class="btn btn-light btn-primary-options btn-block">
+                        {{ 'checkout.success.go_to_enrollments' | t }}
+                      </a>
+                    </div>
+                  {% endif %}
+                {% endunless %}
+
+              {% elsif order.status == 'canceled' %}
+                <img src="{{ 'error-icon.png' | asset_url }}" alt="Error icon" width="112" height="74">
+                <h3 class="title-buying-text color-title-error">{{ 'checkout.success.title.error' | t }}</h3>
+                <p>{{ 'checkout.success.description.error' | t }}</p>
+                <div class="buttons-padding">
+                  <a href="{{ return_url | default: back_path }}" class="btn btn-light btn-primary-options btn-block">
+                    {{ 'checkout.success.buttons.error' | t }}
+                  </a>
+                </div>
+              {% endif %}
+
+              {% if trial_purchase %}
+                <div class="alert alert-warning">
+                  {% assign end_trial = order.billing_at | date: "%d/%m/%Y %H:%M" %}
+                  {{ 'checkout.success.trial_purchase_warning' | t: trial_limit: end_trial }}
+                </div>
+              {% endif %}
+            {% endif %}
+          </div>
+
+          {% unless payment.kind == 'free' %}
+            {% include "express_checkout/payment-processing-message-box" with gateway: gateway_credential %}
+          {% endunless %}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 <style>
+
   .checkout-success-page {
     font-size: 14px;
   }
 
-  .checkout-success-page .btn {
-    margin-top: 0;
-  }
-
-  .form-container {
+  .card-container {
     background: #FFFFFF;
     box-shadow: 0px 5px 10px rgba(211, 211, 211, 0.198044);
     border-radius: 2px;
     padding: 24px 31px;
-    margin: 22px 0;
+    margin-top: 22px;
+    margin-bottom: 60px;
   }
 
-  #icon-congratulations {
-    background: url('data:image/svg+xml;base64,IDxzdmcgd2lkdGg9IjcwIiBoZWlnaHQ9IjY0IiB2aWV3Qm94PSIwIDAgNzAgNjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgZD0iTTQ3LjkxNzMgNDUuODA3N0M0OS42MzA2IDQ0LjExMTkgNDQuNDAzMiAzNi4xOTY1IDM2LjI0NzMgMjguMTE4NkMyOC4wOTE0IDIwLjA0MDYgMjAuMDg4NyAxNC44Nzc1IDE4LjM3NTQgMTYuNTY3OEMxNi42NjIxIDE4LjI2MzYgMTkuNTA4NSAyOC41MzU3IDI3LjY2NDQgMzYuNjEzN0MzNS44MjAzIDQ0LjY5MTcgNDYuMjA0IDQ3LjUwMzUgNDcuOTE3MyA0NS44MDc3WiIKICAgICAgICAgICAgICBmaWxsPSIjMjY5MzUzIiAvPgogICAgICAgICAgICA8cGF0aCBkPSJNNjMuOTIxOSA0OC40MzUzQzY0LjIwMSA0OC44ODUgNjQuNDYzOCA0OS4zNTA5IDY0LjcwNDYgNDkuODMzMSIgc3Ryb2tlPSIjRkZDQjMwIiBzdHJva2Utd2lkdGg9IjQiCiAgICAgICAgICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik0zOC4yNSA0MS40Njc4QzQ2LjE1OTYgMzguMDgxNyA1Ni4xMjczIDM5Ljc0NDkgNjEuODY5MyA0NS43ODU4IiBzdHJva2U9IiNGRkNCMzAiIHN0cm9rZS13aWR0aD0iNCIKICAgICAgICAgICAgICBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz4KICAgICAgICAgICAgPHBhdGgKICAgICAgICAgICAgICBkPSJNMzAuMDQ1MiAzNC4yNTY3QzIyLjcyNjggMjcuMDEzMSAxNy43NzMgMTkuODk0MSAxOC4wNjg2IDE3LjI4ODFMMC4zMzM2MTggNTguNDU4Qy0xLjA4NDA5IDYxLjc0NjYgMi4yNzEzMyA2NS4wNzMyIDUuNTk5MzggNjMuNjdMNDcuMTk0NSA0Ni4xMTYzQzQ0LjU1NjEgNDYuNDAzNCAzNy4zNjM2IDQxLjUwMDMgMzAuMDQ1MiAzNC4yNTY3WiIKICAgICAgICAgICAgICBmaWxsPSIjMjdERTczIiAvPgogICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgIGQ9Ik0zMi43MzI5IDUyLjIxNjhMMzguNTEzMiA0OS43Nzg4QzM0Ljc1MjggNDcuMDUzNyAzMC4xOTMxIDQzLjA5ODcgMjUuNjU1NCAzOC42MDczQzIxLjExNzYgMzQuMTE1OSAxNy4xMjE4IDI5LjYwMjkgMTQuMzY4NSAyNS44ODA5TDExLjkwNTMgMzEuNjAyMUMxNC42MjAzIDM0Ljk3NzQgMTguMDM1OSAzOC43MjY1IDIxLjc4NTQgNDIuNDQzMUMyNS41MzQ5IDQ2LjE1OTcgMjkuMzIyOCA0OS41MjQyIDMyLjczMjkgNTIuMjE2OFoiCiAgICAgICAgICAgICAgZmlsbD0iI0FGRkZEMCIgLz4KICAgICAgICAgICAgPHBhdGgKICAgICAgICAgICAgICBkPSJNOS4wMzEzIDM4LjI2NjFMNi42MzM3OSA0My44MzAyQzguNjY0NTUgNDYuMTI3NCAxMC45MTQzIDQ4LjUwNTggMTMuMjg0NCA1MC44NTE3QzE1LjY0OTEgNTMuMTkyMiAxOC4wNTIxIDU1LjQxODkgMjAuMzc4NCA1Ny40MzQzTDI1Ljk5NDUgNTUuMDYxM0MyMy4xNjQ2IDUyLjcyNjIgMjAuMTMyMSA0OS45Njg2IDE3LjE1NDQgNDcuMDIxM0MxNC4xNzEyIDQ0LjA2ODYgMTEuMzkwNSA0MS4wNjcxIDkuMDMxMyAzOC4yNjYxWiIKICAgICAgICAgICAgICBmaWxsPSIjQUZGRkQwIiAvPgogICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgIGQ9Ik00LjM0MDA1IDQ5LjE0NUwxLjk4NjMzIDU0LjYxN0MzLjE3NDEzIDU1Ljg3MzkgNC40MDAyNiA1Ny4xMzYzIDUuNjY0NyA1OC4zODc4QzYuOTI5MTMgNTkuNjM5MyA4LjIwNDUyIDYwLjg1MjkgOS40NzQ0MyA2Mi4wMjg2TDE1LjAwMjkgNTkuNjk4OUMxMS4zNzkzIDU2LjQ2OTkgNy42MDI0MSA1Mi43MzE2IDQuMzQwMDUgNDkuMTQ1WiIKICAgICAgICAgICAgICBmaWxsPSIjQUZGRkQwIiAvPgogICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgIGQ9Ik00Ny4xOTQ1IDQ2LjExNjRMNS41OTkzOCA2My42NzAxQzQuMDI2MDIgNjQuMzMzNSAyLjQ0NjUzIDYzLjkzOTggMS4zNjgxNiA2Mi45OTI3QzEuMzY4MTYgNjIuOTkyNyAzLjAxMDI5IDYzLjExNzUgNS4xOTk4IDYyLjMwNDhMNDAuNTA1OCA0My4wNzE1QzQ0LjMzNzUgNDUuNzgwNCA0Ni4yMzA2IDQ2LjIyMTMgNDcuMTk0NSA0Ni4xMTY0WiIKICAgICAgICAgICAgICBmaWxsPSIjMzRCNDY5IiBmaWxsLW9wYWNpdHk9IjAuNSIgLz4KICAgICAgICAgICAgPHBhdGggZD0iTTI4LjA1NzkgNy4wMjE0OEMzMC4wMTIgMTIuNzQ4MSAyOC45ODMgMTguOTg5NCAyNS4xNzg3IDIzLjA0MTkiIHN0cm9rZT0iIzc0MjdGMSIgc3Ryb2tlLXdpZHRoPSI0IgogICAgICAgICAgICAgIHN0cm9rZS1taXRlcmxpbWl0PSIxMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiAvPgogICAgICAgICAgICA8cGF0aCBkPSJNMjUuNTUwOCAyLjE2NzI0QzI1LjkzMzkgMi42OTgxOCAyNi4yODQzIDMuMjM5OTYgMjYuNjAxNyAzLjc5OCIgc3Ryb2tlPSIjNzQyN0YxIiBzdHJva2Utd2lkdGg9IjQiCiAgICAgICAgICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+CiAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgZD0iTTUzLjE5MzggMTMuNTQ5OEM1MS42Nzc2IDEzLjMzODUgNTAuMzkxMiAxMy4zOTgxIDQ5LjgzODQgMTMuOTQ1M0M0OC43MjE3IDE1LjA1MDYgNTIuMjUyMyAyMS41NzkgNTAuOTk4OCAyMi44MTk3QzQ5Ljc0NTMgMjQuMDYwNCA0My4zNzk0IDIwLjMzODQgNDEuOTg5IDIxLjcxNDVDNDAuNTkzMiAyMy4wOTYgNDMuNzQ2MSAyOS45OTgzIDQyLjc0OTkgMzAuOTc4OUM0MS43NTM2IDMxLjk2NSAzNy4xNjY2IDMwLjczNTEgMzQuMTM5NiAyOS40ODM2IgogICAgICAgICAgICAgIHN0cm9rZT0iI0ZGMzA1QyIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgLz4KICAgICAgICAgICAgPHBhdGggZD0iTTU4LjAxNjUgMTQuNzc0NEM1Ny4zOTI0IDE0LjU1NzcgNTYuNzI0NiAxNC4zNDY0IDU2LjA0NTkgMTQuMTU2NyIgc3Ryb2tlPSIjRkYzMDVDIiBzdHJva2Utd2lkdGg9IjQiCiAgICAgICAgICAgICAgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiBzdHJva2UtbGluZWNhcD0icm91bmQiIC8+CiAgICAgICAgICAgIDxwYXRoIGQ9Ik03MCAxNi43MjgyVjEzLjg3ODRINjcuMTIwOFYxNi43MjgySDcwWiIgZmlsbD0iI0ZGQ0IzMCIgLz4KICAgICAgICAgICAgPHBhdGgKICAgICAgICAgICAgICBkPSJNNDIuMTQ3OSAtMS4xODQxZS0wN0M0Mi40OTkgMC44Njg4MzQgNDIuNDk5IDEuODQwMDcgNDIuMTQ3OSAyLjcwODlDNDMuMDI3IDIuMzYwODYgNDQuMDA1NyAyLjM2MDg2IDQ0Ljg4NDggMi43MDg5QzQ0LjUzMzYgMS44NDAwNyA0NC41MzM2IDAuODY4ODM0IDQ0Ljg4NDggMEM0NC4wMDU3IDAuMzQ4MDQ1IDQzLjAyNyAwLjM0ODA0NSA0Mi4xNDc5IC0xLjE4NDFlLTA3WiIKICAgICAgICAgICAgICBmaWxsPSIjRkYzMDVDIiAvPgogICAgICAgICAgICA8cGF0aAogICAgICAgICAgICAgIGQ9Ik01NS4wMDE4IDI5LjM2MDdMNTQuNzM3NyAyOS4yNTYxTDU0LjgzMDggMjkuNDg2NUM1NS4xMjIyIDMwLjIwNzUgNTUuMTIyMiAzMS4wMTM2IDU0LjgzMDggMzEuNzM0Nkw1NC43Mzc3IDMxLjk2NUw1NS4wMDE4IDMxLjg2MDRDNTUuNzExMyAzMS41Nzk2IDU2LjUwMTEgMzEuNTc5NiA1Ny4yMTA1IDMxLjg2MDRMNTcuNDc0NiAzMS45NjVMNTcuMzgxNSAzMS43MzQ2QzU3LjA5MDEgMzEuMDEzNiA1Ny4wOTAxIDMwLjIwNzUgNTcuMzgxNSAyOS40ODY1TDU3LjQ3NDYgMjkuMjU2MUw1Ny4yMTA1IDI5LjM2MDdDNTYuNTAxMSAyOS42NDE1IDU1LjcxMTMgMjkuNjQxNSA1NS4wMDE4IDI5LjM2MDdaIgogICAgICAgICAgICAgIGZpbGw9IiM3NDI3RjEiIC8+CiAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgZD0iTTEwLjAyMDEgMTUuMDYxNUw5LjU5Nzk0IDE0LjA4NjVMOS4xNzU3MyAxNS4wNjE1QzkuMDc0MDYgMTUuMjk2MyA4Ljg4NTA0IDE1LjQ4MzQgOC42NDc4MSAxNS41ODQxTDcuNjYyNjcgMTYuMDAyTDguNjQ3ODEgMTYuNDE5OEM4Ljg4NTA0IDE2LjUyMDUgOS4wNzQwNiAxNi43MDc2IDkuMTc1NzMgMTYuOTQyNEw5LjU5Nzk0IDE3LjkxNzRMMTAuMDIwMSAxNi45NDI0QzEwLjEyMTggMTYuNzA3NiAxMC4zMTA4IDE2LjUyMDUgMTAuNTQ4MSAxNi40MTk4TDExLjUzMzIgMTYuMDAyTDEwLjU0ODEgMTUuNTg0MUMxMC4zMTA4IDE1LjQ4MzQgMTAuMTIxOCAxNS4yOTYzIDEwLjAyMDEgMTUuMDYxNVoiCiAgICAgICAgICAgICAgZmlsbD0iI0ZGQ0IzMCIgLz4KICAgICAgICAgICAgPHBhdGggZD0iTTQ5LjA2MDggNTMuMjgzOUw1MS4wOTY3IDUxLjI2ODhMNDkuMDYwOCA0OS4yNTM3TDQ3LjAyNDkgNTEuMjY4OEw0OS4wNjA4IDUzLjI4MzlaIgogICAgICAgICAgICAgIGZpbGw9IiM3NDI3RjEiIC8+CiAgICAgICAgICAgIDxwYXRoCiAgICAgICAgICAgICAgZD0iTTM1LjQzMTYgMTguNDc0N0MzNi42MTA2IDE4LjQ3NDcgMzcuNTY2NCAxNy41Mjg3IDM3LjU2NjQgMTYuMzYxN0MzNy41NjY0IDE1LjE5NDggMzYuNjEwNiAxNC4yNDg4IDM1LjQzMTYgMTQuMjQ4OEMzNC4yNTI2IDE0LjI0ODggMzMuMjk2OSAxNS4xOTQ4IDMzLjI5NjkgMTYuMzYxN0MzMy4yOTY5IDE3LjUyODcgMzQuMjUyNiAxOC40NzQ3IDM1LjQzMTYgMTguNDc0N1oiCiAgICAgICAgICAgICAgZmlsbD0iI0ZGQ0IzMCIgLz4KICAgICAgICAgIDwvc3ZnPgo=') no-repeat 50%;
-    margin-top: 20px;
-    width: 100%;
-    height: 72px;
-  }
-
-  .thank-you-for-buying-text {
+  .title-buying-text {
     margin-top: 20px;
     font-weight: bold;
     padding: 0 40px;
     line-height: 115%;
+  }
+
+  .color-title-confirmed {
     color: #34B469;
+  }
+
+  .color-title-processing {
+    color: #DEB741;
+  }
+
+  .color-title-error {
+    color: #C12B4B;
   }
 
   .buttons-padding {
@@ -108,18 +127,29 @@
   }
 
   .buttons-padding .btn-success-options {
-    padding: calc(.5rem - 4px) 0;
     border: 2px solid #2cc3cc;
     background-color: white;
     box-shadow: 0 2px 4px 0 rgba(44, 195, 204, 0.2);
     color: #2cc3cc;
     padding: 10px;
+    margin-top: 0;
   }
 
+  .buttons-padding .btn-primary-options {
+    background: #2cc3cc;
+    box-shadow: 0px 2px 4px rgba(44, 195, 204, 0.203098);
+    border-radius: 2px;
+    color: #FFFFFF;
+  }
 
-  .title-form {
+  .title-purchage-summary {
     font-weight: bold;
-    line-height: 130%;
     text-transform: uppercase;
+  }
+
+  @media all and (min-width: 767px) {
+    .container-spacing {
+      margin-top: 79px;
+    }
   }
 </style>
