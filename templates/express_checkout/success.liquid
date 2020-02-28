@@ -27,7 +27,7 @@
               {% if order.status == 'processing' or order.status == 'initiated' %}
                 <img src="{{ 'processing-icon.png' | asset_url }}" alt="Processing icon" width="74"
                   height="68">
-                <span class="title-buying-text color-title-processing">{{ 'checkout.success.title.processing' | t }}</span>
+                <h6 class="title-buying-text color-title-processing">{{ 'checkout.success.title.processing' | t }}</h6>
                 <p>{{ 'checkout.success.description.processing' | t }}</p>
                 <div class="buttons-padding">
                   <a href="/users/sign_in" class="btn btn-light btn-primary-options btn-block">
@@ -37,7 +37,7 @@
               {% elsif order.status == 'authorized' or order.status == 'confirmed' %}
                 <img src="{{ 'success-icon.png' | asset_url }}" alt="Success icon" width="70"
                   height="64">
-                <span class="title-buying-text color-title-confirmed">{{ 'checkout.success.title.success' | t }}</span>
+                <h6 class="title-buying-text color-title-confirmed">{{ 'checkout.success.title.success' | t }}</h6>
 
                 {% unless payment.kind == 'free' %}
                   {% if current_user == nil %}
@@ -61,7 +61,7 @@
 
               {% elsif order.status == 'canceled' %}
                 <img src="{{ 'error-icon.png' | asset_url }}" alt="Error icon" width="112" height="74">
-                <span class="title-buying-text color-title-error">{{ 'checkout.success.title.error' | t }}</span>
+                <h6 class="title-buying-text color-title-error">{{ 'checkout.success.title.error' | t }}</h6>
                 <p>{{ 'checkout.success.description.error' | t }}</p>
                 <div class="buttons-padding">
                   <a href="{{ return_url | default: back_path }}" class="btn btn-light btn-primary-options btn-block">
@@ -119,7 +119,7 @@
     font-size: 30px;
     line-height: 115%;
     padding: 0 30px;
-    margin: 15px 0;
+    margin: 18px 0;
   }
 
   .color-title-confirmed {
