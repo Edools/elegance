@@ -1,30 +1,32 @@
 <div id="product-{{ product.id }}">
-  <div class="">
-    <div class="product-image">
-      {% if product.logo %}
-      {% image, src: product.logo, alt: product.title %}
-      {% else %}
-      {% assign placeholder = 'missing-product-logo.png' | asset_url %}
-      {% image, src: placeholder, alt: product.title %}
-      {% endif %}
+  <div class="product-container-responsive">
+    {% if product.logo %}
+    {% image, src: product.logo, alt: product.title, class: 'product-img' %}
+    {% else %}
+    {% assign placeholder = 'missing-product-logo.png' | asset_url %}
+    {% image, src: placeholder, alt: product.title, class: 'product-img' %}
+    {% endif %}
 
+    <div class="product-title">
       <span> {{ product.title }} </span>
     </div>
   </div>
 </div>
 
 <style>
-  .product-image {
+  .product-container-responsive {
     position: relative;
+    height: 220px;
+    overflow: hidden;
   }
 
-  .product-image img {
-    width: 100%;
-    height: auto;
+  .product-container-responsive .product-img {
+    width: auto;
+    height: 220px;
     filter: brightness(70%);
   }
 
-  .product-image span {
+  .product-container-responsive .product-title {
     position: absolute;
     top: 60%;
     left: 12px;
@@ -32,5 +34,25 @@
     font-weight: bold;
     font-size: 20px;
     line-height: 123%;
+  }
+
+  @media all and (max-width: 767px) {
+    .product-container-responsive {
+      display: flex;
+      align-items: center;
+      height: auto;
+    }
+
+    .product-container-responsive .product-img {
+      width: 88px;
+      height: 88px;
+    }
+
+    .product-container-responsive .product-title {
+      position: static;
+      color: #262626;
+      margin-left: 15px;
+      font-size: 14px;
+    }
   }
 </style>
