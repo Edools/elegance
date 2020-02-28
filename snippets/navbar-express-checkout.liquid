@@ -1,0 +1,48 @@
+<header id="header">
+  <a href="/">
+    {% if settings.view.general.navbar.logo.size > 0 %}
+    <img class="item-header" src="{{ settings.view.general.navbar.logo }}" alt="Logo School" width="100" height="17">
+    {% else %}
+    <h4 class="item-header">{{ settings.view.general.navbar.title }}</h4>
+    {% endif %}
+  </a>
+  <img class="item-header" src="{{ 'inline-secure-purchase.png' | asset_url }}" alt="Inline Secure Purchage Image"
+    width="160" height="21">
+</header>
+
+
+<style>
+  #header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    height: 55px;
+    width: 100%;
+    background-color: #FFFFFF;
+    z-index: 100;
+  }
+
+  #header a {
+    text-decoration: none;
+  }
+
+  #header .item-header:nth-child(2) {
+    margin-left: 290px;
+  }
+
+  @media all and (max-width: 602px) {
+    #header {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    #header .item-header:nth-child(1) {
+      display: none;
+    }
+
+    #header .item-header:nth-child(2) {
+      margin-right: 15px;
+    }
+  }
+</style>
