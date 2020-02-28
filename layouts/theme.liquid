@@ -78,17 +78,25 @@
 </head>
 
 <body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% elsif current_path == '/chat' %}chat-page{% endif %}">
-<div class="content-wrapper">
-  {% include 'accessibility-menu' %}
-  {% include 'navbar' %}
-  {% include 'alert-notice' %}
-  {{ content_for_layout }}
-  <div class="content-push"></div>
-</div>
+  <div class="content-wrapper">
+    {% include 'accessibility-menu' %}
 
-<div class="footer-wrapper">
-  {% include 'footer' %}
-</div>
+    {% if current_path != '/express_checkout/payment' and current_path != '/express_checkout/success' %}
+      {% include 'navbar' %}
+    {% else %}
+      {% include 'navbar-express-checkout' %}
+    {% endif %}
+
+    {% include 'alert-notice' %}
+    {{ content_for_layout }}
+    <div class="content-push"></div>
+  </div>
+
+  {% if current_path != '/express_checkout/payment' and current_path != '/express_checkout/success' %}
+    <div class="footer-wrapper">
+      {% include 'footer' %}
+    </div>
+  {% endif %}
 
   {{ settings.view.injector.body }}
 </body>
