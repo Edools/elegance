@@ -1,290 +1,286 @@
 <div class="checkout-page express-checkout-payment-page page">
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-md-11 col-md-offset-1">
-        {% include "checkout/return" %}
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-5 col-sm-push-7 col-md-4">
-        <h4 class="title-form">{{ 'express_checkout.title_purchase_summary' | t }}</h4>
-        {% include "express_checkout/product-box" %}
-        {% include "express_checkout/coupon-box" %}
-        {% include "express_checkout/totals-box" %}
-      </div>
-
-      <div class="col-xs-12 col-sm-7 col-sm-pull-5 col-md-5 col-md-offset-2">
-
-        <h4 class="title-form">{{ 'express_checkout.title_personal_data' | t }}</h4>
-
-        {% unless current_user %}
-        <div class="form-container">
-          <div class="row">
-            <form id="student-form">
-              <div class="form-group {% if form.errors.email %}has-error{% endif %} col-md-12">
-                <label for="user-email" class="control-label">{{ 'login.email' | t }}</label>
-                <input type="email" id="user-email" name="user[email]" class="form-control form-input"
-                  placeholder="seumelhoremail@gmail.com" value="{{ params.user.email }}" data-validation="email"
-                  data-validation-error-msg="{{ 'errors.email.invalid' | t }}">
-              </div>
-
-              <div class="form-group {% if form.errors.cpf %}has-error{% endif %} col-md-9">
-                <label for="user-cpf" class="control-label">{{ 'checkout.complete.cpf' | t }}</label>
-                <input id="user-cpf" name="user[cpf]" data-mask="000.000.000-00" class="form-control form-input"
-                  placeholder="___.___.___-__" value="{{ params.user.cpf }}" data-validate-cpf="true"
-                  data-validation="custom" data-validation-regexp="[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}"
-                  data-validation-error-msg="{{ 'errors.cpf.invalid' | t }}">
-              </div>
-            </form>
-          </div>
+    <div class="container-spacing">
+      <div class="row">
+        <div class="col-xs-12 col-sm-5 col-sm-push-7 col-md-4">
+          <h6 class="title-form">{{ 'express_checkout.title_purchase_summary' | t }}</h6>
+          {% include "express_checkout/product-box" %}
+          {% include "express_checkout/coupon-box" %}
+          {% include "express_checkout/totals-box" %}
         </div>
-        {% endunless %}
 
-        <h4 class="title-form">{{ 'express_checkout.title_payment_method' | t }}</h4>
+        <div class="col-xs-12 col-sm-7 col-sm-pull-5 col-md-5 col-md-offset-2">
 
-        <div class="wizard">
-          <div class="wizard-content">
-            <div class="payment-form">
-              <div class="ed-tabs">
-                {% if payment_option and payment_option.payment_method != nil %}
-                {% case payment_option.payment_method %}
-                {% when 'boleto' %}
-                {% assign show_boleto = true %}
-                {% assign payment_type = 'boleto' %}
-                {% else %}
-                {% assign show_cc = true %}
-                {% assign payment_type = 'credit_card' %}
-                {% endcase %}
-                {% else %}
-                {% assign show_cc = true %}
-                {% assign payment_type = 'credit_card' %}
+          <h6 class="title-form">{{ 'express_checkout.title_personal_data' | t }}</h6>
 
-                {% if payment_option.kind == 'common' %}
-                {% if gateway.common_payment_methods contains 'credit_card' %}
-                {% assign show_cc = true %}
-                {% endif %}
+          {% unless current_user %}
+          <div class="form-container">
+            <div class="row">
+              <form id="student-form">
+                <div class="form-group {% if form.errors.email %}has-error{% endif %} col-md-12">
+                  <label for="user-email" class="control-label">{{ 'login.email' | t }}</label>
+                  <input type="email" id="user-email" name="user[email]" class="form-control form-input" required="required"
+                    placeholder="seumelhoremail@gmail.com" value="{{ params.user.email }}" data-validation="email"
+                    data-validation-error-msg="{{ 'errors.email.invalid' | t }}">
+                </div>
 
-                {% if gateway.common_payment_methods contains 'boleto' %}
-                {% assign show_boleto = true %}
-                {% endif %}
+                <div class="form-group {% if form.errors.cpf %}has-error{% endif %} col-md-9">
+                  <label for="user-cpf" class="control-label">{{ 'checkout.complete.cpf' | t }}</label>
+                  <input id="user-cpf" name="user[cpf]" data-mask="000.000.000-00" class="form-control form-input"
+                    placeholder="___.___.___-__" value="{{ params.user.cpf }}" data-validate-cpf="true"
+                    data-validation="custom" data-validation-regexp="[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}"
+                    data-validation-error-msg="{{ 'errors.cpf.invalid' | t }}">
+                </div>
+              </form>
+            </div>
+          </div>
+          {% endunless %}
 
-                {% if gateway.common_payment_methods contains 'bank_transfer'%}
-                {% assign show_bt = true %}
-                {% endif %}
-                {% elsif payment_option.kind == 'subscription' %}
-                {% if gateway.subscription_payment_methods contains 'credit_card' %}
-                {% assign show_cc = true %}
-                {% endif %}
+          <h6 class="title-form">{{ 'express_checkout.title_payment_method' | t }}</h6>
 
-                {% if gateway.subscription_payment_methods contains 'boleto' %}
-                {% assign show_boleto = true %}
-                {% endif %}
-                {% endif %}
-                {% endif %}
+          <div class="wizard">
+            <div class="wizard-content">
+              <div class="payment-form">
+                <div class="ed-tabs">
+                  {% if payment_option and payment_option.payment_method != nil %}
+                  {% case payment_option.payment_method %}
+                  {% when 'boleto' %}
+                  {% assign show_boleto = true %}
+                  {% assign payment_type = 'boleto' %}
+                  {% else %}
+                  {% assign show_cc = true %}
+                  {% assign payment_type = 'credit_card' %}
+                  {% endcase %}
+                  {% else %}
+                  {% assign show_cc = true %}
+                  {% assign payment_type = 'credit_card' %}
 
-                {% if trial_purchase %}
-                <div class="alert alert-info">{{ 'checkout.payment.trial_purchase_warning' | t }}</div>
-                {% endif %}
-
-                <ul id="tab-payment-methods" class="nav nav-pills">
-                  {% if show_cc %}
-                  <li class="{% if payment_type == 'credit_card' %} active {% endif %}" role="presentation">
-                    <a href="#credit-card" id="credit-card-tab" role="tab" data-toggle="tab" aria-controls="credit-card"
-                      aria-expanded="true" data-toggle="pill">
-                      <i class="fal fa-credit-card"></i> {{ 'checkout.payment.credit_card' | t }}
-                    </a>
-                  </li>
+                  {% if payment_option.kind == 'common' %}
+                  {% if gateway.common_payment_methods contains 'credit_card' %}
+                  {% assign show_cc = true %}
                   {% endif %}
 
-                  {% if show_boleto %}
-                  <li class="{% if payment_type == 'boleto' %} active {% endif %}" role="presentation">
-                    <a href="#boleto" id="boleto-tab" role="tab" data-toggle="tab" aria-controls="boleto"
-                      aria-expanded="false" data-toggle="pill">
-                      <i class="fal fa-barcode-alt"></i> {{ 'checkout.payment.boleto' | t }}
-                    </a>
-                  </li>
+                  {% if gateway.common_payment_methods contains 'boleto' %}
+                  {% assign show_boleto = true %}
                   {% endif %}
 
-                  {% if show_bt %}
-                  <li class="{% if payment_type == 'bank_transfer' %} active {% endif %}" role="presentation">
-                    <a href="#bank-transfer" id="bank-transfer-tab" role="tab" data-toggle="tab" aria-controls="boleto"
-                      aria-expanded="false" data-toggle="pill">
-                      <i class="fad fa-exchange"></i> {{ 'checkout.payment.bank_transfer' | t }}
-                    </a>
-                  </li>
+                  {% if gateway.common_payment_methods contains 'bank_transfer'%}
+                  {% assign show_bt = true %}
                   {% endif %}
-                </ul>
+                  {% elsif payment_option.kind == 'subscription' %}
+                  {% if gateway.subscription_payment_methods contains 'credit_card' %}
+                  {% assign show_cc = true %}
+                  {% endif %}
 
-                <div class="tab-content">
-                  {% if show_cc %}
-                  {% assign credit_card = params.order.credit_card %}
+                  {% if gateway.subscription_payment_methods contains 'boleto' %}
+                  {% assign show_boleto = true %}
+                  {% endif %}
+                  {% endif %}
+                  {% endif %}
 
-                  <div id="credit-card"
-                    class="credit-card tab-pane {% if payment_type == 'credit_card' %}active{% endif %}" role="tabpanel"
-                    aria-labelledby="credit-card-tab">
+                  {% if trial_purchase %}
+                  <div class="alert alert-info">{{ 'checkout.payment.trial_purchase_warning' | t }}</div>
+                  {% endif %}
 
-                    {% form 'express_checkout/pay', id: card-form %}
-                    <div class="form-container">
-                      <input type="hidden" name="coupon_name">
-                      <input type="hidden" name="order[src]" value="{{ params.src }}">
-                      <input type="hidden" name="order[xcod]" value="{{ params.xcod }}">
-                      <input type="hidden" name="order[payment_type]" value="credit_card">
-                      <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
+                  <ul id="tab-payment-methods" class="nav nav-pills">
+                    {% if show_cc %}
+                    <li class="{% if payment_type == 'credit_card' %} active {% endif %}" role="presentation">
+                      <a href="#credit-card" id="credit-card-tab" role="tab" data-toggle="tab" aria-controls="credit-card"
+                        aria-expanded="true" data-toggle="pill">
+                        <i class="fal fa-credit-card"></i> {{ 'checkout.payment.credit_card' | t }}
+                      </a>
+                    </li>
+                    {% endif %}
 
-                      <div class="form-group">
-                        {% if credit_card.active %}
-                        <div class="alert alert-info">
-                          {{ 'checkout.payment.credit_card_warning' | t }}
+                    {% if show_boleto %}
+                    <li class="{% if payment_type == 'boleto' %} active {% endif %}" role="presentation">
+                      <a href="#boleto" id="boleto-tab" role="tab" data-toggle="tab" aria-controls="boleto"
+                        aria-expanded="false" data-toggle="pill">
+                        <i class="fal fa-barcode-alt"></i> {{ 'checkout.payment.boleto' | t }}
+                      </a>
+                    </li>
+                    {% endif %}
+
+                    {% if show_bt %}
+                    <li class="{% if payment_type == 'bank_transfer' %} active {% endif %}" role="presentation">
+                      <a href="#bank-transfer" id="bank-transfer-tab" role="tab" data-toggle="tab" aria-controls="boleto"
+                        aria-expanded="false" data-toggle="pill">
+                        <i class="fad fa-exchange"></i> {{ 'checkout.payment.bank_transfer' | t }}
+                      </a>
+                    </li>
+                    {% endif %}
+                  </ul>
+
+                  <div class="tab-content">
+                    {% if show_cc %}
+                    {% assign credit_card = params.order.credit_card %}
+
+                    <div id="credit-card"
+                      class="credit-card tab-pane {% if payment_type == 'credit_card' %}active{% endif %}" role="tabpanel"
+                      aria-labelledby="credit-card-tab">
+
+                      {% form 'express_checkout/pay', id: card-form %}
+                      <div class="form-container">
+                        <input type="hidden" name="coupon_name">
+                        <input type="hidden" name="order[src]" value="{{ params.src }}">
+                        <input type="hidden" name="order[xcod]" value="{{ params.xcod }}">
+                        <input type="hidden" name="order[payment_type]" value="credit_card">
+                        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
+
+                        <div class="form-group">
+                          {% if credit_card.active %}
+                          <div class="alert alert-info">
+                            {{ 'checkout.payment.credit_card_warning' | t }}
+                          </div>
+                          {% endif %}
+
+                          <label for="card-number"
+                            class="control-label">{{ 'checkout.payment.credit_card_number' | t }}</label>
+                          <div id="card-number-container">
+                            <input id="card-number" name="order[credit_card][number]" class="form-control form-input"
+                              placeholder="____ ____ ____ ____" data-mask="0000 0000 0000 0000"
+                              value="{{ credit_card.number }}" {% if credit_card.active %} disabled {% endif %}
+                              data-validation="length" data-validation-length="min19"
+                              data-validation-error-msg="{{ 'errors.credit_card.number_invalid' | t }}">
+
+                            <div id="card-number-icons">
+                              <img src="{{ 'visa.png' | asset_url }}">
+                              <img src="{{ 'mastercard.png' | asset_url }}">
+                              <img src="{{ 'american-express.png' | asset_url }}">
+                              <img src="{{ 'diners.png' | asset_url }}">
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="card-holder-name"
+                            class="control-label">{{ 'checkout.payment.credit_card_name' | t }}</label>
+                          <input id="card-holder-name" name="order[credit_card][name]" class="form-control form-input"
+                            value="{{ credit_card.name }}" placeholder="João A. Silva" {% if credit_card.active %}
+                            disabled {% endif %} data-validation="length" data-validation-length="min6"
+                            data-validation-error-msg="{{ 'errors.credit_card.name_invalid' | t }}">
+                        </div>
+
+                        <div class="row">
+                          <div class="form-group  col-sm-6">
+                            <label for="card-expiration"
+                              class="control-label">{{ 'checkout.payment.credit_card_expiry' | t }}</label>
+                            <input id="card-expiration" name="order[credit_card][expiry]" class="form-control form-input"
+                              data-mask="00/0000" value="{{ credit_card.expiry }}" placeholder="MM/AAAA"
+                              {% if credit_card.active %} disabled {% endif %} data-validation="date"
+                              data-validation-format="mm/yyyy"
+                              data-validation-error-msg="{{ 'errors.credit_card.year_month_invalid' | t }}">
+                          </div>
+                          <div class="form-group col-sm-6">
+                            <label for="card-cvc"
+                              class="control-label">{{ 'checkout.payment.credit_card_cvv' | t }}</label>
+                            <div class="input-group">
+                              <input id="card-cvc" type="number" name="order[credit_card][cvc]"
+                                class="form-control form-input" value="{{ credit_card.cvc }}" placeholder="CVC"
+                                data-mask="000" {% if credit_card.active %} disabled {% endif %} data-validation="length"
+                                data-validation-length="min3"
+                                data-validation-error-msg="{{ 'errors.credit_card.verification_value_invalid' | t }}">
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-default form-input" data-toggle="popover"
+                                  data-container="body" data-html="true" data-trigger="hover" data-placement="top"
+                                  data-content="<div class='poppover-cvc-container'><span class='card-cvc-preview'></span><div class='text-cvc-preview'><b>{{ 'express_checkout.where_to_find' | t }}</b><p>{{ 'express_checkout.description_where_to_find' | t }}</p></div></div>">
+                                  <i class="fal fa-question-circle"></i>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {% if payment_option.kind == 'common' %}
+                        <div class="form-group">
+                          <label class="control-label">{{ 'checkout.payment.credit_card_installments' | t }}</label>
+                          {% include "express_checkout/credit-card-installments" %}
                         </div>
                         {% endif %}
+                      </div>
+                      {% endform %}
+                    </div>
+                    {% endif %}
 
-                        <label for="card-number"
-                          class="control-label">{{ 'checkout.payment.credit_card_number' | t }}</label>
-                        <div id="card-number-container">
-                          <input id="card-number" name="order[credit_card][number]" class="form-control form-input"
-                            placeholder="____ ____ ____ ____" data-mask="0000 0000 0000 0000"
-                            value="{{ credit_card.number }}" {% if credit_card.active %} disabled {% endif %}
-                            data-validation="length" data-validation-length="min19"
-                            data-validation-error-msg="{{ 'errors.credit_card.number_invalid' | t }}">
+                    {% if show_boleto %}
+                    <div id="boleto" class="boleto tab-pane {% if payment_type == 'boleto' %}active{% endif %}"
+                      role="tabpanel" aria-labelledby="boleto-tab">
 
-                          <div id="card-number-icons">
-                            <img src="{{ 'visa.png' | asset_url }}">
-                            <img src="{{ 'mastercard.png' | asset_url }}">
-                            <img src="{{ 'american-express.png' | asset_url }}">
-                            <img src="{{ 'diners.png' | asset_url }}">
-                          </div>
+                      {% form 'express_checkout/pay', id: boleto-form %}
+                      <div class="form-container">
+                        <div class="alert alert-warning">
+                          <span>{{ 'checkout.payment.disable_popups_warning' | t }}</span>
+                        </div>
+                        <div class="information-alert">
+                          <span>{{ 'checkout.payment.boleto_warning' | t }}</span>
+                        </div>
+                        <input type="hidden" name="coupon_name">
+                        <input type="hidden" name="order[src]" value="{{ params.src }}">
+                        <input type="hidden" name="order[xcod]" value="{{ params.src }}">
+                        <input type="hidden" name="order[payment_type]" value="boleto">
+                        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
+                      </div>
+                      {% endform %}
+                    </div>
+                    {% endif %}
+
+                    {% if show_bt %}
+                    <div id="bank-transfer"
+                      class="bank-transfer tab-pane payment-methods {% if payment_type == 'bank_transfer' %}active{% endif %}"
+                      role="tabpanel" aria-labelledby="boleto-tab">
+
+                      {% form 'express_checkout/pay', id: bank-transfer-form %}
+                      <div class="form-container">
+                        <div class="alert alert-warning">
+                          <span>{{ 'checkout.payment.disable_popups_warning' | t }}</span>
+                        </div>
+                        <div class="information-alert">
+                          <span>{{ 'checkout.payment.bank_transfer_warning' | t }}</span>
+                        </div>
+                        <input type="hidden" name="coupon_name">
+                        <input type="hidden" name="order[src]" value="{{ params.src }}">
+                        <input type="hidden" name="order[xcod]" value="{{ params.src }}">
+                        <input type="hidden" name="order[payment_type]" value="bank_transfer">
+                        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
+
+                        <div class="form-group">
+                          {% for bank in gateway.supported_banks %}
+                          <label class="radio-inline">
+                            <input type="radio" name="order[bank_transfer][institution]" id="bank-{{ bank }}"
+                              value="{{ bank }}"> <span class="bank-flag {{ bank }}"></span>
+                          </label>
+                          {% endfor %}
                         </div>
                       </div>
-
-                      <div class="form-group">
-                        <label for="card-holder-name"
-                          class="control-label">{{ 'checkout.payment.credit_card_name' | t }}</label>
-                        <input id="card-holder-name" name="order[credit_card][name]" class="form-control form-input"
-                          value="{{ credit_card.name }}" placeholder="João A. Silva" {% if credit_card.active %}
-                          disabled {% endif %} data-validation="length" data-validation-length="min6"
-                          data-validation-error-msg="{{ 'errors.credit_card.name_invalid' | t }}">
-                      </div>
-
-                      <div class="row">
-                        <div class="form-group  col-sm-6">
-                          <label for="card-expiration"
-                            class="control-label">{{ 'checkout.payment.credit_card_expiry' | t }}</label>
-                          <input id="card-expiration" name="order[credit_card][expiry]" class="form-control form-input"
-                            data-mask="00/0000" value="{{ credit_card.expiry }}" placeholder="MM/AAAA"
-                            {% if credit_card.active %} disabled {% endif %} data-validation="date"
-                            data-validation-format="mm/yyyy"
-                            data-validation-error-msg="{{ 'errors.credit_card.year_month_invalid' | t }}">
-                        </div>
-                        <div class="form-group col-sm-6">
-                          <label for="card-cvc"
-                            class="control-label">{{ 'checkout.payment.credit_card_cvv' | t }}</label>
-                          <div class="input-group">
-                            <input id="card-cvc" type="number" name="order[credit_card][cvc]"
-                              class="form-control form-input" value="{{ credit_card.cvc }}" placeholder="CVC"
-                              data-mask="000" {% if credit_card.active %} disabled {% endif %} data-validation="length"
-                              data-validation-length="min3"
-                              data-validation-error-msg="{{ 'errors.credit_card.verification_value_invalid' | t }}">
-                            <span class="input-group-btn">
-                              <button type="button" class="btn btn-default form-input" data-toggle="popover"
-                                data-container="body" data-html="true" data-trigger="hover" data-placement="top"
-                                data-content="<div class='poppover-cvc-container'><span class='card-cvc-preview'></span><div class='text-cvc-preview'><b>{{ 'express_checkout.where_to_find' | t }}</b><p>{{ 'express_checkout.description_where_to_find' | t }}</p></div></div>">
-                                <i class="fal fa-question-circle"></i>
-                              </button>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {% if payment_option.kind == 'common' %}
-                      <div class="form-group">
-                        <label class="control-label">{{ 'checkout.payment.credit_card_installments' | t }}</label>
-                        {% include "express_checkout/credit-card-installments" %}
-                      </div>
-                      {% endif %}
+                      {% endform %}
                     </div>
-                    {% endform %}
+                    {% endif %}
                   </div>
-                  {% endif %}
-
-                  {% if show_boleto %}
-                  <div id="boleto" class="boleto tab-pane {% if payment_type == 'boleto' %}active{% endif %}"
-                    role="tabpanel" aria-labelledby="boleto-tab">
-
-                    {% form 'express_checkout/pay', id: boleto-form %}
-                    <div class="form-container">
-                      <div class="alert alert-warning">
-                        <span>{{ 'checkout.payment.disable_popups_warning' | t }}</span>
-                      </div>
-                      <div class="information-alert">
-                        <span>{{ 'checkout.payment.boleto_warning' | t }}</span>
-                      </div>
-                      <input type="hidden" name="coupon_name">
-                      <input type="hidden" name="order[src]" value="{{ params.src }}">
-                      <input type="hidden" name="order[xcod]" value="{{ params.src }}">
-                      <input type="hidden" name="order[payment_type]" value="boleto">
-                      <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
-                    </div>
-                    {% endform %}
-                  </div>
-                  {% endif %}
-
-                  {% if show_bt %}
-                  <div id="bank-transfer"
-                    class="bank-transfer tab-pane payment-methods {% if payment_type == 'bank_transfer' %}active{% endif %}"
-                    role="tabpanel" aria-labelledby="boleto-tab">
-
-                    {% form 'express_checkout/pay', id: bank-transfer-form %}
-                    <div class="form-container">
-                      <div class="alert alert-warning">
-                        <span>{{ 'checkout.payment.disable_popups_warning' | t }}</span>
-                      </div>
-                      <div class="information-alert">
-                        <span>{{ 'checkout.payment.bank_transfer_warning' | t }}</span>
-                      </div>
-                      <input type="hidden" name="coupon_name">
-                      <input type="hidden" name="order[src]" value="{{ params.src }}">
-                      <input type="hidden" name="order[xcod]" value="{{ params.src }}">
-                      <input type="hidden" name="order[payment_type]" value="bank_transfer">
-                      <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
-
-                      <div class="form-group">
-                        {% for bank in gateway.supported_banks %}
-                        <label class="radio-inline">
-                          <input type="radio" name="order[bank_transfer][institution]" id="bank-{{ bank }}"
-                            value="{{ bank }}"> <span class="bank-flag {{ bank }}"></span>
-                        </label>
-                        {% endfor %}
-                      </div>
-                    </div>
-                    {% endform %}
-                  </div>
-                  {% endif %}
                 </div>
               </div>
             </div>
           </div>
+
+          <div class="text-center" id="terms-of-service-text-container">
+            <input type="checkbox" id="checkbox-terms-of-service">
+            <label for="checkbox-terms-of-service">
+              {{ 'express_checkout.checkbox_terms_of_service' | t: url: 'MY_URL_HERE' }}
+            </label>
+          </div>
+
+          <button id="btn-finalize-purchase" disabled
+            class="btn btn-block btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}
+            <i class="fal fa-lock"></i>
+          </button>
+
+          <div id="security-images-container">
+            <img src="{{ 'secure-purchase.png' | asset_url }}" alt="Secure Purchage Image">
+            <img src="{{ 'protected-data.png' | asset_url }}" alt="Protected Data Image">
+          </div>
+
+          {% include "express_checkout/payment-processing-message-box" with gateway %}
+
         </div>
-
-        <div class="text-center" id="terms-of-service-text-container">
-          <input type="checkbox" id="checkbox-terms-of-service">
-          <label for="checkbox-terms-of-service">
-            {{ 'express_checkout.checkbox_terms_of_service' | t: url: 'MY_URL_HERE' }}
-          </label>
-        </div>
-
-        <button id="btn-finalize-purchase" disabled
-          class="btn btn-block btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}
-          <i class="fal fa-lock"></i>
-        </button>
-
-        <div id="security-images-container">
-          <img src="{{ 'secure-purchase.png' | asset_url }}" alt="Secure Purchage Image">
-          <img src="{{ 'protected-data.png' | asset_url }}" alt="Protected Data Image">
-        </div>
-
-        {% include "express_checkout/payment-processing-message-box" with gateway %}
-
       </div>
     </div>
   </div>
@@ -323,9 +319,19 @@
 </script>
 
 <style>
+  @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
-  .express-checkout-payment-page {
+  html *, .btn {
+    font-family: 'Muli';
+  }
+
+  body {
+    color: #000000;
     font-size: 14px;
+  }
+
+  .container-spacing {
+    margin-top: 65px;
   }
 
   .checkout-page .tab-content {
@@ -363,6 +369,7 @@
   }
 
   .title-form {
+    margin: 25px 0;
     font-weight: bold;
     line-height: 130%;
     text-transform: uppercase;
@@ -429,11 +436,17 @@
     text-align: justify;
     background: #F4F4F4;
     border-radius: 2px;
+    color: #797979;
   }
 
   #terms-of-service-text-container {
+    font-weight: 100;
     margin: 21px 0;
     color: #797979;
+  }
+
+  #terms-of-service-text-container label {
+    font-weight: normal;
   }
 
   #terms-of-service-text-container a {

@@ -5,8 +5,9 @@
 
       <div class="row">
         <div class="col-xs-12 col-sm-5 col-sm-push-7 col-md-4">
-          <h4 class="title-purchage-summary">{{ 'express_checkout.title_purchase_summary' | t }}</h4>
-          {% include "express_checkout/product-box" %}
+          <h6 class="title-purchage-summary">{{ 'express_checkout.title_purchase_summary' | t }}</h6>
+          {% assign product = order.items.last.product %}
+          {% include "express_checkout/product-box" with product  %}
           {% include "express_checkout/totals-box" %}
         </div>
 
@@ -26,7 +27,7 @@
               {% if order.status == 'processing' or order.status == 'initiated' %}
                 <img src="{{ 'processing-icon.png' | asset_url }}" alt="Processing icon" width="74"
                   height="68">
-                <h3 class="title-buying-text color-title-processing">{{ 'checkout.success.title.processing' | t }}</h3>
+                <span class="title-buying-text color-title-processing">{{ 'checkout.success.title.processing' | t }}</span>
                 <p>{{ 'checkout.success.description.processing' | t }}</p>
                 <div class="buttons-padding">
                   <a href="/users/sign_in" class="btn btn-light btn-primary-options btn-block">
@@ -36,7 +37,7 @@
               {% elsif order.status == 'authorized' or order.status == 'confirmed' %}
                 <img src="{{ 'success-icon.png' | asset_url }}" alt="Success icon" width="70"
                   height="64">
-                <h3 class="title-buying-text color-title-confirmed">{{ 'checkout.success.title.success' | t }}</h3>
+                <span class="title-buying-text color-title-confirmed">{{ 'checkout.success.title.success' | t }}</span>
 
                 {% unless payment.kind == 'free' %}
                   {% if current_user == nil %}
@@ -60,7 +61,7 @@
 
               {% elsif order.status == 'canceled' %}
                 <img src="{{ 'error-icon.png' | asset_url }}" alt="Error icon" width="112" height="74">
-                <h3 class="title-buying-text color-title-error">{{ 'checkout.success.title.error' | t }}</h3>
+                <span class="title-buying-text color-title-error">{{ 'checkout.success.title.error' | t }}</span>
                 <p>{{ 'checkout.success.description.error' | t }}</p>
                 <div class="buttons-padding">
                   <a href="{{ return_url | default: back_path }}" class="btn btn-light btn-primary-options btn-block">
@@ -89,6 +90,17 @@
   </div>
 <style>
 
+  @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+  html *, .btn {
+    font-family: 'Muli';
+  }
+
+  body {
+    color: #000000;
+    font-size: 14px;
+  }
+
   .checkout-success-page {
     font-size: 14px;
   }
@@ -98,15 +110,16 @@
     box-shadow: 0px 5px 10px rgba(211, 211, 211, 0.198044);
     border-radius: 2px;
     padding: 24px 31px;
-    margin-top: 22px;
-    margin-bottom: 60px;
+    margin-top: 56px;
+    margin-bottom: 70px;
   }
 
   .title-buying-text {
-    margin-top: 20px;
     font-weight: bold;
-    padding: 0 40px;
+    font-size: 30px;
     line-height: 115%;
+    padding: 0 30px;
+    margin: 15px 0;
   }
 
   .color-title-confirmed {
@@ -143,7 +156,10 @@
   }
 
   .title-purchage-summary {
+    margin-top: 12px;
+    margin-bottom: 25px;
     font-weight: bold;
+    line-height: 130%;
     text-transform: uppercase;
   }
 

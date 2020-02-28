@@ -1,5 +1,5 @@
-<div id="product-{{ product.id }}" class="row">
-  <div class="col-md-12">
+<div id="product-{{ product.id }}">
+  <div class="">
     <div class="product-image">
       {% if product.logo %}
       {% image, src: product.logo, alt: product.title %}
@@ -7,20 +7,15 @@
       {% assign placeholder = 'missing-product-logo.png' | asset_url %}
       {% image, src: placeholder, alt: product.title %}
       {% endif %}
-    </div>
-  </div>
 
-  <div class="col-md-12">
-    <h4 tabindex='0' class="product-title">
-      {{ product.title }}
-    </h4>
+      <span> {{ product.title }} </span>
+    </div>
   </div>
 </div>
 
 <style>
   .product-image {
     position: relative;
-    overflow: hidden;
   }
 
   .product-image img {
@@ -29,14 +24,13 @@
     filter: brightness(70%);
   }
 
-  .product-title {
+  .product-image span {
     position: absolute;
-    top: -90px;
-    left: 28px;
+    top: 110px;
+    left: 12px;
     color: #fff;
     font-weight: bold;
     font-size: 20px;
-    width: 330px;
-    overflow-wrap: break-word;
+    line-height: 123%;
   }
 </style>

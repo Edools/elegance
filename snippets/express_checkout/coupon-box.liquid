@@ -1,3 +1,5 @@
+
+{% if payment_option.kind != 'subscription' %}
 <div class="row spacing-top">
   <div id="add-coupon-container">
     <div class="col-xs-9">
@@ -30,6 +32,7 @@
     {% endform %}
   </div>
 </div>
+{% endif %}
 
 <style>
   .spacing-top {
