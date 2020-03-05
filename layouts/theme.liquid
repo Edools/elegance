@@ -75,6 +75,7 @@
   {% if current_school | has_feature: 'recaptcha' %}
     <script defer src='https://www.google.com/recaptcha/api.js?onload=onLoadRecaptcha&render=explicit'></script>
   {% endif %}
+
 </head>
 
 <body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% elsif current_path == '/chat' %}chat-page{% endif %}">
@@ -82,7 +83,24 @@
     {% include 'accessibility-menu' %}
 
     {% if current_path != '/express_checkout/payment' and current_path != '/express_checkout/success' %}
-      {% include 'navbar' %}
+      {% comment %} Teste logico para saber qual pagina está sendo mostrada e se foi escolhido mostrar ou não o objeto {% endcomment %}
+      {% if settings.view.liga.home.header == '1' or settings.view.liga.check.header == '1' or settings.view.liga.login.header == '1' %}
+        {% if current_path == '/' or current_path contains 'cart' or current_path contains 'checkout' or current_path contains 'users' %}
+          {% if settings.view.liga.home.header != '1' and current_path == '/' %}
+            {% include 'navbar' %}
+          {% endif %}
+          {% if settings.view.liga.check.header != '1' and current_path contains 'cart' or current_path contains 'checkout' %}
+            {% include 'navbar' %}
+          {% endif %}
+          {% if settings.view.liga.login.header != '1' and current_path contains 'users' %}
+            {% include 'navbar' %}
+          {% endif %}
+        {% else %}
+          {% include 'navbar' %}
+        {% endif %}
+      {% else %}
+          {% include 'navbar' %}
+      {% endif %}
     {% else %}
       {% include 'navbar-express-checkout' %}
     {% endif %}
@@ -99,5 +117,6 @@
   {% endif %}
 
   {{ settings.view.injector.body }}
+
 </body>
 </html>
