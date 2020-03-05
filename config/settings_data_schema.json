@@ -356,8 +356,179 @@
     ]
   },
   {
-    "name": "Navbar",
+    "name": "Configurações Detalhes das Páginas",
     "id": "2",
+    "icon" : "globe",
+    "settings": [
+      {
+        "template": "<h3>Página Home</h3><p></p>"
+      },
+      {
+        "key": "view.liga.home.logo_href",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Retira o link da logo na página da Home."
+        }
+      },
+      {
+        "key": "view.liga.home.header",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Mostrar Header",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "key": "view.liga.home.footer",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Mostrar Footer",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "template": "<h3>Página Login</h3><p></p>"
+      },
+      {
+        "key": "view.liga.login.logo_href",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Retira o link da logo na página de Login."
+        }
+      },
+      {
+        "key": "view.liga.login.header",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Mostrar Header",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "key": "view.liga.login.footer",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Mostrar Footer",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "template": "<h3>Páginas Cart/Checkout</h3><p></p>"
+      },
+      {
+        "key": "view.liga.check.logo_href",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Retira o link da logo no Cart/Checkout"
+        }
+      },
+      {
+        "key": "view.liga.check.back_button",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Esconder o botão voltar na página Cart/Checkout"
+        }
+      },
+      {
+        "key": "view.liga.check.header",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Mostrar Header",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "key": "view.liga.check.footer",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Mostrar Footer.",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "template": "<h3>Redirecionamentos</h3><p></p>"
+      },
+      {
+        "template": "<h4>- Redirecionamento Página de Sucesso</h4><p></p>"
+      },
+      {
+        "key": "view.liga.check.success_page",
+        "type": "textarea",
+        "templateOptions": {
+          "placeholder": "Endereço para Redirecionamento"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Navbar",
+    "id": "3",
     "icon" : "globe",
     "settings": [
       {
@@ -505,7 +676,7 @@
   },
   {
     "name": "Footer",
-    "id": "3",
+    "id": "4",
     "icon" : "globe",
     "settings": [
       {
@@ -598,7 +769,7 @@
   {
     "name": "Header",
     "icon" : "home",
-    "id": "4",
+    "id": "5",
     "settings": [
       {
         "template": "<h3>Header</h3>"
@@ -667,7 +838,7 @@
   {
     "name": "Tópicos",
     "icon" : "home",
-    "id": "5",
+    "id": "6",
     "settings": [
       {
         "template": "<br><h3>Cores</h3>"
@@ -735,7 +906,7 @@
   {
     "name": "Destaque de Produtos",
     "icon" : "home",
-    "id": "6",
+    "id": "7",
     "settings": [
       {
         "template": "<h3>Título da lista de produtos</h3>"
@@ -753,7 +924,7 @@
   {
     "name": "Apresentação",
     "icon" : "home",
-    "id": "7",
+    "id": "8",
     "settings": [
       {
         "template": "<h3>Sobre</h3>"
@@ -831,7 +1002,7 @@
   {
     "name": "Divisão por Categorias",
     "icon" : "home",
-    "id": "8",
+    "id": "9",
     "settings": [
       {
         "key": "view.home.enable_categories",
@@ -873,7 +1044,7 @@
   {
     "name": "Página de Produto",
     "icon" : "book",
-    "id": "9",
+    "id": "10",
     "settings": [
       {
         "template": "<h3>Estilos</h3>"
@@ -909,11 +1080,10 @@
       }
     ]
   },
-
   {
     "name": "Injetor HTML/CSS/JS",
     "icon" : "code",
-    "id": "10",
+    "id": "11",
     "settings": [
       {
         "key": "view.injector.head",
@@ -933,7 +1103,7 @@
   },
   {
     "name": "Acessibilidade",
-    "id": "11",
+    "id": "12",
     "icon" : "wheelchair",
     "settings": [
       {
