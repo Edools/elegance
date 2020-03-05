@@ -1,6 +1,8 @@
 <div class="checkout-page checkout-cart-page page">
   <div class="container page-container">
-    {% include "checkout/return" %}
+    {% if settings.view.liga.check.back_button != true %}
+      {% include "checkout/return" %}
+    {% endif %}
 
     <div class="checkout">
       <div class="checkout-panel">
