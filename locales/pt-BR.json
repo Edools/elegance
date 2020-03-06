@@ -94,6 +94,9 @@
     "title": {
       "blank": "Titulo não pode ficar em branco"
     },
+    "terms_of_service_and_privacy": {
+      "blank": "Aceite os Termos de Serviço e Política de Privacidade para continuar."
+    },
     "description": {
       "blank": "Descrição não pode ficar em branco"
     },
@@ -634,11 +637,11 @@
       "credit_card_warning": "Sua conta já possui um cartão ativo, não é possível usar outro.",
       "installment_amount": {
         "one": "{{ amount }} à vista",
-        "other": "{{ count }}x de {{ amount }}"
+        "other": "{{ count }}x de {{ amount }} ({{ grand_total }})"
       },
       "installment_amount_with_taxes": {
         "one": "{{ amount }} à vista s/ juros",
-        "other": "{{ count }}x de {{ amount }} c/ juros {{ amount_with_taxes }}"
+        "other": "{{ count }}x de {{ amount }} c/ juros ({{ amount_with_taxes }})"
       }
     },
     "success": {
