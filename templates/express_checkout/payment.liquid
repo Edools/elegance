@@ -18,18 +18,11 @@
             <div class="row">
               <form id="student-form">
                 {% if current_user == nil %}
-                <div class="form-group col-md-6">
-                  <label for="user-first-name" class="control-label">{{ 'checkout.complete.first_name' | t }}</label>
-                  <input type="text" id="user-first-name" name="user[first_name]" class="form-control" placeholder="Seu nome"
-                    value="{{ params.user.first_name }}" data-validation="required"
-                    data-validation-error-msg="{{ 'errors.first_name.blank' | t }}">
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label for="user-last-name" class="control-label">{{ 'checkout.complete.last_name' | t }}</label>
-                  <input type="text" id="user-last-name" name="user[last_name]" class="form-control"
-                    placeholder="Seu sobrenome" value="{{ params.user.last_name }}" data-validation="required"
-                    data-validation-error-msg="{{ 'errors.last_name.blank' | t }}">
+                <div class="form-group col-md-12">
+                  <label for="user-full-name" class="control-label">{{ 'checkout.complete.full_name' | t }}</label>
+                  <input type="text" id="user-full-name" name="user[full_name]" class="form-control"
+                    placeholder="Seu nome completo" value="{{ params.user.first_name }}" data-validation="required"
+                    data-validation-error-msg="{{ 'errors.full_name.blank' | t }}">
                 </div>
 
                 <div class="form-group col-md-12">
@@ -58,9 +51,9 @@
 
                   <div class="form-group col-md-6">
                     <label for="user-street" class="control-label">{{ 'checkout.complete.address_street' | t }}</label>
-                    <input type="text" id="user-street" name="user[address_attributes][street]" placeholder="Seu logradouro"
-                      value="{{ address.street }}" class="form-control" data-validation="required"
-                      data-validation-error-msg="{{ 'errors.address_street.blank' | t }}">
+                    <input type="text" id="user-street" name="user[address_attributes][street]"
+                      placeholder="Seu logradouro" value="{{ address.street }}" class="form-control"
+                      data-validation="required" data-validation-error-msg="{{ 'errors.address_street.blank' | t }}">
                   </div>
 
                   <div class="form-group col-md-6">
@@ -71,16 +64,18 @@
                   </div>
 
                   <div class="form-group col-md-6">
-                    <label for="user-complement" class="control-label">{{ 'checkout.complete.address_complement' | t }}</label>
-                    <input type="text" id="user-complement" name="user[address_attributes][complement]" placeholder="Seu complemento"
-                      value="{{ address.complement }}" class="form-control">
+                    <label for="user-complement"
+                      class="control-label">{{ 'checkout.complete.address_complement' | t }}</label>
+                    <input type="text" id="user-complement" name="user[address_attributes][complement]"
+                      placeholder="Seu complemento" value="{{ address.complement }}" class="form-control">
                   </div>
 
                   <div class="form-group col-md-6">
-                    <label for="user-district" class="control-label">{{ 'checkout.complete.address_district' | t }}</label>
-                    <input type="text" id="user-district" name="user[address_attributes][district]" placeholder="Seu bairro"
-                      value="{{ address.district }}" class="form-control" data-validation="required"
-                      data-validation-error-msg="{{ 'errors.address_district.blank' | t }}">
+                    <label for="user-district"
+                      class="control-label">{{ 'checkout.complete.address_district' | t }}</label>
+                    <input type="text" id="user-district" name="user[address_attributes][district]"
+                      placeholder="Seu bairro" value="{{ address.district }}" class="form-control"
+                      data-validation="required" data-validation-error-msg="{{ 'errors.address_district.blank' | t }}">
                   </div>
 
                   <div class="form-group col-md-6">
@@ -122,15 +117,17 @@
                 <input type="hidden" class="form-control valid" name="user[address_attributes][zip_code]"
                   value="{{ address.zip_code }}">
 
-                <span><b>{{ current_user.first_name }}</b></span><br>
-                <div class="email-logout-container">
-                  <span>
-                    {{ current_user.email }}
-                  </span>
-                  {% capture logout_link_html %}
-                  <span class="link-logout">{{ 'express_checkout.log_out' | t }}</span>
-                  {% endcapture %}
-                  {{ logout_link_html | logout_link }}
+                <div class="personal-data-container">
+                  <span><b>{{ current_user.first_name }}</b></span><br>
+                  <div class="email-logout-container">
+                    <span>
+                      {{ current_user.email }}
+                    </span>
+                    {% capture logout_link_html %}
+                    <span class="link-logout">{{ 'express_checkout.log_out' | t }}</span>
+                    {% endcapture %}
+                    {{ logout_link_html | logout_link }}
+                  </div>
                 </div>
                 {% endif %}
               </form>
@@ -447,7 +444,7 @@
 
     $('.container-spacing input').keyup(event => $(`#${event.target.id}`).validate());
 
-    $("#btn-finalize-purchase").click(() => {
+    $("#btn-finalize-purchase").click(event => {
       const activeTab = $('#tab-payment-methods li.active a').attr('href');
 
       const currentFormIdentifier = `#${$(activeTab).find('form').attr('id')}`;
@@ -469,10 +466,23 @@
       }
 
       studentDataArray.forEach(({ name, value }) => {
-        $('<input>').attr({ type: 'hidden', name, value }).appendTo(currentFormIdentifier);
+
+        if (name === 'user[full_name]') {
+          const EMPTY_STRING = ' ';
+          const splitted = value ? value.split(EMPTY_STRING) : EMPTY_STRING.split(EMPTY_STRING);
+          const firstName = splitted.shift();
+          const lastName = splitted ? splitted.join(EMPTY_STRING) : EMPTY_STRING;
+
+          $('<input>').attr({ type: 'hidden', name: 'user[first_name]', value: firstName }).appendTo(currentFormIdentifier);
+          $('<input>').attr({ type: 'hidden', name: 'user[last_name]', value: lastName }).appendTo(currentFormIdentifier);
+        } else {
+          $('<input>').attr({ type: 'hidden', name, value }).appendTo(currentFormIdentifier);
+        }
+
       });
 
       $(currentFormIdentifier).submit();
+
     });
 
   });
@@ -591,7 +601,11 @@
     color: #262626;
   }
 
-  .email-logout-container {
+  .personal-data-container {
+    padding: 0 15px;
+  }
+
+  .personal-data-container .email-logout-container {
     display: flex;
     justify-content: space-between;
   }

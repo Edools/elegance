@@ -100,6 +100,9 @@
     "description": {
       "blank": "Descrição não pode ficar em branco"
     },
+    "full_name": {
+      "blank": "Adicione o seu nome completo."
+    },
     "first_name": {
       "blank": "Adicione o nome."
     },
@@ -601,6 +604,7 @@
     "total_amount_to_pay_in_installments": "ou em até {{ installments }}x no cartão:",
     "complete": {
       "personal_information": "Dados Pessoais",
+      "full_name": "Nome Completo",
       "first_name": "Nome",
       "last_name": "Sobrenome",
       "phone": "Telefone (opcional)",
