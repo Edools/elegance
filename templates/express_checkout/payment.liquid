@@ -19,15 +19,15 @@
               <form id="student-form">
                 {% if current_user == nil %}
                 <div class="form-group col-md-6">
-                  <label for="user-name" class="control-label">{{ 'checkout.complete.first_name' | t }}</label>
-                  <input type="text" id="user-name" name="user[first_name]" class="form-control" placeholder="Seu nome"
+                  <label for="user-first-name" class="control-label">{{ 'checkout.complete.first_name' | t }}</label>
+                  <input type="text" id="user-first-name" name="user[first_name]" class="form-control" placeholder="Seu nome"
                     value="{{ params.user.first_name }}" data-validation="required"
                     data-validation-error-msg="{{ 'errors.first_name.blank' | t }}">
                 </div>
 
                 <div class="form-group col-md-6">
-                  <label for="user-name" class="control-label">{{ 'checkout.complete.last_name' | t }}</label>
-                  <input type="text" id="user-name" name="user[last_name]" class="form-control"
+                  <label for="user-last-name" class="control-label">{{ 'checkout.complete.last_name' | t }}</label>
+                  <input type="text" id="user-last-name" name="user[last_name]" class="form-control"
                     placeholder="Seu sobrenome" value="{{ params.user.last_name }}" data-validation="required"
                     data-validation-error-msg="{{ 'errors.last_name.blank' | t }}">
                 </div>
@@ -315,6 +315,11 @@
 
                       {% form 'express_checkout/pay', id: boleto-form %}
                       <div class="form-container">
+
+                        {% if form.errors %}
+                        <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+                        {% endif %}
+
                         <div class="information-alert">
                           <span>{{ 'checkout.payment.boleto_warning' | t }}</span>
                         </div>
@@ -335,6 +340,11 @@
 
                       {% form 'express_checkout/pay', id: bank-transfer-form %}
                       <div class="form-container">
+
+                        {% if form.errors %}
+                        <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+                        {% endif %}
+
                         <div class="information-alert">
                           <span>{{ 'checkout.payment.bank_transfer_warning' | t }}</span>
                         </div>

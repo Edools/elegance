@@ -547,8 +547,9 @@
     "has_a_discount_coupon": "Possui um cupom de desconto?",
     "herospark_at_work": "- HeroSpark a serviço de {{ name }} - CNPJ {{ cnpj }}",
     "log_out": "deslogar",
-    "processed_by": "O processamento deste pedido é feito através da tecnologia de pagamento ",
     "original_price_text": "Preço original:",
+    "processed_by": "O processamento deste pedido é feito através da tecnologia de pagamento ",
+    "remove": "remover",
     "title_payment_method": "2. ESCOLHA O MÉTODO DE PAGAMENTO",
     "title_personal_data": "1. PREENCHA SEUS DADOS PESSOAIS",
     "title_purchase_summary": "RESUMO DA COMPRA",
@@ -570,9 +571,9 @@
     "payment_methods": {
       "title": "Formas de Pagamento",
       "description": "Métodos de Pagamento: Visa, MasterCard, Hipercard, American Express, Bradesco, Itaú, Banco do Brasil e Boleto Bancário",
-      "credit_card": "Cartão de créd.",
+      "credit_card": "Cartão de crédito",
       "bank_transfer": "Débito online",
-      "boleto": "Boleto"
+      "boleto": "Boleto Bancário"
     },
     "safety": {
       "title": "Este site é <strong>seguro</strong>",
@@ -841,8 +842,8 @@
   "pages": {
     "retry_payment": {
       "title": "Nova tentativa de pagamento do pedido #{{ order_id }}",
-      "credit_card": "Cartão de créd.",
-      "boleto": "Boleto",
+      "credit_card": "Cartão de Crédito",
+      "boleto": "Boleto Bancário",
       "credit_card_number": "Número do cartão",
       "credit_card_name": "Nome impresso no cartão",
       "credit_card_expiry": "Validade",
