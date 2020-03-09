@@ -6,7 +6,7 @@
   {% if discount > 0 %}
     <div class="totals-box-container">
       <div class="totals-box-item">{{ 'express_checkout.original_price_text' | t }}</div>
-      <div class="totals-box-item">
+      <div class="totals-box-item product-value-text">
         {{ payment.price | money_option_presentation: payment.kind, payment.period, 'full', 1 }}
       </div>
     </div>
@@ -22,7 +22,7 @@
 
   <div class="totals-box-container">
     <div class="totals-box-item"><b>{{ 'checkout.total_amount_to_pay' | t }}</b></div>
-    <div class="totals-box-item">
+    <div class="totals-box-item product-value-text">
       <span>
         <b id="js-payment-total">
           {% if payment.kind == 'free' %}
@@ -82,6 +82,10 @@
 
   .totals-box-item {
     flex-wrap: wrap;
+  }
+
+  .product-value-text {
+    font-size: 16px;
   }
 
   .divider {

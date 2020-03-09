@@ -1,48 +1,51 @@
 <header id="header">
-  <a href="/">
-    {% if settings.view.general.navbar.logo.size > 0 %}
-    <img class="item-header" src="{{ settings.view.general.navbar.logo }}" alt="Logo School" width="100" height="17">
-    {% else %}
-    <h4 class="item-header">{{ settings.view.general.navbar.title }}</h4>
-    {% endif %}
-  </a>
-  <img class="item-header" src="{{ 'inline-secure-purchase.png' | asset_url }}" alt="Inline Secure Purchage Image"
-    width="160" height="21">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-7 col-sm-7 col-md-6 col-md-offset-1">
+        {% if settings.view.general.navbar.logo.size > 0 %}
+          <img class="item-header" src="{{ settings.view.general.navbar.logo }}" alt="Logo School" width="100"
+            height="17">
+        {% else %}
+          <h4 class="item-header">{{ settings.view.general.navbar.title }}</h4>
+        {% endif %}
+      </div>
+      <div class="col-xs-5 col-sm-5 col-md-4 custom-col">
+        <img class="item-header pull-right" src="{{ 'inline-secure-purchase.png' | asset_url }}"
+          alt="Inline Secure Purchage Image" width="160" height="21">
+      </div>
+    </div>
+  </div>
 </header>
-
 
 <style>
   #header {
     display: flex;
-    align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     position: fixed;
     height: 55px;
     width: 100%;
     background-color: #FFFFFF;
     z-index: 100;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
   }
 
   #header a {
     text-decoration: none;
   }
 
-  #header .item-header:nth-child(2) {
-    margin-left: 290px;
+  .custom-col .item-header {
+    margin-top: 18px;
   }
 
-  @media all and (max-width: 602px) {
-    #header {
-      display: flex;
-      justify-content: flex-end;
-    }
+  .custom-col {
+    height: 55px;
+  }
 
-    #header .item-header:nth-child(1) {
-      display: none;
-    }
-
-    #header .item-header:nth-child(2) {
-      margin-right: 15px;
+  @media all and (max-width: 767px) {
+    .container {
+      width: 100%;
+      margin-right: 0;
+      margin-left: 0;
     }
   }
 </style>

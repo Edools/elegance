@@ -546,6 +546,7 @@
     "discount_text": "Desconto:",
     "has_a_discount_coupon": "Possui um cupom de desconto?",
     "herospark_at_work": "- HeroSpark a serviço de {{ name }} - CNPJ {{ cnpj }}",
+    "log_out": "deslogar",
     "processed_by": "O processamento deste pedido é feito através da tecnologia de pagamento ",
     "original_price_text": "Preço original:",
     "title_payment_method": "2. ESCOLHA O MÉTODO DE PAGAMENTO",

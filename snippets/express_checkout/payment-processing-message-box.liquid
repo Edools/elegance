@@ -1,9 +1,13 @@
 <div class="text-center" id="text-security-container">
-  <span>
+  <div>
     {{ 'express_checkout.processed_by' | t }}
     {% image, id: gateway_id, src: gateway.logo, alt: gateway.name, width: 50 %}
     {{ 'express_checkout.herospark_at_work' | t: name: current_school.name, cnpj: current_school.cnpj }}
-  </span>
+  </div>
+
+  <div id="image-logo">
+    <img src="{{ 'logo-herospark.png' | asset_url }}" alt="Logo Herospark" width="90" height="17">
+  </div>
 </div>
 
 <style>
@@ -11,10 +15,7 @@
     color: #797979;
   }
 
-  #text-security-container::after {
-    display: flex;
-    justify-content: center;
+  #image-logo {
     margin: 30px 0;
-    content: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAAARCAYAAABdN7utAAAEK0lEQVRYR+1YW1LUUBA9TaX8dViBsADLsAKHFTj8SiyHFYgrQFYArMChDP4KK2BcgRc3IK7A4dupuda5j6RzJ9EgAmUV+WPS6dt9+vTpvgh6PDYvhgDOo6mYUnp89mCiEOgF2APQN+fMA9A3x7CXhwbQNi+mAJ6HLzfFlPwbbYy2efEOwN5vTvksphzavLAtNgbAJYCjeEa0sfl4Dfi5B8gIwMD/bi8BmQDZkZjJzMf0agzYg9oGU2DxVsxHk8YbfDOXqZhyX8ejbKt861iakgmAZzP2UzHlkbJjji5flccAmFNuc2CxcV9A61y3xJSnHryXObDC4ALAaYkIuN0CVviedt8BTACsAWBhZmLKNQUe37OgfGjzJIC0pUDi968BHIspxx1FaPOzL6Yk2UjEFqC3TwF5AciOmA+Tuwb6IrAidg3jJDirnsnzL90gVxAYINsE5mTWuO46FglIGF2BEQAJHbvY8HZjsu5HDW62Gjsm6WQFqvuGZz+JS0EKtM2LQwBvQsfuuriSCv6tdDQSSnxq6XDtGUD9phJcB+YMiMHFRzE9lSnZAewaYGdiTphU41GMToGOchfi2N4F5ICsA+x7wL7V/rr9RLbGgtWMDpJGX2diTthl7pH6RRpu99+sZA+NDsk0NDpJMJ6RrQJzFvlZ+IXa7ZgQn+b8sGeAEOBzwE4AYdu7edLFxPB7wujCyUqQG8qSFXOy/js/St5ETOkkLjIaAAtJSbsAsqHuDsdoRfVeaN8A6Db/LUPT61oCtB6+n4FsDMxpE2VoCmQ7YiaXNRPdEA0azQ4QdoFjmrJxLLZ5ZDc6l4Bm8HWMHmh3FoEfsPhiTna0fSUd12H2PwSalR8FcLRs/ZHRsS0DYCwCAZ8BGWWIel1dsABc+W3BnkZpsHls/5URxM5gCdKCQ7kaii1DNZ6xwZgV86M8XgF26odgU4ZSjd4D7ACQx8DiTMzHs6QVvd4sS0dfjT72604lEXpyxwES49+NK9SyTLUyPhZqMzgg0K1xLc+ItNH8UEw1WnV+NT+UdFwBiyHw6FLJYNUdTaA3iq+weOqPXYyuAXRPSYAGIXyTrXtGu2lOljz+g35diClzmxejuBY29bdxRgfQ1XDlTl1pOwDuwbwbuO+Wga5itOyceqdvrnehkNxMaOfYf+dA+62jcTHiJcIVIAwaJt4F9ncSAJCh3xb85SEARJBiEeL/ZrqAZkEHcZgls2AG2B8cim1bBwsM4JPex9v36Oqy49bRewLa7cxqvdMDyL2j5jKhCHi4mGSHvqUdsyg12uYYyHbbWj4BMgK1NAeSxYCXGt4ElySo1nevw21Ae19xwNrkwtIhHb1WkWsa2byINzJ3xdZr1TVd/RfmvRh9G5koHYus7Ryot3H+XftMtw51i6uH4W0FlWwTbjXTS/5tnXsffn8BdrobwCIzbuwAAAAASUVORK5CYII=');
   }
 </style>
