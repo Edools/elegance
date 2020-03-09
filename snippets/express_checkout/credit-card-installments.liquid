@@ -1,5 +1,5 @@
 <div class="select-container">
-  <select id="js-credit-card-installments" class="form-control form-input classic"
+  <select id="js-credit-card-installments" class="form-control"
     name="order[credit_card][installments]" required>
     {% assign payment_installments = credit_card.installments | plus: 0 %}
     {% assign installments_by_value = installments | sort:"value" | reverse %}
@@ -25,27 +25,3 @@
     {% endfor %}
   </select>
 </div>
-
-<style>
-  .select-container select {
-    width: 100%;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
-
-  .select-container {
-    width: 100%;
-    position: relative;
-  }
-
-  .select-container::before {
-    content: '';
-    display: block;
-    border: 5px solid transparent;
-    border-top-color: #262626;
-    position: absolute;
-    right: 15px;
-    top: calc(50% - 2px);
-  }
-</style>

@@ -18,22 +18,109 @@
             <div class="row">
               <form id="student-form">
                 {% if current_user == nil %}
-                <div class="form-group {% if form.errors.email %}has-error{% endif %} col-md-12">
-                  <label for="user-email" class="control-label">{{ 'login.email' | t }}</label>
-                  <input type="email" id="user-email" name="user[email]" class="form-control form-input"
-                    required="required" placeholder="seumelhoremail@gmail.com" value="{{ params.user.email }}"
-                    data-validation="email" data-validation-error-msg="{{ 'errors.email.invalid' | t }}">
+                <div class="form-group col-md-6">
+                  <label for="user-name" class="control-label">{{ 'checkout.complete.first_name' | t }}</label>
+                  <input type="text" id="user-name" name="user[first_name]" class="form-control" placeholder="Seu nome"
+                    value="{{ params.user.first_name }}" data-validation="required"
+                    data-validation-error-msg="{{ 'errors.first_name.blank' | t }}">
                 </div>
 
-                <div class="form-group {% if form.errors.cpf %}has-error{% endif %} col-md-9">
+                <div class="form-group col-md-6">
+                  <label for="user-name" class="control-label">{{ 'checkout.complete.last_name' | t }}</label>
+                  <input type="text" id="user-name" name="user[last_name]" class="form-control"
+                    placeholder="Seu sobrenome" value="{{ params.user.last_name }}" data-validation="required"
+                    data-validation-error-msg="{{ 'errors.last_name.blank' | t }}">
+                </div>
+
+                <div class="form-group col-md-12">
+                  <label for="user-email" class="control-label">{{ 'login.email' | t }}</label>
+                  <input type="email" id="user-email" name="user[email]" class="form-control"
+                    placeholder="seumelhoremail@gmail.com" value="{{ params.user.email }}" data-validation="email"
+                    data-validation-error-msg="{{ 'errors.email.invalid' | t }}">
+                </div>
+
+                <div class="form-group col-md-9">
                   <label for="usercpf" class="control-label">{{ 'checkout.complete.cpf' | t }}</label>
-                  <input id="usercpf" inputmode="numeric" name="user[cpf]" class="form-control form-input"
+                  <input id="usercpf" inputmode="numeric" name="user[cpf]" class="form-control"
                     placeholder="___.___.___-__" value="{{ params.user.cpf }}" data-validate-cpf="true"
                     data-validation="cpf" data-validation-error-msg="{{ 'errors.cpf.invalid' | t }}">
                 </div>
+
+                <div id="address-container">
+
+                  <div class="form-group col-md-12">
+                    <label for="user-cep" class="control-label">{{ 'checkout.complete.address_zip_code' | t }}</label>
+                    <input type="text" id="user-cep" name="user[address_attributes][zip_code]"
+                      {% if current_school | has_feature: 'cep_service' %}data-enable-cep-service="true" {% endif %}
+                      placeholder="Seu CEP" value="{{ address.zip_code }}" class="form-control"
+                      data-validation="required" data-validation-error-msg="{{ 'errors.address_zip_code.blank' | t }}">
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label for="user-street" class="control-label">{{ 'checkout.complete.address_street' | t }}</label>
+                    <input type="text" id="user-street" name="user[address_attributes][street]" placeholder="Seu logradouro"
+                      value="{{ address.street }}" class="form-control" data-validation="required"
+                      data-validation-error-msg="{{ 'errors.address_street.blank' | t }}">
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label for="user-number" class="control-label">{{ 'checkout.complete.address_number' | t }}</label>
+                    <input type="text" id="user-number" name="user[address_attributes][number]" placeholder="Seu número"
+                      value="{{ address.number }}" class="form-control" data-validation="required"
+                      data-validation-error-msg="{{ 'errors.address_number.blank' | t }}">
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label for="user-complement" class="control-label">{{ 'checkout.complete.address_complement' | t }}</label>
+                    <input type="text" id="user-complement" name="user[address_attributes][complement]" placeholder="Seu complemento"
+                      value="{{ address.complement }}" class="form-control">
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label for="user-district" class="control-label">{{ 'checkout.complete.address_district' | t }}</label>
+                    <input type="text" id="user-district" name="user[address_attributes][district]" placeholder="Seu bairro"
+                      value="{{ address.district }}" class="form-control" data-validation="required"
+                      data-validation-error-msg="{{ 'errors.address_district.blank' | t }}">
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label for="user-city" class="control-label">{{ 'checkout.complete.address_city' | t }}</label>
+                    <input type="text" id="user-city" name="user[address_attributes][city]" placeholder="Sua cidade"
+                      value="{{ address.city }}" class="form-control" data-validation="required"
+                      data-validation-error-msg="{{ 'errors.address_city.blank' | t }}">
+                  </div>
+
+                  <div class="form-group col-md-6">
+                    <label class="control-label">{{ 'checkout.complete.address_state' | t }}</label>
+                    <div class="select-container">
+                      {% include "select-address", selected_state: address.state %}
+                    </div>
+                  </div>
+
+                </div>
+
                 {% else %}
-                <input type="hidden" class="form-input valid" name="user[email]" value="{{ current_user.email }}">
-                <input type="hidden" class="form-input valid" name="user[cpf]" value="{{ current_user.cpf }}">
+
+                <input type="hidden" class="form-control valid" name="user[first_name]"
+                  value="{{ current_user.first_name }}">
+                <input type="hidden" class="form-control valid" name="user[last_name]"
+                  value="{{ current_user.last_name }}">
+                <input type="hidden" class="form-control valid" name="user[email]" value="{{ current_user.email }}">
+                <input type="hidden" class="form-control valid" name="user[cpf]" value="{{ current_user.cpf }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][street]]"
+                  value="{{ address.street }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][number]"
+                  value="{{  address.number }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][complement]"
+                  value="{{ address.complement }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][district]"
+                  value="{{ address.district }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][city]"
+                  value="{{ address.city }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][state]"
+                  value="{{ address.state  }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][zip_code]"
+                  value="{{ address.zip_code }}">
 
                 <span><b>{{ current_user.first_name }}</b></span><br>
                 <div class="email-logout-container">
@@ -135,6 +222,11 @@
 
                       {% form 'express_checkout/pay', id: card-form %}
                       <div class="form-container">
+
+                        {% if form.errors %}
+                        <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+                        {% endif %}
+
                         <input type="hidden" name="coupon_name">
                         <input type="hidden" name="order[src]" value="{{ params.src }}">
                         <input type="hidden" name="order[xcod]" value="{{ params.xcod }}">
@@ -152,9 +244,9 @@
                             class="control-label">{{ 'checkout.payment.credit_card_number' | t }}</label>
                           <div id="card-number-container">
                             <input type="text" inputmode="numeric" id="card-number" name="order[credit_card][number]"
-                              class="form-control form-input" placeholder="____ ____ ____ ____"
-                              value="{{ credit_card.number }}" {% if credit_card.active %} disabled {% endif %}
-                              data-validation="length" data-validation-length="min16, max19"
+                              class="form-control" placeholder="____ ____ ____ ____" value="{{ credit_card.number }}"
+                              {% if credit_card.active %} disabled {% endif %} data-validation="length"
+                              data-validation-length="min16, max19"
                               data-validation-error-msg="{{ 'errors.credit_card.number_invalid' | t }}">
 
                             <div id="card-number-icons">
@@ -169,7 +261,7 @@
                         <div class="form-group">
                           <label for="card-holder-name"
                             class="control-label">{{ 'checkout.payment.credit_card_name' | t }}</label>
-                          <input id="card-holder-name" name="order[credit_card][name]" class="form-control form-input"
+                          <input id="card-holder-name" name="order[credit_card][name]" class="form-control"
                             value="{{ credit_card.name }}" placeholder="João A. Silva" {% if credit_card.active %}
                             disabled {% endif %} data-validation="length" data-validation-length="min6"
                             data-validation-error-msg="{{ 'errors.credit_card.name_invalid' | t }}">
@@ -180,7 +272,7 @@
                             <label for="card-expiry"
                               class="control-label">{{ 'checkout.payment.credit_card_expiry' | t }}</label>
                             <input id="card-expiry" inputmode="numeric" name="order[credit_card][expiry]"
-                              class="form-control form-input" value="{{ credit_card.expiry }}" placeholder="MM/AAAA"
+                              class="form-control" value="{{ credit_card.expiry }}" placeholder="MM/AAAA"
                               {% if credit_card.active %} disabled {% endif %} data-validation="date"
                               data-validation-format="mm/yyyy"
                               data-validation-error-msg="{{ 'errors.credit_card.year_month_invalid' | t }}">
@@ -190,12 +282,12 @@
                               class="control-label">{{ 'checkout.payment.credit_card_cvv' | t }}</label>
                             <div class="input-group">
                               <input id="card-cvc" type="number" inputmode="numeric" name="order[credit_card][cvc]"
-                                class="form-control form-input" value="{{ credit_card.cvc }}" placeholder="CVC"
+                                class="form-control" value="{{ credit_card.cvc }}" placeholder="CVC"
                                 {% if credit_card.active %} disabled {% endif %} data-validation="length"
                                 data-validation-length="min3"
                                 data-validation-error-msg="{{ 'errors.credit_card.verification_value_invalid' | t }}">
                               <span class="input-group-btn">
-                                <button type="button" id="btn-cvc" class="btn btn-default form-input"
+                                <button type="button" id="btn-cvc" class="btn btn-default form-control"
                                   data-toggle="popover" data-container="body" data-html="true" data-trigger="hover"
                                   data-placement="top"
                                   data-content="<div class='poppover-cvc-container'><span class='card-cvc-preview'></span><div class='text-cvc-preview'><b>{{ 'express_checkout.where_to_find' | t }}</b><br><span>{{ 'express_checkout.description_where_to_find' | t }}</span></div></div>">
@@ -276,7 +368,7 @@
             <div id="terms-of-service-text-container">
               <div>
                 <label for="checkbox-terms-of-service">
-                  <input type="checkbox" class="form-input" id="checkbox-terms-of-service" data-validation="required"
+                  <input type="checkbox" id="checkbox-terms-of-service" data-validation="required"
                     data-validation-error-msg="{{ 'errors.terms_of_service_and_privacy.blank' | t }}">
                   {{ 'express_checkout.checkbox_terms_of_service' | t: url: '/terms-of-use' }}
                 </label>
@@ -338,7 +430,12 @@
       $(`#${cardType}`).css({ opacity: 1 });
     });
 
-    $('.container-spacing input').on("keyup", event => $(`#${event.target.id}`).validate());
+    $('a[data-toggle="tab"]').on('shown.bs.tab', event => {
+      const target = $(event.target).attr("href");
+      $('#address-container').fadeIn().css({ display: target === '#boleto' ? 'block' : 'none' });
+    });
+
+    $('.container-spacing input').keyup(event => $(`#${event.target.id}`).validate());
 
     $("#btn-finalize-purchase").click(() => {
       const activeTab = $('#tab-payment-methods li.active a').attr('href');
@@ -349,15 +446,14 @@
 
       const studentBlur = $('#student-form input').blur();
 
-
-      if (studentBlur.hasClass("form-input error")) {
+      if (studentBlur.hasClass("error")) {
         $("html").animate({ scrollTop: studentBlur.offset().top - 200 }, 1500);
         return
       }
 
       const checkboxTermsOfServiceBlur = $('#checkbox-terms-of-service').blur();
 
-      if (checkboxTermsOfServiceBlur.hasClass("form-input error")) {
+      if (checkboxTermsOfServiceBlur.hasClass("error")) {
         $("html").animate({ scrollTop: checkboxTermsOfServiceBlur.offset().top - 500 }, 1000);
         return
       }
@@ -389,6 +485,10 @@
     margin-top: 60px;
   }
 
+  #address-container {
+    display: none;
+  }
+
   .checkout-page .tab-content {
     margin-top: 0;
   }
@@ -413,6 +513,28 @@
 
   .popover.top>.arrow:after {
     border-top-color: #FFFFFF;
+  }
+
+  .select-container select {
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .select-container {
+    width: 100%;
+    position: relative;
+  }
+
+  .select-container::before {
+    content: '';
+    display: block;
+    border: 5px solid transparent;
+    border-top-color: #262626;
+    position: absolute;
+    right: 15px;
+    top: calc(50% - 2px);
   }
 
   .card-cvc-preview {
@@ -441,13 +563,13 @@
     margin-bottom: 32px;
   }
 
-  .form-container .form-input,
-  .form-container .form-input:hover {
+  .form-container .form-control,
+  .form-container .form-control:hover {
     border: 1px solid #A8A8A8;
     border-radius: 2px;
   }
 
-  .form-container .form-input:focus {
+  .form-container .form-control:focus {
     border: 1px solid #262626;
   }
 
@@ -587,7 +709,7 @@
     color: #269353;
   }
 
-  .has-success .form-input {
+  .has-success .form-control {
     border: 1px solid #269353;
   }
 
@@ -596,7 +718,7 @@
     color: #E42B2B;
   }
 
-  .has-error .form-input {
+  .has-error .form-control {
     border: 1px solid #E42B2B;
   }
 
