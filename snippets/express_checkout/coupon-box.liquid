@@ -1,23 +1,69 @@
-{% if payment_option.kind != 'subscription' %}
-  <div class="coupon-widget panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">{{ 'checkout.coupon' | t }}</h4>
-    </div>
-    <div class="panel-body">
-      {% form 'check_coupon', id: check-coupon-form, remote: true %}
-        <div class="form-group simple">
-          <div class="input-group">
-            <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
-            <input type="text" name="coupon" class="form-control" placeholder="{{ 'checkout.coupon_code' | t }}" required>
 
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-primary" data-disable-with="<i class='busy busy-xs'></i><span>{{ 'general.sending' | t }}...</span>">
-                Verificar
-              </button>
-            </span>
-          </div>
-        </div>
-      {% endform %}
+{% if payment_option.kind != 'subscription' %}
+<div class="row spacing-top">
+
+  <div id="js-add-coupon-container">
+    <div class="col-xs-9">
+      {{ 'express_checkout.has_a_discount_coupon' | t }}
+    </div>
+    <div class="col-xs-3">
+      <div class="pull-right">
+        <u id="link-add-coupon">{{ 'express_checkout.add_coupon' | t }}</u>
+      </div>
     </div>
   </div>
+
+  <div id="js-input-coupon-container" class="col-xs-12">
+    {% form 'check_coupon', remote: true %}
+    <div class="form-group simple">
+      <label for="coupon">{{ 'checkout.coupon_title' | t }}</label>
+      <div class="input-group">
+        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
+        <input id="coupon" name="coupon" class="form-control form-input" placeholder="{{ 'checkout.coupon_code' | t }}"
+          required>
+
+        <span class="input-group-btn">
+          <button id="btn-coupon" type="submit" class="btn btn-primary form-input"
+            data-disable-with="<i class='busy busy-xs'></i><span>{{ 'general.sending' | t }}...</span>">
+            {{ 'express_checkout.apply_coupon' | t }}
+          </button>
+        </span>
+      </div>
+    </div>
+    {% endform %}
+  </div>
+
+</div>
 {% endif %}
+
+<style>
+  .spacing-top {
+    margin-top: 18px;
+  }
+
+  #link-add-coupon {
+    cursor: pointer;
+  }
+
+  #js-input-coupon-container {
+    display: none;
+  }
+
+  #js-input-coupon-container #btn-coupon {
+    background: #2CC3CC;
+  }
+
+  .input-group .form-input {
+    border: 1px solid #262626;
+    border-radius: 2px;
+    background: #fff;
+    height: 43px;
+  }
+</style>
+
+<script>
+  $("#link-add-coupon").click(async () => {
+    await $("#js-add-coupon-container").fadeOut().promise();
+    await $("#js-input-coupon-container").fadeIn().promise();
+  });
+</script>

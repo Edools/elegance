@@ -82,24 +82,29 @@
       "exceeded_orders_limit": "Você atingiu o limite de novas compras!"
     },
     "credit_card": {
-      "number_invalid": "Número do cartão inválido",
+      "number_invalid": "Insira um cartão de crédito válido.",
+      "name_invalid": "Adicione um nome válido.",
       "first_name_invalid": "Primeiro nome impresso no cartão inválido",
       "last_name_invalid": "Último nome impresso no cartão inválido",
+      "year_month_invalid": "Insira uma data válida.",
       "month_invalid": "Mês de vencimento do cartão inválido",
       "year_invalid": "Ano de vencimento do cartão inválido",
-      "verification_value_invalid": "CVV inválido"
+      "verification_value_invalid": "Insira um código válido."
     },
     "title": {
       "blank": "Titulo não pode ficar em branco"
+    },
+    "terms_of_service_and_privacy": {
+      "blank": "Aceite os Termos de Serviço e Política de Privacidade para continuar."
     },
     "description": {
       "blank": "Descrição não pode ficar em branco"
     },
     "first_name": {
-      "blank": "Nome não pode ficar em branco"
+      "blank": "Adicione o Nome"
     },
     "last_name": {
-      "blank": "Sobrenome não pode ficar em branco"
+      "blank": "Adicione o Sobrenome"
     },
     "rg": {
       "blank": "RG não pode ficar em branco"
@@ -108,22 +113,22 @@
       "address_presences": "Todos os campos relacionados a endereço exceto complemento são obrigatórios."
     },
     "address_street": {
-      "blank": "Logradouro não pode ficar em branco"
+      "blank": "Adicione o seu logradouro"
     },
     "address_number": {
-      "blank": "Número do endereço não pode ficar em branco"
+      "blank": "Adicione o número do endereço"
     },
     "address_district": {
-      "blank": "Bairro não pode ficar em branco"
+      "blank": "Adicione o bairro"
     },
     "address_city": {
-      "blank": "Cidade não pode ficar em branco"
+      "blank": "Adicione a cidade"
     },
     "address_state": {
       "blank": "Não pode ficar em branco"
     },
     "address_zip_code": {
-      "blank": "CEP não pode ficar em branco"
+      "blank": "Adicione o CEP"
     },
     "born_at": {
       "invalid": "A data de nascimento deve ser anterior ao dia de hoje.",
@@ -131,7 +136,7 @@
     },
     "cpf": {
       "blank": "O CPF não pode ficar em branco",
-      "invalid": "O CPF não é válido"
+      "invalid": "Insira um CPF válido."
     },
     "login": {
       "invalid": "Email e/ou senha inválidos"
@@ -148,7 +153,8 @@
     },
     "email": {
       "taken": "O email {{ value }} já está em uso",
-      "invalid": "O email não é válido"
+      "invalid": "Adicione um email válido.",
+      "blank": "O email não pode ficar em branco"
     },
     "password": {
       "too_short": "A senha é muito curta (mínimo: {{ count }} caracteres)",
@@ -364,7 +370,7 @@
     "first_name": "Nome",
     "last_name": "Sobrenome",
     "email": "E-mail",
-    "phone": "Telefone",
+    "phone": "Telefone (opcional)",
     "rg": "RG",
     "born_at": "Data de nascimento",
     "cpf": "CPF",
@@ -531,7 +537,23 @@
     }
   },
   "express_checkout": {
-    "coupon_available": "Cupom disponível para uso!"
+    "add_coupon": "adicionar",
+    "applied_coupon": "O cupom <b>{{ name }}</b> foi aplicado.",
+    "apply_coupon": "Aplicar",
+    "checkbox_terms_of_service": "Li e aceito os <a target='_blank' href='{{ url }}'>Termos de Serviço e Política de Privacidade.</a>",
+    "coupon_available": "Cupom disponível para uso!",
+    "description_where_to_find": "São os 3 a 4 dígitos localizados no verso do seu cartão.",
+    "discount_text": "Desconto:",
+    "has_a_discount_coupon": "Possui um cupom de desconto?",
+    "herospark_at_work": "- HeroSpark a serviço de {{ name }} - CNPJ {{ cnpj }}",
+    "log_out": "deslogar",
+    "original_price_text": "Preço original:",
+    "processed_by": "O processamento deste pedido é feito através da tecnologia de pagamento ",
+    "remove": "remover",
+    "title_payment_method": "2. ESCOLHA O MÉTODO DE PAGAMENTO",
+    "title_personal_data": "1. PREENCHA SEUS DADOS PESSOAIS",
+    "title_purchase_summary": "RESUMO DA COMPRA",
+    "where_to_find": "Onde encontrar?"
   },
   "checkout": {
     "wizard": {
@@ -572,15 +594,16 @@
       "user_not_signed_in": "Você ainda não é aluno da escola. Para prosseguir com o checkout <a href=\"/users/sign_in\">faça login</a> ou <a href=\"/users/sign_up\">crie sua conta</a>."
     },
     "finish": "Finalizar Compra",
-    "coupon": "Cupom:",
-    "coupon_code": "Cupom de desconto",
-    "total_amount_to_pay": "Total da Compra",
-    "total_amount_to_pay_in_installments": "ou em até {{ installments }}x no cartão",
+    "coupon": "Possui um cupom de desconto?",
+    "coupon_code": "Insira o seu cupom",
+    "coupon_title": "Cupom de desconto",
+    "total_amount_to_pay": "Total a pagar:",
+    "total_amount_to_pay_in_installments": "ou em até {{ installments }}x no cartão:",
     "complete": {
       "personal_information": "Dados Pessoais",
       "first_name": "Nome",
       "last_name": "Sobrenome",
-      "phone": "Telefone",
+      "phone": "Telefone (opcional)",
       "cpf": "CPF",
       "rg": "Identidade",
       "born_at": "Data de nascimento",
@@ -598,17 +621,17 @@
     },
     "payment": {
       "accept_term_of_use": "Eu aceito os <a href=\"/terms-of-use\" target=\"_blank\">Termos de Uso</a>",
-      "credit_card": "Cartão de Crédito",
-      "boleto": "Boleto Bancário",
-      "bank_transfer": "Transferência Bancária",
-      "credit_card_number": "Nº do Cartão de Crédito",
-      "credit_card_name": "Nome Impresso",
-      "credit_card_expiry": "Validade (mês/ano)",
+      "credit_card": "Crédito",
+      "boleto": "Boleto",
+      "bank_transfer": "Transf.",
+      "credit_card_number": "Número do cartão",
+      "credit_card_name": "Nome impresso no cartão",
+      "credit_card_expiry": "Validade",
       "credit_card_cvv": "Cód. de Segurança",
-      "credit_card_installments": "Parcelas",
-      "credit_card_pay": "Efetuar Pagamento",
+      "credit_card_installments": "Opções de parcelamento",
+      "credit_card_pay": "Finalizar compra",
       "disable_popups_warning": "Desabilite o bloqueio de pop-ups do seu navegador",
-      "boleto_warning": "O prazo para compensação de um boleto bancário é de até 3 dias úteis, após a realização do pagamento. O curso só irá ser liberado após a compensação do mesmo.",
+      "boleto_warning": "Pagamentos com boleto bancário levam até 3 dias úteis para serem compensados. O acesso ao produto só será liberado após este período.",
       "boleto_pay": "Gerar Boleto",
       "bank_transfer_warning": "Você será redirecionado para a página do Banco para inserir as informações necessárias para o débito online. Sendo a transação realizada com sucesso, o curso será liberado.",
       "bank_transfer_pay": "Ir para o Banco",
@@ -616,14 +639,31 @@
       "credit_card_warning": "Sua conta já possui um cartão ativo, não é possível usar outro.",
       "installment_amount": {
         "one": "{{ amount }} à vista",
-        "other": "{{ count }}x de {{ amount }}"
+        "other": "{{ count }}x de {{ amount }} ({{ grand_total }})"
       },
       "installment_amount_with_taxes": {
         "one": "{{ amount }} à vista s/ juros",
-        "other": "{{ count }}x de {{ amount }} c/ juros {{ amount_with_taxes }}"
+        "other": "{{ count }}x de {{ amount }} c/ juros ({{ amount_with_taxes }})"
       }
     },
     "success": {
+      "title":{
+        "success": "Obrigado pela sua compra!",
+        "processing": "Estamos processando seu pedido",
+        "error": "Ops! Ocorreu um erro :("
+      },
+      "description":{
+        "success_logged_user": "Está tudo pronto para acessar o seu produto! Confira os detalhes da sua compra no email que enviamos para você :)",
+        "success_unlogged_user": "Seu pagamento foi aprovado! Agora é só <b>conferir o email que enviamos</b> com todos os detalhes para acessar e aproveitar o seu produto :)",
+        "processing": "Seu produto estará disponível em breve. Enquanto isso, aproveite para explorar a nossa plataforma!",
+        "error": "Não foi possível processar o seu pedido. Por favor, revise os dados do seu cartão ou, se preferir, realize sua compra via boleto bancário."
+      },
+      "buttons":{
+        "success_logged_user": "Acessar curso",
+        "success_unlogged_user": "Acessar {{ platform }}",
+        "processing": "Acessar a plataforma",
+        "error": "Voltar"
+      },
       "user_set_password_email": "Você irá receber um email para definição da sua senha de acesso.",
       "order_created_successfully": "Seu pedido foi realizado com sucesso!",
       "transaction_made_by": "Sua transação está sendo realizada pelo {{ gateway }}.",
@@ -637,9 +677,10 @@
       "transaction_status_is": "O status da sua transação é <b>{{ status }}</b>. O seu identificador é <b id=\"payment-uuid\">{{ gateway_reference }}</b>.",
       "transaction_questions": "Caso tenha alguma dúvida referente ao pagamento, entre em contato com o {{ gateway }}.",
       "trial_purchase_warning": "Sua matrícula foi liberada com sucesso e seu período de Trial encerra em {{ trial_limit }}.",
+      "boleto_description": "Confira os detalhes do seu pedido no email que enviamos para você :)",
       "boleto_warning": "Caso o seu boleto não tenha sido aberto, desative o bloqueio de pop-ups no seu navegador e clique",
       "boleto_warning_click_here": "aqui",
-      "go_to_enrollments": "Ir para Meus Cursos"
+      "go_to_enrollments": "Acessar curso"
     },
     "go_to_payment": "Prosseguir para pagamento"
   },
@@ -803,14 +844,14 @@
       "title": "Nova tentativa de pagamento do pedido #{{ order_id }}",
       "credit_card": "Cartão de Crédito",
       "boleto": "Boleto Bancário",
-      "credit_card_number": "Nº do Cartão de Crédito",
-      "credit_card_name": "Nome Impresso",
-      "credit_card_expiry": "Validade (mês/ano)",
+      "credit_card_number": "Número do cartão",
+      "credit_card_name": "Nome impresso no cartão",
+      "credit_card_expiry": "Validade",
       "credit_card_cvv": "Cód. de Segurança",
-      "credit_card_installments": "Parcelas",
-      "credit_card_pay": "Efetuar Pagamento",
+      "credit_card_installments": "Opções de parcelamento",
+      "credit_card_pay": "Finalizar compra",
       "disable_popups_warning": "Desabilite o bloqueio de pop-ups do seu navegador",
-      "boleto_warning": "O prazo para compensação de um boleto bancário é de até 3 dias úteis, após a realização do pagamento. O curso só irá ser liberado após a compensação do mesmo.",
+      "boleto_warning": "Pagamentos com boleto bancário levam até 3 dias úteis para serem compensados. O acesso ao produto só será liberado após este período.",
       "boleto_pay": "Gerar Boleto",
       "installment_amount": {
         "one": "{{ amount }} à vista",

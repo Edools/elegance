@@ -136,6 +136,7 @@
                                  name="order[credit_card][expiry]"
                                  value="{{ credit_card.expiry }}"
                                  class="form-control"
+                                 minlength=9
                                  {% if credit_card.active %}
                                    disabled
                                  {% endif %}

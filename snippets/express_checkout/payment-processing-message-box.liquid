@@ -1,0 +1,21 @@
+<div class="text-center" id="text-security-container">
+  <div>
+    {{ 'express_checkout.processed_by' | t }}
+    {% image, id: gateway_id, src: gateway.logo, alt: gateway.name, width: 50 %}
+    {{ 'express_checkout.herospark_at_work' | t: name: current_school.name, cnpj: current_school.cnpj }}
+  </div>
+
+  <div id="image-logo">
+    <img src="{{ 'logo-herospark.png' | asset_url }}" alt="Logo Herospark" width="90" height="17">
+  </div>
+</div>
+
+<style>
+  #text-security-container {
+    color: #797979;
+  }
+
+  #image-logo {
+    margin: 30px 0;
+  }
+</style>
