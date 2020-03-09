@@ -1,7 +1,8 @@
 
 {% if payment_option.kind != 'subscription' %}
 <div class="row spacing-top">
-  <div id="add-coupon-container">
+
+  <div id="js-add-coupon-container">
     <div class="col-xs-9">
       {{ 'express_checkout.has_a_discount_coupon' | t }}
     </div>
@@ -12,7 +13,7 @@
     </div>
   </div>
 
-  <div id="input-coupon-container" class="col-xs-12">
+  <div id="js-input-coupon-container" class="col-xs-12">
     {% form 'check_coupon', remote: true %}
     <div class="form-group simple">
       <label for="coupon">{{ 'checkout.coupon_title' | t }}</label>
@@ -43,11 +44,11 @@
     cursor: pointer;
   }
 
-  #input-coupon-container {
+  #js-input-coupon-container {
     display: none;
   }
 
-  #input-coupon-container #btn-coupon {
+  #js-input-coupon-container #btn-coupon {
     background: #2CC3CC;
   }
 
@@ -61,7 +62,7 @@
 
 <script>
   $("#link-add-coupon").click(async () => {
-    await $("#add-coupon-container").fadeOut().promise();
-    await $("#input-coupon-container").fadeIn().promise();
+    await $("#js-add-coupon-container").fadeOut().promise();
+    await $("#js-input-coupon-container").fadeIn().promise();
   });
 </script>

@@ -1,23 +1,43 @@
-<section id="js-totals-box">
+{% if coupon %}
+{% if coupon_token.code %}
+{% assign couponName = coupon_token.code %}
+{% elsif coupon %}
+{% assign couponName =  coupon.name %}
+{% endif %}
+<div class="row js-remove-coupon-container">
+  <div class="col-xs-9">
+    {{ 'express_checkout.applied_coupon' | t: name: couponName }}
+  </div>
+  <div class="col-xs-3">
+    <div class="pull-right">
+      <a href="/express_checkout/remove_coupon?payment_option_id={{ payment_option.id }}" data-remote="true"
+        data-disable-with="<i class='busy busy-xs'></i>">
+        <u id="link-remove-coupon">remover</u>
+      </a>
+    </div>
+  </div>
+</div>
+{% endif %}
 
+<section id="js-totals-box">
   {% assign payment = payment_option | default: order %}
   {% assign discount = payment.price | minus: payment.total %}
 
   {% if discount > 0 %}
-    <div class="totals-box-container">
-      <div class="totals-box-item">{{ 'express_checkout.original_price_text' | t }}</div>
-      <div class="totals-box-item product-value-text">
-        {{ payment.price | money_option_presentation: payment.kind, payment.period, 'full', 1 }}
-      </div>
+  <div class="totals-box-container">
+    <div class="totals-box-item">{{ 'express_checkout.original_price_text' | t }}</div>
+    <div class="totals-box-item product-value-text">
+      {{ payment.price | money_option_presentation: payment.kind, payment.period, 'full', 1 }}
     </div>
+  </div>
 
-    <div class="totals-box-container">
-      <div class="totals-box-item discount-text">{{ 'express_checkout.discount_text' | t }}</div>
-      <div class="totals-box-item discount-text">-
-        {{ discount | money_option_presentation: payment.kind, payment.period, 'full', 1}}</div>
-    </div>
+  <div class="totals-box-container">
+    <div class="totals-box-item discount-text">{{ 'express_checkout.discount_text' | t }}</div>
+    <div class="totals-box-item discount-text">-
+      {{ discount | money_option_presentation: payment.kind, payment.period, 'full', 1}}</div>
+  </div>
 
-    <hr class="divider">
+  <hr class="divider">
   {% endif %}
 
   <div class="totals-box-container">
@@ -26,9 +46,9 @@
       <span>
         <b id="js-payment-total">
           {% if payment.kind == 'free' %}
-            {{ 'product.pricing.free.unitary' | t }}
+          {{ 'product.pricing.free.unitary' | t }}
           {% else %}
-            {{ payment.total | money_option_presentation: payment.kind, payment.period, 'full', 1 }}
+          {{ payment.total | money_option_presentation: payment.kind, payment.period, 'full', 1 }}
           {% endif %}
         </b>
       </span>
@@ -50,24 +70,6 @@
     </div>
     {% endif %}
   </div>
-
-  {% if coupon %}
-  <br>
-  {% if coupon_token.code %}
-  {% assign couponName = coupon_token.code %}
-  {% elsif coupon %}
-  {% assign couponName =  coupon.name %}
-  {% endif %}
-  <div class="totals-box-container">
-    <div class="totals-box-item">{{ 'express_checkout.applied_coupon' | t: name: couponName }}</div>
-    <div class="totals-box-item">
-      <a class="btn btn-xs btn-danger" href="/express_checkout/remove_coupon?payment_option_id={{ payment_option.id }}"
-        data-remote="true" data-disable-with="<i class='busy busy-xs'></i>">
-        <i class="icon-trash"></i>
-      </a>
-    </div>
-  </div>
-  {% endif %}
 </section>
 
 <style>
@@ -99,4 +101,21 @@
   .installment-price {
     color: #34b469;
   }
+
+  #link-remove-coupon {
+    color: #000;
+  }
 </style>
+
+<script>
+  const coupon = '{{ coupon }}';
+
+  $('.js-remove-coupon-container[style="display: none;"]').remove();
+
+  if (coupon) {
+    $('#js-input-coupon-container').hide();
+  } else {
+    $('.js-remove-coupon-container').hide();
+    $('#js-add-coupon-container').show();
+  }
+</script>

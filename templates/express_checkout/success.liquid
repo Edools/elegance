@@ -1,8 +1,6 @@
 <div class="checkout-success-page page">
   <div class="container">
-
     <div class="container-spacing">
-
       <div class="row">
         <div class="col-xs-12 col-sm-5 col-sm-push-7 col-md-4">
           <h6 class="title-purchage-summary">{{ 'express_checkout.title_purchase_summary' | t }}</h6>
@@ -24,63 +22,61 @@
 
             {% else %}
 
-              {% if order.status == 'processing' or order.status == 'initiated' %}
-                <img src="{{ 'processing-icon.png' | asset_url }}" alt="Processing icon" width="74"
-                  height="68">
-                <h6 class="title-buying-text color-title-processing">{{ 'checkout.success.title.processing' | t }}</h6>
-                <p>{{ 'checkout.success.description.processing' | t }}</p>
-                <div class="buttons-padding">
-                  <a href="/users/sign_in" class="btn btn-light btn-primary-options btn-block">
-                    {{ 'checkout.success.buttons.processing' | t }}
-                  </a>
-                </div>
-              {% elsif order.status == 'authorized' or order.status == 'confirmed' %}
-                <img src="{{ 'success-icon.png' | asset_url }}" alt="Success icon" width="70"
-                  height="64">
-                <h6 class="title-buying-text color-title-confirmed">{{ 'checkout.success.title.success' | t }}</h6>
+            {% if order.status == 'processing' or order.status == 'initiated' %}
+            <img src="{{ 'processing-icon.png' | asset_url }}" alt="Processing icon" width="74" height="68">
+            <h6 class="title-buying-text color-title-processing">{{ 'checkout.success.title.processing' | t }}</h6>
+            <p>{{ 'checkout.success.description.processing' | t }}</p>
+            <div class="buttons-padding">
+              <a href="/users/sign_in" class="btn btn-light btn-primary-options btn-block">
+                {{ 'checkout.success.buttons.processing' | t }}
+              </a>
+            </div>
+            {% elsif order.status == 'authorized' or order.status == 'confirmed' %}
+            <img src="{{ 'success-icon.png' | asset_url }}" alt="Success icon" width="70" height="64">
+            <h6 class="title-buying-text color-title-confirmed">{{ 'checkout.success.title.success' | t }}</h6>
 
-                {% unless payment.kind == 'free' %}
-                  {% if current_user == nil %}
-                    <p> {{ 'checkout.success.description.success_unlogged_user' | t }}</p>
-                    <div class="buttons-padding">
-                      <a href="https://gmail.com" target="_blank" class="btn btn-light btn-success-options btn-block">
-                        {{ 'checkout.success.buttons.success_unlogged_user' | t: platform: 'Gmail' }}</a>
-                      <br>
-                      <a href="https://hotmail.com" target="_blank" class="btn btn-light btn-success-options btn-block">
-                        {{ 'checkout.success.buttons.success_unlogged_user' | t: platform: 'Hotmail' }}</a>
-                    </div>
-                  {% else %}
-                    <p> {{ 'checkout.success.description.success_logged_user' | t }}</p>
-                    <div class="buttons-padding">
-                      <a href="/enrollments" class="btn btn-light btn-primary-options btn-block">
-                        {{ 'checkout.success.go_to_enrollments' | t }}
-                      </a>
-                    </div>
-                  {% endif %}
-                {% endunless %}
+            {% unless payment.kind == 'free' %}
+            {% if current_user == nil %}
+            <p> {{ 'checkout.success.description.success_unlogged_user' | t }}</p>
+            <div class="buttons-padding">
+              <a href="https://gmail.com" target="_blank" class="btn btn-light btn-success-options btn-block">
+                {{ 'checkout.success.buttons.success_unlogged_user' | t: platform: 'Gmail' }}</a>
+              <br>
+              <a href="https://hotmail.com" target="_blank" class="btn btn-light btn-success-options btn-block">
+                {{ 'checkout.success.buttons.success_unlogged_user' | t: platform: 'Hotmail' }}</a>
+            </div>
+            {% else %}
+            <p> {{ 'checkout.success.description.success_logged_user' | t }}</p>
+            <div class="buttons-padding">
+              <a href="/enrollments" class="btn btn-light btn-primary-options btn-block">
+                {{ 'checkout.success.go_to_enrollments' | t }}
+              </a>
+            </div>
+            {% endif %}
+            {% endunless %}
 
-              {% elsif order.status == 'canceled' %}
-                <img src="{{ 'error-icon.png' | asset_url }}" alt="Error icon" width="112" height="74">
-                <h6 class="title-buying-text color-title-error">{{ 'checkout.success.title.error' | t }}</h6>
-                <p>{{ 'checkout.success.description.error' | t }}</p>
-                <div class="buttons-padding">
-                  <a href="{{ return_url | default: back_path }}" class="btn btn-light btn-primary-options btn-block">
-                    {{ 'checkout.success.buttons.error' | t }}
-                  </a>
-                </div>
-              {% endif %}
+            {% elsif order.status == 'canceled' %}
+            <img src="{{ 'error-icon.png' | asset_url }}" alt="Error icon" width="112" height="74">
+            <h6 class="title-buying-text color-title-error">{{ 'checkout.success.title.error' | t }}</h6>
+            <p>{{ 'checkout.success.description.error' | t }}</p>
+            <div class="buttons-padding">
+              <a href="{{ return_url | default: back_path }}" class="btn btn-light btn-primary-options btn-block">
+                {{ 'checkout.success.buttons.error' | t }}
+              </a>
+            </div>
+            {% endif %}
 
-              {% if trial_purchase %}
-                <div class="alert alert-warning">
-                  {% assign end_trial = order.billing_at | date: "%d/%m/%Y %H:%M" %}
-                  {{ 'checkout.success.trial_purchase_warning' | t: trial_limit: end_trial }}
-                </div>
-              {% endif %}
+            {% if trial_purchase %}
+            <div class="alert alert-warning">
+              {% assign end_trial = order.billing_at | date: "%d/%m/%Y %H:%M" %}
+              {{ 'checkout.success.trial_purchase_warning' | t: trial_limit: end_trial }}
+            </div>
+            {% endif %}
             {% endif %}
           </div>
 
           {% unless payment.kind == 'free' %}
-            {% include "express_checkout/payment-processing-message-box" with gateway: gateway_credential %}
+          {% include "express_checkout/payment-processing-message-box" with gateway: gateway_credential %}
           {% endunless %}
         </div>
       </div>
@@ -88,84 +84,82 @@
     </div>
 
   </div>
-<style>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
-  @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+    html *,
+    .btn {
+      font-family: 'Muli';
+    }
 
-  html *, .btn {
-    font-family: 'Muli';
-  }
+    body {
+      color: #000000;
+      font-size: 14px;
+    }
 
-  body {
-    color: #000000;
-    font-size: 14px;
-  }
+    .checkout-success-page {
+      font-size: 14px;
+    }
 
-  .checkout-success-page {
-    font-size: 14px;
-  }
-
-  .card-container {
-    background: #FFFFFF;
-    box-shadow: 0px 5px 10px rgba(211, 211, 211, 0.198044);
-    border-radius: 2px;
-    padding: 24px 31px;
-    margin-top: 56px;
-    margin-bottom: 70px;
-  }
-
-  .title-buying-text {
-    font-weight: bold;
-    font-size: 30px;
-    line-height: 115%;
-    padding: 0 30px;
-    margin: 18px 0;
-  }
-
-  .color-title-confirmed {
-    color: #34B469;
-  }
-
-  .color-title-processing {
-    color: #DEB741;
-  }
-
-  .color-title-error {
-    color: #C12B4B;
-  }
-
-  .buttons-padding {
-    margin: 38px 0;
-    padding: 0 40px;
-  }
-
-  .buttons-padding .btn-success-options {
-    border: 2px solid #2cc3cc;
-    background-color: white;
-    box-shadow: 0 2px 4px 0 rgba(44, 195, 204, 0.2);
-    color: #2cc3cc;
-    padding: 10px;
-    margin-top: 0;
-  }
-
-  .buttons-padding .btn-primary-options {
-    background: #2cc3cc;
-    box-shadow: 0px 2px 4px rgba(44, 195, 204, 0.203098);
-    border-radius: 2px;
-    color: #FFFFFF;
-  }
-
-  .title-purchage-summary {
-    margin-top: 12px;
-    margin-bottom: 25px;
-    font-weight: bold;
-    line-height: 130%;
-    text-transform: uppercase;
-  }
-
-  @media all and (min-width: 767px) {
     .container-spacing {
       margin-top: 79px;
     }
-  }
-</style>
+
+    .card-container {
+      background: #FFFFFF;
+      box-shadow: 0px 5px 10px rgba(211, 211, 211, 0.198044);
+      border-radius: 2px;
+      padding: 24px 31px;
+      margin-top: 56px;
+      margin-bottom: 70px;
+    }
+
+    .title-buying-text {
+      font-weight: bold;
+      font-size: 30px;
+      line-height: 115%;
+      padding: 0 30px;
+      margin: 18px 0;
+    }
+
+    .color-title-confirmed {
+      color: #34B469;
+    }
+
+    .color-title-processing {
+      color: #DEB741;
+    }
+
+    .color-title-error {
+      color: #C12B4B;
+    }
+
+    .buttons-padding {
+      margin: 38px 0;
+      padding: 0 40px;
+    }
+
+    .buttons-padding .btn-success-options {
+      border: 2px solid #2cc3cc;
+      background-color: white;
+      box-shadow: 0 2px 4px 0 rgba(44, 195, 204, 0.2);
+      color: #2cc3cc;
+      padding: 10px;
+      margin-top: 0;
+    }
+
+    .buttons-padding .btn-primary-options {
+      background: #2cc3cc;
+      box-shadow: 0px 2px 4px rgba(44, 195, 204, 0.203098);
+      border-radius: 2px;
+      color: #FFFFFF;
+    }
+
+    .title-purchage-summary {
+      margin-top: 12px;
+      margin-bottom: 25px;
+      font-weight: bold;
+      line-height: 130%;
+      text-transform: uppercase;
+    }
+  </style>
