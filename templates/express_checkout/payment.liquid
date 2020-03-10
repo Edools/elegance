@@ -171,7 +171,9 @@
                           <div id="card-number-container">
                             <input type="text" inputmode="numeric" id="card-number" name="order[credit_card][number]"
                               class="form-control" placeholder="____ ____ ____ ____" value="{{ credit_card.number }}"
-                              {% if credit_card.active %} disabled {% endif %}>
+                              {% if credit_card.active %} disabled {% endif %} data-validation="length"
+                              data-validation-length="min16, max19"
+                              data-validation-error-msg="{{ 'errors.credit_card.number_invalid' | t }}">
 
                             <div id="card-number-icons">
                               <img id="visa" src="{{ 'visa.png' | asset_url }}">
@@ -187,7 +189,8 @@
                             class="control-label">{{ 'checkout.payment.credit_card_name' | t }}</label>
                           <input id="card-holder-name" name="order[credit_card][name]" class="form-control"
                             value="{{ credit_card.name }}" placeholder="{{ 'express_checkout.placeholder.card_name' | t }}" {% if credit_card.active %}
-                            disabled {% endif %}>
+                            disabled {% endif %} data-validation="length" data-validation-length="min6"
+                            data-validation-error-msg="{{ 'errors.credit_card.name_invalid' | t }}">
                         </div>
 
                         <div class="row">
@@ -196,7 +199,9 @@
                               class="control-label">{{ 'checkout.payment.credit_card_expiry' | t }}</label>
                             <input id="card-expiration" inputmode="numeric" name="order[credit_card][expiry]"
                               class="form-control" value="{{ credit_card.expiry }}" placeholder="MM/AAAA"
-                              {% if credit_card.active %} disabled {% endif %}>
+                              {% if credit_card.active %} disabled {% endif %} data-validation="date"
+                              data-validation-format="mm/yyyy"
+                              data-validation-error-msg="{{ 'errors.credit_card.year_month_invalid' | t }}">
                           </div>
                           <div class="form-group col-sm-6">
                             <label for="card-cvc"
@@ -204,7 +209,9 @@
                             <div class="input-group">
                               <input id="card-cvc" type="number" inputmode="numeric" name="order[credit_card][cvc]"
                                 class="form-control" value="{{ credit_card.cvc }}" placeholder="CVC"
-                                {% if credit_card.active %} disabled {% endif %}>
+                                {% if credit_card.active %} disabled {% endif %} data-validation="length"
+                                data-validation-length="min3"
+                                data-validation-error-msg="{{ 'errors.credit_card.verification_value_invalid' | t }}">
                               <span class="input-group-btn">
                                 <button type="button" id="btn-cvc" class="btn btn-default form-control"
                                   data-toggle="popover" data-container="body" data-html="true" data-trigger="hover"
@@ -414,7 +421,7 @@
 
     payform.cardNumberInput(input);
 
-    // $('#card-expiration').mask('00/0000');
+    $('#card-expiration').mask('00/0000');
     $('#card-cvc').mask('000');
     $('#usercpf').mask('000.000.000-00');
 
