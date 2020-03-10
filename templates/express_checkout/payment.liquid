@@ -189,8 +189,7 @@
                             class="control-label">{{ 'checkout.payment.credit_card_name' | t }}</label>
                           <input id="card-holder-name" name="order[credit_card][name]" class="form-control"
                             value="{{ credit_card.name }}" placeholder="{{ 'express_checkout.placeholder.card_name' | t }}" {% if credit_card.active %}
-                            disabled {% endif %} data-validation="length" data-validation-length="min6"
-                            data-validation-error-msg="{{ 'errors.credit_card.name_invalid' | t }}">
+                            disabled {% endif %}>
                         </div>
 
                         <div class="row">
@@ -207,9 +206,7 @@
                             <div class="input-group">
                               <input id="card-cvc" type="number" inputmode="numeric" name="order[credit_card][cvc]"
                                 class="form-control" value="{{ credit_card.cvc }}" placeholder="CVC"
-                                {% if credit_card.active %} disabled {% endif %} data-validation="length"
-                                data-validation-length="min3"
-                                data-validation-error-msg="{{ 'errors.credit_card.verification_value_invalid' | t }}">
+                                {% if credit_card.active %} disabled {% endif %}>
                               <span class="input-group-btn">
                                 <button type="button" id="btn-cvc" class="btn btn-default form-control"
                                   data-toggle="popover" data-container="body" data-html="true" data-trigger="hover"
