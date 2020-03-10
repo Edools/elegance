@@ -1,52 +1,121 @@
-<div id="js-totals-box" class="sidebar-widget border right bottom {% if closed_borders %}left{% endif %}">
-  <div class="panel-body row">
-    <div class="col-xs-6">
-      {{ 'checkout.total_amount_to_pay' | t }}
+{% if coupon %}
+{% if coupon_token.code %}
+{% assign couponName = coupon_token.code %}
+{% elsif coupon %}
+{% assign couponName =  coupon.name %}
+{% endif %}
+<div class="row js-remove-coupon-container">
+  <div class="col-xs-9">
+    {{ 'express_checkout.applied_coupon' | t: name: couponName }}
+  </div>
+  <div class="col-xs-3">
+    <div class="pull-right">
+      <a href="/express_checkout/remove_coupon?payment_option_id={{ payment_option.id }}" data-remote="true"
+        data-disable-with="<i class='busy busy-xs'></i>">
+        <u id="link-remove-coupon">{{ 'express_checkout.remove' | t }}</u>
+      </a>
     </div>
-    <div class="col-xs-6">
-      <span class="pull-right text-right total-price">
-        {% if coupon %}
-          <s class="small">{{ payment_option.price | money_option_presentation: payment_option.kind, payment_option.period, 'full', 1 }}</s><br>
-        {% endif %}
-
-        <b id="js-payment-total">{{ payment_option.total | money_option_presentation: payment_option.kind, payment_option.period, 'full', 1 }}</b>
-      </span>
-    </div>
-
-    {% assign payment_config = current_school | has_feature: 'product_payment_config' %}
-    {% if payment_option.kind == 'common' and payment_config == false  %}
-      <div class="col-xs-6">
-        {{ 'checkout.total_amount_to_pay_in_installments' | t: installments: installments_limit }}
-      </div>
-
-      <div class="col-xs-6">
-        <span class="pull-right text-right installment-price">
-          {% if coupon %}
-            <s class="small">{{ payment_option.price | divided_by: installments_limit | money }}</s><br>
-          {% endif %}
-
-          <b id="js-payment-installments">
-            {{ payment_option.total | number_with_taxes: gateway | divided_by: installments_limit | money }}
-          </b>
-        </span>
-      </div>
-    {% endif %}
-
-    {% if coupon %}
-      <br>
-      <div class="col-xs-12 payment-total-coupon">
-        <span class="text-muted small pull-right">{{'checkout.coupon' |t }}
-          {% if coupon_token.code %}
-            {{ coupon_token.code }}
-          {% elsif coupon %}
-            {{ coupon.name }}
-          {% endif %}
-
-          <a class="btn btn-xs btn-danger" href="/express_checkout/remove_coupon?payment_option_id={{ payment_option.id }}" data-remote="true" data-disable-with="<i class='busy busy-xs'></i>">
-            <i class="icon-trash"></i>
-          </a>
-        </span>
-      </div>
-    {% endif %}
   </div>
 </div>
+{% endif %}
+
+<section id="js-totals-box">
+  {% assign payment = payment_option | default: order %}
+  {% assign discount = payment.price | minus: payment.total %}
+
+  {% if discount > 0 %}
+  <div class="totals-box-container">
+    <div class="totals-box-item">{{ 'express_checkout.original_price_text' | t }}</div>
+    <div class="totals-box-item product-value-text">
+      {{ payment.price | money_option_presentation: payment.kind, payment.period, 'full', 1 }}
+    </div>
+  </div>
+
+  <div class="totals-box-container">
+    <div class="totals-box-item discount-text">{{ 'express_checkout.discount_text' | t }}</div>
+    <div class="totals-box-item discount-text">-
+      {{ discount | money_option_presentation: payment.kind, payment.period, 'full', 1}}</div>
+  </div>
+
+  <hr class="divider">
+  {% endif %}
+
+  <div class="totals-box-container">
+    <div class="totals-box-item"><b>{{ 'checkout.total_amount_to_pay' | t }}</b></div>
+    <div class="totals-box-item product-value-text">
+      <span>
+        <b id="js-payment-total">
+          {% if payment.kind == 'free' %}
+          {{ 'product.pricing.free.unitary' | t }}
+          {% else %}
+          {{ payment.total | money_option_presentation: payment.kind, payment.period, 'full', 1 }}
+          {% endif %}
+        </b>
+      </span>
+    </div>
+  </div>
+
+  <div class="totals-box-container">
+    {% assign payment_config = current_school | has_feature: 'product_payment_config' %}
+    {% if payment_option.kind == 'common' and payment_config == false  %}
+    <div class="totals-box-item">
+      {{ 'checkout.total_amount_to_pay_in_installments' | t: installments: installments_limit }}
+    </div>
+    <div class="totals-box-item">
+      <span class="installment-price">
+        <b id="js-payment-installments">
+          {{ payment_option.total | number_with_taxes: gateway | divided_by: installments_limit | money }}
+        </b>
+      </span>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+  #js-totals-box {
+    padding: 20px 0;
+  }
+
+  .totals-box-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .totals-box-item {
+    flex-wrap: wrap;
+  }
+
+  .product-value-text {
+    font-size: 16px;
+  }
+
+  .divider {
+    border-top: 1px solid #bbb;
+  }
+
+  .discount-text {
+    color: #797979;
+  }
+
+  .installment-price {
+    color: #34b469;
+  }
+
+  #link-remove-coupon {
+    color: #000;
+  }
+</style>
+
+<script>
+  const coupon = '{{ coupon }}';
+
+  $('.js-remove-coupon-container[style="display: none;"]').remove();
+
+  if (coupon) {
+    $('#js-input-coupon-container').hide();
+  } else {
+    $('.js-remove-coupon-container').hide();
+    $('#js-add-coupon-container').show();
+  }
+</script>
