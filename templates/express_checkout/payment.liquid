@@ -171,9 +171,7 @@
                           <div id="card-number-container">
                             <input type="text" inputmode="numeric" id="card-number" name="order[credit_card][number]"
                               class="form-control" placeholder="____ ____ ____ ____" value="{{ credit_card.number }}"
-                              {% if credit_card.active %} disabled {% endif %} data-validation="length"
-                              data-validation-length="min16, max19"
-                              data-validation-error-msg="{{ 'errors.credit_card.number_invalid' | t }}">
+                              {% if credit_card.active %} disabled {% endif %}>
 
                             <div id="card-number-icons">
                               <img id="visa" src="{{ 'visa.png' | asset_url }}">
