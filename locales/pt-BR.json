@@ -555,8 +555,20 @@
     "remove": "remover",
     "title_payment_method": "2. ESCOLHA O MÉTODO DE PAGAMENTO",
     "title_personal_data": "1. PREENCHA SEUS DADOS PESSOAIS",
+    "title_address": "3. PREENCHA SEU ENDEREÇO",
     "title_purchase_summary": "RESUMO DA COMPRA",
-    "where_to_find": "Onde encontrar?"
+    "where_to_find": "Onde encontrar?",
+    "placeholder": {
+      "full_name": "Seu nome completo",
+      "email": "seumelhoremail@gmail.com",
+      "card_name": "João A. Silva",
+      "zip_code": "Seu CEP",
+      "street": "Seu logradouro",
+      "number": "Seu número",
+      "complement": "Seu complemento",
+      "district": "Seu bairro",
+      "city": "Sua cidade"
+    }
   },
   "checkout": {
     "wizard": {
