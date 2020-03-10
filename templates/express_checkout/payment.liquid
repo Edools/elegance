@@ -200,7 +200,7 @@
                             <input id="card-expiration" inputmode="numeric" name="order[credit_card][expiry]"
                               class="form-control" value="{{ credit_card.expiry }}" placeholder="MM/AAAA"
                               {% if credit_card.active %} disabled {% endif %} data-validation="date"
-                              data-validation-format="mm / yyyy"
+                              data-validation-format="mm/yyyy"
                               data-validation-error-msg="{{ 'errors.credit_card.year_month_invalid' | t }}">
                           </div>
                           <div class="form-group col-sm-6">
