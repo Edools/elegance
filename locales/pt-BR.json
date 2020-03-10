@@ -100,11 +100,14 @@
     "description": {
       "blank": "Descrição não pode ficar em branco"
     },
+    "full_name": {
+      "blank": "Adicione o seu nome completo."
+    },
     "first_name": {
-      "blank": "Adicione o Nome"
+      "blank": "Adicione o nome."
     },
     "last_name": {
-      "blank": "Adicione o Sobrenome"
+      "blank": "Adicione o sobrenome."
     },
     "rg": {
       "blank": "RG não pode ficar em branco"
@@ -113,22 +116,22 @@
       "address_presences": "Todos os campos relacionados a endereço exceto complemento são obrigatórios."
     },
     "address_street": {
-      "blank": "Adicione o seu logradouro"
+      "blank": "Adicione o seu logradouro."
     },
     "address_number": {
-      "blank": "Adicione o número do endereço"
+      "blank": "Adicione o número do endereço."
     },
     "address_district": {
-      "blank": "Adicione o bairro"
+      "blank": "Adicione o bairro."
     },
     "address_city": {
-      "blank": "Adicione a cidade"
+      "blank": "Adicione a cidade."
     },
     "address_state": {
       "blank": "Não pode ficar em branco"
     },
     "address_zip_code": {
-      "blank": "Adicione o CEP"
+      "blank": "Adicione o CEP."
     },
     "born_at": {
       "invalid": "A data de nascimento deve ser anterior ao dia de hoje.",
@@ -552,8 +555,20 @@
     "remove": "remover",
     "title_payment_method": "2. ESCOLHA O MÉTODO DE PAGAMENTO",
     "title_personal_data": "1. PREENCHA SEUS DADOS PESSOAIS",
+    "title_address": "3. PREENCHA SEU ENDEREÇO",
     "title_purchase_summary": "RESUMO DA COMPRA",
-    "where_to_find": "Onde encontrar?"
+    "where_to_find": "Onde encontrar?",
+    "placeholder": {
+      "full_name": "Seu nome completo",
+      "email": "seumelhoremail@gmail.com",
+      "card_name": "João A. Silva",
+      "zip_code": "Seu CEP",
+      "street": "Seu logradouro",
+      "number": "Seu número",
+      "complement": "Seu complemento",
+      "district": "Seu bairro",
+      "city": "Sua cidade"
+    }
   },
   "checkout": {
     "wizard": {
@@ -601,6 +616,7 @@
     "total_amount_to_pay_in_installments": "ou em até {{ installments }}x no cartão:",
     "complete": {
       "personal_information": "Dados Pessoais",
+      "full_name": "Nome Completo",
       "first_name": "Nome",
       "last_name": "Sobrenome",
       "phone": "Telefone (opcional)",

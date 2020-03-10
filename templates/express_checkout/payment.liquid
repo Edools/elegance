@@ -2,6 +2,7 @@
   <div class="container">
     <div class="container-spacing">
       <div class="row">
+
         <div class="col-xs-12 col-sm-5 col-sm-push-7 col-md-4 col-purchase-summary">
           <div class="purchase-summary-container">
             <h6 id="title-purchase-summary" class="title-form">{{ 'express_checkout.title_purchase_summary' | t }}</h6>
@@ -12,30 +13,22 @@
         </div>
 
         <div class="col-xs-12 col-sm-7 col-sm-pull-5 col-md-5 col-md-offset-2 col-input-data">
-
           <h6 class="title-form">{{ 'express_checkout.title_personal_data' | t }}</h6>
           <div class="form-container">
             <div class="row">
               <form id="student-form">
                 {% if current_user == nil %}
-                <div class="form-group col-md-6">
-                  <label for="user-first-name" class="control-label">{{ 'checkout.complete.first_name' | t }}</label>
-                  <input type="text" id="user-first-name" name="user[first_name]" class="form-control" placeholder="Seu nome"
-                    value="{{ params.user.first_name }}" data-validation="required"
-                    data-validation-error-msg="{{ 'errors.first_name.blank' | t }}">
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label for="user-last-name" class="control-label">{{ 'checkout.complete.last_name' | t }}</label>
-                  <input type="text" id="user-last-name" name="user[last_name]" class="form-control"
-                    placeholder="Seu sobrenome" value="{{ params.user.last_name }}" data-validation="required"
-                    data-validation-error-msg="{{ 'errors.last_name.blank' | t }}">
+                <div class="form-group col-md-12">
+                  <label for="user-full-name" class="control-label">{{ 'checkout.complete.full_name' | t }}</label>
+                  <input type="text" id="user-full-name" name="user[full_name]" class="form-control"
+                    placeholder="{{ 'express_checkout.placeholder.full_name' | t }}" value="{{ params.user.first_name }}" data-validation="required"
+                    data-validation-error-msg="{{ 'errors.full_name.blank' | t }}">
                 </div>
 
                 <div class="form-group col-md-12">
                   <label for="user-email" class="control-label">{{ 'login.email' | t }}</label>
                   <input type="email" id="user-email" name="user[email]" class="form-control"
-                    placeholder="seumelhoremail@gmail.com" value="{{ params.user.email }}" data-validation="email"
+                    placeholder="{{ 'express_checkout.placeholder.email' | t }}" value="{{ params.user.email }}" data-validation="email"
                     data-validation-error-msg="{{ 'errors.email.invalid' | t }}">
                 </div>
 
@@ -46,59 +39,6 @@
                     data-validation="cpf" data-validation-error-msg="{{ 'errors.cpf.invalid' | t }}">
                 </div>
 
-                <div id="address-container">
-
-                  <div class="form-group col-md-12">
-                    <label for="user-cep" class="control-label">{{ 'checkout.complete.address_zip_code' | t }}</label>
-                    <input type="text" id="user-cep" name="user[address_attributes][zip_code]"
-                      {% if current_school | has_feature: 'cep_service' %}data-enable-cep-service="true" {% endif %}
-                      placeholder="Seu CEP" value="{{ address.zip_code }}" class="form-control"
-                      data-validation="required" data-validation-error-msg="{{ 'errors.address_zip_code.blank' | t }}">
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="user-street" class="control-label">{{ 'checkout.complete.address_street' | t }}</label>
-                    <input type="text" id="user-street" name="user[address_attributes][street]" placeholder="Seu logradouro"
-                      value="{{ address.street }}" class="form-control" data-validation="required"
-                      data-validation-error-msg="{{ 'errors.address_street.blank' | t }}">
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="user-number" class="control-label">{{ 'checkout.complete.address_number' | t }}</label>
-                    <input type="text" id="user-number" name="user[address_attributes][number]" placeholder="Seu número"
-                      value="{{ address.number }}" class="form-control" data-validation="required"
-                      data-validation-error-msg="{{ 'errors.address_number.blank' | t }}">
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="user-complement" class="control-label">{{ 'checkout.complete.address_complement' | t }}</label>
-                    <input type="text" id="user-complement" name="user[address_attributes][complement]" placeholder="Seu complemento"
-                      value="{{ address.complement }}" class="form-control">
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="user-district" class="control-label">{{ 'checkout.complete.address_district' | t }}</label>
-                    <input type="text" id="user-district" name="user[address_attributes][district]" placeholder="Seu bairro"
-                      value="{{ address.district }}" class="form-control" data-validation="required"
-                      data-validation-error-msg="{{ 'errors.address_district.blank' | t }}">
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label for="user-city" class="control-label">{{ 'checkout.complete.address_city' | t }}</label>
-                    <input type="text" id="user-city" name="user[address_attributes][city]" placeholder="Sua cidade"
-                      value="{{ address.city }}" class="form-control" data-validation="required"
-                      data-validation-error-msg="{{ 'errors.address_city.blank' | t }}">
-                  </div>
-
-                  <div class="form-group col-md-6">
-                    <label class="control-label">{{ 'checkout.complete.address_state' | t }}</label>
-                    <div class="select-container">
-                      {% include "select-address", selected_state: address.state %}
-                    </div>
-                  </div>
-
-                </div>
-
                 {% else %}
 
                 <input type="hidden" class="form-control valid" name="user[first_name]"
@@ -107,30 +47,16 @@
                   value="{{ current_user.last_name }}">
                 <input type="hidden" class="form-control valid" name="user[email]" value="{{ current_user.email }}">
                 <input type="hidden" class="form-control valid" name="user[cpf]" value="{{ current_user.cpf }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][street]]"
-                  value="{{ address.street }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][number]"
-                  value="{{  address.number }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][complement]"
-                  value="{{ address.complement }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][district]"
-                  value="{{ address.district }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][city]"
-                  value="{{ address.city }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][state]"
-                  value="{{ address.state  }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][zip_code]"
-                  value="{{ address.zip_code }}">
 
-                <span><b>{{ current_user.first_name }}</b></span><br>
-                <div class="email-logout-container">
-                  <span>
-                    {{ current_user.email }}
-                  </span>
-                  {% capture logout_link_html %}
-                  <span class="link-logout">{{ 'express_checkout.log_out' | t }}</span>
-                  {% endcapture %}
-                  {{ logout_link_html | logout_link }}
+                <div class="personal-data-container">
+                  <span><b>{{ current_user.first_name }}</b></span><br>
+                  <div class="email-logout-container">
+                    <span>{{ current_user.email }}</span>
+                    {% capture logout_link_html %}
+                    <span class="link-logout">{{ 'express_checkout.log_out' | t }}</span>
+                    {% endcapture %}
+                    {{ logout_link_html | logout_link }}
+                  </div>
                 </div>
                 {% endif %}
               </form>
@@ -262,7 +188,7 @@
                           <label for="card-holder-name"
                             class="control-label">{{ 'checkout.payment.credit_card_name' | t }}</label>
                           <input id="card-holder-name" name="order[credit_card][name]" class="form-control"
-                            value="{{ credit_card.name }}" placeholder="João A. Silva" {% if credit_card.active %}
+                            value="{{ credit_card.name }}" placeholder="{{ 'express_checkout.placeholder.card_name' | t }}" {% if credit_card.active %}
                             disabled {% endif %} data-validation="length" data-validation-length="min6"
                             data-validation-error-msg="{{ 'errors.credit_card.name_invalid' | t }}">
                         </div>
@@ -315,7 +241,6 @@
 
                       {% form 'express_checkout/pay', id: boleto-form %}
                       <div class="form-container">
-
                         {% if form.errors %}
                         <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
                         {% endif %}
@@ -370,6 +295,84 @@
                 </div>
               </div>
             </div>
+          </div>
+
+          <div id="address-container">
+            <form id="student-address-form">
+              {% if current_user == nil %}
+                <h6 class="title-form">{{ 'express_checkout.title_address' | t }}</h6>
+                <div class="form-container">
+                  <div class="row">
+                    <div class="form-group col-md-12">
+                      <label for="user-cep" class="control-label">{{ 'checkout.complete.address_zip_code' | t }}</label>
+                      <input type="text" id="user-cep" name="user[address_attributes][zip_code]"
+                        {% if current_school | has_feature: 'cep_service' %}data-enable-cep-service="true" {% endif %}
+                             placeholder="{{ 'express_checkout.placeholder.zip_code' | t }}" value="{{ address.zip_code }}" class="form-control"
+                             data-validation="required" data-validation-error-msg="{{ 'errors.address_zip_code.blank' | t }}">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label for="user-street" class="control-label">{{ 'checkout.complete.address_street' | t }}</label>
+                      <input type="text" id="user-street" name="user[address_attributes][street]"
+                             placeholder="{{ 'express_checkout.placeholder.street' | t }}" value="{{ address.street }}" class="form-control"
+                             data-validation="required" data-validation-error-msg="{{ 'errors.address_street.blank' | t }}">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label for="user-number" class="control-label">{{ 'checkout.complete.address_number' | t }}</label>
+                      <input type="text" id="user-number" name="user[address_attributes][number]" placeholder="{{ 'express_checkout.placeholder.number' | t }}"
+                             value="{{ address.number }}" class="form-control" data-validation="required"
+                             data-validation-error-msg="{{ 'errors.address_number.blank' | t }}">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label for="user-complement"
+                        class="control-label">{{ 'checkout.complete.address_complement' | t }}</label>
+                      <input type="text" id="user-complement" name="user[address_attributes][complement]"
+                             placeholder="{{ 'express_checkout.placeholder.complement' | t }}" value="{{ address.complement }}" class="form-control">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label for="user-district"
+                        class="control-label">{{ 'checkout.complete.address_district' | t }}</label>
+                      <input type="text" id="user-district" name="user[address_attributes][district]"
+                             placeholder="{{ 'express_checkout.placeholder.district' | t }}" value="{{ address.district }}" class="form-control"
+                             data-validation="required" data-validation-error-msg="{{ 'errors.address_district.blank' | t }}">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label for="user-city" class="control-label">{{ 'checkout.complete.address_city' | t }}</label>
+                      <input type="text" id="user-city" name="user[address_attributes][city]" placeholder="{{ 'express_checkout.placeholder.city' | t }}"
+                             value="{{ address.city }}" class="form-control" data-validation="required"
+                             data-validation-error-msg="{{ 'errors.address_city.blank' | t }}">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label class="control-label">{{ 'checkout.complete.address_state' | t }}</label>
+                      <div class="select-container">
+                        {% include "select-address", selected_state: address.state %}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              {% else %}
+                <input type="hidden" class="form-control valid" name="user[address_attributes][street]]"
+                  value="{{ address.street }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][number]"
+                  value="{{  address.number }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][complement]"
+                  value="{{ address.complement }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][district]"
+                  value="{{ address.district }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][city]"
+                  value="{{ address.city }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][state]"
+                  value="{{ address.state  }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][zip_code]"
+                  value="{{ address.zip_code }}">
+              {% endif %}
+            </form>
           </div>
 
 
@@ -452,13 +455,24 @@
 
       const currentFormIdentifier = `#${$(activeTab).find('form').attr('id')}`;
 
-      const studentDataArray = $('#student-form').serializeArray();
-
       const studentBlur = $('#student-form input').blur();
 
       if (studentBlur.hasClass("error")) {
         $("html").animate({ scrollTop: studentBlur.offset().top - 200 }, 1500);
         return
+      }
+
+      const studentDataArray = $('#student-form').serializeArray();
+
+      let studentAddressArray = [];
+      if (currentFormIdentifier === '#boleto-form') {
+        const studentAddressBlur = $('#student-address-form input').blur();
+
+        if (studentAddressBlur.hasClass("error")) {
+          $("html").animate({ scrollTop: studentAddressBlur.offset().top - 200 }, 1500);
+          return
+        }
+        studentAddressArray = $('#student-address-form').serializeArray();
       }
 
       const checkboxTermsOfServiceBlur = $('#checkbox-terms-of-service').blur();
@@ -468,14 +482,31 @@
         return
       }
 
-      studentDataArray.forEach(({ name, value }) => {
-        $('<input>').attr({ type: 'hidden', name, value }).appendTo(currentFormIdentifier);
+      [...studentDataArray, ...studentAddressArray].forEach(({ name, value }) => {
+        if (name === 'user[full_name]') {
+          const { firstName, lastName } = splitString(value);
+
+          $('<input>').attr({ type: 'hidden', name: 'user[first_name]', value: firstName }).appendTo(currentFormIdentifier);
+          $('<input>').attr({ type: 'hidden', name: 'user[last_name]', value: lastName }).appendTo(currentFormIdentifier);
+        } else
+          $('<input>').attr({ type: 'hidden', name, value }).appendTo(currentFormIdentifier);
+
       });
 
       $(currentFormIdentifier).submit();
+
     });
 
   });
+
+  function splitString(name){
+    const EMPTY_STRING = ' ';
+    const splitted = name ? name.split(EMPTY_STRING) : EMPTY_STRING.split(EMPTY_STRING);
+    const firstName = splitted.shift();
+    const lastName = splitted ? splitted.join(EMPTY_STRING) : EMPTY_STRING;
+
+    return { firstName, lastName }
+  }
 </script>
 
 <style>
@@ -591,7 +622,11 @@
     color: #262626;
   }
 
-  .email-logout-container {
+  .personal-data-container {
+    padding: 0 15px;
+  }
+
+  .personal-data-container .email-logout-container {
     display: flex;
     justify-content: space-between;
   }
