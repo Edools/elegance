@@ -195,12 +195,12 @@
 
                         <div class="row">
                           <div class="form-group col-sm-6">
-                            <label for="card-expiry"
+                            <label for="card-expiration"
                               class="control-label">{{ 'checkout.payment.credit_card_expiry' | t }}</label>
-                            <input id="card-expiry" inputmode="numeric" name="order[credit_card][expiry]"
+                            <input id="card-expiration" inputmode="numeric" name="order[credit_card][expiry]"
                               class="form-control" value="{{ credit_card.expiry }}" placeholder="MM/AAAA"
                               {% if credit_card.active %} disabled {% endif %} data-validation="date"
-                              data-validation-format="mm/yyyy"
+                              data-validation-format="mm / yyyy"
                               data-validation-error-msg="{{ 'errors.credit_card.year_month_invalid' | t }}">
                           </div>
                           <div class="form-group col-sm-6">
@@ -421,7 +421,7 @@
 
     payform.cardNumberInput(input);
 
-    $('#card-expiry').mask('00/0000');
+    $('#card-expiration').mask('00/0000');
     $('#card-cvc').mask('000');
     $('#usercpf').mask('000.000.000-00');
 
