@@ -110,12 +110,13 @@
 <script>
   const coupon = '{{ coupon }}';
 
-  $('.js-remove-coupon-container[style="display: none;"]').remove();
+  $('#js-input-coupon-container').hide();
 
-  if (coupon) {
-    $('#js-input-coupon-container').hide();
-  } else {
+  if (coupon.length === 0) {
     $('.js-remove-coupon-container').hide();
     $('#js-add-coupon-container').show();
+  } else {
+    $('.js-remove-coupon-container[style="display: none;"]').remove();
+    $('.js-remove-coupon-container').show();
   }
 </script>
