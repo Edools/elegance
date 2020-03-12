@@ -20,21 +20,21 @@
 {% endif %}
 
 <section id="js-totals-box">
-  {% assign payment = payment_option | default: order %}
-  {% assign discount = payment.price | minus: payment.total %}
+  {% assign paymentOption = payment_option | default: order %}
+  {% assign discount = paymentOption.price | minus: paymentOption.total %}
 
   {% if discount > 0 %}
   <div class="totals-box-container">
     <div class="totals-box-item">{{ 'express_checkout.original_price_text' | t }}</div>
     <div class="totals-box-item product-value-text">
-      {{ payment.price | money_option_presentation: payment.kind, payment.period, 'full', 1 }}
+      {{ paymentOption.price | money_option_presentation: paymentOption.kind, paymentOption.period, 'full', 1 }}
     </div>
   </div>
 
   <div class="totals-box-container">
     <div class="totals-box-item discount-text">{{ 'express_checkout.discount_text' | t }}</div>
     <div class="totals-box-item discount-text">-
-      {{ discount | money_option_presentation: payment.kind, payment.period, 'full', 1}}</div>
+      {{ discount | money_option_presentation: paymentOption.kind, paymentOption.period, 'full', 1}}</div>
   </div>
 
   <hr class="divider">
@@ -45,10 +45,10 @@
     <div class="totals-box-item product-value-text">
       <span>
         <b id="js-payment-total">
-          {% if payment.kind == 'free' %}
+          {% if paymentOption.kind == 'free' %}
           {{ 'product.pricing.free.unitary' | t }}
           {% else %}
-          {{ payment.total | money_option_presentation: payment.kind, payment.period, 'full', 1 }}
+          {{ paymentOption.total | money_option_presentation: paymentOption.kind, paymentOption.period, 'full', 1 }}
           {% endif %}
         </b>
       </span>
