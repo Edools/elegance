@@ -84,20 +84,18 @@
 
     {% if current_path != '/express_checkout/payment' and current_path != '/express_checkout/success' %}
       {% comment %} Teste logico para saber qual pagina está sendo mostrada e se foi escolhido mostrar ou não o objeto {% endcomment %}
-      {% if settings.view.liga.home.header == '1' or settings.view.liga.check.header == '1' or settings.view.liga.login.header == '1' %}
-        {% if current_path == '/' or current_path contains 'cart' or current_path contains 'checkout' or current_path contains 'users' %}
-          {% if settings.view.liga.home.header != '1' and current_path == '/' %}
+      {% if settings.view.config_pages.home.header == '1' or settings.view.config_pages.check.header == '1' or settings.view.config_pages.login.header == '1' %}
+          {% if settings.view.config_pages.home.header != '1' and current_path == '/' %}
             {% include 'navbar' %}
           {% endif %}
-          {% if settings.view.liga.check.header != '1' and current_path contains 'cart' or current_path contains 'checkout' %}
+
+          {% if settings.view.config_pages.check.header != '1' and current_path contains 'cart' or current_path contains 'checkout' %}
             {% include 'navbar' %}
           {% endif %}
-          {% if settings.view.liga.login.header != '1' and current_path contains 'users' %}
+
+          {% if settings.view.config_pages.login.header != '1' and current_path contains 'users' %}
             {% include 'navbar' %}
           {% endif %}
-        {% else %}
-          {% include 'navbar' %}
-        {% endif %}
       {% else %}
           {% include 'navbar' %}
       {% endif %}
@@ -110,10 +108,27 @@
     <div class="content-push"></div>
   </div>
 
+  <div class="content-push"></div>
+</div>
+
   {% if current_path != '/express_checkout/payment' and current_path != '/express_checkout/success' %}
     <div class="footer-wrapper">
-      {% include 'footer' %}
-    </div>
+      {% comment %} Teste logico para saber qual pagina está sendo mostrada e se foi escolhido mostrar ou não o objeto {% endcomment %}
+      {% if settings.view.config_pages.home.footer == '1' or settings.view.config_pages.check.footer == '1' or settings.view.config_pages.login.footer == '1' %}
+          {% if settings.view.config_pages.home.footer != '1' and current_path == '/'  %}
+            {% include 'footer' %}
+          {% endif %}
+
+          {% if settings.view.config_pages.check.footer != '1' and current_path contains 'cart' or current_path contains 'checkout' %}
+            {% include 'footer' %}
+          {% endif %}
+
+          {% if settings.view.config_pages.login.footer != '1' and current_path contains 'users' %}
+            {% include 'footer' %}
+          {% endif %}
+      {% else %}
+          {% include 'footer' %}
+      </div>
   {% endif %}
 
   {{ settings.view.injector.body }}

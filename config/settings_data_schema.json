@@ -364,14 +364,14 @@
         "template": "<h3>Página Home</h3><p></p>"
       },
       {
-        "key": "view.liga.home.logo_href",
+        "key": "view.config_pages.home.logo_href",
         "type": "checkbox",
         "templateOptions": {
           "label": "Retira o link da logo na página da Home."
         }
       },
       {
-        "key": "view.liga.home.header",
+        "key": "view.config_pages.home.header",
         "type": "select",
         "defaultValue": "0",
         "templateOptions": {
@@ -390,7 +390,7 @@
         }
       },
       {
-        "key": "view.liga.home.footer",
+        "key": "view.config_pages.home.footer",
         "type": "select",
         "defaultValue": "0",
         "templateOptions": {
@@ -412,14 +412,14 @@
         "template": "<h3>Página Login</h3><p></p>"
       },
       {
-        "key": "view.liga.login.logo_href",
+        "key": "view.config_pages.login.logo_href",
         "type": "checkbox",
         "templateOptions": {
           "label": "Retira o link da logo na página de Login."
         }
       },
       {
-        "key": "view.liga.login.header",
+        "key": "view.config_pages.login.header",
         "type": "select",
         "defaultValue": "0",
         "templateOptions": {
@@ -438,7 +438,7 @@
         }
       },
       {
-        "key": "view.liga.login.footer",
+        "key": "view.config_pages.login.footer",
         "type": "select",
         "defaultValue": "0",
         "templateOptions": {
@@ -460,21 +460,21 @@
         "template": "<h3>Páginas Cart/Checkout</h3><p></p>"
       },
       {
-        "key": "view.liga.check.logo_href",
+        "key": "view.config_pages.check.logo_href",
         "type": "checkbox",
         "templateOptions": {
           "label": "Retira o link da logo no Cart/Checkout"
         }
       },
       {
-        "key": "view.liga.check.back_button",
+        "key": "view.config_pages.check.back_button",
         "type": "checkbox",
         "templateOptions": {
           "label": "Esconder o botão voltar na página Cart/Checkout"
         }
       },
       {
-        "key": "view.liga.check.header",
+        "key": "view.config_pages.check.header",
         "type": "select",
         "defaultValue": "0",
         "templateOptions": {
@@ -493,7 +493,7 @@
         }
       },
       {
-        "key": "view.liga.check.footer",
+        "key": "view.config_pages.check.footer",
         "type": "select",
         "defaultValue": "0",
         "templateOptions": {
@@ -518,10 +518,10 @@
         "template": "<h4>- Redirecionamento Página de Sucesso</h4><p></p>"
       },
       {
-        "key": "view.liga.check.success_page",
+        "key": "view.config_pages.check.success_page",
         "type": "textarea",
         "templateOptions": {
-          "placeholder": "Endereço para Redirecionamento"
+          "placeholder": "Endereço para Redirecionamento Exemplo: https://www.edools.com"
         }
       }
     ]
