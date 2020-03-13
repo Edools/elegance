@@ -8,7 +8,6 @@
           {% include "express_checkout/product-box" with product  %}
           {% include "express_checkout/totals-box" %}
         </div>
-
         <div class="col-xs-12 col-sm-7 col-sm-pull-5 col-md-5 col-md-offset-2">
 
           <div class="card-container text-center">
@@ -21,8 +20,29 @@
             <p>{{ 'checkout.success.subscription_info.' | append: payment_option.period | t: price: price }}</p>
 
             {% else %}
+            {% if payment.status == 'waiting_boleto' %}
+            <img src="{{ 'boleto-icon.png' | asset_url }}" alt="Boleto icon" width="97" height="80">
+            <h6 class="title-buying-text color-title-confirmed">{{ 'checkout.success.title.boleto' | t }}</h6>
+            <p> {{ 'checkout.success.description.boleto' | t }}</p>
+            <div class="buttons-padding">
+              <a onclick="onCopyClipboard('{{ payment.boleto_code }}')"
+                class="btn btn-light btn-primary-options btn-block">
+                {{ 'checkout.success.buttons.boleto.boleto_code' | t }}
+              </a>
+              <br>
+              <a href="{{ payment.link }}" target="_blank" class="btn btn-light btn-success-options btn-block">
+                {{ 'checkout.success.buttons.boleto.link' | t }}</a>
+            </div>
 
-            {% if order.status == 'processing' or order.status == 'initiated' %}
+            <script>
+              const msg = "{{ 'checkout.success.buttons.boleto.copy_boleto_code' | t }}";
+              function onCopyClipboard(text) {
+                navigator.clipboard.writeText(text)
+                  .then(() => $('body').append(`\n  <div class=\"alert-notice\">\n    \n    \n      <div class=\"alert alert-success\">\n        <button data-dismiss=\"alert\" class=\"close\" type=\"button\">×<\/button>\n        <i class=\"icon-close\"><\/i>\n        ${msg}\n      <\/div>\n    \n  <\/div>\n\n  <script>\n    setTimeout(function () {\n      $(\'.alert-notice\').fadeOut(1000, function () {\n        $(this).hide();\n      });\n    }, 3000);\n  <\/script>\n\n`));
+              }
+            </script>
+
+            {% elsif payment.status == 'processing' or payment.status == 'initiated' %}
             <img src="{{ 'processing-icon.png' | asset_url }}" alt="Processing icon" width="74" height="68">
             <h6 class="title-buying-text color-title-processing">{{ 'checkout.success.title.processing' | t }}</h6>
             <p>{{ 'checkout.success.description.processing' | t }}</p>
@@ -31,7 +51,7 @@
                 {{ 'checkout.success.buttons.processing' | t }}
               </a>
             </div>
-            {% elsif order.status == 'authorized' or order.status == 'confirmed' %}
+            {% elsif payment.status == 'authorized' or payment.status == 'confirmed' %}
             <img src="{{ 'success-icon.png' | asset_url }}" alt="Success icon" width="70" height="64">
             <h6 class="title-buying-text color-title-confirmed">{{ 'checkout.success.title.success' | t }}</h6>
 
@@ -55,7 +75,7 @@
             {% endif %}
             {% endunless %}
 
-            {% elsif order.status == 'canceled' %}
+            {% elsif payment.status == 'canceled' %}
             <img src="{{ 'error-icon.png' | asset_url }}" alt="Error icon" width="112" height="74">
             <h6 class="title-buying-text color-title-error">{{ 'checkout.success.title.error' | t }}</h6>
             <p>{{ 'checkout.success.description.error' | t }}</p>
@@ -68,7 +88,7 @@
 
             {% if trial_purchase %}
             <div class="alert alert-warning">
-              {% assign end_trial = order.billing_at | date: "%d/%m/%Y %H:%M" %}
+              {% assign end_trial = payment.billing_at | date: "%d/%m/%Y %H:%M" %}
               {{ 'checkout.success.trial_purchase_warning' | t: trial_limit: end_trial }}
             </div>
             {% endif %}
@@ -142,9 +162,11 @@
     .buttons-padding .btn-success-options {
       border: 2px solid #2cc3cc;
       background-color: white;
-      box-shadow: 0 2px 4px 0 rgba(44, 195, 204, 0.2);
+      box-shadow: 0px 2px 4px rgba(44, 195, 204, 0.203098);
+      border-radius: 2px;
       color: #2cc3cc;
       padding: 10px;
+      font-weight: bold;
       margin-top: 0;
     }
 
@@ -152,6 +174,8 @@
       background: #2cc3cc;
       box-shadow: 0px 2px 4px rgba(44, 195, 204, 0.203098);
       border-radius: 2px;
+      padding: 10px;
+      font-weight: bold;
       color: #FFFFFF;
     }
 
@@ -161,5 +185,20 @@
       font-weight: bold;
       line-height: 130%;
       text-transform: uppercase;
+    }
+
+    @media only screen and (max-width: 767px) {
+      .checkout-success-page {
+        padding-bottom: 0;
+      }
+
+      .card-container {
+        margin-top: 0;
+        margin-bottom: 48px;
+      }
+
+      .title-buying-text, .buttons-padding {
+        padding: 0;
+      }
     }
   </style>
