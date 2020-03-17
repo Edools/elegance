@@ -1,0 +1,812 @@
+<div class="checkout-page express-checkout-payment-page page">
+  <div class="container">
+    <div class="container-spacing">
+      <div class="row">
+
+        <div class="col-xs-12 col-sm-5 col-sm-push-7 col-md-4 col-purchase-summary">
+          <div class="purchase-summary-container">
+            <h6 id="title-purchase-summary" class="title-form">{{ 'express_checkout.title_purchase_summary' | t }}</h6>
+            {% include "express_checkout/product-box" %}
+            {% include "express_checkout/coupon-box" %}
+            {% include "express_checkout/totals-box" %}
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-7 col-sm-pull-5 col-md-5 col-md-offset-2 col-input-data">
+          <h6 class="title-form">{{ 'express_checkout.title_personal_data' | t }}</h6>
+          <div class="form-container">
+            <div class="row">
+              <form id="student-form">
+                {% if current_user == nil %}
+                <div class="form-group col-md-12">
+                  <label for="user-full-name" class="control-label">{{ 'checkout.complete.full_name' | t }}</label>
+                  <input type="text" id="user-full-name" name="user[full_name]" class="form-control"
+                    placeholder="{{ 'express_checkout.placeholder.full_name' | t }}" value="{{ params.user.first_name }}" data-validation="required"
+                    data-validation-error-msg="{{ 'errors.full_name.blank' | t }}">
+                </div>
+
+                <div class="form-group col-md-12">
+                  <label for="user-email" class="control-label">{{ 'login.email' | t }}</label>
+                  <input type="email" id="user-email" name="user[email]" class="form-control"
+                    placeholder="{{ 'express_checkout.placeholder.email' | t }}" value="{{ params.user.email }}" data-validation="email"
+                    data-validation-error-msg="{{ 'errors.email.invalid' | t }}">
+                </div>
+
+                <div class="form-group col-md-9">
+                  <label for="usercpf" class="control-label">{{ 'checkout.complete.cpf' | t }}</label>
+                  <input id="usercpf" inputmode="numeric" name="user[cpf]" class="form-control"
+                    placeholder="___.___.___-__" value="{{ params.user.cpf }}" data-validate-cpf="true"
+                    data-validation="cpf" data-validation-error-msg="{{ 'errors.cpf.invalid' | t }}">
+                </div>
+
+                {% else %}
+
+                <input type="hidden" class="form-control valid" name="user[first_name]"
+                  value="{{ current_user.first_name }}">
+                <input type="hidden" class="form-control valid" name="user[last_name]"
+                  value="{{ current_user.last_name }}">
+                <input type="hidden" class="form-control valid" name="user[email]" value="{{ current_user.email }}">
+                <input type="hidden" class="form-control valid" name="user[cpf]" value="{{ current_user.cpf }}">
+
+                <div class="personal-data-container">
+                  <span><b>{{ current_user.first_name }}</b></span><br>
+                  <div class="email-logout-container">
+                    <span>{{ current_user.email }}</span>
+                    {% capture logout_link_html %}
+                    <span class="link-logout">{{ 'express_checkout.log_out' | t }}</span>
+                    {% endcapture %}
+                    {{ logout_link_html | logout_link }}
+                  </div>
+                </div>
+                {% endif %}
+              </form>
+            </div>
+          </div>
+
+          <h6 class="title-form">{{ 'express_checkout.title_payment_method' | t }}</h6>
+
+          <div class="wizard">
+            <div class="wizard-content">
+              <div class="payment-form">
+                <div class="ed-tabs">
+                  {% if payment_option and payment_option.payment_method != nil %}
+                  {% case payment_option.payment_method %}
+                  {% when 'boleto' %}
+                  {% assign show_boleto = true %}
+                  {% assign payment_type = 'boleto' %}
+                  {% else %}
+                  {% assign show_cc = true %}
+                  {% assign payment_type = 'credit_card' %}
+                  {% endcase %}
+                  {% else %}
+                  {% assign show_cc = true %}
+                  {% assign payment_type = 'credit_card' %}
+
+                  {% if payment_option.kind == 'common' %}
+                  {% if gateway.common_payment_methods contains 'credit_card' %}
+                  {% assign show_cc = true %}
+                  {% endif %}
+
+                  {% if gateway.common_payment_methods contains 'boleto' %}
+                  {% assign show_boleto = true %}
+                  {% endif %}
+
+                  {% if gateway.common_payment_methods contains 'bank_transfer'%}
+                  {% assign show_bt = true %}
+                  {% endif %}
+                  {% elsif payment_option.kind == 'subscription' %}
+                  {% if gateway.subscription_payment_methods contains 'credit_card' %}
+                  {% assign show_cc = true %}
+                  {% endif %}
+
+                  {% if gateway.subscription_payment_methods contains 'boleto' %}
+                  {% assign show_boleto = true %}
+                  {% endif %}
+                  {% endif %}
+                  {% endif %}
+
+                  {% if trial_purchase %}
+                  <div class="alert alert-info">{{ 'checkout.payment.trial_purchase_warning' | t }}</div>
+                  {% endif %}
+
+                  <ul id="tab-payment-methods" class="nav nav-pills">
+                    {% if show_cc %}
+                    <li class="{% if payment_type == 'credit_card' %} active {% endif %}" role="presentation">
+                      <a href="#credit-card" id="credit-card-tab" role="tab" data-toggle="tab"
+                        aria-controls="credit-card" aria-expanded="true" data-toggle="pill">
+                        <i class="fal fa-credit-card"></i> {{ 'checkout.payment.credit_card' | t }}
+                      </a>
+                    </li>
+                    {% endif %}
+
+                    {% if show_boleto %}
+                    <li class="{% if payment_type == 'boleto' %} active {% endif %}" role="presentation">
+                      <a href="#boleto" id="boleto-tab" role="tab" data-toggle="tab" aria-controls="boleto"
+                        aria-expanded="false" data-toggle="pill">
+                        <i class="fal fa-barcode-alt"></i> {{ 'checkout.payment.boleto' | t }}
+                      </a>
+                    </li>
+                    {% endif %}
+
+                    {% if show_bt %}
+                    <li class="{% if payment_type == 'bank_transfer' %} active {% endif %}" role="presentation">
+                      <a href="#bank-transfer" id="bank-transfer-tab" role="tab" data-toggle="tab"
+                        aria-controls="boleto" aria-expanded="false" data-toggle="pill">
+                        <i class="fad fa-exchange"></i> {{ 'checkout.payment.bank_transfer' | t }}
+                      </a>
+                    </li>
+                    {% endif %}
+                  </ul>
+
+                  <div class="tab-content">
+                    {% if show_cc %}
+                    {% assign credit_card = params.order.credit_card %}
+
+                    <div id="credit-card"
+                      class="credit-card tab-pane {% if payment_type == 'credit_card' %}active{% endif %}"
+                      role="tabpanel" aria-labelledby="credit-card-tab">
+
+                      {% form 'express_checkout/pay', id: card-form %}
+                      <div class="form-container">
+
+                        {% if form.errors %}
+                        <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+                        {% endif %}
+
+                        <input type="hidden" name="coupon_name">
+                        <input type="hidden" name="order[src]" value="{{ params.src }}">
+                        <input type="hidden" name="order[xcod]" value="{{ params.xcod }}">
+                        <input type="hidden" name="order[payment_type]" value="credit_card">
+                        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
+
+                        <div class="form-group">
+                          {% if credit_card.active %}
+                          <div class="alert alert-info">
+                            {{ 'checkout.payment.credit_card_warning' | t }}
+                          </div>
+                          {% endif %}
+
+                          <label for="card-number"
+                            class="control-label">{{ 'checkout.payment.credit_card_number' | t }}</label>
+                          <div id="card-number-container">
+                            <input type="text" inputmode="numeric" id="card-number" name="order[credit_card][number]"
+                              class="form-control" placeholder="____ ____ ____ ____" value="{{ credit_card.number }}"
+                              {% if credit_card.active %} disabled {% endif %} data-validation="length"
+                              data-validation-length="min16, max19"
+                              data-validation-error-msg="{{ 'errors.credit_card.number_invalid' | t }}">
+
+                            <div id="card-number-icons">
+                              <img id="visa" src="{{ 'visa.png' | asset_url }}">
+                              <img id="mastercard" src="{{ 'mastercard.png' | asset_url }}">
+                              <img id="amex" src="{{ 'american-express.png' | asset_url }}">
+                              <img id="dinersclub" src="{{ 'diners.png' | asset_url }}">
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="card-holder-name"
+                            class="control-label">{{ 'checkout.payment.credit_card_name' | t }}</label>
+                          <input id="card-holder-name" name="order[credit_card][name]" class="form-control"
+                            value="{{ credit_card.name }}" placeholder="{{ 'express_checkout.placeholder.card_name' | t }}" {% if credit_card.active %}
+                            disabled {% endif %} data-validation="length" data-validation-length="min6"
+                            data-validation-error-msg="{{ 'errors.credit_card.name_invalid' | t }}">
+                        </div>
+
+                        <div class="row">
+                          <div class="form-group col-sm-6">
+                            <label for="card-expiration"
+                              class="control-label">{{ 'checkout.payment.credit_card_expiry' | t }}</label>
+                            <input id="card-expiration" inputmode="numeric" name="order[credit_card][expiry]"
+                              class="form-control" value="{{ credit_card.expiry }}" placeholder="MM/AAAA"
+                              {% if credit_card.active %} disabled {% endif %} data-validation="date"
+                              data-validation-format="mm/yyyy"
+                              data-validation-error-msg="{{ 'errors.credit_card.year_month_invalid' | t }}">
+                          </div>
+                          <div class="form-group col-sm-6">
+                            <label for="card-cvc"
+                              class="control-label">{{ 'checkout.payment.credit_card_cvv' | t }}</label>
+                            <div class="input-group">
+                              <input id="card-cvc" type="number" inputmode="numeric" name="order[credit_card][cvc]"
+                                class="form-control" value="{{ credit_card.cvc }}" placeholder="CVC"
+                                {% if credit_card.active %} disabled {% endif %} data-validation="length"
+                                data-validation-length="min3"
+                                data-validation-error-msg="{{ 'errors.credit_card.verification_value_invalid' | t }}">
+                              <span class="input-group-btn">
+                                <button type="button" id="btn-cvc" class="btn btn-default form-control"
+                                  data-toggle="popover" data-container="body" data-html="true" data-trigger="hover"
+                                  data-placement="top"
+                                  data-content="<div class='poppover-cvc-container'><span class='card-cvc-preview'></span><div class='text-cvc-preview'><b>{{ 'express_checkout.where_to_find' | t }}</b><br><span>{{ 'express_checkout.description_where_to_find' | t }}</span></div></div>">
+                                  <i class="fal fa-question-circle"></i>
+                                </button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {% if payment_option.kind == 'common' %}
+                        <div class="form-group">
+                          <label class="control-label">{{ 'checkout.payment.credit_card_installments' | t }}</label>
+                          {% include "express_checkout/credit-card-installments" %}
+                        </div>
+                        {% endif %}
+                      </div>
+                      {% endform %}
+                    </div>
+                    {% endif %}
+
+                    {% if show_boleto %}
+                    <div id="boleto" class="boleto tab-pane {% if payment_type == 'boleto' %}active{% endif %}"
+                      role="tabpanel" aria-labelledby="boleto-tab">
+
+                      {% form 'express_checkout/pay', id: boleto-form %}
+                      <div class="form-container">
+                        {% if form.errors %}
+                        <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+                        {% endif %}
+
+                        <div class="information-alert">
+                          <span>{{ 'checkout.payment.boleto_warning' | t }}</span>
+                        </div>
+                        <input type="hidden" name="coupon_name">
+                        <input type="hidden" name="order[src]" value="{{ params.src }}">
+                        <input type="hidden" name="order[xcod]" value="{{ params.src }}">
+                        <input type="hidden" name="order[payment_type]" value="boleto">
+                        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
+                      </div>
+                      {% endform %}
+                    </div>
+                    {% endif %}
+
+                    {% if show_bt %}
+                    <div id="bank-transfer"
+                      class="bank-transfer tab-pane payment-methods {% if payment_type == 'bank_transfer' %}active{% endif %}"
+                      role="tabpanel" aria-labelledby="boleto-tab">
+
+                      {% form 'express_checkout/pay', id: bank-transfer-form %}
+                      <div class="form-container">
+
+                        {% if form.errors %}
+                        <div class="alert alert-danger">{{ form.errors | default_errors }}</div>
+                        {% endif %}
+
+                        <div class="information-alert">
+                          <span>{{ 'checkout.payment.bank_transfer_warning' | t }}</span>
+                        </div>
+                        <input type="hidden" name="coupon_name">
+                        <input type="hidden" name="order[src]" value="{{ params.src }}">
+                        <input type="hidden" name="order[xcod]" value="{{ params.src }}">
+                        <input type="hidden" name="order[payment_type]" value="bank_transfer">
+                        <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
+
+                        <div class="form-group">
+                          {% for bank in gateway.supported_banks %}
+                          <label class="radio-inline">
+                            <input type="radio" name="order[bank_transfer][institution]" id="bank-{{ bank }}"
+                              value="{{ bank }}"> <span class="bank-flag {{ bank }}"></span>
+                          </label>
+                          {% endfor %}
+                        </div>
+                      </div>
+                      {% endform %}
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="address-container">
+            <form id="student-address-form">
+              {% if current_user == nil %}
+                <h6 class="title-form">{{ 'express_checkout.title_address' | t }}</h6>
+                <div class="form-container">
+                  <div class="row">
+                    <div class="form-group col-md-12">
+                      <label for="user-cep" class="control-label">{{ 'checkout.complete.address_zip_code' | t }}</label>
+                      <input type="text" id="user-cep" name="user[address_attributes][zip_code]"
+                        {% if current_school | has_feature: 'cep_service' %}data-enable-cep-service="true" {% endif %}
+                             placeholder="{{ 'express_checkout.placeholder.zip_code' | t }}" value="{{ address.zip_code }}" class="form-control"
+                             data-validation="required" data-validation-error-msg="{{ 'errors.address_zip_code.blank' | t }}">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label for="user-street" class="control-label">{{ 'checkout.complete.address_street' | t }}</label>
+                      <input type="text" id="user-street" name="user[address_attributes][street]"
+                             placeholder="{{ 'express_checkout.placeholder.street' | t }}" value="{{ address.street }}" class="form-control"
+                             data-validation="required" data-validation-error-msg="{{ 'errors.address_street.blank' | t }}">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label for="user-number" class="control-label">{{ 'checkout.complete.address_number' | t }}</label>
+                      <input type="text" id="user-number" name="user[address_attributes][number]" placeholder="{{ 'express_checkout.placeholder.number' | t }}"
+                             value="{{ address.number }}" class="form-control" data-validation="required"
+                             data-validation-error-msg="{{ 'errors.address_number.blank' | t }}">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label for="user-complement"
+                        class="control-label">{{ 'checkout.complete.address_complement' | t }}</label>
+                      <input type="text" id="user-complement" name="user[address_attributes][complement]"
+                             placeholder="{{ 'express_checkout.placeholder.complement' | t }}" value="{{ address.complement }}" class="form-control">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label for="user-district"
+                        class="control-label">{{ 'checkout.complete.address_district' | t }}</label>
+                      <input type="text" id="user-district" name="user[address_attributes][district]"
+                             placeholder="{{ 'express_checkout.placeholder.district' | t }}" value="{{ address.district }}" class="form-control"
+                             data-validation="required" data-validation-error-msg="{{ 'errors.address_district.blank' | t }}">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label for="user-city" class="control-label">{{ 'checkout.complete.address_city' | t }}</label>
+                      <input type="text" id="user-city" name="user[address_attributes][city]" placeholder="{{ 'express_checkout.placeholder.city' | t }}"
+                             value="{{ address.city }}" class="form-control" data-validation="required"
+                             data-validation-error-msg="{{ 'errors.address_city.blank' | t }}">
+                    </div>
+
+                    <div class="form-group col-md-12">
+                      <label class="control-label">{{ 'checkout.complete.address_state' | t }}</label>
+                      <div class="select-container">
+                        {% include "select-address", selected_state: address.state %}
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              {% else %}
+                <input type="hidden" class="form-control valid" name="user[address_attributes][street]]"
+                  value="{{ address.street }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][number]"
+                  value="{{  address.number }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][complement]"
+                  value="{{ address.complement }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][district]"
+                  value="{{ address.district }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][city]"
+                  value="{{ address.city }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][state]"
+                  value="{{ address.state  }}">
+                <input type="hidden" class="form-control valid" name="user[address_attributes][zip_code]"
+                  value="{{ address.zip_code }}">
+              {% endif %}
+            </form>
+          </div>
+
+
+          {% if current_school.terms_of_use.size > 0 %}
+          <form id="form-terms-of-service">
+            <div id="terms-of-service-text-container">
+              <div>
+                <label for="checkbox-terms-of-service">
+                  <input type="checkbox" id="checkbox-terms-of-service" data-validation="required"
+                    data-validation-error-msg="{{ 'errors.terms_of_service_and_privacy.blank' | t }}">
+                  {{ 'express_checkout.checkbox_terms_of_service' | t: url: '/terms-of-use' }}
+                </label>
+              </div>
+            </div>
+          </form>
+          {% endif %}
+
+
+          <div class="buttons-padding">
+            <button id="btn-finalize-purchase"
+              class="btn btn-block btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}
+              <i class="fal fa-lock"></i>
+            </button>
+          </div>
+
+          <div id="security-images-container">
+            <img src="{{ 'secure-purchase.png' | asset_url }}" alt="Secure Purchage Image" width="120" height="39">
+            <img src="{{ 'protected-data.png' | asset_url }}" alt="Protected Data Image" width="120" height="39">
+          </div>
+
+          {% include "express_checkout/payment-processing-message-box" with gateway %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(document).ready(() => {
+
+    $.validate({
+      modules: 'brazil'
+    });
+
+    const input = document.getElementById('card-number');
+
+    payform.cardNumberInput(input);
+
+    $('#card-expiration').mask('00/0000');
+    $('#card-cvc').mask('000');
+    $('#usercpf').mask('000.000.000-00');
+
+    $('[data-toggle="popover"]').popover({
+      placement: function (context, source) {
+        setTimeout(() => this.$tip.css('left', '-=40'), 0);
+        return 'top';
+      },
+    });
+
+    $('#card-number').keyup(event => {
+      $('#visa').css({ opacity: 0.5 });
+      $('#mastercard').css({ opacity: 0.5 });
+      $('#amex').css({ opacity: 0.5 });
+      $('#dinersclub').css({ opacity: 0.5 });
+
+      const cardType = payform.parseCardType(event.target.value);
+
+      $(`#${cardType}`).css({ opacity: 1 });
+    });
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', event => {
+      const target = $(event.target).attr("href");
+      $('#address-container').fadeIn().css({ display: target === '#boleto' ? 'block' : 'none' });
+    });
+
+    $('.container-spacing input').keyup(event => $(`#${event.target.id}`).validate());
+
+    $("#btn-finalize-purchase").click(() => {
+      const activeTab = $('#tab-payment-methods li.active a').attr('href');
+
+      const currentFormIdentifier = `#${$(activeTab).find('form').attr('id')}`;
+
+      const studentBlur = $('#student-form input').blur();
+
+      if (studentBlur.hasClass("error")) {
+        $("html").animate({ scrollTop: studentBlur.offset().top - 200 }, 1500);
+        return
+      }
+
+      const studentDataArray = $('#student-form').serializeArray();
+
+      let studentAddressArray = [];
+      if (currentFormIdentifier === '#boleto-form') {
+        const studentAddressBlur = $('#student-address-form input').blur();
+
+        if (studentAddressBlur.hasClass("error")) {
+          $("html").animate({ scrollTop: studentAddressBlur.offset().top - 200 }, 1500);
+          return
+        }
+        studentAddressArray = $('#student-address-form').serializeArray();
+      }
+
+      const checkboxTermsOfServiceBlur = $('#checkbox-terms-of-service').blur();
+
+      if (checkboxTermsOfServiceBlur.hasClass("error")) {
+        $("html").animate({ scrollTop: checkboxTermsOfServiceBlur.offset().top - 500 }, 1000);
+        return
+      }
+
+      [...studentDataArray, ...studentAddressArray].forEach(({ name, value }) => {
+        if (name === 'user[full_name]') {
+          const { firstName, lastName } = splitString(value);
+
+          $('<input>').attr({ type: 'hidden', name: 'user[first_name]', value: firstName }).appendTo(currentFormIdentifier);
+          $('<input>').attr({ type: 'hidden', name: 'user[last_name]', value: lastName }).appendTo(currentFormIdentifier);
+        } else
+          $('<input>').attr({ type: 'hidden', name, value }).appendTo(currentFormIdentifier);
+
+      });
+
+      $(currentFormIdentifier).submit();
+
+    });
+
+  });
+
+  function splitString(name){
+    const EMPTY_STRING = ' ';
+    const splitted = name ? name.split(EMPTY_STRING) : EMPTY_STRING.split(EMPTY_STRING);
+    const firstName = splitted.shift();
+    const lastName = splitted ? splitted.join(EMPTY_STRING) : EMPTY_STRING;
+
+    return { firstName, lastName }
+  }
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+  html *,
+  .btn {
+    font-family: 'Muli';
+  }
+
+  body {
+    color: #000000;
+    font-size: 14px;
+  }
+
+  .container-spacing {
+    margin-top: 60px;
+  }
+
+  #address-container {
+    display: none;
+  }
+
+  .checkout-page .tab-content {
+    margin-top: 0;
+  }
+
+  .wizard {
+    background: #FFFFFF;
+    box-shadow: 0px 5px 10px rgba(211, 211, 211, 0.198044);
+    border-radius: 2px;
+    padding-top: 37px;
+  }
+
+  .popover {
+    background-color: #FFFFFF;
+    color: #797979;
+    max-width: 350px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.09);
+  }
+
+  .poppover-cvc-container {
+    display: flex;
+  }
+
+  .popover.top>.arrow:after {
+    border-top-color: #FFFFFF;
+  }
+
+  .select-container select {
+    width: 100%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  .select-container {
+    width: 100%;
+    position: relative;
+  }
+
+  .select-container::before {
+    content: '';
+    display: block;
+    border: 5px solid transparent;
+    border-top-color: #262626;
+    position: absolute;
+    right: 15px;
+    top: calc(50% - 2px);
+  }
+
+  .card-cvc-preview {
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAyIiBoZWlnaHQ9IjczIiB2aWV3Qm94PSIwIDAgMTAyIDczIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB4PSIwLjUiIHk9IjEuMzAwMDUiIHdpZHRoPSIxMDEiIGhlaWdodD0iNzAuNCIgcng9IjYuNSIgZmlsbD0iI0Y0RjRGNCIgc3Ryb2tlPSIjQThBOEE4Ii8+CjxyZWN0IHk9IjEyLjg1NDYiIHdpZHRoPSIxMDIiIGhlaWdodD0iMTQuODM2NCIgZmlsbD0iI0E4QThBOCIvPgo8cmVjdCB4PSI1LjU2MzcyIiB5PSIzNS4xMDkxIiB3aWR0aD0iODEuNiIgaGVpZ2h0PSIxMC4yIiBmaWxsPSIjRDNEM0QzIi8+CjxwYXRoIGQ9Ik05Ny41IDQwQzk3LjUgNDQuNjA1MyA5Mi44OTc1IDQ4LjUgODcgNDguNUM4MS4xMDI1IDQ4LjUgNzYuNSA0NC42MDUzIDc2LjUgNDBDNzYuNSAzNS4zOTQ3IDgxLjEwMjUgMzEuNSA4NyAzMS41QzkyLjg5NzUgMzEuNSA5Ny41IDM1LjM5NDcgOTcuNSA0MFoiIGZpbGw9IndoaXRlIiBzdHJva2U9IiNGRjMwNUMiLz4KPHBhdGggZD0iTTgxLjYwNTMgNDMuMDcyQzgwLjg3MzMgNDMuMDcyIDgwLjMxNTMgNDIuNzk2IDc5LjkzMTMgNDIuMjQ0Qzc5LjU1MzMgNDEuNjg2IDc5LjM2NDMgNDAuODcgNzkuMzY0MyAzOS43OTZDNzkuMzY0MyAzOC43MjIgNzkuNTUzMyAzNy45MDkgNzkuOTMxMyAzNy4zNTdDODAuMzA5MyAzNi43OTkgODAuODY3MyAzNi41MiA4MS42MDUzIDM2LjUyQzgyLjM0MzMgMzYuNTIgODIuOTAxMyAzNi43OTkgODMuMjc5MyAzNy4zNTdDODMuNjU3MyAzNy45MDkgODMuODQ2MyAzOC43MTkgODMuODQ2MyAzOS43ODdDODMuODQ2MyA0MC44NjEgODMuNjU0MyA0MS42NzcgODMuMjcwMyA0Mi4yMzVDODIuODkyMyA0Mi43OTMgODIuMzM3MyA0My4wNzIgODEuNjA1MyA0My4wNzJaTTgxLjYwNTMgNDIuNDUxQzgyLjExNTMgNDIuNDUxIDgyLjQ5MDMgNDIuMjM1IDgyLjczMDMgNDEuODAzQzgyLjk3NjMgNDEuMzcxIDgzLjA5OTMgNDAuNjk5IDgzLjA5OTMgMzkuNzg3QzgzLjA5OTMgMzguODc1IDgyLjk3NjMgMzguMjA5IDgyLjczMDMgMzcuNzg5QzgyLjQ5MDMgMzcuMzYzIDgyLjExNTMgMzcuMTUgODEuNjA1MyAzNy4xNUM4MS4wOTUzIDM3LjE1IDgwLjcxNzMgMzcuMzYzIDgwLjQ3MTMgMzcuNzg5QzgwLjIzMTMgMzguMjE1IDgwLjExMTMgMzguODgxIDgwLjExMTMgMzkuNzg3QzgwLjExMTMgNDAuNjk5IDgwLjIzMTMgNDEuMzcxIDgwLjQ3MTMgNDEuODAzQzgwLjcxNzMgNDIuMjM1IDgxLjA5NTMgNDIuNDUxIDgxLjYwNTMgNDIuNDUxWk04Ny4wMDE4IDQzLjA3MkM4Ni4yNjk4IDQzLjA3MiA4NS43MTE4IDQyLjc5NiA4NS4zMjc4IDQyLjI0NEM4NC45NDk4IDQxLjY4NiA4NC43NjA4IDQwLjg3IDg0Ljc2MDggMzkuNzk2Qzg0Ljc2MDggMzguNzIyIDg0Ljk0OTggMzcuOTA5IDg1LjMyNzggMzcuMzU3Qzg1LjcwNTggMzYuNzk5IDg2LjI2MzggMzYuNTIgODcuMDAxOCAzNi41MkM4Ny43Mzk4IDM2LjUyIDg4LjI5NzggMzYuNzk5IDg4LjY3NTggMzcuMzU3Qzg5LjA1MzggMzcuOTA5IDg5LjI0MjggMzguNzE5IDg5LjI0MjggMzkuNzg3Qzg5LjI0MjggNDAuODYxIDg5LjA1MDggNDEuNjc3IDg4LjY2NjggNDIuMjM1Qzg4LjI4ODggNDIuNzkzIDg3LjczMzggNDMuMDcyIDg3LjAwMTggNDMuMDcyWk04Ny4wMDE4IDQyLjQ1MUM4Ny41MTE4IDQyLjQ1MSA4Ny44ODY4IDQyLjIzNSA4OC4xMjY4IDQxLjgwM0M4OC4zNzI4IDQxLjM3MSA4OC40OTU4IDQwLjY5OSA4OC40OTU4IDM5Ljc4N0M4OC40OTU4IDM4Ljg3NSA4OC4zNzI4IDM4LjIwOSA4OC4xMjY4IDM3Ljc4OUM4Ny44ODY4IDM3LjM2MyA4Ny41MTE4IDM3LjE1IDg3LjAwMTggMzcuMTVDODYuNDkxOCAzNy4xNSA4Ni4xMTM4IDM3LjM2MyA4NS44Njc4IDM3Ljc4OUM4NS42Mjc4IDM4LjIxNSA4NS41MDc4IDM4Ljg4MSA4NS41MDc4IDM5Ljc4N0M4NS41MDc4IDQwLjY5OSA4NS42Mjc4IDQxLjM3MSA4NS44Njc4IDQxLjgwM0M4Ni4xMTM4IDQyLjIzNSA4Ni40OTE4IDQyLjQ1MSA4Ny4wMDE4IDQyLjQ1MVpNOTIuMzk4MiA0My4wNzJDOTEuNjY2MiA0My4wNzIgOTEuMTA4MiA0Mi43OTYgOTAuNzI0MiA0Mi4yNDRDOTAuMzQ2MiA0MS42ODYgOTAuMTU3MiA0MC44NyA5MC4xNTcyIDM5Ljc5NkM5MC4xNTcyIDM4LjcyMiA5MC4zNDYyIDM3LjkwOSA5MC43MjQyIDM3LjM1N0M5MS4xMDIyIDM2Ljc5OSA5MS42NjAyIDM2LjUyIDkyLjM5ODIgMzYuNTJDOTMuMTM2MiAzNi41MiA5My42OTQyIDM2Ljc5OSA5NC4wNzIyIDM3LjM1N0M5NC40NTAyIDM3LjkwOSA5NC42MzkyIDM4LjcxOSA5NC42MzkyIDM5Ljc4N0M5NC42MzkyIDQwLjg2MSA5NC40NDcyIDQxLjY3NyA5NC4wNjMyIDQyLjIzNUM5My42ODUyIDQyLjc5MyA5My4xMzAyIDQzLjA3MiA5Mi4zOTgyIDQzLjA3MlpNOTIuMzk4MiA0Mi40NTFDOTIuOTA4MiA0Mi40NTEgOTMuMjgzMiA0Mi4yMzUgOTMuNTIzMiA0MS44MDNDOTMuNzY5MiA0MS4zNzEgOTMuODkyMiA0MC42OTkgOTMuODkyMiAzOS43ODdDOTMuODkyMiAzOC44NzUgOTMuNzY5MiAzOC4yMDkgOTMuNTIzMiAzNy43ODlDOTMuMjgzMiAzNy4zNjMgOTIuOTA4MiAzNy4xNSA5Mi4zOTgyIDM3LjE1QzkxLjg4ODIgMzcuMTUgOTEuNTEwMiAzNy4zNjMgOTEuMjY0MiAzNy43ODlDOTEuMDI0MiAzOC4yMTUgOTAuOTA0MiAzOC44ODEgOTAuOTA0MiAzOS43ODdDOTAuOTA0MiA0MC42OTkgOTEuMDI0MiA0MS4zNzEgOTEuMjY0MiA0MS44MDNDOTEuNTEwMiA0Mi4yMzUgOTEuODg4MiA0Mi40NTEgOTIuMzk4MiA0Mi40NTFaIiBmaWxsPSIjNTI1MjUyIi8+Cjwvc3ZnPgoK') no-repeat;
+    margin-top: 20px;
+    width: 200px;
+    height: 72px;
+  }
+
+  .text-cvc-preview {
+    font-size: 14px !important;
+    margin-left: 15px;
+  }
+
+  .title-form {
+    margin: 25px 0;
+    font-weight: bold;
+    line-height: 130%;
+    text-transform: uppercase;
+  }
+
+  .form-container {
+    background: #FFFFFF;
+    border-radius: 2px;
+    padding: 24px 31px;
+    margin-bottom: 32px;
+  }
+
+  .form-container .form-control,
+  .form-container .form-control:hover {
+    border: 1px solid #A8A8A8;
+    border-radius: 2px;
+  }
+
+  .form-container .form-control:focus {
+    border: 1px solid #262626;
+  }
+
+  .control-label {
+    color: #A8A8A8;
+  }
+
+  .form-group:not(.has-error):focus-within label {
+    color: #262626;
+  }
+
+  .personal-data-container {
+    padding: 0 15px;
+  }
+
+  .personal-data-container .email-logout-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .link-logout {
+    font-weight: bold;
+    line-height: 150%;
+    text-decoration-line: underline;
+    color: #2CC3CC;
+  }
+
+  #tab-payment-methods {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 32px;
+  }
+
+  #tab-payment-methods li {
+    flex: 1;
+  }
+
+  #tab-payment-methods li:not(:first-child) {
+    margin-left: 10px;
+  }
+
+  #tab-payment-methods a {
+    font-size: 16px;
+    width: auto;
+    padding: 11px 7px;
+    text-align: center;
+    border: 1px solid #d3d3d3;
+    color: #a8a8a8;
+  }
+
+  #tab-payment-methods a[aria-expanded="true"] {
+    border: 2px solid #2cc3cc;
+    background: #f1fbfc;
+    box-shadow: 0 4px 5px rgba(44, 195, 204, .2);
+    color: #2cc3cc;
+  }
+
+  #card-number-container {
+    position: relative;
+  }
+
+  #card-number-container #card-number-icons {
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+  }
+
+  #card-number-container #card-number-icons img {
+    opacity: 0.5;
+  }
+
+  .information-alert {
+    margin: 24px 0;
+    padding: 8px;
+    text-align: justify;
+    background: #F4F4F4;
+    border-radius: 2px;
+    color: #797979;
+  }
+
+  #terms-of-service-text-container {
+    display: flex;
+    justify-content: center;
+    font-weight: 100;
+    margin: 21px 0;
+    padding: 0 30px;
+    color: #797979;
+  }
+
+  #terms-of-service-text-container label {
+    font-weight: normal;
+    text-align: left;
+    margin-left: 12px;
+  }
+
+  #terms-of-service-text-container input {
+    vertical-align: middle;
+    border: 1px solid #A8A8A8;
+    border-radius: 2px;
+    width: 16px;
+    height: 16px;
+  }
+
+  #terms-of-service-text-container a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .buttons-padding {
+    padding: 0 35px;
+  }
+
+  #btn-finalize-purchase {
+    background-color: #34B469;
+    box-shadow: 0px 2px 4px rgba(38, 147, 83, 0.2);
+    border-radius: 2px;
+    font-weight: bold;
+    height: 54px;
+  }
+
+  #security-images-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 26px 0;
+  }
+
+  /* CUSTOM VALIDATIONS */
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  .has-success .control-label {
+    color: #269353;
+  }
+
+  .has-success .form-control {
+    border: 1px solid #269353;
+  }
+
+  .has-error .control-label,
+  .has-error .help-block {
+    color: #E42B2B;
+  }
+
+  .has-error .form-control {
+    border: 1px solid #E42B2B;
+  }
+
+  @media only screen and (max-width: 767px) {
+    #title-purchase-summary {
+      display: none;
+    }
+
+    .wizard {
+      padding-top: 0;
+    }
+
+    .popover.top>.arrow {
+      left: 84% !important;
+    }
+
+    .col-purchase-summary {
+      background: #f9f9f9;
+      z-index: 2;
+    }
+
+    .col-input-data {
+      background: #FFFFFF;
+      border-radius: 10px 10px 0px 0px;
+      z-index: 1;
+    }
+
+    .purchase-summary-container {
+      margin-top: 15px;
+    }
+
+    .form-container {
+      box-shadow: none;
+      padding: 0;
+      margin-bottom: 0;
+    }
+
+    .form-container>.form-group:nth-of-type(1) {
+      margin-top: 15px;
+    }
+
+    #tab-payment-methods {
+      padding: 0;
+    }
+  }
+</style>

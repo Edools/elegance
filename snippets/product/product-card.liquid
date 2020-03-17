@@ -44,7 +44,8 @@
       </div>
 
       <div class="call-to-action">
-        {% if product.payment_options.size > 1 %}
+        {% assign has_express_checkout = current_school | has_feature: 'express_checkout' %}
+        {% if product.payment_options.size > 1 and has_express_checkout == false %}
           <div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true"

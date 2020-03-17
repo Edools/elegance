@@ -1,0 +1,73 @@
+<div class="product-container-responsive">
+  {% if product.logo %}
+  {% image, src: product.logo, alt: product.title, class: 'product-img' %}
+  {% else %}
+  {% assign placeholder = 'missing-product-logo.png' | asset_url %}
+  {% image, src: placeholder, alt: product.title, class: 'product-img' %}
+  {% endif %}
+
+  <div class="product-title">
+    <span> {{ product.title }} </span>
+  </div>
+</div>
+
+<style>
+  .product-container-responsive {
+    position: relative;
+    height: 220px;
+  }
+
+  .product-container-responsive:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(360deg, rgba(0, 0, 0, 0.9) 3.58%, rgba(0, 0, 0, 0.6) 68.63%, rgba(0, 0, 0, 0) 100%);
+    background-blend-mode: multiply;
+    z-index: 2;
+    border-radius: 4px;
+  }
+
+  .product-container-responsive .product-img {
+    width: 100%;
+    height: 220px;
+    border-radius: 4px;
+  }
+
+  .product-container-responsive .product-title {
+    position: absolute;
+    bottom: 15%;
+    left: 18px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 123%;
+    z-index: 3;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .product-container-responsive {
+      display: flex;
+      align-items: center;
+      height: auto;
+    }
+
+    .product-container-responsive:before {
+      width: 100px;
+      background: none;
+    }
+
+    .product-container-responsive .product-img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .product-container-responsive .product-title {
+      position: initial;
+      color: #262626;
+      margin-left: 15px;
+      font-size: 14px;
+      width: 100%;
+    }
+  }
+</style>
