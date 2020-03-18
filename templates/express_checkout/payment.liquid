@@ -113,7 +113,9 @@
                     {% if show_cc %}
                     <li class="{% if payment_type == 'credit_card' %} active {% endif %}" role="presentation">
                       <a href="#credit-card" id="credit-card-tab" role="tab" data-toggle="tab"
-                        aria-controls="credit-card" aria-expanded="true" data-toggle="pill">
+                        aria-controls="credit-card"
+                        aria-expanded="{% if payment_type == 'credit_card' %}true{% else %}false{% endif %}"
+                        data-toggle="pill">
                         <i class="fal fa-credit-card"></i> {{ 'checkout.payment.credit_card' | t }}
                       </a>
                     </li>
@@ -122,7 +124,8 @@
                     {% if show_boleto %}
                     <li class="{% if payment_type == 'boleto' %} active {% endif %}" role="presentation">
                       <a href="#boleto" id="boleto-tab" role="tab" data-toggle="tab" aria-controls="boleto"
-                        aria-expanded="false" data-toggle="pill">
+                      aria-expanded="{% if payment_type == 'boleto' %}true{% else %}false{% endif %}"
+                        data-toggle="pill">
                         <i class="fal fa-barcode-alt"></i> {{ 'checkout.payment.boleto' | t }}
                       </a>
                     </li>
@@ -131,7 +134,9 @@
                     {% if show_bt %}
                     <li class="{% if payment_type == 'bank_transfer' %} active {% endif %}" role="presentation">
                       <a href="#bank-transfer" id="bank-transfer-tab" role="tab" data-toggle="tab"
-                        aria-controls="boleto" aria-expanded="false" data-toggle="pill">
+                        aria-controls="boleto"
+                        aria-expanded="{% if payment_type == 'bank_transfer' %}true{% else %}false{% endif %}"
+                        data-toggle="pill">
                         <i class="fad fa-exchange"></i> {{ 'checkout.payment.bank_transfer' | t }}
                       </a>
                     </li>
@@ -419,7 +424,7 @@
 
     const input = document.getElementById('card-number');
 
-    payform.cardNumberInput(input);
+    if(input) payform.cardNumberInput(input);
 
     $('#card-expiration').mask('00/0000');
     $('#card-cvc').mask('000');
@@ -659,6 +664,7 @@
     text-align: center;
     border: 1px solid #d3d3d3;
     color: #a8a8a8;
+    background-color: transparent;
   }
 
   #tab-payment-methods a[aria-expanded="true"] {
