@@ -15,13 +15,8 @@
         "color_body_text": "#585858",
         "color_content_bg": "#F9F9F9",
         "color_border": "#dedede",
-<<<<<<< HEAD
-        "color_navbar_bg": "#ffffff",
-        "color_navbar_links": "#222",
-=======
         "color_navbar_bg": "#FFFFFF",
         "color_navbar_links": "#222222",
->>>>>>> e70d9124... Adicionada as configurações do novo menu detalhes das paginas. Foram ciradas as keys utilizadas nas paginas Home, login e Checkout.
         "color_button_primary_text": "#ffffff",
         "color_button_primary_bg": "#4bbb83",
         "color_button_secondary_text": "#585858",
