@@ -474,6 +474,25 @@
         }
       },
       {
+        "key": "view.config_pages.check.express_checkout",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Caso possua Express Checkout: Mostrar Header",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
         "key": "view.config_pages.check.header",
         "type": "select",
         "defaultValue": "0",
