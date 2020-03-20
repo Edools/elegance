@@ -1,5 +1,7 @@
 <div class="enroll">
+  {% assign has_express_checkout = current_school | has_feature: 'express_checkout' %}
   {% assign first_option = product.payment_options[0] %}
+  {% assign oldest_payment_option = product.payment_options | sort: "created_at" | first %}
   {% if first_option %}
     {% capture product_price %}
       {{ first_option.price | money_option_presentation_with_taxes: first_option.kind,
@@ -18,11 +20,16 @@
         </p>
       {% endif %}
 
-      {% if first_option.kind == 'subscription' %}
-        {{ first_option.price | money_option_presentation: first_option.kind, first_option.period, 'full', 1 }}
+      {% if has_express_checkout == true %}
+        {{ oldest_payment_option.price | money_option_presentation: oldest_payment_option.kind, oldest_payment_option.period, 'full', 1 }}
       {% else %}
-        {{ product_price }}
+        {% if first_option.kind == 'subscription' %}
+          {{ first_option.price | money_option_presentation: first_option.kind, first_option.period, 'full', 1 }}
+        {% else %}
+          {{ product_price }}
+        {% endif %}
       {% endif %}
+
 
       {% if first_option.trials > 0 %}
         <div>{{ 'product.trial' | t: count: first_option.trials }}</div>
@@ -30,40 +37,43 @@
     </div>
 
     <div class="btn-group">
-      {% assign has_express_checkout = current_school | has_feature: 'express_checkout' %}
-      {% if product.payment_options.size > 1 and has_express_checkout == false %}
-        <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false">
-          {{ 'product.buy' | t }} <span class="caret"></span>
-        </button>
-
-        <ul class="dropdown-menu">
-          {% for option in product.payment_options %}
-            <li>
-              {% if gateway.gateway == 'hotmart' %}
-                <a href="{{ option.hotmart_config.hotmart_checkout_url }}">
-                  {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway, option }}
-                </a>
-              {% else %}
-                <a id="add-to-cart-product-{{ product.id }}-{{ option.id }}" href="{{ product | add_to_cart_path: option }}">
-                  {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway, option }}
-
-                  {% if option.trials > 0 %}
-                    <span>{{ 'product.trial' | t: count: option.trials }}</span>
-                  {% endif %}
-                </a>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
+      {% if has_express_checkout == true %}
+        {{ 'product.buy' | t | add_to_cart_link: product, oldest_payment_option, 'btn btn-primary btn-lg' }}
       {% else %}
-        {% if gateway.gateway == 'hotmart' %}
-          <a class="hotmart-fb btn btn-primary btn-lg" href="{{ first_option.hotmart_config.hotmart_checkout_url }}">
-            {{ 'product.buy' | t }}
-          </a>
+        {% if product.payment_options.size > 1 %}
+          <button type="button" class="btn btn-primary btn-lg dropdown-toggle" data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false">
+            {{ 'product.buy' | t }} <span class="caret"></span>
+          </button>
+
+          <ul class="dropdown-menu">
+            {% for option in product.payment_options %}
+              <li>
+                {% if gateway.gateway == 'hotmart' %}
+                  <a href="{{ option.hotmart_config.hotmart_checkout_url }}">
+                    {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway, option }}
+                  </a>
+                {% else %}
+                  <a id="add-to-cart-product-{{ product.id }}-{{ option.id }}" href="{{ product | add_to_cart_path: option }}">
+                    {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway, option }}
+
+                    {% if option.trials > 0 %}
+                      <span>{{ 'product.trial' | t: count: option.trials }}</span>
+                    {% endif %}
+                  </a>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
         {% else %}
-          {{ 'product.buy' | t | add_to_cart_link: product, first_option, 'btn btn-primary btn-lg' }}
+          {% if gateway.gateway == 'hotmart' %}
+            <a class="hotmart-fb btn btn-primary btn-lg" href="{{ first_option.hotmart_config.hotmart_checkout_url }}">
+              {{ 'product.buy' | t }}
+            </a>
+          {% else %}
+            {{ 'product.buy' | t | add_to_cart_link: product, first_option, 'btn btn-primary btn-lg' }}
+          {% endif %}
         {% endif %}
       {% endif %}
     </div>
