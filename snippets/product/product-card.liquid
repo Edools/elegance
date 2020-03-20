@@ -26,7 +26,6 @@
     {% assign first_option = product.payment_options[0] %}
     {% assign oldest_payment_option = product.payment_options | sort: "created_at" | first %}
 
-    {{ oldest_payment_option }}
     {% if first_option %}
       <div tabindex="0" class="price">
         {% if first_option.promotional == true %}
