@@ -474,6 +474,7 @@
         }
       },
       {
+<<<<<<< HEAD
         "key": "view.config_pages.check.express_checkout",
         "type": "select",
         "defaultValue": "0",
@@ -493,6 +494,8 @@
         }
       },
       {
+=======
+>>>>>>> 107bc1c46a8f3cc9357bc0a9186fe97de04a2120
         "key": "view.config_pages.check.header",
         "type": "select",
         "defaultValue": "0",
