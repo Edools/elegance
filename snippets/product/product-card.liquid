@@ -21,10 +21,12 @@
     <p tabindex="0" class="subtitle">{{ product.subtitle | truncate: 112 }}</p>
   </div>
 
-  <div class="footer caption clearfix">
+    <div class="footer caption clearfix">
+    {% assign has_express_checkout = current_school | has_feature: 'express_checkout' %}
     {% assign first_option = product.payment_options[0] %}
-    {% if first_option %}
+    {% assign oldest_payment_option = product.payment_options | sort: "created_at" | first %}
 
+    {% if first_option %}
       <div tabindex="0" class="price">
         {% if first_option.promotional == true %}
           <span aria-hidden="true" class="base-price">
@@ -32,10 +34,14 @@
           </span>
         {% endif %}
 
-        {% if first_option.kind == 'subscription' %}
-          <span  class="final-price"> {{ first_option.price | money_option_presentation: first_option.kind, first_option.period, 'full', 1 }}</span>
+        {% if has_express_checkout == true %}
+          <span aria-label="{{ oldest_payment_option.price | money_without_currency | remove: ',00' }} reais" class="final-price">{{ oldest_payment_option.price | money_option_presentation_with_taxes: oldest_payment_option.kind, oldest_payment_option.period, gateway, oldest_payment_option }} </span>
         {% else %}
-          <span aria-label="{{ first_option.price | money_without_currency | remove: ',00' }} reais" class="final-price">{{ first_option.price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway, first_option }} </span>
+          {% if first_option.kind == 'subscription' %}
+            <span  class="final-price"> {{ first_option.price | money_option_presentation: first_option.kind, first_option.period, 'full', 1 }}</span>
+          {% else %}
+            <span aria-label="{{ first_option.price | money_without_currency | remove: ',00' }} reais" class="final-price">{{ first_option.price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway, first_option }} </span>
+          {% endif %}
         {% endif %}
 
         {% if first_option.trials > 0 %}
@@ -44,43 +50,46 @@
       </div>
 
       <div class="call-to-action">
-        {% assign has_express_checkout = current_school | has_feature: 'express_checkout' %}
-        {% if product.payment_options.size > 1 and has_express_checkout == false %}
-          <div class="btn-group">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false">
-              {{ 'product.enroll' | t }} <span class="caret"></span>
-            </button>
-
-            <ul class="dropdown-menu product-accessibility-list">
-              {% for option in product.payment_options %}
-                <li>
-                  {% if gateway.gateway == 'hotmart' %}
-                    <a href="{{ option.hotmart_config.hotmart_checkout_url }}">
-                      {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway, option }}
-                    </a>
-                  {% else %}
-                    <a id="add-to-cart-product-{{ product.id }}-{{ option.id }}"
-                       href="{{ product | add_to_cart_path: option }}">
-                      {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway, option }}
-
-                      {% if option.trials > 0 %}
-                        <span>{{ 'product.trial' | t: count: option.trials }}</span>
-                      {% endif %}
-                    </a>
-                  {% endif %}
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
+        {% if has_express_checkout == true %}
+          {{ 'product.enroll' | t | add_to_cart_link: product, oldest_payment_option, 'btn btn-primary' }}
         {% else %}
-          {% if gateway.gateway == 'hotmart' %}
-            <a class="btn btn-primary" href="{{ first_option.hotmart_config.hotmart_checkout_url }}">
-              {{ 'product.enroll' | t }}
-            </a>
+          {% if product.payment_options.size > 1 %}
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false">
+                {{ 'product.enroll' | t }} <span class="caret"></span>
+              </button>
+
+              <ul class="dropdown-menu product-accessibility-list">
+                {% for option in product.payment_options %}
+                  <li>
+                    {% if gateway.gateway == 'hotmart' %}
+                      <a href="{{ option.hotmart_config.hotmart_checkout_url }}">
+                        {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway, option }}
+                      </a>
+                    {% else %}
+                      <a id="add-to-cart-product-{{ product.id }}-{{ option.id }}"
+                        href="{{ product | add_to_cart_path: option }}">
+                        {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway, option }}
+
+                        {% if option.trials > 0 %}
+                          <span>{{ 'product.trial' | t: count: option.trials }}</span>
+                        {% endif %}
+                      </a>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
           {% else %}
-            {{ 'product.enroll' | t | add_to_cart_link: product, first_option, 'btn btn-primary' }}
+            {% if gateway.gateway == 'hotmart' %}
+              <a class="btn btn-primary" href="{{ first_option.hotmart_config.hotmart_checkout_url }}">
+                {{ 'product.enroll' | t }}
+              </a>
+            {% else %}
+              {{ 'product.enroll' | t | add_to_cart_link: product, first_option, 'btn btn-primary' }}
+            {% endif %}
           {% endif %}
         {% endif %}
       </div>
