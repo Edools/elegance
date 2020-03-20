@@ -24,7 +24,9 @@
     <div class="footer caption clearfix">
     {% assign has_express_checkout = current_school | has_feature: 'express_checkout' %}
     {% assign first_option = product.payment_options[0] %}
-    {% assign last_option = product.payment_options.last %}
+    {% assign oldest_payment_option = product.payment_options | sort: "created_at" | first %}
+
+    {{ oldest_payment_option }}
     {% if first_option %}
       <div tabindex="0" class="price">
         {% if first_option.promotional == true %}
@@ -34,7 +36,7 @@
         {% endif %}
 
         {% if has_express_checkout == true %}
-          <span aria-label="{{ last_option.price | money_without_currency | remove: ',00' }} reais" class="final-price">{{ last_option.price | money_option_presentation_with_taxes: last_option.kind, last_option.period, gateway, last_option }} </span>
+          <span aria-label="{{ oldest_payment_option.price | money_without_currency | remove: ',00' }} reais" class="final-price">{{ oldest_payment_option.price | money_option_presentation_with_taxes: oldest_payment_option.kind, oldest_payment_option.period, gateway, oldest_payment_option }} </span>
         {% else %}
           {% if first_option.kind == 'subscription' %}
             <span  class="final-price"> {{ first_option.price | money_option_presentation: first_option.kind, first_option.period, 'full', 1 }}</span>
@@ -50,9 +52,9 @@
 
       <div class="call-to-action">
         {% if has_express_checkout == true %}
-          {{ 'product.enroll' | t | add_to_cart_link: product, last_option, 'btn btn-primary' }}
+          {{ 'product.enroll' | t | add_to_cart_link: product, oldest_payment_option, 'btn btn-primary' }}
         {% else %}
-          {% if product.payment_options.size > 1 and has_express_checkout == false %}
+          {% if product.payment_options.size > 1 %}
             <div class="btn-group">
               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
                       aria-haspopup="true"
