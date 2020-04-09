@@ -41,14 +41,22 @@
   {% endif %}
 
   <div class="totals-box-container">
-    <div class="totals-box-item"><b>{{ 'checkout.total_amount_to_pay' | t }}</b></div>
+    <div class="totals-box-item">
+      <b>
+        {% if paymentOption.amount_to_pay %}
+          {{ 'checkout.total_paid' | t }}
+        {% else %}
+          {{ 'checkout.total_amount_to_pay' | t }}
+        {% endif %}
+      </b>
+    </div>
     <div class="totals-box-item product-value-text">
       <span>
         <b id="js-payment-total">
           {% if paymentOption.kind == 'free' %}
           {{ 'product.pricing.free.unitary' | t }}
           {% else %}
-          {{ paymentOption.total | money_option_presentation: paymentOption.kind, paymentOption.period, 'full', 1 }}
+          {{ paymentOption.amount_to_pay | default: paymentOption.total | money_option_presentation: paymentOption.kind, paymentOption.period, 'full', 1 }}
           {% endif %}
         </b>
       </span>
