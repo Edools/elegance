@@ -1,6 +1,8 @@
 <div class="checkout-page checkout-connect-page page">
   <div class="container">
-    {% include "checkout/return", return_url: "/cart" %}
+    {% if settings.view.config_pages.check.back_button != true %}
+      {% include "checkout/return", return_url: "/cart" %}
+    {% endif %}
 
     <div class="row">
       {% include "checkout/title-box" %}
