@@ -356,6 +356,203 @@
     ]
   },
   {
+    "name": "Configurações Detalhes das Páginas",
+    "id": "2",
+    "icon" : "globe",
+    "settings": [
+      {
+        "template": "<h3>Página Home</h3><p></p>"
+      },
+      {
+        "key": "view.config_pages.home.closed_home",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Escola com home fechada."
+        }
+      },
+      {
+        "key": "view.config_pages.home.logo_href",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Retira o link da logo na página da Home."
+        }
+      },
+      {
+        "key": "view.config_pages.home.header",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Mostrar Header",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "key": "view.config_pages.home.footer",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Mostrar Footer",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "template": "<h3>Página Login</h3><p></p>"
+      },
+      {
+        "key": "view.config_pages.login.logo_href",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Retira o link da logo na página de Login."
+        }
+      },
+      {
+        "key": "view.config_pages.login.header",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Mostrar Header",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "key": "view.config_pages.login.footer",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Mostrar Footer",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "template": "<h3>Páginas Cart/Checkout</h3><p></p>"
+      },
+      {
+        "key": "view.config_pages.check.logo_href",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Retira o link da logo no Cart/Checkout"
+        }
+      },
+      {
+        "key": "view.config_pages.check.back_button",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Esconder o botão voltar na página Cart/Checkout"
+        }
+      },
+      {
+        "key": "view.config_pages.check.express_checkout",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Caso possua Express Checkout: Mostrar Header",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "key": "view.config_pages.check.header",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Mostrar Header",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "key": "view.config_pages.check.footer",
+        "type": "select",
+        "defaultValue": "0",
+        "templateOptions": {
+          "label": "Mostrar Footer.",
+          "options":
+          [
+            {
+              "name": "Sim",
+              "value": "0"
+            },
+            {
+              "name": "Não",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      {
+        "template": "<h3>Redirecionamentos</h3><p></p>"
+      },
+      {
+        "template": "<h4>- Redirecionamento Página de Sucesso</h4><p></p>"
+      },
+      {
+        "key": "view.config_pages.check.success_page",
+        "type": "textarea",
+        "templateOptions": {
+          "placeholder": "Endereço para Redirecionamento Exemplo: https://www.edools.com"
+        }
+      }
+    ]
+  },
+  {
     "name": "Navbar",
     "id": "2",
     "icon" : "globe",
