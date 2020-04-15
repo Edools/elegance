@@ -8,7 +8,9 @@
 
 <div class="checkout-page checkout-complete-page page">
   <div class="container">
-    {% include "checkout/return", return_url: "/cart" %}
+    {% if settings.view.config_pages.check.back_button != true %}
+      {% include "checkout/return", return_url: "/cart" %}
+    {% endif %}
 
     <div class="row">
       {% include "checkout/title-box" %}
@@ -168,7 +170,7 @@
                 <input type="submit" value="{{ 'checkout.go_to_payment' | t }}" class="btn btn-primary">
               </div>
               {% endform %}
-              
+
             </div>
           </div>
         </div>

@@ -1,6 +1,8 @@
 <div class="checkout-page checkout-payment-page page">
   <div class="container">
-    {% include "checkout/return" %}
+    {% if settings.view.config_pages.check.back_button != true %}
+      {% include "checkout/return" %}
+    {% endif %}
 
     <div class="row">
       {% include "checkout/title-box" %}
