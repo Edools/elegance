@@ -1,13 +1,11 @@
 <div class="certificates-page page">
   <div class="container page-container">
     <h2 tabindex='0' id="accessibility-main-content-certificates" class="page-title">{{ 'enrollment.my_certificates' | t }}</h2>
-
     {% if certificates.size > 0 %}
       <div class="certificates-list">
         <div class="row">
           {% for certificate in certificates %}
             {% assign product = certificate.school_product %}
-
             <article class="col-md-4 col-sm-6 col-xs-12">
               <div class="course">
                 <div class="course-image">
@@ -19,14 +17,23 @@
 
                   {% image, src: product_src, alt: product.title %}
                 </div>
-
-                <div class="course-header">
-              <span tabindex='0' class="title"
-                    title="{{ product.title }}"
-                    data-toggle="{% if product.title.size > 70 %}tooltip{% endif %}">
-              {{ product.title | truncate: 70 }}
-              </span>
-                </div>
+                {% if certificate.course %}
+                  <div class="course-header">
+                    <span tabindex='0' class="title"
+                          title="{{ certificate.course.title }}"
+                          data-toggle="{% if certificate.course.title.size > 70 %}tooltip{% endif %}">
+                    {{ certificate.course.name | truncate: 70 }}
+                    </span>
+                  </div>
+                {% else %}
+                  <div class="course-header">
+                    <span tabindex='0' class="title"
+                          title="{{ product.title }}"
+                          data-toggle="{% if product.title.size > 70 %}tooltip{% endif %}">
+                    {{ product.title | truncate: 70 }}
+                    </span>
+                  </div>
+                {% endif %}
 
                 <div class="course-action">
                   <a class="btn btn-default btn-edit" href="{{ certificate.s3_file_url }}" target="_blank">
@@ -34,7 +41,6 @@
                     {{ 'enrollment.download_certificate' | t }}
                   </a>
                 </div>
-
               </div>
             </article>
           {% endfor %}
