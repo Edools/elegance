@@ -1,4 +1,13 @@
 <div class="checkout-success-page page">
+  {% comment %} Verifica sé há algo preenchido na opção de redirecionamento da pagina sucesso {% endcomment %}
+  {% if settings.view.config_pages.check.success_page %}
+    {% assign url = settings.view.config_pages.check.success_page %}
+    {% comment %} Caso o campo tenha alguam valor chama o script de redirecionamento da pagina {% endcomment %}
+    <script>
+      window.location.href = '{{url}}';
+    </script>
+  {% endif %}
+
   <div class="container">
     <div class="text-center">
       <i class="icon-check"></i>

@@ -83,6 +83,26 @@
             "razao_social": true
           }
         },
+        "config_pages" :{
+          "home":{
+            "closed_home": false,
+            "logo_href": false,
+            "header": "0",
+            "footer": "0"
+          },
+          "login":{
+            "logo_href": false,
+            "header": "0",
+            "footer": "0"
+          },
+          "check":{
+            "logo_href": false,
+            "back_button": false,
+            "express_checkout": "0",
+            "header": "0",
+            "footer": "0"
+          }
+        },
         "home": {
           "header": {
             "title": "Seja Bem-Vindo",
