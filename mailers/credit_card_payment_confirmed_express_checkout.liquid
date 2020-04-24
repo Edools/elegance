@@ -112,17 +112,13 @@
                                           <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
                                              <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                                                 <tr>
-                                                   <td align="center" style="font-size:0px;padding:0px 0px 0px 0px;word-break:break-word;">
-                                                      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
-                                                         <tbody>
-                                                            <tr>
-                                                               <td style="width:600px;">
-                                                                  <img height="auto" src="https://storage.googleapis.com/topolio8758/plugin-assets/6320/8758/topo.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="600">
-                                                               </td>
-                                                            </tr>
-                                                         </tbody>
-                                                      </table>
-                                                   </td>
+                                                  <td align="center" style="font-family:Lato, Tahoma, sans-serif; font-size: 20px; padding:40px 24px;">
+                                                    {% if school.logo.size > 0 %}
+                                                      <img width="150" height="auto" src="{{ school.logo }}" >
+                                                    {% else %}
+                                                      {{ school.name }}
+                                                    {% endif %}
+                                                  </td>
                                                 </tr>
                                              </table>
                                           </div>
@@ -183,7 +179,7 @@
                                                 <tr>
                                                    <td align="left" style="font-size:0px;padding:0px 30px 20px 30px;word-break:break-word;">
                                                       <div style="font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:left;color:#262626;">
-                                                         <p style="text-align: center;"><span style="font-size: 14px;">Boas-not&iacute;cias, Firstname. Voc&ecirc; j&aacute; pode acessar e aproveitar o conte&uacute;do do seu produto. Comece agora:</span></p>
+                                                         <p style="text-align: center;"><span style="font-size: 14px;">Boas-not&iacute;cias, {{user.first_name}}. Voc&ecirc; j&aacute; pode acessar e aproveitar o conte&uacute;do do seu produto. Comece agora:</span></p>
 
                                                           {% if user.invitation_token %}
                                                             <p style="text-align: center;font-weight:bold;"><span style="font-size: 14px;">Estamos enviando agora um email para você definir sua senha. Procure-o em sua caixa de entrada e comece já!</p>
@@ -490,11 +486,11 @@
                                                    <td align="center" style="font-size:0px;padding:0px 0px 35px 0px;word-break:break-word;">
                                                       <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
                                                          <tbody>
-                                                            <tr>
-                                                               <td style="width:90px;">
-                                                                  <img height="auto" src="https://storage.googleapis.com/topolio8758/plugin-assets/6320/8758/herospark_transparente.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="90">
-                                                               </td>
-                                                            </tr>
+                                                          <tr>
+                                                            <td style="width:90px;">
+                                                               <img height="auto" src="https://storage.googleapis.com/topolio8758/plugin-assets/6320/8758/herospark_transparente.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="90">
+                                                            </td>
+                                                         </tr>
                                                          </tbody>
                                                       </table>
                                                    </td>
