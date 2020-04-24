@@ -159,18 +159,13 @@
                                           <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
                                              <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
                                                 <tr>
-                                                   <td align="center" style="font-size:0px;padding:47px 24px 37px 24px;word-break:break-word;">
-                                                      <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:collapse;border-spacing:0px;">
-                                                         <tbody>
-                                                            <tr>
-                                                               <td style="width:120px;">
-                                                                  /* Nome ou logo da conta */
-                                                                  <img height="auto" src="https://storage.googleapis.com/topolio8758/plugin-assets/6320/8758/herospark_transparente.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="120">
-                                                               </td>
-                                                            </tr>
-                                                         </tbody>
-                                                      </table>
-                                                   </td>
+                                                  <td align="center" style="font-family:Lato, Tahoma, sans-serif; font-size: 20px; padding:40px 24px;">
+                                                    {% if school.logo.size > 0 %}
+                                                      <img width="150" height="auto" src="{{ school.logo }}" >
+                                                    {% else %}
+                                                      {{ school.name }}
+                                                    {% endif %}
+                                                  </td>
                                                 </tr>
                                                 <tr>
                                                    <td align="center" style="font-size:0px;padding:15px 15px 2px 15px;word-break:break-word;">
@@ -193,8 +188,8 @@
                                                       <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%; padding-bottom:40px;">
                                                          <tr>
                                                             <td align="center" bgcolor="#2cc3cc" role="presentation" style="border:0px solid #000;border-radius:4px;cursor:auto;mso-padding-alt:11px 32px 11px 32px;background:#2cc3cc;" valign="middle">
-                                                               <a href="{{ accept_invitation_url }}" style="display:inline-block;background:#2cc3cc;color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:16px;font-weight:normal;line-height:100%;Margin:0;text-decoration:none;text-transform:none;padding:11px 32px 11px 32px;mso-padding-alt:0px;border-radius:4px;" target="_blank">
-                                                                  <div>Definir senha e acessar produto</div>
+                                                               <a href="{{ school_url | append: '/users/invitation/accept?invitation_token=' | append: token }}" style="display:inline-block;background:#2cc3cc;color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:16px;font-weight:normal;line-height:100%;Margin:0;text-decoration:none;text-transform:none;padding:11px 32px 11px 32px;mso-padding-alt:0px;border-radius:4px;" target="_blank">
+                                                                Definir senha e acessar produto
                                                                </a>
                                                             </td>
                                                          </tr>
