@@ -20,8 +20,8 @@
                 {% if certificate.course %}
                   <div class="course-header">
                     <span tabindex='0' class="title"
-                          title="{{ certificate.course.title }}"
-                          data-toggle="{% if certificate.course.title.size > 70 %}tooltip{% endif %}">
+                          title="{{ certificate.course.name }}"
+                          data-toggle="{% if certificate.course.name.size > 70 %}tooltip{% endif %}">
                     {{ certificate.course.name | truncate: 70 }}
                     </span>
                   </div>
