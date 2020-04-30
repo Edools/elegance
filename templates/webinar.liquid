@@ -1,4 +1,4 @@
-<link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet">
+<link href="https://vjs.zencdn.net/7.6.0/video-js.css" rel="stylesheet" />
 
 <div class="webinar-page webinar">
   <div class="container-fluid webinar-container">
@@ -6,22 +6,28 @@
       <div class="info">
         <div class="title">{{ webinar.title }}</div>
         {% if webinar.is_before == true %}
-          <div class="info-date">{{ 'webinar.info_not_started' | t: datetime: webinar.start_at }}</div>
+        <div class="info-date">
+          {{ "webinar.info_not_started" | t: datetime:webinar.start_at }}
+        </div>
         {% else %}
-          <div class="info-date">{{ 'webinar.info_started' | t: datetime: webinar.start_at }}</div>
+        <div class="info-date">
+          {{ "webinar.info_started" | t: datetime:webinar.start_at }}
+        </div>
         {% endif %}
       </div>
 
       <div id="webinar-player" class="webinar-player-wrapper col-md-8">
         {% media_player media: webinar %}
         <div class="watching-count">
-          <span id="watch-number">0</span>{{ 'webinar.watch_count' | t }}
+          <span id="watch-number">0</span>{{ "webinar.watch_count" | t }}
         </div>
       </div>
-
+      {% if webinar.type == "Webinar" %}
       <div class="webinar-chat-wrapper col-md-4">
-        {% include 'webinar/chat', jwt: lead_jwt, chat_room: webinar.host_key, is_before: webinar.is_before %}
+        {% include 'webinar/chat', jwt: lead_jwt, chat_room: webinar.host_key,
+        is_before: webinar.is_before %}
       </div>
+      {% endif %}
     </div>
   </div>
 </div>
