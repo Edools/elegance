@@ -5,15 +5,17 @@
     <div class="row">
       <div class="info">
         <div class="title">{{ webinar.title }}</div>
-        {% if webinar.is_before == true %}
-        <div class="info-date">
-          {{ "webinar.info_not_started" | t: datetime:webinar.start_at }}
-        </div>
-        {% else %}
-        <div class="info-date">
-          {{ "webinar.info_started" | t: datetime:webinar.start_at }}
-        </div>
-        {% endif %}
+        {% unless webinar.start_at.nil? %}
+          {% if webinar.is_before == true %}
+          <div class="info-date">
+            {{ "webinar.info_not_started" | t: datetime:webinar.start_at }}
+          </div>
+          {% else %}
+          <div class="info-date">
+            {{ "webinar.info_started" | t: datetime:webinar.start_at }}
+          </div>
+          {% endif %}
+        {% endunless %}
       </div>
 
       <div id="webinar-player" class="webinar-player-wrapper col-md-8">
@@ -29,7 +31,6 @@
       </div>
       {% endif %}
     </div>
-  </div>
 </div>
 
 {{ stage.page_capture_js }}
