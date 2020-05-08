@@ -289,7 +289,7 @@
     "answers": "Respostas",
     "question_title": "Título da sua pergunta",
     "ask": "Perguntar",
-    "helptext" : "Apenas administradores podem criar <strong>fóruns</strong> e <strong>seções</strong>. Para criar um <strong>tópico</strong>, escolha abaixo o fórum que se encaixa no seu assunto de interesse e participe!",
+    "helptext": "Apenas administradores podem criar <strong>fóruns</strong> e <strong>seções</strong>. Para criar um <strong>tópico</strong>, escolha abaixo o fórum que se encaixa no seu assunto de interesse e participe!",
     "child_forum_sections_count": {
       "zero": "Não há nenhuma seção",
       "one": "1 seção",
@@ -303,7 +303,7 @@
     "sections": {
       "title": "Seções",
       "empty": "Ainda não há seções aqui.",
-      "recent" : " Tópicos recentes: ",
+      "recent": " Tópicos recentes: ",
       "topics_count": {
         "zero": "Não há nenhum tópico",
         "one": "1 tópico",
@@ -311,7 +311,7 @@
       }
     },
     "topics": {
-      "total_of_posts" : "<i class='icon icon-bubbles'></i><span class='text-center'> {{ total }} </span><span> Comentários</span>",
+      "total_of_posts": "<i class='icon icon-bubbles'></i><span class='text-center'> {{ total }} </span><span> Comentários</span>",
       "created": "Tópico criado com sucesso",
       "empty": "Ainda não há tópicos aqui.",
       "open_posts": "Ver respostas",
@@ -664,24 +664,24 @@
       }
     },
     "success": {
-      "title":{
+      "title": {
         "success": "Obrigado pela sua compra!",
         "processing": "Estamos processando seu pedido",
         "boleto": "Seu boleto está pronto!",
         "error": "Ops! Ocorreu um erro :("
       },
-      "description":{
+      "description": {
         "success_logged_user": "Está tudo pronto para acessar o seu produto! Confira os detalhes da sua compra no email que enviamos para você :)",
         "success_unlogged_user": "Seu pagamento foi aprovado! Agora é só <b>conferir o email que enviamos</b> com todos os detalhes para acessar e aproveitar o seu produto :)",
         "processing": "Seu produto estará disponível em breve. Enquanto isso, aproveite para explorar a nossa plataforma!",
         "boleto": "Confira os detalhes do seu pedido no email que enviamos para você :)",
         "error": "Não foi possível processar o seu pedido. Por favor, revise os dados do seu cartão ou, se preferir, realize sua compra via boleto bancário."
       },
-      "buttons":{
+      "buttons": {
         "success_logged_user": "Acessar curso",
         "success_unlogged_user": "Acessar {{ platform }}",
         "processing": "Acessar a plataforma",
-        "boleto":{
+        "boleto": {
           "boleto_code": "Copiar código do boleto",
           "link": " Baixar boleto",
           "copy_boleto_code": "Código do boleto copiado com sucesso."
@@ -744,7 +744,7 @@
     "certificate": "Solicitar Certificado",
     "presents": "apresenta :",
     "filter_by_name": "Buscar por nome do curso",
-    "random_quiz_statistics" : "<strong>Desempenho<strong>"
+    "random_quiz_statistics": "<strong>Desempenho<strong>"
   },
   "course": {
     "billboard": "Quadro de <strong>Avisos</strong>",
@@ -764,12 +764,12 @@
     },
     "load_more": "Carregar mais cursos",
     "random_quiz_statistics": {
-      "not_ready" : "Você ainda não realizou exames.",
+      "not_ready": "Você ainda não realizou exames.",
       "general": "Desempenho Geral",
-      "answered_questions" : "Questões Resolvidas",
-      "right_questions" : "Acertos",
-      "wrong_questions" : "Erros",
-      "performance" : "Questões Resolvidas"
+      "answered_questions": "Questões Resolvidas",
+      "right_questions": "Acertos",
+      "wrong_questions": "Erros",
+      "performance": "Questões Resolvidas"
     },
     "dashboard": {
       "content_lessons_completed": "Aulas assistidas",
@@ -824,19 +824,19 @@
   },
   "quiz": {
     "random_quiz": {
-      "message" : "Veja qual foi seu aproveitamento em cada tema:",
-      "hits" : {
+      "message": "Veja qual foi seu aproveitamento em cada tema:",
+      "hits": {
         "one": "{{ percentage }} | Você acertou {{ count }} de {{ quantity }} questões.",
         "other": "{{ percentage }} | Você acertou {{ count }} de {{ quantity }} questões."
       }
     },
     "random_quiz_statistics": {
-      "not_ready" : "Você ainda não realizou exames.",
+      "not_ready": "Você ainda não realizou exames.",
       "general": "Desempenho Geral",
-      "answered_questions" : "Questões Resolvidas",
-      "right_questions" : "Acertos",
-      "wrong_questions" : "Erros",
-      "performance" : "Questões Resolvidas"
+      "answered_questions": "Questões Resolvidas",
+      "right_questions": "Acertos",
+      "wrong_questions": "Erros",
+      "performance": "Questões Resolvidas"
     },
     "messages": {
       "foo": "foo",
@@ -1140,11 +1140,11 @@
   },
   "forum": {
     "forum": "Fórum",
-    "section" : "Você está na seção:  ",
+    "section": "Você está na seção:  ",
     "hint": "Este espaço é dedicado a discutir assuntos relacionados à seção do Fórum. Aqui você pode criar, responder dúvidas ou simplesmente trocar conhecimentos com outros alunos.",
-    "posts" : {
-      "last_post" : {
-        "name_and_date" : "{{ object.user.first_name | prepend: 'criado por ' | append: ' ' | append: object.user.last_name | append: ' | ' | append : last_post_date }}"
+    "posts": {
+      "last_post": {
+        "name_and_date": "{{ object.user.first_name | prepend: 'criado por ' | append: ' ' | append: object.user.last_name | append: ' | ' | append : last_post_date }}"
       }
     }
   },
@@ -1161,29 +1161,29 @@
     "timetags": "Tópicos das Aulas"
   },
   "accessibility": {
-    "navigation" : {
-      "main_content" : {
-        "description" : "Ir para o conteúdo principal",
-        "shortcut" : "(SHIFT-1)"
+    "navigation": {
+      "main_content": {
+        "description": "Ir para o conteúdo principal",
+        "shortcut": "(SHIFT-1)"
       },
-      "menu" : {
-        "description" : "Ir para o menu",
-        "shortcut" : "(SHIFT-2)"
+      "menu": {
+        "description": "Ir para o menu",
+        "shortcut": "(SHIFT-2)"
       },
-      "contact" : {
-        "description" : "Entre em contato",
-        "shortcut" : "(SHIFT-3)"
+      "contact": {
+        "description": "Entre em contato",
+        "shortcut": "(SHIFT-3)"
       },
-      "top_of_the_page" : {
-        "description" : "Voltar ao topo",
-        "shortcut" : "(SHIFT-4)"
+      "top_of_the_page": {
+        "description": "Voltar ao topo",
+        "shortcut": "(SHIFT-4)"
       }
     },
-    "high_contrast" : {
-      "title" : "Alto Contraste",
-      "on" : "Ligado",
-      "off" : "Desligado"
-    } ,
+    "high_contrast": {
+      "title": "Alto Contraste",
+      "on": "Ligado",
+      "off": "Desligado"
+    },
     "hide_accessibility": "(Ocultar Acessibilidade)"
   },
   "webinar": {
@@ -1191,8 +1191,8 @@
       "message": "Mensagem",
       "write_here": "Digite sua mensagem aqui..."
     },
-    "info_started": "Transmissão iniciou em {{ datetime | date: '%H:%M' }} de {{ datetime | date: '%d/%m/%Y' }}",
-    "info_not_started": "Será transmitido em {{ datetime | date: '%d/%m/%Y' }} {{ datetime | date: '%H:%M' }}",
+    "info_started": "Transmissão iniciou em {{ datetime | in_timezone: 'Brasilia' }}",
+    "info_not_started": "Será transmitido em {{ datetime | in_timezone: 'Brasilia' }}",
     "watch_count": "usuários online"
   },
   "welcome_screen": {

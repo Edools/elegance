@@ -5,3 +5,5 @@ npm-debug.log
 dist
 theme.json
 dump.rdb
+.nvmrc
+.vscode
