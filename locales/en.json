@@ -436,7 +436,7 @@
       "creditcard_number": "0000 0000 0000 00000",
       "creditcard_name": "Alice M. Pereira",
       "creditcard_expiry": "mm/yyyy",
-      "creditcard_code": "000",
+      "creditcard_code": "000"
     },
     "wizard": {
       "connect": "Connect",
