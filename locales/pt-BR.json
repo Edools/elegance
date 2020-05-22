@@ -571,6 +571,12 @@
     }
   },
   "checkout": {
+    "placeholder": {
+      "creditcard_number": "0000 0000 0000 00000",
+      "creditcard_name": "Alice M. Pereira",
+      "creditcard_expiry": "mm/aaaa",
+      "creditcard_code": "000"
+    },
     "wizard": {
       "connect": "Conecte-se",
       "complete": "Complete seu cadastro",

@@ -106,6 +106,7 @@
                         <label class="control-label">{{ 'checkout.payment.credit_card_number' | t }}</label>
                         <input id="card-number"
                                type="text"
+                               placeholder="{{'checkout.placeholder.creditcard_number' | t }}" 
                                name="order[credit_card][number]"
                                value="{{ credit_card.number }}"
                                class="form-control"
@@ -119,6 +120,7 @@
                         <label class="control-label">{{ 'checkout.payment.credit_card_name' | t }}</label>
                         <input id="card-holder-name"
                                type="text"
+                               placeholder="{{ 'checkout.placeholder.creditcard_name' | t  }}" 
                                name="order[credit_card][name]"
                                value="{{ credit_card.name }}"
                                class="form-control"
@@ -136,7 +138,8 @@
                                  name="order[credit_card][expiry]"
                                  value="{{ credit_card.expiry }}"
                                  class="form-control"
-                                 minlength=9
+                                 minlength=6
+                                 placeholder="{{'checkout.placeholder.creditcard_expiry' | t }}" 
                                  {% if credit_card.active %}
                                    disabled
                                  {% endif %}
@@ -146,6 +149,7 @@
                           <label class="control-label">{{ 'checkout.payment.credit_card_cvv' | t }}</label>
                           <input id="card-cvc"
                                  type="text"
+                                 placeholder="{{'checkout.placeholder.creditcard_code' | t }}" 
                                  name="order[credit_card][cvc]"
                                  value="{{ credit_card.cvc }}"
                                  class="form-control"
