@@ -1,25 +1,34 @@
 .page-footer {
-  $footer-color: #2e3234;
+  $footer-color: #39393b;
 
-  padding: $padding-large-vertical * 6 0;
+  padding: $padding-large-vertical;
+  border-radius: 10px 10px 0 0;
   background-color: $footer-color;
-  color: #747474;
+  color: white;
   font-weight: 600;
-
+  .row {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
   .info {
-    margin-bottom: $padding-large-vertical * 2;
+    margin-bottom: $padding-large-vertical ;
 
     .logo {
-      margin-bottom: $padding-large-vertical * 2;
+      margin-top: 10px;
+      margin-bottom: $padding-large-vertical;
+      width: 200px;
     }
-
+    .fab {
+      margin: 10px;
+      color: white;
+    }
     .description {
-      margin-top: $padding-large-vertical * 2;
+      margin-top: $padding-large-vertical;
     }
 
     address {
       b {
-        color: #b8b8b8;
+        color: white;
       }
     }
   }
@@ -32,12 +41,12 @@
 
     .title {
       margin-top: 0;
-      margin-bottom: $padding-large-vertical * 2;
+      margin-bottom: $padding-large-vertical ;
       color: $light;
     }
 
     a {
-      color: #b8b8b8;
+      color: white;
       text-decoration: none;
 
       i {
@@ -51,15 +60,38 @@
   }
 
   .company-info {
-    margin-top: $padding-large-vertical * 4;
-
+    text-align: right;
+    h5 {
+      color: white;
+      font-weight: 600;
+    }
     p {
-      font-size: $font-size-small;
+      font-weight: 600;
+      font-size: 12px;
+    }
+    span {
+      font-weight: 100;
+      font-size: 12px;
+    }
+    .mail {
+      color: #0c3cf8;
     }
   }
-
   .copyright {
-    margin-top: $padding-large-vertical * 4;
+    margin-top: 40px;
     text-align: center;
+    p {
+      font-weight: 500;
+      font-size: 16px;
+    }
+    span {
+      font-weight: 100;
+      font-size: 12px;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .company-info {
+      text-align: left;
+    }
   }
 }
