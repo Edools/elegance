@@ -17,8 +17,6 @@
        id="product-{{ product.id }}" href="/{{ product.slug }}">
       {{ product.title | truncate: 54 }}
     </a>
-
-    <p tabindex="0" class="subtitle">{{ product.subtitle | truncate: 112 }}</p>
   </div>
 
     <div class="footer caption clearfix">
@@ -50,48 +48,12 @@
       </div>
 
       <div class="call-to-action">
-        {% if has_express_checkout == true %}
-          {{ 'product.enroll' | t | add_to_cart_link: product, oldest_payment_option, 'btn btn-primary' }}
-        {% else %}
-          {% if product.payment_options.size > 1 %}
-            <div class="btn-group">
-              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false">
-                {{ 'product.enroll' | t }} <span class="caret"></span>
-              </button>
-
-              <ul class="dropdown-menu product-accessibility-list">
-                {% for option in product.payment_options %}
-                  <li>
-                    {% if gateway.gateway == 'hotmart' %}
-                      <a href="{{ option.hotmart_config.hotmart_checkout_url }}">
-                        {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway, option }}
-                      </a>
-                    {% else %}
-                      <a id="add-to-cart-product-{{ product.id }}-{{ option.id }}"
-                        href="{{ product | add_to_cart_path: option }}">
-                        {{ option.price | money_option_presentation_with_taxes: option.kind, option.period, gateway, option }}
-
-                        {% if option.trials > 0 %}
-                          <span>{{ 'product.trial' | t: count: option.trials }}</span>
-                        {% endif %}
-                      </a>
-                    {% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
-          {% else %}
-            {% if gateway.gateway == 'hotmart' %}
-              <a class="btn btn-primary" href="{{ first_option.hotmart_config.hotmart_checkout_url }}">
-                {{ 'product.enroll' | t }}
-              </a>
-            {% else %}
-              {{ 'product.enroll' | t | add_to_cart_link: product, first_option, 'btn btn-primary' }}
-            {% endif %}
-          {% endif %}
-        {% endif %}
+        <a class="more"
+        title="{{ product.title }}"
+        data-toggle="{% if product.title.size > 60 %}tooltip{% endif %}"
+        id="product-{{ product.id }}" href="/{{ product.slug }}">
+       saiba mais
+     </a>
       </div>
     {% endif %}
   </div>

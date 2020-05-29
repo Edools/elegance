@@ -29,7 +29,7 @@
         margin-top: 0;
         margin-bottom: $padding-large-vertical;
         color: $text-color;
-        font-weight: 300;
+        font-weight: 500;
         font-size: 36px;
       }
 
@@ -100,7 +100,11 @@
     margin-bottom: 0;
     background-color: transparent;
   }
-
+  .more {
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
   .home-about-us {
     padding: $padding-large-vertical * 5 0;
     border-top: 1px solid $border-color-base;
