@@ -1,6 +1,11 @@
 <div class="login-page page">
-  <div class="container page-container">
-    <h1 tabindex="0" id="accessibility-main-content-login" class="form-header title">{{ 'login.enter_your_account' | t }}</h1>
+  <div class="container">
+    <div class="row text-center">
+      <a href="/"><img class="brand" src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fb6431075d312a2405e1df36fd8547225%2Fexame-logo.84a0b3ad.svg"></a>
+    </div>
+  </div>
+  <div class="container page-container text-center title">
+    <h1 id="accessibility-main-content-login" class="form-header title-login"> ENTRE E ACESSE SUA CONTA</h1>
     {% assign login_only_with_google = current_school | has_feature: 'login_only_with_google' %}
 
     {% if login_only_with_google %}
@@ -18,16 +23,15 @@
 
         <div class="form-group">
           <input type="email" name="user[email]" class="form-control input-lg"
-                 placeholder="{{ 'login.email' | t }}" required>
+                 placeholder="E-mail" required>
         </div>
 
         <div class="form-group signin-password">
           <input type="password" name="user[password]" class="form-control input-lg error"
                  placeholder="{{ 'login.password' | t }}" {% if current_school | has_feature: 'autocomplete_off' %}autocomplete="off"{% endif %} required>
-          {{ 'login.forgot' | t | reset_password_link : 'forgot' }}
         </div>
 
-        <input type="submit" value="{{ 'login.enter' | t }}" class="btn btn-primary btn-block btn-lg">
+        <input type="submit" value="Acessar" class="btn btn-primary btn-block btn-lg">
         
         {% include 'recaptcha_by_feature', disable_button: true, feature: 'login_with_recaptcha' %}
       {% endform %}
@@ -44,13 +48,13 @@
         </p>
 
       {% endif %}
-
       <br/>
-
-      <p class="register">
-        {{ 'login.not_have_account' | t }}
-        {{ 'login.create_account' | t | register_link }}
-      </p>
+      <div class= "text-center">
+        <a href="/users/password/new">Esqueci a senha</a>
+        <p class="register">
+          Não possui conta? <a class="create" href="/users/sign_up">CRIAR CONTA</a>
+        </p>
+      </div>
     {% endif %}
   </div>
 </div>

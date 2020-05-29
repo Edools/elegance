@@ -77,27 +77,27 @@
   {% endif %}
 </head>
 
-<body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% elsif current_path == '/chat' %}chat-page{% endif %}">
+<body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% elsif current_path == '/chat' %}chat-page{% endif %}" onselectstart="return false" >
   <div class="content-wrapper">
     {% include 'accessibility-menu' %}
-
-    {% if current_path != '/express_checkout/payment' and current_path != '/express_checkout/success' %}
+    {% unless current_path == '/users/sign_in' %}
+    {% if current_path != '/express_checkout/payment' and current_path != '/express_checkout/success'  %}
       {% include 'navbar' %}
     {% else %}
       {% include 'navbar-express-checkout' %}
     {% endif %}
-
+    {% endunless %}
     {% include 'alert-notice' %}
     {{ content_for_layout }}
     <div class="content-push"></div>
   </div>
-
+  {% unless current_path == '/users/sign_in' %}
   {% if current_path != '/express_checkout/payment' and current_path != '/express_checkout/success' %}
     <div class="footer-wrapper">
       {% include 'footer' %}
     </div>
   {% endif %}
-
+  {% endunless %}
   {{ settings.view.injector.body }}
 </body>
 </html>

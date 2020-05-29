@@ -1,6 +1,6 @@
 .login-page {
   .container {
-    max-width: 640px;
+    max-width: 410px;
   }
 
   .form-group,
@@ -12,7 +12,6 @@
 
   .title {
     margin-top: $padding-large-vertical * 8;
-    text-align: center;
   }
 
   .forgot {
@@ -30,5 +29,17 @@
     margin-top: 25px;
 
     justify-content: center;
+  }
+  .brand {
+    margin-top: 5vw;
+    width: 12vw;
+  }
+  .create {
+    font-weight: 800;
+  }
+  .title-login {
+    border-bottom: 4px solid #0c3cf8;
+    font-weight: 600;
+    font-size: 26px;
   }
 }
