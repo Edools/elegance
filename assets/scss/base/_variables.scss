@@ -8,7 +8,7 @@ $bootstrap-sass-asset-helper: true !default;
 //## Gray and brand colors for use across Bootstrap.
 
 //** Background color for `<body>`.
-$body-bg: #f9f9f9 !default;
+$body-bg: white !default;
 
 $gray-base: #050505 !default;
 $gray-darker: lighten($gray-base, 13.5%) !default; // #222
@@ -30,9 +30,9 @@ $light: #fff !default;
 //## Settings for some of the most global styles.
 
 //** Global text color on `<body>`.
-$text-color: #585858 !default;
+$text-color: #39393b!default;
 
-$border-color-base: #e6e6e6;
+$border-color-base: transparent;
 
 //** Global textual link color.
 $link-color: $brand-primary !default;
@@ -45,8 +45,8 @@ $link-hover-decoration: underline !default;
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-$font-family-sans-serif: 'Proxima Nova', Helvetica, Arial, sans-serif !default;
-$font-family-serif: Georgia, 'Times New Roman', Times, serif !default;
+$font-family-sans-serif: 'Prompt', sans-serif !default;
+$font-family-serif: 'Prompt', sans-serif !default;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 $font-family-monospace: Menlo, Monaco, Consolas, 'Courier New', monospace !default;
 $font-family-base: $font-family-sans-serif !default;

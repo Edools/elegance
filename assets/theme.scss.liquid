@@ -63,7 +63,7 @@ html.turbolinks-progress-bar::before {
 }
 
 body {
-  font-family: $type-base-family, Helvetica, Arial, sans-serif, sans-serif;;
+  font-family: 'Prompt', sans-serif;
   font-size: $type-base-size;
   background-color: $color-body-bg;
 }
@@ -75,7 +75,7 @@ body {
 /* Text */
 
 h1, h2 {
-  font-family: $type-title-family;
+  font-family: 'Prompt', sans-serif;
 
   * {
     color: $color-titles;
@@ -83,7 +83,7 @@ h1, h2 {
 }
 
 h3, h4, h5 {
-  font-family: $type-subtitle-family;
+  font-family: 'Prompt', sans-serif;
 
   * {
     color: $color-subtitles;
@@ -121,7 +121,7 @@ h5 {
 }
 
 p {
-  font-family: $type-paragraph-family;
+  font-family: 'Prompt', sans-serif;
   font-size: $type-paragraph-size;
 
   * {
@@ -168,7 +168,7 @@ a {
 /* Navbar */
 
 header.navbar {
-  background-color: $color-navabar-bg;
+  background-color: transparent;
 
   a,
   .dropdown a {
@@ -181,9 +181,9 @@ header.navbar {
 
   .nav {
     a {
-      font-family: $type-navbar-family;
+      font-family: 'Prompt', sans-serif;;
       font-size: $type-navbar-size;
-      color: rgba($color-navabar-links, .6);
+      color: $color-navabar-links;
     }
   }
 
@@ -212,7 +212,7 @@ header.navbar {
 /* Buttons */
 
 .btn {
-  font-family: $type-button-family;
+  font-family: 'Prompt', sans-serif;;
 
   * {
     font-size: $type-button-size;
@@ -308,7 +308,6 @@ header.navbar {
 .home-page {
   .home-header {
     background-color: $home-header-background;
-    background-image: url($home-header-background-image);
     background-repeat: no-repeat;
     background-size: cover;
 

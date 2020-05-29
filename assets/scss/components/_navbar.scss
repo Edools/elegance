@@ -284,7 +284,8 @@
 
   > li > a {
     padding-top: 10px;
-    padding-bottom: 10px;
+    border-bottom: 4px transparent;
+    //padding-bottom: 10px;
     line-height: $line-height-computed;
   }
 
@@ -306,6 +307,7 @@
         line-height: $line-height-computed;
         &:hover,
         &:focus {
+          border-bottom: none;
           background-image: none;
         }
       }
@@ -321,7 +323,7 @@
       float: left;
       > a {
         padding-top: $navbar-padding-vertical;
-        padding-bottom: $navbar-padding-vertical;
+        //padding-bottom: $navbar-padding-vertical;
       }
     }
   }
@@ -464,10 +466,12 @@
 
   .navbar-nav {
     > li > a {
-      color: $navbar-default-link-color;
+      margin-left: -20px;
+      color: #39393b;
 
       &:hover,
       &:focus {
+        border-bottom: 4px solid #0c3cf8;
         background-color: $navbar-default-link-hover-bg;
         color: $navbar-default-link-hover-color;
       }
