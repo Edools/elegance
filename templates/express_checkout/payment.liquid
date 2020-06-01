@@ -817,3 +817,10 @@
     }
   }
 </style>
+
+{% if payment_option.facebook_pixel %}
+  {% include 'product/facebook-pixel' with payment_option %}
+  <script>
+    fbq('track', 'InitiateCheckout');
+  </script>
+{% endif %}

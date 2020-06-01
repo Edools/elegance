@@ -104,101 +104,119 @@
     </div>
 
   </div>
-  <style>
-    @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+</div>
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
-    html *,
-    .btn {
-      font-family: 'Muli';
-    }
+  html *,
+  .btn {
+    font-family: 'Muli';
+  }
 
-    body {
-      color: #000000;
-      font-size: 14px;
-    }
+  body {
+    color: #000000;
+    font-size: 14px;
+  }
 
+  .checkout-success-page {
+    font-size: 14px;
+  }
+
+  .container-spacing {
+    margin-top: 79px;
+  }
+
+  .card-container {
+    background: #FFFFFF;
+    box-shadow: 0px 5px 10px rgba(211, 211, 211, 0.198044);
+    border-radius: 2px;
+    padding: 24px 31px;
+    margin-top: 56px;
+    margin-bottom: 70px;
+  }
+
+  .title-buying-text {
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 115%;
+    padding: 0 30px;
+    margin: 18px 0;
+  }
+
+  .color-title-confirmed {
+    color: #34B469;
+  }
+
+  .color-title-processing {
+    color: #DEB741;
+  }
+
+  .color-title-error {
+    color: #C12B4B;
+  }
+
+  .buttons-padding {
+    margin: 38px 0;
+    padding: 0 40px;
+  }
+
+  .buttons-padding .btn-success-options {
+    border: 2px solid #2cc3cc;
+    background-color: white;
+    box-shadow: 0px 2px 4px rgba(44, 195, 204, 0.203098);
+    border-radius: 2px;
+    color: #2cc3cc;
+    padding: 10px;
+    font-weight: bold;
+    margin-top: 0;
+  }
+
+  .buttons-padding .btn-primary-options {
+    background: #2cc3cc;
+    box-shadow: 0px 2px 4px rgba(44, 195, 204, 0.203098);
+    border-radius: 2px;
+    padding: 10px;
+    font-weight: bold;
+    color: #FFFFFF;
+  }
+
+  .title-purchage-summary {
+    margin-top: 12px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    line-height: 130%;
+    text-transform: uppercase;
+  }
+
+  @media only screen and (max-width: 767px) {
     .checkout-success-page {
-      font-size: 14px;
-    }
-
-    .container-spacing {
-      margin-top: 79px;
+      padding-bottom: 0;
     }
 
     .card-container {
-      background: #FFFFFF;
-      box-shadow: 0px 5px 10px rgba(211, 211, 211, 0.198044);
-      border-radius: 2px;
-      padding: 24px 31px;
-      margin-top: 56px;
-      margin-bottom: 70px;
-    }
-
-    .title-buying-text {
-      font-weight: bold;
-      font-size: 30px;
-      line-height: 115%;
-      padding: 0 30px;
-      margin: 18px 0;
-    }
-
-    .color-title-confirmed {
-      color: #34B469;
-    }
-
-    .color-title-processing {
-      color: #DEB741;
-    }
-
-    .color-title-error {
-      color: #C12B4B;
-    }
-
-    .buttons-padding {
-      margin: 38px 0;
-      padding: 0 40px;
-    }
-
-    .buttons-padding .btn-success-options {
-      border: 2px solid #2cc3cc;
-      background-color: white;
-      box-shadow: 0px 2px 4px rgba(44, 195, 204, 0.203098);
-      border-radius: 2px;
-      color: #2cc3cc;
-      padding: 10px;
-      font-weight: bold;
       margin-top: 0;
+      margin-bottom: 48px;
     }
 
-    .buttons-padding .btn-primary-options {
-      background: #2cc3cc;
-      box-shadow: 0px 2px 4px rgba(44, 195, 204, 0.203098);
-      border-radius: 2px;
-      padding: 10px;
-      font-weight: bold;
-      color: #FFFFFF;
+    .title-buying-text, .buttons-padding {
+      padding: 0;
     }
+  }
+</style>
 
-    .title-purchage-summary {
-      margin-top: 12px;
-      margin-bottom: 25px;
-      font-weight: bold;
-      line-height: 130%;
-      text-transform: uppercase;
-    }
-
-    @media only screen and (max-width: 767px) {
-      .checkout-success-page {
-        padding-bottom: 0;
-      }
-
-      .card-container {
-        margin-top: 0;
-        margin-bottom: 48px;
-      }
-
-      .title-buying-text, .buttons-padding {
-        padding: 0;
-      }
-    }
-  </style>
+{% assign payment_option = order.payment_options | where: "default", true | first %}
+{% if payment_option == nil %}
+{% assign payment_option = order.payment_options.last %}
+{% endif %}
+{% if payment_option.facebook_pixel %}
+  {% include 'product/facebook-pixel' with payment_option %}
+  <script>
+    fbq('track', 'Purchase', {
+      value: {{payment_option.price | times: 0.01}},
+      currency: 'BRL',
+      offer_id: {{payment_option.id}},
+      product_id: {{payment_option.school_product_id}},
+      payment_type: '{{payment.kind}}'
+    });
+  </script>
+{% endif %}
