@@ -1,27 +1,27 @@
 <header class="main-header home-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12 {% if settings.view.home.header.cover_enable %} col-md-6 {% endif %}">
-        <h2 id="accessibility-main-content-home" tabindex="0" class="title">{{ settings.view.home.header.title }}</h2>
-        <p tabindex="0" class="subtitle">{{ settings.view.home.header.subtitle }}</p>
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+  
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img  class="banner-home" src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F0c78dbaa0ad7f029e035b6a964c6cfb2%2Fbanner.png">
       </div>
-
-      {% if settings.view.home.header.cover_enable %}
-        <div class="image col-xs-12 col-md-6 text-center">
-          {% if settings.view.home.header.cover_src contains '<iframe' or
-          settings.view.home.header.cover_src contains '<object' or
-          settings.view.home.header.cover_src contains '<embed' %}
-            <div class="embed-responsive embed-responsive-16by9">
-              {{ settings.view.home.header.cover_src }}
-            </div>
-          {% elsif settings.view.home.header.cover_src.size > 0 %}
-            {% image, src: settings.view.home.header.cover_src %}
-          {% else %}
-            {% assign placeholder = 'capa_tema_classico.png' | asset_url %}
-            {% image, src: placeholder %}
-          {% endif %}
-        </div>
-      {% endif %}
     </div>
+  
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <i class="fas fa-angle-left"></i>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <i class="fas fa-angle-right"></i>
+      <span class="sr-only">Next</span>
+    </a>
   </div>
 </header>

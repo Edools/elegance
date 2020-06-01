@@ -1,7 +1,10 @@
 <div class="product-list">
   <div class="container">
+
+
     {% paginate products by 9 sort { title: :asc } %}
     <div class="row">
+
       <div id="js-product-list">
         {% for product in products %}
           <div class="col-sm-6 col-md-4">

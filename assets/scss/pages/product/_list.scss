@@ -5,13 +5,13 @@
 
 .product-card {
   @include breakpoint(sm) {
-    height: 470px;
+    height: 380px;
   }
   @include breakpoint(md) {
     height: 542px;
   }
   @include breakpoint(lg) {
-    height: 470px;
+    height: 380px;
   }
   @extend .panel;
   @extend .panel-default;

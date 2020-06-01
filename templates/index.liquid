@@ -2,28 +2,97 @@
   {% include 'home/header' %}
   {% include 'home/benefits' %}
 
-  <div tabindex="-1" class="home-call-to-action jumbotron text-center">
-    <div class="container">
-      <h2 tabindex="0" class="title">{{ settings.view.home.product_list_title }}</h2>
-    </div>
-  </div>
-
-  {% if settings.view.home.enable_categories == true %}
-    {% include 'home/categories', gateway: gateway, categories: categories %}
-  {% else %}
-    {% include 'product/list', products: products, gateway: gateway %}
-  {% endif %}
-
   <div class="home-about-us">
     <div class="container">
-      <section class="row">
-        <div class="col-xs-12 col-md-8">
-          <h2>{{ settings.view.home.footer.title }}</h2>
-          <p>{{ settings.view.home.footer.text }}</p>
+      <div class="row">
+        <div class="col-md-5 col-sm-12">
+          <h2  class="title">{{ settings.view.home.product_list_title }}</h2>
+          <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet ornare. Pellentesque elit elit, pharetra a dui eu, dictum aliquet eros. Maecenas a tristique est. Nullam mattis commodo elit, quis suscipit nunc rhoncus non. Cras nec lorem justo. Morbi efficitur lobortis diam et laoreet. Maecenas porttitor nec tortor eu congue. Proin faucibus blandit nisi, eget sollicitudin nisi iaculis in.
+          </p>
+              <p><i class="far fa-check-circle"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet ornare.</p>
+              <p><i class="far fa-check-circle"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet ornare.</p>
+              <p><i class="far fa-check-circle"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet ornare.</p>
         </div>
-
-        {% include 'home/social' %}
-      </section>
+        <div class="col-md-7 col-sm-12 video-home">
+          <div id="CarouselVideo" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators indicators-video">
+              <li data-target="#CarouselVideo" data-slide-to="0" class="active"></li>
+              <li data-target="#CarouselVideo" data-slide-to="1"></li>
+              <li data-target="#CarouselVideo" data-slide-to="2"></li>
+            </ol>
+          <div class="video-carousel">
+                       <!-- Wrapper for slides -->
+                       <div class="carousel-inner">
+                        <div class="item active text-center">
+                          <iframe width="600" height="350" src="https://www.youtube.com/embed/2_b5RuMWKB8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="item text-center">
+                          <iframe width="600" height="350" src="https://www.youtube.com/embed/2_b5RuMWKB8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="item text-center">
+                          <iframe width="600" height="350" src="https://www.youtube.com/embed/2_b5RuMWKB8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                      </div>
+          </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+  <div id="featured-course">
+    <div class="container">
+      <h2 class="title">Cursos em destaque </h2>
+      {% include 'product/list-product-home', products: products, gateway: gateway %}
+    </div>
+  </div>
+<div class="home-testimonial">
+  <div class="container">
+    <h2 class="title">Depoimentos</h2>
+    <div class="row destaque text-center">
+      <div class="col-sm-6 col-md-4">
+        <img src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fa902afb3744fc9549c8ed446f164bd2d%2Fuser+1.png" alt="">
+        <ul class="list-inline">
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+        </ul>
+        <p class="testimonial-name">Lorem Ipsum</p>
+        <p class="testimonial-description">Lorem ipsum dolor sit amet</p>
+        <p class="testimonial-text text-justify">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet"</p>
+      </div>  
+      <div class="col-sm-6 col-md-4">
+        <img src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fa902afb3744fc9549c8ed446f164bd2d%2Fuser+1.png" alt="">
+        <ul class="list-inline">
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+        </ul>
+        <p class="testimonial-name">Lorem Ipsum</p>
+        <p class="testimonial-description">Lorem ipsum dolor sit amet</p>
+        <p class="testimonial-text text-justify">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet"</p>
+      </div> 
+      <div class="col-sm-6 col-md-4">
+        <img src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fa902afb3744fc9549c8ed446f164bd2d%2Fuser+1.png" alt="">
+        <ul class="list-inline">
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+        </ul>
+        <p class="testimonial-name">Lorem Ipsum</p>
+        <p class="testimonial-description">Lorem ipsum dolor sit amet</p>
+        <p class="testimonial-text text-justify">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet"</p>
+      </div> 
+    </div>
+    
+  </div>
 </div>
+
+ </div>

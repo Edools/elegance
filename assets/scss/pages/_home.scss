@@ -1,14 +1,38 @@
 .home-page {
   padding: 0;
 
+  .title {
+    color: #39393b;
+    text-decoration: underline #0c3cf8;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+
+    text-underline-position: under;
+  }
   .navbar {
     border-bottom: none;
   }
-
+  .destaque {
+    margin-right: -28px;
+  }
+  .btn-more {
+    padding: .3vw 3vw;
+    background-color: #e11b22;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
   .home-header {
-    padding: $padding-large-vertical * 4 0;
     background-color: $light;
-
+    .fas {
+      color: white;
+      text-shadow: 5px 5px 5px rgba(0,0,0,.5);
+      font-size: 3vw;
+    }
+    .carousel-control {
+      top: 50%;
+    }
     .row {
       @include breakpoint(md) {
         flex-direction: row;
@@ -52,11 +76,16 @@
         margin-top: $padding-large-vertical * 3;
       }
     }
+    .banner-home {
+      width: 100%;
+      border-radius: 5px;
+    }
   }
 
   .home-benefits {
     padding: $padding-large-vertical * 6 0;
     background-color: $light;
+    background-image: url(https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F0fe41c5ce3f1654aa4057cd3b155e756%2Fimg_bg-home-1+2.png);
 
     .title {
       font-size: 24px;
@@ -105,15 +134,34 @@
     font-weight: bold;
   }
   .home-about-us {
-    padding: $padding-large-vertical * 5 0;
-    border-top: 1px solid $border-color-base;
-    background-color: $light;
-
     h2 {
+      margin-top: 0;
       margin-bottom: $padding-large-vertical * 2;
       line-height: 1.4;
     }
-
+    .far {
+      color: $brand-primary;
+    }
+    .video-carousel {
+      margin-top: 4vw;
+      margin-right: 2vw;
+      margin-bottom: 5vw;
+      padding: .5vw;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+    }
+    .indicators-video {
+      bottom: -3vw;
+    }
+    .carousel-inner {
+      border-radius: 10px;
+    }
+    .video-home {
+      min-height: 30vw;
+      background: #fff url(https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F212eafdfff5dd43a1eb96a0f61570da4%2Ffundoazul.png) repeat-y right center;
+      background-size: 80% auto;
+    }
     .social-networks {
       @include breakpoint(md) {
         text-align: right;
@@ -245,5 +293,19 @@
     .form-control {
       font-size: 3vw;
     }
+  }
+}
+.home-testimonial {
+  margin-top: 2vw;
+
+  .fa-star {
+    color: #f9bc03;
+  }
+  .testimonial-name {
+    font-weight: bold;
+  }
+  .testimonial-description {
+    color: $brand-primary;
+    font-weight: 500;
   }
 }

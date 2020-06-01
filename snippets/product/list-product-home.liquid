@@ -1,0 +1,18 @@
+    <div class="row destaque">
+    {% paginate products by 3 sort { title: :asc } %}
+      <div id="js-product-list">
+        {% for product in products %}
+          <div class="col-sm-6 col-md-4">
+            {% include 'product/product-card', product: product, gateway: gateway %}
+          </div>
+        {% endfor %}
+      </div>
+      {% endpaginate %}
+    </div>
+    <div class="text-center">
+        <a type="button" class="btn btn-more" href="/products">
+            Veja mais
+        </a>
+    </div>
+
+
