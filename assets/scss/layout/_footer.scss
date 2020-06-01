@@ -12,6 +12,7 @@
   }
   .info {
     margin-bottom: $padding-large-vertical ;
+    text-align: left;
 
     .logo {
       margin-top: 10px;
@@ -89,7 +90,7 @@
       font-size: 12px;
     }
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: $screen-md-min) {
     .company-info {
       text-align: left;
     }

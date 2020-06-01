@@ -1,15 +1,17 @@
+<link rel="stylesheet" type="text/css" href="../assets/scss/pages/_home.scss">
+
 <div class="products-page page">
 
   <div class="container">
-    <h2 class="title">{{ 'products.products' | t }}</h2>
+    <h2 class="title-product">Nossos Cursos</h2>
 
     <form accept-charset="UTF-8" method="get" action="/products" data-turbolinks-scroll="false">
-      <div class="input-group input-group-lg">
+      <div class="input-group input-group-lg search">
         <span class="input-group-addon"><i class="icon-magnifier"></i></span>
         <input type="text" name="title" class="form-control" placeholder="{{ 'forums.filter_by_title' | t }}"
                value="{{ current_search.title }}">
         <span class="input-group-btn">
-                <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-default">
+                <input type="submit" value="{{ 'general.search' | t }}" class="btn btn-search">
               </span>
       </div>
     </form>

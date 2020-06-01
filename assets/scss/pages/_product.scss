@@ -10,6 +10,11 @@
 
     .title {
       margin-bottom: $padding-large-vertical;
+      color: #39393b;
+      text-decoration: underline #0c3cf8;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 1.2vw;
     }
 
     .subtitle {
@@ -64,20 +69,15 @@
         margin-bottom: $padding-large-vertical * 4;
         padding: 0 $padding-large-horizontal;
 
-        .avatar {
-          margin-top: 0;
-          margin-bottom: 0;
-        }
-
-        .title {
-          margin-top: 5px;
-          margin-bottom: 5px;
-        }
-
         .description {
           margin-top: $padding-large-vertical * 2;
         }
       }
+    }
+    .photo-teacher {
+      margin-top: 1.1vw;
+      width: 220px;
+      border-radius: 5px;
     }
   }
 
@@ -152,6 +152,9 @@
     .student-note {
       margin-top: 20px;
     }
+  }
+  .banner-product-detail {
+    width: 100%;
   }
 }
 

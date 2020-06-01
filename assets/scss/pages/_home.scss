@@ -2,7 +2,6 @@
   padding: 0;
 
   .navbar {
-    border-top: 5px solid #0c3cf8;
     border-bottom: none;
   }
 
@@ -218,6 +217,33 @@
       .category-actions {
         margin-bottom: $padding-large-vertical * 8;
       }
+    }
+  }
+}
+
+.products-page {
+  .title-product {
+    text-decoration: underline #0c3cf8;
+    font-weight: 600;
+    font-size: 26px;
+
+    text-underline-position: under;
+  }
+  .search {
+    margin-bottom: 2vw;
+  }
+  .btn-search {
+    border: 1px solid rgba(0,0,0,.13);
+    background-color: transparent;
+    color: #c4c4c4;
+  }
+  .icon-magnifier {
+    color: #c4c4c4;
+  }
+
+  @media screen and (max-width: $screen-md-min) {
+    .form-control {
+      font-size: 3vw;
     }
   }
 }

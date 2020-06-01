@@ -1,6 +1,7 @@
 header.navbar {
   margin: 0;
   border: none;
+  border-top: 5px solid #0c3cf8;
   background-color: $light;
 
   .navbar-brand {
@@ -8,6 +9,7 @@ header.navbar {
     color: $text-color;
     text-transform: uppercase !important;
     opacity: 1;
+
 
     &.navbar-brand-img {
       padding: 15px 0;
