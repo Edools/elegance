@@ -128,6 +128,15 @@
                 </p>
               {% endif %}
 
+              {% if order.gateway_name == 'spark_pay' %}
+                <p>
+                  <b>{{ 'pages.orders.recurring.end_at' | t }}:</b>
+                  <span>
+                    {{ order.subscription.expire_at | date: "%d/%m/%Y" }}
+                  </span>
+                </p>
+              {% endif %}
+
               <p>
                 <b>{{ 'pages.orders.recurring.payment_option' | t }}:</b>
                 <span>
@@ -171,7 +180,7 @@
                     {% assign credit_card_class = 'use-credit-card' %}
                   {% endif %}
 
-                  {% if order.gateway_name != 'hotmart' %}
+                  {% if order.gateway_name != 'hotmart' and order.gateway_name != 'spark_pay' %}
                     <a href="orders/{{ order.id }}/edit?title={{ credit_card_label | t }}"
                        class="btn btn-primary btn-block {{ credit_card_class }}" data-toggle="modal">
                       {{ credit_card_label | t }}
@@ -186,6 +195,13 @@
                   {% endif %}
 
                   {% if order.subscription.status != 'canceled' and  order.subscription.status != 'ended' %}
+                    {% if order.gateway_name == 'spark_pay' and order.merchant_payment_method == 'boleto' and order.last_payment.status == 'authorized' %}
+                      <a href="orders/{{ order.id }}/next_bank_slip_membership" data-method='put'
+                        class="btn btn-primary btn-block pay-with-boleto">
+                        {{ 'pages.orders.recurring.generate_next_bank_slip_payment' | t }}
+                      </a>
+                    {% endif %}
+
                     <a href="{{ order | order_cancel_path }}"
                        class="btn btn-danger btn-block cancel-order"
                        data-method="patch">
