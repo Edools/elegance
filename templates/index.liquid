@@ -51,7 +51,18 @@
   <div class="container">
     <h2 class="title">Depoimentos</h2>
     <div class="row destaque text-center">
-      <div class="col-sm-6 col-md-4">
+      <div id="CarouselDepoimentos" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators indicators-testimonial">
+          <li data-target="#CarouselDepoimentos" data-slide-to="0" class="active"></li>
+          <li data-target="#CarouselDepoimentos" data-slide-to="1"></li>
+          <li data-target="#CarouselDepoimentos" data-slide-to="2"></li>
+        </ol>
+      <div class="row">
+                   <!-- Wrapper for slides -->
+                   <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="col-sm-6 col-md-4">
         <img src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fa902afb3744fc9549c8ed446f164bd2d%2Fuser+1.png" alt="">
         <ul class="list-inline">
           <li><i class="fa fa-star"></i></li>
@@ -90,9 +101,45 @@
         <p class="testimonial-description">Lorem ipsum dolor sit amet</p>
         <p class="testimonial-text text-justify">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet"</p>
       </div> 
+     </div>
     </div>
-    
+      </div>
+      </div>
+    </div>
   </div>
 </div>
+<div class="home-newsletter">
+  <div class="container newsletter">
+    <div class="row newsletter-text">
+      <div class="col-md-1">
+        <img src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F48001b53a204ec55ba45656ba4d27706%2FGroup+137.png" alt="">
+      </div>
+      <div class="col-md-11 newsletter-text">
+        <p>Quero receber conteúdos sobre <strong>cursos, treinamentos e oportunidades</strong> para a minha vida profissional e pessoal.</p>
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-md-4">
+        <div class="form-group">
+          <input type="nome" class="form-control input"
+                 placeholder="Nome" required>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <input type="email" class="form-control input"
+                 placeholder="E-mail" required>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <a type="button" class="btn btn-more" href="#">
+          Cadastre-se grátis
+      </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
  </div>

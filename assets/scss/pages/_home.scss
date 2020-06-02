@@ -17,7 +17,7 @@
     margin-right: -28px;
   }
   .btn-more {
-    padding: .3vw 3vw;
+    padding: .45vw 4.5vw;
     background-color: #e11b22;
     color: white;
     text-transform: uppercase;
@@ -109,7 +109,7 @@
 
       .benefits-icon {
         display: inline-block;
-        font-size: 52px;
+        font-size: 74px;
       }
 
       .media-body {
@@ -297,7 +297,7 @@
 }
 .home-testimonial {
   margin-top: 2vw;
-
+  margin-bottom: 3.5vw;
   .fa-star {
     color: #f9bc03;
   }
@@ -307,5 +307,30 @@
   .testimonial-description {
     color: $brand-primary;
     font-weight: 500;
+  }
+  .indicators-testimonial {
+    bottom: -41px;
+  }
+}
+.home-newsletter {
+  margin-bottom: 2vw;
+
+  .newsletter {
+    padding: 2.5vw;
+    border-radius: 10px;
+    background-image: url(https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F3b94eb5b2aa1216ad951b58a98249499%2Ffundonewsletter.png);
+    background-size: 100%;
+  }
+  .newsletter-text {
+    margin-bottom: 1vw;
+    color: white;
+    p {
+      letter-spacing: .1rem;
+      font-size: 1.1vw;
+    }
+    strong {
+      color: white;
+      font-size: 1.35vw;
+    }
   }
 }
