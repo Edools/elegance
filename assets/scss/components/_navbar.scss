@@ -108,7 +108,7 @@
     margin-left: -$navbar-padding-horizontal;
 
     @media (min-width: $grid-float-breakpoint) {
-      margin-right: 0;
+      margin-right: -45px;
       margin-left: 0;
     }
   }

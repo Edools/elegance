@@ -2,19 +2,21 @@
   .navbar {
     border-bottom: none;
   }
-
+  .panel-heading {
+    padding: 0;
+  }
+  .panel-body {
+    padding: 0;
+  }
   .product-header {
     margin-bottom: $padding-large-vertical * 4;
-    padding: $padding-large-vertical * 4 0;
-    padding-bottom: $padding-large-vertical * 8;
-
     .title {
       margin-bottom: $padding-large-vertical;
       color: #39393b;
       text-decoration: underline #0c3cf8;
       text-transform: uppercase;
       font-weight: bold;
-      font-size: 1.2vw;
+      font-size: 20px;
     }
 
     .subtitle {
@@ -85,9 +87,8 @@
   }
 
   .product-content {
-    margin-top: $padding-large-vertical * 8;
-    margin-bottom: $padding-large-vertical * 8;
-
+    margin-right: -30px;
+    margin-left: -30px;
     .title {
       margin-top: 0;
       margin-bottom: $padding-large-vertical * 4;
@@ -160,7 +161,12 @@
     width: 100%;
   }
 }
-
+@media screen and (max-width: $screen-md-min) {
+  .page-container {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+}
 @import 'product/list';
 @import 'product/path-content';
 @import 'product/course-content';

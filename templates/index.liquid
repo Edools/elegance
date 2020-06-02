@@ -2,9 +2,9 @@
   {% include 'home/header' %}
   {% include 'home/benefits' %}
 
-  <div class="home-about-us">
+  <div class="home-about-us" id="about-us">
     <div class="container">
-      <div class="row">
+      <div class="row row-home">
         <div class="col-md-5 col-sm-12">
           <h2  class="title">{{ settings.view.home.product_list_title }}</h2>
           <p>
@@ -26,13 +26,13 @@
                        <!-- Wrapper for slides -->
                        <div class="carousel-inner">
                         <div class="item active text-center">
-                          <iframe width="600" height="350" src="https://www.youtube.com/embed/2_b5RuMWKB8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                          <iframe src="https://www.youtube.com/embed/2_b5RuMWKB8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <div class="item text-center">
-                          <iframe width="600" height="350" src="https://www.youtube.com/embed/2_b5RuMWKB8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                          <iframe  src="https://www.youtube.com/embed/2_b5RuMWKB8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <div class="item text-center">
-                          <iframe width="600" height="350" src="https://www.youtube.com/embed/2_b5RuMWKB8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                          <iframe src="https://www.youtube.com/embed/2_b5RuMWKB8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                       </div>
           </div>
@@ -43,14 +43,14 @@
   </div>
   <div id="featured-course">
     <div class="container">
-      <h2 class="title">Cursos em destaque </h2>
+      <h2 class=" title title-seccao">Cursos em destaque </h2>
       {% include 'product/list-product-home', products: products, gateway: gateway %}
     </div>
   </div>
 <div class="home-testimonial">
   <div class="container">
-    <h2 class="title">Depoimentos</h2>
-    <div class="row destaque text-center">
+    <h2 class="title title-seccao">Depoimentos</h2>
+    <div class="row row-depoimento">
       <div id="CarouselDepoimentos" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators indicators-testimonial">
@@ -62,7 +62,7 @@
                    <!-- Wrapper for slides -->
                    <div class="carousel-inner">
                     <div class="item active">
-                        <div class="col-sm-6 col-md-4">
+                        <div class="col-sm-6 col-md-4 text-center">
         <img src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fa902afb3744fc9549c8ed446f164bd2d%2Fuser+1.png" alt="">
         <ul class="list-inline">
           <li><i class="fa fa-star"></i></li>
@@ -75,7 +75,7 @@
         <p class="testimonial-description">Lorem ipsum dolor sit amet</p>
         <p class="testimonial-text text-justify">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet"</p>
       </div>  
-      <div class="col-sm-6 col-md-4">
+      <div class="col-sm-6 col-md-4 text-center">
         <img src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fa902afb3744fc9549c8ed446f164bd2d%2Fuser+1.png" alt="">
         <ul class="list-inline">
           <li><i class="fa fa-star"></i></li>
@@ -88,7 +88,7 @@
         <p class="testimonial-description">Lorem ipsum dolor sit amet</p>
         <p class="testimonial-text text-justify">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet"</p>
       </div> 
-      <div class="col-sm-6 col-md-4">
+      <div class="col-sm-6 col-md-4 text-center">
         <img src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fa902afb3744fc9549c8ed446f164bd2d%2Fuser+1.png" alt="">
         <ul class="list-inline">
           <li><i class="fa fa-star"></i></li>
@@ -111,10 +111,10 @@
 <div class="home-newsletter">
   <div class="container newsletter">
     <div class="row newsletter-text">
-      <div class="col-md-1">
+      <div class="col-md-1 col-sm-2 text-center">
         <img src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F48001b53a204ec55ba45656ba4d27706%2FGroup+137.png" alt="">
       </div>
-      <div class="col-md-11 newsletter-text">
+      <div class="col-md-11 col-sm-10 newsletter-text">
         <p>Quero receber conteúdos sobre <strong>cursos, treinamentos e oportunidades</strong> para a minha vida profissional e pessoal.</p>
       </div>
     </div>
@@ -139,7 +139,4 @@
     </div>
   </div>
 </div>
-
-
-
  </div>

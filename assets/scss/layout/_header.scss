@@ -21,7 +21,11 @@ header.navbar {
       }
     }
   }
-
+  @media screen and (max-width: $screen-md-min) {
+    .navbar-brand-img {
+      margin-left: 20px;
+    }
+  }
   .navbar-nav {
     a {
       font-weight: 600;

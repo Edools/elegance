@@ -13,8 +13,6 @@
   @include breakpoint(lg) {
     height: 380px;
   }
-  @extend .panel;
-  @extend .panel-default;
 
   position: relative;
   padding: 0;
