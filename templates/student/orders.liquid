@@ -119,7 +119,7 @@
                 </span>
               </p>
 
-              {% if order.gateway_name != 'hotmart' %}
+              {% if order.gateway_name != 'hotmart' and order.gateway_name != 'spark_pay' %}
                 <p>
                   <b>{{ 'pages.orders.recurring.period_end' | t }}:</b>
                   <span>
@@ -129,6 +129,12 @@
               {% endif %}
 
               {% if order.gateway_name == 'spark_pay' %}
+                <p>
+                  <b>{{ 'pages.orders.recurring.period_end' | t }}:</b>
+                  <span>
+                    {{ order.subscription.next_invoice_at | date: "%d/%m/%Y" }}
+                  </span>
+                </p>
                 <p>
                   <b>{{ 'pages.orders.recurring.end_at' | t }}:</b>
                   <span>
