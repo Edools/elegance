@@ -1,6 +1,6 @@
 <div class="login-page page-signin-alt page">
   <div class="container page-container">
-    <h2 class="title">{{ 'accept_invitation.choose_password' | t }}</h2>
+    <h2 class="title title-login">{{ 'accept_invitation.choose_password' | t }}</h2>
     {% form 'accept_invitation' %}
       {% if form.errors %}
         <div class="alert alert-danger">{{ form.errors | default_errors }}</div>

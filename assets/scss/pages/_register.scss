@@ -14,7 +14,14 @@
 
   .title {
     margin-top: $padding-large-vertical * 8;
+    color: #39393b;
     text-align: center;
+    text-decoration: underline #0c3cf8;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 26px;
+
+    text-underline-position: under;
   }
 
   .forgot {

@@ -80,6 +80,11 @@
       width: 100%;
       border-radius: 5px;
     }
+    @media screen and (max-width: $screen-md-min) {
+      .carousel-indicators {
+        bottom: -3vw;
+      }
+    }
   }
 
   .home-benefits {
@@ -161,6 +166,20 @@
       min-height: 30vw;
       background: #fff url(https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F212eafdfff5dd43a1eb96a0f61570da4%2Ffundoazul.png) repeat-y right center;
       background-size: 80% auto;
+    }
+    @media screen and (max-width: $screen-md-min) {
+      .video-home {
+        padding-top: 10px;
+        padding-bottom: 15px;
+        border-radius: 10px;
+        background-size: 100%;
+      }
+      .indicators-video {
+        bottom: -12vw;
+      }
+      iframe {
+        width: 100%;
+      }
     }
     .social-networks {
       @include breakpoint(md) {

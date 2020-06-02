@@ -12,16 +12,22 @@
 
   .title {
     margin-top: $padding-large-vertical * 8;
+    color: #39393b;
+    text-align: center;
+    //text-decoration: underline #0c3cf8;
+    text-transform: uppercase;
+    font-size: 20px;
+
+    text-underline-position: under;
   }
 
   .forgot {
-    display: block;
-    margin: $padding-large-vertical * 2 0;
-    text-align: right;
+    text-align: center;
   }
 
   .register {
     text-align: center;
+    text-decoration: none !important;
   }
 
   .js-recaptcha {
@@ -38,7 +44,9 @@
     font-weight: 800;
   }
   .title-login {
-    border-bottom: 4px solid #0c3cf8;
+    color: #39393b;
+    text-decoration: underline #0c3cf8;
+    text-transform: uppercase;
     font-weight: 600;
     font-size: 26px;
   }
