@@ -1,24 +1,11 @@
 <div class="enrollments-page page">
+    <img class="banner-enrollments" src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fe6dd3fe958aedd3191aa8ed38c7dffc8%2Fbanner-capa_projeto-exame-academy.jpg">
   <div class="container page-container">
-    <div class="page-header">
-      <a class="btn btn-default pull-left" href="/">
-        <i class="icon-arrow-left"></i>
-        <span>{{ 'general.back' | t }}</span>
-      </a>
-
-      {% if exists_certificates %}
-        <a class="btn btn-default my-certificates-btn pull-right" href="/certificates">
-          <i class="icon-graduation"></i>
-          <span>{{ 'enrollment.my_certificates' | t }}</span>
-        </a>
-      {% endif %}
-    </div>
-
     {% assign user_badges = current_user | badges %}
 
     {% if user_badges.size != 0 %}
       <div class="badges-list">
-        <h2 tabindex='0' class="page-title">
+        <h2 class="page-title">
           {{ 'enrollment.my_badges' | t }}
         </h2>
       

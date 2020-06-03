@@ -3,7 +3,7 @@
 
   .course-card {
     @include breakpoint(sm) {
-      height: 518px;
+      height: 380px;
     }
     @extend .panel;
     @extend .panel-default;
@@ -13,6 +13,7 @@
       overflow: hidden;
       width: 100%;
       height: 230px;
+      border-radius: 5px;
 
       img {
         @include translate(-50%, -50%);
@@ -27,8 +28,16 @@
 
     .course-info {
       .title {
+        @include breakpoint(sm) {
+          overflow: hidden;
+        }
+
         display: block;
+        min-height: 3vw;
+        color: $text-color;
         text-decoration: none;
+        font-weight: bold;
+        font-size: 18px;
 
         .caption {
           @include breakpoint(sm) {
@@ -38,7 +47,7 @@
           display: block;
           margin-top: 0;
           margin-bottom: $padding-large-vertical;
-          padding: 10px $padding-base-horizontal + 5;
+          padding-top: 10px;
           color: $text-color;
           font-size: 20px;
           line-height: 1.2;
@@ -66,8 +75,15 @@
     }
 
     .course-action {
-      padding: $padding-large-vertical * 2 $padding-large-horizontal + 5;
       text-align: center;
+      .btn-course {
+        border: 2px solid #0c3cf8;
+        font-weight: bold;
+        &:hover,
+        &:focus {
+          border: 2px solid #39393b;;
+        }
+      }
     }
   }
 }

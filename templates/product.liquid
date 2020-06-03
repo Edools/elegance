@@ -6,9 +6,20 @@
         {{ product.description }}
       </article>
     {% endif %}
-    {% include 'product/buy' %}
+   
     </div>
     <div class="container page-container">
+      <div class="text-left">
+        <p class="breadcrumbs"><a href="/">Home </a> <i class="fas fa-chevron-right"></i> <a href="/products">Nossos Cursos </a><i class="fas fa-chevron-right"></i><a
+          title="{{ product.title }}"
+          data-toggle="{% if product.title.size > 60 %}tooltip{% endif %}"
+          id="product-{{ product.id }}" href="/{{ product.slug }}">
+         {{ product.title | truncate: 54 }}
+       </a></p>
+      </div>
+      <div class="text-center">
+        {% include 'product/buy' %}
+      </div>
       <div class="row text-justify">
         {% include 'product/product-topics' %}
       </div>

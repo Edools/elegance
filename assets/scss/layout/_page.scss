@@ -3,6 +3,17 @@
 
   .page-container {
     padding-bottom: $padding-large-vertical * 8;
+
+    .breadcrumbs {
+      font-size: 12px;
+      a {
+        text-decoration: none;
+      }
+      .fas {
+        color: $brand-primary;
+        font-size: 10px;
+      }
+    }
   }
 
   .page-header {
@@ -49,7 +60,13 @@
   .page-title {
     @include breakpoint(sm) {
       margin: 50px 0;
-      font-size: 28px;
+      color: #39393b;
+      text-decoration: underline #0c3cf8;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 20px;
+
+      text-underline-position: under;
 
       * {
         font-size: 28px;

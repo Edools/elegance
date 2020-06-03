@@ -448,7 +448,7 @@
   },
   "enrollment": {
     "my_badges": "<span class='lighter'>Meus</span>&nbsp;<strong>Badges</strong>",
-    "my_courses": "<span class='lighter'>Meus</span>&nbsp;<strong>Cursos</strong>",
+    "my_courses": "Meus Cursos",
     "no_certificate": "Você ainda não tem certificados",
     "download_certificate": "<span>Download Certificado</span>",
     "my_certificates": "<span class='lighter'>Meus</span>&nbsp;<strong>Certificados</strong>",
