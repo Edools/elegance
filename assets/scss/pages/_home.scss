@@ -391,6 +391,13 @@
       font-size: 26px;
     }
   }
+  .btn-more {
+    padding: .45vw 4.5vw;
+    background-color: #e11b22;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
   @media screen and (max-width: $screen-md-min) {
     .newsletter {
       padding: 5vw;
