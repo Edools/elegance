@@ -1,20 +1,21 @@
 <div class="course-page page">
-  <div class="course-page-header page-header">
+  <div class="course-page-header">
     <div class="container">
       <div class="control-back">
-        <a id="return-home" class="btn btn-default" href="{{ enrollment.id | enrollments_or_path_path: path_id }}">
+        <a id="return-home" class="btn btn-back" href="{{ enrollment.id | enrollments_or_path_path: path_id }}">
           <i class="icon-arrow-left"></i>
           <span>{{ 'general.back' | t }}</span>
         </a>
       </div>
 
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-7">
           <div class="course-header-info">
 
             <h2 class="title">{{ course.name }}</h2>
 
             <div class="description">
+              <p class="course-description">{{ course.description}}</p>
               <p>{{ enrollment | total_max_attendance_message }}</p>
               <p>{{ enrollment | use_max_attendance_message }}</p>
             </div>
@@ -35,7 +36,7 @@
             {% include 'progress-card', progress: progress %}
 
             {% if last_visited_content %}
-              <a class="last-lesson-link btn btn-default"
+              <a class="last-lesson-link btn btn-primary"
                  data-no-turbolink
                  data-toggle="tolltip"
                  title="{{ last_lesson.title }}"
@@ -51,7 +52,7 @@
             {% endif %}
           </div>
         </div>
-        <div class="col-md-6 text-right">
+        <div class="col-md-5 text-right">
           <div class="course-image">
             {% if course.image_url %}
               {% image, src: course.image_url, alt: course.name %}

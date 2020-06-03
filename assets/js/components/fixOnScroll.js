@@ -30,7 +30,6 @@
           $el.addClass('scroll');
           $el.css({
             position: 'fixed',
-            left: offset.left,
             top: 0,
             width: size.width,
             height: size.height,
@@ -43,7 +42,6 @@
           $el.parent().removeClass('scroll');
           $el.css({
             position: 'static',
-            left: 'auto',
             top: 'auto',
             width: 'auto',
             height: 'auto'

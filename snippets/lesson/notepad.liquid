@@ -1,7 +1,7 @@
 <div id="notepad-container" class="notepad">
   <div id="js-notepad-form" class="notepad-form">
     {% form 'notepads', id: notepad_form, remote: false %}
-      <h4>{{ 'notepad.my_annotations' | t }}</h4>
+      <h4 class="title-lesson">{{ 'notepad.my_annotations' | t }}</h4>
 
       <input type="hidden" id="lesson_id" name="lesson_id" value="{{ current_lesson_id }}">
       <input type="hidden" id="js_note_id" name="note_id" value="">
@@ -12,7 +12,7 @@
 
       <div class="form-buttons clearfix">
         <div class="btn-group pull-right">
-          <button id="save_notepad_button" type="submit" class="btn btn-primary"
+          <button id="save_notepad_button" type="submit" class="btn btn-back"
                   data-sending="<i class='busy busy-xs'></i><span>{{ 'general.sending' | t }}...</span>">
             {{ 'general.save' | t }}
           </button>

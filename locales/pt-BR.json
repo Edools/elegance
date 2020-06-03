@@ -269,7 +269,7 @@
     "topic_title": "Tópico",
     "topics_title": "Tópicos",
     "posts_title": "Comentários",
-    "forums": "<b>Fóruns</b> da Escola",
+    "forums": "Fóruns da Escola",
     "new_topic": "Novo Tópico",
     "new_topic_name": "Nome",
     "new_topic_description": "Descrição",
@@ -289,7 +289,7 @@
     "answers": "Respostas",
     "question_title": "Título da sua pergunta",
     "ask": "Perguntar",
-    "helptext" : "Apenas administradores podem criar <strong>fóruns</strong> e <strong>seções</strong>. Para criar um <strong>tópico</strong>, escolha abaixo o fórum que se encaixa no seu assunto de interesse e participe!",
+    "helptext" : "Apenas administradores podem criar fóruns e seções. Para criar um tópico, escolha abaixo o fórum que se encaixa no seu assunto de interesse e participe!",
     "child_forum_sections_count": {
       "zero": "Não há nenhuma seção",
       "one": "1 seção",
@@ -364,7 +364,7 @@
   },
   "profile": {
     "public_profile": "Perfil Público",
-    "my_profile": "<span class='lighter'>Meu</span>&nbsp;<strong>Perfil</strong>",
+    "my_profile": "Meu Perfil",
     "picture": "Foto do Perfil",
     "edit_picture": "Editar foto do perfil",
     "personal_data": "Dados Pessoais",
@@ -447,17 +447,17 @@
     "not_found": "Não existe certificado com este ID!"
   },
   "enrollment": {
-    "my_badges": "<span class='lighter'>Meus</span>&nbsp;<strong>Badges</strong>",
+    "my_badges": "Meus Badges",
     "my_courses": "Meus Cursos",
     "no_certificate": "Você ainda não tem certificados",
-    "download_certificate": "<span>Download Certificado</span>",
-    "my_certificates": "<span class='lighter'>Meus</span>&nbsp;<strong>Certificados</strong>",
+    "download_certificate": "Download Certificado",
+    "my_certificates": "Meus Certificados",
     "not_enrolled_any_course": "Você ainda não está matriculado em nenhum curso.",
     "go_course": "Ir para o Curso",
     "go_path": "Acessar Pacote",
     "go_trail": "Acessar Trilha",
-    "pending": "<span class='lighter'>Matrículas</span>&nbsp;<strong>pendentes</strong>",
-    "expired": "<span class='lighter'>Matrículas</span>&nbsp;<strong>expiradas</strong>",
+    "pending": "Matrículas pendentes",
+    "expired": "Matrículas expiradas",
     "available_time_message": {
       "unlimited": "Este curso estará disponível por tempo ilimitado",
       "available_until": "Este curso estará disponível até {{ date }}"
@@ -578,7 +578,7 @@
       "pay": "Realize o pagamento"
     },
     "cart": {
-      "title": "<strong>Carrinho</strong> <span class=\"lighter\">de compras</span>",
+      "title": "Carrinho de compras",
       "empty": "Ainda não há itens no seu carrinho.",
       "coupon_applied": "Cupom aplicado com sucesso!",
       "item_quantity": "Quantidade: "

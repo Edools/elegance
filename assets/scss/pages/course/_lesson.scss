@@ -112,9 +112,13 @@
         }
       }
     }
-
     .other-lessons {
       margin-top: $padding-large-vertical * 4;
+    }
+    .sidebar-menu-lesson {
+      width: 60%;
+      border: 1px solid #c4c4c4;
+      border-radius: 5px;
     }
   }
 
@@ -123,12 +127,12 @@
       text-align: right;
     }
 
-    text-align: center;
+    text-align: right;
   }
 
   .lesson-description {
     margin-bottom: $padding-large-vertical * 4;
-    color: $text-muted;
+    color: #39393b;
   }
 
   .lesson-content-player {
@@ -141,13 +145,15 @@
 
       .lesson-title {
         @include breakpoint(sm) {
+          color: #39393b;
           text-align: left;
+          font-weight: bold;
+          font-size: 20px;
         }
 
         margin: 0;
         padding: 30.5px 0;
         text-align: center;
-        font-size: 22px;
         line-height: 1;
       }
 
@@ -219,6 +225,9 @@
             border: 0;
           }
         }
+        #spark-videos-player-iframe {
+          border: none;
+        }
       }
     }
   }
@@ -239,5 +248,58 @@
 
     margin-top: $padding-large-vertical * 4;
     text-align: right;
+  }
+}
+/* sidebar menu */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  overflow-x: hidden;
+  padding-top: 60px;
+  width: 0;
+  height: 100%;
+  border-right: 1px solid #c4c4c4;
+  background-color: white;
+  box-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+  transition: .5s;
+}
+.sidebar-content {
+  padding: 40px;
+}
+.title {
+  color: #39393b;
+  text-align: left;
+  font-weight: bold;
+}
+.sidebar a {
+  display: block;
+  text-decoration: none;
+}
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  margin-left: 50px;
+  font-size: 36px;
+}
+.openbtn {
+  border: none;
+  background-color: white;
+  color: #39393b;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+  .sidebar a {
+    font-size: 18px;
   }
 }

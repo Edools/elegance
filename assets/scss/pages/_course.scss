@@ -1,34 +1,42 @@
 .course-page {
   .course-page-header {
     background-color: $light;
-
+    .title {
+      margin-bottom: 0;
+      color: #39393b;
+      font-weight: bold;
+      font-size: 18px;
+    }
     .course-content {
-      margin-top: $padding-large-vertical * 6;
+      margin-top: $padding-large-vertical ;
     }
 
     .card-progress {
-      margin-top: $padding-large-vertical * 4;
+      margin-top: $padding-large-vertical ;
     }
 
     .last-lesson-link {
-      margin-bottom: $padding-large-vertical * 2;
+      margin-bottom: $padding-large-vertical;
     }
 
     .course-image {
       width: 100%;
 
       img {
-        width: 60%;
+        width: 90%;
         height: auto;
       }
     }
   }
 
   .course-page-content {
-    margin-top: $padding-large-vertical * 4;
-
+    margin-top: $padding-large-vertical * 3;
+    border-top: 1px solid #c4c4c4;
+    .modules {
+      border: 1px solid #c4c4c4;
+    }
     .tab-content {
-      margin-top: $padding-large-vertical * 2;
+      margin-top: $padding-large-vertical;
     }
   }
 }

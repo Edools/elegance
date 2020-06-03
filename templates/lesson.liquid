@@ -1,62 +1,27 @@
 <div class="lesson-page page">
   <div class="container page-container">
     <div class="row">
-      <div id="js-lesson-list" class="col-md-4 js-lesson-list">
+      <div id="js-lesson-list" class="col-md-2 js-lesson-list">
         <div class="lesson-page-sidebar">
           <div class="lesson-list-header js-fix-on-scroll js-fix-on-scroll-mobile">
-            <div class="lesson-list-toggle">
-              <button class="btn btn-default">
-                <i class="icon-arrow-left"></i>
-                <i class="icon-menu"></i>
-              </button>
-            </div>
-
             <div class="control-back">
-              <a class="btn btn-default" href="{{ enrollment | back_path: course.id }}">
+              <a class="btn btn-back" href="{{ enrollment | back_path: course.id }}">
                 <i class="icon-arrow-left"></i>
                 <span>{{ 'general.back' | t }}</span>
               </a>
             </div>
           </div>
-
-          <div class="panel panel-default lesson-list-panel">
-            <div class="panel-heading">
-              <h4 class="title">{{ course.name }}</h4>
-            </div>
-
-            <div class="panel-body">
-              <div class="course-progress js-progress">
-                {% assign progress = enrollment | course_progress_card: course %}
-                <p> {{ progress.total }} {{ 'lesson.total' | t }}</p>
-                <div class="progress-header">
-                <span class="label label-success">
-                  <span class="js-completed-counter">{{ progress.completed }}</span> {{ 'lesson.completed' | t }}
-                </span>
-                  <span class="label label-info">
-                  <span class="js-in-progress-counter">{{ progress.in_progress }}</span> {{ 'lesson.started' | t }}
-                </span>
-                </div>
-                {% include 'progress-bar', total: progress.total, success: progress.completed, warning:
-                progress.in_progress %}
-              </div>
-
-              <div class="rating-container">
-                {% assign rating_enable = current_school | has_feature: 'course_rating' %}
-                {% if rating_enable %}
-                  {% include 'course/rating', course: course, enrollment: enrollment %}
-                {% endif %}
-              </div>
-
-              <div class="other-lessons">
-                {% include 'product/content-course', course: course, lesson_actions: true,
-                enrollment: enrollment, current_lesson_id: lesson.id, download_action: true %}
-              </div>
-            </div>
-          </div>
+          <div class="sidebar-menu-lesson text-center">
+            <button class="openbtn" onclick="openNav()">
+              <i class="fas fa-bars"></i>
+            </button>
+  
+            
+           </div>
         </div>
       </div>
-
-      <div class="col-md-8">
+      <div class="col-md-10">
+        {{course_content.lesson}}
         <div id="js-lesson-content-player" class="lesson-content-player">
           <div class="lesson-content-player-heading">
             {% if course_content.prev_content_id or course_content.next_content_id %}
@@ -198,3 +163,52 @@
     </div>
   </div>
 </div>
+<div id="mySidebar" class="sidebar">
+  <div class="sidebar-content">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="panel panel-default lesson-list-panel">
+      <div class="panel-heading">
+        <h4 class="title">{{ course.name }}</h4>
+      </div>
+  
+      <div class="panel-body">
+        <div class="course-progress js-progress">
+          {% assign progress = enrollment | course_progress_card: course %}
+          <p> {{ progress.total }} {{ 'lesson.total' | t }}</p>
+          <div class="progress-header">
+          <span class="label label-success">
+            <span class="js-completed-counter">{{ progress.completed }}</span> {{ 'lesson.completed' | t }}
+          </span>
+            <span class="label label-info">
+            <span class="js-in-progress-counter">{{ progress.in_progress }}</span> {{ 'lesson.started' | t }}
+          </span>
+          </div>
+          {% include 'progress-bar', total: progress.total, success: progress.completed, warning:
+          progress.in_progress %}
+        </div>
+  
+        <div class="rating-container">
+          {% assign rating_enable = current_school | has_feature: 'course_rating' %}
+          {% if rating_enable %}
+            {% include 'course/rating', course: course, enrollment: enrollment %}
+          {% endif %}
+        </div>
+  
+        <div class="other-lessons">
+          {% include 'product/content-course', course: course, lesson_actions: true,
+          enrollment: enrollment, current_lesson_id: lesson.id, download_action: true %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "30%";
+  document.getElementById("main").style.marginLeft = "30%";
+}
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft = "0";
+}
+</script>

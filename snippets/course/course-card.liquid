@@ -18,17 +18,18 @@
             {% image, src: placeholder, alt: title %}
           {% endif %}
         </div>
+
         <span class="caption">{{ title | truncate: 70 }}</span>
       </a>
     </div>
   <div class="course-action">
     {% if released_course == false %}
-      <a class="btn btn-course disabled">
+      <a class="btn btn-course  disabled">
         <i class="fas fa-video"></i>
         <span>{{ detail_label }}</span>
       </a>
     {% else %}
-      <a class="btn btn-course href="{{ detail_path }}">
+      <a class="btn btn-course " href="{{ detail_path }}">
         <i class="fas fa-video"></i>
         <span>{{ detail_label }}</span>
       </a>
