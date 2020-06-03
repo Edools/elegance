@@ -733,12 +733,12 @@
     ]
   },
   {
-    "name": "Destaque de Produtos",
+    "name": "Sobre Nós",
     "icon" : "home",
     "id": "6",
     "settings": [
       {
-        "template": "<h3>Título da lista de produtos</h3>"
+        "template": "<h3>Sessão sobre nós</h3>"
       },
       {
         "key": "view.home.product_list_title",
@@ -747,7 +747,24 @@
           "label": "Título",
           "rows" : 4
         }
+      },
+      {
+        "key": "view.home.product_list_content",
+        "type": "textarea",
+        "templateOptions": {
+          "label": "Conteúdo",
+          "rows" : 10
+        }
+      },
+      {
+        "key": "view.home.video",
+        "type": "textarea",
+        "templateOptions": {
+          "label": "Url do Video",
+          "rows" : 1
+        }
       }
+      
     ]
   },
   {

@@ -79,7 +79,7 @@
     @include transition(color .2s ease);
 
     margin: 0 auto;
-    color: #585858;
+    color: #39393b;
     font-weight: bold;
     font-size: 24px;
     animation-name: up-and-down-movement;
@@ -87,7 +87,7 @@
     animation-iteration-count: infinite;
 
     &:hover {
-      color: lighten(#585858, 40%);
+      color: lighten(#39393b, 40%);
     }
   }
 

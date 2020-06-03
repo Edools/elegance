@@ -284,11 +284,16 @@
 
   > li > a {
     padding-top: 10px;
-    border-bottom: 4px transparent;
     //padding-bottom: 10px;
     line-height: $line-height-computed;
   }
-
+  .nav-home {
+    border-bottom: 4px transparent;
+    &:hover,
+    &:focus {
+      border-bottom: 4px solid #0c3cf8;
+    }
+  }
   @media (max-width: $grid-float-breakpoint-max) {
     // Dropdowns get custom display when collapsed
     .open .dropdown-menu {
@@ -471,7 +476,6 @@
 
       &:hover,
       &:focus {
-        border-bottom: 4px solid #0c3cf8;
         background-color: $navbar-default-link-hover-bg;
         color: $navbar-default-link-hover-color;
       }

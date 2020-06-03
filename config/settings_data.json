@@ -12,18 +12,18 @@
         ],
         "color_primary": "#0C3CF8",
         "color_body_bg": "#f9f9f9",
-        "color_body_text": "#585858",
+        "color_body_text": "#39393B",
         "color_content_bg": "#F9F9F9",
         "color_border": "#dedede",
         "color_navbar_bg": "#ffffff",
         "color_navbar_links": "#222",
         "color_button_primary_text": "#ffffff",
         "color_button_primary_bg": "#0C3CF8",
-        "color_button_secondary_text": "#585858",
+        "color_button_secondary_text": "#39393B",
         "color_button_secondary_bg": "#ffffff",
-        "color_titles": "#585858",
-        "color_subtitles": "#585858",
-        "color_paragraphs": "#585858",
+        "color_titles": "#39393B",
+        "color_subtitles": "#39393B",
+        "color_paragraphs": "#39393B",
         "color_links": "#0C3CF8",
         "color_footer_bg": "#2e3234",
         "color_footer_text": "#747474",
@@ -48,9 +48,9 @@
           "header_text_color": "#ffffff",
           "header_background_image": "",
           "benefits": {
-            "color_icon": "#585858",
-            "color_title": "#585858",
-            "color_text": "#585858"
+            "color_icon": "#39393B",
+            "color_title": "#39393B",
+            "color_text": "#39393B"
           }
         },
         "product": {
@@ -107,7 +107,9 @@
               "icon": "icon-docs"
             }
           ],
-          "product_list_title": "<strong>Participe de nossos cursos</strong>, basta escolher e assistir",
+          
+          "product_list_title": "Sobre nós",
+          "product_list_content": "Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus.",
           "footer": {
             "title": "Donec sollicitudin molestie malesuada. Donec sollicitudin molestie malesuada.",
             "text": "Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus.",

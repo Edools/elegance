@@ -38,7 +38,15 @@
           {% endif %}
 
 
-        {% if current_user %}
+          {% if current_user %}
+          <li>
+            {% assign new_forum = current_school | has_feature: 'new_forum' %}
+            <a href="{% if new_forum %}/school/forums{% else %}/forums{% endif %}">
+              <i class="fas fa-comment"></i>
+              <span>{{ 'navbar.forum' | t }}</span>
+            </a>
+          </li>
+
           {% if current_user.type == 'Student' %}
             <li>
               <a href="/enrollments">
@@ -46,14 +54,6 @@
                 <span>{{ 'navbar.my_courses' | t }}</span>
               </a>
             </li>
-
-            <li>
-              <a href="{{ current_user | profile_path }}">
-                <i class="fas fa-user"></i>
-                <span>{{ "navbar.my_profile" | t }}</span>
-              </a>
-            </li>
-
           {% elsif current_user.type == 'Collaborator' %}
             <li>
               <a href="/courses">
@@ -82,10 +82,10 @@
           </li>
 
         {% else %}
-         <li><a href="/#about-us">Quem Somos</a></li>
-          <li><a href="/products"> Nossos Cursoss</a></li>
-          <li><a href="/users/sign_up">Cadastre-se Grátis</a></li>
-          <li>{{ 'Acesse sua conta' | login_link }}</li>
+         <li><a class="nav-home" href="/#about-us">Quem Somos</a></li>
+          <li><a class="nav-home" href="/products"> Nossos Cursoss</a></li>
+          <li><a class="nav-home" href="/users/sign_up">Cadastre-se Grátis</a></li>
+          <li><a class="nav-home" href="/users/sign_in">Acesse sua conta</a></li>
         {% endif %}
       </ul>
     </div>
