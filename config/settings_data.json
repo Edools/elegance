@@ -11,9 +11,9 @@
           "Courier New"
         ],
         "color_primary": "#0C3CF8",
-        "color_body_bg": "#f9f9f9",
+        "color_body_bg": "#ffffff",
         "color_body_text": "#39393B",
-        "color_content_bg": "#F9F9F9",
+        "color_content_bg": "#ffffff",
         "color_border": "#dedede",
         "color_navbar_bg": "#ffffff",
         "color_navbar_links": "#222",

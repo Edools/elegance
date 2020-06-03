@@ -1,7 +1,7 @@
 /* General */
 $color-primary: {{ settings.style.color_primary | default: 'inherit' }};
 $color-body-bg: {{ settings.style.color_body_bg | default: 'inherit' }};
-$color-content-bg: {{ settings.style.color_content_bg | default: 'inherit' }};
+$color-content-bg: {{ settings.style.color_content_bg | default: '#fff' }};
 $color-border: {{ settings.style.color_border | default: 'inherit' }};
 $type-base-family: '{{ settings.style.type_base_family | default: 'inherit' }}';
 $type-base-size: {{ settings.style.type_base_size | default: 'inherit' }};
@@ -170,7 +170,7 @@ a {
 /* Navbar */
 
 header.navbar {
-  background-color: transparent;
+  background-color: $color-navabar-bg;
 
   a,
   .dropdown a {

@@ -60,7 +60,7 @@
           float: left;
         }
 
-        float: right;
+        float: left;
       }
     }
 
@@ -120,6 +120,11 @@
       border: 1px solid #c4c4c4;
       border-radius: 5px;
     }
+    @media screen and (max-width: $screen-md-min) {
+      .sidebar-menu-lesson {
+        width: 30%;
+      }
+    }
   }
 
   .media-controls {
@@ -153,7 +158,10 @@
 
         margin: 0;
         padding: 30.5px 0;
+        color: #39393b;
         text-align: center;
+        font-weight: bold;
+        font-size: 16px;
         line-height: 1;
       }
 
@@ -298,8 +306,5 @@
 @media screen and (max-height: 450px) {
   .sidebar {
     padding-top: 15px;
-  }
-  .sidebar a {
-    font-size: 18px;
   }
 }
