@@ -318,11 +318,20 @@
   padding-bottom: $padding-base-vertical * 4;
 }
 .products-page {
+  .breadcrumbs {
+    font-size: 12px;
+    a {
+      text-decoration: none;
+    }
+    .fas {
+      color: $brand-primary;
+      font-size: 10px;
+    }
+  }
   .product-page-container {
     padding-right: 0;
     padding-left: 0;
   }
-
   .title-product {
     text-decoration: underline #0c3cf8;
     font-weight: 600;
@@ -341,6 +350,7 @@
   .icon-magnifier {
     color: #c4c4c4;
   }
+
 
   @media screen and (max-width: $screen-md-min) {
     .product-page-container {
