@@ -1,11 +1,21 @@
+<script>
+function sanitizeString(str){
+    str = str.replace(/[^a-z0-9áéíóúñü \ .,_-]/gim,"");
+    return str.trim();
+}
+</script>
+
 <div class="checkout-success-page page">
   {% comment %} Verifica sé há algo preenchido na opção de redirecionamento da pagina sucesso {% endcomment %}
+
+  {{settings.view.config_pages.check.success_page}}
   {% if settings.view.config_pages.check.success_page %}
     {% assign url = settings.view.config_pages.check.success_page %}
     {% comment %} Caso o campo tenha alguam valor chama o script de redirecionamento da pagina {% endcomment %}
     <script>
-      window.location.href = '{{url}}';
+      window.location.href = ('https://' + sanitizeString('{{url}}'));
     </script>
+
   {% endif %}
 
   <div class="container">
