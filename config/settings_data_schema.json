@@ -547,7 +547,7 @@
         "key": "view.config_pages.check.success_page",
         "type": "textarea",
         "templateOptions": {
-          "placeholder": "Endereço para Redirecionamento Exemplo: https://www.edools.com"
+          "placeholder": "Endereço para Redirecionamento Exemplo: www.edools.com"
         }
       }
     ]
