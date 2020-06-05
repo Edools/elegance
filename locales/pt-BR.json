@@ -619,6 +619,7 @@
     "coupon": "Possui um cupom de desconto?",
     "coupon_code": "Insira o seu cupom",
     "coupon_title": "Cupom de desconto",
+    "coupon_recurrency_memberships_quantity": "nas próximas <b>{{ quantity }}</b> mensalidades, após as mensalidades aplicaveis do cupom o valor volta ao preço original",
     "total_amount_to_pay": "Total a pagar:",
     "total_paid": "Total pago:",
     "total_amount_to_pay_in_installments": "ou em até {{ installments }}x no cartão:",

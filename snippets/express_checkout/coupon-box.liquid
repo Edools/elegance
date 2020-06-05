@@ -1,5 +1,4 @@
-
-{% if payment_option.kind != 'subscription' %}
+{% if payment_option.kind != 'subscription' or gateway.gateway == 'spark_pay' %}
 <div class="row spacing-top">
 
   <div id="js-add-coupon-container">
