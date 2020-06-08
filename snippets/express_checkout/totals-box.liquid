@@ -37,6 +37,10 @@
       {{ discount | money_option_presentation: paymentOption.kind, paymentOption.period, 'full', 1}}</div>
   </div>
 
+  {% if payment_option.kind == 'subscription' %}
+    <div class="totals-box-item discount-text pull-right">* {{ 'checkout.coupon_recurrency_memberships_quantity' | t: quantity: coupon.recurrency_memberships_quantity }}</div>
+  {% end %}
+
   <hr class="divider">
   {% endif %}
 
