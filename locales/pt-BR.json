@@ -1043,9 +1043,9 @@
         "ignore": "Se você não quiser aceitar o convite, por favor, ignore este e-mail."
       },
       "student": {
-        "subject": "{{school}} - Você foi convidado para se matricular!",
-        "someone_invited_you": "Você foi convidado para se matricular na escola \"{{school}}\".",
-        "accept_instructions": "Você deve confirmar sua inscrição e definir sua senha, clicando no botão abaixo.",
+        "subject": "Você está convidado a fazer parte da {{school}}!",
+        "someone_invited_you": "Você foi convidado a fazer parte da {{school}} e está matriculado em:",
+        "accept_instructions": "Para aceitar seu convite basta clicar no link abaixo:",
         "accept": "Confirmar inscrição",
         "ignore": "Se você não quiser aceitar o convite, por favor, ignore este e-mail.",
         "invite_register_school": "Você foi convidado para se cadastrar na escola."
