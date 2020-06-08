@@ -80,13 +80,11 @@
 <body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% elsif current_path == '/chat' %}chat-page{% endif %}" onselectstart="return false" >
   <div class="content-wrapper">
     {% include 'accessibility-menu' %}
-    {% unless current_path == '/users/sign_in' %}
     {% if current_path != '/express_checkout/payment' and current_path != '/express_checkout/success'  %}
       {% include 'navbar' %}
     {% else %}
       {% include 'navbar-express-checkout' %}
     {% endif %}
-    {% endunless %}
     {% include 'alert-notice' %}
     {{ content_for_layout }}
     <div class="content-push"></div>

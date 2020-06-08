@@ -22,15 +22,21 @@
         <span class="caption">{{ title | truncate: 70 }}</span>
       </a>
     </div>
+
+    {% if description %}
+      <p class="course-progress">{{ description | truncate: 112 }}</p>
+    {% endif %}
+  </div>
+
   <div class="course-action">
     {% if released_course == false %}
-      <a class="btn btn-course  disabled">
-        <i class="fas fa-video"></i>
+      <a class="btn btn-course disabled">
+        <i class="{{icon}}"></i>
         <span>{{ detail_label }}</span>
       </a>
     {% else %}
-      <a class="btn btn-course " href="{{ detail_path }}">
-        <i class="fas fa-video"></i>
+      <a class="btn btn-course" href="{{ detail_path }}">
+        <i class="{{icon}}"></i>
         <span>{{ detail_label }}</span>
       </a>
     {% endif %}

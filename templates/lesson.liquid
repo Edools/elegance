@@ -10,18 +10,80 @@
                 <span>{{ 'general.back' | t }}</span>
               </a>
             </div>
-          </div>
+          </div>       
           <div class="sidebar-menu-lesson text-center">
-            <button class="openbtn" onclick="openNav()">
-              <i class="fas fa-bars"></i>
-            </button>
+            <a class="open" id="openSidebar"><i class="fas fa-bars"></i></a>
+            <div id="sidebar-items2">
+              {% include 'product/content-course2', course: course, lesson_actions: true,
+                        enrollment: enrollment, current_lesson_id: lesson.id, download_action: true %}
+            </div>
+            <section id="sidebar" class="sidebar">
+             
+          
+              <div id="sidebar-items" class="items sidebar-animate">
+          
+                <div class="list-group-item">
+                  <div class="content-div">
+                    <div class="close">
+                      <a class="close-icon" id="closeSidebar"><i class="fa fa-times"></i></a>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+                <div class="sidebar-content">
+                  <div class="panel panel-default lesson-list-panel">
+                    <div class="panel-heading">
+                      <h4 class="title">{{ course.name }}</h4>
+                    </div>
+                
+                    <div class="panel-body">
+                      <div class="course-progress js-progress">
+                        {% assign progress = enrollment | course_progress_card: course %}
+                        <p> {{ progress.total }} {{ 'lesson.total' | t }}</p>
+                        <div class="progress-header">
+                        <span class="label label-success">
+                          <span class="js-completed-counter">{{ progress.completed }}</span> {{ 'lesson.completed' | t }}
+                        </span>
+                          <span class="label label-info">
+                          <span class="js-in-progress-counter">{{ progress.in_progress }}</span> {{ 'lesson.started' | t }}
+                        </span>
+                        </div>
+                        {% include 'progress-bar', total: progress.total, success: progress.completed, warning:
+                        progress.in_progress %}
+                      </div>
+                
+                      <div class="rating-container">
+                        {% assign rating_enable = current_school | has_feature: 'course_rating' %}
+                        {% if rating_enable %}
+                          {% include 'course/rating', course: course, enrollment: enrollment %}
+                        {% endif %}
+                      </div>
+                
+                      <div class="other-lessons">
+                        {% include 'product/content-course', course: course, lesson_actions: true,
+                        enrollment: enrollment, current_lesson_id: lesson.id, download_action: true %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          
+              </div>
+              <div id="block" class="unblock">
+          
+              </div>
+            </section>
   
 
            </div>
+           <div>
+           
+          </div>
+      
+          
+           </div>
         </div>
-      </div>
+  
       <div class="col-md-10">
-        {{course_content.lesson}}
         <div id="js-lesson-content-player" class="lesson-content-player">
           <div class="lesson-content-player-heading">
             {% if course_content.prev_content_id or course_content.next_content_id %}
@@ -163,52 +225,34 @@
     </div>
   </div>
 </div>
-<div id="mySidebar" class="sidebar">
-  <div class="sidebar-content">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <div class="panel panel-default lesson-list-panel">
-      <div class="panel-heading">
-        <h4 class="title">{{ course.name }}</h4>
-      </div>
-  
-      <div class="panel-body">
-        <div class="course-progress js-progress">
-          {% assign progress = enrollment | course_progress_card: course %}
-          <p> {{ progress.total }} {{ 'lesson.total' | t }}</p>
-          <div class="progress-header">
-          <span class="label label-success">
-            <span class="js-completed-counter">{{ progress.completed }}</span> {{ 'lesson.completed' | t }}
-          </span>
-            <span class="label label-info">
-            <span class="js-in-progress-counter">{{ progress.in_progress }}</span> {{ 'lesson.started' | t }}
-          </span>
-          </div>
-          {% include 'progress-bar', total: progress.total, success: progress.completed, warning:
-          progress.in_progress %}
-        </div>
-  
-        <div class="rating-container">
-          {% assign rating_enable = current_school | has_feature: 'course_rating' %}
-          {% if rating_enable %}
-            {% include 'course/rating', course: course, enrollment: enrollment %}
-          {% endif %}
-        </div>
-  
-        <div class="other-lessons">
-          {% include 'product/content-course', course: course, lesson_actions: true,
-          enrollment: enrollment, current_lesson_id: lesson.id, download_action: true %}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 <script>
-function openNav() {
-  document.getElementById("mySidebar").style.width = "30%";
-  document.getElementById("main").style.marginLeft = "30%";
-}
-function closeNav() {
-  document.getElementById("mySidebar").style.width = "0";
-  document.getElementById("main").style.marginLeft = "0";
-}
+$(function() {
+    $(".preloader").fadeOut(2000, function() {
+      $(".lesson-page").fadeIn(10);
+      $(".navbar").fadeIn(10);
+    });
+  });
+
+  $("#openSidebar").click(function () {
+    $("#sidebar").addClass("sidebar-animate");
+    $("#sidebar").removeClass("sidebar-animate2");
+    $("#block").addClass("block");
+  });
+
+  $("#closeSidebar").click(function () {
+    $("#sidebar").removeClass("sidebar-animate");
+    $("#sidebar").addClass("sidebar-animate2");
+    $("#block").removeClass("block");
+  });
+
+  //Fecha o sidebar quando clicado fora
+  $("#block").click(function () {
+    $("#sidebar").removeClass("sidebar-animate");
+    $("#sidebar").addClass("sidebar-animate2");
+    $("#block").removeClass("block");
+  });
+
+  $('#sidebar').click(function (event) {
+    event.stopPropagation();
+  });
 </script>

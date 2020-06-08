@@ -1,0 +1,32 @@
+
+<!-- Botoes de navegacao mobile -->
+
+{% if current_user.type == 'Student' %}
+  {% assign content_link = '/enrollments/' | append: enrollment.id %}
+{% else %}
+  {% assign content_link = '/admin_view' %}
+{% endif %}
+
+<div class='mobile-nav'>
+  {% if course_content.prev_content_id %}
+    <a href="{{ content_link }}/courses/{{ course.id }}/course_contents/{{ course_content.prev_content_id }}"
+        class="col-sm-1 col-md-1 btn btn-mobile-prev">
+        <i class="material-icons">chevron_left</i><span>Anterior</span>
+    </a>
+  {% else %}
+    <a href="" class="col-sm-1 col-md-1 btn btn-mobile-prev disabled">
+        <i class="material-icons">close</i><span>Anterior</span>
+    </a>
+  {% endif %}
+
+  {% if course_content.next_content_id %}
+    <a href="{{ content_link }}/courses/{{ course.id }}/course_contents/{{ course_content.next_content_id }}"
+      class="col-sm-1 col-md-1 btn btn-mobile-next btn-next-lesson">
+      <span>Próximo</span><i class="material-icons">chevron_right</i>
+    </a>
+  {% else %}
+    <a href="" class="col-sm-1 col-md-1 btn btn-mobile-next btn-next-lesson disabled">
+      <span>Próximo</span><i class="material-icons">close</i>
+    </a>
+  {% endif %}
+</div>

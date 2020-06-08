@@ -39,6 +39,9 @@
       {% paginate active_enrollments by 6 %}
       <div class="row">
         <div id="js-product-list">
+          <div class="row">
+            
+          </div>
           {% for enrollment in active_enrollments %}
             <div class="col-sm-6 col-md-4 active-enrollments">
               {% assign progress = enrollment | course_progress_card %}
