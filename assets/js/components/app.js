@@ -87,6 +87,7 @@
     },
 
     init: function () {
+      //app.Zendesk.init();
       app.bindGlobal();
       app.bindRecaptcha();
       app.bindBlazy();
@@ -102,8 +103,6 @@
       app.bindCourseRating();
       app.deadpoolChat.bindDeadpool();
       app.lessonList.init();
-      app.lessonListCards.init();
-      app.contentCards.init();
       app.chat.init();
       app.studentDoubts.init();
       app.notepad.init();
@@ -112,7 +111,6 @@
       app.changeTimeZone();
       app.followBind();
       app.lessonPage();
-      app.content_find.init();
       app.timeTags();
       app.bindPostsForm();
       app.accessibility();
@@ -120,8 +118,6 @@
       app.bindValidationCpf();
       app.randomQuizStatistics();
       app.bindCepService();
-      // app.carousel();
-      app.buscaCurso();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
     }

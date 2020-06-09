@@ -44,12 +44,11 @@
 
       display: block;
       margin-top: $padding-large-vertical;
-      margin-bottom: $padding-large-vertical;
-      min-height: 4vw;
+      min-height: 1vw;
       color: $text-color;
       text-decoration: none;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 16px;
     }
 
     .subtitle {
@@ -93,6 +92,7 @@
 
       .final-price {
         font-weight: bold;
+        font-size: 18px;
       }
     }
 
@@ -104,7 +104,6 @@
       }
       @include breakpoint(lg) {
         float: right;
-        margin: 0;
         text-align: right;
       }
 

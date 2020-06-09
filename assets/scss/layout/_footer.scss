@@ -2,7 +2,6 @@
   $footer-color: #39393b;
 
   padding: $padding-large-vertical;
-  border-radius: 10px 10px 0 0;
   background-color: $footer-color;
   color: white;
   font-weight: 600;
@@ -20,7 +19,7 @@
       width: 200px;
     }
     .fab {
-      margin: 10px;
+      margin: 8px;
       color: white;
     }
     .description {
@@ -75,7 +74,7 @@
       font-size: 12px;
     }
     .mail {
-      color: #0c3cf8;
+      color: white;
     }
   }
   .copyright {

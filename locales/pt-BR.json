@@ -977,7 +977,7 @@
     }
   },
   "mailer": {
-    "hello": "Olá, {{first_name}}.",
+    "hello": "Olá, {{first_name}}, tudo bem?",
     "if_link_does_not_work": "Caso o link acima não funcione, copie e cole este endereço no seu navegador: {{url}}",
     "new_student": {
       "subject": "Novo aluno cadastrado",
@@ -1043,10 +1043,8 @@
         "ignore": "Se você não quiser aceitar o convite, por favor, ignore este e-mail."
       },
       "student": {
-        "subject": "Você está convidado a fazer parte da {{school}}!",
-        "someone_invited_you": "Você foi convidado a fazer parte da {{school}} e está matriculado em:",
-        "accept_instructions": "Para aceitar seu convite basta clicar no link abaixo:",
-        "accept": "Confirmar inscrição",
+        "subject": "{{school}} - Você precisa redefinir a sua senha",
+        "accept": "Redefir Senha",
         "ignore": "Se você não quiser aceitar o convite, por favor, ignore este e-mail.",
         "invite_register_school": "Você foi convidado para se cadastrar na escola."
       }
@@ -1089,10 +1087,11 @@
         "analysis_payment": "Seu pagamento está em análise."
       },
       "boleto_created": {
-        "subject": "Seu boleto foi gerado!",
-        "first_paragraph": "O seu pedido na escola <strong>{{school_name}}</strong> foi confirmado e o boleto gerado no momento da compra.",
-        "second_paragraph": "Importante: a compensação do boleto pode levar até três dias após o pagamento. A confirmação e liberação do conteúdo será automática, porém pode levar algum tempo até que ela se conclua.",
-        "third_paragraph": "<a href=\"{{boleto_url}}\"><b>Clique aqui</b></a> para imprimir o boleto novamente, se necessário."
+        "subject": " Seu boleto para pagamento foi gerado!",
+        "first_paragraph": "Aqui está seu boleto para pagamento, {{first_name}}",
+        "second_paragraph": "Atenção: o pagamento pode levar até 3 dias úteis para ser confirmado.",
+        "third_paragraph": "<a href=\"{{boleto_url}}\"><b>Clique aqui</b></a> para imprimir o boleto novamente, se necessário.",
+        "fourth_paragraph": "{{course_name}}"
       },
       "confirmed": {
         "subject": "Seu pedido foi aprovado!",

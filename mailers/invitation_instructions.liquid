@@ -187,36 +187,26 @@
                                 <td role="module-content" valign="top" height="100%"
                                     style="padding: 25px 20px 0px 20px;" bgcolor="#ffffff">
                                   <div><h5
-                                      style="color: inherit; font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; padding-top: 20px; margin-top: 0px; margin-bottom: 10px; line-height: 1.3; word-wrap: normal; font-weight: normal; font-size: 20px; background-color: rgb(254, 254, 254);">{{ 'mailer.hello' | t: first_name: resource.first_name }}</h5>
+                                      style="color: #014df0; font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; padding-top: 20px; margin-top: 0px; margin-bottom: 10px; line-height: 1.3; word-wrap: normal; font-weight: normal; font-size: 20px; background-color: rgb(254, 254, 254);">
+                                      {{ 'mailer.hello' | t: first_name: resource.first_name }} </h5>
                                     <p class="lead"
-                                       style="font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; font-weight: normal; padding-bottom: 10px; font-size: 14px; color: rgb(10, 10, 10); line-height: 1.6; background-color: rgb(254, 254, 254);">{{ instructions | append: 'someone_invited_you' | t: school: school.name }}</p>
+                                       style="font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; font-weight: normal; padding-bottom: 10px; font-size: 14px; color: rgb(10, 10, 10); line-height: 1.6; background-color: rgb(254, 254, 254);">
+                                       Temos uma ótima notícia para você. Estamos fazendo uma <strong>reformulação completa do nosso sistema de educação digital</strong>. 
+                                      </p>
+                                      <p class="lead"
+                                      style="font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; font-weight: normal; padding-bottom: 10px; font-size: 14px; color: rgb(10, 10, 10); line-height: 1.6; background-color: rgb(254, 254, 254);">Agora vamos conseguir acompanhar o seu aprendizado mais de perto, você vai ganhar mais velocidade na conexão, uma interface mais intuitiva e acessar várias outras melhorias.</p>
                                   </div>
                                 </td>
                               </tr>
-                            </table>
-                            {% if school_products.size > 0 %}
-                              <table class="module" role="module" data-type="text" border="0" cellpadding="0"
-                                     cellspacing="0" width="100%" style="table-layout: fixed;"
-                                     data-attributes='%7B%22dropped%22%3Atrue%2C%22child%22%3Afalse%2C%22padding%22%3A%2225%2C20%2C20%2C0%22%2C%22containerbackground%22%3A%22%23ffffff%22%7D'>
-                                <tr>
-                                  <td role="module-content" valign="top" height="100%"
-                                      style="padding: 0px 20px 10px 20px;" bgcolor="#ffffff">
-                                    <div>
-                                      <p>{{ 'mailer.enrollment_notification.you_have_been_enrolled' | t }}</p></div>
-                                  </td>
-                                </tr>
-                              </table>
-                            {% endif %}
-
-                            <table class="module" role="module" data-type="wysiwyg" border="0" cellpadding="0"
-                                   cellspacing="0" width="100%" style="table-layout: fixed;"
-                                   data-attributes='%7B%22dropped%22%3Atrue%2C%22padding%22%3A%2215%2C15%2C15%2C15%22%2C%22containerbackground%22%3A%22%23ffffff%22%7D'>
                               <tr>
-                                <td role="module-content" style="padding: 15px 15px 15px 15px;" bgcolor="#ffffff">
-                                  <ul> {% for school_product in school_products %}
-                                      <li><span style="color:#000000;"><span
-                                          style="font-size:18px;">{{ school_product.title }}</span></span>
-                                      </li> {% endfor %}</ul>
+                                <td role="module-content" valign="top" height="100%"
+                                    style="padding: 25px 20px 0px 20px;" bgcolor="#ffffff">
+                                  <div>
+                                    <p class="lead"
+                                       style="font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; font-weight: normal; padding-bottom: 10px; font-size: 14px; color: rgb(10, 10, 10); line-height: 1.6; background-color: rgb(254, 254, 254);">
+                                       Para completar essa mudança, precisamos de uma pequena ajuda sua. <strong>Você deve trocar a sua senha acessando no botão abaixo</strong>. 
+                                      </p>
+                                  </div>
                                 </td>
                               </tr>
                             </table>
@@ -227,7 +217,7 @@
                                 <td role="module-content" valign="top" height="100%"
                                     style="padding: 20px 0px 40px 20px;" bgcolor="#ffffff">
                                   <div style="text-align: left;"><span
-                                      style="color: rgb(10, 10, 10); font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-align: left; background-color: rgb(254, 254, 254);">{{ instructions | append: 'accept_instructions' | t }}</span>
+                                      style="color: rgb(10, 10, 10); font-family: Helvetica, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant: normal; font-weight: normal; line-height: normal; text-align: left; background-color: rgb(254, 254, 254);">{{ instructions | append: 'accept_instructions' | 'Redefir a senha' }}</span>
                                   </div>
                                 </td>
                               </tr>
@@ -247,6 +237,21 @@
                                       </td>
                                     </tr>
                                   </table>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td role="module-content" valign="top" height="100%"
+                                    style="padding: 25px 20px 0px 20px;" bgcolor="#ffffff">
+                                  <div>
+                                    <p class="lead"
+                                       style="font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; font-weight: normal; padding-bottom: 10px; font-size: 14px; color: rgb(10, 10, 10); line-height: 1.6; background-color: rgb(254, 254, 254);">
+                                       Queremos agradecer você por estar com a gente desde o início e esperamos que tenha uma experiência ainda melhor na Exame Academy. <strong>Aguarde, em breve, vai ter muito mais novidade chegando</strong>.
+                                    </p>
+                                    <p class="lead"
+                                    style="font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; font-weight: bold; padding-bottom: 10px; font-size: 14px; color: rgb(10, 10, 10); line-height: 1.6; background-color: rgb(254, 254, 254);">Bom aprendizado!</p>
+                                    <p class="lead"
+                                    style="font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; font-weight: bold; padding-bottom: 10px; font-size: 14px; color: rgb(10, 10, 10); line-height: 1.6; background-color: rgb(254, 254, 254);">Equipe Exame Academy</p>
+                                  </div>
                                 </td>
                               </tr>
                             </table>

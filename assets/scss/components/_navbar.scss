@@ -294,6 +294,22 @@
       border-bottom: 4px solid #0c3cf8;
     }
   }
+  .nav-home-free {
+    margin-top: 19px;
+    margin-left: 10px!important;
+    padding: 6px;
+    border: 2px solid #0c3cf8;
+    border-radius: 5px;
+    background-color: #0c3cf8;
+    color: #fff!important;
+    font-weight: 600;
+    &:hover,
+    &:focus {
+      background-color: #fff;
+      color: #0c3cf8!important;
+    }
+  }
+
   @media (max-width: $grid-float-breakpoint-max) {
     // Dropdowns get custom display when collapsed
     .open .dropdown-menu {

@@ -39,6 +39,12 @@
 </li>
 
 {% if current_user.type == 'Student' %}
+<li class="{% if mobile_class == true %}mobile{% endif %}">
+  <a href="/orders">
+    <i class="icon-graduation"></i>
+    <span>{{ 'navbar.my_certificates' | t }}</span>
+  </a>
+</li>
   <li class="{% if mobile_class == true %}mobile{% endif %}">
     <a href="/orders">
       <i class="icon-list"></i>
