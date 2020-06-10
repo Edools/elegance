@@ -1,0 +1,11 @@
+
+{% comment %}
+  Este snippet é usado pelo controller Tms::NotificationsController para montar a
+  paginação remota.
+
+  Não deve conter nada fora do "for"!
+{% endcomment %}
+
+{% for notification in notifications %}
+  </br>Notification:{{ notification }}
+{% endfor %}
