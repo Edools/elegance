@@ -41,6 +41,8 @@ $home-header-background: {{ settings.style.home.header_bg | default: '#ffffff' }
 $home-header-text-color: {{ settings.style.home.header_text_color | default: 'inherit' }};
 $home-header-background-image: "{{ settings.style.home.header_background_image | default: '' }}";
 
+/* Home Page Slide */
+$home-benefits-icon-color: {{ settings.style.home.benefits.color_icon | default: '#0c3cf8' }};
 
 /* Home Page benefits */
 $home-benefits-icon-color: {{ settings.style.home.benefits.color_icon | default: '#0c3cf8' }};
@@ -317,7 +319,16 @@ header.navbar {
       color: $home-header-text-color;
     }
   }
+  .home-slider {
+    &:after {
+      background-color: rgba({{ settings.home.slider.configuration.filter.color | default: 'inherit' }}, {{ settings.home.slider.configuration.filter.opacity | default: 'inherit' }});
+    }
 
+    .slider-button {
+      
+    }
+    
+  }
   .home-benefits {
     .media {
       .benefits-icon {

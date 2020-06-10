@@ -596,72 +596,87 @@
     ]
   },
   {
-    "name": "Header",
-    "icon" : "home",
+    "name": "Carrossel (Home Page)",
     "id": "4",
+    "icon" : "home",
     "settings": [
       {
-        "template": "<h3>Header</h3>"
+        "template": "<h3>Sliders</h3>"
       },
       {
-        "key": "style.home.header_bg",
-        "type": "color",
+        "type": "repeatSection",
+        "key": "home.slider.sliders",
         "templateOptions": {
-          "label": "Cor de Fundo"
-        }
-      },
-      {
-        "key": "style.home.header_text_color",
-        "type": "color",
-        "templateOptions": {
-          "label": "Cor do texto"
-        }
-      },
-      {
-        "template": "<br>"
-      },
-      {
-        "key": "style.home.header_background_image",
-        "type": "input",
-        "templateOptions": {
-          "label": "Imagem de fundo",
-          "placeholder": "ex: https://host.com/header.jpg"
-        }
-      },
-      {
-        "key": "view.home.header.title",
-        "type": "input",
-        "templateOptions": {
-          "label": "Título",
-          "placeholder": "ex: Elegance Theme"
-        }
-      },
-      {
-        "key": "view.home.header.subtitle",
-        "type": "textarea",
-        "templateOptions": {
-          "label": "Subtítulo",
-          "rows": 5,
-          "placeholder": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lectus, pretium quis lobortis sollicitudin, viverra eget lacus. Curabitur vitae hendrerit ex, id iaculis tellus"
-        }
-      },
-      {
-        "key": "view.home.header.cover_src",
-        "type": "input",
-        "templateOptions": {
-          "label": "Cole a URL da imagem ou o código do iframe do vídeo.",
-          "placeholder": "ex: https://host.com/capa.png"
-        }
-      },
-      {
-        "key": "view.home.header.cover_src_image",
-        "type": "input",
-        "templateOptions": {
-          "label": "Caso tenha utilizado um vídeo acima, cole a URL de uma imagem para servir como thumbnail.",
-          "placeholder": "ex: https://host.com/capa.png"
+          "btnText": "Adicionar novo item ao carrossel",
+          "fields": [
+            {
+              "key": "image_url",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "Url da Imagem",
+                "required": true,
+                "rows": 6
+              }
+            },
+            {
+              "key": "text_color",
+              "type": "color",
+              "templateOptions": {
+                "label": "Cor da Fonte",
+                "required": true,
+                "rows": 6
+              }
+            },
+            {
+              "key": "title",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "Texto",
+                "required": true,
+                "rows": 4
+              }
+            },
+            {
+              "key": "subtitle",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "Subtexto",
+                "required": true,
+                "rows": 6
+              }
+            },
+            {
+              "key": "description",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "Descrição",
+                "required": true,
+                "rows": 10
+              }
+            },
+            {
+              "key": "slider_btn",
+              "type": "input",
+              "templateOptions": {
+                "label": "Título do botão",
+                "required": true
+              }
+            },
+            {
+              "key": "slider_btn_url",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "Url do botão",
+                "required": true,
+                "rows" : 2
+              }
+            },
+            {
+              "template": "<br>"
+            }
+          ]
         }
       }
-
     ]
   },
   {

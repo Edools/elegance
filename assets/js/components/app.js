@@ -118,6 +118,9 @@
       app.bindValidationCpf();
       app.randomQuizStatistics();
       app.bindCepService();
+      app.owlCarousel2();
+      app.carousel();
+      
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
     }

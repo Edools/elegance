@@ -1,0 +1,28 @@
+  <div class="home-slider-owl owl-carousel">
+  {% for slider in home_sliders %}
+    <div class="home-slider filter slider-item-{{forloop.index}}">
+      <style>
+        .home-slider.slider-item-{{forloop.index}}:after {
+          background-image: url('{{slider.image_url}}');
+        }
+
+        .slider-item-{{forloop.index}} .slider-title,
+        .slider-item-{{forloop.index}} .slider-subtitle,
+        .slider-item-{{forloop.index}} .slider-description {
+          color: {{slider.text_color}};
+        }
+      </style>        
+        <div class="">      
+          <h2 class="slider-title">{{slider.title}}</h2>
+          <p class="slider-subtitle">{{slider.subtitle}}</p>
+          <p class="slider-description">{{slider.description}}</p>
+          <p class="text-center">           <a type="button" class="btn btn-more" href="{{ slider.slider_btn_url }}">
+            {{slider.slider_btn}}
+          </a></p>
+
+        </div>        
+    </div>
+  {% endfor %}
+  </div>
+
+
