@@ -276,13 +276,8 @@
       bottom: 10px;
       left: 50%;
       transform: translateX(-50%) translateY(-50%);
-
-      @media (max-width: $screen-lg) {
-        top: 615px;
-      }
-
-      @media (max-width: $screen-md) {
-        top: 575px;
+      @media (min-width: $screen-md) {
+        bottom: -10px;
       }
 
       @media (max-width: $screen-sm) {
@@ -294,8 +289,8 @@
     .owl-dot {
       margin-right: 6px;
       padding: 0;
-      width: 16px;
-      height: 16px;
+      width: 10px;
+      height: 10px;
       border: 1px solid white;
       -webkit-border-radius: 50%;
          -moz-border-radius: 50%;
@@ -319,8 +314,12 @@
     height: 500px;
     transition: transform, 2s;
 
+    @media (min-width: $screen-md) {
+      height: 370px;
+    }
+
     @media (max-width: $screen-sm) {
-      height: 500px;
+      height: 370px;
     }
 
 
@@ -332,29 +331,22 @@
       width: 100%;
       height: 500px;
       background-size: contain;
-      background-repeat: round !important;
+      //background-repeat: round !important;
       content: '';
       transition: transform, 1s;
 
       background-blend-mode: multiply;
 
+      @media (max-width: $screen-md) {
+        height: 361px;
+      }
       @media (max-width: $screen-sm) {
-        height: 500px;
+        height: 90px;
         background-position: bottom;
         background-size: cover;
       }
     }
 
-    &:hover {
-      &:after {
-        //transition: transform, 2s;
-        //transform: scale(1.2);
-      }
-    }
-
-    &.filter {
-      //background-blend-mode: multiply;
-    }
 
     .slider-title {
       margin: 0 auto;
@@ -416,6 +408,7 @@
 
     .slider-description {
       margin: 0 auto;
+      margin-bottom: 15px;
       padding-top: 100px;
       width: 65%;
       text-align: center;
@@ -631,7 +624,112 @@
       }
     }
   }
+  .home-testimonials {
+    .home-testimonials-carousel {
+      display: flex;
+      margin-top: 10px;
+      margin-bottom: 10px;
 
+      flex-wrap: wrap;
+      align-content: center;
+      justify-content: center;
+
+      @media (max-width: $screen-xs) {
+        padding: 20px 10%;
+      }
+
+      .owl-dots {
+        display: flex;
+        margin-top: 30px;
+
+        align-items: center;
+        justify-content: center;
+
+
+        &.disabled {
+          display: none;
+        }
+
+        .owl-dot {
+          margin-right: 6px;
+          padding: 0;
+          width: 16px;
+          height: 16px;
+          border: 1px solid white;
+          -webkit-border-radius: 50%;
+             -moz-border-radius: 50%;
+                  border-radius: 50%;
+          background-color: transparent;
+          box-shadow: none;
+          box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+
+
+          &.active {
+            border: 1px solid white;
+            background-color: $brand-primary;
+            box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+          }
+        }
+      }
+      .owl-stage {
+        width: 1790px!important;
+      }
+      .owl-nav {
+        display: none;
+      }
+      .owl-item {
+        margin-right: 44px!important;
+        width: 360px !important;
+      }
+    }
+    .testimonial-item {
+      width: 100%;
+      text-align: center;
+
+      .testimonial-item-name {
+        margin-top: 15px;
+        margin-bottom: 5px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 24px;
+      }
+      .testimonial-item-name-title {
+        margin-top: 15px;
+        margin-bottom: 5px;
+        color: $brand-primary;
+        text-align: center;
+        font-size: 16px;
+        line-height: 24px;
+      }
+      .testimonial-item-description {
+        margin-top: 10px;
+        text-align: justify;
+        font-weight: 300;
+        font-size: 16px;
+      }
+    }
+    .quotation-mark {
+      position: relative;
+      margin: 0 auto;
+      width: 100%;
+      width: 130px;
+      height: 130px;
+      img {
+        width: 130px;
+        height: 100%;
+        border-radius: 50%;
+
+        object-fit: cover;
+      }
+      span {
+        position: absolute;
+        top: -30px;
+        left: 12px;
+        font-size: 130px;
+      }
+    }
+  }
   .home-categories {
     .home-category {
       .product-list {
@@ -690,24 +788,7 @@
     }
   }
 }
-.home-testimonial {
-  margin-top: 2vw;
-  margin-bottom: 3.5vw;
-  padding-bottom: $padding-base-vertical * 4;
-  .fa-star {
-    color: #f9bc03;
-  }
-  .testimonial-name {
-    font-weight: bold;
-  }
-  .testimonial-description {
-    color: $brand-primary;
-    font-weight: 500;
-  }
-  .indicators-testimonial {
-    bottom: -41px;
-  }
-}
+
 .home-newsletter {
   margin-top: 2vw;
   margin-top: 1vw;

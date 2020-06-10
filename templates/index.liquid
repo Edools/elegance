@@ -44,66 +44,15 @@
       {% include 'product/list-product-home', products: products, gateway: gateway %}
     </div>
   </div>
-<div class="home-testimonial">
-  <div class="container">
-    <h2 class="title title-seccao">Depoimentos</h2>
-    <div class="row row-depoimento">
-      <div id="CarouselDepoimentos" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators indicators-testimonial">
-          <li data-target="#CarouselDepoimentos" data-slide-to="0" class="active"></li>
-          <li data-target="#CarouselDepoimentos" data-slide-to="1"></li>
-          <li data-target="#CarouselDepoimentos" data-slide-to="2"></li>
-        </ol>
-      <div class="row">
-                   <!-- Wrapper for slides -->
-                   <div class="carousel-inner">
-                    <div class="item active">
-                        <div class="col-sm-6 col-md-4 text-center">
-        <img src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fa902afb3744fc9549c8ed446f164bd2d%2Fuser+1.png" alt="">
-        <ul class="list-inline">
-          <li><i class="fa fa-star"></i></li>
-          <li><i class="fa fa-star"></i></li>
-          <li><i class="fa fa-star"></i></li>
-          <li><i class="fa fa-star"></i></li>
-          <li><i class="fa fa-star"></i></li>
-        </ul>
-        <p class="testimonial-name">Lorem Ipsum</p>
-        <p class="testimonial-description">Lorem ipsum dolor sit amet</p>
-        <p class="testimonial-text text-justify">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet"</p>
-      </div>  
-      <div class="col-sm-6 col-md-4 text-center">
-        <img src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fa902afb3744fc9549c8ed446f164bd2d%2Fuser+1.png" alt="">
-        <ul class="list-inline">
-          <li><i class="fa fa-star"></i></li>
-          <li><i class="fa fa-star"></i></li>
-          <li><i class="fa fa-star"></i></li>
-          <li><i class="fa fa-star"></i></li>
-          <li><i class="fa fa-star"></i></li>
-        </ul>
-        <p class="testimonial-name">Lorem Ipsum</p>
-        <p class="testimonial-description">Lorem ipsum dolor sit amet</p>
-        <p class="testimonial-text text-justify">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet"</p>
-      </div> 
-      <div class="col-sm-6 col-md-4 text-center">
-        <img src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fa902afb3744fc9549c8ed446f164bd2d%2Fuser+1.png" alt="">
-        <ul class="list-inline">
-          <li><i class="fa fa-star"></i></li>
-          <li><i class="fa fa-star"></i></li>
-          <li><i class="fa fa-star"></i></li>
-          <li><i class="fa fa-star"></i></li>
-          <li><i class="fa fa-star"></i></li>
-        </ul>
-        <p class="testimonial-name">Lorem Ipsum</p>
-        <p class="testimonial-description">Lorem ipsum dolor sit amet</p>
-        <p class="testimonial-text text-justify">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultricies ut elit sit amet"</p>
-      </div> 
-     </div>
-    </div>
-      </div>
+  <div class="home-testimonial">
+    <div class="container">
+      <h2 class="title title-seccao">Depoimentos</h2>
+     
+      <div class="row row-depoimento">
+        {% include 'home/home-testimonials', home_testimonials: settings.home.home_testimonials %}
+  
       </div>
     </div>
   </div>
-</div>
 {% include 'newsletter' %}
  </div>

@@ -1,0 +1,18 @@
+{% if home_testimonials.enabled %}
+    <div class="home-testimonials">
+        <div class="container-testimonials">
+            <div class="owl-carousel owl-theme home-testimonials-carousel">
+                {% for testimonial in home_testimonials.testimonials %}
+                <div class="testimonial-item">
+                    <div class="quotation-mark">
+                        <img src="{{testimonial.image_url}}" ></img>
+                    </div>
+                    <p class="testimonial-item-name">{{ testimonial.name}}</p>
+                    <p class="testimonial-item-name-title">{{ testimonial.title }}</p>
+                    <p class="testimonial-item-description">{{ testimonial.content }}</p>
+                </div>
+                {% endfor %}
+            </div> 
+        </div>
+    </div>
+{% endif %}

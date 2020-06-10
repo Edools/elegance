@@ -32,7 +32,9 @@
         //background-color: rgba(255, 255, 255, 0.2);
         display: inline-block;
         margin: 0 5px;
-        //@include transition(background-color .2s ease);
+        @include transition(background-color .2s ease);
+        background-color: white;
+        box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
 
         &.active {
           background-color: $brand-primary;
@@ -140,9 +142,6 @@
   // animation if you trip this while in the middle of another animation.
 
   // Set gradients for backgrounds
-  &.left {
-   
-  }
   &.right {
     left: auto;
     right: 0;

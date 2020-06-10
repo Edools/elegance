@@ -596,7 +596,7 @@
     ]
   },
   {
-    "name": "Carrossel (Home Page)",
+    "name": "Carrossel Banner (Home Page)",
     "id": "4",
     "icon" : "home",
     "settings": [
@@ -771,91 +771,73 @@
           "rows" : 10
         }
       },
-      {
-        "key": "view.home.video",
-        "type": "textarea",
-        "templateOptions": {
-          "label": "Url do Video",
-          "rows" : 1
-        }
-      }
-      
     ]
   },
   {
-    "name": "Apresentação",
-    "icon" : "home",
+    "name": "Depoimentos (Home Page)",
     "id": "7",
+    "icon" : "home",
     "settings": [
       {
-        "template": "<h3>Sobre</h3>"
+        "template": "<h3>Seção de Depoimentos</h3>"
       },
       {
-        "key": "view.home.footer.title",
-        "type": "textarea",
-        "templateOptions": {
-          "label": "Título",
-          "rows" : 3
-        }
+        "template": "<p>Essa seção pode ser habilitada/desabilitada do layout na opção abaixo:</p><br>"
       },
       {
-        "key": "view.home.footer.text",
-        "type": "textarea",
-        "templateOptions": {
-          "label": "Texto",
-          "rows": 5
-        }
-      },
-      {
-        "template": "<h3>Redes Sociais</h3>"
-      },
-      {
-        "key": "view.home.footer.social_facebook_link",
+        "key": "home.home_testimonials.enabled",
         "type": "checkbox",
         "templateOptions": {
-          "label": "Facebook"
+          "label": "Habilitar Seção"
         }
       },
       {
-        "key": "view.home.footer.social_twitter_link",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "Twitter"
-        }
+        "template": "<h3>Depoimentos</h3>"
       },
       {
-        "key": "view.home.footer.social_pinterest_link",
-        "type": "checkbox",
+        "type": "repeatSection",
+        "key": "home.home_testimonials.testimonials",
         "templateOptions": {
-          "label": "Pinterest"
-        }
-      },
-      {
-        "key": "view.home.footer.social_google_plus_link",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "Google+"
-        }
-      },
-      {
-        "key": "view.home.footer.social_instagram_link",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "Instagram"
-        }
-      },
-      {
-        "key": "view.home.footer.social_youtube_link",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "Youtube"
-        }
-      },
-      {
-        "key": "view.home.footer.social_linkedin_link",
-        "type": "checkbox",
-        "templateOptions": {
-          "label": "LinkedIn"
+          "btnText": "Adicionar novo item ao carrossel",
+          "fields": [
+            {
+              "key": "image_url",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "Url da Imagem",
+                "required": true,
+                "rows": 6
+              }
+            },
+            {
+              "key": "name",
+              "type": "input",
+              "templateOptions": {
+                "label": "Nome",
+                "required": true
+              }
+            },
+            {
+              "key": "title",
+              "type": "input",
+              "templateOptions": {
+                "label": "Título",
+                "required": true
+              }
+            },
+            {
+              "key": "content",
+              "type": "textarea",
+              "templateOptions": {
+                "label": "Conteúdo",
+                "required": true,
+                "rows": 6
+              }
+            },
+            {
+              "template": "<br>"
+            }
+          ]
         }
       }
     ]
