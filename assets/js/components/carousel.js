@@ -9,7 +9,7 @@
         mouseDrag: false,
         margin:10,
         nav:true,
-        autoplay:false,
+        autoplay:true,
         autoplayTimeout:8000,
         responsive:{
           0 :{
