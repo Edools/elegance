@@ -10,6 +10,7 @@
         mouseDrag: false,
         margin:10,
         nav:true,
+        navText : ['<i class="fas fa-angle-left"></i>','<i class="fas fa-angle-right"></i>'],
         autoplay:true,
         autoplayTimeout:8000,
         responsive:{
@@ -31,9 +32,13 @@
 
       homeTestimonials.owlCarousel({
        
+        dots: true,
+        mouseDrag: false,
         margin:10,
         nav:true,
-        dots:true,
+        navText : ['<i class="fas fa-angle-left"></i>','<i class="fas fa-angle-right"></i>'],
+        autoplay:true,
+        autoplayTimeout:8000,
         
         responsive:{
             0:{
@@ -46,7 +51,6 @@
                 items:3
             }
         },
-        dots: true
       });
 
       var teachersSlider = $('.more-items');
