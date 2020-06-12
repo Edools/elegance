@@ -325,6 +325,7 @@
         text-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
         font-size: 56px;
       }
+
       @media (max-width: $screen-sm-min) {
         .owl-prev {
           margin-top: 55vw;
@@ -339,7 +340,7 @@
   .home-slider {
     position: relative;
     z-index: 10;
-    height: 500px;
+    height: 529px;
     transition: transform, 2s;
     @media (min-width: $screen-lg) {
       height: 600px;
@@ -652,7 +653,9 @@
     }
   }
   .home-testimonials {
+    margin-bottom: 50px;
     .home-testimonials-carousel {
+      position: relative;
       display: flex;
       margin-top: 10px;
       margin-bottom: 10px;
@@ -664,10 +667,10 @@
       @media (max-width: $screen-xs) {
         padding: 20px 10%;
       }
-
       .owl-dots {
+        position: absolute;
         display: flex;
-        margin-top: 30px;
+        margin-top: 380px;
 
         align-items: center;
         justify-content: center;
@@ -698,31 +701,35 @@
           }
         }
       }
-      .owl-stage {
-        width: 1790px!important;
+      @media screen and (max-width: $screen-md-min) {
+        .owl-dot {
+          margin-top: 50px;
+        }
       }
+    }
+    .owl-nav {
+      position: relative;
+      margin-top: -250px;
+      .owl-prev {
+        margin-right: 540px;
+        border: transparent;
+        background-color: transparent;
+        color: $brand-primary;
+        text-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+        font-size: 56px;
+      }
+      .owl-next {
+        margin-left: 540px;
+        border: transparent;
+        background-color: transparent;
+        color: $brand-primary;
+        text-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+        font-size: 56px;
+      }
+    }
+    @media screen and (max-width: $screen-md-min) {
       .owl-nav {
-        position: inherit;
-        .owl-prev {
-          float: left;
-          border: transparent;
-          background-color: transparent;
-          color: black;
-          text-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
-          font-size: 56px;
-        }
-        .owl-next {
-          float: right;
-          border: transparent;
-          background-color: transparent;
-          color: black;
-          text-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
-          font-size: 56px;
-        }
-      }
-      .owl-item {
-        margin-right: 44px!important;
-        width: 360px !important;
+        display: none;
       }
     }
     .testimonial-item {

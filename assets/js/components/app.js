@@ -118,7 +118,6 @@
       app.bindValidationCpf();
       app.randomQuizStatistics();
       app.bindCepService();
-      app.owlCarousel2();
       app.carousel();
       
 

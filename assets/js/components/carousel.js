@@ -13,6 +13,9 @@
         navText : ['<i class="fas fa-angle-left"></i>','<i class="fas fa-angle-right"></i>'],
         autoplay:true,
         autoplayTimeout:8000,
+        responsiveClass: true,
+        animateOut: 'fadeOut',
+        animateIn: 'fadeIn',
         responsive:{
           0 :{
             items:1
@@ -33,11 +36,13 @@
       homeTestimonials.owlCarousel({
        
         dots: true,
-        margin:10,
+        mouseDrag: false,
+        margin:40,
         nav:true,
         navText : ['<i class="fas fa-angle-left"></i>','<i class="fas fa-angle-right"></i>'],
         autoplay:true,
         autoplayTimeout:8000,
+        responsiveClass: true,
         
         responsive:{
             0:{
@@ -46,7 +51,7 @@
             600:{
                 items:1
             },
-            992:{
+            1000:{
                 items:3
             }
         },
