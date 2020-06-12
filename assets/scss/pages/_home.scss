@@ -278,15 +278,11 @@
     padding-bottom: 40px;
     .owl-dots {
       position: absolute;
-      bottom: -5px;
+      bottom: 35px;
       left: 50%;
       transform: translateX(-50%) translateY(-50%);
-      @media (min-width: $screen-md) {
-      }
-
       @media (max-width: $screen-sm) {
-        top: unset;
-        bottom: 20px;
+        bottom: 65px;
       }
     }
 
@@ -308,11 +304,9 @@
     }
     .owl-nav {
       position: inherit;
-      margin-top: -450px;
-      height: 400px;
       .owl-prev {
         float: left;
-        margin-top: 15vw;
+        margin-top: -235px;
         border: transparent;
         background-color: transparent;
         color: white;
@@ -321,29 +315,12 @@
       }
       .owl-next {
         float: right;
-        margin-top: 15vw;
+        margin-top: -235px;
         border: transparent;
         background-color: transparent;
         color: white;
         text-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
         font-size: 56px;
-      }
-
-      @media (min-width: 374px) {
-        .owl-prev {
-          margin-top: 55vw;
-        }
-        .owl-next {
-          margin-top: 55vw;
-        }
-      }
-      @media(max-width: 768px) {
-        .owl-prev {
-          margin-top: 25vw;
-        }
-        .owl-next {
-          margin-top: 25vw;
-        }
       }
     }
   }
@@ -369,7 +346,7 @@
       left: 0;
       z-index: -1;
       width: 100%;
-      height: 500px;
+      height: 400px;
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
@@ -685,7 +662,9 @@
 
         align-items: center;
         justify-content: center;
-
+        @media (max-width: $screen-sm) {
+          bottom: -15px;
+        }
 
         &.disabled {
           display: none;
@@ -710,6 +689,11 @@
             background-color: $brand-primary;
             box-shadow: 5px 5px 5px rgba(0,0,0,.5);
           }
+        }
+      }
+      @media (max-width: 768px) {
+        .owl-dot {
+          margin-top: 50px;
         }
       }
       @media screen and (max-width: $screen-md-min) {

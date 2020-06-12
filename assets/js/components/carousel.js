@@ -14,8 +14,6 @@
         autoplay:true,
         autoplayTimeout:8000,
         responsiveClass: true,
-        animateOut: 'fadeOut',
-        animateIn: 'fadeIn',
         responsive:{
           0 :{
             items:1
