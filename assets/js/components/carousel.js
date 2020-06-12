@@ -33,7 +33,6 @@
       homeTestimonials.owlCarousel({
        
         dots: true,
-        mouseDrag: false,
         margin:10,
         nav:true,
         navText : ['<i class="fas fa-angle-left"></i>','<i class="fas fa-angle-right"></i>'],

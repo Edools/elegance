@@ -1,7 +1,7 @@
   <div class="home-slider-owl owl-carousel">
   {% for slider in home_sliders %}
   <a href="{{ slider.slider_btn_url }}">
-    <div class="home-slider slider-item-{{forloop.index}}">
+    <div class="home-slider filter slider-item-{{forloop.index}}">
       <style>
         .home-slider.slider-item-{{forloop.index}}:after {
           background-image: url('{{slider.image_url}}');
