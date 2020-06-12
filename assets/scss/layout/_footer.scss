@@ -16,10 +16,15 @@
     .logo {
       margin-top: 10px;
       margin-bottom: $padding-large-vertical;
-      width: 200px;
+      width: 170px;
+
+      img {
+        margin-bottom: 5px;
+        width: 160px;
+      }
     }
     .fab {
-      margin: 8px;
+      margin: 6px;
       color: white;
     }
     .description {

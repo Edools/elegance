@@ -11,6 +11,7 @@
         margin:10,
         nav:true,
         autoplay:true,
+        navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
         autoplayTimeout:8000,
         responsive:{
           0 :{
