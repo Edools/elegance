@@ -1,3 +1,6 @@
+* {
+  outline: none;
+}
 .home-page {
   padding: 0;
 
@@ -326,12 +329,20 @@
         font-size: 56px;
       }
 
-      @media (max-width: $screen-sm-min) {
+      @media (min-width: 374px) {
         .owl-prev {
           margin-top: 55vw;
         }
         .owl-next {
           margin-top: 55vw;
+        }
+      }
+      @media(max-width: 768px) {
+        .owl-prev {
+          margin-top: 25vw;
+        }
+        .owl-next {
+          margin-top: 25vw;
         }
       }
     }
