@@ -9,6 +9,14 @@
 <html class="no-js"> <!--<![endif]-->
 
 <head>
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MZTJKPT');</script>
+  <!-- End Google Tag Manager -->
+
   <!-- Basic page needs ================================================== -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -79,6 +87,9 @@
 </head>
 
 <body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% elsif current_path == '/chat' %}chat-page{% endif %}" onselectstart="return false" >
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MZTJKPT"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="content-wrapper">
     {% include 'accessibility-menu' %}
     {% if current_path != '/express_checkout/payment' and current_path != '/express_checkout/success'  %}
