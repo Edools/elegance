@@ -6,6 +6,10 @@
       <input type="hidden" id="lesson_id" name="lesson_id" value="{{ current_lesson_id }}">
       <input type="hidden" id="js_note_id" name="note_id" value="">
 
+      <div style="display: none;">
+        <textarea id="js-editor" class="js-ckeditor" rows="10" cols="80" title="" style="visibility: hidden; display: none;"></textarea>
+      </div>
+
       <div class="note-container">
         <div id="js-note" class="note" rows="10" cols="80" contenteditable="true" name="note[note]" title=""></div>
       </div>
