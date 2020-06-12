@@ -391,9 +391,7 @@
       cursor: pointer;
       pointer-events: all;
       pointer-events: all;
-      @media(max-width: 768px) {
-        display: none;
-      }
+
       a {
         i {
           font-size: 25px;

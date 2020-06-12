@@ -694,7 +694,7 @@
               "key": "title",
               "type": "textarea",
               "templateOptions": {
-                "label": "Texto",
+                "label": "Título",
                 "required": true,
                 "rows": 4
               }
@@ -703,7 +703,7 @@
               "key": "subtitle",
               "type": "textarea",
               "templateOptions": {
-                "label": "Subtexto",
+                "label": "Sub título",
                 "required": true,
                 "rows": 6
               }
