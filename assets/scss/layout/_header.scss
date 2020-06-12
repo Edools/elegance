@@ -1,8 +1,11 @@
 header.navbar {
+  position: fixed;
   margin: 0;
+  width: 100%;
   border: none;
   border-top: 5px solid #0c3cf8;
   background-color: $light;
+  box-shadow: 0 3px 6px rgba(0,0,0,.16);
 
   .navbar-brand {
     display: block;

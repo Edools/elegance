@@ -1,5 +1,6 @@
   <div class="home-slider-owl owl-carousel">
   {% for slider in home_sliders %}
+  <a href="{{ slider.slider_btn_url }}">
     <div class="home-slider filter slider-item-{{forloop.index}}">
       <style>
         .home-slider.slider-item-{{forloop.index}}:after {
@@ -16,13 +17,8 @@
           <h2 class="slider-title">{{slider.title}}</h2>
           <p class="slider-subtitle">{{slider.subtitle}}</p>
           <p class="slider-description">{{slider.description}}</p>
-          <p class="text-center">           <a type="button" class="btn btn-more" href="{{ slider.slider_btn_url }}">
-            {{slider.slider_btn}}
-          </a></p>
-
         </div>        
     </div>
-  {% endfor %}
+  </a>
+{% endfor %}
   </div>
-
-

@@ -6,12 +6,11 @@
       var homeSlider = $('.home-slider-owl');
 
       homeSlider.owlCarousel({
-        loop:true,
+        dots: true,
         mouseDrag: false,
         margin:10,
         nav:true,
         autoplay:true,
-        navText : ['<i class="fa fa-angle-left" aria-hidden="true"></i>','<i class="fa fa-angle-right" aria-hidden="true"></i>'],
         autoplayTimeout:8000,
         responsive:{
           0 :{
@@ -34,6 +33,7 @@
        
         margin:10,
         nav:true,
+        dots:true,
         
         responsive:{
             0:{
