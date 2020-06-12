@@ -6,6 +6,7 @@
       var homeSlider = $('.home-slider-owl');
 
       homeSlider.owlCarousel({
+        loop:true,
         mouseDrag: false,
         margin:10,
         nav:true,
@@ -29,7 +30,7 @@
       var homeTestimonials = $('.home-testimonials-carousel');
 
       homeTestimonials.owlCarousel({
-        loop:false,
+       
         margin:10,
         nav:true,
         
