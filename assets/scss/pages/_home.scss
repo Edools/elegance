@@ -41,43 +41,49 @@
   .home-slider-owl {
     .owl-dots {
       position: absolute;
-      top: 530px;
+      top: 85%;
       left: 50%;
       transform: translateX(-50%) translateY(-50%);
-
-      @media (max-width: $screen-lg) {
-        top: 615px;
-      }
-
-      @media (max-width: $screen-md) {
-        top: 575px;
-      }
-
       @media (max-width: $screen-sm) {
         top: unset;
-        bottom: 20px;
+        bottom: 2px;
       }
     }
 
     .owl-dot {
       margin-right: 6px;
       padding: 0;
-      width: 16px;
-      height: 16px;
+      width: 10px;
+      height: 10px;
       border: 1px solid white;
       -webkit-border-radius: 50%;
          -moz-border-radius: 50%;
               border-radius: 50%;
-      background-color: transparent;
-      box-shadow: none;
-
+      box-shadow: 5px 5px 5px rgba(0,0,0,.5);
       &.active {
-        background-color: white;
+        border: 1px solid white;
+        background-color: $brand-primary;
       }
     }
 
     .owl-nav {
-      display: none;
+      position: absolute;
+      top: 50%;
+      margin: 0 auto;
+      width: 100%;
+      color: white;
+      text-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
+      font-size: 26px;
+      .owl-prev {
+        float: left;
+        border: 0 transparent;
+        background-color: transparent;
+      }
+      .owl-next {
+        float: right;
+        border: 0 transparent;
+        background-color: transparent;
+      }
     }
   }
   .home-slider {

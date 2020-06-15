@@ -34,13 +34,7 @@
     </div>
   </div>
   <div class="home-testimonial">
-    <div class="container">
-      <h2 class="title title-seccao">Depoimentos</h2>
-     
-      <div class="row row-depoimento">
-        {% include 'home/home-testimonials', home_testimonials: settings.home.home_testimonials %}
-  
-      </div>
+    {% include 'home/home-testimonials', home_testimonials: settings.home.home_testimonials %}
     </div>
   </div>
 {% include 'newsletter' %}

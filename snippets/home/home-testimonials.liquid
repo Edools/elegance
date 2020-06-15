@@ -1,5 +1,9 @@
 {% if home_testimonials.enabled %}
-    <div class="home-testimonials">
+<div class="container">
+    <h2 class="title title-seccao">Depoimentos</h2>
+   
+    <div class="row row-depoimento">
+        <div class="home-testimonials">
             <div class="owl-carousel owl-theme home-testimonials-carousel">
                 {% for testimonial in home_testimonials.testimonials %}
                 <div class="testimonial-item">
@@ -13,4 +17,6 @@
                 {% endfor %}
             </div> 
     </div>
+  </div>
+</div>
 {% endif %}
