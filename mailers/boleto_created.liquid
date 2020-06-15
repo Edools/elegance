@@ -133,12 +133,12 @@
                                               {{ 'mailer.hello' | t: first_name: student.first_name }}
                                             </h5>
                                             <p class="lead" style="font-family: Helvetica, Arial, sans-serif; font-style: normal; font-variant: normal; font-weight: normal; padding-bottom: 10px; font-size: 14px; color: rgb(10, 10, 10); line-height: 1.6; background-color: rgb(254, 254, 254);">
-                                              {{ 'mailer.payment.boleto_created.first_paragraph' | t: school_name: school.name }}
+                                              Aqui está seu boleto para pagamento, {{first_name}}
                                             </p>
 
                                             <div style="background-color:#fce473;padding-top:12px;padding-bottom:12px;padding-right:12px;padding-left:12px;border-radius:3px;">
                                               <p style="font-size:15px;color:rgba(0, 0, 0, 0.5);margin-bottom:0px;font-family:Helvetica,Arial,sans-serif;font-weight:normal;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;margin-top:0;margin-right:0;margin-left:0;Margin:0;text-align:left;Margin-bottom:10px;line-height:1.6;">
-                                                {{ 'mailer.payment.boleto_created.second_paragraph' | t }}
+                                                Atenção: o pagamento pode levar até 3 dias úteis para ser confirmado.
                                               </p>
                                             </div>
                                           </div>

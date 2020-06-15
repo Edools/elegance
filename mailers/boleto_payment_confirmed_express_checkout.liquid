@@ -172,14 +172,14 @@
                                                 <tr>
                                                    <td align="center" style="font-size:0px;padding:15px 15px 2px 15px;word-break:break-word;">
                                                       <div style="font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:center;color:#262626;">
-                                                         <p><span style="font-size: 16px;"><strong><span style="font-family: helvetica, arial, sans-serif;">{{user.first_name}}, seu pagamento foi aprovado!</span></strong></span></p>
+                                                         <p><span style="font-size: 16px;"><strong><span style="font-family: helvetica, arial, sans-serif;">Seu pagamento foi aprovado!</span></strong></span></p>
                                                       </div>
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td align="left" style="font-size:0px;padding:0px 30px 20px 30px;word-break:break-word;">
                                                       <div style="font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:left;color:#262626;">
-                                                         <p style="text-align: center;"><span style="font-size: 14px;">Boas-not&iacute;cias! O seu boleto foi compensado e voc&ecirc; j&aacute; pode acessar e aproveitar o conte&uacute;do da {{ school.name }}.</span></p>
+                                                         <p style="text-align: center;"><span style="font-size: 14px;">Boas-not&iacute;cias {{user.first_name}}! Voc&ecirc; j&aacute; pode acessar e aproveitar o conte&uacute;do da {{ school.name }}.</span></p>
 
                                                          {% if user.invitation_token %}
                                                             <p style="text-align: center;font-weight:bold;"><span style="font-size: 14px;">Já, já, você receberá um e-mail para definir sua senha. Procure-o em sua caixa de entrada e comece agora mesmo!</p>
@@ -194,7 +194,7 @@
                                                             <tr>
                                                                <td align="center" bgcolor="#2cc3cc" role="presentation" style="border:0px solid #000;border-radius:4px;cursor:auto;mso-padding-alt:11px 32px 11px 32px;background:#2cc3cc;" valign="middle">
                                                                   <a href="{{ school_url | append: '/enrollments' }}" style="display:inline-block;background:#2cc3cc;color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:16px;font-weight:normal;line-height:100%;Margin:0;text-decoration:none;text-transform:none;padding:11px 32px 11px 32px;mso-padding-alt:0px;border-radius:4px;" target="_blank">
-                                                                     <div>Acessar meu produto</div>
+                                                                     <div>{{course_name}}</div>
                                                                   </a>
                                                                </td>
                                                             </tr>

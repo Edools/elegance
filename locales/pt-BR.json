@@ -1094,7 +1094,7 @@
         "fourth_paragraph": "{{course_name}}"
       },
       "confirmed": {
-        "subject": "Seu pedido foi aprovado!",
+        "subject": "Seu pagamento foi aprovado!",
         "first_paragraph": "O seu pedido na escola <strong>{{school_name}}</strong> foi aprovado! ✅",
         "second_paragraph": "Agora é só acessar e assistir os cursos.",
         "courses_link": "Acessar meus cursos",
