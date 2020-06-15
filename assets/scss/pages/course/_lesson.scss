@@ -81,7 +81,6 @@
 
       position: absolute;
       top: 80px;
-      //left: -100%;
       z-index: 1000;
       max-width: 100%;
       width: 100%;
@@ -492,5 +491,29 @@
     to {
       left: -590px;
     }
+  }
+}
+.document-row {
+  border: 1px solid #c4c4c4;
+  border-radius: 5px;
+  .link-download {
+    margin-top: .5em;
+    margin-bottom: .5em;
+    text-align: right;
+  }
+  .text-link-download {
+    text-align: left;
+  }
+  .document-title {
+    margin: 1em;
+    font-weight: bold;
+  }
+}
+@media screen and (max-width: $screen-md-min) {
+  .document-title {
+    text-align: center;
+  }
+  .link-download {
+    text-align: center !important;
   }
 }

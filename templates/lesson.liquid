@@ -99,13 +99,27 @@
 
           {% if lesson.media %}
             {% if lesson.contents.size > 1 %}
+         
               {% for content in lesson.contents %}
                 {% if track_lesson and content.id == lesson.media.id %}
                   {% assign trackeable_content = true %}
                 {% else %}
                   {% assign trackeable_content = false %}
                 {% endif %}
+                {% if content.type  == "Document" %}
+         
+                  <div class="row document-row">
+                    <div class="col-md-6 text-link-download">
+                      <p class="document-title"> {{ content.title }} </p>
+                    </div>
+                    <div class="col-md-6 link-download">
+                      <a class=" btn btn-primary" target="blank" href="{{ content.s3_file_url | replace: "https://edools-3-production.s3.amazonaws.com/", "https://static-cdn.myedools.com/" }}" download>Baixar arquivo
+                      </a>
+                    </div>
+                  </div>
 
+ 
+                {% else %}
                 <div id="content-{{content.id}}">
                   <div id="js-media-player"
                     class="media-player"
@@ -117,7 +131,8 @@
                       enrollment: enrollment, lesson_progress: lesson_progress,
                       course_content: course_content, course: course, media: content %}
                   </div>
-                </div>
+                </divss>
+                {% endif %}
               {% endfor %}
             {% else %}
               <div id="js-media-player"
