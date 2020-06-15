@@ -1,27 +1,33 @@
-<header class="main-header home-header">
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-  
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner">
-      <div class="item active">
-        <img  class="banner-home" src="https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F6f581a9f0203e52dd0e6abe0c8f30a81%2Fimage+33.png">
+<div class="header-carousel owl-theme owl-carousel">
+  {% for item in header.carousel %}
+      <div class="item" style="background-image: url('{{ item.image }}');">
+          <div class="container">
+              <div class="text-box">
+                  <h4 class="title">{{ item.title }}</h4>
+                  <p class="description">{{ item.description }}</p>
+              </div>
+          </div>
       </div>
-    </div>
-  
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-      <i class="fas fa-angle-left"></i>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-      <i class="fas fa-angle-right"></i>
-      <span class="sr-only">Next</span>
-    </a>
+  {% endfor %}
+</div>
+<div class="footer">
+  <div class="container">
+      <p class="title">{{ header.footer.text }}</p>
   </div>
-</header>
+</div>
+
+{% assign mobile_box = settings.view.home.header.footer.product_box %}
+{% if mobile_box.is_active %}
+  <div class="mobile-box">
+      <div class="header"></div>
+      <span class="product-text">{{ mobile_box.top_text }}</span>
+      <span class="product-featured-text">{{ mobile_box.middle_text }}</span>
+      <span class="product-text">{{ mobile_box.bottom_text }}</span>
+      {% if mobile_box.btn.is_active %}
+          <a href="{{ mobile_box.btn.url }}">
+              <button class="theme-btn product-btn">{{ mobile_box.btn.text }}</button>
+          </a>
+      {% endif %}
+  </div>
+{% endif %}
+</div>

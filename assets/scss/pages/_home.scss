@@ -38,259 +38,32 @@
     text-transform: uppercase;
     font-weight: 600;
   }
-
-  .home-header {
-    background-color: $light;
-    .fas {
-      color: white;
-      text-shadow: 5px 5px 5px rgba(0,0,0,.5);
-      font-size: 3vw;
-    }
-    .carousel-control {
-      top: 50%;
-    }
-    .row {
-      @include breakpoint(md) {
-        flex-direction: row;
-      }
-
-      display: flex;
-      flex-direction: column;
-
-      align-items: center;
-      justify-content: center;
-    }
-
-    .info {
-      color: $text-color;
-
-      .title {
-        margin-top: 0;
-        margin-bottom: $padding-large-vertical;
-        color: $text-color;
-        font-weight: 500;
-        font-size: 36px;
-      }
-
-      .subtitle {
-        font-size: 16px;
-      }
-    }
-
-    .image {
-      @include breakpoint(md) {
-        text-align: right;
-      }
-
-      img {
-        @include img-responsive();
-        @include breakpoint(md) {
-          margin-top: 0;
-        }
-
-        display: inline-block;
-        margin-top: $padding-large-vertical * 3;
-      }
-    }
-    .banner-home {
-      width: 100%;
-    }
-    @media screen and (max-width: $screen-md-min) {
-      .carousel-indicators {
-        bottom: -3vw;
-      }
-    }
-    .header-carousel {
-      .item {
-        position: relative;
-        max-height: calc(100vh - 45px);
-        height: 750px;
-        background-position: bottom center;
-        background-size: cover;
-        background-repeat: no-repeat;
-
-        @media (min-width: $screen-lg) {
-          background-position: bottom center;
-          background-size: cover;
-        }
-
-        @media (max-width: $screen-md) {
-          max-height: unset;
-          height: 620px;
-          background-position: bottom;
-          background-size: 100% auto;
-        }
-
-        @media (max-width: $screen-sm) {
-          height: 500px;
-          background-position: center 250px;
-          background-size: contain;
-        }
-
-        @media (max-width: 600px) {
-          min-height: 300px;
-          background-position: center bottom;
-          background-size: contain;
-        }
-
-        .text-box {
-          display: flex;
-          flex-direction: column;
-          float: right;
-          padding-top: 10%;
-          width: 240px;
-          height: 100%;
-
-          justify-content: center;
-          align-content: flex-start;
-
-          @media (max-width: $screen-md) {
-            display: block;
-            float: none;
-            margin: auto;
-            padding-top: 80px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-          }
-
-          @media (max-width: $screen-xs) {
-            padding: 80px 15% 0;
-          }
-
-          .description {
-            @media (max-width: $screen-xs) {
-              padding-top: 10px;
-            }
-          }
-        }
-      }
-
-      .owl-dots {
-        position: absolute;
-        top: 20vh;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        margin: auto;
-        padding: 0 15px;
-        padding-left: calc(900px - 255px);
-        max-width: 900px;
-        width: 100%;
-
-        justify-content: flex-start;
-        align-items: center;
-
-        @media (min-width: 1300px) {
-          top: 28vh;
-        }
-
-        @media (max-width: $screen-lg) {
-          top: 20vh;
-        }
-
-        @media (max-width: $screen-sm) {
-          display: none;
-          padding: unset;
-        }
-
-        @media (max-width: $screen-xs) {
-          top: 33%;
-        }
-
-        @media (max-width: 360px) {
-          top: 45%;
-        }
-
-        .owl-dot {
-          margin: 0 4px;
-          padding: 6px;
-          border-width: 1px;
-          border-style: solid;
-          border-radius: 50%;
-        }
-      }
-    }
-    .footer {
-      position: absolute;
-      bottom: 0;
-      z-index: 2;
-      display: flex;
-      clear: both;
-      width: 100%;
-      height: 150px;
-
-      background-blend-mode: multiply;
-      align-items: center;
-
-      .container {
-        @media (max-width: $screen-xs) {
-          padding: 0 10%;
-        }
-      }
-
-      @media (max-width: $screen-sm) {
-        position: relative;
-      }
-      .title {
-        margin-bottom: 0;
-        padding: 10px 30px 10px 0;
-        width: calc(100% - 250px);
-
-        @media (max-width: $screen-sm) {
-          padding: 0 10%;
-          width: 100%;
-        }
-
-        @media (max-width: $screen-xs) {
-          padding: 0;
-        }
-      }
-    }
-
-    .mobile-box {
-      display: none;
-      flex-direction: column;
-      padding: 0 0 10% 0;
-
-      justify-content: center;
-      align-items: center;
-      @media (max-width: $screen-sm) {
-        display: flex;
-      }
-
-      .header {
-        margin-bottom: 40px;
-      }
-
-      .product-featured-text {
-        margin: 6px 0;
-      }
-
-      .product-btn {
-        margin-top: 10px;
-      }
-    }
-  }
   .home-slider-owl {
-    padding-top: 80px;
-    padding-bottom: 40px;
     .owl-dots {
       position: absolute;
-      bottom: 35px;
+      top: 530px;
       left: 50%;
       transform: translateX(-50%) translateY(-50%);
+
+      @media (max-width: $screen-lg) {
+        top: 615px;
+      }
+
+      @media (max-width: $screen-md) {
+        top: 575px;
+      }
+
       @media (max-width: $screen-sm) {
-        bottom: 65px;
+        top: unset;
+        bottom: 20px;
       }
     }
 
     .owl-dot {
       margin-right: 6px;
       padding: 0;
-      width: 10px;
-      height: 10px;
+      width: 16px;
+      height: 16px;
       border: 1px solid white;
       -webkit-border-radius: 50%;
          -moz-border-radius: 50%;
@@ -302,71 +75,58 @@
         background-color: white;
       }
     }
+
     .owl-nav {
-      position: inherit;
-      .owl-prev {
-        float: left;
-        margin-top: -235px;
-        border: transparent;
-        background-color: transparent;
-        color: white;
-        text-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
-        font-size: 56px;
-      }
-      .owl-next {
-        float: right;
-        margin-top: -235px;
-        border: transparent;
-        background-color: transparent;
-        color: white;
-        text-shadow: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
-        font-size: 56px;
-      }
+      display: none;
     }
   }
-
   .home-slider {
     position: relative;
     z-index: 10;
-    height: 529px;
+    height: 400px;
     transition: transform, 2s;
-    @media (min-width: $screen-lg) {
-      height: 600px;
-    }
-    @media (min-width: $screen-md) {
-      height: 400px;
-    }
 
     @media (max-width: $screen-sm) {
-      height: 400px;
+      height: 250px;
     }
+    @media(max-width: 678px) {
+      height: 150px;
+    }
+
     &:after {
       position: absolute;
       top: 0;
       left: 0;
       z-index: -1;
       width: 100%;
-      height: 400px;
+      height: 470px;
       background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
+      background-size: 1440px auto;
+      background-repeat: no-repeat !important;
       content: '';
       transition: transform, 1s;
 
       background-blend-mode: multiply;
-
-      @media (max-width: $screen-md) {
-        height: 361px;
-      }
       @media (max-width: $screen-sm) {
-        height: 370px;
+        height: 250px;
         background-position: bottom;
-        background-size: cover;
+        background-size: contain;
+        background-size: 750px auto;
+      }
+      @media(max-width: 678px) {
+        height: 150px;
+        background-position: bottom;
+        background-size: contain;
+        background-size: 370px auto;
+      }
+      @media (min-width: 1500px) {
+        background-size: 1900px auto;
       }
     }
+
     .slider-title {
       margin: 0 auto;
-      padding-top: 50px;
+      padding-top: 200px;
       width: 75%;
       text-align: center;
       font-weight: 600;
@@ -424,7 +184,6 @@
 
     .slider-description {
       margin: 0 auto;
-      margin-bottom: 15px;
       padding-top: 100px;
       width: 65%;
       text-align: center;
