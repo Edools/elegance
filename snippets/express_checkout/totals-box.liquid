@@ -72,7 +72,11 @@
     <div class="totals-box-item">
       <span class="installment-price">
         <b id="js-payment-installments">
-          {{ payment_option.total | number_with_taxes: gateway | divided_by: installments_limit | money }}
+          {% if spark_pay %}
+            {{ installments.last.amount | money }}
+          {% else %}
+            {{ payment_option.total | number_with_taxes: gateway | divided_by: installments_limit | money }}
+          {% endif %}
         </b>
       </span>
     </div>
@@ -107,7 +111,7 @@
   }
 
   .installment-price {
-    color: #0C3CF8;
+    color: #0c3cf8;
   }
 
   #link-remove-coupon {

@@ -3,25 +3,32 @@
     name="order[credit_card][installments]" required>
     {% assign payment_installments = credit_card.installments | plus: 0 %}
     {% assign installments_by_value = installments | sort:"value" | reverse %}
-
     {% for installment in installments_by_value %}
-    {% assign amount_in_money = installment.amount | money %}
-    {% assign total_multiplication_amount = installment.amount | times: installment.value | money %}
-    {% assign grand_total = installments_by_value.last.amount | money %}
-    {% assign amount_with_taxes = installment.amount |
-      number_with_taxes: gateway, installment.value | money %}
-    {% if gateway.installments_forward_taxes and amount_in_money != amount_with_taxes %}
-    {% assign translation_key = 'installment_amount_with_taxes' %}
-    {% else %}
-    {% assign translation_key = 'installment_amount' %}
-    {% endif %}
-
-    <option value="{{ installment.value }}" {% if payment_installments == installment.value %} selected {% endif %}>
-      {{ 'checkout.payment.' | append: translation_key | t:
-        count: installment.value, amount: amount_in_money,
-        amount_with_taxes: amount_with_taxes,
-        grand_total: grand_total }}
-    </option>
+        {% assign amount_in_money = installment.amount | money %}
+        {% assign total_multiplication_amount = installment.amount | times: installment.value | money %}
+        {% if spark_pay %}
+            {% assign grand_total       = installment.total_with_fee | money %}
+            {% assign amount_with_taxes = grand_total %}
+            {% if gateway.absorbent_fees %}
+                {% assign translation_key = 'installment_amount' %}
+            {% else %}
+                {% assign translation_key = 'installment_amount_with_taxes' %}
+            {% endif %}
+        {% else %}
+            {% assign grand_total       = installments_by_value.last.amount | money %}
+            {% assign amount_with_taxes = installment.amount | number_with_taxes: gateway, installment.value | money %}
+            {% if gateway.installments_forward_taxes and amount_in_money != amount_with_taxes %}
+                {% assign translation_key = 'installment_amount_with_taxes' %}
+            {% else %}
+                {% assign translation_key = 'installment_amount' %}
+            {% endif %}
+        {% endif %}
+        <option value="{{ installment.value }}" {% if payment_installments == installment.value %} selected {% endif %}>
+            {{ 'checkout.payment.' | append: translation_key | t:
+                count: installment.value, amount: amount_in_money,
+                amount_with_taxes: amount_with_taxes,
+                grand_total: grand_total }}
+        </option>
     {% endfor %}
   </select>
 </div>
