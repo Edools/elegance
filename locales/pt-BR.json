@@ -1040,13 +1040,18 @@
         "someone_invited_you": "Você foi convidado para fazer parte da equipe administrativa da escola \"{{school}}\".",
         "accept_instructions": "Para aceitar o convite basta clicar no link abaixo.",
         "accept": "Aceitar convite",
+        "message":" ",
+        "message_02": " ",
         "ignore": "Se você não quiser aceitar o convite, por favor, ignore este e-mail."
       },
       "student": {
         "subject": "{{school}} - Você precisa redefinir a sua senha",
+        "someone_invited_you": "Temos uma ótima notícia para você. Estamos fazendo uma <strong>reformulação completa do nosso sistema de educação digital</strong>. Agora vamos conseguir acompanhar o seu aprendizado mais de perto, você vai ganhar mais velocidade na conexão, uma interface mais intuitiva e acessar várias outras melhorias.",
+        "accept_instructions": "Para completar essa mudança, precisamos de uma pequena ajuda sua. <strong>Você deve trocar a sua senha acessando no botão abaixo.</strong>.",
         "accept": "Redefir Senha",
-        "ignore": "Se você não quiser aceitar o convite, por favor, ignore este e-mail.",
-        "invite_register_school": "Você foi convidado para se cadastrar na escola."
+        "message":"Queremos agradecer você por estar com a gente desde o início e esperamos que tenha uma experiência ainda melhor na Exame Academy. <strong>Aguarde, em breve, vai ter muito mais novidade chegando</strong>.",
+        "message_02": "Bom aprendizado!",
+        "ignore": "Se você não quiser aceitar o convite, por favor, ignore este e-mail."
       }
     },
     "enrollment_notification": {
