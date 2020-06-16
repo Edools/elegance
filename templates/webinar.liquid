@@ -24,10 +24,14 @@
           <span id="watch-number">0</span>{{ "webinar.watch_count" | t }}
         </div>
       </div>
-      {% if webinar.type == "Webinar" %}
+       {% if webinar.type == "Webinar" and  (webinar.is_after == false or webinar.is_before == false) %}
       <div class="webinar-chat-wrapper col-md-4">
         {% include 'webinar/chat', jwt: lead_jwt, chat_room: webinar.host_key,
         is_before: webinar.is_before %}
+      </div>
+      {% else %}
+      <div class="webinar-chat-wrapper col-md-4">
+      {% include 'webinar/chat' %}
       </div>
       {% endif %}
     </div>

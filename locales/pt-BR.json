@@ -594,7 +594,8 @@
       "description": "Métodos de Pagamento: Visa, MasterCard, Hipercard, American Express, Bradesco, Itaú, Banco do Brasil e Boleto Bancário",
       "credit_card": "Cartão de crédito",
       "bank_transfer": "Débito online",
-      "boleto": "Boleto Bancário"
+      "boleto": "Boleto Bancário",
+      "bank_slip": "Boleto Bancário"
     },
     "safety": {
       "title": "Este site é <strong>seguro</strong>",
@@ -618,6 +619,7 @@
     "coupon": "Possui um cupom de desconto?",
     "coupon_code": "Insira o seu cupom",
     "coupon_title": "Cupom de desconto",
+    "coupon_recurrency_memberships_quantity": "nas próximas <b>{{ quantity }}</b> mensalidades, após as mensalidades aplicaveis do cupom o valor volta ao preço original",
     "total_amount_to_pay": "Total a pagar:",
     "total_paid": "Total pago:",
     "total_amount_to_pay_in_installments": "ou em até {{ installments }}x no cartão:",
@@ -937,11 +939,15 @@
         "plan": "Plano",
         "period_start": "Início do Período Atual",
         "period_end": "Fim do Período Atual",
+        "end_at": "Expira em",
         "payment_option": "Forma de Pagamento",
         "credit_card_used": "Cartão usado",
         "change_credit_card": "Alterar cartão de crédito",
         "pay_with_credit_card": "Pagar com cartão de crédito",
         "pay_with_boleto": "Pagar com boleto",
+        "generate_next_bank_slip_payment": "Gerar próximo boleto",
+        "bank_slip_created": "Boleto gerado com sucesso!",
+        "bank_slip_failed": "Ocorreu um erro ao gerar o boleto",
         "pricing": {
           "monthly": "{{ price }} por Mês",
           "quarterly": "{{ price }} por Trimestre",
