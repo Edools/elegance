@@ -1,4 +1,4 @@
-<div id="section" class="forum fade in">
+<div id="section" class="forum tab-pane fade in">
     {% if current_user %}
         <div class="description">
             <div class="alert alert-info">
@@ -12,9 +12,8 @@
             <a href="#js-section-{{ section.id }}-new-topic" data-toggle="collapse" class="btn btn-default new-topic-btn">
                 <i class="icon-plus"></i>
                 <span>{{ 'forums.new_topic' | t }}</span>
-
             </a>
-        </div>
+        </div>           
 
         <div id="js-section-{{ section.id }}-new-topic" class="row new-topic-form collapse">
 
