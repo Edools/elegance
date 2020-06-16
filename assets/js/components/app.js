@@ -119,6 +119,7 @@
       app.randomQuizStatistics();
       app.bindCepService();
       app.carousel();
+      app.progressBar.resize();
       
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);

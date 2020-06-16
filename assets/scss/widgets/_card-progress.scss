@@ -12,6 +12,16 @@
     border-radius: $border-radius-base;
     background-color: $gray-lighter;
 
+    .progress-bar {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      .percent-front {
+        display: none;
+        color: white;
+      }
+    }
+
     .percent {
       position: absolute;
       top: 0;

@@ -1,13 +1,13 @@
 {% if progress.id %}
-  {% assign id = progress.id %}
+{% assign id = progress.id %}
 {% else %}
-  {% assign id = nil %}
+{% assign id = nil %}
 
-  {% if progress.type == 'CourseProgressCard' %}
-    {% assign id = 'course-' | append: progress.course_id %}
-  {% else %}
-    {% assign id = 'path-' | append: progress.path_id %}
-  {% endif %}
+{% if progress.type == 'CourseProgressCard' %}
+{% assign id = 'course-' | append: progress.course_id %}
+{% else %}
+{% assign id = 'path-' | append: progress.path_id %}
+{% endif %}
 {% endif %}
 
 <div id="card-{{ id }}" class="{{ container_class }} card-progress">
@@ -20,13 +20,13 @@
   <div class="{{ bar_container_class }}">
     <div class="progress-bar-component">
       {% if total > 0 %}
-        {% assign percentage = completed | times: 100 | divided_by: total %}
+      {% assign percentage = completed | times: 100 | divided_by: total %}
       {% else %}
-        {% assign percentage = 0 %}
+      {% assign percentage = 0 %}
       {% endif %}
-      <div class="progress-bar progress-bar-success progress-striped"
-           style="width: {{ percentage }}%"
-           data-percent="15"></div>
+      <div class="progress-bar progress-bar-success progress-striped" style="width: {{ percentage }}%" data-percent="{{ percentage }}">
+        <span class="percent percent-front">{{ percentage }}%</span>
+      </div>
 
       <span class="percent">{{ percentage }}%</span>
     </div>
