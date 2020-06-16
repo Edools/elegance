@@ -284,7 +284,7 @@
     "create_answer_success": "Resposta criada com sucesso",
     "create_answer_failed": "Aconteceu um erro ao criar a resposta",
     "student": "Aluno",
-    "teacher": "Professor",
+    "teacher": "Mentor",
     "answers_empty": "Ainda não há respostas para esta pergunta.",
     "answers": "Respostas",
     "question_title": "Título da sua pergunta",
@@ -493,7 +493,7 @@
       "continue": "Continuar de Onde Parei"
     },
     "teachers": {
-      "about": "Professor"
+      "about": "Mentor"
     },
     "path": {
       "courses": {
@@ -1095,8 +1095,8 @@
       },
       "confirmed": {
         "subject": "Seu pagamento foi aprovado!",
-        "first_paragraph": "O seu pedido na escola <strong>{{school_name}}</strong> foi aprovado! ✅",
-        "second_paragraph": "Agora é só acessar e assistir os cursos.",
+        "first_paragraph": "Boas-notícias, {{first_name}}. Você já pode acessar e aproveitar o conteúdo da <strong>{{school_name}}</strong>",
+        "second_paragraph": "Já, já, você receberá um e-mail para definir sua senha. Procure-o em sua caixa de entrada e comece agora mesmo!",
         "courses_link": "Acessar meus cursos",
         "payment_success": ""
       },
