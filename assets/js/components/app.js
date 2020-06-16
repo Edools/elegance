@@ -87,7 +87,6 @@
     },
 
     init: function () {
-      //app.Zendesk.init();
       app.bindGlobal();
       app.bindRecaptcha();
       app.bindBlazy();
