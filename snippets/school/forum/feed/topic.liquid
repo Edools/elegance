@@ -1,32 +1,34 @@
 <div id="js-topic-item-{{ object.id }}" data-id="{{ object.id }}" class="topic-item panel panel-default js-topic">
   <div class="post-body panel-body">
     <div class="row">
-      
-      <div class="col col-md-12">
-        <div class="post-information">  
+      <div class="col-md-12">
+        <div class="col-md-1">
 
-          <div class="user">
-            <div class="user-image">
-              <img src="{{ object.user.cover_image_url }}">
-            </div>          
-          </div>        
-
-          <div class="user-info">
-            <p class="title">
-              {{ object.title }}
-            </p>
-            {% assign last_post_date = object.created_at | time_ago_in_words %}
-            <p class="name-and-date">{{ "forum.posts.last_post.name_and_date" | t: object: object, last_post_date: last_post_date }}</p>
+          <div class="img-wrapper img-circle">
+            <img src="{{ object.user.cover_image_url }}" class="img-responsive">
           </div>
 
         </div>
-      </div>
 
-      <div class="col col-md-12">
+        <div id="topic-info" class="col-md-11">
+          <p class="title">
+            {{ object.title }}
+
+          </p>
+
+          <div id="topic-description">
+            {% assign last_post_date = object.created_at | time_ago_in_words %}
+            <small class="name-and-date">{{ "forum.posts.last_post.name_and_date" | t: object: object, last_post_date: last_post_date }}</small>
+          </div>
+
           <div class="description">
             {{ object.description }}
           </div>
+
+        </div>
+
       </div>
+
 
       <div class="col col-md-12">
         <div class="controls">
@@ -47,7 +49,7 @@
                   <i class="icon-bubble"></i>
               </button>
             </a>
-            
+
               <div class="comment">
               {% if object.posts_count > 0 %}
                   <a class="js-collapse-toggle-text" role="button"
@@ -60,12 +62,12 @@
                 {{ 'forums.topics.total_of_posts' | t: total: object.posts_count }}
               {% endif %}
               </div>
-            
+
           </div>
         </div>
       </div>
     </div>
-        
+
       {% paginate object.posts by 10 %}
       <div class="">
         <div id="js-topic-{{ object.id }}-posts" class="posts {% if object.posts.size == 0 %} hidden {% endif %}">
@@ -100,11 +102,11 @@
                         class="form-control js-post-body"
                         id="topic-{{ object.id }}-post-body"
                         name="post[body]"
-                        
+
                         placeholder="{% if object.posts.size > 0 %}{{ 'forums.posts.feed.new'| t }}{% else %}Ainda não há comentários neste tópico. Faça o primeiro!{% endif %}"
                         required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">{{ "forums.posts.send" | t }}</button>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane" aria-hidden="true"></i> {{ "forums.posts.send" | t }}</button>
           </form>
         </div>
       </div>

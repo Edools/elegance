@@ -31,7 +31,11 @@
                 <form accept-charset="UTF-8" method="post" action="{{ section | topics_path }}" data-remote="true">
                 <input type="hidden" name="authenticity_token" value="{{ authenticity_token }}">
                 <div class="input-group">
-                    <input type="text" class="form-control js-topic-title" name="topic[title]" id="topic-title-{{ topic.id }}" value="{{ topic.title }}" placeholder="{{ 'forums.new_topic_name' | t }}"required/>
+                    <input type="text" class="form-control js-topic-title" name="topic[title]"
+                    id="topic-title-{{ topic.id }}"
+                    value="{{ topic.title }}"
+                    placeholder="{{ 'forums.new_topic_name' | t }}"
+                    required/>
 
                     <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary">Salvar</button>
@@ -44,8 +48,7 @@
                             id="topic-description-{{ topic.id }}"
                             name="topic[description]"
                             placeholder="{{ 'forums.new_topic_description' | t }}"
-                            required>{{ topic.description }}
-                    </textarea>
+                            required>{{ topic.description }}</textarea>
                 </div>
                 </form>
             </div>
