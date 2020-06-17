@@ -1,19 +1,84 @@
 Notificações
+</br>Total de notificações não lidas: <span class="unread-notifications-count-js">{{ current_user.unread_notifications_count | default: 0 }}</span>
 
-</br>Total de notificações: {{ notifications.size }}
-</br>Total de notificações lidas: {{ notifications.read_count }}
-</br>Total de notificações não lidas: {{ notifications.unread_count }}
-
-{% paginate notifications by 1 sort { created_at: :desc } %}
+<div id="notifications-container">
+  {% comment %}
+    Este elemento é usado pelo app/views/tms/notifications/index.js.erb
+    O script vai dar "append" das notificações no elemento com id #js-notifications-list
+  {% endcomment %}
   <div id="js-notifications-list">
-    {% include 'student/notification-list', notification: notification %}
   </div>
 
-  {% if paginate.next.is_link %}
-    <div id="notifications-more" class="col-xs-12 text-center">
-      <a id="js-notifications-more-link" href="{{ paginate.next.url }}" data-remote="true">
-        <span class="bold">{{ 'general.load_more' | t }}</span>
-      </a>
-    </div>
-  {% endif %}
-{% endpaginate %}
+  <div id="notifications-more">
+    <a id="js-notifications-more-link" href="{{ 1 | notifications_path: 2, created_at: 'desc' }}" data-remote="true">
+      <span class="bold">{{ 'general.load_more' | t }}</span>
+    </a>
+  </div>
+</div>
+
+<style>
+  .unreaded-notification-js {
+    background: red;
+  }
+  .readed-notification-js {
+    background: green;
+  }
+</style>
+
+<script type="text/javascript">
+  var readOldNotifications = function (successFunc, errorFunc) {
+    var unreadedIds = [];
+    var notifications = $('.showed-notification-js');
+
+    $.each(notifications, function(i, elem) {
+      if ($(elem).hasClass('unreaded-notification-js')) {
+        unreadedIds.push($(this).data('notification-id'));
+      }
+    });
+
+    if (unreadedIds.length > 0) {
+      var request = $.ajax({
+        method: 'PATCH',
+        url: window.location.origin + '/notifications/read',
+        data: { ids: unreadedIds }
+      })
+
+      request.success(successFunc);
+      request.error(errorFunc);
+    }
+  }
+
+  if (typeof(appNotificationsScript) === 'undefined') {
+    appNotificationsScript = true
+    console.log('appNotificationsScript loaded!');
+
+    $(document).on('loaded-notifications', function() {
+      $('.notification-js').addClass('showed-notification-js');
+
+      {% comment %}
+        Esta função vai enviar uma request ler as notificações com as classes
+        "showed-notification-js" e "unreaded-notification-js".
+
+        Ela deve receber 2 funções como argumentos, sendo a primeira executada
+        em caso de sucesso e a segunda em caso de erro.
+
+        Em caso de sucesso ela vai retornar um json com "ids" e o counter
+        "unread_notifications_count"
+      {% endcomment %}
+      readOldNotifications(
+        function (data) {
+          $('.unread-notifications-count-js').html(data.unread_notifications_count);
+
+          $.each(data.ids, function(i, id) {
+            $('#notification-' + id).removeClass('unreaded-notification-js');
+            $('#notification-' + id).addClass('readed-notification-js');
+          })
+        },
+        function (data) {
+          console.log("Something wrong with lesson progress:");
+          console.log(data);
+        }
+      );
+    });
+  }
+</script>

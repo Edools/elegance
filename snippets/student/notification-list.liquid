@@ -7,5 +7,11 @@
 {% endcomment %}
 
 {% for notification in notifications %}
-  </br>Notification:{{ notification }}
+  </br>
+  {% comment %}
+    Quando a classe "unread-notification-js" for adicioanda em um elemento do
+    DOM uma chamada ajax será enviada para mudar a notificação para lida.
+  {% endcomment %}
+  {% capture notification_class %}{% if notification.read %}readed-notification-js{% else %}unreaded-notification-js{% endif %}{% endcapture %}
+  <div id="notification-{{ notification.id }}" class="{{ notification_class }} notification-js" data-notification-id="{{ notification.id}}">Notification:{{ notification }}</div>
 {% endfor %}
