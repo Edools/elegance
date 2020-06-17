@@ -117,7 +117,7 @@
                                                          <tbody>
                                                             <tr>
                                                                <td style="width:600px;">
-                                                                  <img height="auto" src="https://storage.googleapis.com/topolio8758/plugin-assets/6320/8758/topo.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="600">
+                                                                  <img height="auto" src="https://cdn.edools.com/assets/images/emails/boleto+pago.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="600">
                                                                </td>
                                                             </tr>
                                                          </tbody>
@@ -160,15 +160,15 @@
                                           <![endif]-->
                                           <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;">
                                              <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="vertical-align:top;" width="100%">
-                                              <tr>
-                                                <td align="center" style="font-family:Lato, Tahoma, sans-serif; font-size: 20px; padding:40px 24px;">
-                                                  {% if school.logo.size > 0 %}
-                                                    <img width="150" height="auto" src="{{ school.logo }}" >
-                                                  {% else %}
-                                                    {{ school.name }}
-                                                  {% endif %}
-                                                </td>
-                                              </tr>
+                                                <tr>
+                                                  <td align="center" style="font-family:Lato, Tahoma, sans-serif; font-size: 20px; padding:40px 24px;">
+                                                    {% if school.logo.size > 0 %}
+                                                      <img width="150" height="auto" src="{{ school.logo }}" >
+                                                    {% else %}
+                                                      {{ school.name }}
+                                                    {% endif %}
+                                                  </td>
+                                                </tr>
                                                 <tr>
                                                    <td align="center" style="font-size:0px;padding:15px 15px 2px 15px;word-break:break-word;">
                                                       <div style="font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:center;color:#262626;">
@@ -179,28 +179,29 @@
                                                 <tr>
                                                    <td align="left" style="font-size:0px;padding:0px 30px 20px 30px;word-break:break-word;">
                                                       <div style="font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:left;color:#262626;">
-                                                         <p style="text-align: center;"><span style="font-size: 14px;">Boas-not&iacute;cias, {{ user.first_name }}. Voc&ecirc; j&aacute; pode acessar e aproveitar o conte&uacute;do da {{ school.name }}.</span></p>
+                                                         <p style="text-align: center;"><span style="font-size: 14px;">Boas-not&iacute;cias {{user.first_name}}! Voc&ecirc; j&aacute; pode acessar e aproveitar o conte&uacute;do da {{ school.name }}.</span></p>
 
-                                                          {% if user.invitation_token %}
-                                                            <p style="text-align: center;font-weight:bold;"><span style="font-size: 14px;">Já, já, você receberá um e-mail para definir sua senha. Procure-o em sua caixa de entrada e comece agora mesmo!</p>
+                                                         {% if user.invitation_token %}
+                                                            <p style="text-align: center;font-weight:bold;"><span style="font-size: 14px;">Caso o seu pagamento tenha sido realizado com cartão de crédito, você receberá um e-mail para definir sua senha. Procure-o em sua caixa de entrada e comece agora mesmo!</p>
+                                                               <p style="text-align: center;font-weight:bold;"><span style="font-size: 14px;">Se o seu pagamento foi por meio do boleto, você já recebeu um e-mail no dia da compra, procure-o na sua caixa de entrada pelo título "Termine de criar sua conta e comece agora". Não esqueça de verificar a sua caixa de SPAM!</p>
                                                          {% endif %}
                                                       </div>
                                                    </td>
                                                 </tr>
                                                 {% if user.invitation_token == nil %}
-                                                    <tr>
-                                                       <td align="center" vertical-align="middle" style="font-size:0px;padding:0px 20px 37px 20px;word-break:break-word;">
-                                                          <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
-                                                             <tr>
-                                                                <td align="center" bgcolor="#2cc3cc" role="presentation" style="border:0px solid #000;border-radius:4px;cursor:auto;mso-padding-alt:11px 32px 11px 32px;background:#2cc3cc;" valign="middle">
-                                                                   <a href="{{ school_url | append: '/enrollments' }}" style="display:inline-block;background:#2cc3cc;color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:16px;font-weight:normal;line-height:100%;Margin:0;text-decoration:none;text-transform:none;padding:11px 32px 11px 32px;mso-padding-alt:0px;border-radius:4px;" target="_blank">
-                                                                      <div>Acessar meu produto</div>
-                                                                   </a>
-                                                                </td>
-                                                             </tr>
-                                                          </table>
-                                                       </td>
-                                                    </tr>
+                                                   <tr>
+                                                      <td align="center" vertical-align="middle" style="font-size:0px;padding:0px 20px 37px 20px;word-break:break-word;">
+                                                         <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="border-collapse:separate;line-height:100%;">
+                                                            <tr>
+                                                               <td align="center" bgcolor="#2cc3cc" role="presentation" style="border:0px solid #000;border-radius:4px;cursor:auto;mso-padding-alt:11px 32px 11px 32px;background:#2cc3cc;" valign="middle">
+                                                                  <a href="{{ school_url | append: '/enrollments' }}" style="display:inline-block;background:#2cc3cc;color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:16px;font-weight:normal;line-height:100%;Margin:0;text-decoration:none;text-transform:none;padding:11px 32px 11px 32px;mso-padding-alt:0px;border-radius:4px;" target="_blank">
+                                                                     <div>{{course_name}}</div>
+                                                                  </a>
+                                                               </td>
+                                                            </tr>
+                                                         </table>
+                                                      </td>
+                                                   </tr>
                                                 {% endif %}
                                                 <tr>
                                                    <td style="font-size:0px;padding:10px 25px;padding-top:10px;padding-right:60px;padding-bottom:10px;padding-left:60px;word-break:break-word;">
@@ -367,18 +368,12 @@
                                                 <tr>
                                                    <td align="right" style="font-size:0px;padding:15px 61px 40px 15px;word-break:break-word;">
                                                       <div style="font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:right;color:#525252;">
-                                                        {% for item in items %}
-                                                            {% if item.payment_option.price > item.amount_to_pay %}
-                                                                <p><span style="font-size: 16px;">Subtotal: {{ item.payment_option.price | money }}</span></p>
-                                                                <p><span style="font-size: 16px;">Descontos: - {{ item.payment_option.price | minus: item.amount_to_pay | money }}</span></p>
-                                                            {% endif %}
-
+                                                         {% for item in items %} {% if item.payment_option.price > item.amount_to_pay %}
+                                                            <p><span style="font-size: 16px;">Subtotal: {{ item.payment_option.price | money }}</span></p>
+                                                            <p><span style="font-size: 16px;">Descontos: - {{ item.payment_option.price | minus: item.amount_to_pay | money }}</span></p>
+                                                         {% endif %}
                                                             <p><span style="font-size: 16px;">Total: {{ item.amount_to_pay | money }}</span></p>
-
-                                                            {% if payment.installments > 1 %}
-                                                                <p><span style="font-size: 16px;color:black;">{{ item.amount_to_pay | money }} em {{ payment.installments }}x</span></p>
-                                                            {% endif %}
-                                                        {% endfor %}
+                                                         {% endfor %}
                                                       </div>
                                                    </td>
                                                 </tr>
@@ -407,9 +402,9 @@
                      <v:fill  origin="0.5, 0" position="0.5, 0" src="https://storage.googleapis.com/topolio8758/plugin-assets/6320/8758/bottom-tip.png" color="#f4f4f4" type="tile" />
                      <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
                         <![endif]-->
-                        <div style="background:#f4f4f4 url(https://storage.googleapis.com/topolio8758/plugin-assets/6320/8758/bottom-tip.png) top center / cover repeat;Margin:0px auto;max-width:600px;">
+                        <div style="background:#f4f4f4 url(https://cdn.edools.com/assets/images/emails/bottom-tip.png) top center / cover repeat;Margin:0px auto;max-width:600px;">
                            <div style="line-height:0;font-size:0;">
-                              <table align="center" background="https://storage.googleapis.com/topolio8758/plugin-assets/6320/8758/bottom-tip.png" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#f4f4f4 url(https://storage.googleapis.com/topolio8758/plugin-assets/6320/8758/bottom-tip.png) top center / cover repeat;width:100%;">
+                              <table align="center" background="https://cdn.edools.com/assets/images/emails/bottom-tip.png" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#f4f4f4 url(https://cdn.edools.com/assets/images/emails/bottom-tip.png) top center / cover repeat;width:100%;">
                                  <tbody>
                                     <tr>
                                        <td style="direction:ltr;font-size:0px;padding:0px 0px 0px 0px;text-align:center;vertical-align:top;">
@@ -428,7 +423,7 @@
                                                                   <tbody>
                                                                      <tr>
                                                                         <td style="width:600px;">
-                                                                           <img height="auto" src="https://storage.googleapis.com/topolio8758/plugin-assets/6320/8758/bottom-tip.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="600">
+                                                                           <img height="auto" src="https://cdn.edools.com/assets/images/emails/bottom-tip.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="600">
                                                                         </td>
                                                                      </tr>
                                                                   </tbody>
@@ -478,7 +473,8 @@
                                                    <td align="center" style="font-size:0px;padding:15px 60px 15px 60px;word-break:break-word;">
                                                       <div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:11px;line-height:1.5;text-align:center;color:#000000;">
                                                          <p>O processamento deste pedido foi feito atrav&eacute;s da tecnologia de pagamento SparkPay - HeroSpark a servi&ccedil;o de {{ school.name }}
-                                                            <br>- CNPJ {{ school.cnpj }}</p>
+                                                            <br>- CNPJ {{ school.cnpj }}
+                                                         </p>
                                                       </div>
                                                    </td>
                                                 </tr>
@@ -488,7 +484,7 @@
                                                          <tbody>
                                                             <tr>
                                                                <td style="width:90px;">
-                                                                  <img height="auto" src="https://storage.googleapis.com/topolio8758/plugin-assets/6320/8758/herospark_transparente.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="90">
+                                                                  <img height="auto" src="https://cdn.edools.com/assets/images/emails/herospark-logo.png" style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;font-size:13px;" width="90">
                                                                </td>
                                                             </tr>
                                                          </tbody>

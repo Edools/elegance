@@ -172,18 +172,17 @@
                                                 <tr>
                                                    <td align="center" style="font-size:0px;padding:15px 15px 2px 15px;word-break:break-word;">
                                                       <div style="font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:center;color:#262626;">
-                                                         <p><span style="font-size: 16px;"><strong><span style="font-family: helvetica, arial, sans-serif;">Seu pagamento foi aprovado!</span></strong></span></p>
+                                                         <p><span style="font-size: 16px;"><strong><span style="font-family: helvetica, arial, sans-serif;">{{user.first_name}}, seu pagamento foi aprovado!</span></strong></span></p>
                                                       </div>
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td align="left" style="font-size:0px;padding:0px 30px 20px 30px;word-break:break-word;">
                                                       <div style="font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:left;color:#262626;">
-                                                         <p style="text-align: center;"><span style="font-size: 14px;">Boas-not&iacute;cias {{user.first_name}}! Voc&ecirc; j&aacute; pode acessar e aproveitar o conte&uacute;do da {{ school.name }}.</span></p>
+                                                         <p style="text-align: center;"><span style="font-size: 14px;">Boas-notícias! O seu boleto foi compensado e você já pode aproveitar seu conteúdo.</span></p>
 
                                                          {% if user.invitation_token %}
-                                                            <p style="text-align: center;font-weight:bold;"><span style="font-size: 14px;">Caso o seu pagamento tenha sido realizado com cartão de crédito, você receberá um e-mail para definir sua senha. Procure-o em sua caixa de entrada e comece agora mesmo!</p>
-                                                               <p style="text-align: center;font-weight:bold;"><span style="font-size: 14px;">Se o seu pagamento foi por meio do boleto, você já recebeu um e-mail no dia da compra, procure-o na sua caixa de entrada pelo título "Termine de criar sua conta e comece agora". Não esqueça de verificar a sua caixa de SPAM!</p>
+                                                            <p style="text-align: center;font-weight:bold;"><span style="font-size: 14px;">Você já recebeu um e-mail para definir a sua senha no dia da compra, procure-o na sua caixa de entrada pelo título "Termine de criar sua conta e comece agora". Não esqueça de verificar a sua caixa de SPAM!</p>
                                                          {% endif %}
                                                       </div>
                                                    </td>
