@@ -35,18 +35,16 @@
                 <div class="form-group col-md-9">
                   <label for="usercpf" class="control-label">{{ 'checkout.complete.cpf' | t }}</label>
                   <input id="usercpf" inputmode="numeric" name="user[cpf]" class="form-control"
-                    placeholder="___.___.___-__" value="{{ params.user.cpf }}" data-validate-cpf="true"
+                    placeholder="___.___.___-__" value="{{ current_user.cpf }}" data-validate-cpf="true"
                     data-validation="cpf" data-validation-error-msg="{{ 'errors.cpf.invalid' | t }}">
                 </div>
 
                 {% else %}
-
                 <input type="hidden" class="form-control valid" name="user[first_name]"
                   value="{{ current_user.first_name }}">
                 <input type="hidden" class="form-control valid" name="user[last_name]"
                   value="{{ current_user.last_name }}">
                 <input type="hidden" class="form-control valid" name="user[email]" value="{{ current_user.email }}">
-                <input type="hidden" class="form-control valid" name="user[cpf]" value="{{ current_user.cpf }}">
 
                 <div class="personal-data-container">
                   <span><b>{{ current_user.first_name }}</b></span><br>
@@ -57,7 +55,14 @@
                     {% endcapture %}
                     {{ logout_link_html | logout_link }}
                   </div>
+                  <div class="form-group">
+                    <label for="usercpf" class="control-label">{{ 'checkout.complete.cpf' | t }}</label>
+                    <input id="usercpf" inputmode="numeric" name="user[cpf]" class="form-control"
+                      placeholder="___.___.___-__" value="{{ current_user.cpf }}" data-validate-cpf="true"
+                      data-validation="cpf" data-validation-error-msg="{{ 'errors.cpf.invalid' | t }}">
+                  </div>
                 </div>
+
                 {% endif %}
               </form>
             </div>
@@ -304,79 +309,68 @@
 
           <div id="address-container">
             <form id="student-address-form">
-              {% if current_user == nil %}
-                <h6 class="title-form">{{ 'express_checkout.title_address' | t }}</h6>
-                <div class="form-container">
-                  <div class="row">
-                    <div class="form-group col-md-12">
-                      <label for="user-cep" class="control-label">{{ 'checkout.complete.address_zip_code' | t }}</label>
-                      <input type="text" id="user-cep" name="user[address_attributes][zip_code]"
-                        {% if current_school | has_feature: 'cep_service' %}data-enable-cep-service="true" {% endif %}
-                             placeholder="{{ 'express_checkout.placeholder.zip_code' | t }}" value="{{ address.zip_code }}" class="form-control"
-                             data-validation="required" data-validation-error-msg="{{ 'errors.address_zip_code.blank' | t }}">
-                    </div>
-
-                    <div class="form-group col-md-12">
-                      <label for="user-street" class="control-label">{{ 'checkout.complete.address_street' | t }}</label>
-                      <input type="text" id="user-street" name="user[address_attributes][street]"
-                             placeholder="{{ 'express_checkout.placeholder.street' | t }}" value="{{ address.street }}" class="form-control"
-                             data-validation="required" data-validation-error-msg="{{ 'errors.address_street.blank' | t }}">
-                    </div>
-
-                    <div class="form-group col-md-12">
-                      <label for="user-number" class="control-label">{{ 'checkout.complete.address_number' | t }}</label>
-                      <input type="text" id="user-number" name="user[address_attributes][number]" placeholder="{{ 'express_checkout.placeholder.number' | t }}"
-                             value="{{ address.number }}" class="form-control" data-validation="required"
-                             data-validation-error-msg="{{ 'errors.address_number.blank' | t }}">
-                    </div>
-
-                    <div class="form-group col-md-12">
-                      <label for="user-complement"
-                        class="control-label">{{ 'checkout.complete.address_complement' | t }}</label>
-                      <input type="text" id="user-complement" name="user[address_attributes][complement]"
-                             placeholder="{{ 'express_checkout.placeholder.complement' | t }}" value="{{ address.complement }}" class="form-control">
-                    </div>
-
-                    <div class="form-group col-md-12">
-                      <label for="user-district"
-                        class="control-label">{{ 'checkout.complete.address_district' | t }}</label>
-                      <input type="text" id="user-district" name="user[address_attributes][district]"
-                             placeholder="{{ 'express_checkout.placeholder.district' | t }}" value="{{ address.district }}" class="form-control"
-                             data-validation="required" data-validation-error-msg="{{ 'errors.address_district.blank' | t }}">
-                    </div>
-
-                    <div class="form-group col-md-12">
-                      <label for="user-city" class="control-label">{{ 'checkout.complete.address_city' | t }}</label>
-                      <input type="text" id="user-city" name="user[address_attributes][city]" placeholder="{{ 'express_checkout.placeholder.city' | t }}"
-                             value="{{ address.city }}" class="form-control" data-validation="required"
-                             data-validation-error-msg="{{ 'errors.address_city.blank' | t }}">
-                    </div>
-
-                    <div class="form-group col-md-12">
-                      <label class="control-label">{{ 'checkout.complete.address_state' | t }}</label>
-                      <div class="select-container">
-                        {% include "select-address", selected_state: address.state %}
-                      </div>
-                    </div>
-
+              <h6 class="title-form">{{ 'express_checkout.title_address' | t }}</h6>
+              <div class="form-container">
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <label for="user-cep" class="control-label">{{ 'checkout.complete.address_zip_code' | t }}</label>
+                    <input type="text" id="user-cep" name="user[address_attributes][zip_code]"
+                      {% if current_school | has_feature: 'cep_service' %}data-enable-cep-service="true" {% endif %}
+                      placeholder="{{ 'express_checkout.placeholder.zip_code' | t }}" value="{{ address.zip_code }}"
+                      class="form-control" data-validation="required"
+                      data-validation-error-msg="{{ 'errors.address_zip_code.blank' | t }}">
                   </div>
+
+                  <div class="form-group col-md-12">
+                    <label for="user-street" class="control-label">{{ 'checkout.complete.address_street' | t }}</label>
+                    <input type="text" id="user-street" name="user[address_attributes][street]"
+                      placeholder="{{ 'express_checkout.placeholder.street' | t }}" value="{{ address.street }}"
+                      class="form-control" data-validation="required"
+                      data-validation-error-msg="{{ 'errors.address_street.blank' | t }}">
+                  </div>
+
+                  <div class="form-group col-md-12">
+                    <label for="user-number" class="control-label">{{ 'checkout.complete.address_number' | t }}</label>
+                    <input type="text" id="user-number" name="user[address_attributes][number]"
+                      placeholder="{{ 'express_checkout.placeholder.number' | t }}" value="{{ address.number }}"
+                      class="form-control" data-validation="required"
+                      data-validation-error-msg="{{ 'errors.address_number.blank' | t }}">
+                  </div>
+
+                  <div class="form-group col-md-12">
+                    <label for="user-complement"
+                      class="control-label">{{ 'checkout.complete.address_complement' | t }}</label>
+                    <input type="text" id="user-complement" name="user[address_attributes][complement]"
+                      placeholder="{{ 'express_checkout.placeholder.complement' | t }}" value="{{ address.complement }}"
+                      class="form-control">
+                  </div>
+
+                  <div class="form-group col-md-12">
+                    <label for="user-district"
+                      class="control-label">{{ 'checkout.complete.address_district' | t }}</label>
+                    <input type="text" id="user-district" name="user[address_attributes][district]"
+                      placeholder="{{ 'express_checkout.placeholder.district' | t }}" value="{{ address.district }}"
+                      class="form-control" data-validation="required"
+                      data-validation-error-msg="{{ 'errors.address_district.blank' | t }}">
+                  </div>
+
+                  <div class="form-group col-md-12">
+                    <label for="user-city" class="control-label">{{ 'checkout.complete.address_city' | t }}</label>
+                    <input type="text" id="user-city" name="user[address_attributes][city]"
+                      placeholder="{{ 'express_checkout.placeholder.city' | t }}" value="{{ address.city }}"
+                      class="form-control" data-validation="required"
+                      data-validation-error-msg="{{ 'errors.address_city.blank' | t }}">
+                  </div>
+
+                  <div class="form-group col-md-12">
+                    <label class="control-label">{{ 'checkout.complete.address_state' | t }}</label>
+                    <div class="select-container">
+                      {% include "select-address", selected_state: address.state %}
+                    </div>
+                  </div>
+
                 </div>
-              {% else %}
-                <input type="hidden" class="form-control valid" name="user[address_attributes][street]]"
-                  value="{{ address.street }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][number]"
-                  value="{{  address.number }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][complement]"
-                  value="{{ address.complement }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][district]"
-                  value="{{ address.district }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][city]"
-                  value="{{ address.city }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][state]"
-                  value="{{ address.state  }}">
-                <input type="hidden" class="form-control valid" name="user[address_attributes][zip_code]"
-                  value="{{ address.zip_code }}">
-              {% endif %}
+              </div>
             </form>
           </div>
 
