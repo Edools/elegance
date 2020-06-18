@@ -24,8 +24,18 @@
 
           {% include 'student/profile-school-settings' %}
 
-          {% comment %} TODO: remover {% endcomment %}
-          {% include_async 'student/notifications' %}
+          {% comment %}
+            O snippet 'student/notifications' é responsável pelo carregamento
+            das notificações. O mesmo pode ser usado com o "include_async",
+            porem não se faz necessário pois o load inicial depende apenas
+            do usuário logado.
+
+            Todo seu código foi feito como um "componente", fazendo com que ele
+            não dependa da pagina em que foi carregado.
+
+            Porem é de suma importância não mudar as classes com -js dos elementos
+          {% endcomment %}
+          {% include 'student/notifications' %}
         </div>
       </div>
       <div class="col-md-4">
