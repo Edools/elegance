@@ -16,18 +16,18 @@
         "color_content_bg": "#ffffff",
         "color_border": "#dedede",
         "color_navbar_bg": "#ffffff",
-        "color_navbar_links": "#222",
+        "color_navbar_links": "#39393b",
         "color_button_primary_text": "#ffffff",
-        "color_button_primary_bg": "#0C3CF8",
-        "color_button_secondary_text": "#39393B",
+        "color_button_primary_bg": "#0c3cf8",
+        "color_button_secondary_text": "#39393b",
         "color_button_secondary_bg": "#ffffff",
-        "color_titles": "#39393B",
+        "color_titles": "#39393b",
         "color_subtitles": "#39393B",
-        "color_paragraphs": "#39393B",
-        "color_links": "#0C3CF8",
-        "color_footer_bg": "#2e3234",
-        "color_footer_text": "#747474",
-        "color_footer_links": "#b8b8b8",
+        "color_paragraphs": "#39393b",
+        "color_links": "#0c3cf8",
+        "color_footer_bg": "#39393b",
+        "color_footer_text": "#ffffff",
+        "color_footer_links": "#ffffff",
         "type_base_family": "Proxima Nova",
         "type_base_size": "16px",
         "type_navbar_family": "Proxima Nova",
@@ -41,21 +41,21 @@
         "type_button_family": "Proxima Nova",
         "type_button_size": "16px",
         "type_enable_simple_line_icons": true,
-        "type_enable_font_awesome": false,
-        "type_enable_new_font_awesome": false,
+        "type_enable_font_awesome": true,
+        "type_enable_new_font_awesome": true,
         "home": {
           "header_bg": "#41a875",
           "header_text_color": "#ffffff",
           "header_background_image": "",
           "benefits": {
-            "color_icon": "#39393B",
-            "color_title": "#39393B",
-            "color_text": "#39393B"
+            "color_icon": "#0c3cf8",
+            "color_title": "#39393b",
+            "color_text": "#39393b"
           }
         },
         "product": {
-          "header_bg": "#41a875",
-          "header_text_color": "#ffffff",
+          "header_bg": "#ffffff",
+          "header_text_color": "#39393b",
           "header_background_image": "",
           "footer_text": "Assista ao curso e aumente a performance da sua organização!"
         }
@@ -67,13 +67,13 @@
             "navigation": true,
             "contrast": true
           },
-          "favicon": "",
+          "favicon": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F1f899f3765204f464c9fbacba4ea4329%2Ffavicon+exame.png",
           "navbar": {
             "title": "Elegance Theme",
-            "logo": ""
+            "logo": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fb6431075d312a2405e1df36fd8547225%2Fexame-logo.84a0b3ad.svg"
           },
           "footer": {
-            "logo": "",
+            "logo": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F4c0f1645e3c225f50912e321d3a4706f%2Flogo-exame-rodape.svg",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lectus, pretium quis lobortis sollicitu",
             "site": false,
             "email": false,
@@ -81,7 +81,8 @@
             "address": true,
             "cnpj": true,
             "razao_social": true
-          }
+          },
+          "thumbnail": null
         },
         "home": {
           "header": {
@@ -92,24 +93,26 @@
           },
           "topics": [
             {
-              "title": "Assista onde preferir",
-              "subtitle": "no seu computador, tablet ou celular",
-              "icon": "icon-screen-smartphone"
+              "title": "<strong>Acelere sua carreira</strong>",
+              "subtitle": "Aprenda hoje as<br>habilidades do futuro",
+              "icon": "icon-rocket",
+              "$$hashKey": "object:1260"
             },
             {
-              "title": "Certificados",
-              "subtitle": "Você irá receber nosso certificado na conclusão",
-              "icon": "icon-graduation"
+              "title": "<strong>Os melhores cursos do Brasil</strong>",
+              "subtitle": "Conteúdos originais e dos maiores especialistas do mercado",
+              "icon": "icon-trophy",
+              "$$hashKey": "object:1261"
             },
             {
-              "title": "Materiais Extras",
-              "subtitle": "Para complementar seu estudo além das video-aulas.",
-              "icon": "icon-docs"
+              "title": "<strong>Certificado Exame Academy</strong>",
+              "subtitle": "Receba um certificado com a credibilidade da marca Exame",
+              "icon": "icon-badge",
+              "$$hashKey": "object:1262"
             }
           ],
-          
           "product_list_title": "Sobre nós",
-          "product_list_content": "Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus.",
+          "product_list_content": "A <strong>Exame Academy</strong> é a plataforma de educação digital da Exame, que nasceu para <strong>acelerar</strong> o seu <strong>desenvolvimento pessoal e profissional.</strong>\n<p> \nA realidade do mundo de hoje nos demanda cada vez mais novas habilidades em um ritmo de aprendizagem constante.<strong> #LifelongLearning</strong> <br/><p>\n\nAqui você terá acesso ao conhecimento indispensável e essencial para o <strong>mercado de trabalho do futuro.</strong> Através do nosso conteúdo original e da melhor curadoria em<i>Finanças Pessoais, Investimentos, Tecnologia, Carreira, Marketing Digital, Inovação e Empreendedorismo.</i><br><br>\n\n<strong>Exame Academy, invista seu tempo em você.</strong>",
           "footer": {
             "title": "Donec sollicitudin molestie malesuada. Donec sollicitudin molestie malesuada.",
             "text": "Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus.",
@@ -123,6 +126,74 @@
           },
           "enable_categories": false,
           "categories": []
+        },
+        "injector": {
+          "head": "",
+          "body": null
+        }
+      },
+      "home": {
+        "slider": {
+          "configuration": {
+            "filter": {
+              "color": "#1c1717",
+              "opacity": "0"
+            }
+          },
+          "sliders": [
+            {
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fbbec6390168a558c66c93e8f13f8a2c1%2Fbanner_home_academy_INSTITUCIONAL_400_s_cta.png",
+              "text_color": "#ffffff",
+              "slider_btn_url": "https://academy.exame.com/users/sign_up",
+              "$$hashKey": "object:1075"
+            },
+            {
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F20f60dbddd317497b9ebaaed5217078d%2Fbanner_home_academy_LETSCODE_400_s_cta.png",
+              "text_color": "#ffffff",
+              "$$hashKey": "object:2233"
+            },
+            {
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F60d8cc8b630dc45811c7084c0c8a209a%2Fbanner_home_academy_ACE_400_s_cta.png",
+              "text_color": "#ffffff",
+              "slider_btn_url": "https://academy.exame.com/inovacao-na-pratica",
+              "$$hashKey": "object:1755"
+            },
+            {
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F3c5cf37685d75b8cadf26993e091c060%2Fbanner_home_academy_OMI_400_s_cta.png",
+              "text_color": "#ffffff",
+              "slider_btn_url": "https://academy.exame.com/o-manual-do-investidor",
+              "$$hashKey": "object:2616"
+            }
+          ]
+        },
+        "home_testimonials": {
+          "enabled": true,
+          "testimonials": [
+            {
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F01c8fbb6837ca73a14796deda71525f9%2FWhatsApp+Image+2020-06-16+at+10.56.10.jpeg",
+              "name": "André Barbon",
+              "content": "<i> Do básico ao avançado, o curso passa por todos os conceitos de mercado e economia, ensina sobre cada tipo de investimento e me deu completa confiança para montar com estratégia uma carteira de investimentos para curto e para o longo prazo. </i>",
+              "$$hashKey": "object:3027"
+            },
+            {
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F3db18201e646cbd4526ade72d7ace306%2Fpp.jpg",
+              "name": "Bellini Maia",
+              "content": "<i> Tive uma excelente experiência fazendo meu primeiro curso pela Exame Academy. Conteúdo de alto nível, ótima didática e material muito completo. O formato do curso foi um diferencial, pois estava acostumado a videos longos e cansativos e nesse caso pude encaixar as aulas a minha rotina e no meu dia a dia. </i>",
+              "$$hashKey": "object:3075"
+            },
+            {
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F38ad18dc52a20c2d61f34bb4f8f4ad8e%2FWhatsApp+Image+2020-06-16+at+11.02.43.jpeg",
+              "name": "Paulo Alves",
+              "content": "<i> André Bona passa os conceitos de forma clara, tornando o aprendizado mais fácil e acessível, até para os iniciantes. Para mim foram transformadoras as ideias de alocação com fundamento nos objetivos de curto, médio e longo prazos porque facilita a decisão da escolha de ativos. </i>",
+              "$$hashKey": "object:3099"
+            },
+            {
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F1c5c484be4ebd1d64be7e9b22ad0b77f%2FWhatsApp+Image+2020-06-16+at+10.45.32.jpeg",
+              "name": "Isabel O. Albuquerque",
+              "content": "<i> Para quem só teve de educação financeira o famoso \"não gaste mais do que ganha\", encontrei no Manual do Investidor a didática para entender que a educação financeira é muito mais que isso e também deixar que ser mera poupadora e me tornar definitivamente investidora. </i>",
+              "$$hashKey": "object:3123"
+            }
+          ]
         }
       }
     }

@@ -16,7 +16,54 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-MZTJKPT');</script>
   <!-- End Google Tag Manager -->
-
+  <link rel="preconnect" href="https://tags.crwdcntrl.net">
+  <link rel="preconnect" href="https://bcp.crwdcntrl.net">
+  <link rel="dns-prefetch" href="https://tags.crwdcntrl.net">
+  <link rel="dns-prefetch" href="https://bcp.crwdcntrl.net">
+      <script>
+          ! function() {
+          window.googletag = window.googletag || {};
+          window.googletag.cmd = window.googletag.cmd || [];
+          var targetingKey = 'lotame';
+          var lotameClientId = '11366';
+          var audLocalStorageKey = 'lotame_' + lotameClientId + '_auds';
+          // Immediately get audiences from local storage and get them loaded
+          try {
+              var storedAuds = window.localStorage.getItem(audLocalStorageKey) || '';
+              if (storedAuds) {
+              googletag.cmd.push(function() {
+                  window.googletag.pubads().setTargeting(targetingKey, storedAuds.split(','));
+              });
+              }
+          } catch(e) {
+          }
+          // Callback when targeting audience is ready to push latest audience data
+          var audienceReadyCallback = function (profile) {
+              // Get audiences as an array
+              var lotameAudiences = profile.getAudiences() || [];
+              // Set the new target audiences for call to Google
+              googletag.cmd.push(function() {
+              window.googletag.pubads().setTargeting(targetingKey, lotameAudiences);
+              });
+          };
+          // Lotame Config
+          var lotameTagInput = {
+              data: {},
+              config: {
+              clientId: Number(lotameClientId),
+              audienceLocalStorage: audLocalStorageKey,
+              onProfileReady: audienceReadyCallback
+              }
+          };
+          // Lotame initialization
+          var lotameConfig = lotameTagInput.config || {};
+          var namespace = window['lotame_' + lotameConfig.clientId] = {};
+          namespace.config = lotameConfig;
+          namespace.data = lotameTagInput.data || {};
+          namespace.cmd = namespace.cmd || [];
+          }();
+      </script>
+  <script async src="https://tags.crwdcntrl.net/lt/c/11366/lt.min.js"></script>
   <!-- Basic page needs ================================================== -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
