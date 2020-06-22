@@ -1061,7 +1061,7 @@
     "reset_password": {
       "subject": "Instruções para troca de senha",
       "hello": "Olá, {{first_name}}. Esqueceu sua senha?",
-      "someone_requested_a_link": "Sem problemas! Clique no botão abaixo.",
+      "someone_requested_a_link": "Clique no botão abaixo e crie uma nova",
       "change_my_password": "Redefinir senha",
       "your_password_will_not_change": "Sua senha não irá mudar até você acessar o link acima e criar uma nova.",
       "if_you_did_not_requested": "Se você não requisitou a troca de senha, ignore este email.",
