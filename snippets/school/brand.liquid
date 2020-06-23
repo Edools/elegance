@@ -1,0 +1,9 @@
+{% if current_school.logo %}
+  {% image, src: current_school.logo %}
+{% elsif settings.view.general.navbar.logo.size > 0 %}
+  {% image, src: settings.view.general.navbar.logo %}
+{% elsif settings.view.general.navbar.title.size > 0 %}
+  {{ settings.view.general.navbar.title }}
+{% else %}
+  {{ current_school.name }}
+{% endif %}
