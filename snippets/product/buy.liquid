@@ -36,6 +36,31 @@
       {% endif %}
     </div>
 
+    {% if spark_pay_installments %}
+      <div class="installments">
+        {% for installment in spark_pay_installments %}
+          {% if installment.value == 1 %}
+            {% continue %}
+          {% else %}
+            {% assign amount_in_money   = installment.amount | money %}
+            {% assign amount_with_taxes = installment.amount | number_with_taxes: gateway, installment.value | money %}
+            {% assign grand_total       = installment.total_with_fee | money %}
+
+            {% if gateway.installments_forward_taxes and amount_in_money != amount_with_taxes %}
+              {% assign translation_key = 'installment_amount_with_taxes' %}
+            {% else %}
+              {% assign translation_key = 'installment_amount' %}
+            {% endif %}
+
+            <option>{{ 'checkout.payment.' | append: translation_key | t:
+            count: installment.value, amount: amount_in_money,
+            amount_with_taxes: amount_with_taxes,
+            grand_total: grand_total }}</option>
+          {% endif %}
+        {% endfor %}
+        </div>
+    {% endif %}
+
     <div class="btn-group">
       {% if has_express_checkout == true %}
         {{ 'product.buy' | t | add_to_cart_link: product, oldest_payment_option, 'btn btn-primary btn-lg' }}
