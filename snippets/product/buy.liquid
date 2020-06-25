@@ -22,15 +22,16 @@
 
       {% if has_express_checkout == true %}
         {% if spark_pay_installments %}
-        {% assign installment = spark_pay_installments.last %}
-          {% assign amount_in_money   = installment.amount | money %}
+            {% assign installment = spark_pay_installments.last %}
+            {% assign amount_in_money   = installment.amount | money %}
             {% assign amount_with_taxes = installment.amount | number_with_taxes: gateway, installment.value | money %}
             {% assign grand_total       = installment.total_with_fee | money %}
 
             {% if gateway.installments_forward_taxes and amount_in_money != amount_with_taxes %}
               {% assign translation_key = 'installment_amount_with_taxes' %}
             {% else %}
-              {% assign translation_key = 'installment_amount' %}
+              {% assign grand_total       = spark_pay_installments.first.amount | money %}
+              {% assign translation_key = 'installments_or_one' %}
             {% endif %}
 
             <span class="final-price">{{ 'checkout.payment.' | append: translation_key | t:

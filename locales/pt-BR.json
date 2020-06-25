@@ -532,7 +532,8 @@
       },
       "credit": {
         "unitary": "{{ price }} Créditos"
-      }
+      },
+      "installments_or_one": "{{ count }}x de {{ amount }} ou {{ grand_total }} à vista"
     },
     "payemnt_methods": {
       "credit_card": "no cartão",
@@ -658,6 +659,7 @@
         "one": "{{ amount }} à vista",
         "other": "{{ count }}x de {{ amount }} ({{ grand_total }})"
       },
+      "installments_or_one": "{{ count }}x de {{ amount }} ou {{ grand_total }} à vista",
       "installment_amount_with_taxes": {
         "one": "{{ amount }} à vista s/ juros",
         "other": "{{ count }}x de {{ amount }} c/ juros ({{ amount_with_taxes }})"
