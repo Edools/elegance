@@ -482,6 +482,8 @@
         return
       }
 
+      $("#btn-finalize-purchase").attr('disabled', true);
+
       [...studentDataArray, ...studentAddressArray].forEach(({ name, value }) => {
         if (name === 'user[full_name]') {
           const { firstName, lastName } = splitString(value);
