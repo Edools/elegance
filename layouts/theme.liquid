@@ -130,7 +130,8 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script> 
   {% if current_school | has_feature: 'recaptcha' %}
     <script defer src='https://www.google.com/recaptcha/api.js?onload=onLoadRecaptcha&render=explicit'></script>
-  {% endif %} 
+  {% endif %}
+
 </head>
 
 <body class="{% if current_path == '/' %}home-page{% elsif product %}product-page{% elsif current_path == '/chat' %}chat-page{% endif %}" onselectstart="return false" >
@@ -154,7 +155,12 @@
     </div>
   {% endif %}
   {{ settings.view.injector.body }}
-    
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=39c192e9-79bf-4ec4-941f-db168cbdb3fe"></script>
+    <script type="text/javascript">
+      $(document).on('page:before-change', function () {
+        window.zEACLoaded = undefined;
+      });
+    </script>
 </body>
 </html>
 
