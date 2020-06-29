@@ -34,6 +34,15 @@
       }
     }
 
+    .product-description {
+      img {
+        width: 100% !important;
+        height: auto !important;
+
+        object-fit: contain;
+      }
+    }
+
     .product-info {
       padding-bottom: $padding-large-horizontal * 2;
       text-align: left;
