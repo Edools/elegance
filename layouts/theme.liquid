@@ -74,8 +74,17 @@
 
   <!-- Title ========================================================= -->
   {% assign sub_title = current_page_title | default: '' %}
+  {% if product_page %}
+    {% assign seo_title = product.meta_title | default: main_title %}
+  {% else %}
+    {% assign seo_title = current_school.seo_title | default: main_title %}
+  {% endif %}
   <title>
-    {{ current_school.name }}{% if sub_title.size > 0 %} | {{ sub_title }}{% endif %}
+    {% if seo_title %}
+      {{ seo_title }}
+    {% else %}
+      {{ current_school.name }}{% if sub_title.size > 0 %} | {{ sub_title }}{% endif %}
+    {% endif %}
   </title>
 
   <!-- Social meta ================================================== -->
