@@ -18,7 +18,6 @@
       {{ product.title | truncate: 54 }}
     </a>
   </div>
-
     <div class="footer caption clearfix">
     {% assign has_express_checkout = current_school | has_feature: 'express_checkout' %}
     {% assign first_option = product.payment_options[0] %}
@@ -48,13 +47,22 @@
       </div>
 
       <div class="call-to-action">
-        <a class="more"
+       <a class="more"
         title="{{ product.title }}"
         data-toggle="{% if product.title.size > 60 %}tooltip{% endif %}"
         id="product-{{ product.id }}" href="/{{ product.slug }}">
        saiba mais
      </a>
       </div>
+      {% else %}
+      <div class="call-to-action">
+        <a class="more"
+         title="{{ product.title }}"
+         data-toggle="{% if product.title.size > 60 %}tooltip{% endif %}"
+         id="product-{{ product.id }}" href="/{{ product.slug }}">
+        lista de espera
+      </a>
+       </div>
     {% endif %}
   </div>
 </div>

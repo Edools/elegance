@@ -148,7 +148,7 @@
               "$$hashKey": "object:1075"
             },
             {
-              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F20f60dbddd317497b9ebaaed5217078d%2Fbanner_home_academy_LETSCODE_400_s_cta.png",
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F9122aaf6baab1ee39514e7cc4e149e9c%2Fbanner_home_academy_LETSCODE_400_s_cta_v3.png",
               "text_color": "#ffffff",
               "$$hashKey": "object:2233"
             },
@@ -173,25 +173,36 @@
               "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F01c8fbb6837ca73a14796deda71525f9%2FWhatsApp+Image+2020-06-16+at+10.56.10.jpeg",
               "name": "André Barbon",
               "content": "<i> Do básico ao avançado, o curso passa por todos os conceitos de mercado e economia, ensina sobre cada tipo de investimento e me deu completa confiança para montar com estratégia uma carteira de investimentos para curto e para o longo prazo. </i>",
-              "$$hashKey": "object:3027"
+              "$$hashKey": "object:3027",
+              "title": "O Manual do Investidor"
             },
             {
               "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F3db18201e646cbd4526ade72d7ace306%2Fpp.jpg",
               "name": "Bellini Maia",
               "content": "<i> Tive uma excelente experiência fazendo meu primeiro curso pela Exame Academy. Conteúdo de alto nível, ótima didática e material muito completo. O formato do curso foi um diferencial, pois estava acostumado a videos longos e cansativos e nesse caso pude encaixar as aulas a minha rotina e no meu dia a dia. </i>",
-              "$$hashKey": "object:3075"
+              "$$hashKey": "object:3075",
+              "title": "Inovação na Prática"
             },
             {
               "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F38ad18dc52a20c2d61f34bb4f8f4ad8e%2FWhatsApp+Image+2020-06-16+at+11.02.43.jpeg",
               "name": "Paulo Alves",
               "content": "<i> André Bona passa os conceitos de forma clara, tornando o aprendizado mais fácil e acessível, até para os iniciantes. Para mim foram transformadoras as ideias de alocação com fundamento nos objetivos de curto, médio e longo prazos porque facilita a decisão da escolha de ativos. </i>",
-              "$$hashKey": "object:3099"
+              "$$hashKey": "object:3099",
+              "title": "O Manual do Investidor"
             },
             {
               "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F1c5c484be4ebd1d64be7e9b22ad0b77f%2FWhatsApp+Image+2020-06-16+at+10.45.32.jpeg",
               "name": "Isabel O. Albuquerque",
               "content": "<i> Para quem só teve de educação financeira o famoso \"não gaste mais do que ganha\", encontrei no Manual do Investidor a didática para entender que a educação financeira é muito mais que isso e também deixar que ser mera poupadora e me tornar definitivamente investidora. </i>",
-              "$$hashKey": "object:3123"
+              "$$hashKey": "object:3123",
+              "title": "O Manual do Investidor"
+            },
+            {
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F6f8e25632e3f2778b17f4be68a79c725%2Fsidnei.png",
+              "name": "Sidnei Matos",
+              "content": "<i> O curso é sensacional e com conteúdo de altíssimo nível. Oferece uma visão clara e objetiva sobre inovação e como aplicá-la nas empresas. Os depoimentos complementam as explicações, conectando  a teoria com dia a dia corporativo e o material de apoio funciona com um guia prático. </i>",
+              "$$hashKey": "object:1028",
+              "title": "Inovação na Prática"
             }
           ]
         }

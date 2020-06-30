@@ -29,15 +29,6 @@
   </a>
 </li>
 
-<li class="{% if mobile_class == true %}mobile{% endif %}">
-  {% capture inbox_link_html %}
-  <i class="icon-envelope-open"></i>
-  <span>{{ 'navbar.messages' | t }}</span>
-  {% endcapture %}
-
-  {{ inbox_link_html | inbox_link }}
-</li>
-
 {% if current_user.type == 'Student' %}
 <li class="{% if mobile_class == true %}mobile{% endif %}">
   <a href="/certificates">
