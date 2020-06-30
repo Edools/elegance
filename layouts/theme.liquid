@@ -82,7 +82,7 @@
   {% include 'social-meta-tags' %}
 
   <!-- Helpers ================================================== -->
-  <link rel="canonical" href="{{ canonical_url }}">
+  <link rel="canonical" href="{{ current_url }}">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- CSS ================================================== -->
@@ -104,7 +104,7 @@
           onload="if(media!='all')media='all'">
   {% endif %}
 
-  {% if settings.style.type_enable_new_font_awesome != false %}
+  {% if settings.style.type_enable_new_font_awesome != false %}x
     <link rel="stylesheet"
           href="https://pro.fontawesome.com/releases/v5.12.1/css/all.css"
           integrity="sha384-TxKWSXbsweFt0o2WqfkfJRRNVaPdzXJ/YLqgStggBVRREXkwU7OKz+xXtqOU4u8+"
