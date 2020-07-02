@@ -33,6 +33,14 @@
                 </div>
 
                 <div class="form-group col-md-9">
+                    <div class="form-group {{ required }} {% if form.errors.phone %}has-error{% endif %}">
+                            <label class="control-label">Telefone</label>
+                            <input type="text" id="user-phone" name="user[phone]" placeholder="{{ 'express_checkout.placeholder.phone' | t }}"
+                                   value="{{ current_user.phone }}" class="form-control" {{ required }}>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-9">
                   <label for="usercpf" class="control-label">{{ 'checkout.complete.cpf' | t }}</label>
                   <input id="usercpf" inputmode="numeric" name="user[cpf]" class="form-control"
                     placeholder="___.___.___-__" value="{{ current_user.cpf }}" data-validate-cpf="true"
