@@ -9,7 +9,7 @@
         dots: true,
         mouseDrag: false,
         margin:10,
-        nav:true,
+        nav:false,
         loop: true,
         navText : ['<i class="fas fa-angle-left"></i>','<i class="fas fa-angle-right"></i>'],
         autoplay:true,

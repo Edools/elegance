@@ -112,7 +112,7 @@
             }
           ],
           "product_list_title": "Sobre nós",
-          "product_list_content": "A <strong>Exame Academy</strong> é a plataforma de educação digital da Exame, que nasceu para <strong>acelerar</strong> o seu <strong>desenvolvimento pessoal e profissional.</strong>\n<p> \nA realidade do mundo de hoje nos demanda cada vez mais novas habilidades em um ritmo de aprendizagem constante.<strong> #LifelongLearning</strong> <br/><p>\n\nAqui você terá acesso ao conhecimento indispensável e essencial para o <strong>mercado de trabalho do futuro.</strong> Através do nosso conteúdo original e da melhor curadoria em<i>Finanças Pessoais, Investimentos, Tecnologia, Carreira, Marketing Digital, Inovação e Empreendedorismo.</i><br><br>\n\n<strong>Exame Academy, invista seu tempo em você.</strong>",
+          "product_list_content": "A <strong>Exame Academy</strong> é a plataforma de educação digital da Exame, que nasceu para <strong>acelerar</strong> o seu <strong>desenvolvimento pessoal e profissional.</strong>\n<p> \nA realidade do mundo de hoje nos demanda cada vez mais novas habilidades em um ritmo de aprendizagem constante.<strong> #LifelongLearning</strong> <br/><p>\n\nAqui você terá acesso ao conhecimento indispensável e essencial para o <strong>mercado de trabalho do futuro</strong> através do nosso conteúdo original e da melhor curadoria em<i>Finanças Pessoais, Investimentos, Tecnologia, Carreira, Marketing Digital, Inovação e Empreendedorismo.</i><br><br>\n\n<strong>Exame Academy, invista seu tempo em você.</strong>",
           "footer": {
             "title": "Donec sollicitudin molestie malesuada. Donec sollicitudin molestie malesuada.",
             "text": "Nulla porttitor accumsan tincidunt. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus. Proin eget tortor risus.",
@@ -148,9 +148,10 @@
               "$$hashKey": "object:1075"
             },
             {
-              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F9122aaf6baab1ee39514e7cc4e149e9c%2Fbanner_home_academy_LETSCODE_400_s_cta_v3.png",
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F38778f5548a5729739358b92577de234%2Fbanner_home_academy_LETSCODE_400_c_cta.png",
               "text_color": "#ffffff",
-              "$$hashKey": "object:2233"
+              "$$hashKey": "object:2233",
+              "slider_btn_url": "https://exameacademy.myedools.com/introducao-a-data-science-e-python"
             },
             {
               "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F60d8cc8b630dc45811c7084c0c8a209a%2Fbanner_home_academy_ACE_400_s_cta.png",
@@ -203,6 +204,13 @@
               "content": "<i> O curso é sensacional e com conteúdo de altíssimo nível. Oferece uma visão clara e objetiva sobre inovação e como aplicá-la nas empresas. Os depoimentos complementam as explicações, conectando  a teoria com dia a dia corporativo e o material de apoio funciona com um guia prático. </i>",
               "$$hashKey": "object:1028",
               "title": "Inovação na Prática"
+            },
+            {
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fa118ed6ac516dc0c958daf9c8deafc25%2Fger.png",
+              "name": "Gabriel E. Ribeiro",
+              "content": "<i> Gostei bastante do curso. Já acompanhava o André Bona pelo site, youtube e mídias sociais e buscava justamente um curso que organizasse todo aquele conteúdo que estava disponível, mas de maneira dispersa. Atendeu 100% essa minha demanda e com um bônus surpreendente:  participar de um grupo fechado recebendo sugestões de leituras, vídeos e tirando dúvidas com o próprio André! </i>",
+              "title": "O Manual do Investidor",
+              "$$hashKey": "object:2671"
             }
           ]
         }
