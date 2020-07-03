@@ -32,7 +32,26 @@
       {% endif %}
 
       {% if has_express_checkout == true %}
+        {% if product.spark_pay_installments %}
+          {% assign installment = product.spark_pay_installments.last %}
+          {% assign amount_in_money   = installment.amount | money %}
+          {% assign amount_with_taxes = installment.amount | number_with_taxes: gateway, installment.value | money %}
+          {% assign grand_total       = installment.total_with_fee | money %}
+
+          {% if gateway.installments_forward_taxes and amount_in_money != amount_with_taxes %}
+            {% assign translation_key = 'installment_amount_with_taxes' %}
+          {% else %}
+            {% assign grand_total       = spark_pay_installments.first.amount | money %}
+            {% assign translation_key = 'installments' %}
+          {% endif %}
+
+          <span class="final-price">{{ 'checkout.payment.' | append: translation_key | t:
+          count: installment.value, amount: amount_in_money,
+          amount_with_taxes: amount_with_taxes,
+          grand_total: grand_total }}</span>
+        {% else %}
         <span aria-label="{{ oldest_payment_option.price | money_without_currency | remove: ',00' }} reais" class="final-price">{{ oldest_payment_option.price | money_option_presentation_with_taxes: oldest_payment_option.kind, oldest_payment_option.period, gateway, oldest_payment_option }} </span>
+        {% endif %}
       {% else %}
         {% if first_option.kind == 'subscription' %}
           <span  class="final-price"> {{ first_option.price | money_option_presentation: first_option.kind, first_option.period, 'full', 1 }}</span>

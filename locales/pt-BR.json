@@ -661,6 +661,7 @@
         "other": "{{ count }}x de {{ amount }} ({{ grand_total }})"
       },
       "installments_or_one": "{{ count }}x de {{ amount }} ou {{ grand_total }} à vista",
+      "installments": "{{ count }}x de {{ amount }}",
       "installment_amount_with_taxes": {
         "one": "{{ amount }} à vista s/ juros",
         "other": "{{ count }}x de {{ amount }} c/ juros ({{ amount_with_taxes }})"
