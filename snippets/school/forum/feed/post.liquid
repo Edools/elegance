@@ -1,19 +1,21 @@
 <div id="js-post-item-{{ object.id }}" class="post row js-post">
-  <div class="col-md-3">
+  <div class="col-md-1">
     <div class="post-information post-comment"> 
       <div class="user">
-        <div class="author-name">
-          {{ object.user | fullname }}
-        </div>
         <div class="user-image">
           {% assign avatar_alt = object.user | fullname %}
-          {% image, src: object.user.cover_image_url, alt: avatar_alt %}
+          
+          <img src="{{ object.user.cover_image_url }}" class="img-responsive img-circle">
         </div>
         </div>
       </div>
   </div>
 
-  <div class="col-md-8 well">
+  <div class="col-md-11 well">
+
+    <div class="author-name">
+      {{ object.user | fullname }}
+    </div>
     <div class="date">
       {{ object.created_at | time_ago_in_words }}
     </div>

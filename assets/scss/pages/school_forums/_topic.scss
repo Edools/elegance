@@ -68,7 +68,8 @@
         .author-name {
           @include ellipsis();
 
-          margin-bottom: 5px;
+          margin-bottom: 20px;
+          text-align: center;
           font-size: $font-size-small;
         }
 

@@ -69,7 +69,8 @@
 
 
           .author-name {
-            margin-bottom: $forum-margin-base * .5;
+            margin-bottom: 20px;
+            text-align: center;
             text-align: center;
             font-weight: 800;
             font-size: $font-size-small;
@@ -79,8 +80,8 @@
             display: flex;
             overflow: hidden;
             margin: auto;
-            width: 40px;
-            height: 40px;
+            width: 20px;
+            height: 20px;
             border-radius: 100%;
 
             justify-content: center;
@@ -88,12 +89,11 @@
             align-content: center;
 
             img {
-              width: auto;
+              width: 40px;
               height: 100%;
             }
           }
         }
-
         .topic-image {
           display: flex;
           width: 50px;
