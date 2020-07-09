@@ -156,7 +156,7 @@
                       class="credit-card tab-pane {% if payment_type == 'credit_card' %}active{% endif %}"
                       role="tabpanel" aria-labelledby="credit-card-tab">
 
-                      {% form 'express_checkout/pay', id: card-form %}
+                      {% form 'express_checkout/pay', id: form-card %}
                       <div class="form-container">
 
                         {% if form.errors %}
@@ -168,72 +168,17 @@
                         <input type="hidden" name="order[xcod]" value="{{ params.xcod }}">
                         <input type="hidden" name="order[payment_type]" value="credit_card">
                         <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
-
-                        <div class="form-group">
-                          {% if credit_card.active %}
-                          <div class="alert alert-info">
-                            {{ 'checkout.payment.credit_card_warning' | t }}
-                          </div>
-                          {% endif %}
-
-                          <label for="card-number"
-                            class="control-label">{{ 'checkout.payment.credit_card_number' | t }}</label>
-                          <div id="card-number-container">
-                            <input type="text" inputmode="numeric" id="card-number" name="order[credit_card][number]"
-                              class="form-control" placeholder="____ ____ ____ ____" value="{{ credit_card.number }}"
-                              {% if credit_card.active %} disabled {% endif %} data-validation="length"
-                              data-validation-length="min16, max19"
-                              data-validation-error-msg="{{ 'errors.credit_card.number_invalid' | t }}">
-
-                            <div id="card-number-icons">
-                              <img id="visa" src="{{ 'visa.png' | asset_url }}">
-                              <img id="mastercard" src="{{ 'mastercard.png' | asset_url }}">
-                              <img id="amex" src="{{ 'american-express.png' | asset_url }}">
-                              <img id="dinersclub" src="{{ 'diners.png' | asset_url }}">
-                            </div>
-                          </div>
+                        
+                        <div id="card-container">
+                          <div id="spinner"></div>
                         </div>
-
-                        <div class="form-group">
-                          <label for="card-holder-name"
-                            class="control-label">{{ 'checkout.payment.credit_card_name' | t }}</label>
-                          <input id="card-holder-name" name="order[credit_card][name]" class="form-control"
-                            value="{{ credit_card.name }}" placeholder="{{ 'express_checkout.placeholder.card_name' | t }}" {% if credit_card.active %}
-                            disabled {% endif %} data-validation="length" data-validation-length="min6"
-                            data-validation-error-msg="{{ 'errors.credit_card.name_invalid' | t }}">
-                        </div>
-
-                        <div class="row">
-                          <div class="form-group col-sm-6">
-                            <label for="card-expiration"
-                              class="control-label">{{ 'checkout.payment.credit_card_expiry' | t }}</label>
-                            <input id="card-expiration" inputmode="numeric" name="order[credit_card][expiry]"
-                              class="form-control" value="{{ credit_card.expiry }}" placeholder="MM/AAAA"
-                              {% if credit_card.active %} disabled {% endif %} data-validation="date"
-                              data-validation-format="mm/yyyy"
-                              data-validation-error-msg="{{ 'errors.credit_card.year_month_invalid' | t }}">
-                          </div>
-                          <div class="form-group col-sm-6">
-                            <label for="card-cvc"
-                              class="control-label">{{ 'checkout.payment.credit_card_cvv' | t }}</label>
-                            <div class="input-group">
-                              <input id="card-cvc" type="number" inputmode="numeric" name="order[credit_card][cvc]"
-                                class="form-control" value="{{ credit_card.cvc }}" placeholder="CVC"
-                                {% if credit_card.active %} disabled {% endif %} data-validation="length"
-                                data-validation-length="min3, max4"
-                                data-validation-error-msg="{{ 'errors.credit_card.verification_value_invalid' | t }}">
-                              <span class="input-group-btn">
-                                <button type="button" id="btn-cvc" class="btn form-control"
-                                  data-toggle="popover" data-container="body" data-html="true" data-trigger="hover"
-                                  data-placement="top"
-                                  data-content="<div class='poppover-cvc-container'><span class='card-cvc-preview'></span><div class='text-cvc-preview'><b>{{ 'express_checkout.where_to_find' | t }}</b><br><span>{{ 'express_checkout.description_where_to_find' | t }}</span></div></div>">
-                                  <i class="fal fa-question-circle"></i>
-                                </button>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-
+                        <input type="hidden" name="order[credit_card][brand]">
+                        <input type="hidden" name="order[credit_card][number]">
+                        <input type="hidden" name="order[credit_card][month]">
+                        <input type="hidden" name="order[credit_card][year]">
+                        <input type="hidden" name="order[credit_card][cvc]">
+                        <input type="hidden" name="order[credit_card][name]">
+                        
                         {% if payment_option.kind == 'common' %}
                         <div class="form-group">
                           <label class="control-label">{{ 'checkout.payment.credit_card_installments' | t }}</label>
@@ -409,6 +354,7 @@
     </div>
   </div>
 </div>
+<script src="https://sparkpay-cdn.s3.amazonaws.com/sparkpay.js"></script>
 <script>
   $(document).ready(() => {
 
@@ -482,8 +428,6 @@
         return
       }
 
-      $("#btn-finalize-purchase").attr('disabled', true);
-
       [...studentDataArray, ...studentAddressArray].forEach(({ name, value }) => {
         if (name === 'user[full_name]') {
           const { firstName, lastName } = splitString(value);
@@ -498,6 +442,24 @@
       $(currentFormIdentifier).submit();
 
     });
+  
+    adyen.createCardForm({
+      formType: 'elegance',
+      containerId: 'card-container',
+      environment: window.location.origin.split('.')[2] === 'com' ? 'live' : 'test',
+      locale: 'pt-BR',
+      originDomain: window.location.origin, 
+      onBrand: brandCode => $('input[name="order[credit_card][brand]"]').val(brandCode),
+      onChange: cardData => {
+        $('input[name="order[credit_card][number]"]').val(cardData.encryptedCardNumber);
+        $('input[name="order[credit_card][month]"]').val(cardData.encryptedExpiryMonth);
+        $('input[name="order[credit_card][year]"]').val(cardData.encryptedExpiryYear);
+        $('input[name="order[credit_card][cvc]"]').val(cardData.encryptedSecurityCode);
+        $('input[name="order[credit_card][name]"]').val(cardData.holderName);
+      },
+    });
+
+    $('#btn-finalize-purchase').click(() => adyen.submit());
 
   });
 
@@ -812,6 +774,35 @@
       padding: 0;
     }
   }
+  
+  #card-container {
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #spinner {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid rgb(50, 50, 50);
+    width: 60px;
+    height: 60px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
 </style>
 
 {% if payment_option.facebook_pixel %}
