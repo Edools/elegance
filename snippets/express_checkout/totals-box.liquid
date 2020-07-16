@@ -76,7 +76,7 @@
     <div class="totals-box-item">
       <span class="installment-price">
         <b id="js-payment-installments">
-          {% if spark_pay %}
+          {% if gateway.gateway == 'spark_pay' %}
             {{ installments.last.amount | money }}
           {% else %}
             {{ payment_option.total | number_with_taxes: gateway | divided_by: installments_limit | money }}
