@@ -669,6 +669,10 @@
       "installment_amount_with_taxes": {
         "one": "{{ amount }} à vista s/ juros",
         "other": "{{ count }}x de {{ amount }} c/ juros ({{ amount_with_taxes }})"
+      },
+      "installment_amount_with_taxes_fallback": {
+        "one": "{{ amount }} à vista s/ juros",
+        "other": "{{ count }}x de {{ amount }} mais juros"
       }
     },
     "success": {
