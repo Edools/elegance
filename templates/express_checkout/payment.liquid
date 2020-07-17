@@ -354,7 +354,6 @@
     </div>
   </div>
 </div>
-<script src="https://sparkpay-cdn.s3.amazonaws.com/sparkpay.js"></script>
 <script>
   $(document).ready(() => {
 
@@ -442,24 +441,26 @@
       $(currentFormIdentifier).submit();
 
     });
-  
-    adyen.createCardForm({
-      formType: 'elegance',
-      containerId: 'card-container',
-      environment: window.location.origin.split('.')[2] === 'com' ? 'live' : 'test',
-      locale: 'pt-BR',
-      originDomain: window.location.origin, 
-      onBrand: brandCode => $('input[name="order[credit_card][brand]"]').val(brandCode),
-      onChange: cardData => {
-        $('input[name="order[credit_card][number]"]').val(cardData.encryptedCardNumber);
-        $('input[name="order[credit_card][month]"]').val(cardData.encryptedExpiryMonth);
-        $('input[name="order[credit_card][year]"]').val(cardData.encryptedExpiryYear);
-        $('input[name="order[credit_card][cvc]"]').val(cardData.encryptedSecurityCode);
-        $('input[name="order[credit_card][name]"]').val(cardData.holderName);
-      },
-    });
 
-    $('#btn-finalize-purchase').click(() => adyen.submit());
+    $.getScript('https://sparkpay-cdn.s3.amazonaws.com/sparkpay.js', () => {
+      adyen.createCardForm({
+        formType: 'elegance',
+        containerId: 'card-container',
+        environment: window.location.origin.split('.')[2] === 'com' ? 'live' : 'test',
+        locale: 'pt-BR',
+        originDomain: window.location.origin, 
+        onBrand: brandCode => $('input[name="order[credit_card][brand]"]').val(brandCode),
+        onChange: cardData => {
+          $('input[name="order[credit_card][number]"]').val(cardData.encryptedCardNumber);
+          $('input[name="order[credit_card][month]"]').val(cardData.encryptedExpiryMonth);
+          $('input[name="order[credit_card][year]"]').val(cardData.encryptedExpiryYear);
+          $('input[name="order[credit_card][cvc]"]').val(cardData.encryptedSecurityCode);
+          $('input[name="order[credit_card][name]"]').val(cardData.holderName);
+        },
+      });
+
+      $('#btn-finalize-purchase').click(() => adyen.submit());
+    });
 
   });
 
