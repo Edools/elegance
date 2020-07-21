@@ -43,7 +43,7 @@
         nav:true,
         navText : ['<i class="fas fa-angle-left"></i>','<i class="fas fa-angle-right"></i>'],
         autoplay:true,
-        autoplayTimeout:8000,
+        autoplayTimeout:12000,
         responsiveClass: true,
         
         responsive:{

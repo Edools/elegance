@@ -148,10 +148,10 @@
               "$$hashKey": "object:1075"
             },
             {
-              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F38778f5548a5729739358b92577de234%2Fbanner_home_academy_LETSCODE_400_c_cta.png",
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fb2bd8e339bfb2f88a5323ab689b20ecd%2FBANNER_HOME.png",
               "text_color": "#ffffff",
               "$$hashKey": "object:2233",
-              "slider_btn_url": "https://exameacademy.myedools.com/introducao-a-data-science-e-python"
+              "slider_btn_url": "https://academy.exame.com/introducao-a-data-science-e-python"
             },
             {
               "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F60d8cc8b630dc45811c7084c0c8a209a%2Fbanner_home_academy_ACE_400_s_cta.png",
@@ -160,7 +160,7 @@
               "$$hashKey": "object:1755"
             },
             {
-              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2F3c5cf37685d75b8cadf26993e091c060%2Fbanner_home_academy_OMI_400_s_cta.png",
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Ff18584db6fec5de867c8d7367057fc18%2FBanner_LANCAMENTO_Home_OManualDoInvestidor_v2.png",
               "text_color": "#ffffff",
               "slider_btn_url": "https://academy.exame.com/o-manual-do-investidor",
               "$$hashKey": "object:2616"
@@ -211,6 +211,13 @@
               "content": "<i> Gostei bastante do curso. Já acompanhava o André Bona pelo site, youtube e mídias sociais e buscava justamente um curso que organizasse todo aquele conteúdo que estava disponível, mas de maneira dispersa. Atendeu 100% essa minha demanda e com um bônus surpreendente:  participar de um grupo fechado recebendo sugestões de leituras, vídeos e tirando dúvidas com o próprio André! </i>",
               "title": "O Manual do Investidor",
               "$$hashKey": "object:2671"
+            },
+            {
+              "image_url": "https://edools-3-production.s3.amazonaws.com/org-25042%2Fschool-26067%2Fd14b98ba42e58bfae0e32f1f2c3cd96d%2Fcarla+emydio.jpg",
+              "name": "Carla Emydio",
+              "content": "<i> O curso superou minhas expectativas e desmistificou minha idéia de que seria um conteúdo voltada pra quem é da área de TI. Os instrutores entregam bastante conteúdo, mas com uma didática que torna tudo muito leve. Preparem-se para ter vários insights, seja pra inovar como colaborador de uma empresa ou para empreender em um negócio próprio. Recomendo à todos, pois sabemos que agora mais do que nunca, a Inovação se faz necessária.  </i>",
+              "title": "Inovação na Prática",
+              "$$hashKey": "object:1307"
             }
           ]
         }
