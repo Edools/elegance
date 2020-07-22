@@ -19,7 +19,12 @@
           <strike>{{ product_base_price }}</strike>
         </p>
       {% endif %}
-
+      <p>{% assign default_payment_option = product.payment_options | where: "default", true | first %}
+        {% assign final_price = default_payment_option.price | times: 0.01 %}
+        {% assign base_price = default_payment_option.base_price | times: 0.01 %}
+        {% assign price = final_price | divided_by: base_price | times: 100 |  floor %}
+        {{100 | minus: price}}% de desconto
+      </p> 
       {% if has_express_checkout == true %}
         {% if spark_pay_installments %}
             {% assign installment = spark_pay_installments.last %}

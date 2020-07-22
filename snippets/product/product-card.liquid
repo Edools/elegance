@@ -28,10 +28,17 @@
       {% if first_option.promotional == true %}
         <span aria-hidden="true" class="base-price">
           <strike >{{ first_option.base_price | money_option_presentation_with_taxes: first_option.kind, first_option.period, gateway, first_option }}</strike>
+          <strong>
+          {% assign default_payment_option = product.payment_options | where: "default", true | first %}
+          {% assign final_price = default_payment_option.price | times: 0.01 %}
+          {% assign base_price = default_payment_option.base_price | times: 0.01 %}
+          {% assign price = final_price | divided_by: base_price | times: 100 |  floor %}
+          {{100 | minus: price}}% de desconto
+          </strong>
         </span>
       {% endif %}
-
-      {% if has_express_checkout == true %}
+   
+       {% if has_express_checkout == true %}
         {% if product.spark_pay_installments %}
           {% assign installment = product.spark_pay_installments.last %}
           {% assign amount_in_money   = installment.amount | money %}
