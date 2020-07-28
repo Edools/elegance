@@ -446,7 +446,7 @@
       adyen.createCardForm({
         formType: 'elegance',
         containerId: 'card-container',
-        environment: window.location.origin.includes('localhost') || window.location.origin.includes('.info') ? 'test' : 'live',
+        environment: window.location.origin.includes('localhost') || window.location.origin.includes('.edools-dev') || window.location.origin.includes('.info') ? 'test' : 'live',
         locale: 'pt-BR',
         originDomain: window.location.origin, 
         onBrand: brandCode => $('input[name="order[credit_card][brand]"]').val(brandCode),
