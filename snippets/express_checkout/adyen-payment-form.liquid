@@ -10,7 +10,7 @@
 <input type="hidden" name="order[credit_card][name]">
 
 <script>
-  $.getScript('https://sparkpay-cdn.s3.amazonaws.com/sparkpay.js', () => {
+  $.getScript('{{ gateway_js_url }}', () => {
     adyen.createCardForm({
       formType: 'elegance',
       containerId: 'card-container',
