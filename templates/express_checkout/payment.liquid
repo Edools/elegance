@@ -169,7 +169,7 @@
                         <input type="hidden" name="order[payment_type]" value="credit_card">
                         <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
 
-                        {% if gateway.school.has_feature?(:spark_pay_adyen) %}
+                        {% if gateway.school.has_feature?(:sparkpay_adyen) %}
                           {% include "express_checkout/adyen-payment-form" %}
                         {% else %}
                           {% include "express_checkout/default-payment-form" %}
