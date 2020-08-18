@@ -169,70 +169,11 @@
                         <input type="hidden" name="order[payment_type]" value="credit_card">
                         <input type="hidden" name="payment_option_id" value="{{ payment_option.id }}">
 
-                        <div class="form-group">
-                          {% if credit_card.active %}
-                          <div class="alert alert-info">
-                            {{ 'checkout.payment.credit_card_warning' | t }}
-                          </div>
-                          {% endif %}
-
-                          <label for="card-number"
-                            class="control-label">{{ 'checkout.payment.credit_card_number' | t }}</label>
-                          <div id="card-number-container">
-                            <input type="text" inputmode="numeric" id="card-number" name="order[credit_card][number]"
-                              class="form-control" placeholder="____ ____ ____ ____" value="{{ credit_card.number }}"
-                              {% if credit_card.active %} disabled {% endif %} data-validation="length"
-                              data-validation-length="min16, max19"
-                              data-validation-error-msg="{{ 'errors.credit_card.number_invalid' | t }}">
-
-                            <div id="card-number-icons">
-                              <img id="visa" src="{{ 'visa.png' | asset_url }}">
-                              <img id="mastercard" src="{{ 'mastercard.png' | asset_url }}">
-                              <img id="amex" src="{{ 'american-express.png' | asset_url }}">
-                              <img id="dinersclub" src="{{ 'diners.png' | asset_url }}">
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="form-group">
-                          <label for="card-holder-name"
-                            class="control-label">{{ 'checkout.payment.credit_card_name' | t }}</label>
-                          <input id="card-holder-name" name="order[credit_card][name]" class="form-control"
-                            value="{{ credit_card.name }}" placeholder="{{ 'express_checkout.placeholder.card_name' | t }}" {% if credit_card.active %}
-                            disabled {% endif %} data-validation="length" data-validation-length="min6"
-                            data-validation-error-msg="{{ 'errors.credit_card.name_invalid' | t }}">
-                        </div>
-
-                        <div class="row">
-                          <div class="form-group col-sm-6">
-                            <label for="card-expiration"
-                              class="control-label">{{ 'checkout.payment.credit_card_expiry' | t }}</label>
-                            <input id="card-expiration" inputmode="numeric" name="order[credit_card][expiry]"
-                              class="form-control" value="{{ credit_card.expiry }}" placeholder="MM/AAAA"
-                              {% if credit_card.active %} disabled {% endif %} data-validation="date"
-                              data-validation-format="mm/yyyy"
-                              data-validation-error-msg="{{ 'errors.credit_card.year_month_invalid' | t }}">
-                          </div>
-                          <div class="form-group col-sm-6">
-                            <label for="card-cvc"
-                              class="control-label">{{ 'checkout.payment.credit_card_cvv' | t }}</label>
-                            <div class="input-group">
-                              <input id="card-cvc" type="number" inputmode="numeric" name="order[credit_card][cvc]"
-                                class="form-control" value="{{ credit_card.cvc }}" placeholder="CVC"
-                                {% if credit_card.active %} disabled {% endif %} data-validation="length"
-                                data-validation-length="min3, max4"
-                                data-validation-error-msg="{{ 'errors.credit_card.verification_value_invalid' | t }}">
-                              <span class="input-group-btn">
-                                <button type="button" id="btn-cvc" class="btn form-control"
-                                  data-toggle="popover" data-container="body" data-html="true" data-trigger="hover"
-                                  data-placement="top"
-                                  data-content="<div class='poppover-cvc-container'><span class='card-cvc-preview'></span><div class='text-cvc-preview'><b>{{ 'express_checkout.where_to_find' | t }}</b><br><span>{{ 'express_checkout.description_where_to_find' | t }}</span></div></div>">
-                                  <i class="fal fa-question-circle"></i>
-                                </button>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
+                        {% if spark_pay_adyen %}
+                          {% include "express_checkout/adyen-payment-form" %}
+                        {% else %}
+                          {% include "express_checkout/default-payment-form" %}
+                        {% endif %}
 
                         {% if payment_option.kind == 'common' %}
                         <div class="form-group">
@@ -482,8 +423,6 @@
         return
       }
 
-      $("#btn-finalize-purchase").attr('disabled', true);
-
       [...studentDataArray, ...studentAddressArray].forEach(({ name, value }) => {
         if (name === 'user[full_name]') {
           const { firstName, lastName } = splitString(value);
@@ -498,7 +437,6 @@
       $(currentFormIdentifier).submit();
 
     });
-
   });
 
   function splitString(name){

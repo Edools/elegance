@@ -1,0 +1,60 @@
+<div id="card-container">
+  <div id="spinner"></div>
+</div>
+
+<input type="hidden" name="order[credit_card][brand]">
+<input type="hidden" name="order[credit_card][number]">
+<input type="hidden" name="order[credit_card][month]">
+<input type="hidden" name="order[credit_card][year]">
+<input type="hidden" name="order[credit_card][cvc]">
+<input type="hidden" name="order[credit_card][name]">
+
+<script>
+  $.getScript('{{ gateway_js_url }}', () => {
+    adyen.createCardForm({
+      formType: 'elegance',
+      containerId: 'card-container',
+      environment: window.location.origin.includes('localhost') || window.location.origin.includes('.edools-dev') || window.location.origin.includes('.info') ? 'test' : 'live',
+      locale: 'pt-BR',
+      originDomain: window.location.origin, 
+      onBrand: brandCode => $('input[name="order[credit_card][brand]"]').val(brandCode),
+      onChange: cardData => {
+        $('input[name="order[credit_card][number]"]').val(cardData.encryptedCardNumber);
+        $('input[name="order[credit_card][month]"]').val(cardData.encryptedExpiryMonth);
+        $('input[name="order[credit_card][year]"]').val(cardData.encryptedExpiryYear);
+        $('input[name="order[credit_card][cvc]"]').val(cardData.encryptedSecurityCode);
+        $('input[name="order[credit_card][name]"]').val(cardData.holderName);
+      },
+    });
+    $('#btn-finalize-purchase').click(() => adyen.submit());
+  });
+</script>
+
+<style>
+  #card-container {
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #spinner {
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid rgb(50, 50, 50);
+    width: 60px;
+    height: 60px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+</style>
