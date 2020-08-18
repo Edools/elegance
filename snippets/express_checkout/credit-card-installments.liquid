@@ -6,11 +6,13 @@
     {% for installment in installments_by_value %}
         {% assign amount_in_money = installment.amount | money %}
         {% assign total_multiplication_amount = installment.amount | times: installment.value | money %}
-        {% if spark_pay %}
+        {% if gateway.gateway == 'spark_pay' %}
             {% assign grand_total       = installment.total_with_fee | money %}
             {% assign amount_with_taxes = grand_total %}
             {% if gateway.absorbent_fees %}
                 {% assign translation_key = 'installment_amount' %}
+            {% elsif installment.total_with_fee == 0 %}
+                {% assign translation_key = 'installment_amount_with_taxes_fallback' %}
             {% else %}
                 {% assign translation_key = 'installment_amount_with_taxes' %}
             {% endif %}

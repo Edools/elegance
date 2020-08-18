@@ -48,6 +48,8 @@
 
             {% if gateway.installments_forward_taxes and amount_in_money != amount_with_taxes %}
               {% assign translation_key = 'installment_amount_with_taxes' %}
+            {% elsif installment.total_with_fee == 0 %}
+                {% assign translation_key = 'installment_amount_with_taxes_fallback' %}
             {% else %}
               {% assign translation_key = 'installment_amount' %}
             {% endif %}
