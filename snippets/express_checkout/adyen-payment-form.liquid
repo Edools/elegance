@@ -16,7 +16,7 @@
       containerId: 'card-container',
       environment: window.location.origin.includes('localhost') || window.location.origin.includes('.edools-dev') || window.location.origin.includes('.info') ? 'test' : 'live',
       locale: 'pt-BR',
-      originDomain: window.location.origin, 
+      originDomain: window.location.origin,
       onBrand: brandCode => $('input[name="order[credit_card][brand]"]').val(brandCode),
       onChange: cardData => {
         $('input[name="order[credit_card][number]"]').val(cardData.encryptedCardNumber);
@@ -25,14 +25,17 @@
         $('input[name="order[credit_card][cvc]"]').val(cardData.encryptedSecurityCode);
         $('input[name="order[credit_card][name]"]').val(cardData.holderName);
       },
+      onCardNumberInput: cardNumber => {}
     });
+
     $('#btn-finalize-purchase').click(() => adyen.submit());
+
   });
 </script>
 
 <style>
   #card-container {
-    height: 260px;
+    height: 335px;
     display: flex;
     align-items: center;
     justify-content: center;
