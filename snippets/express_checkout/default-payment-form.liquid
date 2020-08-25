@@ -62,3 +62,35 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(() => {
+    const input = document.getElementById('card-number');
+    if (input) payform.cardNumberInput(input);
+
+    $('#card-expiration').mask('00/0000');
+
+    $('.container-spacing input').keyup(event => {
+      $(`#${event.target.id}`).validate()
+    });
+
+    $('[data-toggle="popover"]').popover({
+      placement: function (context, source) {
+        setTimeout(() => this.$tip.css('left', '-=40'), 0);
+        return 'top';
+      },
+    });
+
+    $('#card-number').keyup(event => {
+      $('#visa').css({ opacity: 0.5 });
+      $('#mastercard').css({ opacity: 0.5 });
+      $('#amex').css({ opacity: 0.5 });
+      $('#dinersclub').css({ opacity: 0.5 });
+
+      const cardType = payform.parseCardType(event.target.value);
+
+      $('#card-cvc').mask(cardType === 'amex' ? '0000' : '000');
+      $(`#${cardType}`).css({ opacity: 1 });
+    });
+  });
+</script>
