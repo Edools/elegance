@@ -94,7 +94,7 @@
             {% endfor %}
           </ul>
         {% else %}
-          {% if gateway.gateway == 'hotmart' %}
+          {% if gateway.gateway == 'hotmart' and first_option.kind != 'free' %}
             <a class="hotmart-fb btn btn-primary btn-lg" href="{{ first_option.hotmart_config.hotmart_checkout_url }}">
               {{ 'product.buy' | t }}
             </a>
