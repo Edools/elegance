@@ -9,7 +9,6 @@
 <input type="hidden" name="order[credit_card][cvc]">
 <input type="hidden" name="order[credit_card][name]">
 
-<script type="text/javascript" src="{{ gateway_js_config_url }}"></script>
 <script>
   $.getScript('{{ gateway_js_url }}', () => {
     adyen.createCardForm({
