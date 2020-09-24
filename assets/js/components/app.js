@@ -45,7 +45,7 @@
     },
 
     bindCepService() {
-      $(document).on('cep-result', function(_event, result){
+      $(document).on('cep-result', function (_event, result) {
         if (result) {
           $('input[name="user[address_attributes][street]"]').val(result.street);
           $('input[name="user[address_attributes][city]"]').val(result.city);
@@ -60,7 +60,7 @@
       var $userCpf = $('#user-cpf');
 
       if ($userCpf.data('validate-cpf')) {
-        $userCpf.on('keyup', function() {
+        $userCpf.on('keyup', function () {
           var $field = $(this);
           var $parents = $field.parent();
           var $validationMessage = $('<span />', {
@@ -117,6 +117,7 @@
       app.bindValidationCpf();
       app.randomQuizStatistics();
       app.bindCepService();
+      appModal.init();
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
     }
