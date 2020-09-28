@@ -1,4 +1,4 @@
-{% if answer.try(:corrected_at) %}
+{% if answer.corrected_at %}
   {% if lesson.min_grade > 0 %}
 
     {% assign questions_size = answer.exam_question_answers.size %}
