@@ -1,5 +1,5 @@
 <div id="sent-files">
-  {% if answer.files.size > 0 %}
+  {% if answer.try(:files).try(:size) && answer.try(:files).try(:size) > 0 %}
     <h4>{{ 'upload.files_sent' | t }}</h4>
 
     {% for file in answer.files %}
@@ -15,3 +15,11 @@
     </div>
   {% endif %}
 </div>
+
+{% if answer.try(:corrected_at) %}
+  <div class="alert alert-info">
+    <span class="question-comment">
+      <strong>{{ 'upload.teacher_comment' | t }}:</strong> {{ answer.comment }}
+    </span>
+  </div>
+{% endif %}
