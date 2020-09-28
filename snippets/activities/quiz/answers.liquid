@@ -252,6 +252,14 @@
 
           {% endcase %}
 
+          {% if question.comment and ((activity.show_comments == 'always') or (activity.show_comments == 'approved' and answer.approved?)) %}
+            <div class="alert alert-info">
+              <span class="question-comment">
+                <strong>{{ 'quiz.teacher_comment' | t }}:</strong> {{ question.comment }}
+              </span>
+            </div>
+          {% endif %}
+
           <div class="pull-right badge">
             Pontuação: {{ question_answer.score | round }} / {{ question.point }}
           </div>
