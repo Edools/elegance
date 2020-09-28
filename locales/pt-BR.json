@@ -873,8 +873,7 @@
     "save": "Salvar arquivos",
     "files_sent": "Arquivos enviados",
     "any_uploaded_file": "Nenhum arquivo enviado",
-    "drag_files": "Solte os arquivos aqui",
-    "teacher_comment": "Comentário do professor"
+    "drag_files": "Solte os arquivos aqui"
   },
   "pages": {
     "retry_payment": {
