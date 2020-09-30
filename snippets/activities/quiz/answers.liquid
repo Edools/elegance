@@ -10,7 +10,7 @@
     {% endfor %}
 
     {% assign performance = correct_answers | divided_by: questions_size | times: 100 | round %}
-    {% if answer.approved? %}    
+    {% if answer.approved? %}
       <p class="alert alert-success alert-approved">
         {{ 'quiz.messages.approved' | t: performance: performance }}
       </p>
@@ -74,6 +74,11 @@
             <div class="discursive-answer">
               <div class="answer-text">{{ question_answer.text }}</div>
               <br/>
+            </div>
+            <div class="alert alert-info">
+              <span class="question-comment">
+                <strong>{{ 'quiz.teacher_comment' | t }}:</strong> {{ question_answer.comment }}
+              </span>
             </div>
           {% when 'MultipleChoiceExamQuestion' %}
             <div class="multiple-choice-answer">
