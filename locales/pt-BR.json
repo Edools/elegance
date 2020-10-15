@@ -21,6 +21,21 @@
       "short": "%d de %B, %H:%M"
     }
   },
+  "app_modal": {
+    "desktop": {
+      "title": "Baixe o app HeroSpark e leve seu aprendizado sempre com você!",
+      "qrcode_text": "Aponte a câmera para o QR Code e baixe o app",
+      "navbar_button": "Acesse pelo App"
+    },
+    "mobile": {
+      "title": "HeroSpark",
+      "text": "O aplicativo oficial",
+      "buttons": {
+        "download": "Download",
+        "close": "Fechar"
+      }
+    }
+  },
   "general": {
     "see_all": "Ver todos",
     "load_more": "Carregar mais",

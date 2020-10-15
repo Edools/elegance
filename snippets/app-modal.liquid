@@ -15,7 +15,7 @@
     </div>
     <div class="appModalDesktop_info">
       <h3 class="appModalDesktop_info-title">
-      Baixe o app HeroSpark e leve seu aprendizado sempre com você!
+        {{ 'app_modal.desktop.title' | t }}
       </h3>
       <div class="appModalDesktop_info-links">
         <a class="appModalDesktop_info-links--button -appStore" href="{{ appStoreUrl }}" title="Baixar na App Store">
@@ -26,10 +26,10 @@
         </a>
       </div>
       <div class="appModalDesktop_info-qrcode">
-        <img src="{{'mobile-app-modal/qrcode.png' | asset_url }}" alt="QR Code">
+        <img src="https://cdn.edools.com/assets/images/misc/herospark-app-qrcode.png" alt="QR Code">
       </div>
       <span class="appModalDesktop_info-text">
-      Aponte a câmera para o QR Code e baixe o app
+        {{ 'app_modal.desktop.qrcode_text' | t }}
       </span>
     </div>
   </div>
@@ -38,15 +38,19 @@
 <section id="appModalMobile" class="appModalMobile">
   <div class="appModalMobile-info">
     <div class="appModalMobile-logo">
-      <img src="{{'herospark-icon.png' | asset_url }}" alt="Herospark">
+      <img src="https://cdn.edools.com/assets/images/logos/herospark-logo-icon.png" alt="Herospark">
     </div>
     <div class="appModalMobile-company">
-      <h3 class="appModalMobile-company--title">HeroSpark</h3>
-      <span class="appModalMobile-company--text">O aplicativo oficial</span>
+      <h3 class="appModalMobile-company--title">{{ 'app_modal.mobile.title' | t }}</h3>
+      <span class="appModalMobile-company--text">{{ 'app_modal.mobile.text' | t }}</span>
     </div>
   </div>
   <div class="appModalMobile-buttons">
-    <a class="appModalMobile-buttons--download" href="{{ appUrl }}" target="_blank">Download</a>
-    <button class="appModalMobile-buttons--close js_appModalMobile-close">Fechar</button>
+    <a class="appModalMobile-buttons--download" href="{{ appUrl }}" target="_blank">
+      {{ 'app_modal.mobile.buttons.download' | t }}
+    </a>
+    <button class="appModalMobile-buttons--close js_appModalMobile-close">
+      {{ 'app_modal.mobile.buttons.close' | t }}
+    </button>
   </div>
 </section>
