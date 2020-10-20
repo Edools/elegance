@@ -2,7 +2,7 @@
   {
     "name": "Configurações Gerais",
     "id": "1",
-    "icon" : "globe",
+    "icon": "globe",
     "settings": [
       {
         "template": "<h3>Thumbnail</h3><p>Thumbnail é a imagem que aparecerá quando você compartilhar o link de sua escola em redes sociais como <i>Facebook, Twitter, Linkedin</i>.<br><strong>Exemplo</strong>: <img src='https://edools-3-production.s3.amazonaws.com/org-1388%2Fschool-1387%2F0834e6d3ab7ce47f4b1da0c241e1b495%2Fthumbnail_academia.png'></p>"
@@ -12,7 +12,7 @@
         "type": "textarea",
         "templateOptions": {
           "label": "Url da Imagem",
-          "rows" : 3
+          "rows": 3
         }
       },
       {
@@ -206,7 +206,6 @@
           "placeholder": "ex: 16px"
         }
       },
-
       {
         "template": "<br><h3>Textos</h3>"
       },
@@ -300,8 +299,6 @@
           "placeholder": "ex: 16px"
         }
       },
-
-
       {
         "template": "<br><h3>Botões Primários</h3>"
       },
@@ -328,7 +325,6 @@
       {
         "template": "<p>Os <b>botões secundários</b> são os botões de navegação entre as páginas de sua Escola. <br>Exemplos:<i> Ir para o Curso, Voltar, Buscar. </i></p>"
       },
-
       {
         "key": "style.color_button_secondary_bg",
         "type": "color",
@@ -358,7 +354,7 @@
   {
     "name": "Navbar",
     "id": "2",
-    "icon" : "globe",
+    "icon": "globe",
     "settings": [
       {
         "template": "<h3>Estilo da Navbar</h3>"
@@ -370,7 +366,6 @@
           "label": "Cor de Fundo"
         }
       },
-
       {
         "key": "view.general.navbar.title",
         "type": "input",
@@ -388,7 +383,6 @@
           "label": ""
         }
       },
-
       {
         "template": "<h3>Ícones</h3>"
       },
@@ -499,14 +493,23 @@
           "label": "Tamanho da Fonte",
           "placeholder": "ex: 16px"
         }
+      },
+      {
+        "template": "<h3>Modal do Aplicativo</h3>"
+      },
+      {
+        "key": "view.general.navbar.app_modal",
+        "type": "checkbox",
+        "templateOptions": {
+          "label": "Habilitar Modal do Aplicativo"
+        }
       }
-
     ]
   },
   {
     "name": "Footer",
     "id": "3",
-    "icon" : "globe",
+    "icon": "globe",
     "settings": [
       {
         "template": "<h3>Footer</h3>"
@@ -592,12 +595,11 @@
           "label": "Razão Social"
         }
       }
-
     ]
   },
   {
     "name": "Header",
-    "icon" : "home",
+    "icon": "home",
     "id": "4",
     "settings": [
       {
@@ -661,12 +663,11 @@
           "placeholder": "ex: https://host.com/capa.png"
         }
       }
-
     ]
   },
   {
     "name": "Tópicos",
-    "icon" : "home",
+    "icon": "home",
     "id": "5",
     "settings": [
       {
@@ -693,7 +694,6 @@
           "label": "Cor do texto abaixo do título"
         }
       },
-
       {
         "template": "<h3>Conteúdo dos Tópicos</h3><p>Encontre os ícones neste endereço: <a target=\"_blank\" href=\"https://simplelineicons.github.io/\">Simple Line Icons</a>.</p>"
       },
@@ -734,7 +734,7 @@
   },
   {
     "name": "Destaque de Produtos",
-    "icon" : "home",
+    "icon": "home",
     "id": "6",
     "settings": [
       {
@@ -745,14 +745,14 @@
         "type": "textarea",
         "templateOptions": {
           "label": "Título",
-          "rows" : 4
+          "rows": 4
         }
       }
     ]
   },
   {
     "name": "Apresentação",
-    "icon" : "home",
+    "icon": "home",
     "id": "7",
     "settings": [
       {
@@ -763,7 +763,7 @@
         "type": "textarea",
         "templateOptions": {
           "label": "Título",
-          "rows" : 3
+          "rows": 3
         }
       },
       {
@@ -830,7 +830,7 @@
   },
   {
     "name": "Divisão por Categorias",
-    "icon" : "home",
+    "icon": "home",
     "id": "8",
     "settings": [
       {
@@ -872,7 +872,7 @@
   },
   {
     "name": "Página de Produto",
-    "icon" : "book",
+    "icon": "book",
     "id": "9",
     "settings": [
       {
@@ -909,10 +909,9 @@
       }
     ]
   },
-
   {
     "name": "Injetor HTML/CSS/JS",
-    "icon" : "code",
+    "icon": "code",
     "id": "10",
     "settings": [
       {
@@ -934,7 +933,7 @@
   {
     "name": "Acessibilidade",
     "id": "11",
-    "icon" : "wheelchair",
+    "icon": "wheelchair",
     "settings": [
       {
         "key": "view.general.accessibility.enabled",

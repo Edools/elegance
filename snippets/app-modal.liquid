@@ -1,0 +1,56 @@
+{% assign appUrl = 'http://onelink.to/gj2jnu' %}
+{% assign playStoreUrl = 'https://play.google.com/store/apps/details?id=com.herospark&utm_source=elegance-theme&utm_campaign=members-area-button-modal-01&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' %}
+{% assign appStoreUrl = 'https://apps.apple.com/br/app/herospark/id1491015699&utm_source=elegance-theme&utm_campaign=members-area-button-modal-01' %}
+
+<section id="appModalDesktop" class="appModalDesktop">
+  <div class="appModalDesktop_background js_appModalDesktop-close"></div>
+  <div class="appModalDesktop_container">
+    <button class="appModalDesktop_button-close js_appModalDesktop-close" title="Fechar">
+      <svg class="appModalDesktop_button-close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 10">
+        <path fill="#262626" fill-rule="evenodd" d="M5.944 5l2.854-2.972.589-.613a.239.239 0 000-.328l-.63-.655a.216.216 0 00-.314 0L5 4.017 1.557.43a.216.216 0 00-.314 0l-.63.656a.239.239 0 000 .328L4.056 5 .613 8.585a.239.239 0 000 .328l.63.655c.086.09.227.09.314 0L5 5.983l2.854 2.972.589.613c.086.09.227.09.314 0l.63-.655a.239.239 0 000-.328L5.944 5z" clip-rule="evenodd"/>
+      </svg>
+    </button>
+    <div class="appModalDesktop_illustration">
+      {% include 'svg/mobile-modal-illustration' %}
+    </div>
+    <div class="appModalDesktop_info">
+      <h3 class="appModalDesktop_info-title">
+        {{ 'app_modal.desktop.title' | t }}
+      </h3>
+      <div class="appModalDesktop_info-links">
+        <a class="appModalDesktop_info-links--button -appStore" href="{{ appStoreUrl }}" title="Baixar na App Store">
+          <img class="appModalDesktop_info-links--button-img" src="{{'mobile-app-modal/bt-app-store.jpg' | asset_url }}" alt="App Store">
+        </a>
+        <a class="appModalDesktop_info-links--button -googlePlay" href="{{ playStoreUrl }}" title="Baixar no Google Play">
+          <img class="appModalDesktop_info-links--button-img" src="{{'mobile-app-modal/bt-google-play.jpg' | asset_url }}" alt="Google Play">
+        </a>
+      </div>
+      <div class="appModalDesktop_info-qrcode">
+        <img src="https://cdn.edools.com/assets/images/misc/herospark-app-qrcode.png" alt="QR Code">
+      </div>
+      <span class="appModalDesktop_info-text">
+        {{ 'app_modal.desktop.qrcode_text' | t }}
+      </span>
+    </div>
+  </div>
+</section>
+
+<section id="appModalMobile" class="appModalMobile">
+  <div class="appModalMobile-info">
+    <div class="appModalMobile-logo">
+      <img src="https://cdn.edools.com/assets/images/logos/herospark-logo-icon.png" alt="Herospark">
+    </div>
+    <div class="appModalMobile-company">
+      <h3 class="appModalMobile-company--title">{{ 'app_modal.mobile.title' | t }}</h3>
+      <span class="appModalMobile-company--text">{{ 'app_modal.mobile.text' | t }}</span>
+    </div>
+  </div>
+  <div class="appModalMobile-buttons">
+    <a class="appModalMobile-buttons--download" href="{{ appUrl }}" target="_blank">
+      {{ 'app_modal.mobile.buttons.download' | t }}
+    </a>
+    <button class="appModalMobile-buttons--close js_appModalMobile-close">
+      {{ 'app_modal.mobile.buttons.close' | t }}
+    </button>
+  </div>
+</section>

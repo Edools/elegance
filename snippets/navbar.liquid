@@ -39,6 +39,16 @@
 
 
         {% if current_user %}
+          {% if settings.view.general.navbar.app_modal == true %}
+            <li class="appModalDesktop_button-nav">
+                <a href="javascript:;">
+                  <button class="appModalDesktop_button-open js_appModalDesktop-open">
+                    {{ 'app_modal.desktop.navbar_button' | t }}
+                  </button>
+                </a>
+            </li>
+          {% endif %}
+
           <li>
             {% assign new_forum = current_school | has_feature: 'new_forum' %}
             <a href="{% if new_forum %}/school/forums{% else %}/forums{% endif %}">
@@ -87,7 +97,6 @@
               {% include 'navbar-user-links' %}
             </ul>
           </li>
-
         {% else %}
           <li>{{ 'navbar.sign_in' | t | login_link }}</li>
         {% endif %}
@@ -95,3 +104,7 @@
     </div>
   </div>
 </header>
+
+{% if current_user and settings.view.general.navbar.app_modal == true %}
+  {% include 'app-modal' %}
+{% endif %}

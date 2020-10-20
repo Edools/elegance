@@ -70,7 +70,8 @@
           "favicon": "",
           "navbar": {
             "title": "Elegance Theme",
-            "logo": ""
+            "logo": "",
+            "app_modal": false
           },
           "footer": {
             "logo": "",
