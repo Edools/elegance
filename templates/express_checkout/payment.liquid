@@ -65,7 +65,7 @@
                 </div>
 
                 {% endif %}
-          
+                
               </form>
             </div>
           </div>
@@ -338,9 +338,9 @@
               <i class="fal fa-lock"></i>
             </button>
           </div>
-                          
+          
           <div class="buttons-padding">
-            <button id="btn-full-discount" style="display:none;"
+            <button id="btn-full-discount"
               class="btn btn-block btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}
               <i class="fal fa-lock"></i>
             </button>
@@ -380,7 +380,7 @@
 
       for (var [key, value] of formData.entries()) {
         student_params[key] = value
-        console.log(key + " / " + value);
+        console.log(student_params);
       }
     });
 
