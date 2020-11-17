@@ -65,13 +65,6 @@
                 </div>
 
                 {% endif %}
-                
-                <div class="buttons-padding">
-                  <button id="btn-full-discount" type="submit" style="display:none;"
-                    class="btn btn-block btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}
-                    <i class="fal fa-lock"></i>
-                  </button>
-                </div>
           
               </form>
             </div>
@@ -341,6 +334,13 @@
           
           <div class="buttons-padding">
             <button id="btn-finalize-purchase"
+              class="btn btn-block btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}
+              <i class="fal fa-lock"></i>
+            </button>
+          </div>
+                          
+          <div class="buttons-padding">
+            <button id="btn-full-discount" style="display:none;"
               class="btn btn-block btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}
               <i class="fal fa-lock"></i>
             </button>
