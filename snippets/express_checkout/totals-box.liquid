@@ -36,7 +36,7 @@
     <div class="totals-box-item discount-text">-
       {{ discount | money_option_presentation: paymentOption.kind, paymentOption.period, 'full', 1}}</div>
   </div>
-
+  
   {% if payment_option.kind == 'subscription' %}
     <div class="totals-box-item discount-text pull-right">* {{ 'checkout.coupon_recurrency_memberships_quantity' | t: quantity: coupon.recurrency_memberships_quantity }}</div>
   {% endif %}
@@ -124,6 +124,23 @@
 </style>
 
 <script>
+
+  {% if paymentOption.total == 0 %}
+    $(document).ready(() => {
+      $("#full-discount-values").html("\
+        <input type='hidden' name='coupon_name'>\
+        <input type='hidden' name='coupon_discount' value='100%''>\
+      ");
+      $('#btn-finalize-purchase').hide();
+      $('#btn-full-discount').show();
+    });
+  {% else if paymentOption.total != 0 %}
+    $(document).ready(() => {
+      $('#btn-finalize-purchase').show();
+      $('#btn-full-discount').hide();
+    });
+  {% endif %} 
+  
   var coupon = '{{ coupon }}';
 
   $('#js-input-coupon-container').hide();

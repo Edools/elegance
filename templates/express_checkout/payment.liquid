@@ -17,6 +17,7 @@
           <div class="form-container">
             <div class="row">
               <form id="student-form">
+                <div id="full-discount-values"></div>
                 {% if current_user == nil %}
                 <div class="form-group col-md-12">
                   <label for="user-full-name" class="control-label">{{ 'checkout.complete.full_name' | t }}</label>
@@ -64,6 +65,14 @@
                 </div>
 
                 {% endif %}
+                
+                <div class="buttons-padding">
+                  <button id="btn-full-discount" type="submit" style="display:none;"
+                    class="btn btn-block btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}
+                    <i class="fal fa-lock"></i>
+                  </button>
+                </div>
+          
               </form>
             </div>
           </div>
@@ -329,8 +338,7 @@
             </div>
           </form>
           {% endif %}
-
-
+          
           <div class="buttons-padding">
             <button id="btn-finalize-purchase"
               class="btn btn-block btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}
@@ -361,6 +369,19 @@
     $('a[data-toggle="tab"]').on('shown.bs.tab', event => {
       const target = $(event.target).attr("href");
       $('#address-container').fadeIn().css({ display: target === '#boleto' ? 'block' : 'none' });
+    });
+    
+    $('#btn-full-discount').click(function() {
+
+      const studentForm = document.getElementById("student-form");
+      const formData = new FormData(studentForm);
+
+      let student_params = {}
+
+      for (var [key, value] of formData.entries()) {
+        student_params[key] = value
+        console.log(key + " / " + value);
+      }
     });
 
     $("#btn-finalize-purchase").click(() => {
@@ -420,7 +441,6 @@
 
       $(currentFormIdentifier).submit();
       $("#btn-finalize-purchase").attr("disabled", true);
-
     });
   });
 
@@ -657,7 +677,7 @@
     padding: 0 35px;
   }
 
-  #btn-finalize-purchase {
+  #btn-finalize-purchase, #btn-full-discount {
     background-color: #34B469;
     box-shadow: 0px 2px 4px rgba(38, 147, 83, 0.2);
     border-radius: 2px;
