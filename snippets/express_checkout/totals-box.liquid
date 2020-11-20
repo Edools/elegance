@@ -127,17 +127,12 @@
 
   {% if paymentOption.total == 0 %}
     $(document).ready(() => {
-      $("#full-discount-values").html("\
-        <input type='hidden' name='coupon_name'>\
-        <input type='hidden' name='coupon_discount' value='100%''>\
+      $("#coupon-fields").html("\
+          <input type='hidden' name='coupon_name'>\
+          <input type='hidden' name='coupon_value' value='100%' />\
+          <label for='coupon-full-active'>Estou utilizando um cupom de 100%</label>\
+          <input type='checkbox' name='coupon-full-active' id='coupon-full-active' checked='checked' onclick='return false;'/>\
       ");
-      $('#btn-finalize-purchase').hide();
-      $('#btn-full-discount').show();
-    });
-  {% else if paymentOption.total != 0 %}
-    $(document).ready(() => {
-      $('#btn-finalize-purchase').show();
-      $('#btn-full-discount').hide();
     });
   {% endif %} 
   

@@ -17,7 +17,6 @@
           <div class="form-container">
             <div class="row">
               <form id="student-form">
-                <div id="full-discount-values"></div>
                 {% if current_user == nil %}
                 <div class="form-group col-md-12">
                   <label for="user-full-name" class="control-label">{{ 'checkout.complete.full_name' | t }}</label>
@@ -148,6 +147,7 @@
                       </a>
                     </li>
                     {% endif %}
+
                   </ul>
 
                   <div class="tab-content">
@@ -244,6 +244,14 @@
                       {% endform %}
                     </div>
                     {% endif %}
+
+                    <div id="coupon-full" class="coupon-full tab-pane" role="tabpanel" aria-labelledby="coupon-full-tab">
+                      <form id="coupon-full-form" class="has-validation-callback" method="post" action="/express_checkout/pay" data-remote="false">
+                        <div class="form-container">
+                          <div id="coupon-fields"></div>
+                        </div>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -332,15 +340,10 @@
           </form>
           {% endif %}
           
-          <div class="buttons-padding">
-            <button id="btn-finalize-purchase"
-              class="btn btn-block btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}
-              <i class="fal fa-lock"></i>
-            </button>
-          </div>
+          <div id="coupon-check"></div>
           
           <div class="buttons-padding">
-            <button id="btn-full-discount"
+            <button id="btn-finalize-purchase"
               class="btn btn-block btn-primary btn-finalize">{{ 'checkout.payment.credit_card_pay' | t }}
               <i class="fal fa-lock"></i>
             </button>
@@ -366,28 +369,20 @@
 
     $('#usercpf').mask('000.000.000-00');
 
+
     $('a[data-toggle="tab"]').on('shown.bs.tab', event => {
       const target = $(event.target).attr("href");
       $('#address-container').fadeIn().css({ display: target === '#boleto' ? 'block' : 'none' });
-    });
-    
-    $('#btn-full-discount').click(function() {
-
-      const studentForm = document.getElementById("student-form");
-      const formData = new FormData(studentForm);
-
-      let student_params = {}
-
-      for (var [key, value] of formData.entries()) {
-        student_params[key] = value
-        console.log(student_params);
-      }
     });
 
     $("#btn-finalize-purchase").click(() => {
 
       const activeTab = $('#tab-payment-methods li.active a').attr('href');
       const currentFormIdentifier = `#${$(activeTab).find('form').attr('id')}`;
+      
+      if ($('#coupon-full-active').is(':checked')) {
+        const currentFormIdentifier = '#coupon-full-form';
+      }
 
       const studentBlur = $('#student-form input');
       forceVerifyField(studentBlur);
@@ -409,7 +404,8 @@
             return
           }
         }
-      } else if (currentFormIdentifier === '#boleto-form') {
+      } 
+      else if (currentFormIdentifier === '#boleto-form') {
         const studentAddressBlur = $('#student-address-form input');
         forceVerifyField(studentAddressBlur);
 
@@ -418,7 +414,19 @@
           return
         }
         studentAddressArray = $('#student-address-form').serializeArray();
-      }
+      } 
+      else if (currentFormIdentifier === '#coupon-full-form') {
+        const couponFullForm = document.getElementById("coupon-full-form");
+        const formData = new FormData(couponFullForm);
+  
+        let couponFull_params = {}
+  
+        for (var [key, value] of formData.entries()) {
+          couponFull_params[key] = value
+          console.log(couponFull_params);
+        }
+      } 
+      
 
       const checkboxTermsOfServiceBlur = $('#checkbox-terms-of-service');
       forceVerifyField(checkboxTermsOfServiceBlur);
