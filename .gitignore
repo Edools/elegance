@@ -7,5 +7,4 @@ theme.json
 dump.rdb
 .nvmrc
 .vscode
-deployed.txt
-entrypoint.rb
+assets/compiled/
