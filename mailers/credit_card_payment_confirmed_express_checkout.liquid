@@ -182,7 +182,11 @@
                                                          <p style="text-align: center;"><span style="font-size: 14px;">Boas-not&iacute;cias, {{ user.first_name }}. Voc&ecirc; j&aacute; pode acessar e aproveitar o conte&uacute;do do seu produto. Comece agora:</span></p>
 
                                                          {% if user.confirmed_at == nil %}
-                                                            <p style="text-align: center;font-weight:bold;"><span style="font-size: 14px;">Estamos enviando agora um email para você definir sua senha. Procure-o em sua caixa de entrada e comece já!</p>
+                                                            <p style="text-align: center;font-weight:bold;">
+                                                              <a href="{{ accept_invitation_url }}" style="display:inline-block;background:#2cc3cc;color:#ffffff;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:16px;font-weight:normal;line-height:100%;margin: 25px 0px 0px 0px;text-decoration:none;text-transform:none;padding:11px 32px 11px 32px;mso-padding-alt:0px;border-radius:4px;" target="_blank">
+                                                                Definir senha e criar conta
+                                                              </a>
+                                                            </p>
                                                          {% endif %}
                                                       </div>
                                                    </td>
