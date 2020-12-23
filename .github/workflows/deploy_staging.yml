@@ -19,7 +19,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install Hero theme cli
-        run: npm i -g hero-themes-cli
+        run: npm i -g @herospark/hero-themes-cli
 
       - name: Deploy staging
         run: hero t:deployci --env=staging
