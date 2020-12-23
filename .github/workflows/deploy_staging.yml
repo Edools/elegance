@@ -2,7 +2,7 @@ name: elegance
 on:
   push:
     branches:
-      - dev
+      - feature/add-deploy
 jobs:
   deploy-staging:
     runs-on: ubuntu-latest
