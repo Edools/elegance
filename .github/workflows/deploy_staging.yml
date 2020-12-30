@@ -11,15 +11,12 @@ jobs:
         node-version: [12.19.0]
 
     steps:
-      - shell: bash
       - uses: actions/checkout@v2
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-        env:
-          THEME_ID_STAGING: ${{ secrets.THEME_ID_STAGING }}
 
       - name: NPM - Install Bower
         run: npm install -g bower
@@ -34,4 +31,7 @@ jobs:
         run: npm install
 
       - name: Elegance Theme - Deploy staging
+      - shell: bash
+        env:
+          THEME_ID_STAGING: ${{ secrets.THEME_ID_STAGING }}
         run: hero t:deployci --env=staging --themeID="$THEME_ID_STAGING" --token=${{ secrets.DEPLOY_TOKEN_STAGING }}
