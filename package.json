@@ -12,6 +12,7 @@
   },
   "homepage": "https://github.com/Edools/elegance#readme",
   "devDependencies": {
+    "@babel/core": "^7.12.10",
     "@babel/plugin-transform-runtime": "^7.12.10"
   }
 }
