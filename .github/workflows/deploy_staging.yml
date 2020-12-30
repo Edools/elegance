@@ -5,21 +5,20 @@ on:
       - feature/add-deploy
 jobs:
   deploy-staging:
+
+    environment:
+      - name: Set environment staging
+        if: endsWith(github.ref, '/feature/add-deploy')
+        name: staging
+
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         node-version: [12.19.0]
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Set env to staging
-        if: endsWith(github.ref, '/feature/add-deploy')
-        environment: staging
-
-      - name: Set env to production
-        if: endsWith(github.ref, '/master')
-        environment: production
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
