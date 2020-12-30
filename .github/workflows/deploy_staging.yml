@@ -13,13 +13,11 @@ jobs:
     steps:
       - name: Set env to staging
         if: endsWith(github.ref, '/feature/add-deploy')
-        run: |
-          echo "::set-environment name=staging"
+        environment: staging
 
       - name: Set env to production
         if: endsWith(github.ref, '/master')
-        run: |
-          echo "::set-environment name=production"
+        environment: production
 
       - uses: actions/checkout@v2
 
