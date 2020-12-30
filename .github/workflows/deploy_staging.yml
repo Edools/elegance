@@ -24,10 +24,10 @@ jobs:
       - name: NPM - Install Themes CLI
         run: npm i -g @herospark/hero-themes-cli
 
-      - name: Elegance Theme - install Bower modules
+      - name: Elegance Theme - Install Bower modules
         run: bower install
 
-      - name: Elegance Theme - install NPM modules
+      - name: Elegance Theme - Install NPM modules
         run: npm install
 
       - name: Elegance Theme - Deploy staging
