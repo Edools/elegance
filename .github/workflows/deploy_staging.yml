@@ -18,17 +18,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Bower install
+      - name: NPM - Install Bower
         run: npm install -g bower
 
-      - name: Hero Theme Bower install
-        run: bower install
-
-      - name: Hero Theme npm install
-        run: npm install
-
-      - name: Hero Theme CLI install
+      - name: NPM - Install Themes CLI
         run: npm i -g @herospark/hero-themes-cli
 
-      - name: Deploy staging
+      - name: Elegance Theme - install Bower modules
+        run: bower install
+
+      - name: Elegance Theme - install NPM modules
+        run: npm install
+
+      - name: Elegance Theme - Deploy staging
         run: hero t:deployci --env=staging --themeID=${{ secrets.THEME_ID_STAGING }} --token=${{ secrets.DEPLOY_TOKEN_STAGING }}
