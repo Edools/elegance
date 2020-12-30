@@ -17,8 +17,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-          token: ${{ secrets.DEPLOY_TOKEN_STAGING }}
         env:
+          token: ${{ secrets.DEPLOY_TOKEN_STAGING }}
           theme-id: ${{ secrets.THEME_ID_STAGING }}
 
       - name: NPM - Install Bower
