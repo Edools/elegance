@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Set env to staging
-        if: endsWith(github.ref, '/dev')
+        if: endsWith(github.ref, '/feature/add-deploy')
         run: |
           echo "::set-environment name=staging"
 
