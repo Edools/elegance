@@ -18,10 +18,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install Hero Theme
+      - name: Hero Theme Bower install
+        run: bower install
+
+      - name: Hero Theme npm install
         run: npm install
 
-      - name: Install Hero theme cli
+      - name: Hero Theme CLI install
         run: npm i -g @herospark/hero-themes-cli
 
       - name: Deploy staging
