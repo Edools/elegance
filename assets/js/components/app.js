@@ -87,6 +87,7 @@
     },
 
     init: function () {
+      console.log('deploy staging foi');
       app.bindGlobal();
       app.bindRecaptcha();
       app.bindBlazy();

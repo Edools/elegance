@@ -7,7 +7,7 @@
 
   .home-header {
     padding: $padding-large-vertical * 4 0;
-    background-color: red;
+    background-color: red !important;
 
     .row {
       @include breakpoint(md) {
