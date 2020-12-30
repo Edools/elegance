@@ -31,6 +31,6 @@ jobs:
         run: npm install
 
       - name: Elegance Theme - Deploy staging
-        run: hero t:deployci --env=staging --themeID=${THEME_ID_STAGING} --token=${{ secrets.DEPLOY_TOKEN_STAGING }}
+        run: hero t:deployci --env=staging --themeID=$THEME_ID_STAGING --token=${{ secrets.DEPLOY_TOKEN_STAGING }}
         env:
           THEME_ID_STAGING: ${{ secrets.THEME_ID_STAGING }}
