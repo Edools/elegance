@@ -17,6 +17,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+          token: ${{ secrets.DEPLOY_TOKEN_STAGING }}
+        env:
+          theme-id: ${{ secrets.THEME_ID_STAGING }}
 
       - name: NPM - Install Bower
         run: npm install -g bower
@@ -31,4 +34,4 @@ jobs:
         run: npm install
 
       - name: Elegance Theme - Deploy staging
-        run: hero t:deployci --env=staging --themeID=${{ secrets.THEME_ID_STAGING }} --token=${{ secrets.DEPLOY_TOKEN_STAGING }}
+        run: hero t:deployci --env=staging --themeID="$theme-id" --token="$token"
