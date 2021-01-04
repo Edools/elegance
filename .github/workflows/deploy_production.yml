@@ -2,7 +2,7 @@ name: elegance
 on:
   push:
     branches:
-      - dev
+      - master
 jobs:
   deploy-staging:
     runs-on: ubuntu-latest
@@ -29,5 +29,5 @@ jobs:
       - name: Elegance Theme - Install NPM modules
         run: npm install
 
-      - name: Elegance Theme - CLI - Deploy staging
-        run: hero t:deployci --env=staging --themeID=${{ secrets.THEME_ID_STAGING }} --token=${{ secrets.DEPLOY_TOKEN_STAGING }}
+      - name: Elegance Theme - CLI - Deploy production
+        run: hero t:deployci --env=production --themeID=${{ secrets.THEME_ID_PRODUCTION }} --token=${{ secrets.DEPLOY_TOKEN_PRODUCTION }}
