@@ -138,7 +138,7 @@
                                         <tr>
                                             <td style="word-wrap:break-word;font-size:0px;padding:15px 15px 0px 15px;" align="center">
                                                 <div style="cursor:auto;color:#000000;font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:center;">
-                                                    <p><strong><span style="font-size:18px;">Nova conta criada&#xA0;em {{ school.name | remove_quotation_marks }}</span></strong></p>
+                                                    <p><strong><span style="font-size:18px;">Uma nova pergunta foi feita no fórum {{ school_forum.title }}, em {{ school.name | remove_quotation_marks }}</span></strong></p>
                                                 </div>
                                             </td>
                                         </tr>
@@ -147,8 +147,8 @@
                                                 <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;" align="center" border="0">
                                                     <tbody>
                                                         <tr>
-                                                            <td style="width:276px;">
-                                                                <a href="{{school_url}}/admin" target="_blank"><img alt="" title="" height="auto" src="https://s3.amazonaws.com/products-documents-assets/Images/Notification+Mailers/novo+aluno.png" style="border:none;border-radius:0px;display:block;font-size:13px;outline:none;text-decoration:none;width:100%;height:auto;" width="276"></a>
+                                                            <td style="width:168px;">
+                                                                <a href="{{school_url}}/admin" target="_blank"><img alt="" title="" height="auto" src="https://s3.amazonaws.com/products-documents-assets/Images/Notification+Mailers/forum.png" style="border:none;border-radius:0px;display:block;font-size:13px;outline:none;text-decoration:none;width:100%;height:auto;" width="168"></a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -176,12 +176,10 @@
                                 <table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0">
                                     <tbody>
                                         <tr>
-                                            <td style="word-wrap:break-word;font-size:0px;padding:0px 15px 0px 0px;" align="center">
+                                            <td style="word-wrap:break-word;font-size:0px;padding:0px 0px 0px 0px;" align="center">
                                                 <div style="cursor:auto;color:#3B3B3B;font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:center;">
-                                                    <p><span style="font-size:14px;"><strong>{{ user | fullname | remove_quotation_marks }}</strong></span></p>
-                                                    <p><span style="font-size: 14px;"><strong>{{ user.email }}</strong></span></p>
-                                                    <p><span style="font-size:14px;">Cadastrou-se em&#xA0;{{ user.created_at | date: "%d/%m/%Y %H:%M" }}</span></p>
-                                                    <p><span style="font-size:14px;">Identificador &#xDA;nico: {{ user.id }}</span></p>
+                                                    <p><span style="font-size: 14px;">Fórum: <strong>{{ school_forum.title }}</strong> <br>Criada por <strong>{{ user | fullname | remove_quotation_marks }}</strong> ({{ user.email }}), em {{ message.created_at | date: "%d/%m/%Y %H:%M" }}. Veja o conte&#xFA;do do tópico abaixo.</span></p>
+                                                    <p></p>
                                                 </div>
                                             </td>
                                         </tr>
@@ -194,6 +192,42 @@
                 </tbody>
             </table>
         </div>
+        <!--[if mso | IE]>      </td></tr></table>      <![endif]-->
+        <!--[if mso | IE]>      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">        <tr>          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">      <![endif]-->
+        <table role="presentation" cellpadding="0" cellspacing="0" style="background:#FFFFFF;font-size:0px;width:100%;" border="0">
+            <tbody>
+                <tr>
+                    <td>
+                        <div style="margin:0px auto;max-width:600px;">
+                            <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;" align="center" border="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:9px 0px 9px 0px;">
+                                            <!--[if mso | IE]>      <table role="presentation" border="0" cellpadding="0" cellspacing="0">        <tr>          <td style="vertical-align:top;width:600px;">      <![endif]-->
+                                            <div class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
+                                                <table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="word-wrap:break-word;font-size:0px;padding:15px 15px 15px 15px;" align="left">
+                                                                <div style="cursor:auto;color:#000000;font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:left;">
+                                                                    <p><strong><span style="font-size:14px;">Título: {{ school_forum_topic.title }}</span></strong></p>
+                                                                    <p><span style="font-size:14px;">{{ school_forum_topic.description | strip_html }}</span></p>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!--[if mso | IE]>      </td></tr></table>      <![endif]-->
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
         <!--[if mso | IE]>      </td></tr></table>      <![endif]-->
         <!--[if mso | IE]>      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">        <tr>          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">      <![endif]-->
         <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;" border="0">
@@ -214,7 +248,7 @@
                                                                 <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;width:auto;" align="center" border="0">
                                                                     <tbody>
                                                                         <tr>
-                                                                            <td style="border:0px solid #000;border-radius:4px;color:#fff;cursor:auto;padding:9px 26px;" align="center" valign="middle" bgcolor="#3298C8"><a href="https://{{school_url}}/admin" style="text-decoration:none;background:#3298C8;color:#fff;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:120%;text-transform:none;margin:0px;" target="_blank">Acessar {{ school.name | remove_quotation_marks }}</a></td>
+                                                                            <td style="border:0px solid #000;border-radius:4px;color:#fff;cursor:auto;padding:9px 26px;" align="center" valign="middle" bgcolor="#3298C8"><a href="{{topic_url}}" style="text-decoration:none;background:#3298C8;color:#fff;font-family:Ubuntu, Helvetica, Arial, sans-serif, Helvetica, Arial, sans-serif;font-size:13px;font-weight:normal;line-height:120%;text-transform:none;margin:0px;" target="_blank">Acessar fórum</a></td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>

@@ -138,7 +138,7 @@
                                         <tr>
                                             <td style="word-wrap:break-word;font-size:0px;padding:15px 15px 0px 15px;" align="center">
                                                 <div style="cursor:auto;color:#000000;font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:center;">
-                                                    <p><strong><span style="font-size:18px;">Nova conta criada&#xA0;em {{ school.name | remove_quotation_marks }}</span></strong></p>
+                                                    <p><strong><span style="font-size:18px;">Uma nova matrícula foi criada por um usuário administrativo em {{ school.name | remove_quotation_marks }}</span></strong></p>
                                                 </div>
                                             </td>
                                         </tr>
@@ -147,8 +147,8 @@
                                                 <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;" align="center" border="0">
                                                     <tbody>
                                                         <tr>
-                                                            <td style="width:276px;">
-                                                                <a href="{{school_url}}/admin" target="_blank"><img alt="" title="" height="auto" src="https://s3.amazonaws.com/products-documents-assets/Images/Notification+Mailers/novo+aluno.png" style="border:none;border-radius:0px;display:block;font-size:13px;outline:none;text-decoration:none;width:100%;height:auto;" width="276"></a>
+                                                            <td style="width:204px;">
+                                                                <a href="{{school_url}}/admin" target="_blank"><img alt="" title="" height="auto" src="https://s3.amazonaws.com/products-documents-assets/Images/Notification+Mailers/nova+matri%CC%81cula.png" style="border:none;border-radius:0px;display:block;font-size:13px;outline:none;text-decoration:none;width:100%;height:auto;" width="204"></a>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -178,10 +178,7 @@
                                         <tr>
                                             <td style="word-wrap:break-word;font-size:0px;padding:0px 15px 0px 0px;" align="center">
                                                 <div style="cursor:auto;color:#3B3B3B;font-family:Lato, Tahoma, sans-serif;font-size:11px;line-height:1.5;text-align:center;">
-                                                    <p><span style="font-size:14px;"><strong>{{ user | fullname | remove_quotation_marks }}</strong></span></p>
-                                                    <p><span style="font-size: 14px;"><strong>{{ user.email }}</strong></span></p>
-                                                    <p><span style="font-size:14px;">Cadastrou-se em&#xA0;{{ user.created_at | date: "%d/%m/%Y %H:%M" }}</span></p>
-                                                    <p><span style="font-size:14px;">Identificador &#xDA;nico: {{ user.id }}</span></p>
+                                                    <p><span style="font-size:14px;">Produto(s) da matrícula: <strong>{{ school_product.title }}</strong><br>Aluno da matrícula: <strong>{{ user | fullname | remove_quotation_marks }}</strong> ({{user.email}}.<br> Criada{{ enrollment.created_at | date: "%d/%m/%Y %H:%M" }}.</span></p>
                                                 </div>
                                             </td>
                                         </tr>
