@@ -124,6 +124,29 @@
 </style>
 
 <script>
+
+   {% if paymentOption.total == 0 %}
+    $(document).ready(() => {
+      $("#tab-payment-methods").html("\
+        <li role='presentation'>\
+          <a href='#credit-card' id='credit-card-tab' role='tab' data-toggle='tab'\
+             aria-controls='credit-card'\
+             aria-expanded='false'\
+             data-toggle='pill'>\
+            <i class='fal fa-credit-card'></i> Crédito \
+          </a>\
+        </li>\
+        <li class='active' role='presentation'>\
+          <a href='#boleto' id='boleto-tab' role='tab' data-toggle='tab' aria-controls='boleto'\
+             aria-expanded='true'\
+             data-toggle='pill'>\
+            <i class='fal fa-barcode-alt'></i> Boleto\
+          </a>\
+        </li>\
+      ");
+    });
+  {% endif %} 
+
   var coupon = '{{ coupon }}';
 
   $('#js-input-coupon-container').hide();
