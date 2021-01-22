@@ -248,7 +248,7 @@
             </div>
           </div>
 
-          <div id="address-container">
+          <div id="address-container" style="display:block;">
             <form id="student-address-form">
               <h6 class="title-form">{{ 'express_checkout.title_address' | t }}</h6>
               <div class="form-container">
@@ -259,7 +259,7 @@
                       {% if current_school | has_feature: 'cep_service' %}data-enable-cep-service="true" {% endif %}
                       placeholder="{{ 'express_checkout.placeholder.zip_code' | t }}" value="{{ address.zip_code }}"
                       class="form-control" data-validation="required"
-                      data-validation-error-msg="{{ 'errors.address_zip_code.blank' | t }}">
+                      data-validation-error-msg="{{ 'errors.address_zip_code.blank' | t }}" required>
                   </div>
 
                   <div class="form-group col-md-12">
@@ -267,7 +267,7 @@
                     <input type="text" id="user-street" name="user[address_attributes][street]"
                       placeholder="{{ 'express_checkout.placeholder.street' | t }}" value="{{ address.street }}"
                       class="form-control" data-validation="required"
-                      data-validation-error-msg="{{ 'errors.address_street.blank' | t }}">
+                      data-validation-error-msg="{{ 'errors.address_street.blank' | t }}" required>
                   </div>
 
                   <div class="form-group col-md-12">
@@ -275,7 +275,7 @@
                     <input type="text" id="user-number" name="user[address_attributes][number]"
                       placeholder="{{ 'express_checkout.placeholder.number' | t }}" value="{{ address.number }}"
                       class="form-control" data-validation="required"
-                      data-validation-error-msg="{{ 'errors.address_number.blank' | t }}">
+                      data-validation-error-msg="{{ 'errors.address_number.blank' | t }}" required>
                   </div>
 
                   <div class="form-group col-md-12">
@@ -292,7 +292,7 @@
                     <input type="text" id="user-district" name="user[address_attributes][district]"
                       placeholder="{{ 'express_checkout.placeholder.district' | t }}" value="{{ address.district }}"
                       class="form-control" data-validation="required"
-                      data-validation-error-msg="{{ 'errors.address_district.blank' | t }}">
+                      data-validation-error-msg="{{ 'errors.address_district.blank' | t }}" required>
                   </div>
 
                   <div class="form-group col-md-12">
@@ -300,7 +300,7 @@
                     <input type="text" id="user-city" name="user[address_attributes][city]"
                       placeholder="{{ 'express_checkout.placeholder.city' | t }}" value="{{ address.city }}"
                       class="form-control" data-validation="required"
-                      data-validation-error-msg="{{ 'errors.address_city.blank' | t }}">
+                      data-validation-error-msg="{{ 'errors.address_city.blank' | t }}" required>
                   </div>
 
                   <div class="form-group col-md-12">
@@ -350,6 +350,7 @@
     </div>
   </div>
 </div>
+
 <script>
   $(document).ready(() => {
     $.validate({
@@ -358,10 +359,11 @@
 
     $('#usercpf').mask('000.000.000-00');
 
-    $('a[data-toggle="tab"]').on('shown.bs.tab', event => {
+    /*$('a[data-toggle="tab"]').on('shown.bs.tab', event => {
       const target = $(event.target).attr("href");
-      $('#address-container').fadeIn().css({ display: target === '#boleto' ? 'block' : 'none' });
-    });
+      //$('#address-container').fadeIn().css({ display: target === '#boleto' ? 'block' : 'none' });
+      $('#address-container').fadeIn().css({ display: target === '#boleto' ? 'block' : 'block' });
+    });*/
 
     $("#btn-finalize-purchase").click(() => {
 
@@ -388,16 +390,24 @@
             return
           }
         }
-      } else if (currentFormIdentifier === '#boleto-form') {
+      } /*else if (currentFormIdentifier === '#boleto-form') {
         const studentAddressBlur = $('#student-address-form input');
         forceVerifyField(studentAddressBlur);
-
         if (studentAddressBlur.hasClass("error")) {
           scrollToForm(studentAddressBlur);
           return
         }
         studentAddressArray = $('#student-address-form').serializeArray();
+      }*/
+
+      const studentAddressBlur = $('#student-address-form input');
+        forceVerifyField(studentAddressBlur);
+
+      if (studentAddressBlur.hasClass("error")) {
+        scrollToForm(studentAddressBlur);
+        return
       }
+      studentAddressArray = $('#student-address-form').serializeArray();
 
       const checkboxTermsOfServiceBlur = $('#checkbox-terms-of-service');
       forceVerifyField(checkboxTermsOfServiceBlur);
