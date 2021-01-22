@@ -19,6 +19,159 @@
       <input type="email" value="{{ user.email }}" name="user[email]" class="form-control input-lg"
              placeholder="{{ 'register.email' | t }}" required>
     </div>
+    
+    <!-- ----- Campos de cadastro nativos ----- -->
+    
+    <div class="form-group">
+      <label for="user-cep" class="control-label active">CEP</label>
+      <input type="text" id="user-cep" name="user[address_attributes][zip_code]" data-enable-cep-service="true" placeholder="Seu CEP" value="" class="form-control" data-validation="required" data-validation-error-msg="Adicione o CEP." maxlength="10" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="user-street" class="control-label active">Logradouro</label>
+      <input type="text" id="user-street" name="user[address_attributes][street]" placeholder="Seu logradouro" value="" class="form-control" data-validation="required" data-validation-error-msg="Adicione o seu logradouro." required>
+    </div>
+                  
+    <div class="form-group">
+      <label for="user-number" class="control-label active">Nº</label>
+      <input type="text" id="user-number" name="user[address_attributes][number]" placeholder="Seu número" value="" class="form-control" data-validation="required" data-validation-error-msg="Adicione o número do endereço." required>
+    </div>
+                  
+    <div class="form-group">
+      <label for="user-complement" class="control-label active">Complemento</label>
+      <input type="text" id="user-complement" name="user[address_attributes][complement]" placeholder="Seu complemento" value="" class="form-control">
+    </div>
+                  
+    <div class="form-group">
+      <label for="user-district" class="control-label active">Bairro</label>
+      <input type="text" id="user-district" name="user[address_attributes][district]" placeholder="Seu bairro" value="" class="form-control" data-validation="required" data-validation-error-msg="Adicione o bairro." required>
+    </div>
+                  
+    <div class="form-group">
+      <label for="user-city" class="control-label active">Cidade</label>
+      <input type="text" id="user-city" name="user[address_attributes][city]" placeholder="Sua cidade" value="" class="form-control" data-validation="required" data-validation-error-msg="Adicione a cidade." required>
+    </div>
+                  
+    <div class="form-group">
+      <label class="control-label">Estado</label>
+        <div class="select-container">
+                      
+          <select value="" name="user[address_attributes][state]" class="form-control" required="" required>
+  
+            <option value="AC">
+              Acre
+            </option>
+  
+            <option value="AL">
+              Alagoas
+            </option>
+          
+            <option value="AM">
+              Amazonas
+            </option>
+          
+            <option value="AP">
+              Amapá
+            </option>
+          
+            <option value="BA">
+              Bahia
+            </option>
+          
+            <option value="CE">
+              Ceará
+            </option>
+          
+            <option value="DF">
+              Distrito Federal
+            </option>
+          
+            <option value="ES">
+              Espirito Santo
+            </option>
+          
+            <option value="GO">
+              Goiás
+            </option>
+          
+            <option value="MA">
+              Maranhão
+            </option>
+          
+            <option value="MG">
+              Minas Gerais
+            </option>
+          
+            <option value="MS">
+              Mato Grosso do Sul
+            </option>
+          
+            <option value="MT">
+              Mato Grosso
+            </option>
+          
+            <option value="PA">
+              Pará
+            </option>
+          
+            <option value="PB">
+              Paraíba
+            </option>
+          
+            <option value="PE">
+              Pernambuco
+            </option>
+          
+            <option value="PI">
+              Piauí
+            </option>
+          
+            <option value="PR">
+              Paraná
+            </option>
+          
+            <option value="RJ">
+              Rio de Janeiro
+            </option>
+          
+            <option value="RN">
+              Rio Grande do Norte
+            </option>
+          
+            <option value="RO">
+              Rondônia
+            </option>
+          
+            <option value="RR">
+              Roraima
+            </option>
+          
+            <option value="RS">
+              Rio Grande do Sul
+            </option>
+          
+            <option value="SC">
+              Santa Catarina
+            </option>
+          
+            <option value="SE">
+              Sergipe
+            </option>
+          
+            <option value="SP">
+              São Paulo
+            </option>
+          
+            <option value="TO">
+              Tocantins
+            </option>
+  
+          </select>
+
+      </div>
+    </div>
+                  
+    <!-- ----- Fin campos de cadastro nativos ----- -->
 
     <div class="form-group signin-password">
       {% assign has_feature_password = current_school | has_feature: 'strong_password_policy' %}
