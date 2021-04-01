@@ -28,7 +28,7 @@
                 <a class="title"
                    href="/admin_view/courses/{{ course.id }}/extra_contents/{{ content.id }}">
                   {{ content.title }}
-                </a>              
+                </a>
               {% else %}
                 <span class="title">{{ content.title }}</span>
               {% endif %}
@@ -37,7 +37,7 @@
             <div class="right">
               {% if content_released %}
                 {% if allow_extra_content_download or content.downloadable %}
-                  {% if content.media.download_type? and current_user.type == 'Student' %}
+                  {% if content.media.download_type? %}
                     <a class="download-link" href="{{ content | extra_content_download_path: course, enrollment }}"
                        data-no-turbolink>
                       <i class="icon-cloud-download"></i>
