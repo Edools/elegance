@@ -37,7 +37,7 @@
         {% if has_express_checkout == true %}
           {% if gateway.price_format == "installments" %}
             {% assign lastInstallment = product.spark_pay_installments.last %}
-            <span aria-label="{{ oldest_payment_option.price | money_without_currency | remove: ',00' }} reais" class="final-price">{{ lastInstallment.value }}x de {{ lastInstallment.amount| money}}</span>
+            <span aria-label="{{ lastInstallment.value }} vezes de {{ lastInstallment.amount| money}} reais" class="final-price">{{ lastInstallment.value }}x de {{ lastInstallment.amount| money}}</span>
           {% else %}
             <span aria-label="{{ oldest_payment_option.price | money_without_currency | remove: ',00' }} reais" class="final-price">{{ oldest_payment_option.price | money_option_presentation_with_taxes: oldest_payment_option.kind, oldest_payment_option.period, gateway, oldest_payment_option }} </span>
           {% endif %}
