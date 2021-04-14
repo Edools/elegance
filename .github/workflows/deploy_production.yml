@@ -1,0 +1,33 @@
+name: elegance
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.19.0]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: NPM - Install Bower
+        run: npm i -g bower
+
+      - name: NPM - Install Themes CLI
+        run: npm i -g @herospark/hero-themes-cli
+
+      - name: Elegance Theme - Install Bower modules
+        run: bower i
+
+      - name: Elegance Theme - Install NPM modules
+        run: npm i
+
+      - name: Elegance Theme - CLI - Deploy production
+        run: hero t:deployci --env=production --themeID=${{ secrets.THEME_ID_PRODUCTION }} --token=${{ secrets.DEPLOY_TOKEN_PRODUCTION }}
