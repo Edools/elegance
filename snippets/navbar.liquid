@@ -105,6 +105,8 @@
   </div>
 </header>
 
-{% if current_user and settings.view.general.navbar.app_modal == true %}
-  {% include 'app-modal' %}
-{% endif %}
+{% comment %}
+  {% if current_user and settings.view.general.navbar.app_modal == true %}
+    {% include 'app-modal' %}
+  {% endif %}
+{% endcomment %}
