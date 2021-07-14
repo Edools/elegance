@@ -117,7 +117,7 @@
       app.bindValidationCpf();
       app.randomQuizStatistics();
       app.bindCepService();
-      appModal.init();
+      /*appModal.init();*/
 
       $(document).on('app:bind:ckeditor_submit', app.bindCollaborativeDiscussion);
     }
