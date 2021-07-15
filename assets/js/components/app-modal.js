@@ -30,23 +30,23 @@ class AppModal {
   controlDesktopCookie() {
     if (this.checkCookie()) {
       this.closeModal();
-    } else {
+    } /*else {
       this.setCookie();
 
       setTimeout(() => {
         this.openModal();
       }, 3000);
-    }
+    }*/
   }
 
   controlMobileCookie(action = 'start') {
     if (action === 'click') {
       this.setCookie();
-    } else {
+    } /*else {
       if (!this.checkCookie()) {
         this.openModal();
       }
-    }
+    }*/
   }
 
   setCookie() {
