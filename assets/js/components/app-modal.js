@@ -19,11 +19,11 @@ class AppModal {
       this.addOpenButtonListener();
       this.addCloseButtonListener();
 
-      if (this.isMobile) {
+      /*if (this.isMobile) {
         this.controlMobileCookie();
       } else {
         this.controlDesktopCookie();
-      }
+      }*/
     }
   }
 
@@ -73,9 +73,9 @@ class AppModal {
         bt.addEventListener('click', e => {
           this.closeModal();
 
-          if (this.isMobile) {
+          /*if (this.isMobile) {
             this.controlMobileCookie('click');
-          }
+          }*/
         })
       })
     }
