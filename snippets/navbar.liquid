@@ -7,12 +7,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a tabindex="-1" class="navbar-brand {% if settings.view.general.navbar.logo.size > 0 %}navbar-brand-img{% endif %}" href="/">
-        {% if settings.view.general.navbar.logo.size > 0 %}
-          {% image, src: settings.view.general.navbar.logo %}
-        {% else %}
-          {{ settings.view.general.navbar.title }}
-        {% endif %}
+      <a tabindex="-1" class="navbar-brand {% if settings.view.general.navbar.logo.size > 0 or current_school.logo %}navbar-brand-img{% endif %}" href="/">
+        {% include 'school/brand' %}
       </a>
     </div>
 

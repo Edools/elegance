@@ -2,12 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-7 col-sm-7 col-md-6 col-md-offset-1 custom-col">
-        <div class="responsive-img">
-          {% if settings.view.general.navbar.logo.size > 0 %}
-          <img src="{{ settings.view.general.navbar.logo }}" alt="Logo School">
-          {% else %}
-          <h4>{{ settings.view.general.navbar.title }}</h4>
-          {% endif %}
+        <div class="responsive-img header-brand">
+          {% include 'school/brand' %}
         </div>
       </div>
       <div class="col-xs-5 col-sm-5 col-md-4 custom-col">
@@ -34,6 +30,19 @@
     text-decoration: none;
   }
 
+  #header .header-brand {
+    height: 100%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  #header .header-brand img {
+    height: 100%;
+    object-fit: contain;
+    object-position: left;
+  }
+
   .custom-col {
     display: flex;
     align-items: center;
@@ -55,7 +64,7 @@
 
   @media only screen and (max-width: 420px) {
     .responsive-img {
-      width: 140px;
+      width: 160px;
     }
   }
 
