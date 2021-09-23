@@ -25,8 +25,20 @@
               </li>
             {% endunless %}
           {% else %}
+
+            {% assign admin_dashboard_url = current_user | sso_admin_path: current_api_key %}
+            {% assign admin_dashboard_params = 'sso?school_id=' | append: current_school.id | append: '&credentials=' | append: current_api_key.credentials | append: '&email=' | append: current_user.email %}
+
+            {% if current_school.account_type == 'herospark' %}
+              {% assign admin_dashboard_url = 'https://app.herospark.com/' | append: admin_dashboard_params %}
+
+              {% if current_url contains 'heroi.dev' %}
+                {% assign admin_dashboard_url = 'https://app.beta.herospark.com/' | append: admin_dashboard_params %}
+              {% endif %}
+            {% endif %}
+
             <li>
-              <a href="{{ current_user | sso_admin_path: current_api_key }}">
+              <a href="{{ admin_dashboard_url }}">
                 <i class="icon-settings"></i>
                 <span>{{ 'navbar.admin' | t }}</span>
               </a>
