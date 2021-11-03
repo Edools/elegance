@@ -85,7 +85,7 @@ header.navbar {
         &:before {
           $size: 18px;
 
-          top: - ($size / 2) - 1;
+          top: math.div(-$size, 2) - 1;
           right: 69px;
           display: block;
           width: $size;
@@ -153,7 +153,9 @@ header.navbar {
             }
 
             .logged-user {
-              @include ellipsis();
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
 
               margin-bottom: 3px;
               max-width: 110px;
@@ -161,7 +163,9 @@ header.navbar {
             }
 
             .logged-user-email {
-              @include ellipsis();
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
 
               color: $text-muted;
               font-size: 12px;

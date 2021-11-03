@@ -18,7 +18,7 @@
   }
 
   p {
-    margin-bottom: ($jumbotron-padding / 2);
+    margin-bottom: math.div($jumbotron-padding, 2);
     font-weight: 200;
     font-size: $jumbotron-font-size;
   }

@@ -22,7 +22,9 @@
           margin-top: 20px;
 
           .badge {
-            @include ellipsis();
+            white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 
             margin-top: -3px;
             max-width: 250px;

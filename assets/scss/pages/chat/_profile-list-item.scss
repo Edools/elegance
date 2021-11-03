@@ -19,14 +19,18 @@
     line-height: 1;
 
     .name {
-      @include ellipsis();
+      white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 
       font-size: 14px;
       line-height: 1.2;
     }
 
     .location {
-      @include ellipsis();
+      white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 
       color: lighten($chat-sidebar-bg, 45%);
       font-weight: 300;

@@ -1,5 +1,5 @@
 // Compass
-@import '../../bower_components/compass-sass-mixins/lib/compass';
+@use "sass:math";
 
 @import 'base/variables';
 @import 'components/mixins';

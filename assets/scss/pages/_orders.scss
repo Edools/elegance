@@ -14,10 +14,8 @@
   }
 
   .subscription-actions {
-    @include flexbox((
-      display: flex,
-      flex-direction: column
-    ));
+    display: flex;
+    flex-direction: column;
 
     padding: $padding-large-horizontal;
     width: 100%;
