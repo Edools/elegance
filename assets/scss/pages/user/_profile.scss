@@ -16,7 +16,7 @@ $profile-text-color: rgba($light, .9);
     background-color: #222;
 
     .bg-picture {
-      @include filter(blur(20px));
+      filter:blur(20px);
 
       position: absolute;
       top: -20px;
@@ -245,9 +245,10 @@ $profile-text-color: rgba($light, .9);
   }
 
   .media-list {
-    @include column-gap(15px);
+    column-gap:15px;
+
     @include breakpoint(sm) {
-      @include column-count(2);
+      column-count:2;
     }
 
     .media {

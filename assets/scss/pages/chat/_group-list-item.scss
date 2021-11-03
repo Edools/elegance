@@ -2,7 +2,9 @@
   line-height: 1.4;
 
   .name {
-    @include ellipsis();
+    white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 
     max-width: 200px;
     font-size: 14px;

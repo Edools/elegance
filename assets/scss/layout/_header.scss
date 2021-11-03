@@ -153,7 +153,9 @@ header.navbar {
             }
 
             .logged-user {
-              @include ellipsis();
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
 
               margin-bottom: 3px;
               max-width: 110px;
@@ -161,7 +163,9 @@ header.navbar {
             }
 
             .logged-user-email {
-              @include ellipsis();
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
 
               color: $text-muted;
               font-size: 12px;
