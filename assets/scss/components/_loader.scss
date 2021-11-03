@@ -1,3 +1,53 @@
+@mixin loader-rotate {
+  @keyframes loader-rotate {
+    0% {
+      transform: rotate(0);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@mixin loader04(
+  $size: 56px,
+  $color: #0052ec,
+  $border-size: 8px,
+  $duration: 1s,
+  $align: null
+) {
+  $dot: round($size - (0.82 * $size));
+  width: $size;
+  height: $size;
+  border: $border-size solid rgba($color, 0.5);
+  border-radius: 50%;
+  position: relative;
+  animation: loader-rotate $duration ease-in-out infinite;
+
+  &::after {
+    content: '';
+    width: $dot;
+    height: $dot;
+    border-radius: 50%;
+    background: $color;
+    position: absolute;
+    top: -$border-size - math.div($dot, 2) + math.div($border-size, 2);
+    left: 50%;
+    margin-left: - math.div($dot, 2);
+  }
+
+  @if ($align == center) {
+    margin: 0 auto;
+  }
+  @if ($align == middle) {
+    top: 50%;
+    margin: - math.div($size, 2) auto 0;
+  }
+  @include loader-rotate;
+}
+
+
 .loader {
   @include user-select(none);
 
@@ -100,9 +150,6 @@
 
 $loader-gap: 12px !default;
 $loader-animation-duration: 1s !default;
-
-@import '../../../bower_components/spinthatshit/src/animations';
-@import '../../../bower_components/spinthatshit/src/loaders/loader04';
 
 .busy {
   display: inline-block;
