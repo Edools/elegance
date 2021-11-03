@@ -12,8 +12,8 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    margin-top: -$loader-size / 2;
-    margin-left: -$loader-size / 2;
+    margin-top: math.div(-$loader-size, 2);
+    margin-left: math.div(-$loader-size, 2);
   }
 }
 
