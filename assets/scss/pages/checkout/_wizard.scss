@@ -86,7 +86,7 @@
           width: $size;
           height: $size;
           border: 2px solid $base-bg;
-          border-radius: $size / 2;
+          border-radius: math.div($size, 2);
           background-color: transparent;
           color: darken($base-bg, 15%);
           text-align: center;
