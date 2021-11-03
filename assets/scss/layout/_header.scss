@@ -85,7 +85,7 @@ header.navbar {
         &:before {
           $size: 18px;
 
-          top: - math.div($size, 2) - 1;
+          top: math.div(-$size, 2) - 1;
           right: 69px;
           display: block;
           width: $size;
