@@ -7,16 +7,14 @@ RUN apt-get update -yqq \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && truncate -s 0 /var/log/*log
 
-# Allow bower install with root
-RUN echo '{ "allow_root": true }' > /root/.bowerrc
-RUN npm install -g bower
-
-RUN git config --global user.email "you@example.com"
-RUN git config --global user.name "Your Name"
-
 WORKDIR /app
 COPY ./bower.json /app/
 
-# Install Dependencies
-RUN bower install
+# Allow bower install with root
+RUN echo '{ "allow_root": true }' > /root/.bowerrc
+RUN npm install -g bower
 RUN npm install -g --unsafe-perm=true --allow-root edools-theme-cli
+
+# Install Dependencies
+RUN npm install
+RUN bower install
