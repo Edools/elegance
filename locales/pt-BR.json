@@ -760,6 +760,7 @@
       "unpaid": "Pagamento não efetuado",
       "active": "Ativada",
       "canceled": "Cancelada",
+      "confirmed": "Confirmado",
       "overdue": "Atrasada",
       "ended": "Encerrada"
     }

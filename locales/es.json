@@ -545,6 +545,19 @@
       "processing": "Procesando"
     }
   },
+  "subscription": {
+    "status": {
+      "initiated": "Iniciado",
+      "trial": "Prueba",
+      "pending_payment": "Pago Pendiente",
+      "unpaid": "No Pagado",
+      "active": "Ativo",
+      "canceled": "Cancelado",
+      "confirmed": "Confirmado",
+      "overdue": "Atrasado",
+      "ended": "Terminado"
+    }
+  },
   "path": {
     "no_courses": "Sin cursos en este paquete.",
     "pinboard": "Cuadro de <strong>Avisos</strong>",

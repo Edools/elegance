@@ -558,6 +558,7 @@
       "unpaid": "Unpaid",
       "active": "Active",
       "canceled": "Canceled",
+      "confirmed": "Confirmed",
       "overdue": "Overdue",
       "ended": "Ended"
     }
