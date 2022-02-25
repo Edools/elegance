@@ -12,7 +12,7 @@ RUN apt-get update -yqq \
   && truncate -s 0 /var/log/*log
 
 WORKDIR /app
-COPY ./bower.json package.json package-lock.json /app/
+COPY bower.json package.json package-lock.json /app/
 
 # Allow bower install with root
 RUN echo '{ "allow_root": true }' > /root/.bowerrc
