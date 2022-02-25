@@ -1,2 +1,2 @@
 #!/bin/sh
-npx edt serve development
+hero theme:serve --env development
