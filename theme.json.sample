@@ -4,9 +4,9 @@
   "author": "Mayke Freitas",
   "folder_name": "elegance",
   "development": {
-    "url": "http://demo.edools-dev.com:3010",
+    "url": "http://demo.edools-dev.com:3000",
     "school_id": 1,
     "theme_id": 1,
-    "token": "clisupersecret123:clisupertoken321"
+    "token": "local"
   }
 }
