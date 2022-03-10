@@ -11,3 +11,8 @@ No HeroDocker:
 Para acessar o tema:
 1. Entre na URL `http://demo.edools-dev.com:3000`
 2. Utilize o seguinte login/senha: `montgomery.burns@edools.com` / `edools1234`
+
+Para forçar a mudança do tema usado pela escola no Core:
+1. Acesse o bash do Core (no HeroDocker): `$ make bash-core`
+2. Execute o console do Rails: `$ rails c`
+3. Execute o comando: `School.find(1).update(theme_id: 1)`
