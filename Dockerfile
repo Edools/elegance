@@ -13,9 +13,10 @@ WORKDIR /app
 COPY bower.json package.json package-lock.json /app/
 
 RUN npm install -g bower
-RUN npm install -g @herospark/hero-themes-cli 
-RUN npm install --allow-root @babel/core @babel/plugin-transform-runtime @babel/preset-env @babel/runtime
+RUN echo '{ "allow_root": true }' > /root/.bowerrc;
 
 # Install Dependencies
-RUN npm install --allow-root
-RUN bower install --allow-root
+RUN npm install -g @herospark/hero-themes-cli 
+RUN npm install @babel/core @babel/plugin-transform-runtime @babel/preset-env @babel/runtime
+RUN bower install
+RUN npm install
