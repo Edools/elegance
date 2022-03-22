@@ -34,7 +34,7 @@
 
         {% if settings.view.home.footer.social_youtube_link and current_school.youtube %}
             <a class="social-network social-network-youtube" target="_blank"
-               href="https://www.youtube.com/c/{{ current_school.youtube }}">
+               href="https://www.youtube.com/{{ current_school.youtube }}">
                 <i class="icon-social-youtube"></i>
                 {{ 'home.social.follow_youtube' | t }}
             </a>
