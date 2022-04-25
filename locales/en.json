@@ -616,7 +616,8 @@
     "total": "Total Lessons",
     "preview": "Previous",
     "next": "Next",
-    "course_content": "Course Content"
+    "course_content": "Course Content",
+    "blocked": "Lesson Blocked"
   },
   "extra_content": {
     "label": "Complementary Material"

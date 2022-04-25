@@ -611,7 +611,8 @@
     "total": "clase(s) en total",
     "preview": "Anterior",
     "next": "Próximo",
-    "course_content": "Contenido del curso"
+    "course_content": "Contenido del curso",
+    "blocked": "Classe Bloqueada"
   },
   "extra_content": {
     "label": "Material complementar"
