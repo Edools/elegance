@@ -845,7 +845,8 @@
     "total": "aula(s) no total",
     "preview": "Anterior",
     "next": "Próximo",
-    "course_content": "Conteúdo do curso"
+    "course_content": "Conteúdo do curso",
+    "blocked": "Aula bloqueada"
   },
   "extra_content": {
     "label": "Material complementar"
