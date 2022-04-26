@@ -68,8 +68,8 @@
             <h2 class="lesson-title">{{ lesson.title }}</h2>
           </div>
 
-          {% if lesson.lock_at %}
-              <h1>{{ 'lesson.blocked' | t}}</h1>
+          {% if lesson.block_due_lock_date %}
+            <h1>{{ 'lesson.blocked' | t}}</h1>
           {% else %}
             {% if lesson.description.size > 0 %}
               <div class="lesson-description">
