@@ -623,7 +623,7 @@
 
                 var isDownloadableMedia = content.lesson.media && ['Document', 'Audio', 'Download'].indexOf(content.lesson.media.type) > -1;
 
-                if ((self.downloadAction || content.downloadable) && isDownloadableMedia)
+                if (self.downloadAction && content.downloadable && isDownloadableMedia)
                   html += '<a class="download-link" href="' + self.getContentDownloadPath(content) + '" data-no-turbolink>' +
                     '<i class="icon-cloud-download"></i>' +
                     '</a>';
