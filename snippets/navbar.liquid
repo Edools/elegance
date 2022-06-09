@@ -47,6 +47,7 @@
 
 
         {% if current_user %}
+          {% comment %}
           {% if settings.view.general.navbar.app_modal == true %}
             <li class="appModalDesktop_button-nav">
                 <a href="javascript:;">
@@ -56,6 +57,7 @@
                 </a>
             </li>
           {% endif %}
+          {% endcomment %}
 
           <li>
             {% assign new_forum = current_school | has_feature: 'new_forum' %}
@@ -113,7 +115,8 @@
   </div>
 </header>
 
-
+{% comment %}
   {% if current_user and settings.view.general.navbar.app_modal == true %}
     {% include 'app-modal' %}
   {% endif %}
+{% endcomment %}
