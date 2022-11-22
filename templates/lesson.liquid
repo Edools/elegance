@@ -99,6 +99,14 @@
                     </div>
                   </div>
                 {% endfor %}
+              {% else if lesson.media.type == 'LiveMeet' %}
+                <div class="control-back">
+                  <a class="btn btn-default"
+                     href="/enrollments/{{ enrollment.id }}/courses/{{ course.id }}/live_meet_contents/{{ course_content.id }}/meet_room">
+                    <i class="icon-camrecorder"></i>
+                    <span>Acessar Encontro Ao Vivo</span>
+                  </a>
+                </div>
               {% else %}
                 <div id="js-media-player"
                   class="media-player"

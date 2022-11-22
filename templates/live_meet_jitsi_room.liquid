@@ -1,0 +1,20 @@
+<script src='https://8x8.vc/vpaas-magic-cookie-da3ada7f6cd84f1a92ed606dbb5b6fed/external_api.js' async></script>
+<style>#jaas-container { height: 100%; }</style>
+<script type="text/javascript">
+  window.onload = () => {
+    const api = new JitsiMeetExternalAPI("8x8.vc", {
+      roomName: "{{ jitsi_room }}",
+      parentNode: document.querySelector('#jaas-container'),
+      jwt: "{{ jitsi_jwt }}"
+    });
+  }
+</script>
+<div class="live-meet-jitsi-room-page page">
+  <div class="container page-container">
+    <div class="row">
+      <div class="col-md-12" style="height: 500px">
+        <div id="jaas-container" />
+      </div>
+    </div>
+  </div>
+</div>
