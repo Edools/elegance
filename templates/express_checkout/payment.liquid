@@ -342,6 +342,7 @@
             <img src="{{ 'secure-purchase.png' | asset_url }}" alt="Secure Purchage Image" width="120" height="39">
             <img src="{{ 'protected-data.png' | asset_url }}" alt="Protected Data Image" width="120" height="39">
           </div>
+          <input type="hidden" value="" name="g-recaptcha-response" />
 
           {% include "express_checkout/payment-processing-message-box" with gateway %}
 
@@ -350,8 +351,16 @@
     </div>
   </div>
 </div>
+<script src='https://www.google.com/recaptcha/enterprise.js?render={{ recaptcha_site_key }}'></script>
+
 <script>
   $(document).ready(() => {
+    grecaptcha.enterprise.ready(function() {
+    grecaptcha.enterprise.execute("{{ recaptcha_site_key }}", {}).then(function(token) {
+         $('input[name="g-recaptcha-response"]').val(token);
+      });
+    });
+
     $.validate({
       modules: 'brazil'
     });
@@ -418,6 +427,7 @@
 
       });
 
+      $('input[name="g-recaptcha-response"]').appendTo(currentFormIdentifier);
       $(currentFormIdentifier).submit();
       $("#btn-finalize-purchase").attr("disabled", true);
 
