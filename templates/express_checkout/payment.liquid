@@ -342,7 +342,7 @@
             <img src="{{ 'secure-purchase.png' | asset_url }}" alt="Secure Purchage Image" width="120" height="39">
             <img src="{{ 'protected-data.png' | asset_url }}" alt="Protected Data Image" width="120" height="39">
           </div>
-
+          <input type="hidden" value="" name="g-recaptcha-response" />
           {% include "express_checkout/payment-processing-message-box" with gateway %}
 
         </div>
@@ -350,95 +350,118 @@
     </div>
   </div>
 </div>
+<script src='https://www.google.com/recaptcha/enterprise.js?render={{ site_key_checkout }}'></script>
 <script>
-  $(document).ready(() => {
-    $.validate({
-      modules: 'brazil'
-    });
-
-    $('#usercpf').mask('000.000.000-00');
-
-    $('a[data-toggle="tab"]').on('shown.bs.tab', event => {
-      const target = $(event.target).attr("href");
-      $('#address-container').fadeIn().css({ display: target === '#boleto' ? 'block' : 'none' });
-    });
-
-    $("#btn-finalize-purchase").click(() => {
-
-      const activeTab = $('#tab-payment-methods li.active a').attr('href');
-      const currentFormIdentifier = `#${$(activeTab).find('form').attr('id')}`;
-
-      const studentBlur = $('#student-form input');
-      forceVerifyField(studentBlur);
-
-      if (studentBlur.hasClass("error")) {
-        scrollToForm(studentBlur);
-        return
-      }
-
-      const studentDataArray = $('#student-form').serializeArray();
-      let studentAddressArray = [];
-
-      if(currentFormIdentifier === '#card-form') {
-        if (typeof adyen !== 'undefined') {
-          const adyenContainer = $('#card-container');
-
-          if(adyen.success === false) {
-            scrollToForm(adyenContainer);
-            return
-          }
-        }
-      } else if (currentFormIdentifier === '#boleto-form') {
-        const studentAddressBlur = $('#student-address-form input');
-        forceVerifyField(studentAddressBlur);
-
-        if (studentAddressBlur.hasClass("error")) {
-          scrollToForm(studentAddressBlur);
+  function onSubmit() {
+    const activeTab = $('#tab-payment-methods li.active a').attr('href');
+    const currentFormIdentifier = `#${$(activeTab).find('form').attr('id')
+      }`;
+  
+    const studentBlur = $('#student-form input');
+    forceVerifyField(studentBlur);
+  
+    if (studentBlur.hasClass("error")) {
+      scrollToForm(studentBlur);
+      return
+    }
+  
+    const studentDataArray = $('#student-form').serializeArray();
+    let studentAddressArray = [];
+  
+    if (currentFormIdentifier === '#card-form') {
+      if (typeof adyen !== 'undefined') {
+        const adyenContainer = $('#card-container');
+  
+        if (adyen.success === false) {
+          scrollToForm(adyenContainer);
           return
         }
-        studentAddressArray = $('#student-address-form').serializeArray();
       }
-
-      const checkboxTermsOfServiceBlur = $('#checkbox-terms-of-service');
-      forceVerifyField(checkboxTermsOfServiceBlur);
-
-      if (checkboxTermsOfServiceBlur.hasClass("error")) {
-        scrollToForm(checkboxTermsOfServiceBlur);
+    } else if (currentFormIdentifier === '#boleto-form') {
+      const studentAddressBlur = $('#student-address-form input');
+      forceVerifyField(studentAddressBlur);
+  
+      if (studentAddressBlur.hasClass("error")) {
+        scrollToForm(studentAddressBlur);
         return
       }
-
-      [...studentDataArray, ...studentAddressArray].forEach(({ name, value }) => {
-        if (name === 'user[full_name]') {
-          const { firstName, lastName } = splitString(value);
-
-          $('<input>').attr({ type: 'hidden', name: 'user[first_name]', value: firstName }).appendTo(currentFormIdentifier);
-          $('<input>').attr({ type: 'hidden', name: 'user[last_name]', value: lastName }).appendTo(currentFormIdentifier);
-        } else
-          $('<input>').attr({ type: 'hidden', name, value }).appendTo(currentFormIdentifier);
-
+      studentAddressArray = $('#student-address-form').serializeArray();
+    }
+  
+    const checkboxTermsOfServiceBlur = $('#checkbox-terms-of-service');
+    forceVerifyField(checkboxTermsOfServiceBlur);
+  
+    if (checkboxTermsOfServiceBlur.hasClass("error")) {
+      scrollToForm(checkboxTermsOfServiceBlur);
+      return
+    } [
+      ...studentDataArray,
+      ...studentAddressArray
+    ].forEach(({ name, value }) => {
+      if (name === 'user[full_name]') {
+        const { firstName, lastName } = splitString(value);
+  
+        $('<input>').attr({ type: 'hidden', name: 'user[first_name]', value: firstName }).appendTo(currentFormIdentifier);
+        $('<input>').attr({ type: 'hidden', name: 'user[last_name]', value: lastName }).appendTo(currentFormIdentifier);
+      } else
+        $('<input>').attr({ type: 'hidden', name, value }).appendTo(currentFormIdentifier);
+    });
+  
+    $('input[name="g-recaptcha-response"]').appendTo(currentFormIdentifier);
+    $(currentFormIdentifier).submit();
+    $("#btn-finalize-purchase").attr("disabled", true);
+  }
+  
+  $(document).ready(() => {
+    $.validate({ modules: 'brazil' });
+  
+    $('#usercpf').mask('000.000.000-00');
+  
+    $('a[data-toggle="tab"]').on('shown.bs.tab', event => {
+      const target = $(event.target).attr("href");
+      $('#address-container').fadeIn().css({
+        display: target === '#boleto'
+          ? 'block'
+          : 'none'
       });
-
-      $(currentFormIdentifier).submit();
-      $("#btn-finalize-purchase").attr("disabled", true);
-
+    });
+  
+    $("#btn-finalize-purchase").click(() => {
+      const site_key = "{{ site_key_checkout }}";
+      if (site_key) {
+        grecaptcha.enterprise.ready(function () {
+          grecaptcha.enterprise.execute("{{ site_key_checkout }}", {}).then(function (token) {
+            $('input[name="g-recaptcha-response"]').val(token);
+            onSubmit()
+          });
+        });
+      } else {
+        onSubmit();
+      }
     });
   });
-
-  function splitString(name){
+  
+  function splitString(name) {
     const EMPTY_STRING = ' ';
-    const splitted = name ? name.split(EMPTY_STRING) : EMPTY_STRING.split(EMPTY_STRING);
+    const splitted = name
+      ? name.split(EMPTY_STRING)
+      : EMPTY_STRING.split(EMPTY_STRING);
     const firstName = splitted.shift();
-    const lastName = splitted ? splitted.join(EMPTY_STRING) : EMPTY_STRING;
-
+    const lastName = splitted
+      ? splitted.join(EMPTY_STRING)
+      : EMPTY_STRING;
+  
     return { firstName, lastName }
   }
-
+  
   function forceVerifyField(field) {
     field.focus().blur();
   }
-
+  
   function scrollToForm(el) {
-    $("html").animate({ scrollTop: el.offset().top - 220 }, 800);
+    $("html").animate({
+      scrollTop: el.offset().top - 220
+    }, 800);
   }
 </script>
 
