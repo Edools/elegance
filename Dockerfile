@@ -1,12 +1,7 @@
-FROM node:12.19.1-stretch
+FROM node:12.22.12-alpine
 
 # install ruby to run entrypoint script
-RUN apt-get update -yqq \
-  && apt-get install -yqq --no-install-recommends \
-  git \
-  ca-certificates \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
+RUN apk add --update git ca-certificates \
   && truncate -s 0 /var/log/*log
 
 WORKDIR /app
