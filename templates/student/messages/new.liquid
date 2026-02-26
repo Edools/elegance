@@ -23,7 +23,7 @@
         <input type="hidden" name="channel[permission_key]" value="profile_message">
 
         <label class="control-label">{{ 'messages.new.to' | t }}</label>
-        <span>{{ receiver | fullname }}</span>
+        <span>{{ receiver | fullname | escape }}</span>
       {% else %}
         <div class="form-group">
           <label class="control-label">{{ 'messages.new.to_team' | t }}</label>

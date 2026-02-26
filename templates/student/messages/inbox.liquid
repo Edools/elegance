@@ -62,9 +62,9 @@
             <td class="from">
               {% if channel.permission_key == 'profile_message' %}
                 {% assign members = channel.members | map: 'user' %}
-                {{ members | reject_by: 'id', current_user.id | map: 'full_name' }}
+                {{ members | reject_by: 'id', current_user.id | map: 'full_name' | join: ', ' | escape }}
               {% else %}
-                {{ channel.owner | fullname }}
+                {{ channel.owner | fullname | escape }}
               {% endif %}
             </td>
 

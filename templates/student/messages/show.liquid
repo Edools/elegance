@@ -20,7 +20,7 @@
           {% if channel.permission_key != 'profile_message' %}
             <div class="channel-owner">
               <strong class="member-label">{{ 'messages.show.from' | t }}</strong>
-              <i>{{ channel.owner | fullname }}</i>
+              <i>{{ channel.owner | fullname | escape }}</i>
             </div>
           {% endif %}
 
@@ -29,9 +29,9 @@
 
             {% assign members = channel.members | map: 'user' %}
             {% if channel.permission_key == 'profile_message' %}
-              {{ members | reject_by: 'id', current_user.id | map: 'full_name' }}
+              {{ members | reject_by: 'id', current_user.id | map: 'full_name' | join: ', ' | escape }}
             {% else %}
-              {{ members | map: 'full_name' | to_sentence }}
+              {{ members | map: 'full_name' | to_sentence | escape }}
             {% endif %}
           </div>
         </div>
@@ -43,14 +43,14 @@
             <div class="answer row">
               <div class="col-xs-3 col-sm-1 clearfix">
                 <div class="avatar">
-                  {% assign avatar_alt = message.sender | fullname %}
+                  {% assign avatar_alt = message.sender | fullname | escape %}
                   {% image, src: message.sender.cover_image_url, alt: avatar_alt %}
                 </div>
               </div>
               <div class="col-xs-9 col-sm-11">
                 <div class="comment-bubble">
                   <div class="author">
-                    <span>{{ message.sender | fullname }}</span>
+                    <span>{{ message.sender | fullname | escape }}</span>
                     <span class="date">{{ message.created_at | time_ago_in_words }}</span>
                   </div>
                   <div class="content">

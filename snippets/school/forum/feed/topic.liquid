@@ -13,7 +13,7 @@
 
           <div class="user-info">
             <p class="title">
-              {{ object.title }}
+              {{ object.title | escape }}
             </p>
             {% assign last_post_date = object.created_at | time_ago_in_words %}
             <p class="name-and-date">{{ "forum.posts.last_post.name_and_date" | t: object: object, last_post_date: last_post_date }}</p>
@@ -24,7 +24,7 @@
 
       <div class="col col-md-12">
           <div class="description">
-            {{ object.description }}
+            {{ object.description | escape }}
           </div>
       </div>
 

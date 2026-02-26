@@ -28,7 +28,7 @@
                 <div class="answer row">
                   <div class="col-xs-3 col-sm-1 clearfix">
                     <div class="avatar">
-                      {% assign avatar_alt = answer.user | fullname %}
+                      {% assign avatar_alt = answer.user | fullname | escape %}
                       {% image, src: answer.user.cover_image_url, alt: avatar_alt %}
                     </div>
                   </div>
@@ -41,7 +41,7 @@
                     {% else %}
                       <i class="icon-graduation" tooltip="{{ 'forums.student' | t }}"></i>
                     {% endif %}
-                    {{ answer.user | fullname }}</span>
+                    {{ answer.user | fullname | escape }}</span>
                         <span class="date">{{ answer.created_at | time_ago_in_words }}</span>
                       </div>
                       <div class="content">

@@ -10,10 +10,10 @@
       <div class="col col-sm-2">
         <div class="post-user">
           <div class="avatar">
-            {% assign avatar_alt = object.user | fullname %}
+            {% assign avatar_alt = object.user | fullname | escape %}
             {% image, src: object.user.cover_image_url, alt: avatar_alt %}
           </div>
-          <span class="author-name"><spaan>{{ object.user | fullname }}</spaan>
+          <span class="author-name"><spaan>{{ object.user | fullname | escape }}</spaan>
           <span class="date">{{ object.created_at | time_ago_in_words }}</span>
         </div>
       </div>
@@ -21,7 +21,7 @@
         <div class="post-content">
           <div class="{{ attr }} description">
             {% unless forloop.index >= 1 %}
-            <h3 class="title">{{ topic.title }}</h3>
+            <h3 class="title">{{ topic.title | escape }}</h3>
           {% endunless %}
             {{ object.description | default: object.body }}
           </div>

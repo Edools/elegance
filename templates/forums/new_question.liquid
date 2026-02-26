@@ -11,9 +11,10 @@
         {% endif %}
         <div class="question-user col-xs-12 col-sm-1">
           <div class="avatar">
-            {% image, src: current_user.cover_image_url, alt: current_user.first_name %}
+            {% assign question_user_alt = current_user.first_name | escape %}
+            {% image, src: current_user.cover_image_url, alt: question_user_alt %}
           </div>
-          <span class="name">{{ current_user.first_name }}</span>
+          <span class="name">{{ current_user.first_name | escape }}</span>
         </div>
         <div class="content col-xs-12 col-sm-11">
           <div class="form-group">

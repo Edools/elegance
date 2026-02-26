@@ -4,20 +4,20 @@
 
     <div class="question-user col-xs-3">
       <div class="avatar">
-        {% assign avatar_alt = question.user | fullname %}
+        {% assign avatar_alt = question.user | fullname | escape %}
         {% image, src: question.user.cover_image_url, alt: avatar_alt %}
       </div>
-      <span class="author-name"><span>{{ question.user | fullname }}</span></span>
+      <span class="author-name"><span>{{ question.user | fullname | escape }}</span></span>
       <span class="date">{{ question.created_at | time_ago_in_words }}</span>
     </div>
 
     <div class="question-content col-xs-9 speech-bubble">
       <a class="title" href="{{ question | question_path: topic }}">
-        {{ question.title }}
+        {{ question.title | escape }}
       </a>
 
       <p class="description" clamp="3">
-        {{ question.description }}
+        {{ question.description | escape }}
       </p>
 
       <span class="attached">
