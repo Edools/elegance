@@ -52,7 +52,7 @@
                 {% endif %}
               </div>
               <div class="card-info col-xs-8">
-                <p class="name">{{ user | fullname }}</p>
+                <p class="name">{{ user | fullname | escape }}</p>
                 <p class="email">{{ user.email }}</p>
               </div>
             </div>

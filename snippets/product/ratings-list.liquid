@@ -3,12 +3,13 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-sm-2">
-          {% image, class: 'img-circle student-avatar' src: rating.student.cover_image_url, alt: rating.student.first_name, width: 50 %}
+          {% assign rating_student_alt = rating.student.first_name | escape %}
+          {% image, class: 'img-circle student-avatar' src: rating.student.cover_image_url, alt: rating_student_alt, width: 50 %}
         </div>
         <div class="col-md-6">
           <p class="student-name">
             <a href="/profile/{{ rating.student.id }}" class="student-profile">
-              {{ rating.student.first_name }}
+              {{ rating.student.first_name | escape }}
             </a>
           </p>
           <div class="student-points">
@@ -18,7 +19,7 @@
       </div>
 
       <div class="student-note">
-        <p>{{ rating.note }}</p>
+        <p>{{ rating.note | escape }}</p>
       </div>
     </div>
   </div>

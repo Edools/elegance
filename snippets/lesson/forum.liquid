@@ -20,7 +20,7 @@
             <div class="col col-sm-1">
                 <div class="post-user">
                     <div class="avatar">
-                        {% assign avatar_alt = current_user | fullname %}
+                        {% assign avatar_alt = current_user | fullname | escape %}
                         {% image, src: current_user.cover_image_url, alt: avatar_alt %}
                         <img src="{{ current_user.cover_image_url }}">
                     </div>

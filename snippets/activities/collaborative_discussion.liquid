@@ -5,7 +5,8 @@
     <div class="row">
       <div class="col-sm-1">
         <div class="avatar">
-          {% image, src: current_user.cover_image_url, alt: current_user.first_name %}
+          {% assign discussion_user_alt = current_user.first_name | escape %}
+          {% image, src: current_user.cover_image_url, alt: discussion_user_alt %}
         </div>
       </div>
       <div class="col-sm-11">

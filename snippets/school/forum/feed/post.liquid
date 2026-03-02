@@ -3,10 +3,10 @@
     <div class="post-information post-comment"> 
       <div class="user">
         <div class="author-name">
-          {{ object.user | fullname }}
+          {{ object.user | fullname | escape }}
         </div>
         <div class="user-image">
-          {% assign avatar_alt = object.user | fullname %}
+          {% assign avatar_alt = object.user | fullname | escape %}
           {% image, src: object.user.cover_image_url, alt: avatar_alt %}
         </div>
         </div>

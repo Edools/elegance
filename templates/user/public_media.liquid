@@ -67,7 +67,8 @@
                   <div class="logo text-center">
                     <a href="{{ m.s3_file_url }}">
                       {% if m.type == 'Image' %}
-                        {% image, src: m.s3_file_url, alt: m.title %}
+                        {% assign media_alt = m.title | escape %}
+                        {% image, src: m.s3_file_url, alt: media_alt %}
                       {% else %}
                         <i class="icon-doc"></i>
                       {% endif %}
@@ -76,13 +77,13 @@
 
                   <div class="caption">
                     <a class="title"
-                       title="{{ m.title }}"
+                       title="{{ m.title | escape }}"
                        data-toggle="{% if m.title.size > 25 %}tooltip{% endif %}"
                        id="media-{{ m.id }}" href="{{ m.s3_file_url }}">
-                      {{ m.title | truncate: 25 }}
+                      {{ m.title | truncate: 25 | escape }}
                     </a>
 
-                    <p class="subtitle">{{ m.description | truncate: 112 }}</p>
+                    <p class="subtitle">{{ m.description | truncate: 112 | escape }}</p>
                   </div>
                 </div>
               {% endfor %}

@@ -7,7 +7,7 @@
           <label for="collaborator_id">{{ 'student_doubt.tutor' | t }}</label>
           <select class="form-control" id="collaborator_id" name="student_doubt[collaborator_id]">
             {% for collaborator in collaborators %}
-              <option value="{{ collaborator.id }}">{{ collaborator | fullname }}</option>
+              <option value="{{ collaborator.id }}">{{ collaborator | fullname | escape }}</option>
             {% endfor %}
           </select>
         </div>

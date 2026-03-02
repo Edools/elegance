@@ -1,4 +1,10 @@
-<header tabindex="0" id="school-header" class="navbar navbar-default navbar-static-top" {% if current_user %} data-user='{"id": {{current_user.id}}, "name": "{{current_user.first_name + ' ' + current_user.last_name}}", "cpf": "{{current_user.cpf}}", "email": "{{current_user.email}}", "avatar_url": "{{current_user.cover_image_url}}"}' {% endif %}>
+{% if current_user %}
+  {% assign navbar_user_name = current_user | fullname | replace: '\', '\\' | replace: '"', '\"' %}
+  {% assign navbar_user_cpf = current_user.cpf | replace: '"', '\"' %}
+  {% assign navbar_user_email = current_user.email | replace: '"', '\"' %}
+  {% capture navbar_user_json %}{"id": {{ current_user.id }}, "name": "{{ navbar_user_name }}", "cpf": "{{ navbar_user_cpf }}", "email": "{{ navbar_user_email }}", "avatar_url": "{{ current_user.cover_image_url }}"}{% endcapture %}
+{% endif %}
+<header tabindex="0" id="school-header" class="navbar navbar-default navbar-static-top" {% if current_user %} data-user="{{ navbar_user_json | replace: '"', '&quot;' | strip_newlines }}" {% endif %}>
   <div class="container">
     <div id="main-navbar" tabindex="0" aria-label="Menu Principal" class="navbar-header row">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-menu">
@@ -98,7 +104,7 @@
             <a aria-label="Opções de Usuário" href="#" class="dropdown-toggle user-options" data-toggle="dropdown">
               <i class="icon icon-arrow-down"></i>
               <span class="avatar">
-                {% assign avatar_alt = current_user | fullname %}
+                {% assign avatar_alt = current_user | fullname | escape %}
                 {% image, src: current_user.cover_image_url, alt: avatar_alt, class: 'avatar-img' %}
               </span>
             </a>

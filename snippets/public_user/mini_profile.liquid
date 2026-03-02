@@ -10,7 +10,7 @@
     <div tabindex='0' aria-label="Seu Perfil - Informações" class="info-profile">
       <a href="/profile/{{ user.id }}">
         <div class="info">
-          <h3 class="name">{{ user | fullname }}</h3>
+          <h3 class="name">{{ user | fullname | escape }}</h3>
         </div>
       </a>
 
